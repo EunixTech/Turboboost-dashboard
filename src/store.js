@@ -1,11 +1,3 @@
-import { configureStore } from "@reduxjs/toolkit";
-import homeReducer from "./home";
-
-// export const store = configureStore({
-//   reducer: { home: homeReducer },
-// });
-
-
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import { apiSlice } from './slices/apiSlice';
