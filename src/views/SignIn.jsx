@@ -12,11 +12,9 @@ import { useGoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 
 const SignInPage = () => {
+
   const router = useNavigate();
-
   const w = useWidth();
-
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -142,15 +140,8 @@ const SignInPage = () => {
             onChange={(e) => setEmail(e.target.value)}
              />
 
-          <div className=" flex items-center justify-center h-[38px] text-[#000] w-[100%] border-[1px] border-[#e1e1e1]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#fff] rounded-sm">
-            <img
-              src="/graphic/login/google.svg"
-              className="w-[14px] translate-y-[1px] mr-[5px]"
-              alt=""
-            />{" "}
-            <span className="translate-y-[1.5px]"> Sign in with Google</span>
-          </div>
-          <button onClick={loginWithGoogle} >
+      
+          <button style={{display: "none"}} onClick={loginWithGoogle} >
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_1148_88683)">
                                 <path d="M24.2682 12.2765C24.2682 11.4608 24.2021 10.6406 24.061 9.83813H12.7422V14.4591H19.2239C18.955 15.9495 18.0907 17.2679 16.8252 18.1056V21.104H20.6922C22.963 19.014 24.2682 15.9274 24.2682 12.2765Z" fill="#4285F4" />
@@ -165,7 +156,7 @@ const SignInPage = () => {
                             </defs>
                         </svg>
 
-                        Sign up with Google
+                        Sign in with Google
                     </button>
                     <GoogleLogin
                         onSuccess={credentialResponse => {
