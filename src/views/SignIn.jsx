@@ -1,16 +1,128 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import SignInForm from "../components/forms/signIn";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../hooks/useWidth";
-import { useSelector } from "react-redux";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '../slice/userApiSlice';
+import { setCredentials } from '../slice/authSlice';
+import toast from 'react-hot-toast';
+import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 
 const SignInPage = () => {
   const router = useNavigate();
 
   const w = useWidth();
 
-  const dark = useSelector(state=>state.home.dark);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/');
+    }
+  }, [navigate, userInfo]);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate('/');
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
+  const renderButton = ({ onClick }) => null;
+
+
+    const loginWithGoogle = useGoogleLogin({
+        onSuccess: async respose => {
+            // try {
+            //     axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+            //         headers: {
+            //             "Authorization": `Bearer ${respose.access_token}`
+            //         }
+            //     }).then(async (res) => {
+            //         const datas = res?.data;
+            //         console.log(datas)
+
+            //         const userDataObj = {
+            //             name: datas.given_name,
+            //             email_address: datas.email,
+            //             google_id: String(datas.sub.toLowerCase()),
+            //             google_token: respose.access_token,
+            //             device_token: "token",
+            //             device_type: 1
+            //         };
+
+
+            //         fetch(`https://menehariya-api.netscapelabs.com/v1/api/login-with-google`, {
+            //             ...fetchConfig,
+            //             body: JSON.stringify(userDataObj)
+            //         })
+            //             .then(handleFetchErrors)
+            //             .then((res) => {
+            //                 console.log(res)
+            //                 toast.dismiss();
+            //                 updateModalVisibilityForLogin(false)
+
+            //                 if (Number(res?.status) === 201 || Number(res?.status) === 200) {
+            //                     const userData = res?.data;
+            //                     const Obj = {
+            //                         name: userData.name,
+            //                         email_address: userData?.email_address || ``,
+            //                         phone_number: userData?.phone_number || ``,
+            //                         source: userData.source,
+            //                         picture: userData.picture || ``
+            //                     }
+            //                     localStorage.setItem(`user`, JSON.stringify(Obj));
+            //                     localStorage.setItem(`token`, res?.token);
+
+            //                 } else if (Number(res?.status) === 400 || Number(res?.status) === 403) {
+
+            //                     toast.error(res?.message);
+            //                 }
+
+
+
+            //             })
+            //             .catch((err) => {
+            //                 console.log(err)
+            //             });
+
+
+
+            //         // Extract the user's email and name from the response data
+
+
+
+
+            //     })
+
+
+
+
+
+            //     // console.log(res.data)
+            // } catch (err) {
+            //     console.log(err)
+
+            // }
+
+        }
+    });
 
   return (
     <div className="w-[100%] h-[100vh] flex items-center justify-center">
@@ -23,7 +135,12 @@ const SignInPage = () => {
           <p className="text-[#969AA5] inter text-[14px] mb-[10px]">
             Please enter your credentials below.
           </p>
-          <SignInForm />
+          <SignInForm 
+           type='email'
+            placeholder='Enter email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+             />
 
           <div className=" flex items-center justify-center h-[38px] text-[#000] w-[100%] border-[1px] border-[#e1e1e1]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#fff] rounded-sm">
             <img
@@ -33,6 +150,37 @@ const SignInPage = () => {
             />{" "}
             <span className="translate-y-[1.5px]"> Sign in with Google</span>
           </div>
+          <button onClick={loginWithGoogle} >
+                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clipPath="url(#clip0_1148_88683)">
+                                <path d="M24.2682 12.2765C24.2682 11.4608 24.2021 10.6406 24.061 9.83813H12.7422V14.4591H19.2239C18.955 15.9495 18.0907 17.2679 16.8252 18.1056V21.104H20.6922C22.963 19.014 24.2682 15.9274 24.2682 12.2765Z" fill="#4285F4" />
+                                <path d="M12.7391 24.0008C15.9756 24.0008 18.705 22.9382 20.6936 21.1039L16.8266 18.1055C15.7507 18.8375 14.3618 19.252 12.7435 19.252C9.61291 19.252 6.95849 17.1399 6.00607 14.3003H2.01562V17.3912C4.05274 21.4434 8.20192 24.0008 12.7391 24.0008Z" fill="#34A853" />
+                                <path d="M6.00473 14.3002C5.50206 12.8099 5.50206 11.196 6.00473 9.70569V6.61475H2.01869C0.316687 10.0055 0.316687 14.0004 2.01869 17.3912L6.00473 14.3002Z" fill="#FBBC04" />
+                                <path d="M12.7391 4.74966C14.4499 4.7232 16.1034 5.36697 17.3425 6.54867L20.7685 3.12262C18.5991 1.0855 15.7198 -0.034466 12.7391 0.000808666C8.20192 0.000808666 4.05274 2.55822 2.01562 6.61481L6.00166 9.70575C6.94967 6.86173 9.6085 4.74966 12.7391 4.74966Z" fill="#EA4335" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_1148_88683">
+                                    <rect width="24" height="24" fill="white" transform="translate(0.5)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+                        Sign up with Google
+                    </button>
+                    <GoogleLogin
+                        onSuccess={credentialResponse => {
+
+                            var decoded = jwt_decode(credentialResponse.credential);
+
+                        }}
+                        render={renderButton}
+
+                        onError={() => {
+                            console.log('Login Failed');
+                        }} />
+
+
+
           <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
             Don’t have an account? jshdfsgj{" "}
             <span
