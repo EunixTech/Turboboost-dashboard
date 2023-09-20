@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
 
+
 const SignInPage = () => {
   const router = useNavigate();
 
@@ -33,11 +34,9 @@ const SignInPage = () => {
             <span className="translate-y-[1.5px]"> Sign in with Google</span>
           </div>
           <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
-            Don’t have an account?{" "}
+            Don’t have an account? jshdfsgj{" "}
             <span
-              onClick={() => {
-                router("/auth/signUp");
-              }}
+              onClick={() => {router("/auth/signUp");}}
               className="text-[#06F] font-bold cursor-pointer"
             >
               Sign up
