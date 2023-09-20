@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({ w, label,mt }) => {
+const Input = ({ onChangeHandler, value, type,name, w, label,mt }) => {
   return (
     <div
       style={{
@@ -13,25 +13,30 @@ const Input = ({ w, label,mt }) => {
         {label} <span className="text-[#FF0703]">*</span>
       </p>
       <input
-        type="text"
+        onChange={onChangeHandler}
+        value={value}
+        name = {name}
+        type={type}
         className="border-[#e1e1e1] px-[5px] outline-none text-[12px] font-medium border-[1px] w-[100%] h-[35px] rounded-[3px]"
       />
     </div>
   );
 };
 
-const SignInForm = () => {
+const SignUpForm = ({submitHandler = () => {}, formData, onChangeHandler = () => {}}) => {
   return (
     <div className="w-[100%] mt-[20px] mb-[13px]">
-      <div className="flex items-center justify-between">
-        <Input w={"48%"} label={"First Name"} />
-        <Input w={"48%"} label={"Last Name"} />
+        <form onSubmit={submitHandler}>
+        <div className="flex items-center justify-between">
+        <Input onChangeHandler = {onChangeHandler} value= {formData.first_name} name="first_name"  w={"48%"} label={"First Name"} />
+        <Input onChangeHandler = {onChangeHandler} value= {formData.last_name} name="last_name"   w={"48%"} label={"Last Name"} />
       </div>
-      <Input w={"100%"} mt={"10px"} label={"Business Name"} />
-      <Input w={"100%"} mt={"10px"}label={"Email"} />
-      <Input w={"100%"} mt={"10px"} label={"Password"} />
+      <Input onChangeHandler = {onChangeHandler} value= {formData.bussiness_name} name="bussiness_name"  w={"100%"} mt={"10px"} label={"Business Name"} />
+      <Input onChangeHandler = {onChangeHandler} value= {formData.email_address} name="email_address"  w={"100%"} mt={"10px"}label={"Email"} />
+      <Input onChangeHandler = {onChangeHandler} value= {formData.password} name="password"  w={"100%"} mt={"10px"} label={"Password"} />
+        </form>
     </div>
   );
 };
 
-export default SignInForm;
+export default SignUpForm;
