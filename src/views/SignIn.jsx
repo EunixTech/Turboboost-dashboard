@@ -15,8 +15,6 @@ const SignInPage = () => {
 
   const router = useNavigate();
   const w = useWidth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,16 +29,6 @@ const SignInPage = () => {
     }
   }, [navigate, userInfo]);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
-      navigate('/');
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
-    }
-  };
 
   const renderButton = ({ onClick }) => null;
 
@@ -133,12 +121,7 @@ const SignInPage = () => {
           <p className="text-[#969AA5] inter text-[14px] mb-[10px]">
             Please enter your credentials below.
           </p>
-          <SignInForm 
-           type='email'
-            placeholder='Enter email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-             />
+          <SignInForm />
 
       
           <button style={{display: "none"}} onClick={loginWithGoogle} >

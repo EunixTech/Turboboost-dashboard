@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '../../slice/userApiSlice';
+import { setCredentials } from '../../slice/authSlice';
+import toast from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
+import { isValidEmailAddress, isValidPassword } from '../../utils/verification';
 
-const Input = ({ w, label, mt, value, setValue, type }) => {
+const Input = ({ w, label, mt, value, onChangeHandler, type, name }) => {
   return (
     <div
       style={{
@@ -15,8 +20,9 @@ const Input = ({ w, label, mt, value, setValue, type }) => {
       </p>
       <input
         type={type}
+        name = {name}
         value={value}
-        onChange={(e) => { setValue(e.target.value);}}
+        onChange={onChangeHandler}
         className="border-[#e1e1e1] px-[5px] outline-none text-[12px] font-medium border-[1px] w-[100%] h-[35px] rounded-[3px]"
       />
     </div>
@@ -25,38 +31,101 @@ const Input = ({ w, label, mt, value, setValue, type }) => {
 
 const SignInForm = () => {
 
-  const [email, setEmail] = useState("");
-  const [passwprd, setPassword] = useState("");
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+
+  const [formData, updateFormData] = useState({
+      email_address: "",
+      password: "",
+      remember_me: false
+  });
+
+  const [rememberMe, updateRememberMe] = useState({
+    email_address: ``,
+    password: ``,
+    value: false
+})
+
+  const {email_address, password} = formData;
+ 
+  const onChangeHandler = (e) =>{
+
+    const inputName = e.target.name,
+        inputValue = e.target.value;
+ 
+    updateFormData((prevState) => ({
+        ...prevState,
+        [inputName]: inputValue
+    }));
+
+  }
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("sfjshf")
+
+        const missingData = [],
+          invalidData = [];
+
+        if (!email_address) missingData.push(`email address`);
+        else if (email_address && !isValidEmailAddress(email_address)) invalidData.push(`email_address`);
+
+        if (!password) missingData.push(`password`);
+        else if (password && !isValidPassword(password)) invalidData.push(`password should include at least one upper case, one lower case,one digit & special character`);
+
+        // Show errors if needed
+        if (missingData.length || invalidData.length) {
+            if (missingData.length) toast.error(`Missing:- ${missingData.join(`, `)}`);
+            if (invalidData.length) toast.error(`Invalid:- ${invalidData.join(`, `)}`);
+
+            return;
+        }
+
+        const data = {
+            email_address,
+            password
+        };
+
+      const res = await login({ email_address, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate('/');
+    } catch (err) {
+
+      return toast.error(err?.data?.message || err.error);
+    }
+  };
+
 
   return (
     <>
+      <form onSubmit={submitHandler}>
       <div className="w-[100%] mt-[20px] mb-[13px]">
         <Input
           w={"100%"}
-          value={email}
-          setValue={(e) => {
-            setEmail(e);
-          }}
+          value={email_address}
+          onChangeHandler={onChangeHandler}
           mt={"10px"}
           label={"Email"}
+          name = "email_address"
           type="text"
         />
         <Input
           w={"100%"}
           mt={"10px"}
-          value={passwprd}
-          setValue={(e) => {
-            setPassword(e);
-          }}
+          name = "password"
+          value={password}
+          onChangeHandler={onChangeHandler}
           type="password"
           label={"Password"}
         />
       </div>
       <div className="w-[100%] flex justify-between">
         <div className="flex ">
-          <input type="checkbox" className="mr-[5px]" name="" id="" />
+          <input type="checkbox" className="mr-[5px]" name="remember_me" onChange={onChangeHandler}  />
           <p className="text-[13px] font-medium text-[#000] translate-y-[1px] ">
             Remember me
           </p>
@@ -65,17 +134,13 @@ const SignInForm = () => {
           Forgot password
         </p>
       </div>
-      <div 
-        // onClick={() => {
-        //   if (email === "turbo123@gmail.com" || passwprd === "allpha123") {
-        //     localStorage.setItem("loggedIn", "true");
-        //     navigate("/dashboard");
-        //   }
-        // }}
+      <button 
+      
         className="h-[38px] mb-[20px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm"
       >
         <span className="translate-y-[1.5px] ">Sign in</span>
-      </div>
+      </button>
+      </form>
     </>
   );
 };

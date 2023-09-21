@@ -107,7 +107,10 @@ root.render(
 
     <BrowserRouter>
       <App />
-      <Toaster />
+      <Toaster 
+       position="top-right"
+        reverseOrder={false}
+   />
     </BrowserRouter>
   </Provider>
   </GoogleOAuthProvider>
