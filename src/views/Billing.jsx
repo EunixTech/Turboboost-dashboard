@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import HomeLayout from "../layouts/index/index";
 import { useSelector } from "react-redux";
 
 const Table1 = ({ setSelected1 }) => {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   const arrrrr = [
     {
       title: "Optimized by TurboBoost Badge",

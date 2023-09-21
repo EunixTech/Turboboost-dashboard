@@ -16,9 +16,7 @@ const Input = ({ w, label, mt, value, setValue, type }) => {
       <input
         type={type}
         value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}
+        onChange={(e) => { setValue(e.target.value);}}
         className="border-[#e1e1e1] px-[5px] outline-none text-[12px] font-medium border-[1px] w-[100%] h-[35px] rounded-[3px]"
       />
     </div>
@@ -26,6 +24,7 @@ const Input = ({ w, label, mt, value, setValue, type }) => {
 };
 
 const SignInForm = () => {
+
   const [email, setEmail] = useState("");
   const [passwprd, setPassword] = useState("");
 
@@ -67,12 +66,12 @@ const SignInForm = () => {
         </p>
       </div>
       <div 
-        onClick={() => {
-          if (email === "turbo123@gmail.com" || passwprd === "allpha123") {
-            localStorage.setItem("loggedIn", "true");
-            navigate("/dashboard");
-          }
-        }}
+        // onClick={() => {
+        //   if (email === "turbo123@gmail.com" || passwprd === "allpha123") {
+        //     localStorage.setItem("loggedIn", "true");
+        //     navigate("/dashboard");
+        //   }
+        // }}
         className="h-[38px] mb-[20px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm"
       >
         <span className="translate-y-[1.5px] ">Sign in</span>
