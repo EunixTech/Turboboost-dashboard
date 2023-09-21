@@ -6,10 +6,11 @@ import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../slice/userApiSlice";
 import { setCredentials } from "../slice/authSlice";
+import GoogleLoginButton from "../components/button/GoogleLogin";
 
 import toast from "react-hot-toast";
 
-const SignInPage = () => {
+const SignUpPage = () => {
   const router = useNavigate(),
     w = useWidth();
 
@@ -83,17 +84,10 @@ const SignInPage = () => {
               </span>
             </p>
           </div>
-          <div className="h-[38px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm">
+          <div className="h-[38px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm mb-[20px]">
             <span className="translate-y-[1.5px]"> Create Account</span>
           </div>
-          <div className=" flex items-center justify-center h-[38px] text-[#000] w-[100%] border-[1px] border-[#e1e1e1]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#fff] rounded-sm">
-            <img
-              src="/graphic/login/google.svg"
-              className="w-[14px] translate-y-[1px] mr-[5px]"
-              alt=""
-            />{" "}
-            <span className="translate-y-[1.5px]">Continue with Google</span>
-          </div>
+          <GoogleLoginButton />
           <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
             Already have an account?{" "}
             <span
@@ -181,4 +175,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

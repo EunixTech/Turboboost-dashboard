@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { isTruthyString, isValidEmailAddress, isValidPassword } from "../../utils/verification";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Input = ({ onChangeHandler, value, type,name, w, label,mt }) => {
   return (
@@ -23,7 +26,77 @@ const Input = ({ onChangeHandler, value, type,name, w, label,mt }) => {
   );
 };
 
-const SignUpForm = ({submitHandler = () => {}, formData, onChangeHandler = () => {}}) => {
+const SignUpForm = () => {
+
+  const navigate = useNavigate();
+
+  const [formData, updateFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email_address: "",
+    bussiness_name: "",
+    password: "",
+  });
+
+
+  const { first_name, last_name, email_address, bussiness_name, password } = formData;
+
+  const onChangeHandler = (e) => {
+    const inputName = e.target.name,
+      inputValue = e.target.value;
+
+    updateFormData((prevState) => ({
+      ...prevState,
+      [inputName]: inputValue,
+    }));
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const missingData = [],
+        invalidData = [];
+
+        if(!isTruthyString(first_name)) missingData.push(`first name`);
+        if(!isTruthyString(last_name)) missingData.push(`last name`);
+        if(!isTruthyString(bussiness_name)) missingData.push(`bussiness name`);
+
+      if (!email_address) missingData.push(`email address`);
+      else if (email_address && !isValidEmailAddress(email_address))invalidData.push(`email_address`);
+
+      if (!password) missingData.push(`password`);
+      // else if (password && !isValidPassword(password)) invalidData.push(`password should include at least one upper case, one lower case,one digit & special character`);
+
+      const data = {
+        first_name,
+        last_name,
+        email_address,
+        bussiness_name,
+        password,
+      };
+      // Show errors if needed
+      if (missingData.length || invalidData.length) {
+        if (missingData.length)
+          toast.error(`Missing:- ${missingData.join(`, `)}`);
+        if (invalidData.length)
+          toast.error(`Invalid:- ${invalidData.join(`, `)}`);
+
+        return;
+      }
+
+      // const res = await login(data).unwrap();
+      // dispatch(setCredentials({ ...res }));
+
+      formData?.remember_me &&
+        localStorage.setItem("rememberMe", JSON.stringify(data));
+
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      return toast.error(err?.data?.message || err.error);
+    }
+  };
+
   return (
     <div className="w-[100%] mt-[20px] mb-[13px]">
         <form onSubmit={submitHandler}>

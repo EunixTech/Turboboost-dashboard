@@ -1,8 +1,6 @@
 import React from "react";
 import { GoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from '@react-oauth/google';
-import jwt_decode from "jwt-decode";
-
 
 export default function GoogleLoginButton() {
 
@@ -80,13 +78,9 @@ export default function GoogleLoginButton() {
         Sign in with Google
       </button>
       <GoogleLogin
-        onSuccess={(credentialResponse) => {
-          var decoded = jwt_decode(credentialResponse.credential);
-        }}
+        onSuccess={(credentialResponse) => {}}
         render={renderButton}
-        onError={() => {
-          console.log("Login Failed");
-        }}
+        onError={() => {}}
       />
     </>
   );
