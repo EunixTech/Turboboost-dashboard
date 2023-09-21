@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '../../slice/userApiSlice';
 import { setCredentials } from '../../slice/authSlice';
@@ -66,7 +66,6 @@ const SignInForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      console.log("sfjshf")
 
         const missingData = [],
           invalidData = [];
@@ -75,8 +74,12 @@ const SignInForm = () => {
         else if (email_address && !isValidEmailAddress(email_address)) invalidData.push(`email_address`);
 
         if (!password) missingData.push(`password`);
-        else if (password && !isValidPassword(password)) invalidData.push(`password should include at least one upper case, one lower case,one digit & special character`);
+        // else if (password && !isValidPassword(password)) invalidData.push(`password should include at least one upper case, one lower case,one digit & special character`);
 
+        const data = {
+          email_address,
+          password
+        } 
         // Show errors if needed
         if (missingData.length || invalidData.length) {
             if (missingData.length) toast.error(`Missing:- ${missingData.join(`, `)}`);
@@ -85,19 +88,28 @@ const SignInForm = () => {
             return;
         }
 
-        const data = {
-            email_address,
-            password
-        };
+      // const res = await login(data).unwrap();
+      // dispatch(setCredentials({ ...res }));
 
-      const res = await login({ email_address, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
+      formData?.remember_me && localStorage.setItem('rememberMe', JSON.stringify(data));
+
       navigate('/');
     } catch (err) {
-
+      console.log(err)
       return toast.error(err?.data?.message || err.error);
     }
   };
+
+  useEffect(() => {
+
+    const rememberMe = JSON.parse(localStorage.getItem(`rememberMe`));
+
+    updateFormData({
+        email_address: rememberMe?.email_address || ``,
+        password: rememberMe?.password || ``
+    })
+
+}, [])
 
 
   return (
