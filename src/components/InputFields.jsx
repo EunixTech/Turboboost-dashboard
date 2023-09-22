@@ -17,20 +17,16 @@ export default function InputFields({
 
     const dark = useSelector((state) => state.home.dark);
 
-    const [curr, setCurr] = useState(0);
-    const [hover, setHover] = useState(false);
-    const [clicked, setClicked] = useState(false);
+    const [valueIndex, updateValueIndex] = useState(0);
+    
+    const [hover, setHover] = useState(false),
+        [isDropdownOpen, updateIsDropdownOpen] = useState(false);
   
     useEffect(() => {
-      const onpointerdown = () => {
-        if (!hover) {
-          setClicked(false);
-        }
-      };
-      document.addEventListener("pointerdown", onpointerdown, false);
-      return () => {
-        document.removeEventListener("pointerdown", onpointerdown, false);
-      };
+        const onpointerdown = () => { if (!hover) { updateIsDropdownOpen(false)}};
+
+        document.addEventListener("pointerdown", onpointerdown, false);
+        return () => { document.removeEventListener("pointerdown", onpointerdown, false)};
     });
   
 
@@ -61,12 +57,13 @@ export default function InputFields({
         
                     } 
                     else if(type === "dropdown"){
+
                         return <div 
                             style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
                             className="w-[100%] relative   text-[12px] font-medium mt-[5px] h-[38px]"
                             >
 
-                        <div onClick={() => { setClicked(true)}}
+                        <div onClick={() => { updateIsDropdownOpen(true)}}
                             style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
                             className={`${class1}  w-[100%] cursor-pointer border-[1px] rounded-[4px]  border-[#ebebeb] px-[10px] h-[38px] flex justify-between items-center`}
                         >
@@ -74,13 +71,13 @@ export default function InputFields({
                             style={{ color: dark ? "#fff" : "#000"}}
                             className="text-[12px] font-bold tracking-wide  text-[#000]"
                         >
-                            {list[curr]}
+                            {list[valueIndex]}
                         </p>
 
                         <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
                     </div>
 
-                        {clicked && (
+                        {isDropdownOpen && (
 
                             <div
                                 onMouseOver={() => { setHover(true)}}
@@ -99,15 +96,19 @@ export default function InputFields({
                          
                                         key={i}
                                         style={{
-                                            backgroundColor:
-                                            i === curr  ? dark  ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
+                                            backgroundColor: i === valueIndex  ? dark  ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
                                         }}
-                                        onClick={() => { setCurr(i)}}
+                                        onClick={() => { 
+                                            updateValueIndex(i)
+                                            updateIsDropdownOpen(false)
+                                        }}
                                         className="w-[100%] h-[30px] mb-[0px] flex items-center  px-[10px] text-[11px] cursor-pointer"
                                     >
-                                    {item}
-                                </div>
-                              );
+                                        {item}
+                                    </div>
+
+                                );
+                                
                             })}
 
                           </div>
