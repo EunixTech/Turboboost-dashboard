@@ -4,6 +4,7 @@ import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { countries } from "../static/countries";
 import { setUpgradePopUpShow } from "../services/home";
+import InputFields from "../components/InputFields";
 
 const Button = () => {
 
@@ -281,7 +282,7 @@ const Navigator = ({ current, setCurrent }) => {
   );
 };
 
-const InputText = ({ w, label, type }) => {
+const InputText = ({ w, label }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div style={{ width: w }} className=" h-[100%]">
@@ -293,15 +294,16 @@ const InputText = ({ w, label, type }) => {
       >
         {label}
       </p>
-      <input
-        style={{
-          borderColor: dark ? "#1F2329" : "#ebebeb",
-          color: dark ? "#fff" : "#000",
-          backgroundColor: dark ? "#111317" : "#fff",
-        }}
-        type="text"
-        className="w-[100%] border-[1px] outline-none rounded-[4px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"
+      <InputFields
+       style={{
+        borderColor: dark ? "#1F2329" : "#ebebeb",
+        color: dark ? "#fff" : "#000",
+        backgroundColor: dark ? "#111317" : "#fff",
+      }}
+      type="text"
+      classess="w-[100%] border-[1px] outline-none rounded-[4px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"
       />
+     
     </div>
   );
 };
