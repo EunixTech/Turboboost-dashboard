@@ -281,7 +281,7 @@ const Navigator = ({ current, setCurrent }) => {
   );
 };
 
-const InputText = ({ w, label }) => {
+const InputText = ({ w, label, type }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div style={{ width: w }} className=" h-[100%]">
