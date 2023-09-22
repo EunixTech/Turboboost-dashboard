@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { useSelector } from "react-redux";
 
 export default function InputFields({
@@ -9,11 +9,30 @@ export default function InputFields({
     inputName,
     wrapperClass,
     labelClass,
-    labelText
+    labelText,
+    list = [],
+    class1 = ""
 
 }) {
 
     const dark = useSelector((state) => state.home.dark);
+
+    const [curr, setCurr] = useState(0);
+    const [hover, setHover] = useState(false);
+    const [clicked, setClicked] = useState(false);
+  
+    useEffect(() => {
+      const onpointerdown = () => {
+        if (!hover) {
+          setClicked(false);
+        }
+      };
+      document.addEventListener("pointerdown", onpointerdown, false);
+      return () => {
+        document.removeEventListener("pointerdown", onpointerdown, false);
+      };
+    });
+  
 
     return (
 
@@ -77,6 +96,7 @@ export default function InputFields({
                             {list.map((item, i) => {
                                 return (
                                     <div
+                         
                                         key={i}
                                         style={{
                                             backgroundColor:
@@ -97,7 +117,7 @@ export default function InputFields({
                     }
 
                 })()}
-                
+
         </div>
         
     );

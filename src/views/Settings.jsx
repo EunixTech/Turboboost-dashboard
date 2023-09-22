@@ -424,7 +424,7 @@ const InputDropdown = ({ label, list, w, class1 }) => {
   return (
     <div className="h-[100%]" style={{ width: w }}>
       <p style={{ color: dark ? "#ffffff74" : "#0a0a187e", }} className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]" >{label} </p>
-      
+
       <div
         style={{
           borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -481,6 +481,7 @@ const InputDropdown = ({ label, list, w, class1 }) => {
                   }}
                   onClick={() => {
                     setCurr(i);
+                    setClicked(false);
                   }}
                   className="w-[100%] h-[30px] mb-[0px] flex items-center  px-[10px] text-[11px] cursor-pointer"
                 >
