@@ -423,14 +423,8 @@ const InputDropdown = ({ label, list, w, class1 }) => {
 
   return (
     <div className="h-[100%]" style={{ width: w }}>
-      <p
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
-      >
-        {label}
-      </p>
+      <p style={{ color: dark ? "#ffffff74" : "#0a0a187e", }} className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]" >{label} </p>
+      
       <div
         style={{
           borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -498,6 +492,17 @@ const InputDropdown = ({ label, list, w, class1 }) => {
         )}
       </div>
     </div>
+
+//   <>
+//     <label for="small" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Small select</label>
+// <select id="small" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+//   <option selected>Choose a country</option>
+//   <option value="US">United States</option>
+//   <option value="CA">Canada</option>
+//   <option value="FR">France</option>
+//   <option value="DE">Germany</option>
+// </select>
+//   </>
   );
 };
 
@@ -1139,18 +1144,25 @@ const Settings = () => {
                     Details
                   </h1>
                   <div className="grid mt-[10px] laptop:grid-cols-2 gap-x-[15px] gap-y-[10px]">
-                    <InputText label={"First Name"} />
+                   
                     <InputFields
                       wrapperClass={"h-[100%]"}
                       wrapperStyle={{ width: w }}
                       labelText="First Name"
-                      labelStyle={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       labelClass={"text-[14px] font-bold tracking-wide  text-[#0a0a187a]"}
                       inputClass={"w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"}
-                  
                       type="text"
                     />
-                    <InputText label={"Last Name"} />
+
+                    <InputFields
+                      wrapperClass={"h-[100%]"}
+                      wrapperStyle={{ width: w }}
+                      labelText="Last Name"
+                      labelClass={"text-[14px] font-bold tracking-wide  text-[#0a0a187a]"}
+                      inputClass={"w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"}
+                      type="text"
+                    />
+                   
                     <InputDropdown label="Country" list={countriesData} />
                     <InputPhone />
                     <InputDropdown
