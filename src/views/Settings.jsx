@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
+import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { countries } from "../static/countries";
 import { setUpgradePopUpShow } from "../services/home";
 import InputFields from "../components/InputFields";
-
 const Button = () => {
-
   const dark = useSelector((state) => state.home.dark);
-
   return (
     <div
       className={` ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
@@ -294,16 +292,15 @@ const InputText = ({ w, label }) => {
       >
         {label}
       </p>
-      <InputFields
-       style={{
-        borderColor: dark ? "#1F2329" : "#ebebeb",
-        color: dark ? "#fff" : "#000",
-        backgroundColor: dark ? "#111317" : "#fff",
-      }}
-      type="text"
-      classess="w-[100%] border-[1px] outline-none rounded-[4px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"
+      <input
+        style={{
+          borderColor: dark ? "#1F2329" : "#ebebeb",
+          color: dark ? "#fff" : "#000",
+          backgroundColor: dark ? "#111317" : "#fff",
+        }}
+        type="text"
+        className="w-[100%] border-[1px] outline-none rounded-[4px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"
       />
-     
     </div>
   );
 };
@@ -995,6 +992,7 @@ const Item5 = ({ last }) => {
 
 const Item4 = ({ last, title, sub, h, p, drop, dropTitle, children }) => {
   const [dropped, setDropped] = useState(false);
+  const ref = useRef();
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -1142,6 +1140,16 @@ const Settings = () => {
                   </h1>
                   <div className="grid mt-[10px] laptop:grid-cols-2 gap-x-[15px] gap-y-[10px]">
                     <InputText label={"First Name"} />
+                    <InputFields
+                      wrapperClass={"h-[100%]"}
+                      wrapperStyle={{ width: w }}
+                      labelText="First Name"
+                      labelStyle={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      labelClass={"text-[14px] font-bold tracking-wide  text-[#0a0a187a]"}
+                      inputClass={"w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"}
+                  
+                      type="text"
+                    />
                     <InputText label={"Last Name"} />
                     <InputDropdown label="Country" list={countriesData} />
                     <InputPhone />
