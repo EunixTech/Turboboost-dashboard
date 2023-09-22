@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { countries } from "../static/countries";
 import { setUpgradePopUpShow } from "../services/home";
 import InputFields from "../components/InputFields";
+ 
 const Button = () => {
+
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -494,16 +496,7 @@ const InputDropdown = ({ label, list, w, class1 }) => {
       </div>
     </div>
 
-//   <>
-//     <label for="small" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Small select</label>
-// <select id="small" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-//   <option selected>Choose a country</option>
-//   <option value="US">United States</option>
-//   <option value="CA">Canada</option>
-//   <option value="FR">France</option>
-//   <option value="DE">Germany</option>
-// </select>
-//   </>
+
   );
 };
 
@@ -1147,32 +1140,42 @@ const Settings = () => {
                   <div className="grid mt-[10px] laptop:grid-cols-2 gap-x-[15px] gap-y-[10px]">
                    
                     <InputFields
-                      wrapperClass={"h-[100%]"}
-                      wrapperStyle={{ width: w }}
                       labelText="First Name"
-                      labelClass={"text-[14px] font-bold tracking-wide  text-[#0a0a187a]"}
-                      inputClass={"w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"}
                       type="text"
                     />
 
                     <InputFields
-                      wrapperClass={"h-[100%]"}
-                      wrapperStyle={{ width: w }}
                       labelText="Last Name"
-                      labelClass={"text-[14px] font-bold tracking-wide  text-[#0a0a187a]"}
-                      inputClass={"w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"}
                       type="text"
                     />
-                   
-                    <InputDropdown label="Country" list={countriesData} />
-                    <InputPhone />
-                    <InputDropdown
-                      class1={"translate-y-[2.5px]"}
-                      label="Business Type"
-                      list={["Small or Medium Business", "India"]}
+
+                    <InputFields
+                      list={countriesData}
+                      labelText="Country"
+                      type="dropdown"
                     />
+                   
+                    {/* <InputPhone  /> */}
+
+                    <InputFields
+                      labelText="Phone number"
+                      type="number"
+                    />
+
+                    <InputFields
+                       class1={"translate-y-[2.5px]"}
+                       labelText="Business Type"
+                       list={["Small or Medium Business", "India"]}
+                      type="dropdown"
+                    />
+                  
                     <div className="flex justify-between items-end h-[]">
-                      <InputText label={"Email"} w={"100%"} />
+                    
+                      <InputFields
+                      wrapperStyle={{ width: w }}
+                      labelText="Email"
+                      type="email"
+                    />
                       {/* <div className="h-[38px] hover:bg-[#333345] cursor-pointer px-[25px] cursor-pointer shrink-0 flex items-center text-[14px] font-bold text-[#fff] justify-center rounded-[3px] bg-[#000] ml-[10px]">
                       Change Email
                     </div> */}

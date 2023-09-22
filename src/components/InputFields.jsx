@@ -2,13 +2,14 @@ import React,{useState, useEffect} from "react";
 import { useSelector } from "react-redux";
 
 export default function InputFields({
-    inputClass,
+    inputClass="w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]",
     type,
     onChangeHandler = () => {},
     value,
     inputName,
-    wrapperClass,
-    labelClass,
+    wrapperClass="h-[100%]",
+    wrapperStyle ,
+    labelClass = "text-[14px] font-bold tracking-wide  text-[#0a0a187a]",
     labelText,
     list = [],
     class1 = ""
@@ -32,7 +33,7 @@ export default function InputFields({
 
     return (
 
-        <div className="h-[100%]">
+        <div style={wrapperStyle} className={wrapperClass}>
         <p
           style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
           className={labelClass}
@@ -41,7 +42,7 @@ export default function InputFields({
         </p>
         {
                 (() => {
-                    if(type === "text"){
+                    if(type === "text" || type === "email" || type === "number"){
                         return <input
                         type={type}
                         className={inputClass}
