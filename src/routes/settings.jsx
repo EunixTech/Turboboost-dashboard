@@ -1,8 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setAuth, setDark } from "../services/home";
-import HomeLayout from "../layouts/index";
+import { setDark } from "../services/home";
 
 const SettingsPage = React.lazy(() => import("../views/Settings.jsx"));
 
@@ -47,17 +46,17 @@ const Settings = () => {
     } else {
       dispatch(setDark(false));
     }
-    if (loggedIn === "true") {
-      setTimeout(() => {
-        setLoading(false);
-        dispatch(setAuth(true));
-      }, 1000);
-    } else {
-      setTimeout(() => {
-        navigate("/auth/signIn");
-        dispatch(setAuth(false));
-      }, 1000);
-    }
+    // if (loggedIn === "true") {
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //     dispatch(setAuth(true));
+    //   }, 1000);
+    // } else {
+    //   setTimeout(() => {
+    //     navigate("/auth/signIn");
+    //     dispatch(setAuth(false));
+    //   }, 1000);
+    // }
   });
   const dark = useSelector((state) => state.home.dark);
   return (

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +6,9 @@ import { countries } from "../static/countries";
 import { setUpgradePopUpShow } from "../services/home";
 
 const Button = () => {
+
   const dark = useSelector((state) => state.home.dark);
+
   return (
     <div
       className={` ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
@@ -992,7 +993,6 @@ const Item5 = ({ last }) => {
 
 const Item4 = ({ last, title, sub, h, p, drop, dropTitle, children }) => {
   const [dropped, setDropped] = useState(false);
-  const ref = useRef();
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
