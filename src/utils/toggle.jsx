@@ -6,8 +6,7 @@ const Toggle = ({ value, setValue }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
-      style={{
-        backgroundColor: (value ? value : toggle) ? (dark?"#272B33":"#EBEBEB") : "#38F8AC",
+      style={{ backgroundColor: (value ? value : toggle) ? (dark?"#272B33":"#EBEBEB") : "#38F8AC",
       }}
       onClick={() => {
         if (setValue) {

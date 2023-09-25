@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Toggle from "../utils/toggle";
+import ToggleButton from "../components/ToggleButton";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { countries } from "../static/countries";
@@ -7,7 +7,6 @@ import { setUpgradePopUpShow } from "../services/home";
 import InputFields from "../components/InputFields";
 import SaveButton from "../components/button/SaveButton";
 import OptimizationModeCard from "../components/OptimizationModeCard";
-
 
 const Navigator = ({ current, setCurrent }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -338,100 +337,6 @@ const Navigator1 = ({ label, list, w, change }) => {
   );
 };
 
-const InputDropdown1 = ({ label, list, w }) => {
-  const [curr, setCurr] = useState(0);
-  const [hover, setHover] = useState(false);
-  const [clicked, setClicked] = useState(false);
-  const dark = useSelector((state) => state.home.dark);
-
-  useEffect(() => {
-    const onpointerdown = () => {
-      if (!hover) {
-        setClicked(false);
-      }
-    };
-    document.addEventListener("pointerdown", onpointerdown, false);
-    return () => {
-      document.removeEventListener("pointerdown", onpointerdown, false);
-    };
-  });
-
-  return (
-    <div className="h-[100%] flex justify-center flex-col" style={{ width: w }}>
-      <p className="text-[14px] whitespace-nowrap font-bold tracking-wide  text-[#0a0a187a]">
-        {label}
-      </p>
-      <div
-        style={{
-          borderColor: dark ? "#1F2329" : "#ebebeb",
-        }}
-        className="w-[100%] relative   text-[12px] font-medium mt-[4px] h-[34px]"
-      >
-        <div
-          onClick={() => {
-            setClicked(true);
-          }}
-          style={{
-            borderColor: dark ? "#1F2329" : "#ebebeb",
-            borderRadius: clicked ? "4px 4px 0 0" : "4px 4px 4px 4px",
-          }}
-          className="w-[100%] cursor-pointer border-[1px] border-[#ebebeb] px-[10px] h-[34px] flex justify-between items-center"
-        >
-          <p
-            style={{
-              color: dark ? "#fff" : "#000",
-            }}
-            className="text-[12px] font-medium tracking-wide px-[10px] text-[#000]"
-          >
-            {list[curr]}
-          </p>
-          <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
-        </div>
-        {clicked && (
-          <div
-            style={{
-              color: dark ? "#fff" : "#000",
-              backgroundColor: dark ? "#111317" : "#fff",
-              borderColor: dark ? "#1F2329" : "#ebebeb",
-            }}
-            className="w-[100%] min-h-[10px] rounded-b-[4px] border-[1px] border-t-0 border-[#ebebeb] absolute z-20 top-[33px] bg-[#fff]"
-          >
-            {list.map((item, i) => {
-              return (
-                <div
-                  onMouseOver={() => {
-                    setHover(true);
-                  }}
-                  onMouseLeave={() => {
-                    setHover(false);
-                  }}
-                  key={i}
-                  style={{
-                    backgroundColor:
-                      i === curr
-                        ? dark
-                          ? "#000"
-                          : "#ebebeb"
-                        : dark
-                        ? "#111317"
-                        : "#fff",
-                  }}
-                  onClick={() => {
-                    setCurr(i);
-                  }}
-                  className="w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
-                >
-                  {item}
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
 const CheckBox = ({ change }) => {
   const [check, setCheck] = useState(false);
   return (
@@ -593,7 +498,7 @@ const Item1 = ({ last, title, sub, h, featured }) => {
         </h1>
       </div>
       <div className="shrink-0 ml-[10px]">
-        <Toggle />
+        <ToggleButton />
       </div>
     </div>
   );
@@ -633,7 +538,7 @@ const Item3 = ({ last, title, sub, h }) => {
           </h1>
         </div>
         <div className="shrink-0">
-          <Toggle />
+          <ToggleButton />
         </div>
       </div>
       <div
@@ -659,31 +564,52 @@ const Item2 = ({ last }) => {
       }}
     >
       <div className="mobile:w-[100%] laptop:w-[18%] h-[100%] mr-[10px] flex items-center">
-        <InputDropdown1
-          w="100%"
+       
+              <InputFields
+          labelText="Asset URL/Code"
           list={["jquery.min.js", "JavaScript", "External", "Any Device"]}
-          label="Asset URL/Code"
+          type="dropdown"
+          labelClass = "text-[11px] font-bold tracking-wide  text-[#0a0a187a]"
+          wrapperStyle={{ width: "100%" }}
+          dropDownListClass="w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
+          dropDownClass="h-[34px]"
         />
       </div>
       <div className="mobile:w-[100%] laptop:w-[18%] h-[100%] mr-[10px] flex items-center">
-        <InputDropdown1
-          w="100%"
+       
+        <InputFields
+                  labelClass = "text-[11px] font-bold tracking-wide  text-[#0a0a187a]"
+          labelText="Resource Type"
           list={["JavaScript", "External", "Any Device", "jquery.min.js"]}
-          label="Resource Type"
+          type="dropdown"
+          wrapperStyle={{ width: "100%" }}
+          dropDownListClass="w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
+          dropDownClass="h-[34px]"
         />
       </div>
       <div className="mobile:w-[100%] laptop:w-[18%] h-[100%] mr-[10px] flex items-center">
-        <InputDropdown1
-          w="100%"
+      
+
+<InputFields
+          labelText="Resource Relation"
           list={["External", "Any Device", "jquery.min.js", "JavaScript"]}
-          label="Resource Relation"
+          type="dropdown"
+          labelClass = "text-[11px] font-bold tracking-wide  text-[#0a0a187a]"
+          wrapperStyle={{ width: "100%" }}
+          dropDownListClass="w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
+          dropDownClass="h-[34px]"
         />
       </div>
       <div className="mobile:w-[100%] laptop:w-[18%] h-[100%] mr-[10px] flex items-center">
-        <InputDropdown1
-          w="100%"
+     
+         <InputFields
+          labelText="Device"
           list={["Any Device", "jquery.min.js", "JavaScript", "External"]}
-          label="Device"
+          type="dropdown"
+          labelClass = "text-[11px] font-bold tracking-wide  text-[#0a0a187a]"
+          wrapperStyle={{ width: "100%" }}
+          dropDownListClass="w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
+          dropDownClass="h-[34px]"
         />
       </div>
       <div className="mobile:w-[100%] laptop:w-[18%] h-[100%] mr-[10px] flex items-center">
@@ -726,7 +652,6 @@ const Item5 = ({ last }) => {
         borderColor: true ? "#ffffff00" : dark ? "#1F2329" : "#ebebeb",
       }}
     >
-
       <div className="mobile:w-[100%] laptop:w-[32.5%] h-[100%] mobile:mb-[10px] laptop:mr-[10px] flex items-center">
         <InputFields
           inputClass="w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[34px]"
@@ -746,21 +671,15 @@ const Item5 = ({ last }) => {
         />
       </div>
       <div className="mobile:w-[100%] laptop:w-[25%] mobile:mb-[10px] h-[100%] laptop:mr-[10px] flex items-center">
-        {/* <InputDropdown1
-          w="100%"
+     
+        <InputFields
+          labelText="Group"
           list={["External", "Any Device", "jquery.min.js", "JavaScript"]}
-          label="Group"
-        /> */}
-
-<InputFields
-                      labelText="Group"
-                      list={["External", "Any Device", "jquery.min.js", "JavaScript"]}
-                      type="dropdown"
-                      wrapperStyle={{ width: "100%" }}
-                      dropDownListClass="w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
-                      dropDownClass="h-[34px]"
-                    />
-        
+          type="dropdown"
+          wrapperStyle={{ width: "100%" }}
+          dropDownListClass="w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
+          dropDownClass="h-[34px]"
+        />
       </div>
       <div
         style={{
@@ -816,7 +735,7 @@ const Item4 = ({ last, title, sub, h, p, drop, dropTitle, children }) => {
           </h1>
         </div>
         <div className="shrink-0">
-          <Toggle />
+          <ToggleButton />
         </div>
       </div>
       {drop ? (
@@ -1033,9 +952,10 @@ const Settings = () => {
                     <Item2 />
                     <Item2 last={true} />
                     <div className="w-[100%] px-[15px] mb-[15px] h-[38px] flex justify-end items-center">
-                  
-                    <SaveButton btnText="Add an Exclude" wrapperClasses="mb-[20px]" />
-                   
+                      <SaveButton
+                        btnText="Add an Exclude"
+                        wrapperClasses="mb-[20px]"
+                      />
                     </div>
                   </div>
                   <div
@@ -1169,8 +1089,10 @@ const Settings = () => {
                       <Item5 />
                     </Item4>
                     <div className="w-[100%] px-[15px] mb-[15px] h-[38px] flex justify-end items-center">
-                      <SaveButton btnText="Add Cookie" wrapperClasses="mb-[20px]" />
-                   
+                      <SaveButton
+                        btnText="Add Cookie"
+                        wrapperClasses="mb-[20px]"
+                      />
                     </div>
                   </div>
                 </div>
@@ -1197,12 +1119,11 @@ const Settings = () => {
                         sub="Use this option to set a desired value for the CSS front-display rule"
                       >
                         <div className="w-[100%] py-[10px]">
-                     
-                           <InputFields
-                      labelText="Font-display Value"
-                      list={["Swap"]}
-                      type="dropdown"
-                    />
+                          <InputFields
+                            labelText="Font-display Value"
+                            list={["Swap"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             The selected value will be applied to all @font-face
                             definitions
@@ -1217,12 +1138,11 @@ const Settings = () => {
                         sub="Use this option to configure the method of loading fonts on your pages"
                       >
                         <div className="w-[100%] py-[10px]">
-                
-<InputFields
-                      labelText="Loading Strategy"
-                      list={["Onload"]}
-                      type="dropdown"
-                    />
+                          <InputFields
+                            labelText="Loading Strategy"
+                            list={["Onload"]}
+                            type="dropdown"
+                          />
                         </div>
                       </Item4>
                       <Item1
@@ -1283,23 +1203,22 @@ const Settings = () => {
                         sub="Load images only when they become visible. This reduce the initial weight of the pages."
                       >
                         <div className="w-[100%] py-[10px]">
-                        
                           <InputFields
-                      labelText="Size Images Preemptively"
-                      list={["Enabled"]}
-                      type="dropdown"
-                    />
+                            labelText="Size Images Preemptively"
+                            list={["Enabled"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Images will get width and heiht pre-configured
                             before the actual image is loaded. Helps with some
                             element sizing issues
                           </div>
-                     
-                                  <InputFields
-                      labelText="Lazy Load iFrames"
-                      list={["Enabled"]}
-                      type="dropdown"
-                    />
+
+                          <InputFields
+                            labelText="Lazy Load iFrames"
+                            list={["Enabled"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             In addition to images, iframe elements will be lazy
                             loaded as well.
@@ -1310,23 +1229,23 @@ const Settings = () => {
                             type="textarea"
                             inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
-                         
-                           <InputFields
-                      labelText="DOM-rebuilding Slider Compatibility"
-                      list={["Enabled"]}
-                      type="dropdown"
-                    />
+
+                          <InputFields
+                            labelText="DOM-rebuilding Slider Compatibility"
+                            list={["Enabled"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Images will get width and heiht pre-configured
                             before the actual image is loaded. Helps with some
                             element sizing issues
                           </div>
-                         
-                                <InputFields
-                      labelText="Detect Theme Video Overlays"
-                      list={["Enabled"]}
-                      type="dropdown"
-                    />
+
+                          <InputFields
+                            labelText="Detect Theme Video Overlays"
+                            list={["Enabled"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Some themes allow configuring an overlay for
                             embedded videos. With this setting enabled,
@@ -1343,12 +1262,12 @@ const Settings = () => {
                             loaded when they get the configured threshold or
                             close
                           </div>
-                          
-                                      <InputFields
-                      labelText="Hidden Image Loading"
-                      list={["Default"]}
-                      type="dropdown"
-                    />
+
+                          <InputFields
+                            labelText="Hidden Image Loading"
+                            list={["Default"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Images with visibility: hidden; take up space on the
                             page but are not visible - use Default to have them
@@ -1417,13 +1336,11 @@ const Settings = () => {
                         sub="Create critical CSS as well as rework your website CSS for optimal delivery"
                       >
                         <div className="w-[100%] py-[10px]">
-                   
-
-<InputFields
-                      labelText="Remove @font-face rules from the critical CSS"
-                      list={["Disabled"]}
-                      type="dropdown"
-                    />
+                          <InputFields
+                            labelText="Remove @font-face rules from the critical CSS"
+                            list={["Disabled"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Enabling this will remove the @font-face rules from
                             the critical CSS, which will delay font loading and
@@ -1451,28 +1368,27 @@ const Settings = () => {
                         sub="Unused CSS rules are removed from optimized CSS files for faster page rendering."
                       >
                         <div className="w-[100%] py-[10px]">
-                         
                           <InputFields
-                      labelText="Debupe Based on Critical CSS"
-                      list={["Disabled"]}
-                      type="dropdown"
-                    />
+                            labelText="Debupe Based on Critical CSS"
+                            list={["Disabled"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Remove duplicate rules from the final CSS files for
                             rules that are present in the critical CSS
                           </div>
-              
-<InputFields
-                      labelText="Inline the final CSS"
-                      list={["Disabled"]}
-                      type="dropdown"
-                    />
 
-                        <InputFields
-                      labelText="Inline the final CSS"
-                      list={["Disabled"]}
-                      type="dropdown"
-                    />
+                          <InputFields
+                            labelText="Inline the final CSS"
+                            list={["Disabled"]}
+                            type="dropdown"
+                          />
+
+                          <InputFields
+                            labelText="Inline the final CSS"
+                            list={["Disabled"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Remove duplicate rules from the final CSS files for
                             rules that are present in the critical CSS
@@ -1483,13 +1399,12 @@ const Settings = () => {
                             type="textarea"
                             inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
-                         
-                           <InputFields
+
+                          <InputFields
                             labelText="Specify CSS selector to force exclude CSS for matching elemnts"
                             type="textarea"
                             inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
-                       
                         </div>
                       </Item4>
                       <Item4
@@ -1500,12 +1415,11 @@ const Settings = () => {
                         sub="Use a single file for all CSS rules grouped by media type. This reduces the number of network requests and makes rendering more efficient"
                       >
                         <div className="w-[100%] py-[10px]">
-                         
-                               <InputFields
-                      labelText="Merge resources for media “screen” and “all”"
-                      list={["Disabled"]}
-                      type="dropdown"
-                    />
+                          <InputFields
+                            labelText="Merge resources for media “screen” and “all”"
+                            list={["Disabled"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Enabling this will use a single group for styles
                             using media “screen” and “all”. Otherwise 2 separate
@@ -1550,12 +1464,11 @@ const Settings = () => {
                         sub="Rework and reposition blocking resource files in the above-the-fold portion of your page"
                       >
                         <div className="w-[100%] py-[10px]">
-                         
-                                   <InputFields
-                      labelText="Use Resource Loader Script"
-                      list={["Disabled"]}
-                      type="dropdown"
-                    />
+                          <InputFields
+                            labelText="Use Resource Loader Script"
+                            list={["Disabled"]}
+                            type="dropdown"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Using a resource loader script gives us control over
                             the CSS asd JS loading sequence, which often
@@ -1563,13 +1476,13 @@ const Settings = () => {
                             compatible with all sites, especially ones that have
                             JS errors or scripts that use document.write().
                           </div>
-                            
+
                           <InputFields
-                      labelText="Delay loading of non-critical resources until user interaction is detected"
-                      list={["Disabled"]}
-                      type="dropdown"
-                    />
-                        
+                            labelText="Delay loading of non-critical resources until user interaction is detected"
+                            list={["Disabled"]}
+                            type="dropdown"
+                          />
+
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             When this option is enabled, only critical resources
                             for rendering above-the-fold parts of pages will be
@@ -1665,13 +1578,13 @@ const Settings = () => {
                             the entire reverse proxy cache. Default value is
                             PURGE.
                           </div>
-                     
+
                           <InputFields
                             labelText="List of IPs of reverse proxy servers. Format: <ip>:<port>. The port can be omitted, in which case port 80 will be used."
                             type="textarea"
                             inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
-                         
+
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             List the IPs of the reverse proxy servers that
                             should get their cache purge.
@@ -1727,7 +1640,7 @@ const Settings = () => {
                       </Item4>
                     </div>
                   </div>
-                <OptimizationModeCard />
+                  <OptimizationModeCard />
                 </div>
               </>
             )}
