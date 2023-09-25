@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
 import { useSelector } from "react-redux";
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -199,6 +199,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
       >
         {url}
       </div>
+      {/* Site ID */}
       <div
         style={{
           color: dark ? "#fff" : "#000",
@@ -218,7 +219,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
         }}
         className="w-[17%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
-        {clicked1 ? "IV73238FB33" : "••••••••••"}
+        {clicked1 ? id : "••••••••••"}
         <div className="flex ml-[10px] cursor-pointer translate-y-[-2px]">
           <img
             src={
@@ -239,13 +240,16 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
           </p>
         </div>
       </div>
+
+      {/* Site Secret */}
       <div
         style={{
           color: dark ? "#fff" : "#000",
         }}
         onClick={() => {
           if (hover2) {
-            setClicked1(true);
+            // Copy the Site Secret when the hover2 state is true
+            copyToClipboard(secret);
           }
         }}
         onMouseOver={() => {
@@ -257,7 +261,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
         }}
         className="w-[17%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
-        {clicked1 ? "IV73238FB33" : "••••••••••"}
+        {clicked1 ? secret : "••••••••••"}
         <div className="flex ml-[10px] cursor-pointer translate-y-[-2px]">
           <img
             src={
@@ -278,6 +282,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
           </p>
         </div>
       </div>
+
       <div className="w-[15%] font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
         <Status i={status} />
       </div>
@@ -292,7 +297,6 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
     </div>
   );
 };
-
 
 const Table = ({ websites, deleteWebsite, dark }) => (
   <div className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool">
@@ -313,7 +317,19 @@ const Table = ({ websites, deleteWebsite, dark }) => (
 const ConnectWebsite = ({ setShow }) => {
   const dark = useSelector((state) => state.home.dark);
   const [websites, setWebsites] = useState([]);
-  const [copySuccess, setCopySuccess] = useState(false);
+
+  // Load data from localStorage when the component mounts
+  useEffect(() => {
+    const storedData = localStorage.getItem("websites");
+    if (storedData) {
+      setWebsites(JSON.parse(storedData));
+    }
+  }, []);
+
+  // Save data to localStorage whenever the websites state changes
+  useEffect(() => {
+    localStorage.setItem("websites", JSON.stringify(websites));
+  }, [websites]);
 
   const addWebsiteToList = (website) => {
     setWebsites((prevWebsites) => [...prevWebsites, website]);
@@ -356,7 +372,8 @@ const ConnectWebsite = ({ setShow }) => {
                     }}
                     className="text-[#0a0a187e] f2 text-[14px] font-medium"
                   >
-                     {websites.length} Connection{websites.length !== 1 ? "s" : ""}
+                    {websites.length} Connection
+                    {websites.length !== 1 ? "s" : ""}
                   </p>
                 </div>
                 <Table websites={websites} deleteWebsite={deleteWebsite} />
