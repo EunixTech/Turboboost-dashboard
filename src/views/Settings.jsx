@@ -776,6 +776,9 @@ const Item4 = ({ last, title, sub, h, p, drop, dropTitle, children }) => {
 };
 
 const Settings = () => {
+
+  const excludedResourcesArr = [];
+
   const [current, setCurrent] = useState(0);
   const w = useWidth();
   const dark = useSelector((state) => state.home.dark);
@@ -819,9 +822,7 @@ const Settings = () => {
                   }}
                 />
               )}
-              {/* <div className="h-[38px] hover:bg-[#2FE49C] ml-[10px] shrink-0 px-[25px] cursor-pointer flex items-center text-[14px] font-bold text-[#0A0A18] justify-center rounded-[3px] bg-[#38F8AC]">
-              Save Settings
-            </div> */}
+             
               <SaveButton btnText="Save Settings" />
             </div>
 

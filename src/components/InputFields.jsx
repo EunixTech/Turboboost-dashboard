@@ -19,7 +19,7 @@ export default function InputFields({
 }) {
 
     const dark = useSelector((state) => state.home.dark);
-
+    const [checkboxStatus, updateCheckboxStatus] = useState(false);
     const [valueIndex, updateValueIndex] = useState(0);
     
     const [hover, setHover] = useState(false),
@@ -129,6 +129,24 @@ export default function InputFields({
                             type="textarea"
                             className={inputClass}
                         />
+                    } else if(type === "checkbox"){
+                        return  <div
+                                    style={{
+                                        backgroundColor: checkboxStatus && "#38f8ab34",
+                                        borderColor: checkboxStatus ? "#38F8AC" : "#959494",
+                                    }}
+                                    onClick={() => { updateCheckboxStatus(!checkboxStatus); }}
+                                    className="w-[14px] h-[14px] mr-[10px] shrink-0 border-[1px] border-[#959494] rounded-[2px] cursor-pointer flex items-center justify-center"
+                                >
+                                    {checkboxStatus && (
+                                    <img
+                                        alt="checkbox"
+                                        src="/graphic/status/checkboxStatus.svg"
+                                        className="w-[8px] h-[8px]"
+                                    />
+                                )}
+
+                            </div>
                     }
 
                 })()}
