@@ -726,6 +726,7 @@ const Item5 = ({ last }) => {
         borderColor: true ? "#ffffff00" : dark ? "#1F2329" : "#ebebeb",
       }}
     >
+
       <div className="mobile:w-[100%] laptop:w-[32.5%] h-[100%] mobile:mb-[10px] laptop:mr-[10px] flex items-center">
         <InputFields
           inputClass="w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[34px]"
@@ -745,11 +746,20 @@ const Item5 = ({ last }) => {
         />
       </div>
       <div className="mobile:w-[100%] laptop:w-[25%] mobile:mb-[10px] h-[100%] laptop:mr-[10px] flex items-center">
-        <InputDropdown1
+        {/* <InputDropdown1
           w="100%"
           list={["External", "Any Device", "jquery.min.js", "JavaScript"]}
           label="Group"
-        />
+        /> */}
+
+<InputFields
+                      labelText="Group"
+                      list={["External", "Any Device", "jquery.min.js", "JavaScript"]}
+                      type="dropdown"
+                      wrapperStyle={{ width: "100%" }}
+                      dropDownListClass="w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
+                    />
+        
       </div>
       <div
         style={{

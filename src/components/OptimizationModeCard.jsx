@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import InputFields from "./InputFields";
 
-export default function OptimizationModeCard() {
+export default function OptimizationModeCard({lis}) {
     const dark = useSelector((state) => state.home.dark);
 
   return (

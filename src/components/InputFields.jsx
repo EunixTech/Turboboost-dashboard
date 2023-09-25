@@ -12,7 +12,10 @@ export default function InputFields({
     labelClass = "text-[14px] font-bold tracking-wide  text-[#0a0a187a]",
     labelText,
     list = [],
-    class1 = ""
+    
+    class1 = "",
+
+    dropDownListClass = "w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
 
 }) {
 
@@ -66,7 +69,7 @@ export default function InputFields({
 
                                     <div onClick={() => { updateIsDropdownOpen(true)}}
                                         style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
-                                        className={`${class1}  w-[100%] cursor-pointer border-[1px] rounded-[4px]  border-[#ebebeb] px-[10px] h-[38px] flex justify-between items-center`}
+                                        className={`${class1}  w-[100%] cursor-pointer border-[1px] border-[#ebebeb] px-[10px] h-[34px] flex justify-between items-center`}
                                     >
                                     <p
                                         style={{ color: dark ? "#fff" : "#000"}}
@@ -103,7 +106,7 @@ export default function InputFields({
                                                     updateValueIndex(i)
                                                     updateIsDropdownOpen(false)
                                                 }}
-                                                className="w-[100%] h-[30px] mb-[0px] flex items-center  px-[10px] text-[11px] cursor-pointer"
+                                                className={dropDownListClass}
                                             >
                                                 {item}
                                             </div>
