@@ -758,6 +758,7 @@ const Item5 = ({ last }) => {
                       type="dropdown"
                       wrapperStyle={{ width: "100%" }}
                       dropDownListClass="w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
+                      dropDownClass="h-[34px]"
                     />
         
       </div>

@@ -12,10 +12,9 @@ export default function InputFields({
     labelClass = "text-[14px] font-bold tracking-wide  text-[#0a0a187a]",
     labelText,
     list = [],
-    
-    class1 = "",
 
-    dropDownListClass = "w-[100%]  h-[40px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer"
+    dropDownListClass = "w-[100%]  h-[34px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer",
+    dropDownClass = "h-[38px]"
 
 }) {
 
@@ -64,12 +63,12 @@ export default function InputFields({
 
                         return <div 
                                     style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
-                                    className="w-[100%] relative   text-[12px] font-medium mt-[5px] h-[38px]"
+                                    className="w-[100%] relative   text-[12px] font-medium mt-[5px] h-[34px]"
                                 >
 
                                     <div onClick={() => { updateIsDropdownOpen(true)}}
-                                        style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
-                                        className={`${class1}  w-[100%] cursor-pointer border-[1px] border-[#ebebeb] px-[10px] h-[34px] flex justify-between items-center`}
+                                        style={{ borderColor: dark ? "#1F2329" : "#ebebeb", borderRadius: "4px",}}
+                                        className={`${dropDownClass}  w-[100%] cursor-pointer border-[1px] border-[#ebebeb] px-[10px] flex justify-between items-center`}
                                     >
                                     <p
                                         style={{ color: dark ? "#fff" : "#000"}}
