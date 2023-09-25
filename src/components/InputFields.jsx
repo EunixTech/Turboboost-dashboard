@@ -35,10 +35,11 @@ export default function InputFields({
 
         <div style={wrapperStyle} className={wrapperClass}>
         <p
-          style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-          className={labelClass}
+            style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+            className={labelClass}
         >
           {labelText}
+
         </p>
         {
                 (() => {
@@ -56,66 +57,76 @@ export default function InputFields({
                           }}
                     />
         
-                    } 
-                    else if(type === "dropdown"){
+                    } else if(type === "dropdown"){
 
                         return <div 
-                            style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
-                            className="w-[100%] relative   text-[12px] font-medium mt-[5px] h-[38px]"
-                            >
+                                    style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
+                                    className="w-[100%] relative   text-[12px] font-medium mt-[5px] h-[38px]"
+                                >
 
-                        <div onClick={() => { updateIsDropdownOpen(true)}}
-                            style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
-                            className={`${class1}  w-[100%] cursor-pointer border-[1px] rounded-[4px]  border-[#ebebeb] px-[10px] h-[38px] flex justify-between items-center`}
-                        >
-                        <p
-                            style={{ color: dark ? "#fff" : "#000"}}
-                            className="text-[12px] font-bold tracking-wide  text-[#000]"
-                        >
-                            {list[valueIndex]}
-                        </p>
-
-                        <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
-                    </div>
-
-                        {isDropdownOpen && (
-
-                            <div
-                                onMouseOver={() => { setHover(true)}}
-                                onMouseLeave={() => {setHover(false)}}
-                                style={{
-                                    color: dark ? "#fff" : "#000",
-                                    backgroundColor: dark ? "#111317" : "#fff",
-                                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                                }}
-                                className="w-[100%] min-h-[10px] rounded-b-[4px] max-h-[200px] scroll-bar-cool111 overflow-y-auto  border-t-0 border-[1px] border-[#ebebeb] absolute z-50 top-[33px] bg-[#fff]"
-                            >
-
-                            {list.map((item, i) => {
-                                return (
-                                    <div
-                         
-                                        key={i}
-                                        style={{
-                                            backgroundColor: i === valueIndex  ? dark  ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
-                                        }}
-                                        onClick={() => { 
-                                            updateValueIndex(i)
-                                            updateIsDropdownOpen(false)
-                                        }}
-                                        className="w-[100%] h-[30px] mb-[0px] flex items-center  px-[10px] text-[11px] cursor-pointer"
+                                    <div onClick={() => { updateIsDropdownOpen(true)}}
+                                        style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
+                                        className={`${class1}  w-[100%] cursor-pointer border-[1px] rounded-[4px]  border-[#ebebeb] px-[10px] h-[38px] flex justify-between items-center`}
                                     >
-                                        {item}
-                                    </div>
+                                    <p
+                                        style={{ color: dark ? "#fff" : "#000"}}
+                                        className="text-[12px] font-bold tracking-wide  text-[#000]"
+                                    >
+                                        {list[valueIndex]}
+                                    </p>
 
-                                );
+                                    <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
+                                </div>
+
+                                {isDropdownOpen && (
+
+                                    <div
+                                        onMouseOver={() => { setHover(true)}}
+                                        onMouseLeave={() => {setHover(false)}}
+                                        style={{
+                                            color: dark ? "#fff" : "#000",
+                                            backgroundColor: dark ? "#111317" : "#fff",
+                                            borderColor: dark ? "#1F2329" : "#ebebeb",
+                                        }}
+                                        className="w-[100%] min-h-[10px] rounded-b-[4px] max-h-[200px] scroll-bar-cool111 overflow-y-auto  border-t-0 border-[1px] border-[#ebebeb] absolute z-50 top-[33px] bg-[#fff]"
+                                    >
+
+                                    {list.map((item, i) => {
+                                        return (
+                                            <div
                                 
-                            })}
+                                                key={i}
+                                                style={{
+                                                    backgroundColor: i === valueIndex  ? dark  ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
+                                                }}
+                                                onClick={() => { 
+                                                    updateValueIndex(i)
+                                                    updateIsDropdownOpen(false)
+                                                }}
+                                                className="w-[100%] h-[30px] mb-[0px] flex items-center  px-[10px] text-[11px] cursor-pointer"
+                                            >
+                                                {item}
+                                            </div>
 
-                          </div>
-                        )}
+                                        );
+                                        
+                                    })}
 
-                      </div>
+                                </div>
+                                )}
+
+                            </div>
+                    } else if(type === "textarea"){
+                        return <textarea
+                            style={{
+                                borderColor: dark ? "#1F2329" : "#ebebeb",
+                                color: dark ? "#fff" : "#000",
+                                backgroundColor: dark ? "#191b2184" : "#fff",
+                                resize: "none",
+                            }}
+                            type="textarea"
+                            className={inputClass}
+                        />
                     }
 
                 })()}

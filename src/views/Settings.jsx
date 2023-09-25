@@ -1,71 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { countries } from "../static/countries";
 import { setUpgradePopUpShow } from "../services/home";
 import InputFields from "../components/InputFields";
- 
-const Button = () => {
+import SaveButton from "../components/button/SaveButton";
 
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      className={` ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
-        w-[130px]
-        h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
-    >
-      <p
-        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-        } rounded-[4px] active:translate-y-[0px] active:border-0 hover:bg-[#2fe49c] translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-bold `}
-      >
-        Save Settings
-      </p>
-    </div>
-  );
-};
-
-const Button2 = ({ title }) => {
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      className={` ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
-        w-[130px]
-        h-[40px] mt-[20px]  cursor-pointer mb-[20px] rounded-[4px]  flex items-center justify-center`}
-    >
-      <p
-        className={`text-[${dark ? "#fff" : "#000"}]   f2 text-[14px]   ${
-          dark ? "bg-[#111317]" : "bg-[#38F8AC]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0 translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-bold `}
-      >
-        {title}
-      </p>
-    </div>
-  );
-};
-
-
-const Button1 = ({ onClick }) => {
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      onClick={() => {}}
-      className={` w-[150px] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
-
-        h-[38px] mt-[20px] ml-[10px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
-    >
-      <p
-        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#000]" : "bg-[#000]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-      >
-        Change Email
-      </p>
-    </div>
-  );
-};
 
 const Navigator = ({ current, setCurrent }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -282,87 +223,6 @@ const Navigator = ({ current, setCurrent }) => {
   );
 };
 
-const InputText = ({ w, label }) => {
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div style={{ width: w }} className=" h-[100%]">
-      <p
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
-      >
-        {label}
-      </p>
-      <input
-        style={{
-          borderColor: dark ? "#1F2329" : "#ebebeb",
-          color: dark ? "#fff" : "#000",
-          backgroundColor: dark ? "#111317" : "#fff",
-        }}
-        type="text"
-        className="w-[100%] border-[1px] outline-none rounded-[4px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]"
-      />
-    </div>
-  );
-};
-
-const InputText1 = ({ w, label }) => {
-  const dark = useSelector((state) => state.home.dark);
-
-  return (
-    <div
-      style={{ width: w }}
-      className=" h-[100%] flex justify-center flex-col"
-    >
-      <p
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="text-[12px] font-bold tracking-wide  text-[#0a0a187a]"
-      >
-        {label}
-      </p>
-      <input
-        style={{
-          borderColor: dark ? "#1F2329" : "#ebebeb",
-          color: dark ? "#fff" : "#000",
-          backgroundColor: dark ? "#111317" : "#fff",
-        }}
-        type="text"
-        className="w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[34px]"
-      />
-    </div>
-  );
-};
-
-const InputTextArea = ({ w, label }) => {
-  const dark = useSelector((state) => state.home.dark);
-
-  return (
-    <div style={{ width: w }} className=" h-[100%]">
-      <p
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="text-[14px] font-medium tracking-wide  text-[#0a0a187a]"
-      >
-        {label}
-      </p>
-      <textarea
-        style={{
-          borderColor: dark ? "#1F2329" : "#ebebeb",
-          color: dark ? "#fff" : "#000",
-          backgroundColor: dark ? "#191b2184" : "#fff",
-          resize: "none",
-        }}
-        type="text"
-        className="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
-      />
-    </div>
-  );
-};
-
 const InputPhone = ({ label }) => {
   const dark = useSelector((state) => state.home.dark);
 
@@ -425,7 +285,12 @@ const InputDropdown = ({ label, list, w, class1 }) => {
 
   return (
     <div className="h-[100%]" style={{ width: w }}>
-      <p style={{ color: dark ? "#ffffff74" : "#0a0a187e", }} className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]" >{label} </p>
+      <p
+        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+        className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
+      >
+        {label}{" "}
+      </p>
 
       <div
         style={{
@@ -495,8 +360,6 @@ const InputDropdown = ({ label, list, w, class1 }) => {
         )}
       </div>
     </div>
-
-
   );
 };
 
@@ -961,10 +824,22 @@ const Item5 = ({ last }) => {
       }}
     >
       <div className="mobile:w-[100%] laptop:w-[32.5%] h-[100%] mobile:mb-[10px] laptop:mr-[10px] flex items-center">
-        <InputText1 w="100%" label="Cookie Name" />
+        <InputFields
+          inputClass="w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[34px]"
+          wrapperStyle={{ width: "100%" }}
+          labelText="Cookie Name"
+          type="text"
+          labelClass="text-[12px] font-bold tracking-wide  text-[#0a0a187a]"
+        />
       </div>
       <div className="mobile:w-[100%] laptop:w-[32.5%] h-[100%] mobile:mb-[10px] laptop:mr-[10px] flex items-center">
-        <InputText1 w="100%" label="Cookie Values (comma-seperated)" />
+        <InputFields
+          inputClass="w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[34px]"
+          labelClass="text-[12px] font-bold tracking-wide  text-[#0a0a187a]"
+          wrapperStyle={{ width: "100%" }}
+          labelText="Cookie Values (,)"
+          type="text"
+        />
       </div>
       <div className="mobile:w-[100%] laptop:w-[25%] mobile:mb-[10px] h-[100%] laptop:mr-[10px] flex items-center">
         <InputDropdown1
@@ -1114,7 +989,7 @@ const Settings = () => {
               {/* <div className="h-[38px] hover:bg-[#2FE49C] ml-[10px] shrink-0 px-[25px] cursor-pointer flex items-center text-[14px] font-bold text-[#0A0A18] justify-center rounded-[3px] bg-[#38F8AC]">
               Save Settings
             </div> */}
-              <Button />
+              <SaveButton btnText="Save Settings" />
             </div>
 
             {w > 1000 && (
@@ -1138,48 +1013,33 @@ const Settings = () => {
                     Details
                   </h1>
                   <div className="grid mt-[10px] laptop:grid-cols-2 gap-x-[15px] gap-y-[10px]">
-                   
-                    <InputFields
-                      labelText="First Name"
-                      type="text"
-                    />
+                    <InputFields labelText="First Name" type="text" />
 
-                    <InputFields
-                      labelText="Last Name"
-                      type="text"
-                    />
+                    <InputFields labelText="Last Name" type="text" />
 
                     <InputFields
                       list={countriesData}
                       labelText="Country"
                       type="dropdown"
                     />
-                   
-                    {/* <InputPhone  /> */}
+
+                    <InputFields labelText="Phone number" type="number" />
 
                     <InputFields
-                      labelText="Phone number"
-                      type="number"
-                    />
-
-                    <InputFields
-                       class1={"translate-y-[2.5px]"}
-                       labelText="Business Type"
-                       list={["Small or Medium Business", "India"]}
+                      class1={"translate-y-[2.5px]"}
+                      labelText="Business Type"
+                      list={["Small or Medium Business", "India"]}
                       type="dropdown"
                     />
-                  
+
                     <div className="flex justify-between items-end h-[]">
-                    
                       <InputFields
-                      wrapperStyle={{ width: w }}
-                      labelText="Email"
-                      type="email"
-                    />
-                      {/* <div className="h-[38px] hover:bg-[#333345] cursor-pointer px-[25px] cursor-pointer shrink-0 flex items-center text-[14px] font-bold text-[#fff] justify-center rounded-[3px] bg-[#000] ml-[10px]">
-                      Change Email
-                    </div> */}
-                      <Button1 />
+                        wrapperStyle={{ width: w }}
+                        labelText="Email"
+                        type="email"
+                      />
+
+                      <SaveButton btnText="Change Email" />
                     </div>
                   </div>
                 </div>
@@ -1259,10 +1119,9 @@ const Settings = () => {
                     <Item2 />
                     <Item2 last={true} />
                     <div className="w-[100%] px-[15px] mb-[15px] h-[38px] flex justify-end items-center">
-                      {/* <div className="h-[38px]  px-[25px] cursor-pointer flex items-center text-[14px] cursor-pointer hover:bg-[#2FE49C] font-bold text-[#0A0A18] justify-center rounded-[3px] bg-[#38F8AC]">
-                      Add an Exclude
-                    </div> */}
-                      <Button2 title="Add an Exclude" />
+                  
+                    <SaveButton btnText="Add an Exclude" wrapperClasses="mb-[20px]" />
+                   
                     </div>
                   </div>
                   <div
@@ -1363,9 +1222,11 @@ const Settings = () => {
                       sub="We’re serving you with static page cache which you can use effectively to skip all the server logic. Use it to improve the server response time."
                     >
                       <div className="w-[100%] py-[10px]">
-                        <InputText label={"First Name"} />
+                        <InputFields labelText="First Name" type="text" />
+
                         <div className="h-[10px]"></div>
-                        <InputText label={"Country"} />
+
+                        <InputFields labelText="Country" type="text" />
                       </div>
                     </Item4>
                     <Item1
@@ -1402,13 +1263,15 @@ const Settings = () => {
                       p="10px 15px 10px 15px"
                     >
                       <div className="w-[100%] mt-[10px]">
-                        <InputTextArea
-                          label={
-                            "Specify excluded URL parameters, one at a line. You can use wildcard *. By default TurboBoost ignores the Urchin tracking parameters"
-                          }
+                        <InputFields
+                          labelText="Specify excluded URL parameters, one at a line. You can use wildcard *. By default TurboBoost ignores the Urchin tracking parameters333"
+                          type="textarea"
+                          inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                         />
-                        <InputText
-                          label={"Include the default ignored parameters"}
+
+                        <InputFields
+                          labelText="Include the default ignored parameters"
+                          type="text"
                         />
                         <div className="w-[100%] text-[12px] italic text-[#85858C] mt-[5px] ">
                           You can find the complete list of parameters that this
@@ -1446,7 +1309,8 @@ const Settings = () => {
                       <Item5 />
                     </Item4>
                     <div className="w-[100%] px-[15px] mb-[15px] h-[38px] flex justify-end items-center">
-                      <Button2 title="Add Cookie" />
+                      <SaveButton btnText="Add Cookie" wrapperClasses="mb-[20px]" />
+                   
                     </div>
                   </div>
                 </div>
@@ -1641,7 +1505,8 @@ const Settings = () => {
                         sub="Enable or disable image optimization for size and delivery"
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputText label={"Image Quality"} list={["Swap"]} />
+                          <InputFields labelText="Image Quality" type="text" />
+
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Choose the desired optimization image quality, from
                             0 to 100, Google recommends 80.
@@ -1678,10 +1543,11 @@ const Settings = () => {
                             In addition to images, iframe elements will be lazy
                             loaded as well.
                           </div>
-                          <InputTextArea
-                            label={
-                              "Specify CSS selector to force include CSS for matching elemnts"
-                            }
+
+                          <InputFields
+                            labelText="Specify CSS selector to force include CSS for matching elemnts"
+                            type="textarea"
+                            inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
                           <InputDropdown
                             label={"DOM-rebuilding Slider Compatibility"}
@@ -1702,7 +1568,11 @@ const Settings = () => {
                             TurboBoost will display that overlay instead of the
                             video thumbnail before the video is loaded.
                           </div>
-                          <InputText label={"Loading Threshold"} />
+
+                          <InputFields
+                            labelText="Loading Threshold"
+                            type="text"
+                          />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Elements approaching the viewport will be lazy
                             loaded when they get the configured threshold or
@@ -1897,15 +1767,17 @@ const Settings = () => {
                             the critical CSS, which will delay font loading and
                             help improve the first meaningful paint.
                           </div>
-                          <InputTextArea
-                            label={
-                              "Specify CSS selector to force include CSS for matching elemnts"
-                            }
+
+                          <InputFields
+                            labelText="Specify CSS selector to force include CSS for matching elemnts"
+                            type="textarea"
+                            inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
-                          <InputTextArea
-                            label={
-                              "Specify CSS selector to force include CSS for matching elemnts"
-                            }
+
+                          <InputFields
+                            labelText="Specify CSS selector to force include CSS for matching elemnts"
+                            type="textarea"
+                            inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
                         </div>
                       </Item4>
@@ -1933,16 +1805,19 @@ const Settings = () => {
                             Remove duplicate rules from the final CSS files for
                             rules that are present in the critical CSS
                           </div>
-                          <InputTextArea
-                            label={
-                              "Specify CSS selector to force include CSS for matching elemnts"
-                            }
+
+                          <InputFields
+                            labelText="Specify CSS selector to force include CSS for matching elemnts"
+                            type="textarea"
+                            inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
-                          <InputTextArea
-                            label={
-                              "Specify CSS selector to force exclude CSS for matching elemnts"
-                            }
+                         
+                           <InputFields
+                            labelText="Specify CSS selector to force exclude CSS for matching elemnts"
+                            type="textarea"
+                            inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
+                       
                         </div>
                       </Item4>
                       <Item4
@@ -2080,9 +1955,10 @@ const Settings = () => {
                             when user interaction with the site is detected.
                             This option can improve score drastically.
                           </div>
-                          <InputText
-                            label={"Resource loading strategy"}
-                            list={["Disabled"]}
+
+                          <InputFields
+                            labelText="Resource loading strategy"
+                            type="text"
                           />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Loading scripts first usually gives better
@@ -2192,35 +2068,41 @@ const Settings = () => {
                         sub="If you are using a reverse proxy (like Varnish or NGINX) use this option to configure its settings, so TurboBoost can synchronize both caches for best performance."
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputText
-                            label={"URL for performing a complete purge"}
-                            list={["Disabled"]}
+                          <InputFields
+                            labelText="URL for performing a complete purge"
+                            type="text"
                           />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Use this only if your reverse proxy server is
                             configured with a custom URL for purging its entire
                             cache.
                           </div>
-                          <InputText
-                            label={"HTTP method when purging a single URL"}
-                            list={["Disabled"]}
+
+                          <InputFields
+                            labelText="HTTP method when purging a single URL"
+                            type="text"
                           />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             The HTTP method to use when TurboBoost is purging
                             cache for a single URL. Default value is PURGE.
                           </div>
-                          <InputText
-                            label={
-                              "HTTP method when purging the entire reverse proxy cache"
-                            }
-                            list={["Disabled"]}
+
+                          <InputFields
+                            labelText="HTTP method when purging the entire reverse proxy cache"
+                            type="text"
                           />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             The HTTP method to use when TurboBoost is purging
                             the entire reverse proxy cache. Default value is
                             PURGE.
                           </div>
-                          <InputTextArea label="List of IPs of reverse proxy servers. Format: <ip>:<port>. The port can be omitted, in which case port 80 will be used." />
+                     
+                          <InputFields
+                            labelText="List of IPs of reverse proxy servers. Format: <ip>:<port>. The port can be omitted, in which case port 80 will be used."
+                            type="textarea"
+                            inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
+                          />
+                         
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             List the IPs of the reverse proxy servers that
                             should get their cache purge.
@@ -2235,18 +2117,17 @@ const Settings = () => {
                         sub="If your site is behind Cloudflare use this option to configure API access, so TurboBoost can synchronize both caches for best performance."
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputText
-                            label={"Cloudflare account-email address"}
-                            list={["Disabled"]}
+                          <InputFields
+                            labelText="Cloudflare account-email address"
+                            type="text"
                           />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Enter the primary email address for the Cloudflare
                             account that controls http://txtcartapp.com/
                           </div>
-                          <InputText
-                            label={"Global API Key"}
-                            list={["Disabled"]}
-                          />
+
+                          <InputFields labelText="Global API Key" type="text" />
+
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             For information on finding your global API key, see
                             this article in the Cloudflare knowledge base.
@@ -2261,12 +2142,13 @@ const Settings = () => {
                         sub="If your site is behind Sucuri use this option to configure API access, so TurboBoost can synchronize both caches for best performance."
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputText label={"API Key"} list={["Disabled"]} />
+                          <InputFields labelText="API Key" type="text" />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             The Sucuri API key for http://txtcartapp.com/,
                             labeled as API_KEY in the website Firewall Dashboard
                           </div>
-                          <InputText label={"API Secret"} list={["Disabled"]} />
+                          <InputFields labelText="API Secret" type="text" />
+
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             The Sucuri API secret for
                             http://txtcartapp.com/,labeled as API_SECRET in the
