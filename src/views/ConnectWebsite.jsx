@@ -356,7 +356,7 @@ const ConnectWebsite = ({ setShow }) => {
                     }}
                     className="text-[#0a0a187e] f2 text-[14px] font-medium"
                   >
-                    5 Connections
+                     {websites.length} Connection{websites.length !== 1 ? "s" : ""}
                   </p>
                 </div>
                 <Table websites={websites} deleteWebsite={deleteWebsite} />
