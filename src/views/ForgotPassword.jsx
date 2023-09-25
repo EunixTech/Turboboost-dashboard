@@ -1,13 +1,19 @@
-import React,{useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import React,{useState} from "react";
+// import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "../components/forms/forgotPassword";
-import Otpverification from "./otp";
+// import Otpverification from "./otp";
+import ResetPasswordForm from "../components/forms/resetPassword";
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('');
+    function checkEmail(email){
+      console.log(email);
+      setEmail(email);
+    }
     return (
         <>
         <div className="w-[100%] h-[100vh] flex items-center justify-center">
             <div className=" laptop:w-[50%] mobile:w-[100%]  px-[100px] h-[100vh] px-[7%] flex items-center justify-center">
+              {/* ---------------------forgot password body left------------------------ */}
                <div className="w-[100%] ">
                     <img src="/logo-b.png" className="w-[150px]" alt="" />
                     <h1 className="text-[34px] mt-[10px] font-bold">Forgot Password?</h1>
@@ -15,13 +21,23 @@ const ForgotPasswordPage = () => {
                         Please enter your email address below
                     </p>
                     <ForgotPasswordForm 
-           type='email'
-            placeholder='Enter email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-             />
+                    type='email'
+                      placeholder='Enter email'
+                      value={email}
+                      onkeyup={(e) => checkEmail(e.target.value)}
+                    />
                 </div>
-             
+                 {/* ---------------------forgot password body left end------------------------ */}
+                  {/* ---------------------reset password body left------------------------ */}
+                <div className="w-[100%] ">
+                    <img src="/logo-b.png" className="w-[150px]" alt="" />
+                    <h1 className="text-[34px] mt-[10px] font-bold">Reset Password?</h1>
+                    <p className="text-[#969AA5] inter text-[14px] mb-[10px]">
+                        Please enter your password below
+                    </p>
+                    <ResetPasswordForm/>
+                </div>
+                 {/* ---------------------reset password body left end------------------------ */}
             </div>
             <div className=" w-[50%] h-[100vh] relative">
           <img

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Otpverification() {
+const Otpverification = () => {
   const [code, setCode] = useState(''); // Initialize state for your input field
 
   const handleInputChange = (e) => {
@@ -38,4 +38,4 @@ function Otpverification() {
   );
 }
 
-export default OtpVerification;
+export default Otpverification;

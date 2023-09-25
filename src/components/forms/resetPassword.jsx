@@ -1,55 +1,83 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 
-const Input = ({ w, label, mt, value, setValue, type }) => {
+const ResetPasswordForm = () => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordsMatchError, setPasswordsMatchError] = useState("");
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const handlePasswordChange = (event) => {
+    const newPassword = event.target.value;
+    setPassword(newPassword);
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    const newConfirmPassword = event.target.value;
+    setConfirmPassword(newConfirmPassword);
+
+    if (!newConfirmPassword) {
+      setPasswordsMatchError("");
+      return;
+    }
+
+    if (newConfirmPassword !== password) {
+      setPasswordsMatchError("Passwords do not match.");
+    } else {
+      setPasswordsMatchError("");
+    }
+  };
+
   return (
-    <div
-      style={{
-        width: w,
-        marginTop: mt,
-      }}
-      className=""
-    >
-      <p className="text-[#0A0A18] font-medium text-[13px] mb-[4px]">
-        {label} <span className="text-[#FF0703]">*</span>
-      </p>
-      <input
-        type={type}
-        value={value}
-        onChange={(e) => { setValue(e.target.value);}}
-        className="border-[#e1e1e1] px-[5px] outline-none text-[12px] font-medium border-[1px] w-[100%] h-[35px] rounded-[3px]"
-      />
+    <div>
+      <div>
+        <label className="mb-1 inline-block">Password</label>
+        <div className="password-input w-full flex relative mb-5">
+          <input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={handlePasswordChange}
+            className="border rounded p-2 w-full"
+          />
+          <button
+            className="password-toggle-button absolute right-3 top-3"
+            onClick={toggleShowPassword}
+          >
+            {showPassword ? <FaEye /> : <FaEyeSlash />}
+          </button>
+        </div>
+      </div>
+      <div className="">
+        <label className="mb-1 inline-block">Confirm Password</label>
+        <div className="password-input w-full flex relative mb-0">
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+            className="border rounded p-2 w-full"
+          />
+          <button
+            className="password-toggle-button absolute right-3 top-3"
+            onClick={toggleShowConfirmPassword}
+          >
+            {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
+          </button>
+        </div>
+        {passwordsMatchError && (
+          <p className="text-red-600 text-md">{passwordsMatchError}</p>
+        )}
+      </div>
     </div>
   );
 };
 
-const ResetPasswordForm = () => {
-
-  const [password, setEmail] = useState("");
-
-  const navigate = useNavigate();
-
-  return (
-    <>
-      <div className="w-[100%] mt-[20px] mb-[13px]">
-        <Input
-          w={"100%"}
-          value={password}
-          setValue={(e) => {
-            setEmail(e);
-          }}
-          mt={"10px"}
-          label={"Email"}
-          type="text"
-        />
-        
-      </div>
-      <div className="h-[38px] mb-[20px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm"
-      >
-        <span className="translate-y-[1.5px] ">Next</span>
-      </div>
-    </>
-  );
-};
-
-export default ForgotPasswordForm;
+export default ResetPasswordForm;
