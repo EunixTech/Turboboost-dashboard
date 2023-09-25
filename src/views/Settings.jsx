@@ -6,6 +6,7 @@ import { countries } from "../static/countries";
 import { setUpgradePopUpShow } from "../services/home";
 import InputFields from "../components/InputFields";
 import SaveButton from "../components/button/SaveButton";
+import OptimizationModeCard from "../components/OptimizationModeCard";
 
 
 const Navigator = ({ current, setCurrent }) => {
@@ -260,104 +261,6 @@ const InputPhone = ({ label }) => {
           }}
           className="w-[100%] outline-none rounded-[4px] px-[10px] text-[12px] font-medium   h-[100%]"
         />
-      </div>
-    </div>
-  );
-};
-
-const InputDropdown = ({ label, list, w, class1 }) => {
-  const [curr, setCurr] = useState(0);
-  const [hover, setHover] = useState(false);
-  const [clicked, setClicked] = useState(false);
-  const dark = useSelector((state) => state.home.dark);
-
-  useEffect(() => {
-    const onpointerdown = () => {
-      if (!hover) {
-        setClicked(false);
-      }
-    };
-    document.addEventListener("pointerdown", onpointerdown, false);
-    return () => {
-      document.removeEventListener("pointerdown", onpointerdown, false);
-    };
-  });
-
-  return (
-    <div className="h-[100%]" style={{ width: w }}>
-      <p
-        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-        className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
-      >
-        {label}{" "}
-      </p>
-
-      <div
-        style={{
-          borderColor: dark ? "#1F2329" : "#ebebeb",
-        }}
-        className="w-[100%] relative   text-[12px] font-medium mt-[5px] h-[38px]"
-      >
-        <div
-          onClick={() => {
-            setClicked(true);
-          }}
-          style={{
-            borderColor: dark ? "#1F2329" : "#ebebeb",
-          }}
-          className={`${class1}  w-[100%] cursor-pointer border-[1px] rounded-[4px]  border-[#ebebeb] px-[10px] h-[38px] flex justify-between items-center`}
-        >
-          <p
-            style={{
-              color: dark ? "#fff" : "#000",
-            }}
-            className="text-[12px] font-bold tracking-wide  text-[#000]"
-          >
-            {list[curr]}
-          </p>
-          <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
-        </div>
-        {clicked && (
-          <div
-            onMouseOver={() => {
-              setHover(true);
-            }}
-            onMouseLeave={() => {
-              setHover(false);
-            }}
-            style={{
-              color: dark ? "#fff" : "#000",
-              backgroundColor: dark ? "#111317" : "#fff",
-              borderColor: dark ? "#1F2329" : "#ebebeb",
-            }}
-            className="w-[100%] min-h-[10px] rounded-b-[4px] max-h-[200px] scroll-bar-cool111 overflow-y-auto  border-t-0 border-[1px] border-[#ebebeb] absolute z-50 top-[33px] bg-[#fff]"
-          >
-            {list.map((item, i) => {
-              return (
-                <div
-                  key={i}
-                  style={{
-                    backgroundColor:
-                      i === curr
-                        ? dark
-                          ? "#000"
-                          : "#ebebeb"
-                        : dark
-                        ? "#111317"
-                        : "#fff",
-                  }}
-                  onClick={() => {
-                    setCurr(i);
-                    setClicked(false);
-                  }}
-                  className="w-[100%] h-[30px] mb-[0px] flex items-center  px-[10px] text-[11px] cursor-pointer"
-                >
-                  {item}
-                </div>
-              );
-            })}
-          </div>
-        )}
       </div>
     </div>
   );
@@ -1146,61 +1049,7 @@ const Settings = () => {
                     />
                   </div>
                 </div>
-                <div className="w-[320px] shrink-0 ml-[15px]">
-                  <div
-                    style={{
-                      backgroundColor: dark ? "#111317" : "#fff",
-                      borderColor: dark ? "#1F2329" : "#ebebeb",
-                    }}
-                    className=" bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
-                  >
-                    <div className="w-[100%] flex justify-between">
-                      <h1
-                        style={{
-                          color: dark ? "#fff" : "#000",
-                        }}
-                        className="text-[20px] font-bold tracking-wide "
-                      >
-                        Optimization Modes
-                      </h1>
-                      <div
-                        style={{
-                          color: dark ? "#fff" : "#000",
-                        }}
-                        className="flex text-[14px] font-medium items-center"
-                      >
-                        <>
-                          <img
-                            src="/graphic/warmup/elli1.svg"
-                            className="mr-[3px] w-[14px]"
-                            alt=""
-                          />
-                          Custom
-                        </>
-                      </div>
-                    </div>
-                    <p
-                      style={{
-                        color: dark ? "#ffffff74" : "#0a0a187e",
-                      }}
-                      className="text-[14px] mt-[5px] tracking-wide text-[#0a0a186f]"
-                    >
-                      Changing the mode, the level of optimization is updated
-                      and your cache is purged
-                    </p>
-                    <InputDropdown1
-                      label=""
-                      list={[
-                        "Select Optimization Mode",
-                        " Custom",
-                        "Ludacris",
-                        "Strong",
-                        "Medium",
-                        "Standard",
-                      ]}
-                    />
-                  </div>
-                </div>
+                <OptimizationModeCard />
               </div>
             )}
             {current === 2 && (
@@ -1314,61 +1163,7 @@ const Settings = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-[320px] shrink-0 ml-[15px]">
-                  <div
-                    style={{
-                      backgroundColor: dark ? "#111317" : "#fff",
-                      borderColor: dark ? "#1F2329" : "#ebebeb",
-                    }}
-                    className=" bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
-                  >
-                    <div className="w-[100%] flex justify-between">
-                      <h1
-                        style={{
-                          color: dark ? "#fff" : "#000",
-                        }}
-                        className="text-[20px] font-bold tracking-wide "
-                      >
-                        Optimization Modes
-                      </h1>
-                      <div
-                        style={{
-                          color: dark ? "#fff" : "#000",
-                        }}
-                        className="flex text-[14px] font-medium items-center"
-                      >
-                        <>
-                          <img
-                            src="/graphic/warmup/elli1.svg"
-                            className="mr-[3px] w-[14px]"
-                            alt=""
-                          />
-                          Custom
-                        </>
-                      </div>
-                    </div>
-                    <p
-                      style={{
-                        color: dark ? "#ffffff74" : "#0a0a187e",
-                      }}
-                      className="text-[14px] mt-[5px] tracking-wide text-[#0a0a186f]"
-                    >
-                      Changing the mode, the level of optimization is updated
-                      and your cache is purged
-                    </p>
-                    <InputDropdown1
-                      label=""
-                      list={[
-                        "Select Optimization Mode",
-                        " Custom",
-                        "Ludacris",
-                        "Strong",
-                        "Medium",
-                        "Standard",
-                      ]}
-                    />
-                  </div>
-                </div>
+                <OptimizationModeCard />
               </div>
             )}
             {current === 3 && (
@@ -1391,10 +1186,12 @@ const Settings = () => {
                         sub="Use this option to set a desired value for the CSS front-display rule"
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputDropdown
-                            label={"Font-display Value"}
-                            list={["Swap"]}
-                          />
+                     
+                           <InputFields
+                      labelText="Font-display Value"
+                      list={["Swap"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             The selected value will be applied to all @font-face
                             definitions
@@ -1409,10 +1206,12 @@ const Settings = () => {
                         sub="Use this option to configure the method of loading fonts on your pages"
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputDropdown
-                            label={"Loading Strategy"}
-                            list={["Onload"]}
-                          />
+                
+<InputFields
+                      labelText="Loading Strategy"
+                      list={["Onload"]}
+                      type="dropdown"
+                    />
                         </div>
                       </Item4>
                       <Item1
@@ -1428,60 +1227,7 @@ const Settings = () => {
                       />
                     </div>
                   </div>
-                  <div className="w-[320px] shrink-0 ml-[15px]">
-                    <div
-                      style={{
-                        backgroundColor: dark ? "#111317" : "#fff",
-                        borderColor: dark ? "#1F2329" : "#ebebeb",
-                      }}
-                      className=" bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
-                    >
-                      <div className="w-[100%] flex justify-between">
-                        <h1
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="text-[20px] font-bold tracking-wide "
-                        >
-                          Optimization Modes
-                        </h1>
-                        <div
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="flex text-[14px] font-medium items-center"
-                        >
-                          <>
-                            <img
-                              src="/graphic/warmup/elli1.svg"
-                              className="mr-[3px] w-[14px]"
-                              alt=""
-                            />
-                            Custom
-                          </>
-                        </div>
-                      </div>
-                      <p
-                        style={{
-                          color: dark ? "#ffffff74" : "#0a0a187e",
-                        }}
-                        className="text-[14px] mt-[5px] tracking-wide text-[#0a0a186f]"
-                      >
-                        Changing the mode, the level of optimization is updated
-                        and your cache is purged
-                      </p>
-                      <InputDropdown1
-                        label=""
-                        list={[
-                          " Custom",
-                          "Ludacris",
-                          "Strong",
-                          "Medium",
-                          "Standard",
-                        ]}
-                      />
-                    </div>
-                  </div>
+                  <OptimizationModeCard />
                 </div>
               </>
             )}
@@ -1526,19 +1272,23 @@ const Settings = () => {
                         sub="Load images only when they become visible. This reduce the initial weight of the pages."
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputDropdown
-                            label={"Size Images Preemptively"}
-                            list={["Enabled"]}
-                          />
+                        
+                          <InputFields
+                      labelText="Size Images Preemptively"
+                      list={["Enabled"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Images will get width and heiht pre-configured
                             before the actual image is loaded. Helps with some
                             element sizing issues
                           </div>
-                          <InputDropdown
-                            label={"Lazy Load iFrames"}
-                            list={["Enabled"]}
-                          />
+                     
+                                  <InputFields
+                      labelText="Lazy Load iFrames"
+                      list={["Enabled"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             In addition to images, iframe elements will be lazy
                             loaded as well.
@@ -1549,19 +1299,23 @@ const Settings = () => {
                             type="textarea"
                             inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                           />
-                          <InputDropdown
-                            label={"DOM-rebuilding Slider Compatibility"}
-                            list={["Enabled"]}
-                          />
+                         
+                           <InputFields
+                      labelText="DOM-rebuilding Slider Compatibility"
+                      list={["Enabled"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Images will get width and heiht pre-configured
                             before the actual image is loaded. Helps with some
                             element sizing issues
                           </div>
-                          <InputDropdown
-                            label={"Detect Theme Video Overlays"}
-                            list={["Enabled"]}
-                          />
+                         
+                                <InputFields
+                      labelText="Detect Theme Video Overlays"
+                      list={["Enabled"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Some themes allow configuring an overlay for
                             embedded videos. With this setting enabled,
@@ -1578,10 +1332,12 @@ const Settings = () => {
                             loaded when they get the configured threshold or
                             close
                           </div>
-                          <InputDropdown
-                            label={"Hidden Image Loading"}
-                            list={["Default"]}
-                          />
+                          
+                                      <InputFields
+                      labelText="Hidden Image Loading"
+                      list={["Default"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Images with visibility: hidden; take up space on the
                             page but are not visible - use Default to have them
@@ -1598,60 +1354,7 @@ const Settings = () => {
                       />
                     </div>
                   </div>
-                  <div className="w-[320px] shrink-0 ml-[15px]">
-                    <div
-                      style={{
-                        backgroundColor: dark ? "#111317" : "#fff",
-                        borderColor: dark ? "#1F2329" : "#ebebeb",
-                      }}
-                      className=" bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
-                    >
-                      <div className="w-[100%] flex justify-between">
-                        <h1
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="text-[20px] font-bold tracking-wide "
-                        >
-                          Optimization Modes
-                        </h1>
-                        <div
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="flex text-[14px] font-medium items-center"
-                        >
-                          <>
-                            <img
-                              src="/graphic/warmup/elli1.svg"
-                              className="mr-[3px] w-[14px]"
-                              alt=""
-                            />
-                            Custom
-                          </>
-                        </div>
-                      </div>
-                      <p
-                        style={{
-                          color: dark ? "#ffffff74" : "#0a0a187e",
-                        }}
-                        className="text-[14px] mt-[5px] tracking-wide text-[#0a0a186f]"
-                      >
-                        Changing the mode, the level of optimization is updated
-                        and your cache is purged
-                      </p>
-                      <InputDropdown1
-                        label=""
-                        list={[
-                          " Custom",
-                          "Ludacris",
-                          "Strong",
-                          "Medium",
-                          "Standard",
-                        ]}
-                      />
-                    </div>
-                  </div>
+                  <OptimizationModeCard />
                 </div>
               </>
             )}
@@ -1679,60 +1382,7 @@ const Settings = () => {
                       />
                     </div>
                   </div>
-                  <div className="w-[320px] shrink-0 ml-[15px]">
-                    <div
-                      style={{
-                        backgroundColor: dark ? "#111317" : "#fff",
-                        borderColor: dark ? "#1F2329" : "#ebebeb",
-                      }}
-                      className=" bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
-                    >
-                      <div className="w-[100%] flex justify-between">
-                        <h1
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="text-[20px] font-bold tracking-wide "
-                        >
-                          Optimization Modes
-                        </h1>
-                        <div
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="flex text-[14px] font-medium items-center"
-                        >
-                          <>
-                            <img
-                              src="/graphic/warmup/elli1.svg"
-                              className="mr-[3px] w-[14px]"
-                              alt=""
-                            />
-                            Custom
-                          </>
-                        </div>
-                      </div>
-                      <p
-                        style={{
-                          color: dark ? "#ffffff74" : "#0a0a187e",
-                        }}
-                        className="text-[14px] mt-[5px] tracking-wide text-[#0a0a186f]"
-                      >
-                        Changing the mode, the level of optimization is updated
-                        and your cache is purged
-                      </p>
-                      <InputDropdown1
-                        label=""
-                        list={[
-                          " Custom",
-                          "Ludacris",
-                          "Strong",
-                          "Medium",
-                          "Standard",
-                        ]}
-                      />
-                    </div>
-                  </div>
+                  <OptimizationModeCard />
                 </div>
               </>
             )}
@@ -1756,12 +1406,13 @@ const Settings = () => {
                         sub="Create critical CSS as well as rework your website CSS for optimal delivery"
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputDropdown
-                            label={
-                              "Remove @font-face rules from the critical CSS"
-                            }
-                            list={["Disabled"]}
-                          />
+                   
+
+<InputFields
+                      labelText="Remove @font-face rules from the critical CSS"
+                      list={["Disabled"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Enabling this will remove the @font-face rules from
                             the critical CSS, which will delay font loading and
@@ -1789,18 +1440,28 @@ const Settings = () => {
                         sub="Unused CSS rules are removed from optimized CSS files for faster page rendering."
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputDropdown
-                            label={"Debupe Based on Critical CSS"}
-                            list={["Disabled"]}
-                          />
+                         
+                          <InputFields
+                      labelText="Debupe Based on Critical CSS"
+                      list={["Disabled"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Remove duplicate rules from the final CSS files for
                             rules that are present in the critical CSS
                           </div>
-                          <InputDropdown
-                            label={"Inline the final CSS"}
-                            list={["Disabled"]}
-                          />
+              
+<InputFields
+                      labelText="Inline the final CSS"
+                      list={["Disabled"]}
+                      type="dropdown"
+                    />
+
+                        <InputFields
+                      labelText="Inline the final CSS"
+                      list={["Disabled"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Remove duplicate rules from the final CSS files for
                             rules that are present in the critical CSS
@@ -1828,12 +1489,12 @@ const Settings = () => {
                         sub="Use a single file for all CSS rules grouped by media type. This reduces the number of network requests and makes rendering more efficient"
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputDropdown
-                            label={
-                              "Merge resources for media “screen” and “all”"
-                            }
-                            list={["Enabled"]}
-                          />
+                         
+                               <InputFields
+                      labelText="Merge resources for media “screen” and “all”"
+                      list={["Disabled"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Enabling this will use a single group for styles
                             using media “screen” and “all”. Otherwise 2 separate
@@ -1849,60 +1510,7 @@ const Settings = () => {
                       />
                     </div>
                   </div>
-                  <div className="w-[320px] shrink-0 ml-[15px]">
-                    <div
-                      style={{
-                        backgroundColor: dark ? "#111317" : "#fff",
-                        borderColor: dark ? "#1F2329" : "#ebebeb",
-                      }}
-                      className=" bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
-                    >
-                      <div className="w-[100%] flex justify-between">
-                        <h1
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="text-[20px] font-bold tracking-wide "
-                        >
-                          Optimization Modes
-                        </h1>
-                        <div
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="flex text-[14px] font-medium items-center"
-                        >
-                          <>
-                            <img
-                              src="/graphic/warmup/elli1.svg"
-                              className="mr-[3px] w-[14px]"
-                              alt=""
-                            />
-                            Custom
-                          </>
-                        </div>
-                      </div>
-                      <p
-                        style={{
-                          color: dark ? "#ffffff74" : "#0a0a187e",
-                        }}
-                        className="text-[14px] mt-[5px] tracking-wide text-[#0a0a186f]"
-                      >
-                        Changing the mode, the level of optimization is updated
-                        and your cache is purged
-                      </p>
-                      <InputDropdown1
-                        label=""
-                        list={[
-                          " Custom",
-                          "Ludacris",
-                          "Strong",
-                          "Medium",
-                          "Standard",
-                        ]}
-                      />
-                    </div>
-                  </div>
+                  <OptimizationModeCard />
                 </div>
               </>
             )}
@@ -1931,10 +1539,12 @@ const Settings = () => {
                         sub="Rework and reposition blocking resource files in the above-the-fold portion of your page"
                       >
                         <div className="w-[100%] py-[10px]">
-                          <InputDropdown
-                            label={"Use Resource Loader Script"}
-                            list={["Disabled"]}
-                          />
+                         
+                                   <InputFields
+                      labelText="Use Resource Loader Script"
+                      list={["Disabled"]}
+                      type="dropdown"
+                    />
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             Using a resource loader script gives us control over
                             the CSS asd JS loading sequence, which often
@@ -1942,12 +1552,13 @@ const Settings = () => {
                             compatible with all sites, especially ones that have
                             JS errors or scripts that use document.write().
                           </div>
-                          <InputDropdown
-                            label={
-                              "Delay loading of non-critical resources until user interaction is detected"
-                            }
-                            list={["Disabled"]}
-                          />
+                            
+                          <InputFields
+                      labelText="Delay loading of non-critical resources until user interaction is detected"
+                      list={["Disabled"]}
+                      type="dropdown"
+                    />
+                        
                           <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                             When this option is enabled, only critical resources
                             for rendering above-the-fold parts of pages will be
@@ -1991,60 +1602,7 @@ const Settings = () => {
                       />
                     </div>
                   </div>
-                  <div className="w-[320px] shrink-0 ml-[15px]">
-                    <div
-                      style={{
-                        backgroundColor: dark ? "#111317" : "#fff",
-                        borderColor: dark ? "#1F2329" : "#ebebeb",
-                      }}
-                      className=" bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
-                    >
-                      <div className="w-[100%] flex justify-between">
-                        <h1
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="text-[20px] font-bold tracking-wide "
-                        >
-                          Optimization Modes
-                        </h1>
-                        <div
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="flex text-[14px] font-medium items-center"
-                        >
-                          <>
-                            <img
-                              src="/graphic/warmup/elli1.svg"
-                              className="mr-[3px] w-[14px]"
-                              alt=""
-                            />
-                            Custom
-                          </>
-                        </div>
-                      </div>
-                      <p
-                        style={{
-                          color: dark ? "#ffffff74" : "#0a0a187e",
-                        }}
-                        className="text-[14px] mt-[5px] tracking-wide text-[#0a0a186f]"
-                      >
-                        Changing the mode, the level of optimization is updated
-                        and your cache is purged
-                      </p>
-                      <InputDropdown1
-                        label=""
-                        list={[
-                          " Custom",
-                          "Ludacris",
-                          "Strong",
-                          "Medium",
-                          "Standard",
-                        ]}
-                      />
-                    </div>
-                  </div>
+                  <OptimizationModeCard />
                 </div>
               </>
             )}
@@ -2158,60 +1716,7 @@ const Settings = () => {
                       </Item4>
                     </div>
                   </div>
-                  <div className="w-[320px] shrink-0 ml-[15px]">
-                    <div
-                      style={{
-                        backgroundColor: dark ? "#111317" : "#fff",
-                        borderColor: dark ? "#1F2329" : "#ebebeb",
-                      }}
-                      className=" bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
-                    >
-                      <div className="w-[100%] flex justify-between">
-                        <h1
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="text-[20px] font-bold tracking-wide "
-                        >
-                          Optimization Modes
-                        </h1>
-                        <div
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="flex text-[14px] font-medium items-center"
-                        >
-                          <>
-                            <img
-                              src="/graphic/warmup/elli1.svg"
-                              className="mr-[3px] w-[14px]"
-                              alt=""
-                            />
-                            Custom
-                          </>
-                        </div>
-                      </div>
-                      <p
-                        style={{
-                          color: dark ? "#ffffff74" : "#0a0a187e",
-                        }}
-                        className="text-[14px] mt-[5px] tracking-wide text-[#0a0a186f]"
-                      >
-                        Changing the mode, the level of optimization is updated
-                        and your cache is purged
-                      </p>
-                      <InputDropdown1
-                        label=""
-                        list={[
-                          " Custom",
-                          "Ludacris",
-                          "Strong",
-                          "Medium",
-                          "Standard",
-                        ]}
-                      />
-                    </div>
-                  </div>
+                <OptimizationModeCard />
                 </div>
               </>
             )}
