@@ -22,7 +22,8 @@ export default function CookieVariationCard() {
                     labelClass="text-[12px] font-bold tracking-wide  text-[#0a0a187a]"
                 />
             </div>
-            
+                
+                
             <div className="mobile:w-[100%] laptop:w-[32.5%] h-[100%] mobile:mb-[10px] laptop:mr-[10px] flex items-center">
                 <InputFields
                     inputClass="w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[34px]"
