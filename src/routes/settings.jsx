@@ -2,9 +2,8 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setDark } from "../services/home";
-import FeatureCard from "../components/FeatureCard";
 
-const SettingsPage = React.lazy(() => import("../views/Settings.jsx"));
+const SettingsPage = React.lazy(() => import("../views/SettingPage.jsx"));
 
 const Loader = () => {
   return (
