@@ -427,7 +427,7 @@ const ConnectWebsite = ({ setShow }) => {
                           </p>
                           <Field
                             type="text"
-                            name="url"
+                            name="url" 
                             placeholder="e.g. https://mywebsite.com"
                             className={`w-[100%] h-[34px] bg-transparent rounded-[4px] border-[1px] border-${
                               dark ? "#1F2329" : "#ebebeb"

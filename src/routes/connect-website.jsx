@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setAuth, setDark } from "../services/home";
@@ -177,9 +177,28 @@ const Connector = ({ title, sub, connect }) => {
 
 const BrowseConnectors = ({ cancel }) => {
   const dark = useSelector((state) => state.home.dark);
+  const containerRef = useRef(null);
+
+    // Event handler to close the component when clicking outside
+    const handleOutsideClick = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        // Click occurred outside the component, so close it
+        cancel();
+      }
+    };
+     // Add event listener when the component mounts
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
   return (
     <div className="w-[100%] h-[100vh] fixed z-50 left-0 laptop:px-[0] mobile:px-[10px] bg-[#00000074] flex items-center justify-center py-[50px]">
       <div
+       ref={containerRef}
         style={{
           borderColor: dark ? "#1F2329" : "#ebebeb",
           backgroundColor: dark ? "#111317" : "#fff",
