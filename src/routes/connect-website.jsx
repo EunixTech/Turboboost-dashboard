@@ -166,9 +166,6 @@ const Connector = ({ title, sub, connect }) => {
             {sub}
           </p>
         </div>
-        {/* <div className="w-[80px] h-[32px] hover:bg-[#2FE49C] bg-[#38F8AC] text-[#000] font-bold rounded-[3px] flex items-center justify-center text-[11px] cursor-pointer">
-          Connect
-        </div> */}
         <Button />
       </div>
     </div>
