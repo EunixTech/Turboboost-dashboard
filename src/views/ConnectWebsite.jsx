@@ -149,10 +149,8 @@ const Status = ({ i }) => {
 
 const TableItem = ({ name, url, id, secret, status, onDelete }) => {
   const dark = useSelector((state) => state.home.dark);
-  const [clicked, setClicked] = useState(false);
-  const [hover1, setHover1] = useState(false);
-  const [hover2, setHover2] = useState(false);
-  const [clicked1, setClicked1] = useState(false);
+  const [clipboardHover, setClipboardHover] = useState(false);
+  const [copyText, setCopyText] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleTrashIconClick = () => {
@@ -204,25 +202,25 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
           color: dark ? "#fff" : "#000",
         }}
         onClick={() => {
-          if (hover2) {
-            // Copy the Site ID when the hover2 state is true
+          if (clipboardHover) {
+            // Copy the Site ID when the clipboardHover state is true
             copyToClipboard(id);
           }
         }}
         onMouseOver={() => {
-          setHover2(true);
+          setClipboardHover(true);
         }}
         onMouseLeave={() => {
-          setHover2(false);
-          setClicked1(false);
+          setClipboardHover(false);
+          setCopyText(false);
         }}
         className="w-[17%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
-        {clicked1 ? id : "••••••••••"}
+        {copyText ? id : "••••••••••"}
         <div className="flex ml-[10px] cursor-pointer translate-y-[-2px]">
           <img
             src={
-              hover2
+              clipboardHover
                 ? "/graphic/connect-website/copy1.svg"
                 : "/graphic/connect-website/copy.svg"
             }
@@ -231,7 +229,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
           />
           <p
             style={{
-              color: hover2 ? "#0A0A18" : "#85858C",
+              color: clipboardHover ? "#0A0A18" : "#85858C",
             }}
             className="text-[#85858C] ml-[1px]"
           >
@@ -246,25 +244,25 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
           color: dark ? "#fff" : "#000",
         }}
         onClick={() => {
-          if (hover2) {
-            // Copy the Site Secret when the hover2 state is true
+          if (clipboardHover) {
+            // Copy the Site Secret when the clipboardHover state is true
             copyToClipboard(secret);
           }
         }}
         onMouseOver={() => {
-          setHover2(true);
+          setClipboardHover(true);
         }}
         onMouseLeave={() => {
-          setHover2(false);
-          setClicked1(false);
+          setClipboardHover(false);
+          setCopyText(false);
         }}
         className="w-[17%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
-        {clicked1 ? secret : "••••••••••"}
+        {copyText ? secret : "••••••••••"}
         <div className="flex ml-[10px] cursor-pointer translate-y-[-2px]">
           <img
             src={
-              hover2
+              clipboardHover
                 ? "/graphic/connect-website/copy1.svg"
                 : "/graphic/connect-website/copy.svg"
             }
@@ -273,7 +271,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
           />
           <p
             style={{
-              color: hover2 ? "#0A0A18" : "#85858C",
+              color: clipboardHover ? "#0A0A18" : "#85858C",
             }}
             className="text-[#85858C] ml-[1px]"
           >
