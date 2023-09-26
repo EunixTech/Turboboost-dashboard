@@ -157,17 +157,17 @@ const Integrations = () => {
     } else {
       dispatch(setDark(false));
     }
-    if (loggedIn === "true") {
-      setTimeout(() => {
-        setLoading(false);
-        dispatch(setAuth(true));
-      }, 1000);
-    } else {
-      setTimeout(() => {
-        navigate("/auth/signIn");
-        dispatch(setAuth(false));
-      }, 1000);
-    }
+    // if (loggedIn === "true") {
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //     dispatch(setAuth(true));
+    //   }, 1000);
+    // } else {
+    //   setTimeout(() => {
+    //     navigate("/auth/signIn");
+    //     dispatch(setAuth(false));
+    //   }, 1000);
+    // }
   });
 
   const [show, setShow] = useState(false);

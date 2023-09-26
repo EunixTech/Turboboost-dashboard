@@ -12,7 +12,7 @@ export default function InputFields({
     labelClass = "text-[14px] font-bold tracking-wide  text-[#0a0a187a]",
     labelText,
     list = [],
-
+    dropDownCheckbox = false,
     dropDownListClass = "w-[100%]  h-[34px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer",
     dropDownClass = "h-[38px]"
 
@@ -147,6 +147,30 @@ export default function InputFields({
                                 )}
 
                             </div>
+                    } else if(type === "tel"){
+                        return <div style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
+                            className="flex w-[100%] h-[38px] border-[1px] border-[#ebebeb] mt-[7px] rounded-[2px]"
+                        >
+                            <div
+                                style={{
+                                    borderColor: dark ? "#1F2329" : "#ebebeb",
+                                    color: dark ? "#fff" : "#000",
+                                    backgroundColor: dark ? "#191b2184" : "#ebebeb79",
+                                }}
+                                className="w-[70px]  shrink-0 h-[100%] border-r-[1px] text-[12px] font-medium  border-[#ebebeb] bg-[#ebebeb79] flex items-center justify-center"
+                            >
+                                +1
+                            </div>
+
+                            <input
+                                type="tel"
+                                style={{
+                                    backgroundColor: dark ? "#111317" : "#fff",
+                                    color: dark ? "#fff" : "#000",
+                                }}
+                                className="w-[100%] outline-none rounded-[4px] px-[10px] text-[12px] font-medium   h-[100%]"
+                            />
+                        </div>
                     }
 
                 })()}

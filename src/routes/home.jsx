@@ -48,17 +48,17 @@ const CacheWarmupage = () => {
     } else {
       dispatch(setDark(false));
     }
-    if (loggedIn === "true") {
-      setTimeout(() => {
-        navigate("/dashboard");
-        dispatch(setAuth(true));
-      }, 1000);
-    } else {
-      setTimeout(() => {
-        navigate("/auth/signIn");
-        dispatch(setAuth(false));
-      }, 1000);
-    }
+    // if (loggedIn === "true") {
+    //   setTimeout(() => {
+    //     navigate("/dashboard");
+    //     dispatch(setAuth(true));
+    //   }, 1000);
+    // } else {
+    //   setTimeout(() => {
+    //     navigate("/auth/signIn");
+    //     dispatch(setAuth(false));
+    //   }, 1000);
+    // }
   });
 
   return (
