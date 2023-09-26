@@ -11,7 +11,6 @@ const validationSchema = Yup.object().shape({
 
 const Button = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
-  console.log("Button", Button);
   return (
     <div
       onClick={() => {
