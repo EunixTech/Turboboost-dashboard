@@ -1,18 +1,17 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export default function InputFields({
-    inputClass="w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]",
+    inputClass = "w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]",
     type,
-    onChangeHandler = () => {},
+    onChangeHandler = () => { },
     value,
     inputName,
-    wrapperClass="h-[100%]",
-    wrapperStyle ,
+    wrapperClass = "h-[100%]",
+    wrapperStyle,
     labelClass = "text-[14px] font-bold tracking-wide  text-[#0a0a187a]",
     labelText,
     list = [],
-    dropDownCheckbox = false,
     dropDownListClass = "w-[100%]  h-[34px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer",
     dropDownClass = "h-[38px]"
 
@@ -21,87 +20,87 @@ export default function InputFields({
     const dark = useSelector((state) => state.home.dark);
     const [checkboxStatus, updateCheckboxStatus] = useState(false);
     const [valueIndex, updateValueIndex] = useState(0);
-    
+
     const [hover, setHover] = useState(false),
         [isDropdownOpen, updateIsDropdownOpen] = useState(false);
-  
+
     useEffect(() => {
-        const onpointerdown = () => { if (!hover) { updateIsDropdownOpen(false)}};
+        const onpointerdown = () => { if (!hover) { updateIsDropdownOpen(false) } };
 
         document.addEventListener("pointerdown", onpointerdown, false);
-        return () => { document.removeEventListener("pointerdown", onpointerdown, false)};
+        return () => { document.removeEventListener("pointerdown", onpointerdown, false) };
     });
-  
+
 
     return (
 
         <div style={wrapperStyle} className={wrapperClass}>
-        <p
-            style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-            className={labelClass}
-        >
-          {labelText}
+            <p
+                style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                className={labelClass}
+            >
+                {labelText}
 
-        </p>
-        {
+            </p>
+            {
                 (() => {
-                    if(type === "text" || type === "email" || type === "number"){
+                    if (type === "text" || type === "email" || type === "number") {
                         return <input
-                        type={type}
-                        className={inputClass}
-                        onChange={onChangeHandler}
-                        name={inputName}
-                        value={value}
-                        style={{
-                            borderColor: dark ? "#1F2329" : "#ebebeb",
-                            color: dark ? "#fff" : "#000",
-                            backgroundColor: dark ? "#111317" : "#fff",
-                          }}
-                    />
-        
-                    } else if(type === "dropdown"){
+                            type={type}
+                            className={inputClass}
+                            onChange={onChangeHandler}
+                            name={inputName}
+                            value={value}
+                            style={{
+                                borderColor: dark ? "#1F2329" : "#ebebeb",
+                                color: dark ? "#fff" : "#000",
+                                backgroundColor: dark ? "#111317" : "#fff",
+                            }}
+                        />
 
-                        return <div 
-                                    style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
-                                    className="w-[100%] relative   text-[12px] font-medium mt-[5px] h-[34px]"
+                    } else if (type === "dropdown") {
+
+                        return <div
+                            style={{ borderColor: dark ? "#1F2329" : "#ebebeb" }}
+                            className="w-[100%] relative   text-[12px] font-medium mt-[5px] h-[34px]"
+                        >
+
+                            <div onClick={() => { updateIsDropdownOpen(true) }}
+                                style={{ borderColor: dark ? "#1F2329" : "#ebebeb", borderRadius: "4px", }}
+                                className={`${dropDownClass}  w-[100%] cursor-pointer border-[1px] border-[#ebebeb] px-[10px] flex justify-between items-center`}
+                            >
+                                <p
+                                    style={{ color: dark ? "#fff" : "#000" }}
+                                    className="text-[12px] font-bold tracking-wide  text-[#000]"
                                 >
+                                    {list[valueIndex]}
+                                </p>
 
-                                    <div onClick={() => { updateIsDropdownOpen(true)}}
-                                        style={{ borderColor: dark ? "#1F2329" : "#ebebeb", borderRadius: "4px",}}
-                                        className={`${dropDownClass}  w-[100%] cursor-pointer border-[1px] border-[#ebebeb] px-[10px] flex justify-between items-center`}
-                                    >
-                                    <p
-                                        style={{ color: dark ? "#fff" : "#000"}}
-                                        className="text-[12px] font-bold tracking-wide  text-[#000]"
-                                    >
-                                        {list[valueIndex]}
-                                    </p>
+                                <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
+                            </div>
 
-                                    <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
-                                </div>
+                            {isDropdownOpen && (
 
-                                {isDropdownOpen && (
-
-                                    <div
-                                        onMouseOver={() => { setHover(true)}}
-                                        onMouseLeave={() => {setHover(false)}}
-                                        style={{
-                                            color: dark ? "#fff" : "#000",
-                                            backgroundColor: dark ? "#111317" : "#fff",
-                                            borderColor: dark ? "#1F2329" : "#ebebeb",
-                                        }}
-                                        className="w-[100%] min-h-[10px] rounded-b-[4px] max-h-[200px] scroll-bar-cool111 overflow-y-auto  border-t-0 border-[1px] border-[#ebebeb] absolute z-50 top-[33px] bg-[#fff]"
-                                    >
+                                <div
+                                    onMouseOver={() => { setHover(true) }}
+                                    onMouseLeave={() => { setHover(false) }}
+                                    style={{
+                                        color: dark ? "#fff" : "#000",
+                                        backgroundColor: dark ? "#111317" : "#fff",
+                                        borderColor: dark ? "#1F2329" : "#ebebeb",
+                                    }}
+                                    className="w-[100%] min-h-[10px] rounded-b-[4px] max-h-[200px] scroll-bar-cool111 overflow-y-auto  border-t-0 border-[1px] border-[#ebebeb] absolute z-50 top-[33px] bg-[#fff]"
+                                >
 
                                     {list.map((item, i) => {
                                         return (
                                             <div
-                                
+
                                                 key={i}
                                                 style={{
-                                                    backgroundColor: i === valueIndex  ? dark  ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
+                                                    backgroundColor: i === valueIndex ? dark ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
                                                 }}
-                                                onClick={() => { 
+                                                onClick={() => {
                                                     updateValueIndex(i)
                                                     updateIsDropdownOpen(false)
                                                 }}
@@ -111,14 +110,14 @@ export default function InputFields({
                                             </div>
 
                                         );
-                                        
+
                                     })}
 
                                 </div>
-                                )}
+                            )}
 
-                            </div>
-                    } else if(type === "textarea"){
+                        </div>
+                    } else if (type === "textarea") {
                         return <textarea
                             style={{
                                 borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -129,26 +128,26 @@ export default function InputFields({
                             type="textarea"
                             className={inputClass}
                         />
-                    } else if(type === "checkbox"){
-                        return  <div
-                                    style={{
-                                        backgroundColor: checkboxStatus && "#38f8ab34",
-                                        borderColor: checkboxStatus ? "#38F8AC" : "#959494",
-                                    }}
-                                    onClick={() => { updateCheckboxStatus(!checkboxStatus); }}
-                                    className="w-[14px] h-[14px] mr-[10px] shrink-0 border-[1px] border-[#959494] rounded-[2px] cursor-pointer flex items-center justify-center"
-                                >
-                                    {checkboxStatus && (
-                                    <img
-                                        alt="checkbox"
-                                        src="/graphic/status/checkboxStatus.svg"
-                                        className="w-[8px] h-[8px]"
-                                    />
-                                )}
+                    } else if (type === "checkbox") {
+                        return <div
+                            style={{
+                                backgroundColor: checkboxStatus && "#38f8ab34",
+                                borderColor: checkboxStatus ? "#38F8AC" : "#959494",
+                            }}
+                            onClick={() => { updateCheckboxStatus(!checkboxStatus); }}
+                            className="w-[14px] h-[14px] mr-[10px] shrink-0 border-[1px] border-[#959494] rounded-[2px] cursor-pointer flex items-center justify-center"
+                        >
+                            {checkboxStatus && (
+                                <img
+                                    alt="checkbox"
+                                    src="/graphic/status/checkboxStatus.svg"
+                                    className="w-[8px] h-[8px]"
+                                />
+                            )}
 
-                            </div>
-                    } else if(type === "tel"){
-                        return <div style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
+                        </div>
+                    } else if (type === "tel") {
+                        return <div style={{ borderColor: dark ? "#1F2329" : "#ebebeb" }}
                             className="flex w-[100%] h-[38px] border-[1px] border-[#ebebeb] mt-[7px] rounded-[2px]"
                         >
                             <div
@@ -176,6 +175,6 @@ export default function InputFields({
                 })()}
 
         </div>
-        
+
     );
 }

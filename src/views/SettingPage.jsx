@@ -6,19 +6,20 @@ import InputFields from "../components/InputFields";
 import SaveButton from "../components/button/SaveButton";
 import OptimizationModeCard from "../components/OptimizationModeCard";
 import FeatureCard from "../components/FeatureCard";
-import CookieVariationCard from "../components/CookieVariationCard";
 import ExcludedResources from "../components/ExcludedResources";
 import Navigator from "../components/Navigator";
 import MobileViewNavigator from "../components/MobileViewNavigator";
+import CookieVariationCard from "../components/CookieVariationCard";
 
 const SettingPage = () => {
-
     const [activeTab, updateActiveTab] = useState(0);
 
-    const deviceWith = useWidth(),
-        dark = useSelector((state) => state.home.dark);
+    const deviceWith = useWidth();
+    const dark = useSelector((state) => state.home.dark);
 
-    const countriesData = countries.map((item, i) => { return item.label; });
+    const countriesData = countries.map((item, i) => {
+        return item.label;
+    });
 
     return (
         <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
@@ -29,7 +30,6 @@ const SettingPage = () => {
                 className="w-[100%] h-[100%] flex flex-col items-center overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] pb-[40px] mobile:px-[10px] laptop:px-[80px]"
             >
                 <div className="w-[100%] max-w-[1920px] min-h-[100vh]">
-
                     <div className="w-[100%] pt-[30px]">
                         <h1
                             style={{ color: dark ? "#fff" : "#000" }}
@@ -42,25 +42,10 @@ const SettingPage = () => {
                     <div className="w-[100%] mobile:my-[20px] laptop:my-0 h-[34px] flex justify-end items-center">
 
                         {deviceWith < 1000 && (
-                            <MobileViewNavigator
-                                list={[
-                                    "User",
-                                    "General",
-                                    "Caching",
-                                    "Fonts",
-                                    "Images",
-                                    "HTML",
-                                    "CSS",
-                                    "JS",
-                                    "Integrations",
-                                ]}
-                                change={(e) => {
-                                    updateActiveTab(e);
-                                }}
-                            />
+                            <MobileViewNavigator onChangeHandler={(e) => {updateActiveTab(e);}} />
                         )}
-
                         <SaveButton btnText="Save Settings" />
+                        
                     </div>
 
                     {deviceWith > 1000 && (<Navigator activeTab={activeTab} updateActiveTab={updateActiveTab} />)}
@@ -128,18 +113,18 @@ const SettingPage = () => {
 
                                 <FeatureCard
                                     title="Essential emails"
-                                    sub="Important emails about your TurboBoost account billing, resource usage
+                                    description="Important emails about your TurboBoost account billing, resource usage
                                     and other account activity related events. These notifications are
                                     always on because they are directly related to us delivering the
                                     TurboBoost service to you."
                                 />
                                 <FeatureCard
                                     title="New features, tips and tricks articles, and company news"
-                                    sub="Our newsletters, surveys, and other helpful content."
+                                    description="Our newsletters, surveys, and other helpful content."
                                 />
                                 <FeatureCard
                                     title="Promotions and special offers"
-                                    sub="Our seasonal offers and exclusive upgrade deals."
+                                    description="Our seasonal offers and exclusive upgrade deals."
                                 />
 
                             </div>
@@ -163,11 +148,11 @@ const SettingPage = () => {
                                     <FeatureCard
                                         last={true}
                                         title="Safe Mode"
-                                        sub="Use TurboBoost for debugging purposes, excluding public traffic. To test your pages with TurboBoost append [tsetruno=1 to your URLs."
+                                        description="Use TurboBoost for debugging purposes, excluding public traffic. To test your pages with TurboBoost append [tsetruno=1 to your URLs."
                                     />
                                     <FeatureCard
                                         title="Ignore query parameters for static assets"
-                                        sub="Enabling this option will produce consistent URLs for static assets that contain cache busting query parameters. This will increase the browser cache effectiveness and improve the loading time for your visitors."
+                                        description="Enabling this option will produce consistent URLs for static assets that contain cache busting query parameters. This will increase the browser cache effectiveness and improve the loading time for your visitors."
                                         h={"130px"}
                                     />
                                 </div>
@@ -183,7 +168,7 @@ const SettingPage = () => {
                                         h="60px"
                                         last={true}
                                         title="Excluded Resources (Images, JavaScript, CSS, etc.)"
-                                        sub="Specify the names or snippets that should be excluded from optimization."
+                                        description="Specify the names or snippets that should be excluded from optimization."
                                     />
                                     <ExcludedResources />
                                     <ExcludedResources />
@@ -210,10 +195,10 @@ const SettingPage = () => {
                                     className=" bg-[#fff] border-[1px] border-[#EBEBEB]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
                                 >
                                     <FeatureCard
-                                        drop={false}
+                                        isSubSectionExist={false}
                                         last={true}
                                         title="Webhook for Config Changes"
-                                        sub="Specify a URL that will be called when your config changes. Use this to automatically fetch a fresh version of your config as soon as it gets updated."
+                                        description="Specify a URL that will be called when your config changes. Use this to automatically fetch a fresh version of your config as soon as it gets updated."
                                     >
                                         <div
                                             style={{
@@ -227,11 +212,11 @@ const SettingPage = () => {
                                     </FeatureCard>
                                     <FeatureCard
                                         title="Webhook for Clearing Cache"
-                                        sub="Specify a URL that will be called when cache is being deleted. Use this to delete your local cache copies for the affected URLs."
+                                        description="Specify a URL that will be called when cache is being deleted. Use this to delete your local cache copies for the affected URLs."
                                     />
                                     <FeatureCard
                                         title="Webhook for Cache Ready Notifications"
-                                        sub="Specify a URL that will be called when cache is ready for a URL. Use this to notify your integration that an optimized version of a URl is ready."
+                                        description="Specify a URL that will be called when cache is ready for a URL. Use this to notify your integration that an optimized version of a URl is ready."
                                     >
                                         <div
                                             style={{
@@ -264,10 +249,10 @@ const SettingPage = () => {
                                     <FeatureCard
                                         last={true}
                                         title="Improve Server Response Time"
-                                        drop={true}
+                                        isSubSectionExist={true}
                                         p="10px 15px 20px 15px"
-                                        dropTitle={"Adjust page cache expiration time"}
-                                        sub="We’re serving you with static page cache which you can use effectively to skip all the server logic. Use it to improve the server response time."
+                                        subSectionTitile={"Adjust page cache expiration time"}
+                                        description="We’re serving you with static page cache which you can use effectively to skip all the server logic. Use it to improve the server response time."
                                     >
                                         <div className="w-[100%] py-[10px]">
                                             <InputFields labelText="First Name" type="text" />
@@ -278,17 +263,17 @@ const SettingPage = () => {
                                     </FeatureCard>
                                     <FeatureCard
                                         title="Minify Resources"
-                                        sub="Enable or disable minification of JavaScript, CSS and HTML resources"
+                                        description="Enable or disable minification of JavaScript, CSS and HTML resources"
                                         h={"70px"}
                                     />
                                     <FeatureCard
                                         title="“Optimize only” URLs"
-                                        sub="Only optimize the specified URLs and skip the rest"
+                                        description="Only optimize the specified URLs and skip the rest"
                                         h={"70px"}
                                     />
                                     <FeatureCard
                                         title="Excluded URLs"
-                                        sub="Specify a list of excluded URLs you would not like to be optimized."
+                                        description="Specify a list of excluded URLs you would not like to be optimized."
                                         h={"90px !important"}
                                         p="10px 15px 10px 15px"
                                     >
@@ -300,12 +285,12 @@ const SettingPage = () => {
                                     </FeatureCard>
                                     <FeatureCard
                                         title="Cache AJAX URLs"
-                                        sub="Specify a list of AJAX URLs you would like to be cached."
+                                        description="Specify a list of AJAX URLs you would like to be cached."
                                         h={"70px"}
                                     />
                                     <FeatureCard
                                         title="Ignore Parameters"
-                                        sub="Specify a list of URL parameters that do not modify the page content and can be ignored."
+                                        description="Specify a list of URL parameters that do not modify the page content and can be ignored."
                                         h={"90px !important"}
                                         p="10px 15px 10px 15px"
                                     >
@@ -332,17 +317,17 @@ const SettingPage = () => {
                                     </FeatureCard>
                                     <FeatureCard
                                         title="Exclude from Optimization Cookie"
-                                        sub="Specify cookie names and values (optional) that when present then the page won't be optimized"
+                                        description="Specify cookie names and values (optional) that when present then the page won't be optimized"
                                         h={"100px"}
                                     />
                                     <FeatureCard
                                         title="Enable Compression"
-                                        sub="We’ve enabled this optimization for all your resources. Compression is supported in effectively all browsers ( since IE6+, Firefox 2+, Chrome 1+ etc)"
+                                        description="We’ve enabled this optimization for all your resources. Compression is supported in effectively all browsers ( since IE6+, Firefox 2+, Chrome 1+ etc)"
                                         h={"100px"}
                                     />
                                     <FeatureCard
                                         title="Variation Cookies"
-                                        sub="Specify cookie names for different page cache versions based on their values"
+                                        description="Specify cookie names for different page cache versions based on their values"
                                         h={"90px !important"}
                                         p="10px 15px 10px 15px"
                                     >
@@ -385,10 +370,10 @@ const SettingPage = () => {
                                         <FeatureCard
                                             last={true}
                                             title="Override Font Rendering Behavior"
-                                            drop={true}
+                                            isSubSectionExist={true}
                                             p="10px 15px 20px 15px"
-                                            dropTitle={"Additional Options"}
-                                            sub="Use this option to set a desired value for the CSS front-display rule"
+                                            subSectionTitile={"Additional Options"}
+                                            description="Use this option to set a desired value for the CSS front-display rule"
                                         >
                                             <div className="w-[100%] py-[10px]">
                                                 <InputFields
@@ -406,10 +391,10 @@ const SettingPage = () => {
                                         </FeatureCard>
                                         <FeatureCard
                                             title="Font Loading"
-                                            drop={true}
+                                            isSubSectionExist={true}
                                             p="10px 15px 20px 15px"
-                                            dropTitle={"Additional Options"}
-                                            sub="Use this option to configure the method of loading fonts on your pages"
+                                            subSectionTitile={"Additional Options"}
+                                            description="Use this option to configure the method of loading fonts on your pages"
                                         >
                                             <div className="w-[100%] py-[10px]">
                                                 <InputFields
@@ -422,12 +407,12 @@ const SettingPage = () => {
                                         <FeatureCard
                                             featured={true}
                                             title="Font Subsetting (Remove Unused Glyphs)"
-                                            sub="When this option is enabled, TurboBoost will optimize fonts by removing symbols(glyphs), when are not used anywhere. This can dramatically reduce the size of these fonts. Learn more"
+                                            description="When this option is enabled, TurboBoost will optimize fonts by removing symbols(glyphs), when are not used anywhere. This can dramatically reduce the size of these fonts. Learn more"
                                             h={"100px"}
                                         />
                                         <FeatureCard
                                             title="Enable Font Compression Upgrade"
-                                            sub="When this option is enabled, TurboBoost will optimize fonts by upgrading their compression to WOFF2 format. This can reduce the size of these fonts by up to 50%."
+                                            description="When this option is enabled, TurboBoost will optimize fonts by upgrading their compression to WOFF2 format. This can reduce the size of these fonts by up to 50%."
                                             h={"100px"}
                                         />
 
@@ -454,10 +439,10 @@ const SettingPage = () => {
                                     <FeatureCard
                                         last={true}
                                         title="Image Optimization"
-                                        drop={true}
+                                        isSubSectionExist={true}
                                         p="10px 15px 20px 15px"
-                                        dropTitle={"Adjust Image Quality"}
-                                        sub="Enable or disable image optimization for size and delivery"
+                                        subSectionTitile={"Adjust Image Quality"}
+                                        description="Enable or disable image optimization for size and delivery"
                                     >
                                         <div className="w-[100%] py-[10px]">
                                             <InputFields labelText="Image Quality" type="text" />
@@ -471,15 +456,15 @@ const SettingPage = () => {
 
                                     <FeatureCard
                                         title="Adaptive Image Sizing"
-                                        sub="Image files are resized to match their container dimensions, reducing image file size. learn more"
+                                        description="Image files are resized to match their container dimensions, reducing image file size. learn more"
                                         h={"80px"}
                                     />
                                     <FeatureCard
                                         title="Automatic Image Lazy Loading"
-                                        drop={true}
+                                        isSubSectionExist={true}
                                         p="10px 15px 20px 15px"
-                                        dropTitle={"Additional Options"}
-                                        sub="Load images only when they become visible. This reduce the initial weight of the pages."
+                                        subSectionTitile={"Additional Options"}
+                                        description="Load images only when they become visible. This reduce the initial weight of the pages."
                                     >
                                         <div className="w-[100%] py-[10px]">
                                             <InputFields
@@ -559,7 +544,7 @@ const SettingPage = () => {
 
                                     <FeatureCard
                                         title="Additional Images"
-                                        sub="Specify any custom DOM element attributes that contain image URLs to have TurboBoost optimize them as well."
+                                        description="Specify any custom DOM element attributes that contain image URLs to have TurboBoost optimize them as well."
                                         h={"80px"}
                                     />
                                 </div>
@@ -582,12 +567,12 @@ const SettingPage = () => {
                                         last={true}
                                         h="70px"
                                         title="Minify HTML"
-                                        sub="When enabled TurboBoost will minify the HTML by removing extra whitespace."
+                                        description="When enabled TurboBoost will minify the HTML by removing extra whitespace."
                                     />
                                     <FeatureCard
                                         h="70px"
                                         title="Keep HTML comments"
-                                        sub="When enabled TurboBoost will not remove the HTML comments from the final cache files."
+                                        description="When enabled TurboBoost will not remove the HTML comments from the final cache files."
                                     />
                                 </div>
                             </div>
@@ -608,10 +593,10 @@ const SettingPage = () => {
                                         <FeatureCard
                                             last={true}
                                             title="Optimize CSS Delivery"
-                                            drop={true}
+                                            isSubSectionExist={true}
                                             p="10px 15px 20px 15px"
-                                            dropTitle={"Additional Options"}
-                                            sub="Create critical CSS as well as rework your website CSS for optimal delivery"
+                                            subSectionTitile={"Additional Options"}
+                                            description="Create critical CSS as well as rework your website CSS for optimal delivery"
                                         >
                                             <div className="w-[100%] py-[10px]">
                                                 <InputFields
@@ -641,10 +626,10 @@ const SettingPage = () => {
 
                                         <FeatureCard
                                             title="Reduce Unused CSS"
-                                            drop={true}
+                                            isSubSectionExist={true}
                                             p="10px 15px 20px 15px"
-                                            dropTitle={"Additional Options"}
-                                            sub="Unused CSS rules are removed from optimized CSS files for faster page rendering."
+                                            subSectionTitile={"Additional Options"}
+                                            description="Unused CSS rules are removed from optimized CSS files for faster page rendering."
                                         >
                                             <div className="w-[100%] py-[10px]">
                                                 <InputFields
@@ -689,10 +674,10 @@ const SettingPage = () => {
 
                                         <FeatureCard
                                             title="Combine CSS into one resource"
-                                            drop={true}
+                                            isSubSectionExist={true}
                                             p="10px 15px 20px 15px"
-                                            dropTitle={"Additional Options"}
-                                            sub="Use a single file for all CSS rules grouped by media type. This reduces the number of network requests and makes rendering more efficient"
+                                            subSectionTitile={"Additional Options"}
+                                            description="Use a single file for all CSS rules grouped by media type. This reduces the number of network requests and makes rendering more efficient"
                                         >
                                             <div className="w-[100%] py-[10px]">
                                                 <InputFields
@@ -711,7 +696,7 @@ const SettingPage = () => {
 
                                         <FeatureCard
                                             title="Custom CSS"
-                                            sub="Specify custom CSS rules which will be applied to the optimized pages."
+                                            description="Specify custom CSS rules which will be applied to the optimized pages."
                                         />
                                     </div>
                                 </div>
@@ -734,14 +719,14 @@ const SettingPage = () => {
                                         <FeatureCard
                                             last={true}
                                             title="Combine JS into one resource"
-                                            sub="Use a single file for all JavaScript code. This reduces the number of network requests and makes rendering more efficient"
+                                            description="Use a single file for all JavaScript code. This reduces the number of network requests and makes rendering more efficient"
                                         />
                                         <FeatureCard
                                             title="Configure resource loading strategy"
-                                            drop={true}
+                                            isSubSectionExist={true}
                                             p="10px 15px 20px 15px"
-                                            dropTitle={"Additional Options"}
-                                            sub="Rework and reposition blocking resource files in the above-the-fold portion of your page"
+                                            subSectionTitile={"Additional Options"}
+                                            description="Rework and reposition blocking resource files in the above-the-fold portion of your page"
                                         >
                                             <div className="w-[100%] py-[10px]">
                                                 <InputFields
@@ -786,19 +771,19 @@ const SettingPage = () => {
                                         </FeatureCard>
                                         <FeatureCard
                                             title="Delayed Scripts"
-                                            sub="Specify scripts that you would like to be loaded with a delay."
+                                            description="Specify scripts that you would like to be loaded with a delay."
                                         />
                                         <FeatureCard
                                             title="Optimize Ads"
-                                            sub="Ads will not block the initial page render"
+                                            description="Ads will not block the initial page render"
                                         />
                                         <FeatureCard
                                             title="Minify JSON for Linking Data"
-                                            sub="When enabled TurboBoost will minify the JSON-LD elements in the HTML document."
+                                            description="When enabled TurboBoost will minify the JSON-LD elements in the HTML document."
                                         />
                                         <FeatureCard
                                             title="Do not optimize OptinMonster scripts"
-                                            sub="OptinMonster scripts and scripts using the OptinMonster events will be automatically excluded from optimization"
+                                            description="OptinMonster scripts and scripts using the OptinMonster events will be automatically excluded from optimization"
                                         />
                                     </div>
                                 </div>
@@ -819,11 +804,11 @@ const SettingPage = () => {
                                     >
                                         <FeatureCard
                                             title="Remove Proxy (Varnish, NGINX, etc.)"
-                                            drop={true}
+                                            isSubSectionExist={true}
                                             last={true}
                                             p="10px 15px 20px 15px"
-                                            dropTitle={"Adjust Reverse Proxy Settings"}
-                                            sub="If you are using a reverse proxy (like Varnish or NGINX) use this option to configure its settings, so TurboBoost can synchronize both caches for best performance."
+                                            subSectionTitile={"Adjust Reverse Proxy Settings"}
+                                            description="If you are using a reverse proxy (like Varnish or NGINX) use this option to configure its settings, so TurboBoost can synchronize both caches for best performance."
                                         >
                                             <div className="w-[100%] py-[10px]">
                                                 <InputFields
@@ -870,10 +855,10 @@ const SettingPage = () => {
 
                                         <FeatureCard
                                             title="Cloudfare"
-                                            drop={true}
+                                            isSubSectionExist={true}
                                             p="15px 15px 30px 15px"
-                                            dropTitle={"Adjust Cloudfare Settings"}
-                                            sub="If your site is behind Cloudflare use this option to configure API access, so TurboBoost can synchronize both caches for best performance."
+                                            subSectionTitile={"Adjust Cloudfare Settings"}
+                                            description="If your site is behind Cloudflare use this option to configure API access, so TurboBoost can synchronize both caches for best performance."
                                         >
                                             <div className="w-[100%] py-[10px]">
                                                 <InputFields
@@ -896,10 +881,10 @@ const SettingPage = () => {
 
                                         <FeatureCard
                                             title="Sucuri"
-                                            drop={true}
+                                            isSubSectionExist={true}
                                             p="15px 15px 30px 15px"
-                                            dropTitle={"Adjust Sucuri Settings"}
-                                            sub="If your site is behind Sucuri use this option to configure API access, so TurboBoost can synchronize both caches for best performance."
+                                            subSectionTitile={"Adjust Sucuri Settings"}
+                                            description="If your site is behind Sucuri use this option to configure API access, so TurboBoost can synchronize both caches for best performance."
                                         >
                                             <div className="w-[100%] py-[10px]">
                                                 <InputFields labelText="API Key" type="text" />
@@ -938,3 +923,4 @@ const SettingPage = () => {
 };
 
 export default SettingPage;
+
