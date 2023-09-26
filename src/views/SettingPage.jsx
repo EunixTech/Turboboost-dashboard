@@ -12,13 +12,14 @@ import Navigator from "../components/Navigator";
 import MobileViewNavigator from "../components/MobileViewNavigator";
 
 const SettingPage = () => {
-    const [current, setCurrent] = useState(0);
-    const w = useWidth();
-    const dark = useSelector((state) => state.home.dark);
+    
+    const [activeTab, updateActiveTab] = useState(0);
 
-    const countriesData = countries.map((item, i) => {
-        return item.label;
-    });
+    const deviceWith = useWidth(),
+        dark = useSelector((state) => state.home.dark);
+
+    const countriesData = countries.map((item, i) => { return item.label;});
+
     return (
         <>
             <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
@@ -41,7 +42,7 @@ const SettingPage = () => {
 
                         <div className="w-[100%] mobile:my-[20px] laptop:my-0 h-[34px] flex justify-end items-center">
 
-                            {w < 1000 && (
+                            {deviceWith < 1000 && (
                                 <MobileViewNavigator
                                     list={[
                                         "User",
@@ -55,7 +56,7 @@ const SettingPage = () => {
                                         "Integrations",
                                     ]}
                                     change={(e) => {
-                                        setCurrent(e);
+                                        updateActiveTab(e);
                                     }}
                                 />
                             )}
@@ -63,9 +64,9 @@ const SettingPage = () => {
                             <SaveButton btnText="Save Settings" />
                         </div>
 
-                        {w > 1000 && ( <Navigator current={current} setCurrent={setCurrent} />)}
+                        {deviceWith > 1000 && ( <Navigator activeTab={activeTab} updateActiveTab={updateActiveTab} />)}
 
-                        {current === 0 && (
+                        {activeTab === 0 && (
                             <>
                                 <div
                                     style={{
@@ -100,7 +101,7 @@ const SettingPage = () => {
 
                                         <div className="flex justify-between items-end h-[]">
                                             <InputFields
-                                                wrapperStyle={{ width: w }}
+                                                wrapperStyle={{ width: deviceWith }}
                                                 labelText="Email"
                                                 type="email"
                                             />
@@ -148,7 +149,7 @@ const SettingPage = () => {
 
                         )}
 
-                        {current === 1 && (
+                        {activeTab === 1 && (
 
                             <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
                                 <div className="w-[100%] ">
@@ -250,8 +251,7 @@ const SettingPage = () => {
                                 <OptimizationModeCard />
                             </div>
                         )}
-
-                        {current === 2 && (
+                        {activeTab === 2 && (
                             <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
                                 <div className="w-[100%] ">
 
@@ -371,7 +371,7 @@ const SettingPage = () => {
                                 <OptimizationModeCard />
                             </div>
                         )}
-                        {current === 3 && (
+                        {activeTab === 3 && (
                             <>
                                 <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
                                     <div className="w-[100%] ">
@@ -441,7 +441,7 @@ const SettingPage = () => {
 
                             </>
                         )}
-                        {current === 4 && (
+                        {activeTab === 4 && (
                             <>
                                 <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
                                     <div className="w-[100%] ">
@@ -568,8 +568,7 @@ const SettingPage = () => {
                                 </div>
                             </>
                         )}
-
-                        {current === 5 && (
+                        {activeTab === 5 && (
                             <>
                                 <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
                                     <div className="w-[100%] ">
@@ -597,7 +596,7 @@ const SettingPage = () => {
                                 </div>
                             </>
                         )}
-                        {current === 6 && (
+                        {activeTab === 6 && (
                             <>
                                 <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
                                     <div className="w-[100%] ">
@@ -719,7 +718,7 @@ const SettingPage = () => {
                                 </div>
                             </>
                         )}
-                        {current === 7 && (
+                        {activeTab === 7 && (
                             <>
                                 <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
                                     <div className="w-[100%] ">
@@ -805,7 +804,7 @@ const SettingPage = () => {
                                 </div>
                             </>
                         )}
-                        {current === 8 && (
+                        {activeTab === 8 && (
                             <>
                                 <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
                                     <div className="w-[100%] ">
@@ -928,7 +927,7 @@ const SettingPage = () => {
                 </div>
 
             </div>
-            
+
         </>
     );
 };
