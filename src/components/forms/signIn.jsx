@@ -141,28 +141,10 @@ const SignInForm = () => {
             Forgot password
           </p>
         </div>
-<<<<<<< HEAD
         <button className="h-[38px] mb-[20px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm">
           <span className="translate-y-[1.5px] ">Sign in</span>
         </button>
       </form>
-=======
-        <p className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px] ">
-          Forgot password
-        </p>
-      </div>
-      <div 
-        onClick={() => {
-          if (email === "turbo123@gmail.com" || passwprd === "allpha123") {
-            localStorage.setItem("loggedIn", "true");
-            navigate("/dashboard");
-          }
-        }}
-        className="h-[38px] mb-[20px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm"
-      >
-        <span className="translate-y-[1.5px] ">Sign in</span>
-      </div>
->>>>>>> origin/development-0.0.3
     </>
   );
 };

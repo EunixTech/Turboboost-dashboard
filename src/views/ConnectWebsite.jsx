@@ -123,13 +123,6 @@ const Status = ({ i }) => {
 
 const TableItem = ({ name, url, id, secret, status, onDelete }) => {
   const dark = useSelector((state) => state.home.dark);
-<<<<<<< HEAD
-  const [clicked, setClicked] = useState(false);
-  const [hover1, setHover1] = useState(false);
-  const [hover2, setHover2] = useState(false);
-  const [clicked1, setClicked1] = useState(false);
-  
-=======
   const [clipboardHover, setClipboardHover] = useState(false);
   const [copyText, setCopyText] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
@@ -154,7 +147,6 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
       });
   };
 
->>>>>>> origin/development-0.0.3
   return (
     <div
       style={{
