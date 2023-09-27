@@ -9,52 +9,9 @@ import HoverGreenButton from "../components/button/HoverGreenButton";
 import CircularProgressBar from "../components/CircularProgressBar";
 import progressBarDataArr from "../static/progressBarData";
 import CoreVitalsReportCard from "../components/CoreVitalsReportCard";
+import Tooltip from "../components/Tooltip";
 
 
-
-const HoverDetail = () => {
-  const [hover, setHover] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false); // Track whether the image has loaded
-
-  const handleImageLoad = () => {
-    console.log(true);
-    setImageLoaded(true); // Set imageLoaded to true when the image is loaded
-  };
-  return (
-    <div
-      onMouseOver={() => {
-        setHover(true);
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
-      className="relative "
-    >
-      {hover && (
-        <div className="absolute shrink-0  w-[150px] left-[-62.1px]  z-50 bottom-[13px]">
-          <Suspense fallback={null}>
-            <img
-              onLoad={handleImageLoad}
-              src="/hover.svg"
-              className="z-0 w-[145px] h-[88px]"
-              alt=""
-            />
-            {imageLoaded && (
-              <div className="w-[100%] h-[100%] px-[10px] py-[14px] font-medium text-[12px] leading-[16px] top-0 left-0 absolute z-10">
-                Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet.
-              </div>
-            )}
-          </Suspense>
-        </div>
-      )}
-      <img
-        className="w-[20px] cursor-pointer"
-        src="/graphic/dashboard/info.svg"
-        alt=""
-      />
-    </div>
-  );
-};
 
 const Dashboard = () => {
   const w = useWidth();
@@ -116,7 +73,7 @@ const Dashboard = () => {
                 >
                   Cache Hit Ratio
                 </p>
-                <HoverDetail />
+                <Tooltip text=" Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet." />
               </div>
               <div className="flex mt-[6px] items-center">
                 <p
@@ -173,8 +130,9 @@ const Dashboard = () => {
                 >
                   Cache Size
                 </p>
-                <HoverDetail />
+                <Tooltip text=" Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet." />
               </div>
+
               <div className="flex mt-[6px] items-center">
                 <p
                   style={{
@@ -195,6 +153,7 @@ const Dashboard = () => {
                   </p>
                 </div>
               </div>
+
               <div className="flex">
                 <p
                   style={{
@@ -214,6 +173,7 @@ const Dashboard = () => {
                 </p>
               </div>
             </div>
+
             <div
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
@@ -230,7 +190,7 @@ const Dashboard = () => {
                 >
                   Bounce Rate
                 </p>
-                <HoverDetail />
+                <Tooltip text=" Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet." />
               </div>
               <div className="flex mt-[6px] items-center">
                 <p
@@ -290,7 +250,7 @@ const Dashboard = () => {
                 >
                   Last Purge
                 </p>
-                <HoverDetail />
+                <Tooltip text=" Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet." />
               </div>
               <div className="flex mt-[6px] items-center">
                 <p
@@ -360,102 +320,102 @@ const Dashboard = () => {
           </div>
           <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:grid  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px]">
 
-          {/* google score card */}
+            {/* google score card */}
 
-          <div style={{
-                backgroundColor: dark ? "#111317" : "#fff",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
+            <div style={{
+              backgroundColor: dark ? "#111317" : "#fff",
+              borderColor: dark ? "#1F2329" : "#ebebeb",
             }}
-            className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]"
-        >
-            <div className="w-[100%]  flex items-center justify-between">
+              className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]"
+            >
+              <div className="w-[100%]  flex items-center justify-between">
                 <p
-                    style={{ color: dark ? "#fff" : "#000" }}
-                    className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
+                  style={{ color: dark ? "#fff" : "#000" }}
+                  className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
                 >
-                    Google Page Score
+                  Google Page Score
                 </p>
                 <div
-                    style={{
-                        backgroundColor: dark ? "#111317" : "#fff",
-                        borderColor: dark ? "#1F2329" : "#ebebeb",
-                    }}
-                    className="w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center"
+                  style={{
+                    backgroundColor: dark ? "#111317" : "#fff",
+                    borderColor: dark ? "#1F2329" : "#ebebeb",
+                  }}
+                  className="w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center"
                 >
-                    <div
-                        onClick={() => { setVitsals(true)}}
-                        style={{
-                            ...(coreVitals
-                                ? {
-                                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                                    color: dark ? "#fff" : "#000",
-                                }
-                                : {
-                                    backgroundColor: dark ? "#111317" : "#fff",
-                                    color: dark ? "#fff" : "#000",
-                                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                                }),
-                        }}
-                        className="w-[50%] h-[100%]  flex items-center justify-center bg-[#ebebeb8b] border-r-[1px] "
-                    >
-                        <p className="text-[12px] f2  font-medium">Core Vitals</p>
-                    </div>
+                  <div
+                    onClick={() => { setVitsals(true) }}
+                    style={{
+                      ...(coreVitals
+                        ? {
+                          backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                          borderColor: dark ? "#1F2329" : "#ebebeb",
+                          color: dark ? "#fff" : "#000",
+                        }
+                        : {
+                          backgroundColor: dark ? "#111317" : "#fff",
+                          color: dark ? "#fff" : "#000",
+                          borderColor: dark ? "#1F2329" : "#ebebeb",
+                        }),
+                    }}
+                    className="w-[50%] h-[100%]  flex items-center justify-center bg-[#ebebeb8b] border-r-[1px] "
+                  >
+                    <p className="text-[12px] f2  font-medium">Core Vitals</p>
+                  </div>
 
-                    <div
-                        onClick={() => { setVitsals(false)}}
-                        style={{
-                            ...(!coreVitals
-                                ? {
-                                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                                    color: dark ? "#fff" : "#000",
-                                }
-                                : {
-                                    backgroundColor: dark ? "#111317" : "#fff",
-                                    color: dark ? "#fff" : "#000",
-                                }),
-                        }}
-                        className="w-[50%] h-[100%] flex items-center justify-center bg-[#fff]"
-                    >
-                        <p className="text-[12px]  font-medium f2">Performance</p>
-                    </div>
+                  <div
+                    onClick={() => { setVitsals(false) }}
+                    style={{
+                      ...(!coreVitals
+                        ? {
+                          backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                          borderColor: dark ? "#1F2329" : "#ebebeb",
+                          color: dark ? "#fff" : "#000",
+                        }
+                        : {
+                          backgroundColor: dark ? "#111317" : "#fff",
+                          color: dark ? "#fff" : "#000",
+                        }),
+                    }}
+                    className="w-[50%] h-[100%] flex items-center justify-center bg-[#fff]"
+                  >
+                    <p className="text-[12px]  font-medium f2">Performance</p>
+                  </div>
 
                 </div>
 
-            </div>
+              </div>
 
-            {!coreVitals ? (
+              {!coreVitals ? (
                 <>
-                    <p
-                        style={{
-                            color: dark ? "#ffffff74" : "#0a0a187e",
-                        }}
-                        className="text-[12px]  font-semibold f2"
-                    >
-                        Performance
-                    </p>
+                  <p
+                    style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}
+                    className="text-[12px]  font-semibold f2"
+                  >
+                    Performance
+                  </p>
 
-                    <div className="flex items-center  justify-around h-[140px]">
-                        {progressBarDataArr.length && progressBarDataArr.map((item, index) => (
-                            <CircularProgressBar
-                                key={index}
-                                margin={item?.margin}
-                                title={item?.title}
-                                percentage={item?.percentage}
-                            />
-                        ))}
+                  <div className="flex items-center  justify-around h-[140px]">
+                    {progressBarDataArr.length && progressBarDataArr.map((item, index) => (
+                      <CircularProgressBar
+                        key={index}
+                        margin={item?.margin}
+                        title={item?.title}
+                        percentage={item?.percentage}
+                      />
+                    ))}
 
-                    </div>
+                  </div>
                 </>
 
-            ) : (
+              ) : (
                 <CoreVitalsReportCard />
-            )}
+              )}
 
-        </div>
+            </div>
 
-   {/*end google score card */}
+            {/*end google score card */}
 
 
             <div

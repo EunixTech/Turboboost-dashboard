@@ -10,7 +10,7 @@ export default function CoreVitalsReportCard() {
         <div className="w-[100%] mt-[20px]">
 
             <div className="flex  justify-around ">
-                
+
                     {coreVitalsDataArr?.length && coreVitalsDataArr.map((item, index) => (
                     <div className="w-[150px]" key={index}>
                         <p
