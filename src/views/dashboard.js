@@ -12,7 +12,9 @@ import CoreVitalsReportCard from "../components/CoreVitalsReportCard";
 import CacheStatCard from "../components/CacheStatCard";
 import cacheStatDataArr from "../static/cacheStatData";
 import QuickActionCard from "../components/QuickActionCard";
-import quickActionDataArr from "../static/quickActionData"
+import quickActionDataArr from "../static/quickActionData";
+import CacheStatusCard from "../components/CacheStatusCard";
+import caccheStatusDataArr from "../static/caccheStatusData";
 
 const Dashboard = () => {
     const w = useWidth();
@@ -232,86 +234,23 @@ const Dashboard = () => {
                             <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
 
                                 <CustomDonutChart />
+
                                 <div className="max-w-[250px] w-[50%] ml-auto">
-                                    <div className="flex items-center mb-[4px] justify-between">
-                                        <div className="flex  items-center">
-                                            <img
-                                                src={
-                                                    dark
-                                                        ? "/graphic/dashboard/elli1-d.svg"
-                                                        : "/graphic/dashboard/elli1.svg"
-                                                }
-                                                className="w-[10px] h-[10px]"
-                                                alt=""
-                                            />
-                                            <p
-                                                style={{ color: dark ? "#fff" : "#000" }}
-                                                className="text-[13px] f2 font-medium ml-[5px]"
-                                            >
-                                                Optimized URLs
-                                            </p>
-                                        </div>
-                                        <div
-                                            style={{ color: dark ? "#fff" : "#000" }}
-                                            className="text-[14px] f2 font-bold translate-y-[-2px]"
-                                        >
-                                            244
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center mb-[4px] justify-between">
-                                        <div className="flex items-center">
-                                            <img
-                                                src={
-                                                    dark
-                                                        ? "/graphic/dashboard/elli2-d.svg"
-                                                        : "/graphic/dashboard/elli2.svg"
-                                                }
-                                                className="w-[10px] h-[10px]"
-                                                alt=""
-                                            />
-                                            <p
-                                                style={{ color: dark ? "#fff" : "#000" }}
-                                                className="text-[13px] f2 font-medium ml-[5px]"
-                                            >
-                                                Pending Optimizations
-                                            </p>
-                                        </div>
-                                        <div
-                                            style={{ color: dark ? "#fff" : "#000" }}
-                                            className="text-[14px] f2 font-bold translate-y-[-2px]"
-                                        >
-                                            72
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center mb-[4px] justify-between">
-                                        <div className="flex items-center">
-                                            <img
-                                                src={
-                                                    dark
-                                                        ? "/graphic/dashboard/elli3-d.svg"
-                                                        : "/graphic/dashboard/elli9.svg"
-                                                }
-                                                className="w-[10px] h-[10px]"
-                                                alt=""
-                                            />
-                                            <p
-                                                style={{ color: dark ? "#fff" : "#000" }}
-                                                className="text-[13px] f2 font-medium ml-[5px]"
-                                            >
-                                                Not Optimized URLs
-                                            </p>
-                                        </div>
-                                        <div
-                                            style={{ color: dark ? "#fff" : "#000" }}
-                                            className="text-[14px] font-bold translate-y-[-2px]"
-                                        >
-                                            19
-                                        </div>
-                                    </div>
+
+                                    {caccheStatusDataArr.map((data, index) => (
+                                        <CacheStatusCard
+                                            key={index}
+                                            title={data.title}
+                                            size={data.size}
+                                        />
+                                    ))}
+
                                 </div>
+
                             </div>
+
                         </div>
-                        
+
                         <div
                             style={{
                                 backgroundColor: dark ? "#111317" : "#fff",
@@ -321,12 +260,10 @@ const Dashboard = () => {
                         >
                             <div className="w-[100%] px-[15px] mb-[10px] flex items-center justify-between">
 
-                                <p  style={{ color: dark ? "#fff" : "#000" }} className="text-[15px] f2 translate-y-[0px] font-medium tracking-wide">
-                                    Quick Actions
-                                </p>
+                                <p style={{ color: dark ? "#fff" : "#000" }} className="text-[15px] f2 translate-y-[0px] font-medium tracking-wide"> Quick Actions </p>
 
                                 <div style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                                    onClick={() => { router("/settings")}}
+                                    onClick={() => { router("/settings") }}
                                     className={`text-[#0a0a187e] f2 ${dark ? "text-[#ffffff74]  hover:bg-[#ffffff30]" : "text-[#0a0a187e] hover:bg-[#e1e1e1]"}  px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium`}
                                 >
                                     All Settings
@@ -334,10 +271,10 @@ const Dashboard = () => {
 
                             </div>
 
-                            {quickActionDataArr?.length && 
+                            {quickActionDataArr?.length &&
                                 quickActionDataArr.map((action, index) => (
-                                <QuickActionCard key={index} text={action} />
-                            ))}
+                                    <QuickActionCard key={index} text={action} />
+                                ))}
 
                             <HoverGreenButton btnText="Purge all cache " />
                         </div>
