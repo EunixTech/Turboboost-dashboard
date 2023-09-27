@@ -1,254 +1,16 @@
 import React, { Suspense, useState } from "react";
-import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import useWidth from "../hooks/useWidth";
-import { useDispatch, useSelector } from "react-redux";
-import { setDark } from "../services/home";
+import { useSelector } from "react-redux";
 import Chart1 from "../components/charts/chart1";
-import DemoPie from "../components/charts/donut";
-import MultiLineChart from "../components/charts/chart5";
 import CustomDonutChart from "../components/charts/chart5";
 import { useNavigate } from "react-router-dom";
+import HoverGreenButton from "../components/button/HoverGreenButton";
+import CircularProgressBar from "../components/CircularProgressBar";
+import progressBarDataArr from "../static/progressBarData";
+import CoreVitalsReportCard from "../components/CoreVitalsReportCard";
 
-const Button = () => {
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      style={{
-        borderColor: dark ? "#1F2329" : "#ebebeb",
-      }}
-      className="w-[100%]  mt-[10px] h-[50px] px-[15px] flex items-center justify-center  border-t-[1px] left-0"
-    >
-      <div
-        className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
-        h-[32px] ${dark?"hover:bg-[#1F2329]":"hover:bg-[#f3f3f3]"}  cursor-pointer rounded-[4px] ${
-          dark ? "border-[#1F2329]" : "border-[#38F8AC] "
-        } flex items-center justify-center`}
-      >
-        <p
-          className={`text-[${
-            dark ? "#fff" : "#000"
-          }]   f2 text-[12px]  border-[1px] hover:border-[#38F8AC] ${
-            dark ? "border-[#38F8AC]" : "border-[#38F8AC]"
-          } ${
-            dark ? "bg-[#111317]" : "bg-[#fff]"
-          } rounded-[4px] hover:bg-[#38f8ac] hover:text-white active:translate-y-[0px] active:border-0 active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-        >
-          Purge all cache
-        </p>
-      </div>
-    </div>
-  );
-};
-
-const CircularProgressBar = ({ percentage, title, mr }) => {
-  const radius = 45; // Slightly reduce the radius to keep it within the SVG
-  const centerX = 50;
-  const centerY = 50;
-  const circumference = 2 * Math.PI * radius;
-  const dashOffset = ((100 - percentage) / 100) * circumference;
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      style={{
-        marginRight: mr,
-      }}
-      className="w-[70px]  relative  h-[70px] p-[2px] "
-    >
-      <div
-        style={{
-          color: dark ? "#0ccf68" : "#0ccf68",
-        }}
-        className="w-[100%] h-[100%] font-medium relative z-0 rounded-[50%]  bg-[#0ccf6718] flex items-center justify-center text-[20px] "
-      >
-        {percentage}
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[90px] absolute font-medium text-center left-[-10px]  top-[74px] text-[12px] font-medium"
-      >
-        {title}
-      </div>
-      <svg
-        width="70"
-        style={{
-          transform: " rotateZ(-90deg)",
-        }}
-        className="absolute duration-100 z-10 top-0 left-0"
-        height="70"
-        viewBox="0 0 100 100"
-      >
-        <circle
-          cx={centerX}
-          cy={centerY}
-          r={radius}
-          fill="transparent"
-          strokeWidth="5" // Set the stroke width as needed
-          stroke="#0ccf68" // Set the stroke color
-          strokeDasharray={circumference}
-          strokeDashoffset={dashOffset}
-        />
-      </svg>
-    </div>
-  );
-};
-
-const GooglePageScore = () => {
-  const dark = useSelector((state) => state.home.dark);
-  const [coreVitals, setVitsals] = useState(true);
-
-  return (
-    <div
-      style={{
-        backgroundColor: dark ? "#111317" : "#fff",
-        borderColor: dark ? "#1F2329" : "#ebebeb",
-      }}
-      className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]"
-    >
-      <div className="w-[100%]  flex items-center justify-between">
-        <p
-          style={{ color: dark ? "#fff" : "#000" }}
-          className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
-        >
-          Google Page Score
-        </p>
-        <div
-          style={{
-            backgroundColor: dark ? "#111317" : "#fff",
-            borderColor: dark ? "#1F2329" : "#ebebeb",
-          }}
-          className="w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center"
-        >
-          <div
-            onClick={() => {
-              setVitsals(true);
-            }}
-            style={{
-              ...(coreVitals
-                ? {
-                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                    color: dark ? "#fff" : "#000",
-                  }
-                : {
-                    backgroundColor: dark ? "#111317" : "#fff",
-                    color: dark ? "#fff" : "#000",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                  }),
-            }}
-            className="w-[50%] h-[100%]  flex items-center justify-center bg-[#ebebeb8b] border-r-[1px] "
-          >
-            <p className="text-[12px] f2  font-medium">Core Vitals</p>
-          </div>
-          <div
-            onClick={() => {
-              setVitsals(false);
-            }}
-            style={{
-              ...(!coreVitals
-                ? {
-                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                    color: dark ? "#fff" : "#000",
-                  }
-                : {
-                    backgroundColor: dark ? "#111317" : "#fff",
-                    color: dark ? "#fff" : "#000",
-                  }),
-            }}
-            className="w-[50%] h-[100%] flex items-center justify-center bg-[#fff]"
-          >
-            <p className="text-[12px]  font-medium f2">Performance</p>
-          </div>
-        </div>
-      </div>
-      {!coreVitals ? (
-        <>
-          <p
-            style={{
-              color: dark ? "#ffffff74" : "#0a0a187e",
-            }}
-            className="text-[12px]  font-semibold f2"
-          >
-            Performance
-          </p>
-          <div className="flex items-center  justify-around h-[140px]">
-            <CircularProgressBar
-              mr="20px"
-              title="Performence"
-              percentage={98}
-            />
-            <CircularProgressBar
-              mr="20px"
-              title="Accessibility"
-              percentage={98}
-            />
-            <CircularProgressBar
-              mr="20px"
-              title="Best Practices"
-              percentage={98}
-            />
-            <CircularProgressBar title="SEO" percentage={98} />
-          </div>
-        </>
-      ) : (
-        <div className="w-[100%] mt-[20px]">
-          <div className="flex  justify-around ">
-            <div className="w-[150px]">
-              <p
-                style={{ color: dark ? "#fff" : "#000" }}
-                className="text-[12px] f2 font-medium"
-              >
-                First Contentful Paint
-              </p>
-              <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-                0.5s
-              </p>
-            </div>
-            <div className="w-[150px]">
-              <p
-                style={{ color: dark ? "#fff" : "#000" }}
-                className="text-[12px] f2 font-medium"
-              >
-                Speed Index
-              </p>
-              <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-                1.3 s
-              </p>
-            </div>
-          </div>
-          <div className="flex mt-[5%] justify-around ">
-            <div className="w-[150px]">
-              <p
-                style={{ color: dark ? "#fff" : "#000" }}
-                className="text-[12px] f2 font-medium"
-              >
-                Total Blocking Time
-              </p>
-              <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-                0ms
-              </p>
-            </div>
-            <div className="w-[150px]">
-              <p
-                style={{ color: dark ? "#fff" : "#000" }}
-                className="text-[12px] f2 font-medium"
-              >
-                Largest Contentful Paint
-              </p>
-              <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-                1.1s
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
 
 const HoverDetail = () => {
   const [hover, setHover] = useState(false);
@@ -296,9 +58,11 @@ const HoverDetail = () => {
 
 const Dashboard = () => {
   const w = useWidth();
-  const dispatch = useDispatch();
+  const [coreVitals, setVitsals] = useState(true);
+
   const dark = useSelector((state) => state.home.dark);
   const router = useNavigate();
+
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <div className="w-[100%] h-[50px] shrink-0"></div>
@@ -590,23 +354,110 @@ const Dashboard = () => {
               >
                 This Month
               </p>
-              {/* <img
-                src={
-                  dark
-                    ? "/graphic/dashboard/dummy-d.svg"
-                    : w > 1000
-                    ? "/graphic/dashboard/dummy.svg"
-                    : "/graphic/dashboard/dumm1.svg"
-                }
-                className="mt-[10px]"
-                alt=""
-              /> */}
+
               <Chart1 className="custom-chart" />
-              {/* <MultiLineChart/> */}
             </div>
           </div>
           <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:grid  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px]">
-            <GooglePageScore />
+
+          {/* google score card */}
+
+          <div style={{
+                backgroundColor: dark ? "#111317" : "#fff",
+                borderColor: dark ? "#1F2329" : "#ebebeb",
+            }}
+            className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]"
+        >
+            <div className="w-[100%]  flex items-center justify-between">
+                <p
+                    style={{ color: dark ? "#fff" : "#000" }}
+                    className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
+                >
+                    Google Page Score
+                </p>
+                <div
+                    style={{
+                        backgroundColor: dark ? "#111317" : "#fff",
+                        borderColor: dark ? "#1F2329" : "#ebebeb",
+                    }}
+                    className="w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center"
+                >
+                    <div
+                        onClick={() => { setVitsals(true)}}
+                        style={{
+                            ...(coreVitals
+                                ? {
+                                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                                    borderColor: dark ? "#1F2329" : "#ebebeb",
+                                    color: dark ? "#fff" : "#000",
+                                }
+                                : {
+                                    backgroundColor: dark ? "#111317" : "#fff",
+                                    color: dark ? "#fff" : "#000",
+                                    borderColor: dark ? "#1F2329" : "#ebebeb",
+                                }),
+                        }}
+                        className="w-[50%] h-[100%]  flex items-center justify-center bg-[#ebebeb8b] border-r-[1px] "
+                    >
+                        <p className="text-[12px] f2  font-medium">Core Vitals</p>
+                    </div>
+
+                    <div
+                        onClick={() => { setVitsals(false)}}
+                        style={{
+                            ...(!coreVitals
+                                ? {
+                                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                                    borderColor: dark ? "#1F2329" : "#ebebeb",
+                                    color: dark ? "#fff" : "#000",
+                                }
+                                : {
+                                    backgroundColor: dark ? "#111317" : "#fff",
+                                    color: dark ? "#fff" : "#000",
+                                }),
+                        }}
+                        className="w-[50%] h-[100%] flex items-center justify-center bg-[#fff]"
+                    >
+                        <p className="text-[12px]  font-medium f2">Performance</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {!coreVitals ? (
+                <>
+                    <p
+                        style={{
+                            color: dark ? "#ffffff74" : "#0a0a187e",
+                        }}
+                        className="text-[12px]  font-semibold f2"
+                    >
+                        Performance
+                    </p>
+
+                    <div className="flex items-center  justify-around h-[140px]">
+                        {progressBarDataArr.length && progressBarDataArr.map((item, index) => (
+                            <CircularProgressBar
+                                key={index}
+                                margin={item?.margin}
+                                title={item?.title}
+                                percentage={item?.percentage}
+                            />
+                        ))}
+
+                    </div>
+                </>
+
+            ) : (
+                <CoreVitalsReportCard />
+            )}
+
+        </div>
+
+   {/*end google score card */}
+
+
             <div
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
@@ -642,24 +493,7 @@ const Dashboard = () => {
                 )}
               </div>
               <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
-                {/* <div className="h-[100%] w-[110px] flex items-center justify-center relative mr-[10px]">
-                  <img
-                    src={
-                      dark
-                        ? "/graphic/dashboard/circle-d.svg"
-                        : "/graphic/dashboard/circle.svg"
-                    }
-                    className="h-[100%] w-[100%] left-0 top-0  absolute z-10"
-                    alt=""
-                  />
-                  <p
-                    style={{ color: dark ? "#fff" : "#000" }}
-                    className=" font-medium f2"
-                  >
-                    335
-                  </p>
-                </div> */}
-                {/* <DemoPie /> */}
+
                 <CustomDonutChart />
                 <div className="max-w-[250px] w-[50%] ml-auto">
                   <div className="flex items-center mb-[4px] justify-between">
@@ -808,7 +642,7 @@ const Dashboard = () => {
                 </p>
                 <Toggle />
               </div>
-              <Button />
+              <HoverGreenButton btnText="Purge all cache " />
             </div>
           </div>
           <div className="w-[100%] h-[50px]"></div>
