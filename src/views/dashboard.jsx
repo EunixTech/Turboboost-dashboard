@@ -10,7 +10,8 @@ import CircularProgressBar from "../components/CircularProgressBar";
 import progressBarDataArr from "../static/progressBarData";
 import CoreVitalsReportCard from "../components/CoreVitalsReportCard";
 import Tooltip from "../components/Tooltip";
-
+import CacheStatCard from "../components/CacheStatCard";
+import cacheStatDataArr from "../static/cacheStatData"
 
 
 const Dashboard = () => {
@@ -57,240 +58,19 @@ const Dashboard = () => {
             )}
           </div>
           <div className="w-[100%] mobile:px-[10px] mt-[20px] grid desktop:grid-cols-4 laptop:grid-cols-2 gap-y-[10px] gap-x-[24px]">
-            <div
-              style={{
-                backgroundColor: dark ? "#111317" : "#fff",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
-              }}
-              className="  px-[15px] py-[14px] h-[100%] bg-[#fff] border-[1px] rounded-[8px]"
-            >
-              <div className="flex justify-between items-center">
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className="text-[16px] f2 tracking-wide font-bold"
-                >
-                  Cache Hit Ratio
-                </p>
-                <Tooltip text=" Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet." />
-              </div>
-              <div className="flex mt-[6px] items-center">
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="laptop:text-[25px] f2 desktop:text-[25px]  font-bold "
-                >
-                  96%
-                </p>
-                <div className=" flex bg-[#18df902e] px-[13px] py-[2px] rounded-[23px] ml-[10px]">
-                  <img
-                    src="/graphic/dashboard/trend.svg"
-                    className="mr-[5px] translate-y-[1px] w-[14px]"
-                    alt=""
-                  />
-                  <p className="text-[#18DF90] f2 text-[13px] font-bold tracking-wide ">
-                    3%
-                  </p>
-                </div>
-              </div>
-              <div className="flex">
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className=" mr-[2px] f2 text-[14px] tracking-wide font-bold"
-                >
-                  vs last purge:
-                </p>
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[#000] f2 text-[14px] tracking-wide font-bold"
-                >
-                  89%
-                </p>
-              </div>
-            </div>
-            <div
-              style={{
-                backgroundColor: dark ? "#111317" : "#fff",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
-              }}
-              className="  px-[15px] py-[14px] h-[100%] border-[1px]  rounded-[8px]"
-            >
-              <div className="flex justify-between items-center">
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className="text-[#0a0a187e] f2 text-[16px] tracking-wide font-bold"
-                >
-                  Cache Size
-                </p>
-                <Tooltip text=" Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet." />
-              </div>
+ 
+            {cacheStatDataArr.map((data, index) => (
+              <CacheStatCard
+                key={index}
+                heading={data.heading}
+                purgeHeading={data.purgeHeading}
+                purgeValue={data.purgeValue}
+                percentageData={data.percentageData}
+                fluctuationType={data.fluctuationType}
+                fluctuationAmount={data.fluctuationAmount}
+              />
+            ))}
 
-              <div className="flex mt-[6px] items-center">
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
-                >
-                  125.93 MB
-                </p>
-                <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
-                  <img
-                    src="/graphic/dashboard/trend-red-down.svg"
-                    className="mr-[5px] translate-y-[1px] w-[14px]"
-                    alt=""
-                  />
-                  <p className="text-[#ff004c] f2 text-[13px] font-medium tracking-wide ">
-                    3%
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex">
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className="text-[#0a0a187e] f2 mr-[2px] text-[14px] tracking-wide font-bold"
-                >
-                  vs last purge:
-                </p>
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[#000] f2 text-[14px] tracking-wide font-bold"
-                >
-                  136.71 MB
-                </p>
-              </div>
-            </div>
-
-            <div
-              style={{
-                backgroundColor: dark ? "#111317" : "#fff",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
-              }}
-              className="  px-[15px] py-[14px] h-[100%] bg-[#fff] border-[1px] rounded-[8px]"
-            >
-              <div className="flex justify-between items-center">
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className="text-[#0a0a187e] f2 text-[16px] tracking-wide font-bold"
-                >
-                  Bounce Rate
-                </p>
-                <Tooltip text=" Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet." />
-              </div>
-              <div className="flex mt-[6px] items-center">
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
-                >
-                  17.23%
-                </p>
-                <div className=" flex bg-[#18df902e] f2 px-[13px] py-[3px] rounded-[23px] ml-[10px]">
-                  <img
-                    src="/graphic/dashboard/trend.svg"
-                    style={{
-                      transform: "rotateZ(180deg) rotateY(180deg)",
-                    }}
-                    className="mr-[5px] translate-y-[1px] w-[14px]"
-                    alt=""
-                  />
-                  <p className="text-[#18DF90] f2 text-[13px] font-medium tracking-wide ">
-                    3%
-                  </p>
-                </div>
-              </div>
-              <div className="flex">
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className="text-[#0a0a187e] f2 mr-[2px] text-[14px] tracking-wide font-bold"
-                >
-                  vs last week:
-                </p>
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[#000] f2 text-[14px] tracking-wide font-bold"
-                >
-                  21.92%
-                </p>
-              </div>
-            </div>
-            <div
-              style={{
-                backgroundColor: dark ? "#111317" : "#fff",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
-              }}
-              className="  px-[15px] py-[14px] h-[100%] bg-[#fff] border-[1px]  rounded-[8px]"
-            >
-              <div className="flex justify-between items-center">
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className="text-[#0a0a187e] f2 text-[16px] tracking-wide font-bold"
-                >
-                  Last Purge
-                </p>
-                <Tooltip text=" Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet." />
-              </div>
-              <div className="flex mt-[6px] items-center">
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
-                >
-                  1 Day Ago
-                </p>
-                <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
-                  <img
-                    src="/graphic/dashboard/trend-red-down.svg"
-                    className="mr-[5px] translate-y-[1px] w-[14px]"
-                    alt=""
-                  />
-                  <p className="text-[#ff004c] f2 text-[13px] font-medium tracking-wide ">
-                    3%
-                  </p>
-                </div>
-              </div>
-              <div className="flex">
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className="text-[#0a0a187e] f2 mr-[2px] text-[14px] tracking-wide font-bold"
-                >
-                  previous purge:
-                </p>
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[#000] f2 text-[14px] tracking-wide font-bold"
-                >
-                  4/26/94
-                </p>
-              </div>
-            </div>
           </div>
           <div className="w-[100%] px-[10px]">
             <div
