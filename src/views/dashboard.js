@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import Toggle from "../utils/toggle";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
 import Chart1 from "../components/charts/chart1";
-import CustomDonutChart from "../components/charts/chart5";
 import { useNavigate } from "react-router-dom";
 import HoverGreenButton from "../components/button/HoverGreenButton";
 import CircularProgressBar from "../components/CircularProgressBar";
@@ -15,6 +13,7 @@ import QuickActionCard from "../components/QuickActionCard";
 import quickActionDataArr from "../static/quickActionData";
 import CacheStatusCard from "../components/CacheStatusCard";
 import caccheStatusDataArr from "../static/caccheStatusData";
+import DoughnutChart from "../components/charts/DoughnutChart";
 
 const Dashboard = () => {
     const w = useWidth();
@@ -233,7 +232,7 @@ const Dashboard = () => {
                             </div>
                             <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
 
-                                <CustomDonutChart />
+                                <DoughnutChart />
 
                                 <div className="max-w-[250px] w-[50%] ml-auto">
 
