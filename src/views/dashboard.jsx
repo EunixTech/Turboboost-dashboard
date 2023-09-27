@@ -10,40 +10,6 @@ import MultiLineChart from "../components/charts/chart5";
 import CustomDonutChart from "../components/charts/chart5";
 import { useNavigate } from "react-router-dom";
 
-// const Button = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       style={{
-//         borderColor: dark ? "#1F2329" : "#ebebeb",
-//       }}
-//       className="w-[100%]  mt-[10px] h-[50px] px-[15px] flex items-center justify-center  border-t-[1px] left-0"
-//     >
-//       <div
-//         onClick={() => {
-//           // onClick();
-//         }}
-//         className={`w-[100%] ${!dark ? "bg-[#ebebeb] " : "bg-[#1F2329]"}
-//       h-[34px]   cursor-pointer rounded-[4px] border-[1px] ${
-//         dark ? "border-[#1F2329]" : "border-[#ebebeb] "
-//       } flex items-center justify-center mt-[20px]`}
-//       >
-//         <p
-//           className={`text-[${
-//             dark ? "#fff" : "#000"
-//           }]   f2 text-[12px]  border-[1px]  ${
-//             dark ? "border-[#1F2329]" : "border-[#ebebeb]"
-//           } ${
-//             dark ? "bg-[#111317]" : "bg-[#fff]"
-//           } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[1.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//         >
-//           Purge all cache
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
 const Button = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
