@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
-import Chart1 from "../components/charts/chart1";
 import { useNavigate } from "react-router-dom";
 import HoverGreenButton from "../components/button/HoverGreenButton";
 import CircularProgressBar from "../components/CircularProgressBar";
@@ -14,6 +13,7 @@ import quickActionDataArr from "../static/quickActionData";
 import CacheStatusCard from "../components/CacheStatusCard";
 import caccheStatusDataArr from "../static/caccheStatusData";
 import DoughnutChart from "../components/charts/DoughnutChart";
+import DomLineChart from "../components/charts/DomLineChart";
 
 const Dashboard = () => {
     const w = useWidth();
@@ -58,6 +58,7 @@ const Dashboard = () => {
                             </div>
                         )}
                     </div>
+
                     <div className="w-[100%] mobile:px-[10px] mt-[20px] grid desktop:grid-cols-4 laptop:grid-cols-2 gap-y-[10px] gap-x-[24px]">
 
                         {cacheStatDataArr.map((data, index) => (
@@ -73,32 +74,18 @@ const Dashboard = () => {
                         ))}
 
                     </div>
-                    <div className="w-[100%] px-[10px]">
-                        <div
-                            style={{
-                                backgroundColor: dark ? "#111317" : "#fff",
-                                borderColor: dark ? "#1F2329" : "#ebebeb",
-                            }}
-                            className="w-[100%]  px-[15px] py-[15px] min-h-[110px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[10px] mt-[24px]"
-                        >
-                            <h1
-                                style={{ color: dark ? "#fff" : "#000" }}
-                                className="desktop:text-[20px] f2 laptop:text-[20px] leading-[22px] font-semibold"
-                            >
-                                Service Usage Log
-                            </h1>
-                            <p
-                                style={{
-                                    color: dark ? "#ffffff74" : "#0a0a187e",
-                                }}
-                                className="text-[#0a0a187e] f2 laptop:text-[14px] desktop:text-[14px] font-medium tracking-wide"
-                            >
-                                This Month
-                            </p>
 
-                            <Chart1 className="custom-chart" />
+                    <div className="w-[100%] px-[10px]">
+                        <div style={{ backgroundColor: dark ? "#111317" : "#fff", borderColor: dark ? "#1F2329" : "#ebebeb"}} className="w-[100%]  px-[15px] py-[15px] min-h-[110px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[10px] mt-[24px]">
+
+                            <h1 style={{ color: dark ? "#fff" : "#000" }} className="desktop:text-[20px] f2 laptop:text-[20px] leading-[22px] font-semibold" >Service Usage Log </h1>
+                            <p style={{ color: dark ? "#ffffff74" : "#0a0a187e"}} className="text-[#0a0a187e] f2 laptop:text-[14px] desktop:text-[14px] font-medium tracking-wide" > This Month </p>
+
+                            <DomLineChart className="custom-chart" />
+
                         </div>
                     </div>
+
                     <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:grid  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px]">
 
                         <div style={{
@@ -194,8 +181,6 @@ const Dashboard = () => {
 
                         </div>
 
-
-
                         <div
                             style={{
                                 backgroundColor: dark ? "#111317" : "#fff",
@@ -204,32 +189,13 @@ const Dashboard = () => {
                             className=" h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px]"
                         >
                             <div className="w-[100%]  flex items-center justify-between">
-                                <p
-                                    style={{ color: dark ? "#fff" : "#000" }}
-                                    className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
-                                >
-                                    Total Cache Status
-                                </p>
-                                {dark ? (
-                                    <div
-                                        style={{
-                                            color: dark ? "#ffffff74" : "#0a0a187e",
-                                        }}
-                                        className="text-[#0a0a187e] text-[#ffffff74] f2 hover:bg-[#ffffff30] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
-                                    >
-                                        View Details
-                                    </div>
-                                ) : (
-                                    <div
-                                        style={{
-                                            color: dark ? "#ffffff74" : "#0a0a187e",
-                                        }}
-                                        className="text-[#0a0a187e] translate-x-[7px] text-[#0a0a187e] f2 hover:bg-[#e1e1e1] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
-                                    >
-                                        View Details
-                                    </div>
-                                )}
+                                <p style={{ color: dark ? "#fff" : "#000" }} className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide" > Total Cache Status </p>
+
+                                <div style={{ color: dark ? "#ffffff74" : "#0a0a187e"}}
+                                    className={`text-[#0a0a187e] f2 ${dark ? "text-[#ffffff74]  hover:bg-[#ffffff30]" : "text-[#0a0a187e] hover:bg-[#e1e1e1]"} px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium `}
+                                > View Details </div>
                             </div>
+
                             <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
 
                                 <DoughnutChart />
@@ -291,3 +257,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
