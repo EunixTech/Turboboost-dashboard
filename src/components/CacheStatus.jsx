@@ -1,13 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderItem from "../components/HeaderItem";
 import Button2 from "./button/Button2";
 import Filter from "./Filter";
 import Table from "./Table";
 import { useSelector } from "react-redux";
+import cacheStatusStore from "../views/CacheStatusStore";
 
 const CacheStatus = () => {
     const [selected, setSelected] = useState([]);
     const dark = useSelector((state) => state.home.dark);
+
+    useEffect(() => {
+      // Fetch cache status data when the component mounts
+      cacheStatusStore.fetchCacheStatus();
+    }, []);
+
+    const {
+      totalCacheStatus,
+      totalCacheSize,
+      // optimizedUrls,
+      // pendingUrls,
+      // notOptimizedUrls,
+      // htmlCache,
+      // jsCache,
+      // cssCache,
+      // fontsCache,
+      // imagesCache,
+    } = cacheStatusStore.cacheStatusData;
+
+
     return (
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
         <div className="w-[100%] h-[50px] shrink-0"></div>
@@ -49,7 +70,7 @@ const CacheStatus = () => {
                   }}
                   className="text-[30px] mt-[10px] font-bold tracking-wide "
                 >
-                  335
+                  {totalCacheStatus}
                 </h1>
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                   <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
@@ -87,7 +108,7 @@ const CacheStatus = () => {
                   }}
                   className="text-[30px] mt-[10px] font-bold tracking-wide "
                 >
-                  467.08 MB
+                  {totalCacheSize}
                 </h1>
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                   <div className="w-[25%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
