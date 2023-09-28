@@ -10,7 +10,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import Dashboard from "./routes/dashboard";
+import DashboardPage from "./routes/DashboardPage";
 import ForgotPasswordPage from "./views/ForgotPassword";
 import PasswordScreen from "./routes/forgot-password"
 import Login from "./routes/signIn";
@@ -35,7 +35,7 @@ const router = [
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <DashboardPage />,
   },
   {
     path: "/connect-website",
