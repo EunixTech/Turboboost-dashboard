@@ -1,34 +1,6 @@
 import React, { useState } from "react";
 import HomeLayout from "../layouts/index/index";
 import { useSelector } from "react-redux";
-
-// const Button = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         // onClick();
-//       }}
-//       className={`w-[100%] ${!dark ? "bg-[#ebebeb] " : "bg-[#204c3a]"}
-//         h-[40px]   cursor-pointer rounded-[4px] border-[1px] ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb] "
-//         } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           false ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[2.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         Add New Website
-//       </p>
-//     </div>
-//   );
-// };
-
 const Button = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -48,7 +20,7 @@ const Button = () => {
   );
 };
 
-// const Button1 = ({ onClick }) => {
+
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
 //     <div
