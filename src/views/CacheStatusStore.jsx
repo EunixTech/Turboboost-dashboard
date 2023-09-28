@@ -4,8 +4,8 @@ class CacheStatusStore {
   cacheStatusData = {
     totalCacheStatus: 0,
     totalCacheSize: '100 MB',
-    optimizedUrls: 0,
-    pendingUrls: 0,
+    optimizedUrls: 80,
+    pendingUrls: 1,
     notOptimizedUrls: 0,
     htmlCache: '0 MB',
     jsCache: '0 MB',

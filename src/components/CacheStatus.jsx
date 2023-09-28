@@ -18,14 +18,14 @@ const CacheStatus = () => {
     const {
       totalCacheStatus,
       totalCacheSize,
-      // optimizedUrls,
-      // pendingUrls,
-      // notOptimizedUrls,
-      // htmlCache,
-      // jsCache,
-      // cssCache,
-      // fontsCache,
-      // imagesCache,
+      optimizedUrls,
+      pendingUrls,
+      notOptimizedUrls,
+      htmlCache,
+      jsCache,
+      cssCache,
+      fontsCache,
+      imagesCache,
     } = cacheStatusStore.cacheStatusData;
 
 
@@ -78,10 +78,10 @@ const CacheStatus = () => {
                   <div className="w-[33%] h-[100%] rounded-[10px] bg-[#FF465C]" />
                 </div>
                 <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                  <HeaderItem title="Optimized URLs" sub="246" color="#38F8AC" />
-                  <HeaderItem title="Pending URLs" sub="72" color="#FFCB65" />
+                  <HeaderItem title="Optimized URLs" sub={optimizedUrls} color="#38F8AC" />
+                  <HeaderItem title="Pending URLs" sub={pendingUrls}color="#FFCB65" />
                   <HeaderItem
-                    title="Not Optimized URLs"
+                    title={notOptimizedUrls}
                     sub="19"
                     color="#FF465C"
                   />
@@ -118,17 +118,17 @@ const CacheStatus = () => {
                   <div className="w-[10%] h-[100%] bg-[#E9DEFC]" />
                 </div>
                 <div className="w-[100%] mobile:grid-cols-2 grid laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                  <HeaderItem title="HTML Cache" sub="114.79MB" color="#391F87" />
-                  <HeaderItem title="JS Cache" sub="21.54MB" color="#766695" />
-                  <HeaderItem title="CSS Cache" sub="67.67MB" color="#9963FE" />
+                  <HeaderItem title="HTML Cache" sub={htmlCache} color="#391F87" />
+                  <HeaderItem title="JS Cache" sub={jsCache} color="#766695" />
+                  <HeaderItem title="CSS Cache" sub={cssCache} color="#9963FE" />
                   <HeaderItem
                     title="Fonts Cache"
-                    sub="766.48kB"
+                    sub={fontsCache}
                     color="#CCB0FF"
                   />
                   <HeaderItem
                     title="Images Cache"
-                    sub="262.46MB"
+                    sub={imagesCache}
                     color="#E9DEFC"
                   />
                 </div>
