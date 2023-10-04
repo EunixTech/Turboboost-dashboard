@@ -1,79 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
 import { useSelector } from "react-redux";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { index } from "d3";
+const validationSchema = Yup.object().shape({
+  url: Yup.string().url("Invalid URL").required("Website URL is required"),
+  name: Yup.string().required("Website Name is required"),
+});
 
-// const Button = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         // onClick();
-//       }}
-//       className={`w-[100%] ${!dark ? "bg-[#ebebeb] " : "bg-[#204c3a]"}
-//         h-[40px]   cursor-pointer rounded-[4px] border-[1px] ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb] "
-//         } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           false ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[2.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         Add New Website
-//       </p>
-//     </div>
-//   );
-// };
-
-const Button = () => {
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
-
-        h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
-    >
-      <p
-        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-        } rounded-[4px] hover:bg-[#2fe49c] active:translate-y-[0px] font-bold active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide `}
-      >
-        Add New Website
-      </p>
-    </div>
-  );
-};
-
-// const Button1 = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         onClick();
-//       }}
-//       className={`w-[100%] ${!dark ? "bg-[#ebebeb] " : "bg-[#1c1f26]"}
-//       h-[40px]   cursor-pointer rounded-[4px] border-[1px] ${
-//         dark ? "border-[#1F2329]" : "border-[#ebebeb] "
-//       } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           true ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#1F2329]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#000]" : "bg-[#000]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[2.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         Browse Connectors
-//       </p>
-//     </div>
-//   );
-// };
 
 const Button1 = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -186,13 +121,32 @@ const Status = ({ i }) => {
   );
 };
 
-const TableItem = ({ name, url, id, secret, status }) => {
+const TableItem = ({ name, url, id, secret, status, onDelete }) => {
   const dark = useSelector((state) => state.home.dark);
-  const [clicked, setClicked] = useState(false);
-  const [hover1, setHover1] = useState(false);
-  const [hover2, setHover2] = useState(false);
-  const [clicked1, setClicked1] = useState(false);
-  
+  const [clipboardHover, setClipboardHover] = useState(false);
+  const [copyText, setCopyText] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
+
+  const handleTrashIconClick = () => {
+    // Call your function to trash the item here
+    // For example:
+    onDelete();
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopySuccess(true); // Update copy success state
+        setTimeout(() => {
+          setCopySuccess(false); // Reset copy success state after a few seconds
+        }, 3000); // Reset after 3 seconds (adjust as needed)
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+
   return (
     <div
       style={{
@@ -216,65 +170,31 @@ const TableItem = ({ name, url, id, secret, status }) => {
       >
         {url}
       </div>
+      {/* Site ID */}
       <div
         style={{
           color: dark ? "#fff" : "#000",
         }}
         onClick={() => {
-          setClicked(!clicked);
-        }}
-        onMouseOver={() => {
-          setHover1(true);
-        }}
-        onMouseLeave={() => {
-          setHover1(false);
-        }}
-        className="w-[20%] cursor-pointer font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
-      >
-        {clicked ? "PHJDtTfis" : "PHJDtTfisM..."}
-        <div className="flex ml-[10px] cursor-pointer translate-y-[-2px]">
-          <img
-            src={
-              hover1
-                ? "/graphic/connect-website/copy1.svg"
-                : "/graphic/connect-website/copy.svg"
-            }
-            className={`w-[12px]`}
-            alt=""
-          />
-          <p
-            style={{
-              color: hover1 ? "#0A0A18" : "#85858C",
-            }}
-            className="text-[#85858C] ml-[1px]"
-          >
-            Copy
-          </p>
-        </div>
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        onClick={() => {
-          if (hover2) {
-            setClicked1(true);
+          if (clipboardHover) {
+            // Copy the Site ID when the clipboardHover state is true
+            copyToClipboard(id);
           }
         }}
         onMouseOver={() => {
-          setHover2(true);
+          setClipboardHover(true);
         }}
         onMouseLeave={() => {
-          setHover2(false);
-          setClicked1(false);
+          setClipboardHover(false);
+          setCopyText(false);
         }}
         className="w-[17%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
-        {clicked1 ? "IV73238FB33" : "••••••••••"}
+        {copyText ? id : "••••••••••"}
         <div className="flex ml-[10px] cursor-pointer translate-y-[-2px]">
           <img
             src={
-              hover2
+              clipboardHover
                 ? "/graphic/connect-website/copy1.svg"
                 : "/graphic/connect-website/copy.svg"
             }
@@ -283,7 +203,7 @@ const TableItem = ({ name, url, id, secret, status }) => {
           />
           <p
             style={{
-              color: hover2 ? "#0A0A18" : "#85858C",
+              color: clipboardHover ? "#0A0A18" : "#85858C",
             }}
             className="text-[#85858C] ml-[1px]"
           >
@@ -291,6 +211,49 @@ const TableItem = ({ name, url, id, secret, status }) => {
           </p>
         </div>
       </div>
+
+      {/* Site Secret */}
+      <div
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
+        onClick={() => {
+          if (clipboardHover) {
+            // Copy the Site Secret when the clipboardHover state is true
+            copyToClipboard(secret);
+          }
+        }}
+        onMouseOver={() => {
+          setClipboardHover(true);
+        }}
+        onMouseLeave={() => {
+          setClipboardHover(false);
+          setCopyText(false);
+        }}
+        className="w-[17%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+      >
+        {copyText ? secret : "••••••••••"}
+        <div className="flex ml-[10px] cursor-pointer translate-y-[-2px]">
+          <img
+            src={
+              clipboardHover
+                ? "/graphic/connect-website/copy1.svg"
+                : "/graphic/connect-website/copy.svg"
+            }
+            className="w-[12px]"
+            alt=""
+          />
+          <p
+            style={{
+              color: clipboardHover ? "#0A0A18" : "#85858C",
+            }}
+            className="text-[#85858C] ml-[1px]"
+          >
+            Copy
+          </p>
+        </div>
+      </div>
+
       <div className="w-[15%] font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
         <Status i={status} />
       </div>
@@ -299,74 +262,55 @@ const TableItem = ({ name, url, id, secret, status }) => {
           src="/graphic/status/trash.svg"
           className="w-[15px] hover:opacity-70 cursor-pointer h-[15px]"
           alt=""
+          onClick={handleTrashIconClick}
         />
       </div>
     </div>
   );
 };
 
-const Table = () => {
-  const data = [
-    {
-      name: "TxtCart",
-      url: "http://txtcartapp.com/",
-      id: "PHJDtTfisMlMaLY...",
-      secret: "••••••••••••••••••",
-      status: 1,
-    },
-    {
-      name: "Appstack",
-      url: "http://appstack.io/",
-      id: "PHJDtTfisMlMaLY...",
-      secret: "••••••••••••••••••",
-      status: 1,
-    },
-    {
-      name: "Apple",
-      url: "http://apple.com/",
-      id: "PHJDtTfisMlMaLY...",
-      secret: "••••••••••••••••••",
-      status: 2,
-    },
-    {
-      name: "KBM",
-      url: "http://kylebigleymotorsports.com/",
-      id: "PHJDtTfisMlMaLY...",
-      secret: "••••••••••••••••••",
-      status: 1,
-    },
-    {
-      name: "Something",
-      url: "http://somethinggroup.com/",
-      id: "PHJDtTfisMlMaLY...",
-      secret: "••••••••••••••••••",
-      status: 3,
-    },
-  ];
-
-  return (
-    <div className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool">
-      <div className="mobile:w-[900px]  laptop:min-w-[900px] laptop:w-[100%]">
-        <TableHeader />
-        {data.map((item, i) => {
-          return (
-            <TableItem
-              key={i}
-              name={item.name}
-              url={item.url}
-              id={item.id}
-              secret={item.secret}
-              status={item.status}
-            />
-          );
-        })}
-      </div>
+const Table = ({ websites, deleteWebsite, dark }) => (
+  <div className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool">
+    <div className="mobile:w-[900px]  laptop:min-w-[900px] laptop:w-[100%]">
+      <TableHeader dark={dark} />
+      {websites.map((website, i) => (
+        <TableItem
+          key={i}
+          {...website}
+          dark={dark}
+          onDelete={() => deleteWebsite(i)}
+        />
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 const ConnectWebsite = ({ setShow }) => {
   const dark = useSelector((state) => state.home.dark);
+  const [websites, setWebsites] = useState([]);
+
+  // Load data from localStorage when the component mounts
+  useEffect(() => {
+    const storedData = localStorage.getItem("websites");
+    if (storedData) {
+      setWebsites(JSON.parse(storedData));
+    }
+  }, []);
+
+  // Save data to localStorage whenever the websites state changes
+  useEffect(() => {
+    localStorage.setItem("websites", JSON.stringify(websites));
+  }, [websites]);
+
+  const addWebsiteToList = (website) => {
+    setWebsites((prevWebsites) => [...prevWebsites, website]);
+    console.log("add data", website);
+  };
+
+  const deleteWebsite = (index) => {
+    setWebsites((prevWebsites) => prevWebsites.filter((_, i) => i !== index));
+  };
+
   return (
     <>
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
@@ -379,18 +323,10 @@ const ConnectWebsite = ({ setShow }) => {
             <div className="w-[100%] pt-[30px]">
               <h1
                 style={{ color: dark ? "#fff" : "#000" }}
-                className="text-[24px] f2 font-bold tracking-wide "
+                className="text-[24px] f2 font-bold tracking-wide"
               >
                 Connect Website
               </h1>
-              {/* <p
-              style={{
-                color: dark ? "#ffffff74" : "#0a0a187e",
-              }}
-              className="text-[#0a0a187e] f2 text-[14px] tracking-wide font-medium"
-            >
-              Lorem ipsum dolor sit amet consectetur
-            </p> */}
             </div>
             <div className="w-[100%] mt-[18px] laptop:flex justify-between">
               <div
@@ -401,94 +337,132 @@ const ConnectWebsite = ({ setShow }) => {
                 className="laptop:w-[73%] mobile:w-[100%] pb-[5px] pt-[14px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
               >
                 <div className="flex px-[15px] justify-between items-center">
-                  {/* <h1
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[20px] f2 font-bold tracking-wide "
-                >
-                  Connect Website
-                </h1> */}
                   <p
                     style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",
                     }}
                     className="text-[#0a0a187e] f2 text-[14px] font-medium"
                   >
-                    5 Connections
+                    {websites.length} Connection
+                    {websites.length !== 1 ? "s" : ""}
                   </p>
                 </div>
-                <Table />
+                <Table websites={websites} deleteWebsite={deleteWebsite} />
               </div>
-              <div className="mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[26%] ">
+              <div className="mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[26%]">
                 <div
                   style={{
                     backgroundColor: dark ? "#111317" : "#fff",
                     borderColor: dark ? "#1F2329" : "#ebebeb",
                   }}
-                  className="w-[100%]  px-[15px] py-[14px]  bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
+                  className="w-[100%] px-[15px] py-[14px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
                 >
                   <h1
                     style={{
                       color: dark ? "#fff" : "#000",
                     }}
-                    className="desktop:text-[20px] mobile:text-[20px] font-bold tracking-wide "
+                    className="desktop:text-[20px] mobile:text-[20px] font-bold tracking-wide"
                   >
                     Add New Website
                   </h1>
-                  <div className="w-[100%] mt-[4px]">
-                    <p
-                      style={{
-                        color: dark ? "#ffffff74" : "#0a0a187e",
-                      }}
-                      className="desktop:text-[14px] mobile:text-[14px] tracking-wide font-medium text-[#0a0a186f]"
-                    >
-                      Website URL
-                    </p>
-                    <input
-                      style={{
-                        borderColor: dark ? "#1F2329" : "#ebebeb",
-                      }}
-                      type="text"
-                      placeholder="e.g. https://mywebsite.com"
-                      className="w-[100%] h-[34px] bg-transparent rounded-[4px] border-[1px] border-[#ebebeb] outline-none mt-[5px] desktop:text-[12px] mobile:text-[11px] font-medium px-[10px] "
-                    />
-                  </div>
-                  <div className="w-[100%] mt-[8px]">
-                    <p
-                      style={{
-                        color: dark ? "#ffffff74" : "#0a0a187e",
-                      }}
-                      className="text-[14px] tracking-wide font-medium text-[#0a0a186f]"
-                    >
-                      Website Name
-                    </p>
-                    <input
-                      style={{
-                        borderColor: dark ? "#1F2329" : "#ebebeb",
-                      }}
-                      type="text"
-                      placeholder="e.g. My Website"
-                      className="w-[100%] h-[34px] bg-transparent rounded-[4px] border-[1px] border-[#ebebeb] outline-none mt-[5px] desktop:text-[12px] mobile:text-[11px] font-medium px-[10px] "
-                    />
-                  </div>
-                  <Button />
-                  {/* <div className="w-[100%] h-[40px] cursor-pointer mt-[18px] hover:bg-[#2FE49C] rounded-[3px] flex items-center justify-center bg-[#38F8AC]">
-                  <h1 className="text-[14px] font-medium">Add New Website</h1>
-                </div> */}
+                  <Formik
+                    initialValues={{
+                      url: "",
+                      name: "",
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={(values, { resetForm }) => {
+                      // Handle form submission here
+                      addWebsiteToList({
+                        name: values.name,
+                        url: values.url,
+                        id: "NewWebsiteID123", // Replace with the actual ID
+                        secret: "NewWebsiteSecret", // Replace with the actual secret
+                        status: 1, // Replace with the actual status
+                      });
+
+                      // Reset the form after submission
+                      resetForm();
+                    }}
+                  >
+                    {({ errors, touched }) => (
+                      <Form>
+                        <div className="w-[100%] mt-[4px]">
+                          <p
+                            style={{
+                              color: dark ? "#ffffff74" : "#0a0a187e",
+                            }}
+                            className="desktop:text-[14px] mobile:text-[14px] tracking-wide font-medium text-[#0a0a186f]"
+                          >
+                            Website URL
+                          </p>
+                          <Field
+                            type="text"
+                            name="url" 
+                            placeholder="e.g. https://mywebsite.com"
+                            className={`w-[100%] h-[34px] bg-transparent rounded-[4px] border-[1px] border-${
+                              dark ? "#1F2329" : "#ebebeb"
+                            } outline-none mt-[5px] desktop:text-[12px] mobile:text-[11px] font-medium px-[10px] ${
+                              errors.url && touched.url ? "border-red-500" : ""
+                            }`}
+                          />
+                          <ErrorMessage
+                            name="url"
+                            component="div"
+                            className="text-red-500 text-xs mt-1"
+                          />
+                        </div>
+                        <div className="w-[100%] mt-[8px]">
+                          <p
+                            style={{
+                              color: dark ? "#ffffff74" : "#0a0a187e",
+                            }}
+                            className="text-[14px] tracking-wide font-medium text-[#0a0a186f]"
+                          >
+                            Website Name
+                          </p>
+                          <Field
+                            type="text"
+                            name="name"
+                            placeholder="e.g. My Website"
+                            className={`w-[100%] h-[34px] bg-transparent rounded-[4px] border-[1px] border-${
+                              dark ? "#1F2329" : "#ebebeb"
+                            } outline-none mt-[5px] desktop:text-[12px] mobile:text-[11px] font-medium px-[10px] ${
+                              errors.name && touched.name
+                                ? "border-red-500"
+                                : ""
+                            }`}
+                          />
+                          <ErrorMessage
+                            name="name"
+                            component="div"
+                            className="text-red-500 text-xs mt-1"
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          className={`w-[100%] h-[40px] cursor-pointer mt-[18px] hover:bg-[#2FE49C] rounded-[3px] flex items-center justify-center bg-[#38F8AC] ${
+                            dark ? "text-white" : "text-black"
+                          }`}
+                        >
+                          Add New Website
+                        </button>
+                      </Form>
+                    )}
+                  </Formik>
                 </div>
                 <div
                   style={{
                     backgroundColor: dark ? "#111317" : "#fff",
                     borderColor: dark ? "#1F2329" : "#ebebeb",
                   }}
-                  className="w-[100%]  px-[15px] py-[14px] mt-[10px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
+                  className="w-[100%] px-[15px] py-[14px] mt-[10px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
                 >
                   <h1
                     style={{
                       color: dark ? "#fff" : "#000",
                     }}
-                    className="desktop:text-[20px] mobile:text-[15px] font-bold tracking-wide "
+                    className="desktop:text-[20px] mobile:text-[15px] font-bold tracking-wide"
                   >
                     Download Connectors
                   </h1>
@@ -503,14 +477,6 @@ const ConnectWebsite = ({ setShow }) => {
                     integrate with SDK/API. Follow this button to browse the
                     available connectors.
                   </p>
-                  {/* <div
-                  onClick={() => {
-                    setShow(true);
-                  }}
-                  className="w-[100%] h-[38px] hover:bg-[#333345] cursor-pointer mt-[12px] rounded-[3px] flex items-center justify-center bg-[#000] text-[#fff]"
-                >
-                  <h1 className="text-[14px] font-bold">Browse Connectors</h1>
-                </div> */}
                   <Button1
                     onClick={() => {
                       setShow(true);
@@ -525,5 +491,4 @@ const ConnectWebsite = ({ setShow }) => {
     </>
   );
 };
-
 export default ConnectWebsite;

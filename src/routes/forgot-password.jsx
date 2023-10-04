@@ -1,10 +1,9 @@
-import React, { Suspense, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Suspense, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setAuth, setDark } from "../services/home";
-import HomeLayout from "../layouts/index";
-
-const DashboardPage = React.lazy(() => import("../views/dashboard"));
+import SignInPage from "../views/SignIn";
+import SignIn from "./signIn";
 
 const Loader = () => {
   return (
@@ -26,89 +25,50 @@ const Loader = () => {
             fill={"#04c09c"}
           />
         </svg>
-        <span className="sr-only">Loading...</span>
+        <span className="sr-only">Loading... sdwsffs</span>
       </div>
     </div>
   );
 };
+const ForgotPasswordPage = React.lazy(() => import("../views/ForgotPassword"));
 
-const Dashboard = () => {
-  const auth = useSelector((state) => state.home.auth);
-  const [loading, setLoading] = useState(!auth);
+const ForgotPassword = () => {
+  const [loading, setLoading] = useState(true);
+  
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [vidLoad, setVidLoad] = useState(auth);
 
   useEffect(() => {
     const loggedIn = localStorage.getItem("loggedIn");
     const dark = localStorage.getItem("dark");
+
     if (dark) {
       dispatch(setDark(true));
     } else {
       dispatch(setDark(false));
     }
-    // if (loggedIn === "true") {
-    //   setTimeout(() => {
-    //     setLoading(false);
-    //     dispatch(setAuth(true));
-    //   }, 1000);
-    // } else {
-    //   setTimeout(() => {
-    //     navigate("/auth/signIn");
-    //     dispatch(setAuth(false));
-    //   }, 1000);
-    // }
+    if (loggedIn === "true") {
+      setTimeout(() => {
+        navigate("/dashboard");
+        dispatch(setAuth(true));
+      }, 1000);
+    } else {
+      setLoading(false);
+    }
   });
-  const dark = useSelector((state) => state.home.dark);
-  
+
   return (
     <>
-      {!vidLoad ? (
-        <div
-          style={{
-            backgroundColor: dark ? "#090917" : "#fff",
-          }}
-          className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
-        >
-          <video
-            autoPlay
-            className={"w-[300px]"}
-            muted
-             
-            onEnded={() => {
-              setVidLoad(true);
-            }}
-            src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-          ></video>
-        </div>
+      {loading ? (
+        <Loader />
       ) : (
-        <Suspense
-          fallback={
-            <div
-              style={{
-                backgroundColor: dark ? "#090917" : "#fff",
-              }}
-              className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
-            >
-              <video
-                autoPlay
-                className={"w-[300px]"}
-                muted
-                 
-                onEnded={() => {
-                  setVidLoad(true);
-                }}
-                src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-              ></video>
-            </div>
-          }
-        >
-          <DashboardPage />
+        <Suspense fallback={null}>
+          <ForgotPasswordPage />
         </Suspense>
       )}
     </>
   );
 };
 
-export default Dashboard;
+export default SignIn;

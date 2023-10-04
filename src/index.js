@@ -10,7 +10,9 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import Dashboard from "./routes/dashboard";
+import DashboardPage from "./routes/DashboardPage";
+import ForgotPasswordPage from "./views/ForgotPassword";
+import PasswordScreen from "./routes/forgot-password"
 import Login from "./routes/signIn";
 import SignUp from "./routes/signUp.jsx";
 import ConnectWebsite from "./routes/connect-website.jsx";
@@ -33,7 +35,7 @@ const router = [
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <DashboardPage />,
   },
   {
     path: "/connect-website",
@@ -75,6 +77,11 @@ const router = [
     path: "/shopify-admin",
     element: <ShopifyAdmin />,
   },
+  {
+    path: "/new-route",
+    element: <PasswordScreen />,
+  },
+  
 
 ];
 
@@ -83,7 +90,7 @@ const App = () => {
   console.log(location.pathname);
   return (
     <>
-      {!(location.pathname==="/auth/signIn" || location.pathname==="/auth/signUp")&&
+      {!(location.pathname==="/auth/signIn" || location.pathname==="/auth/signUp" || location.pathname==="/auth/forgot-password" )&&
         <HomeLayout  >
           <Routes>
             {router.map((item, i) => {
@@ -95,6 +102,7 @@ const App = () => {
       <Routes>
         <Route path={"/auth/signIn"} element={<Login />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
+        <Route path={"/auth/forgot-password"} element={<ForgotPasswordPage />} />
       </Routes>
     </>
   );
