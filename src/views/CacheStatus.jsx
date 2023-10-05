@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HomeLayout from "../layouts/index/index";
+import x from "../layouts/index/index";
 import { useSelector } from "react-redux";
 import HeaderItem from "../components/HeaderItem";
 import InputDropdown from "../components/InputDropdown";
