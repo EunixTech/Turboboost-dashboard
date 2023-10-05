@@ -11,6 +11,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import Dashboard from "./routes/dashboard";
+import ForgotPasswordPage from "./views/ForgotPassword";
+import PasswordScreen from "./routes/forgot-password"
 import Login from "./routes/signIn";
 import SignUp from "./routes/signUp.jsx";
 import ConnectWebsite from "./routes/connect-website.jsx";
@@ -83,7 +85,7 @@ const App = () => {
   console.log(location.pathname);
   return (
     <>
-      {!(location.pathname==="/auth/signIn" || location.pathname==="/auth/signUp")&&
+      {!(location.pathname==="/auth/signIn" || location.pathname==="/auth/signUp" || location.pathname==="/auth/forgot-password" )&&
         <HomeLayout  >
           <Routes>
             {router.map((item, i) => {
@@ -95,6 +97,7 @@ const App = () => {
       <Routes>
         <Route path={"/auth/signIn"} element={<Login />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
+        <Route path={"/auth/forgot-password"} element={<ForgotPasswordPage />} />
       </Routes>
     </>
   );
