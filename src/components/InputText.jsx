@@ -1,25 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const InputText = ({ label, dark }) => {
+const InputText = ({ label }) => {
+  const dark = useSelector((state) => state.home.dark);
+
+  // Define CSS classes based on dark mode
+  const containerClasses = `mobile:w-[100%] laptop:w-[19.5%] h-[100%] ${
+    dark ? "divWrapperDarkMode" : "divWrapper"
+  }`;
+
+  const labelClasses = `text-[14px] font-bold tracking-wide ${
+    dark ? "subHeadingDarkMode" : "subHeading"
+  }`;
+
+  const inputClasses = `w-[100%] border-[1px] outline-none bg-transparent ${
+    dark ? "borderColorDarkMode" : "borderColor"
+  } rounded-[4px] px-[10px] text-[12px] font-medium mt-[4px] h-[34px]`;
+
   return (
-    <div className="mobile:w-[100%] laptop:w-[19.5%] h-[100%]">
-      <p
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="text-[14px] font-bold tracking-wide text-[#0a0a187a]"
-      >
-        {label}
-      </p>
-      <input
-        style={{
-          color: dark ? "#fff" : "#000",
-          borderColor: dark ? "#1F2329" : "#ebebeb",
-        }}
-        type="text"
-        className="w-[100%] border-[1px] outline-none bg-transparent border-[#ebebeb] rounded-[4px] px-[10px] text-[12px] font-medium mt-[4px] h-[34px]"
-      />
+    <div className={containerClasses}>
+      <p className={labelClasses}>{label}</p>
+      <input type="text" className={inputClasses} />
     </div>
   );
 };
