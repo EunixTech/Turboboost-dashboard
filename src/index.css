@@ -121,3 +121,111 @@ span.ripple {
 .svg-copy{
   filter: invert(3%) sepia(30%) saturate(3139%) hue-rotate(220deg) brightness(92%) contrast(98%) !important;
 }
+/* /* darkmode css / */
+.divWrapperDarkMode{
+    background-color: #111317;
+    border-color: #1F2329;
+    color:#fff ;
+}
+
+.backgroundDarkMode{ background-color: #09090b}
+.headingDarkMode{ color: #fff}
+.subHeadingDarkMode{ color: #ffffff74}
+.borderColorDarkMode { border-color:#1F2329 ;}
+
+
+
+
+/*  whiteMode */ 
+.divWrapper{
+  background-color: #fff;
+  border-color: #ebebeb;
+  color: #000;
+}
+.background{ background-color: #FAFAFC}
+.borderColor { border-color:#ebebeb ;}
+.heading{ color: #000}
+.subHeading{ color: #0a0a187e}
+
+
+/* checkbox css */
+
+
+.check-box {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #959494;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.checked {
+  background-color: #38f8ab34;
+  border-color: #38F8AC;
+}
+
+.check-icon {
+  width: 8px;
+  height: 8px;
+  display: flex;
+}
+
+
+/* Status css starts here */
+
+.status-container {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  padding: 0 9.5px;
+  justify-content: space-between;
+  border-radius: 23px;
+}
+
+.background-green {
+  background-color: #38f8ab31;
+}
+
+.background-yellow {
+  background-color: #ffcc6538;
+}
+
+.background-red {
+  background-color: #ff465c38;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-green {
+  background-color: #0FE38F;
+}
+
+.status-yellow {
+  background-color: #FFCB65;
+}
+
+.status-red {
+  background-color: #FF465C;
+}
+
+.status-text {
+  font-size: 11px;
+  letter-spacing: wide;
+  margin-left: 5px;
+}
+
+.text-green {
+  color: #0FE38F;
+}
+
+.text-yellow {
+  color: #FFCB65;
+}
+
+.text-red {
+  color: #FF465C;
+}
