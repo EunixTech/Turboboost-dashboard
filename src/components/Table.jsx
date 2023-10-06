@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableHeader from "./TableHeader";
 import TableItem from "./TableItem";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setTableData } from "../services/tableDataSlice";
 const Table = ({ setSelected1 }) => {
-  // Use a more descriptive name for your array
-  const tableData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+  const tableData = useSelector((state) => state.tableData); // Get tableData from the Redux store
   const [selected, setSelected] = useState([]);
   const dark = useSelector((state) => state.home.dark);
   const wrapperClassName = dark ? "divWrapperDarkMode" : "divWrapper";
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // Dispatch an action to set tableData when the component mounts
+    dispatch(
+      setTableData([1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    );
+  }, [dispatch]);
   return (
     <div
       className={`w-[100%] border-t-[1px] border-[#ebebeb] mt-[10px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool${wrapperClassName}`}
@@ -19,12 +23,12 @@ const Table = ({ setSelected1 }) => {
         <TableHeader
           change={() => {
             if (selected.length !== tableData.length) {
-              const newArr = [];
+              const allIndexes = [];
               for (let i = 0; i < tableData.length; i++) {
-                newArr.push(i);
+                allIndexes.push(i);
               }
-              setSelected(newArr);
-              setSelected1(newArr);
+              setSelected(allIndexes);
+              setSelected1(allIndexes);
             } else {
               setSelected([]);
               setSelected1([]);
