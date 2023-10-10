@@ -11,12 +11,10 @@ import { isTruthyString, isValidEmailAddress, isValidPassword } from "../utils/v
 
 import toast from "react-hot-toast";
 
-
 export default function SignUpPage() {
     const router = useNavigate(),
         screenWidth = useWidth();
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [register, { isLoading }] = useRegisterMutation();
@@ -34,6 +32,7 @@ export default function SignUpPage() {
     const { first_name, last_name, email_address, bussiness_name, password } = formData;
 
     const onChangeHandler = (e) => {
+
         const inputName = e.target.name,
             inputValue = e.target.value;
 
@@ -41,10 +40,11 @@ export default function SignUpPage() {
             ...prevState,
             [inputName]: inputValue,
         }));
+
     };
 
     const submitHandler = async (e) => {
-        console.log("working")
+
         e.preventDefault();
         try {
             const missingData = [],
@@ -58,7 +58,7 @@ export default function SignUpPage() {
             else if (email_address && !isValidEmailAddress(email_address)) invalidData.push(`email_address`);
 
             if (!password) missingData.push(`password`);
-            // else if (password && !isValidPassword(password)) invalidData.push(`password should include at least one upper case, one lower case,one digit & special character`);
+            else if (password && !isValidPassword(password)) invalidData.push(`password should include at least one upper case, one lower case,one digit & special character`);
 
             const data = {
                 first_name,
@@ -67,7 +67,7 @@ export default function SignUpPage() {
                 bussiness_name,
                 password,
             };
-            // Show errors if needed
+         
             if (missingData.length || invalidData.length) {
                 if (missingData.length)
                     toast.error(`Missing:- ${missingData.join(`, `)}`);
@@ -76,9 +76,6 @@ export default function SignUpPage() {
 
                 return;
             }
-
-            // const res = await login(data).unwrap();
-            // dispatch(setCredentials({ ...res }));
 
             formData?.remember_me && localStorage.setItem("rememberMe", JSON.stringify(data));
 
@@ -103,6 +100,7 @@ export default function SignUpPage() {
 
                 <div className="w-[100%] ">
                     <form onSubmit={submitHandler}>
+
                         <img src="/logo-b.png" className="w-[150px]" alt="logoImage" />
                         <h1 className="text-[34px] mt-[10px] font-bold"> Create an account </h1>
                         <p className="text-[#969AA5] inter text-[14px] mb-[10px]"> Start your 7-day free trial, no credit card required. </p>
@@ -110,30 +108,68 @@ export default function SignUpPage() {
                         <div className="w-[100%] mt-[20px] mb-[13px]">
 
                             <div className="flex items-center justify-between">
-                                <InputFields type="text" name="first_name" labelText="First Name" wrapperStyle={{ width: "48%" }} />
-                                <InputFields type="text" name="last_name" labelText="Last Name" wrapperStyle={{ width: "48%" }} />
+                                <InputFields
+                                    type="text"
+                                    value={first_name}
+                                    onChangeHandler={onChangeHandler}
+                                    inputName="first_name"
+                                    labelText="First Name"
+                                    wrapperStyle={{ width: "48%" }}
+                                />
+                                <InputFields
+                                    type="text"
+                                    value={last_name}
+                                    onChangeHandler={onChangeHandler}
+                                    inputName="last_name"
+                                    labelText="Last Name"
+                                    wrapperStyle={{ width: "48%" }}
+                                />
                             </div>
-                            
-                            <InputFields type="text" name="bussiness_name" labelText="Business Name" wrapperStyle={{ width: "100%" }} />
-                            <InputFields type="email" name="email_address" labelText="Email" wrapperStyle={{ width: "100%" }} />
-                            <InputFields type="password" name="password" labelText="Password" wrapperStyle={{ width: "100%" }} />
+
+                            <InputFields
+                                onChangeHandler={onChangeHandler}
+                                type="text"
+                                value={bussiness_name}
+                                inputName="bussiness_name"
+                                labelText="Business Type"
+                                wrapperStyle={{ width: "100%" }}
+                            />
+
+                            <InputFields
+                                type="email"
+                                onChangeHandler={onChangeHandler}
+                                name="email_address"
+                                inputName={email_address}
+                                labelText="Email"
+                                wrapperStyle={{ width: "100%" }}
+                            />
+
+                            <InputFields
+                                type="password"
+                                value={password}
+                                onChangeHandler={onChangeHandler}
+                                inputName="password"
+                                labelText="Password"
+                                wrapperStyle={{ width: "100%" }}
+                            />
 
                         </div>
 
 
                         <div className="flex ">
-                            <input type="checkbox" className="mr-[5px]" name="" id="" />
+                            <input type="checkbox" onChange={onChangeHandler} className="mr-[5px]" name="termandcondition"  />
                             <p className="text-[13px] font-medium translate-y-[1px] text-[#969AA5]">
                                 I agree to the TurboBoost{" "}
                                 <span className="text-[#18113C] cursor-pointer"> Terms of Use </span>{" "} and {" "}
                                 <span className="text-[#18113C] cursor-pointer"> Privacy Policy </span>
                             </p>
                         </div>
-                    </form>
 
-                    <div className="h-[38px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm mb-[20px]">
-                        <span className="translate-y-[1.5px]"> Create Account </span>
-                    </div>
+                        <button type="submit" className="h-[38px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm mb-[20px]">
+                            <span className="translate-y-[1.5px]"> Create Account </span>
+                        </button>
+
+                    </form>
 
                     <GoogleLoginButton />
 
