@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
 import { useSelector } from "react-redux";
-<<<<<<< HEAD
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { index } from "d3";
-const validationSchema = Yup.object().shape({
-  url: Yup.string().url("Invalid URL").required("Website URL is required"),
-  name: Yup.string().required("Website Name is required"),
-});
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from 'yup';
 
-=======
 const Button = () => {
+
   const dark = useSelector((state) => state.home.dark);
+ 
+  
   return (
     <div
       className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
@@ -31,32 +27,7 @@ const Button = () => {
 };
 
 
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         onClick();
-//       }}
-//       className={`w-[100%] ${!dark ? "bg-[#ebebeb] " : "bg-[#1c1f26]"}
-//       h-[40px]   cursor-pointer rounded-[4px] border-[1px] ${
-//         dark ? "border-[#1F2329]" : "border-[#ebebeb] "
-//       } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           true ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#1F2329]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#000]" : "bg-[#000]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[2.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         Browse Connectors
-//       </p>
-//     </div>
-//   );
-// };
->>>>>>> 49a8478bef821fa193e2539d5e3c39f56130a500
+
 
 const Button1 = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -358,6 +329,12 @@ const ConnectWebsite = ({ setShow }) => {
   const deleteWebsite = (index) => {
     setWebsites((prevWebsites) => prevWebsites.filter((_, i) => i !== index));
   };
+  const validationSchema = Yup.object().shape({
+    url: Yup.string()
+      .url('Invalid URL format')
+      .required('Website URL is required'),
+    name: Yup.string().required('Website Name is required'),
+  });
 
   return (
     <>
@@ -418,7 +395,7 @@ const ConnectWebsite = ({ setShow }) => {
                       url: "",
                       name: "",
                     }}
-                    validationSchema={validationSchema}
+                    validationSchema={validationSchema} // Use the validationSchema here
                     onSubmit={(values, { resetForm }) => {
                       // Handle form submission here
                       addWebsiteToList({
