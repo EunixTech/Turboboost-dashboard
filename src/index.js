@@ -27,6 +27,7 @@ import Affiliate from "./routes/affiliate";
 import ShopifyAdmin from "./routes/shopify-admin";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
+import PrivateRoute from "../src/components/ProtectedRoute"
 import { GoogleOAuthProvider } from '@react-oauth/google';
 const router = [
   {
@@ -90,15 +91,19 @@ const App = () => {
   console.log(location.pathname);
   return (
     <>
-      {!(location.pathname==="/auth/signIn" || location.pathname==="/auth/signUp" || location.pathname==="/auth/forgot-password" )&&
-        <HomeLayout  >
+      {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password") && (
+        <HomeLayout>
           <Routes>
-            {router.map((item, i) => {
-              return <Route key={i} path={item.path} element={item.element} />;
-            })}
+            {router.map((item, i) => (
+              <PrivateRoute
+                key={i}
+                path={item.path}
+                element={item.element}
+              />
+            ))}
           </Routes>
         </HomeLayout>
-      }
+      )}
       <Routes>
         <Route path={"/auth/signIn"} element={<Login />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
