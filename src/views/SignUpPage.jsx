@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";  
+import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../slice/userApiSlice";
 import { setCredentials } from "../slice/authSlice";
 import GoogleLoginButton from "../components/button/GoogleLogin";
+import { registerUser, resetStatus } from "../slice/registerationSlice";
 
 import {
   isTruthyString,
@@ -31,7 +32,11 @@ const validationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-export default function SignUpPage() {
+export default function SignUpPage() { debugger
+  const dispatch = useDispatch();
+  const registerStatus = useSelector(
+    (state) => state.registration.registerStatus
+  );
   const router = useNavigate();
   const screenWidth = useWidth();
   const navigate = useNavigate();
@@ -40,30 +45,22 @@ export default function SignUpPage() {
   const { userInfo } = useSelector((state) => state.auth);
 
   const submitForm = async (values) => {
-    try {
-      const response = await Axios.post("http://localhost:8000/v1/user/register-account", values);
-  
-      if (response.status === 201) {
-        // Registration was successful, navigate to the login screen
-        router.push("/auth/signIn");
-      } else {
-        // Handle errors here, e.g., by displaying an error message.
-        // You can use toast to display error messages:
-        toast.error("Registration failed. Please try again.");
-      }
-    } catch (error) {
-      // Handle other error scenarios, e.g., network issues
-      console.error("Error:", error);
-      toast.error("An error occurred. Please try again.");
-    }
+    // Dispatch the registration action
+    dispatch(registerUser(values));
   };
-  
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/");
+  useEffect(() => { 
+    // Handle the registration status
+    if (registerStatus === "succeeded") {
+      // Registration was successful, navigate to the login screen
+      router("/auth/signIn");
+    } else if (registerStatus === "failed") {
+      // Handle registration errors (display a message, etc.)
+      toast.error("Registration failed. Please try again.");
+      // Optionally reset the status to 'idle'
+      dispatch(resetStatus());
     }
-  }, [navigate, userInfo]);
+  }, [router, registerStatus, dispatch]);
 
   return (
     <div className="w-[100%] h-[100vh] flex items-center justify-center">
@@ -163,7 +160,7 @@ export default function SignUpPage() {
             {" "}
             Already have an account?{" "}
             <span
-              onClick={() => router.push("/auth/signIn")}
+              onClick={() => router("/auth/signIn")}
               className="text-[#06F] font-bold cursor-pointer"
             >
               Login

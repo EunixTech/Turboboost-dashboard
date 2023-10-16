@@ -1,28 +1,48 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { Axios } from 'axios';
 
-import { createSlice } from '@reduxjs/toolkit';
+// Define the async thunk for registration
+export const registerUser = createAsyncThunk('registration/registerUser', async (registrationData) => {
+  try {
+    const response = await Axios.post('http://localhost:8000/v1/user/register-account', registrationData);
 
-const initialState = {
-  registrationStatus: 'idle', // 'idle', 'pending', 'succeeded', 'failed'
-  error: null,
-};
+    if (response.status === 200) {
+      return response.data; // You can return any relevant data here
+    } else {
+      throw new Error('Registration failed');
+    }
+  } catch (error) {
+    throw error;
+  }
+});
 
 const registrationSlice = createSlice({
   name: 'registration',
-  initialState,
+  initialState: {
+    registerStatus: 'idle',
+    error: null,
+  },
   reducers: {
-    registrationPending: (state) => {
-      state.registrationStatus = 'pending';
+    resetStatus: (state) => {
+      state.registerStatus = 'idle';
+      state.error = null;
     },
-    registrationSuccess: (state) => {
-      state.registrationStatus = 'succeeded';
-    },
-    registrationFailed: (state, action) => {
-      state.registrationStatus = 'failed';
-      state.error = action.payload;
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.registerStatus = 'loading';
+      })
+      .addCase(registerUser.fulfilled, (state) => {
+        state.registerStatus = 'succeeded';
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.registerStatus = 'failed';
+        state.error = action.error.message;
+      });
   },
 });
 
-export const { registrationPending, registrationSuccess, registrationFailed } = registrationSlice.actions;
+export const { resetStatus } = registrationSlice.actions;
 
 export default registrationSlice.reducer;
