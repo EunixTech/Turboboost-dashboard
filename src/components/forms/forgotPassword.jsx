@@ -73,25 +73,30 @@ const ForgotPasswordForm = () => {
 
   const handleNextClick = async () => {
     if (isValid && !isEmpty) {
-      // Send a request to check if the email exists
       try {
         const response = await axios.post(
-          "http://localhost:3000/v1/user/forget-password",
+          "http://localhost:8000/v1/user/forget-password",
           { email }
         );
 
-        // If the email exists, update the emailExists state
-        setEmailExists(response.data.exists);
-
-        // If the email exists, send the email
+        // Check if the email exists and handle accordingly
         if (response.data.exists) {
+          // Email exists, send the email
           sendEmail();
+          setEmailExists(true);
+        } else {
+          // Email doesn't exist, show an error message
+          setEmailExists(false);
         }
       } catch (error) {
         console.error("Error checking email:", error);
       }
     }
   };
+
+
+
+
 
   const validateEmail = (input) => {
     const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;

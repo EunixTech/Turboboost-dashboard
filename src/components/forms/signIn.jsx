@@ -75,13 +75,16 @@ const SignInForm = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:8000/v1/user/login-with-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "http://localhost:8000/v1/user/login-with-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (response.status === 200) {
         const responseData = await response.json();
@@ -144,9 +147,11 @@ const SignInForm = () => {
               Remember me
             </p>
           </div>
-          <p className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px]">
-            Forgot password
-          </p>
+          <a href="http://localhost:3000/auth/forgot-password">
+            <p className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px]">
+              Forgot password
+            </p>
+          </a>
         </div>
         <button className="h-[38px] mb-[20px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm">
           <span className="translate-y-[1.5px]">Sign in</span>
