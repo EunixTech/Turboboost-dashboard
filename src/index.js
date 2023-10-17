@@ -77,11 +77,6 @@ const router = [
     path: "/shopify-admin",
     element: <ShopifyAdmin />,
   },
-  {
-    path: "/new-route",
-    element: <PasswordScreen />,
-  },
-  
 
 ];
 
