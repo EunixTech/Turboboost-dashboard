@@ -12,6 +12,7 @@ const initialState = {
   resultPerPageList: ["20", "URL", "All Devices", "All Statuses"],
 };
 
+
 const filterSlice = createSlice({
   name: 'filter',
   initialState,
@@ -25,6 +26,7 @@ const filterSlice = createSlice({
     },
   },
 });
+
 
 // Export the selectors to access the lists
 export const selectSearchByList = (state) => state.filter.searchByList;
