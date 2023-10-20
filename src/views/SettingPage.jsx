@@ -10,15 +10,15 @@ import ExcludedResources from "../components/ExcludedResources";
 import Navigator from "../components/Navigator";
 import MobileViewNavigator from "../components/MobileViewNavigator";
 import CookieVariationCard from "../components/CookieVariationCard";
-import UserTabSettings from "../components/integrationComponent/userTabSetting";
-import GeneralTabSetting from "../components/integrationComponent/generalTabSetting";
-import CachingTabSetting from "../components/integrationComponent/CachingTabSetting";
-import FontsTabSettings from "../components/integrationComponent/FontsTabSettings";
-import ImageTabSettings from "../components/integrationComponent/ImageTabSettings";
-import HtmlTabSettings from "../components/integrationComponent/HtmlTabSettings";
-import CssTabSettings from "../components/integrationComponent/CssTabSettings";
-import JSTabSettings from "../components/integrationComponent/JSTabSettings";
-import IntegrationsTabSettings from "../components/integrationComponent/IntegrationsTabSettings";
+import UserTabSettings from "../components/SettingsComponent/userTabSetting";
+import GeneralTabSetting from "../components/SettingsComponent/generalTabSetting";
+import CachingTabSetting from "../components/SettingsComponent/CachingTabSetting";
+import FontsTabSettings from "../components/SettingsComponent/FontsTabSettings";
+import ImageTabSettings from "../components/SettingsComponent/ImageTabSettings";
+import HtmlTabSettings from "../components/SettingsComponent/HtmlTabSettings";
+import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
+import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
+import IntegrationsTabSettings from "../components/SettingsComponent/IntegrationsTabSettings";
 const SettingPage = () => {
   const [activeTab, updateActiveTab] = useState(0);
 
