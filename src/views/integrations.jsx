@@ -207,16 +207,16 @@ const Integrations = ({ setShow }) => {
                 sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
               />
             </div>
-            <div className="w-[100%] pt-[30px]">
-              <h1
+            {/* <div className="w-[100%] pt-[30px]"> */}
+              {/* <h1
                 style={{
                   color: dark ? "#fff" : "#000",
                 }}
                 className="text-[18px] font-bold tracking-wide "
               >
-                Integrations
-              </h1>
-              <div className="w-[100%] mt-[10px] flex">
+                Integrationssss
+              </h1> */}
+              {/* <div className="w-[100%] mt-[10px] flex">
                 <div
                   onClick={() => {
                     setSelected(0);
@@ -290,8 +290,8 @@ const Integrations = ({ setShow }) => {
                 >
                   Not Installed
                 </div>
-              </div>
-              <div className="w-[100%] mt-[20px] grid laptop:grid-cols-3 gap-[20px] ">
+              </div> */}
+              {/* <div className="w-[100%] mt-[20px] grid laptop:grid-cols-3 gap-[20px] ">
                 {selected === 0 && (
                   <>
                     <IntegrationItem
@@ -476,8 +476,8 @@ const Integrations = ({ setShow }) => {
                     />
                   </>
                 )}
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
