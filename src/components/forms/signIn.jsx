@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "../../slice/userApiSlice";
-import { setCredentials } from "../../slice/authSlice";
-import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import { isValidEmailAddress, isValidPassword } from "../../utils/verification";
+import { setCredentials } from "../../slice/authSlice";
 
 const Input = ({ w, label, mt, value, onChangeHandler, type, name }) => {
   return (
@@ -33,8 +32,6 @@ const SignInForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
-
   const [formData, updateFormData] = useState({
     email_address: "",
     password: "",
@@ -56,49 +53,62 @@ const SignInForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const missingData = [],
-        invalidData = [];
+      const missingData = [];
+      const invalidData = [];
 
-      if (!email_address) missingData.push(`email address`);
+      if (!email_address) missingData.push("email address");
       else if (email_address && !isValidEmailAddress(email_address))
-        invalidData.push(`email_address`);
+        invalidData.push("email_address");
 
-      if (!password) missingData.push(`password`);
-      // else if (password && !isValidPassword(password)) invalidData.push(`password should include at least one upper case, one lower case,one digit & special character`);
+      if (!password) missingData.push("password");
 
       const data = {
         email_address,
         password,
       };
-      // Show errors if needed
+
       if (missingData.length || invalidData.length) {
         if (missingData.length)
-          toast.error(`Missing:- ${missingData.join(`, `)}`);
+          toast.error(`Missing: ${missingData.join(", ")}`);
         if (invalidData.length)
-          toast.error(`Invalid:- ${invalidData.join(`, `)}`);
-
+          toast.error(`Invalid: ${invalidData.join(", ")}`);
         return;
       }
 
-      // const res = await login(data).unwrap();
-      // dispatch(setCredentials({ ...res }));
+      const response = await fetch(
+        "http://localhost:8000/v1/user/login-with-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
-      formData?.remember_me &&
-        localStorage.setItem("rememberMe", JSON.stringify(data));
-
-      navigate("/");
+      if (response.status === 200) {
+        const responseData = await response.json();
+        dispatch(setCredentials(responseData));
+        formData?.remember_me &&
+          localStorage.setItem("rememberMe", JSON.stringify(data));
+        navigate("/");
+      } else {
+        toast.error("Login failed. Please check your credentials.");
+      }
     } catch (err) {
       console.log(err);
-      return toast.error(err?.data?.message || err.error);
+      toast.error(
+        err?.data?.message || err.message || "An error occurred during login."
+      );
     }
   };
 
   useEffect(() => {
-    const rememberMe = JSON.parse(localStorage.getItem(`rememberMe`));
+    const rememberMe = JSON.parse(localStorage.getItem("rememberMe"));
 
     updateFormData({
-      email_address: rememberMe?.email_address || ``,
-      password: rememberMe?.password || ``,
+      email_address: rememberMe?.email_address || "",
+      password: rememberMe?.password || "",
     });
   }, []);
 
@@ -126,23 +136,25 @@ const SignInForm = () => {
           />
         </div>
         <div className="w-[100%] flex justify-between">
-          <div className="flex ">
+          <div className="flex">
             <input
               type="checkbox"
               className="mr-[5px]"
               name="remember_me"
               onChange={onChangeHandler}
             />
-            <p className="text-[13px] font-medium text-[#000] translate-y-[1px] ">
+            <p className="text-[13px] font-medium text-[#000] translate-y-[1px]">
               Remember me
             </p>
           </div>
-          <p className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px] ">
-            Forgot password
-          </p>
+          <a href="http://localhost:3000/auth/forgot-password">
+            <p className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px]">
+              Forgot password
+            </p>
+          </a>
         </div>
         <button className="h-[38px] mb-[20px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm">
-          <span className="translate-y-[1.5px] ">Sign in</span>
+          <span className="translate-y-[1.5px]">Sign in</span>
         </button>
       </form>
     </>
