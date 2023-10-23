@@ -3,16 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./services/store";
-import{ Toaster } from 'react-hot-toast';
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import DashboardPage from "./routes/DashboardPage";
 import ForgotPasswordPage from "./views/ForgotPassword";
-import PasswordScreen from "./routes/forgot-password"
+import PasswordScreen from "./routes/forgot-password";
 import Login from "./routes/signIn";
 import SignUp from "./routes/signUp.jsx";
 import ConnectWebsite from "./routes/connect-website.jsx";
@@ -27,8 +22,8 @@ import Affiliate from "./routes/affiliate";
 import ShopifyAdmin from "./routes/shopify-admin";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
-import PrivateRoute from "../src/components/ProtectedRoute"
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import PrivateRoute from "../src/components/ProtectedRoute";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 const router = [
   {
     path: "/",
@@ -82,8 +77,6 @@ const router = [
     path: "/new-route",
     element: <PasswordScreen />,
   },
-  
-
 ];
 
 const App = () => {
@@ -91,14 +84,18 @@ const App = () => {
   console.log(location.pathname);
   return (
     <>
-      {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password") && (
+      {!(
+        location.pathname === "/auth/signIn" ||
+        location.pathname === "/auth/signUp" ||
+        location.pathname === "/auth/forgot-password"
+      ) && (
         <HomeLayout>
           <Routes>
             {router.map((item, i) => (
-              <PrivateRoute
+              <Route
                 key={i}
                 path={item.path}
-                element={item.element}
+                element={<PrivateRoute element={item.element} />}
               />
             ))}
           </Routes>
@@ -107,7 +104,10 @@ const App = () => {
       <Routes>
         <Route path={"/auth/signIn"} element={<Login />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
-        <Route path={"/auth/forgot-password"} element={<ForgotPasswordPage />} />
+        <Route
+          path={"/auth/forgot-password"}
+          element={<ForgotPasswordPage />}
+        />
       </Routes>
     </>
   );
@@ -116,15 +116,11 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <GoogleOAuthProvider clientId="648805285797-kgc785jg9ffbt9u8t73leb6o9pcs59oh.apps.googleusercontent.com">
-  <Provider store={store}>
-
-    <BrowserRouter>
-      <App />
-      <Toaster 
-       position="top-right"
-        reverseOrder={false}
-   />
-    </BrowserRouter>
-  </Provider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+        <Toaster position="top-right" reverseOrder={false} />
+      </BrowserRouter>
+    </Provider>
   </GoogleOAuthProvider>
 );
