@@ -59,15 +59,11 @@ const Integrations = ({ setShow }) => {
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <div className="w-[100%] h-[50px] shrink-0"></div>
       <div
-        style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
         className={`w-[100%] h-[100%] flex flex-col items-center overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] pb-[40px] mobile:px-[10px] laptop:px-[80px] ${wrapperClassName}`}
       >
         <div className="w-[100%] max-w-[1920px] min-h-[100vh]">
           <div className="w-[100%] pt-[30px]">
             <h1
-              style={{
-                color: dark ? "#fff" : "#000",
-              }} 
               className={`text-[20px] font-bold tracking-wide ${wrapperClassName}`}
             >
               Featured Apps
