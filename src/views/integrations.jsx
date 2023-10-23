@@ -86,11 +86,11 @@ const Integrations = ({ setShow }) => {
               />
             ))}
           </div>
-          <div className="w-[100%] pt-[30px]">
+          {/* <div className="w-[100%] pt-[30px]">
             <h1
               className={`text-[18px] font-bold tracking-wide ${wrapperClassName}`}
             >
-              Integrations
+              Integrationsss
             </h1>
             <div className="w-[100%] mt-[10px] flex">
               <div
@@ -181,7 +181,7 @@ const Integrations = ({ setShow }) => {
             <div className="w-[100%] mt-[20px] grid laptop:grid-cols-3 gap-[20px] ">
               {renderIntegrationItems()}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
