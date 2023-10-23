@@ -1,13 +1,32 @@
 import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
 import { useSelector } from "react-redux";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { index } from "d3";
-const validationSchema = Yup.object().shape({
-  url: Yup.string().url("Invalid URL").required("Website URL is required"),
-  name: Yup.string().required("Website Name is required"),
-});
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from 'yup';
+
+const Button = () => {
+
+  const dark = useSelector((state) => state.home.dark);
+ 
+  
+  return (
+    <div
+      className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
+
+        h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
+    >
+      <p
+        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
+          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+        } rounded-[4px] hover:bg-[#2fe49c] active:translate-y-[0px] font-bold active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide `}
+      >
+        Add New Website
+      </p>
+    </div>
+  );
+};
+
+
 
 
 const Button1 = ({ onClick }) => {
@@ -310,6 +329,12 @@ const ConnectWebsite = ({ setShow }) => {
   const deleteWebsite = (index) => {
     setWebsites((prevWebsites) => prevWebsites.filter((_, i) => i !== index));
   };
+  const validationSchema = Yup.object().shape({
+    url: Yup.string()
+      .url('Invalid URL format')
+      .required('Website URL is required'),
+    name: Yup.string().required('Website Name is required'),
+  });
 
   return (
     <>
@@ -370,7 +395,7 @@ const ConnectWebsite = ({ setShow }) => {
                       url: "",
                       name: "",
                     }}
-                    validationSchema={validationSchema}
+                    validationSchema={validationSchema} // Use the validationSchema here
                     onSubmit={(values, { resetForm }) => {
                       // Handle form submission here
                       addWebsiteToList({

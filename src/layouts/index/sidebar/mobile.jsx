@@ -101,7 +101,7 @@ const Sidebar = ({ transition, cancel }) => {
               src="/icon3.svg"
             />
             <Item
-              title={"Cache Status"}
+              title={"Cache Statussss"}
               route="/cache-status"
               src="/icon4.svg"
             />

@@ -8,7 +8,6 @@ import { useLoginMutation } from '../slice/userApiSlice';
 import { setCredentials } from '../slice/authSlice';
 import toast from 'react-hot-toast';
 import GoogleLoginButton from "../components/button/GoogleLogin";
-
 const SignInPage = () => {
 
   const router = useNavigate();
