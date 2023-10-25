@@ -14,12 +14,15 @@ import HtmlTabSettings from "../components/SettingsComponent/HtmlTabSettings";
 import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
 import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
 import IntegrationsTabSettings from "../components/SettingsComponent/IntegrationsTabSettings";
+import EmailPreferecesSetting from "../components/SettingsComponent/EmailPreferecesSetting";
 const SettingPage = () => {
   const [activeTab, updateActiveTab] = useState(0);
 
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
-
+  const [userSettings, setUserSettings] = useState({/* user settings data */});
+  const [generalSettings, setGeneralSettings] = useState({/* general settings data */});
+  
   const countriesData = countries.map((item, i) => {
     return item.label;
   });
@@ -58,8 +61,9 @@ const SettingPage = () => {
             />
           )}
           {activeTab === 0 && (
-             <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
+             <div>
             <UserTabSettings />
+            <EmailPreferecesSetting />
             </div>
           )}
           {activeTab === 1 && (

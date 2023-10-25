@@ -34,6 +34,7 @@ import SaveButton from "./saveButton";
   const countriesData = ["Country1", "Country2", "Country3"];
 
   return (
+    <>
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -60,7 +61,7 @@ import SaveButton from "./saveButton";
               className="error text-red-600"
             />
           </div>
-          <div className="InputFields">
+          <div className="InputFields"> 
             <label
               htmlFor="lastName"
               className="block font-bold text-lg text-gray-700 mb-2"
@@ -178,6 +179,7 @@ import SaveButton from "./saveButton";
         </button>
       </Form>
     </Formik>
+    </>
   );
 };
 
