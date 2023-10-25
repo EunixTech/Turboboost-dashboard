@@ -257,3 +257,71 @@ export const ComparePlans = [
         pro: true,
     },
 ];
+
+export const planChangeText = (item,currentPlan) => {
+    let itemPlan = item.name;
+    let buttenText = "";
+
+    switch (currentPlan) {
+        case "Free":
+            if (itemPlan === "Free") {
+                buttenText = "Current Plan";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Upgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+    break;
+        case "Starter":
+            if (itemPlan === "Free") {
+                buttenText = "Downgrade to Free";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Current Plan";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+    break;
+        case "Growth":
+            if (itemPlan === "Free") {
+                buttenText = "Downgrade to Free";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Downgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Current Plan";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+    break;
+        case "Pro":
+            if (itemPlan === "Free") {
+                buttenText = "Downgrade to Free";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Downgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Downgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Current Plan";
+            }
+    break;
+        default:
+            buttenText = "";
+            break;
+    }
+    return buttenText;
+};
