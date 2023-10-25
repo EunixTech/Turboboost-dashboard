@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { planMockData, ComparePlans ,planChangeText} from "../utils/constant";
+import { planMockData, ComparePlans, planChangeText } from "../utils/constant";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { billingApi } from "../utils/billingApi";
 
 const Billing = () => {
-	const [currentPlan, setCurrentPlan] = useState("Growth");
+	const [currentPlan, setCurrentPlan] = useState("Starter");
+	const router = useNavigate();
 	const [selected, setSelected] = useState(0);
 	const dark = useSelector((state) => state.home.dark);
 
-	const handleBilling = (item) => {
-		console.log(item);
-		//Billing Logic
+	const handleBilling = async (item) => {
+		
+		try {
+			let response = await billingApi(item,selected);
+			console.log(response.data);
+			if(response?.data?.confirmationUrl){
+				console.log(response?.data?.confirmationUrl)
+				window.location.replace(response?.data?.confirmationUrl);
+			}
+		} catch (e) {
+			console.log(e)
+		}
 	};
 
-	
 	return (
 		<div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
 			<div className="w-[100%] h-[50px] shrink-0"></div>
@@ -148,7 +160,7 @@ const Billing = () => {
 													dark ? "#fff" : "#000"
 												}] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
 											>
-												{planChangeText(item,currentPlan)}
+												{planChangeText(item, currentPlan)}
 											</div>
 										)}
 									</div>
