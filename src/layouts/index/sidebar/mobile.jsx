@@ -11,7 +11,7 @@ const Item = ({ title, src, route }) => {
   const currentPath = location.pathname;
   console.log(currentPath, "please check here");
   const selected = currentPath === route;
-  console.log(selected, currentPath, route);
+
   return (
     <div
       style={{
