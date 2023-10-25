@@ -1,0 +1,22 @@
+<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="trend (1) 1" clip-path="url(#clip0_39_968)">
+<g id="Clip path group">
+<mask id="mask0_39_968" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="11" height="11">
+<g id="clip0_246_1849">
+<path id="Vector" d="M0 0H11V11H0V0Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_39_968)">
+<g id="Group">
+<path id="Vector_2" fill-rule="evenodd" clip-rule="evenodd" d="M10.8658 2.4259C11.0447 2.60489 11.0447 2.89509 10.8658 3.07408L6.51159 7.42824C6.33261 7.60722 6.04239 7.60722 5.86341 7.42824L3.89583 5.46066L0.782426 8.57408C0.603433 8.75306 0.313233 8.75306 0.134243 8.57408C-0.0447476 8.3951 -0.0447476 8.10488 0.134243 7.9259L3.57174 4.4884C3.75073 4.30941 4.04093 4.30941 4.21993 4.4884L6.1875 6.45598L10.2176 2.4259C10.3966 2.24691 10.6868 2.24691 10.8658 2.4259Z" fill="#18DF90"/>
+<path id="Vector_3" fill-rule="evenodd" clip-rule="evenodd" d="M7.33325 2.74999C7.33325 2.49686 7.53845 2.29166 7.79159 2.29166H10.5416C10.7947 2.29166 10.9999 2.49686 10.9999 2.74999V5.49999C10.9999 5.75313 10.7947 5.95832 10.5416 5.95832C10.2884 5.95832 10.0833 5.75313 10.0833 5.49999V3.20832H7.79159C7.53845 3.20832 7.33325 3.00312 7.33325 2.74999Z" fill="#18DF90"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_39_968">
+<rect width="11" height="11" fill="white"/>
+</clipPath>
+</defs>
+</svg>

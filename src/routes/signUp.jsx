@@ -29,7 +29,7 @@ const Loader = () => {
   );
 };
 
-const SignInPage = React.lazy(() => import("../views/SignUp"));
+const SignInPage = React.lazy(() => import("../views/SignUpPage.jsx"));
 
 const SignUp = () => {
   const [loading, setLoading] = useState(true);
