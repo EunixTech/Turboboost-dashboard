@@ -10,7 +10,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import DashboardPageRoute from "./routes/DashboardPage"
+import DashboardPageRoute from "./routes/DashboardPag"
 import Login from "./routes/signIn";
 import SignUp from "./routes/signUp.jsx";
 import ConnectWebsite from "./routes/connect-website";
