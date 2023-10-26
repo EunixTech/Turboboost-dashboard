@@ -3,11 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./services/store";
-import { Toaster } from "react-hot-toast";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import DashboardPage from "./routes/DashboardPage";
-import ForgotPasswordPage from "./views/ForgotPassword";
-import PasswordScreen from "./routes/forgot-password";
+import{ Toaster } from 'react-hot-toast';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import Dashboard from "./routes/DashboardPage"
 import Login from "./routes/signIn";
 import SignUp from "./routes/signUp.jsx";
 import ConnectWebsite from "./routes/connect-website.jsx";
@@ -22,8 +25,7 @@ import Affiliate from "./routes/affiliate";
 import ShopifyAdmin from "./routes/shopify-admin";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
-import PrivateRoute from "../src/components/ProtectedRoute";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 const router = [
   {
     path: "/",
@@ -31,7 +33,7 @@ const router = [
   },
   {
     path: "/dashboard",
-    element: <DashboardPage />,
+    element: <Dashboard />,
   },
   {
     path: "/connect-website",
@@ -73,10 +75,7 @@ const router = [
     path: "/shopify-admin",
     element: <ShopifyAdmin />,
   },
-  {
-    path: "/new-route",
-    element: <PasswordScreen />,
-  },
+
 ];
 
 const App = () => {
@@ -84,30 +83,18 @@ const App = () => {
   console.log(location.pathname);
   return (
     <>
-      {!(
-        location.pathname === "/auth/signIn" ||
-        location.pathname === "/auth/signUp" ||
-        location.pathname === "/auth/forgot-password"
-      ) && (
-        <HomeLayout>
+      {!(location.pathname==="/auth/signIn" || location.pathname==="/auth/signUp")&&
+        <HomeLayout  >
           <Routes>
-            {router.map((item, i) => (
-              <Route
-                key={i}
-                path={item.path}
-                element={<PrivateRoute element={item.element} />}
-              />
-            ))}
+            {router.map((item, i) => {
+              return <Route key={i} path={item.path} element={item.element} />;
+            })}
           </Routes>
         </HomeLayout>
-      )}
+      }
       <Routes>
         <Route path={"/auth/signIn"} element={<Login />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
-        <Route
-          path={"/auth/forgot-password"}
-          element={<ForgotPasswordPage />}
-        />
       </Routes>
     </>
   );
@@ -116,11 +103,15 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <GoogleOAuthProvider clientId="648805285797-kgc785jg9ffbt9u8t73leb6o9pcs59oh.apps.googleusercontent.com">
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-        <Toaster position="top-right" reverseOrder={false} />
-      </BrowserRouter>
-    </Provider>
+  <Provider store={store}>
+
+    <BrowserRouter>
+      <App />
+      <Toaster 
+       position="top-right"
+        reverseOrder={false}
+   />
+    </BrowserRouter>
+  </Provider>
   </GoogleOAuthProvider>
 );
