@@ -10,10 +10,10 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import Dashboard from "./routes/DashboardPage"
+import DashboardPageRoute from "./routes/DashboardPage"
 import Login from "./routes/signIn";
 import SignUp from "./routes/signUp.jsx";
-import ConnectWebsite from "./routes/connect-website.jsx";
+import ConnectWebsite from "./routes/connect-website";
 import CacheWarmup from "./routes/cache-warmup";
 import CacheStatus from "./routes/cache-status";
 import Home from "./routes/home.jsx";
@@ -33,7 +33,7 @@ const router = [
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <DashboardPageRoute />,
   },
   {
     path: "/connect-website",
@@ -80,7 +80,7 @@ const router = [
 
 const App = () => {
   const location = useLocation();
-  console.log(location.pathname);
+  
   return (
     <>
       {!(location.pathname==="/auth/signIn" || location.pathname==="/auth/signUp")&&
