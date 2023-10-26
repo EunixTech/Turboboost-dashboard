@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import SaveButton from "./saveButton";
 
-  const  UserTabSettings = () => {
+const UserTabSettings = ({ onUpdate }) => {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -30,6 +30,7 @@ import SaveButton from "./saveButton";
       alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
     }, 400);
+    onUpdate(values);
   };
   const countriesData = ["Country1", "Country2", "Country3"];
 

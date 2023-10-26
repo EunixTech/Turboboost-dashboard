@@ -20,9 +20,27 @@ const SettingPage = () => {
 
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
-  const [userSettings, setUserSettings] = useState({/* user settings data */});
-  const [generalSettings, setGeneralSettings] = useState({/* general settings data */});
-  
+  const [userSettings, setUserSettings] = useState({
+    /* user settings data */
+  });
+  const [generalSettings, setGeneralSettings] = useState({
+    /* general settings data */
+  });
+  const handleUserSettingsChange = (newData) => {
+    setUserSettings(newData);
+  };
+
+  const handleGeneralSettingsChange = (newData) => {
+    setGeneralSettings(newData);
+  };
+
+  const handleSaveSettings = () => {
+    const allSettings = {
+      userSettings,
+      generalSettings,
+    };
+    console.log("All Settings:", allSettings);
+  };
   const countriesData = countries.map((item, i) => {
     return item.label;
   });
@@ -52,7 +70,7 @@ const SettingPage = () => {
                 }}
               />
             )}
-            <SaveButton btnText="Save Settings" />
+            <SaveButton btnText="Save Settings" onClick={handleSaveSettings} />
           </div>
           {deviceWith > 1000 && (
             <Navigator
@@ -61,35 +79,22 @@ const SettingPage = () => {
             />
           )}
           {activeTab === 0 && (
-             <div>
-            <UserTabSettings />
-            <EmailPreferecesSetting />
-            </div>
+            <>
+              <UserTabSettings onUpdate={handleUserSettingsChange} />
+
+              <EmailPreferecesSetting />
+            </>
           )}
           {activeTab === 1 && (
-           <GeneralTabSetting />
+            <GeneralTabSetting onUpdate={handleGeneralSettingsChange} />
           )}
-          {activeTab === 2 && (
-            <CachingTabSetting />
-          )}
-          {activeTab === 3 && (
-           <FontsTabSettings />
-          )}
-          {activeTab === 4 && (
-            <ImageTabSettings />
-          )}
-          {activeTab === 5 && (
-           <HtmlTabSettings />
-          )}
-          {activeTab === 6 && (
-          <CssTabSettings />
-          )}
-          {activeTab === 7 && (
-           <JSTabSettings />
-          )}
-          {activeTab === 8 && (
-           <IntegrationsTabSettings />
-          )}
+          {activeTab === 2 && <CachingTabSetting />}
+          {activeTab === 3 && <FontsTabSettings />}
+          {activeTab === 4 && <ImageTabSettings />}
+          {activeTab === 5 && <HtmlTabSettings />}
+          {activeTab === 6 && <CssTabSettings />}
+          {activeTab === 7 && <JSTabSettings />}
+          {activeTab === 8 && <IntegrationsTabSettings />}
         </div>
       </div>
     </div>
