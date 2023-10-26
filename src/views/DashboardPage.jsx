@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import HoverGreenButton from "../components/button/HoverGreenButton";
 import CircularProgressBar from "../components/CircularProgressBar";
 import CoreVitalsReportCard from "../components/CoreVitalsReportCard";
+import GreetingCard from "../components/GreetingCard";
 import CacheStatCard from "../components/CacheStatCard";
 import QuickActionCard from "../components/QuickActionCard";
 import CacheStatusCard from "../components/CacheStatusCard";
@@ -38,8 +39,8 @@ const DashboardPage = () => {
                     <div className="w-[100%] pt-[50px] h-[40px] mobile:px-[10px] flex items-center justify-between">
 
                         <div className="flex items-center mb-[20px] justify-center">
-                            <h1 className={`${dark ? "headingDarkMode" : "heading"} text-[18px] f2 font-medium`} > Good evening, Kyle! </h1>
-
+                            <GreetingCard />
+                            
                             <img
                                 src="/graphic/dashboard/hifi.png"
                                 alt="icon"
