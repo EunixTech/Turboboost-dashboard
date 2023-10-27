@@ -89,6 +89,7 @@ const DashboardPage = () => {
 
                         <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]`}>
                             <div className="w-[100%]  flex items-center justify-between">
+
                                 <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`}> Google Page Score </p>
 
                                 <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center`}>
@@ -139,7 +140,7 @@ const DashboardPage = () => {
                                 <>
                                     <p className={`${dark ? "subHeadingDarkMode" : "subHeading"} text-[12px]  font-semibold f2`}> Performance </p>
 
-                                    <div className="flex items-center  justify-around h-[140px]">
+                                    <div className="flex items-center justify-around h-[140px]">
                                         {progressBarDataArr.length && progressBarDataArr.map((item, index) => (
                                             <CircularProgressBar
                                                 key={index}

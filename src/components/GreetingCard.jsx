@@ -30,13 +30,10 @@ export default function GreetingCard() {
             updateGreeting();
         }, 1000 * 60);
 
-        return () => {
-            clearInterval(timerID);
-        };
+        return () => { clearInterval(timerID)};
     }, [updateGreeting]);
 
     return (
            <h1 className={`${dark ? "headingDarkMode" : "heading"} text-[18px] f2 font-medium`} > {greeting}, Kyle! </h1>
-
     )
 }
