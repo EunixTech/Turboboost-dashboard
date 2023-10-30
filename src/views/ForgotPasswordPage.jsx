@@ -1,21 +1,10 @@
 import React, { useState } from "react";
-import ForgotPasswordForm from "../components/forms/forgotPassword";
+import ForgotPasswordForm from "../components/forms/ForgotPasswordForm";
 import ResetPasswordForm from "../components/forms/resetPassword";
 
 const ForgotPasswordPage = () => {
-  const [email, setEmail] = useState("");
+
   const [showResetPassword, setShowResetPassword] = useState(false);
-
-  function checkEmail(email) {
-    console.log(email);
-    setEmail(email);
-  }
-
-  const handleResetPasswordClick = () => {
-    // Redirect to the Reset Password screen
-    setShowResetPassword(true);
-  };
-
   return (
     <>
       <div className="w-[100%] h-[100vh] flex items-center justify-center">
@@ -31,24 +20,12 @@ const ForgotPasswordPage = () => {
               <ResetPasswordForm />
             ) : (
               // Display Forgot Password form
-              <ForgotPasswordForm
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onKeyUp={(e) => checkEmail(e.target.value)}
-              />
+              <ForgotPasswordForm />
             )}
           </div>
         </div>
       </div>
-      {showResetPassword || ( // Hide the reset password button initially
-        <button
-          onClick={handleResetPasswordClick}
-          className="text-[12px] text-[#06F] cursor-pointer translate-y-[1px] "
-        >
-          Forgot password
-        </button>
-      )}
+   
     </>
   );
 };

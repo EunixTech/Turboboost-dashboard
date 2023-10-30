@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { isValidEmailAddress } from "../../utils/verification";
 
 const Input = ({ w, label, mt, value, onChange, type }) => {
   return (
@@ -67,17 +68,16 @@ const ForgotPasswordForm = () => {
   const handleEmailChange = (event) => {
     const inputEmail = event.target.value;
     setEmail(inputEmail);
-    setIsValid(validateEmail(inputEmail));
+    setIsValid(isValidEmailAddress(inputEmail));
     setIsEmpty(inputEmail.trim() === ""); // Check if email is empty
   };
 
   const handleNextClick = async () => {
     if (isValid && !isEmpty) {
       try {
-        const response = await axios.post(
-          "http://localhost:8000/v1/user/forget-password",
-          { email }
-        );
+        const response = await axios.post( "http://localhost:8000/v1/user/forget-password", { email } );
+
+        console.log(`::A:DASDa`)
 
         // Check if the email exists and handle accordingly
         if (response.data.exists) {
@@ -95,14 +95,6 @@ const ForgotPasswordForm = () => {
   };
 
 
-
-
-
-  const validateEmail = (input) => {
-    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    return emailPattern.test(input);
-  };
-
   return (
     <>
       <div>
@@ -117,7 +109,7 @@ const ForgotPasswordForm = () => {
           />
           {isEmpty && (
             <p style={{ color: "red", fontSize: "12px", marginTop: "4px" }}>
-              Email is required.
+    Email is required.
             </p>
           )}
           {!isValid && !isEmpty && (
@@ -137,11 +129,7 @@ const ForgotPasswordForm = () => {
           <span className="translate-y-[1.5px] ">Submit</span>
         </div>
         <div className="w-full">
-          {isEmpty && (
-            <p className="text-red-600 text-lg font-semibold">
-              Email is required.
-            </p>
-          )}
+       
           {emailExists === false && (
             <p className="text-red-600 text-lg font-semibold">
               We couldn't find an account associated with this email address.

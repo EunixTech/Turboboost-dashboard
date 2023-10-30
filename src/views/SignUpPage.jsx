@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../slice/userApiSlice";
-import { setCredentials } from "../slice/authSlice";
 import GoogleLoginButton from "../components/button/GoogleLogin";
 import { registerUser, resetStatus } from "../slice/registerationSlice";
 
-import {
-  isTruthyString,
-  isValidEmailAddress,
-  isValidPassword,
-} from "../utils/verification";
 import toast from "react-hot-toast";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
+
+import FormikInput from "../components/forms/FormikInput";
+import SideBanner from "../components/SideBanner";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required("First Name is required"),
@@ -39,10 +35,6 @@ export default function SignUpPage() { debugger
   );
   const router = useNavigate();
   const screenWidth = useWidth();
-  const navigate = useNavigate();
-
-  const [register, { isLoading }] = useRegisterMutation();
-  const { userInfo } = useSelector((state) => state.auth);
 
   const submitForm = async (values) => {
     // Dispatch the registration action
@@ -91,39 +83,39 @@ export default function SignUpPage() { debugger
                 <div className="w-[100%] mt-[20px] mb-[13px]">
                   <div className="flex justify-between">
                     <div className="w-[48%]">
-                      <CustomFormInput
-                        label="First Name"
-                        name="first_name"
+                      <FormikInput
+                        inputLabel="First Name"
+                        inputName="first_name"
                         type="text"
                       />
                     </div>
                     <div className="w-[48%]">
-                      <CustomFormInput
-                        label="Last Name"
-                        name="last_name"
+                      <FormikInput
+                        inputLabel="Last Name"
+                        inputName="last_name"
                         type="text"
                       />
                     </div>
                   </div>
                   <div className="w-[48%]">
-                    <CustomFormInput
-                      label="Business Type"
-                      name="bussiness_type"
-                      type="text"
+                    <FormikInput
+                      inputLabel="Business Type"
+                      inputName="bussiness_type"
+                      inputType="text"
                     />
                   </div>
                   <div className="w-[48%]">
-                    <CustomFormInput
-                      label="Email"
-                      name="email_address"
-                      type="email"
+                    <FormikInput
+                      inputLabel="Email"
+                      inputName="email_address"
+                      inputType="email"
                     />
                   </div>
                   <div className="w-[48%]">
-                    <CustomFormInput
-                      label="Password"
-                      name="password"
-                      type="password"
+                    <FormikInput
+                      inputLabel="Password"
+                      inputName="password"
+                      inputType="password"
                     />
                   </div>
                 </div>
@@ -169,89 +161,8 @@ export default function SignUpPage() { debugger
         </div>
       </div>
       {screenWidth > 1000 && (
-        <div className="w-[50%] h-[100vh] relative">
-          <img
-            src="/graphic/login/bg.png"
-            className="w-[100%] h-[100vh] object-cover absolute z-0"
-            alt="svgIcon"
-          />
-          <div className="w-[100%] h-[100vh] flex items-center justify-center absolute z-10">
-            <img
-              src="/graphic/login/ellipse.png"
-              className="w-[100%] h-[100vh] object-cover"
-              alt="svgIcon"
-            />
-          </div>
-          <div className="w-[100%] h-[100vh]  flex items-end justify-end opacity-20 absolute z-20">
-            <img
-              src="/graphic/login/Vector.png"
-              className="w-[95%]"
-              alt="banner image"
-            />
-          </div>
-          <div className="overflow-hidden w-[100%] h-[100vh] flex items-center flex-col justify-center absolute z-30">
-            <h1 className="inter text-white text-[30px] text-center px-[100px] leading-[38px] font-medium">
-              Increasing your website speed has dwnever been easier.
-            </h1>
-            <div className="w-[600px] mt-[10px] flex items-center justify-center">
-              {[
-                "7-day free trial",
-                "One-click setup",
-                "No fixed contracts",
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="mr-[17px] h-[30px] flex items-center"
-                >
-                  <img
-                    src="/graphic/login/tick.png"
-                    className="w-[10px]  h-[10px] object-contain   mr-[8px]"
-                    alt="svgIcon"
-                  />
-                  <p className="text-[13px] inter font-medium text-white">
-                    {item}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="relative laptop:w-[370px] scale-110 desktop:w-[65%] mt-[40px] h-[300px]">
-              <img src="/graphic/login/g1.png" alt="svgIcon" />
-              <img
-                src="/graphic/login/g2.png"
-                className="w-[350px] translate-x-[-70px] translate-y-[120px] absolute bottom-0 left-0"
-                alt="svgIcon"
-              />
-              <img
-                src="/graphic/login/g3.png"
-                className="w-[250px]  absolute top-[100px] right-0 translate-x-[50px] "
-                alt="svgIcon"
-              />
-            </div>
-          </div>
-        </div>
+        <SideBanner />
       )}
     </div>
   );
 }
-
-const CustomFormInput = ({ label, name, type }) => (
-  <div className="mb-5">
-    <label
-      htmlFor={name}
-      className="block text-[#969AA5] text-sm font-medium mb-2"
-    >
-      {label}
-    </label>
-    <Field
-      type={type}
-      id={name}
-      name={name}
-      className="w-full h-12 px-3 border rounded focus:outline-none focus:border-[#38F8AC] focus:ring-[#38F8AC] bg-gray-50 text-gray-800"
-    />
-    <ErrorMessage
-      name={name}
-      component="div"
-      className="text-red-500 text-sm"
-    />
-  </div>
-);

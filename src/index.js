@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import DashboardPageRoute from "./routes/DashboardPag"
 import Login from "./routes/signIn";
-import SignUp from "./routes/signUp.jsx";
+import SignUp from "./routes/SignUpRoute";
 import ConnectWebsite from "./routes/connect-website";
 import CacheWarmup from "./routes/cache-warmup";
 import CacheStatus from "./routes/cache-status";
@@ -22,6 +22,7 @@ import Integrations from "./routes/integrations";
 import Billing from "./routes/billing";
 import Settings from "./routes/settings";
 import Affiliate from "./routes/affiliate";
+import ForgotPassword from "./routes/ForgotPassword";
 import ShopifyAdmin from "./routes/shopify-admin";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
@@ -83,7 +84,7 @@ const App = () => {
   
   return (
     <>
-      {!(location.pathname==="/auth/signIn" || location.pathname==="/auth/signUp")&&
+      {!(location.pathname==="/auth/signIn" || location.pathname==="/auth/signUp" || location.pathname==="/auth/forgot-password")&&
         <HomeLayout  >
           <Routes>
             {router.map((item, i) => {
@@ -95,6 +96,7 @@ const App = () => {
       <Routes>
         <Route path={"/auth/signIn"} element={<Login />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
+        <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
       </Routes>
     </>
   );

@@ -75,8 +75,7 @@ const SignInForm = () => {
         return;
       }
 
-      const response = await fetch(
-        "http://localhost:8000/v1/user/login-with-email",
+      const response = await fetch( "http://localhost:8000/v1/user/login-with-email",
         {
           method: "POST",
           headers: {
@@ -147,7 +146,7 @@ const SignInForm = () => {
               Remember me
             </p>
           </div>
-          <a href="http://localhost:3000/auth/forgot-password">
+          <a href="/auth/forgot-password">
             <p className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px]">
               Forgot password
             </p>
