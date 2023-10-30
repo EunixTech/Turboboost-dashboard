@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import ForgotPasswordForm from "../components/forms/ForgotPasswordForm";
 import ResetPasswordForm from "../components/forms/resetPassword";
+import SideBanner from "../components/SideBanner";
+
+import useWidth from "../hooks/useWidth";
 
 const ForgotPasswordPage = () => {
 
   const [showResetPassword, setShowResetPassword] = useState(false);
+
+  const screenWidth = useWidth();
+
   return (
-    <>
-      <div className="w-[100%] h-[100vh] flex items-center justify-center">
+
+    <div className="w-[100%] h-[100vh] flex items-center justify-center">
+
         <div className="laptop:w-[50%] mobile:w-[100%]  px-[100px] h-[100vh] px-[7%] flex items-center justify-center">
           <div className="w-[100%]">
             <img src="/logo-b.png" className="w-[150px]" alt="" />
@@ -24,9 +31,11 @@ const ForgotPasswordPage = () => {
             )}
           </div>
         </div>
-      </div>
-   
-    </>
+    
+      {screenWidth > 1000 && (
+        <SideBanner />
+      )}
+    </div>
   );
 };
 
