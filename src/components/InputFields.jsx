@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function InputFields({
     inputClass = "w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]",
@@ -30,6 +31,17 @@ export default function InputFields({
         document.addEventListener("pointerdown", onpointerdown, false);
         return () => { document.removeEventListener("pointerdown", onpointerdown, false) };
     });
+
+
+    // password field
+    const [showPassword, updateShowPassword] = useState(false);
+    const [showConfirmPassword, updateShowConfirmPassword] = useState(false);
+   
+    const toggleShowPassword = (passwordType = "") => {
+        if(passwordType === "password") updateShowPassword(!showPassword);
+        else if(passwordType === "confirm_password") updateShowConfirmPassword(!showConfirmPassword)
+        
+    };
 
 
     return (
@@ -169,6 +181,27 @@ export default function InputFields({
                                 }}
                                 className="w-[100%] outline-none rounded-[4px] px-[10px] text-[12px] font-medium   h-[100%]"
                             />
+                        </div>
+                    } else if (type === "password") {
+                        return <div>
+
+                            <div className="password-input w-full flex relative mb-5">
+
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    value={value}
+                                    name={inputName}
+                                    onChange={onChangeHandler}
+                                    className="border rounded p-2 w-full"
+                                />
+                                <button
+                                    className="password-toggle-button absolute right-3 top-3"
+                                    onClick={toggleShowPassword}
+                                >
+                                    {showPassword ? <FaEye /> : <FaEyeSlash />}
+                                </button>
+                            </div>
+                            {/* {passwordsMatchError && ( <p className="text-red-600 text-md">{passwordsMatchError}</p> )} */}
                         </div>
                     }
 

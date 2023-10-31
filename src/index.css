@@ -229,3 +229,30 @@ span.ripple {
 .text-red {
   color: #FF465C;
 }
+
+
+
+/* formik input fiels css */
+.formikInputField{
+    height: 35px;
+    color: black;
+    font-size: .8rem;
+    background: white;
+}
+
+.formikInputField:focus {
+  background-color: white !important;
+}
+
+.formikInputField:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+.formikErrorText{
+  font-size: .8rem;
+  margin-left: 3px;
+}
+
+.formikInputLabel{
+  font-size: .8rem;
+}

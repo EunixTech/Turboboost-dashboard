@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { setAuth, setDark } from "../services/home";
 import PageLoader from "../components/PageLoader";
 
-const SignUpPage = React.lazy(() => import("../views/SignUpPage.jsx"));
 
-const SignUp = () => {
+const SignInPage = React.lazy(() => import("../views/SignInPage"));
+
+const SignInRoute = () => {
     const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
@@ -15,20 +16,16 @@ const SignUp = () => {
     useEffect(() => {
         const loggedIn = localStorage.getItem("loggedIn");
         const dark = localStorage.getItem("dark");
+
+        if (dark) dispatch(setDark(true));
+        else  dispatch(setDark(false));
         
-        if (dark) {
-            dispatch(setDark(true));
-        } else {
-            dispatch(setDark(false));
-        }
         if (loggedIn === "true") {
             setTimeout(() => {
                 navigate("/dashboard");
                 dispatch(setAuth(true));
             }, 1000);
-        } else {
-            setLoading(false);
-        }
+        } else { setLoading(false)}
     });
 
     return (
@@ -37,11 +34,11 @@ const SignUp = () => {
                 <PageLoader />
             ) : (
                 <Suspense fallback={null}>
-                    <SignUpPage />
+                    <SignInPage />
                 </Suspense>
             )}
         </>
     );
 };
 
-export default SignUp;
+export default SignInRoute;
