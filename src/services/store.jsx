@@ -10,6 +10,8 @@ import featuresReducer from "./featureAppsDataSlice"
 import { apiSlice } from '../slice/apiSlice';
 import registrationReducer from '../slice/registerationSlice';
 
+import {loginWithGoogle } from "../slice/userLoginWithGoogleSlice"
+import excludesReducer from "../slice/excludeSlice"
 const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
@@ -22,6 +24,8 @@ const store = configureStore({
     integration: integrationReducer,
     features: featuresReducer,
 
+    loginGoogle: loginWithGoogle, 
+    excludes: excludesReducer, 
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
