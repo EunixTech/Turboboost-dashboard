@@ -15,7 +15,7 @@ export default function FormikInput({ inputName = "", inputType = "", inputLabel
 
             {
                 (() => {
-                    if (inputType === "text" || inputType === "tel" || inputType == "email") {
+                    if (inputType === "text" || inputType === "tel" || inputType == "email" || inputType )  {
                         return <Field
                             type={inputType}
                             id={inputName}
