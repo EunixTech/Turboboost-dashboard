@@ -27,6 +27,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function SignUpPage() {
+   
     debugger
     const dispatch = useDispatch();
     const registerStatus = useSelector(

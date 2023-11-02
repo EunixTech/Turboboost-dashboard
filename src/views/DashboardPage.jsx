@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +26,20 @@ const DashboardPage = () => {
     const dark = useSelector((state) => state.home.dark),
         router = useNavigate(),
         deviceWidth = useWidth();
+
+        useEffect(()=>{
+            // console.log(user,"userdata")
+            if (typeof window.Intercom === 'function') {
+                window.intercomSettings = {
+                    api_base: "https://api-iam.intercom.io",
+                    app_id: "eh6xj4vw",
+                    name: "Manmohan", // Full name
+                    email: "manmohankumar023@gmail.com", // Email address
+                    created_at: new Date() // Signup date as a Unix timestamp
+                  };
+            }
+        },[])
+        
 
 
     return (
