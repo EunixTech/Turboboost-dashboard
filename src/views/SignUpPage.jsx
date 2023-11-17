@@ -44,7 +44,7 @@ const SignUpPage = () => {
       );
       console.log("response", response);
       // Handle the response as needed
-      if (response.status === 200) {
+      if (response.status === 201) {
         // Registration successful, you can redirect or display a success message
         router("/auth/signIn");
       } else {
