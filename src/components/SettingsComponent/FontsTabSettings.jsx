@@ -5,7 +5,7 @@ import OptimizationModeCard from '../OptimizationModeCard';
 import { useSelector } from 'react-redux';
 
 const FontsTabSettings = () => {
-    const dark = useSelector((state) => state.home.dark);
+  const dark = useSelector((state) => state.home.dark);
 
   return (
     <>
