@@ -82,6 +82,9 @@ const router = [
 
 const App = () => {
   const location = useLocation();
+//   useEffect(() => {
+//     window.Intercom('show'); // trigger
+// }, []);
 
   return (
     <>
