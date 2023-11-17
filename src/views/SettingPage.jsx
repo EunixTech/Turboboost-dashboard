@@ -17,6 +17,8 @@ import EmailPreferecesSetting from "../components/SettingsComponent/EmailPrefere
 const SettingPage = () => {
   const [activeTab, updateActiveTab] = useState(0);
 
+  console.log(`activeTab`,activeTab)
+
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
   const [userSettings, setUserSettings] = useState({
@@ -85,11 +87,11 @@ const SettingPage = () => {
             <GeneralTabSetting onUpdate={handleGeneralSettingsChange} />
           )} */}
           {/* {activeTab === 2 && <CachingTabSetting />} */}
-          {activeTab === 3 && <FontsTabSettings />}
-          {activeTab === 4 && <ImageTabSettings />}
-          {activeTab === 5 && <HtmlTabSettings />}
-          {activeTab === 6 && <CssTabSettings />}
-          {activeTab === 7 && <JSTabSettings />}
+          {activeTab === 1 && <FontsTabSettings />}
+          {activeTab === 2 && <ImageTabSettings />}
+          {activeTab === 3 && <HtmlTabSettings />}
+          {activeTab === 4 && <CssTabSettings />}
+          {activeTab === 5 && <JSTabSettings />}
           {/* {activeTab === 8 && <IntegrationsTabSettings />} */}
         </div>
       </div>
