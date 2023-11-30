@@ -103,6 +103,37 @@ const SignInForm = () => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    try {
+      if (!email_address || !isValidEmailAddress(email_address)) {
+        toast.error("Please enter a valid email address.");
+        return;
+      }
+
+      const response = await fetch(
+        "http://localhost:8000/v1/user/forgot-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email_address }),
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Password reset email sent. Please check your inbox.");
+      } else {
+        toast.error(
+          "Failed to send password reset email. Please try again later."
+        );
+      }
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
+      toast.error("An error occurred while processing your request.");
+    }
+  };
+
   useEffect(() => {
     const rememberMe = JSON.parse(localStorage.getItem("rememberMe"));
 
@@ -147,11 +178,12 @@ const SignInForm = () => {
               Remember me
             </p>
           </div>
-          <a href="http://localhost:3000/auth/forgot-password">
-            <p className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px]">
-              Forgot password
-            </p>
-          </a>
+          <p
+            className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px]"
+            onClick={handleForgotPassword}
+          >
+            Forgot password
+          </p>
         </div>
         <button className="h-[38px] mb-[20px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm">
           <span className="translate-y-[1.5px]">Sign in</span>
