@@ -1,12 +1,12 @@
 import React from "react";
-import { Formik, Form } from "formik"
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import FormikInput from "../forms/FormikInput";
 import SaveButton from "../button/SaveButton";
-
+import FormikSelectInput from "./FormikSelectInput";
 const UserTabSettings = ({ onUpdate }) => {
-   const dark = useSelector((state) => state.home.dark);
+  const dark = useSelector((state) => state.home.dark);
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -28,15 +28,26 @@ const UserTabSettings = ({ onUpdate }) => {
       .required("Email is required"),
   });
   const onSubmit = (values, { setSubmitting }) => {
-    // Your submission logic here
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
+    // Submission logic
     onUpdate(values);
+    setSubmitting(false);
   };
-  const countriesData = ["Country1", "Country2", "Country3"];
-  const bussinessTypeData = ["small", "medium"];
+
+  const countriesData = [
+    "Country1",
+    "Country2",
+    "Country3",
+    "Country4",
+    "Country5",
+    "Country6",
+    "Country7",
+    "Country8",
+    "Country9",
+    "Country10",
+  ];
+  const businessTypeData = Array.from({ length: 123 }, (_, i) =>
+    (i + 1).toString()
+  );
 
   return (
     <>
@@ -46,10 +57,13 @@ const UserTabSettings = ({ onUpdate }) => {
         onSubmit={onSubmit}
       >
         <Form>
-          <div style={{
-        backgroundColor: dark ? "#111317" : "#fff",
-        borderColor: dark ? "#1F2329" : "#ebebeb",
-      }} className="border-[1px] border-[#EBEBEB] rounded-[8px] grid mt-[10px] laptop:grid-cols-2 gap-x-[15px] gap-y-[10px] p-4 mb-5">
+          <div
+            style={{
+              backgroundColor: dark ? "#111317" : "#fff",
+              borderColor: dark ? "#1F2329" : "#ebebeb",
+            }}
+            className="border-[1px] border-[#EBEBEB] rounded-[8px] grid mt-[10px] laptop:grid-cols-2 gap-x-[15px] gap-y-[10px] p-4 mb-5"
+          >
             <div className="w-[100%]">
               <FormikInput
                 inputLabel="First Name"
@@ -66,12 +80,16 @@ const UserTabSettings = ({ onUpdate }) => {
               />
             </div>
 
-            <FormikInput
-              inputLabel="Country"
-              inputName="country"
-              inputType="select"
-              optionsData={countriesData}
-            />
+            <FormikSelectInput label="Country" name="country">
+              <option value="" disabled>
+                Select Country
+              </option>
+              {countriesData.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </FormikSelectInput>
 
             <FormikInput
               inputLabel="Phone Number"
@@ -79,12 +97,16 @@ const UserTabSettings = ({ onUpdate }) => {
               inputType="tel"
             />
 
-            <FormikInput
-              inputLabel="Business Type"
-              inputName="businessType"
-              inputType="select"
-              optionsData={bussinessTypeData}
-            />
+     <FormikSelectInput label="Business" name="country">
+              <option value="" disabled>
+                Select Business
+              </option>
+              {businessTypeData.map((business) => (
+                <option key={business} value={business}>
+                  {business}
+                </option>
+              ))}
+            </FormikSelectInput>
 
             <div className="flex justify-between items-end h-[]">
               <div className="w-[63%]">
@@ -98,15 +120,12 @@ const UserTabSettings = ({ onUpdate }) => {
               <div className="w-[35%]">
                 <SaveButton btnText="Change Email" />
               </div>
-
             </div>
-
           </div>
-      
         </Form>
       </Formik>
     </>
   );
 };
 
-export default UserTabSettings
+export default UserTabSettings;

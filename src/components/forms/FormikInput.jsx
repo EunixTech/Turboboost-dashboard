@@ -1,51 +1,43 @@
-import React from 'react'
-import { Field, ErrorMessage } from "formik";
+// FormikInput.js
 
-export default function FormikInput({ inputName = "", inputType = "", inputLabel = "", optionsData = [] }) {
+import React from "react";
+import { useField } from "formik";
 
-    return (
-        <div className="mb-2">
+const FormikInput = ({ inputLabel, inputName, inputType, optionsData }) => {
+  const [field, meta] = useField(inputName);
 
-            <label
-                htmlFor={inputName}
-                className="block text-[#000000] text-sm font-medium mb-1 formikInputLabel"
-            >
-                {inputLabel} <span className="text-red-500">*</span>
-            </label>
+  return (
+    <div className="w-[100%]">
+      <label htmlFor={inputName} className="text-[13px] text-[#2F3A45] mb-[8px] block font-medium">
+        {inputLabel}
+      </label>
+      {inputType === "select" ? (
+        <select
+          {...field}
+          className="w-full border-[1px] border-[#EBEBEB] rounded-[4px] h-[38px] px-[12px] text-[13px] text-[#2F3A45] placeholder-[#969AA5] focus:outline-none focus:border-blue-500"
+        >
+          <option value="" disabled>
+            Select {inputLabel}
+          </option>
+          {optionsData.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      ) : (
+        // Handle other input types (text, email, tel, etc.)
+        <input
+          {...field}
+          type={inputType}
+          className="w-full border-[1px] border-[#EBEBEB] rounded-[4px] h-[38px] px-[12px] text-[13px] text-[#2F3A45] placeholder-[#969AA5] focus:outline-none focus:border-blue-500"
+        />
+      )}
+      {meta.touched && meta.error ? (
+        <div className="text-red-500 text-[13px] mt-1">{meta.error}</div>
+      ) : null}
+    </div>
+  );
+};
 
-            {
-                (() => {
-                    if (inputType === "text" || inputType === "tel" || inputType == "email" || inputType )  {
-                        return <Field
-                            type={inputType}
-                            id={inputName}
-                            name={inputName}
-                            className="formikInputField w-full h-12 px-3 border rounded focus:outline-none focus:border-[#38F8AC] focus:ring-[#38F8AC] bg-gray-50 text-gray-800"
-                        />
-                    } else if (inputType === "select") {
-                       return  <Field
-                            as="select"
-                            id={inputName}
-                            name={inputName}
-                            className="formikInputField rounded-md border border-gray-300 p-2 w-full"
-                        >
-                            {optionsData.map((data, index) => (
-                                <option key={index} value={data}>
-                                    {data}
-                                </option>
-                            ))}
-                        </Field>
-                    }
-                })()}
-
-            <ErrorMessage
-                name={inputName}
-                component="div"
-                className="formikErrorText text-red-500 text-sm font-size: 0.8rem; margin-left: 3px;"
-            />
-
-        </div>
-
-    )
-
-}
+export default FormikInput;
