@@ -1,11 +1,11 @@
 export const navigationbarArr = [
     "User",
-    "General",
-    "Caching",
+    // "General",
+    // "Caching",
     "Fonts",
     "Images",
     "HTML",
     "CSS",
     "JS",
-    "Integrations"
+    // "Integrations"
 ];

@@ -82,19 +82,19 @@ const SettingPage = () => {
             <>
               <UserTabSettings onUpdate={handleUserSettingsChange} />
 
-              <EmailPreferecesSetting />
+              {/* <EmailPreferecesSetting /> */}
             </>
           )}
-          {activeTab === 1 && (
+          {/* {activeTab === 1 && (
             <GeneralTabSetting onUpdate={handleGeneralSettingsChange} />
-          )}
-          {activeTab === 2 && <CachingTabSetting />}
+          )} */}
+          {/* {activeTab === 2 && <CachingTabSetting />} */}
           {activeTab === 3 && <FontsTabSettings />}
           {activeTab === 4 && <ImageTabSettings />}
           {activeTab === 5 && <HtmlTabSettings />}
           {activeTab === 6 && <CssTabSettings />}
           {activeTab === 7 && <JSTabSettings />}
-          {activeTab === 8 && <IntegrationsTabSettings />}
+          {/* {activeTab === 8 && <IntegrationsTabSettings />} */}
         </div>
       </div>
     </div>
