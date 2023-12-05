@@ -69,7 +69,7 @@ const SignInPage = () => {
             validationSchema={validationSchema}
             onSubmit={submitForm}
           >
-            
+
             {() => (
               <Form>
                 <img src="/logo-b.png" className="w-[150px]" alt="" />
@@ -91,6 +91,25 @@ const SignInPage = () => {
                     inputName="password"
                     inputType="password"
                   />
+
+                  <div className="w-[100%] flex justify-between">
+                    <div className="flex">
+                      <input
+                        type="checkbox"
+                        className="mr-[5px]"
+                        name="remember_me"
+                        // onChange={onChangeHandler}
+                      />
+                      <p className="text-[13px] font-medium text-[#000] translate-y-[1px]">
+                        Remember me
+                      </p>
+                    </div>
+                    <a href="/auth/forgot-password">
+                      <p className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px]">
+                        Forgot password
+                      </p>
+                    </a>
+                  </div>
                   <button
                     type="submit"
                     className="h-[38px] text-[#000] w-[100%] font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm mb-[20px]"
