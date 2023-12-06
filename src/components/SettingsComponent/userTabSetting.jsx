@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field,ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import FormikInput from "../forms/FormikInput";
@@ -16,18 +16,21 @@ const UserTabSettings = ({ onUpdate }) => {
     email: "",
   };
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("First Name is required"),
-    lastName: Yup.string().required("Last Name is required"),
+    first_name: Yup.string().required("First Name is required"),
+    last_name: Yup.string().required("Last Name is required"),
     country: Yup.string().required("Country is required"),
-    phoneNumber: Yup.string()
+    phone_number: Yup.string()
       .matches(/^\d{10}$/, "Invalid phone number")
       .required("Phone number is required"),
-    businessType: Yup.string().required("Business Type is required"),
+    business_type: Yup.string().required("Business Type is required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
   });
+
+
   const onSubmit = async (values, { setSubmitting }) => {
+  
     try {
       const response = await fetch("http://localhost:3000/v1/user/update-account/6520095c29371858a78fb1ec", {
         method: "POST", 
@@ -78,6 +81,7 @@ const UserTabSettings = ({ onUpdate }) => {
         onSubmit={onSubmit}
       >
         <Form>
+       
           <div
             style={{
               backgroundColor: dark ? "#111317" : "#fff",
@@ -114,11 +118,11 @@ const UserTabSettings = ({ onUpdate }) => {
 
             <FormikInput
               inputLabel="Phone Number"
-              inputName="phoneNumber"
+              inputName="phone_number"
               inputType="tel"
             />
 
-     <FormikSelectInput label="Business" name="country">
+     <FormikSelectInput label="Business" name="business_type">
               <option value="" disabled>
                 Select Business
               </option>
@@ -138,13 +142,13 @@ const UserTabSettings = ({ onUpdate }) => {
                 />
               </div>
 
-              <div className="w-[35%]">
-                <SaveButton btnText="Change Email" />
-              </div>
+            
             </div>
           </div>
+          <button type="submit">Submit</button>
         </Form>
       </Formik>
+
     </>
   );
 };
