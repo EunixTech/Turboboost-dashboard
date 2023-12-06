@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../hooks/useWidth";
 import axios from "axios";
@@ -8,6 +8,9 @@ import * as Yup from "yup";
 import GoogleLoginButton from "../components/button/GoogleLogin";
 import SideBanner from "../components/SideBanner";
 import FormikInput from "../components/forms/FormikInput";
+import UserTabSettings from "../components/SettingsComponent/userTabSetting";
+import { useDispatch, useSelector } from "react-redux";
+import { storeUserData } from "../slice/userSlice";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required("First Name is required"),
@@ -27,8 +30,13 @@ const validationSchema = Yup.object().shape({
 const SignUpPage = () => {
   const screenWidth = useWidth();
   const router = useNavigate();
+  const [registrationData, setRegistrationData] = useState(null);
+  const dispatch =useDispatch()
+  const count = useSelector((state) => state)
 
-  const handleCreateAccount = async (values) => {
+
+  const handleCreateAccount = async (values, { setSubmitting }) => {
+    debugger
     try {
       // Make the API request using Axios
       const response = await axios.post(
@@ -42,22 +50,24 @@ const SignUpPage = () => {
           password: values.password,
         }
       );
-      console.log("response", response);
-      // Handle the response as needed
       if (response.status === 201) {
-        // Registration successful, you can redirect or display a success message
+        // Set the registration data to state
+        setRegistrationData(response.data);
+        dispatch(storeUserData(response.data.data))
+
+// 
+        // Redirect to SignIn or any other logic
         router("/auth/signIn");
       } else {
-        // Handle other response statuses or errors
         toast.error("Registration failed. Please try again.");
       }
     } catch (error) {
       console.error("API call error:", error);
-      // Handle the error, e.g., show an error message
       toast.error("Registration failed. Please try again.");
+    } finally {
+      setSubmitting(false); // Ensure to set submitting to false, regardless of success or failure
     }
   };
-
   return (
     <div className="w-[100%] h-[100vh] flex items-center justify-center">
       <div className="laptop:w-[50%] mobile:w-[100%] mobile:overflow-y-auto px-[100px] h-[100vh] px-[7%] flex items-center laptop:justify-center">
@@ -73,8 +83,9 @@ const SignUpPage = () => {
             }}
             validationSchema={validationSchema}
             onSubmit={handleCreateAccount}
+            
           >
-            {({ values, handleChange }) => (
+              {({ values, handleChange, isSubmitting }) => (
               <Form>
                 <img src="/logo-b.png" className="w-[150px]" alt="logoImage" />
                 <h1 className="text-[34px] mt-[10px] font-bold">
@@ -162,9 +173,14 @@ const SignUpPage = () => {
                 <button
                   type="submit"
                   className="h-[38px] text-[#000] w-[100%]  font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm mb-[20px]"
+                  disabled={isSubmitting}
                 >
                   <span className="translate-y-[1.5px]">Create Account</span>
                 </button>
+                {registrationData && (
+                  <UserTabSettings registrationData={registrationData} />
+                )}
+
               </Form>
             )}
           </Formik>
@@ -185,6 +201,7 @@ const SignUpPage = () => {
       </div>
 
       {screenWidth > 1000 && <SideBanner />}
+
     </div>
   );
 };

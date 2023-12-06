@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
-import store from "./services/store";
+import {store, persistor} from "./services/store";
 import { Toaster } from 'react-hot-toast';
 import {
   BrowserRouter,
@@ -28,6 +28,7 @@ import ShopifyAdmin from "./routes/shopify-admin";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { PersistGate } from "redux-persist/integration/react";
 const router = [
   {
     path: "/",
@@ -114,7 +115,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <GoogleOAuthProvider clientId="648805285797-kgc785jg9ffbt9u8t73leb6o9pcs59oh.apps.googleusercontent.com">
     <Provider store={store}>
-
+    <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
         <App />
         <Toaster
@@ -122,6 +123,7 @@ root.render(
           reverseOrder={false}
         />
       </BrowserRouter>
+      </PersistGate>
     </Provider>
   </GoogleOAuthProvider>
 );
