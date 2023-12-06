@@ -17,7 +17,7 @@ import EmailPreferecesSetting from "../components/SettingsComponent/EmailPrefere
 const SettingPage = () => {
   const [activeTab, updateActiveTab] = useState(0);
 
-  console.log(`activeTab`,activeTab)
+  console.log(`activeTab`, activeTab);
 
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
@@ -35,12 +35,37 @@ const SettingPage = () => {
     setGeneralSettings(newData);
   };
 
-  const handleSaveSettings = () => {
-    const allSettings = {
-      userSettings,
-      generalSettings,
-    };
-    console.log("All Settings:", allSettings);
+  const handleSaveSettings = async () => {
+    try {
+      let updatedUserData = {};
+      let updatedGeneralData = {};
+
+      // Save user settings
+      if (activeTab === 0) {
+        updatedUserData = await saveUserSettings(userSettings);
+      }
+
+      // Save general settings
+      if (activeTab === 1) {
+        updatedGeneralData = await saveGeneralSettings(generalSettings);
+      }
+
+      // Handle other tabs as needed
+
+      console.log("User information updated:", {
+        userSettings: updatedUserData,
+        generalSettings: updatedGeneralData,
+      });
+    } catch (error) {
+      console.error("Error updating user information:", error.message);
+    }
+  };
+  const saveUserSettings = async (newData) => {
+    return newData; 
+  };
+
+  const saveGeneralSettings = async (newData) => {
+    return newData; 
   };
 
   return (

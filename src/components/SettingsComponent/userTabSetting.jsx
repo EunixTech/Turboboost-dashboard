@@ -27,27 +27,48 @@ const UserTabSettings = ({ onUpdate }) => {
       .email("Invalid email address")
       .required("Email is required"),
   });
-  const onSubmit = (values, { setSubmitting }) => {
-    // Submission logic
-    onUpdate(values);
-    setSubmitting(false);
+  const onSubmit = async (values, { setSubmitting }) => {
+    try {
+      const response = await fetch("http://localhost:3000/v1/user/update-account/6520095c29371858a78fb1ec", {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values), 
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json(); 
+        throw new Error(errorData.message || "Failed to update user information");
+      }
+
+      
+      const updatedUserData = await response.json();
+      console.log("User information updated:", updatedUserData);
+
+      onUpdate(updatedUserData);
+
+      setSubmitting(false);
+    } catch (error) {
+      console.error("Error updating user information:", error.message);
+      setSubmitting(false);
+    }
   };
 
   const countriesData = [
-    "Country1",
-    "Country2",
-    "Country3",
-    "Country4",
-    "Country5",
-    "Country6",
-    "Country7",
-    "Country8",
-    "Country9",
-    "Country10",
+    "United States",
+    "Canada",
+    "United Kingdom",
+    "Germany",
+    "France",
+    "Italy",
+    "Japan",
+    "Australia",
+    "Brazil",
+    "India",
   ];
-  const businessTypeData = Array.from({ length: 123 }, (_, i) =>
-    (i + 1).toString()
-  );
+  const businessTypeData = ["Small", "Large"];
+
 
   return (
     <>
