@@ -1,51 +1,50 @@
 import React from "react";
-import { Formik, Form, Field,ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import FormikInput from "../forms/FormikInput";
 import SaveButton from "../button/SaveButton";
 import FormikSelectInput from "./FormikSelectInput";
-const UserTabSettings = ({ onUpdate }) => {
+
+const UserTabSettings = ({ onUpdate, registrationData }) => {
+  const dispatch = useDispatch();
+  const count = useSelector((state) => state?.userProfile?.userProfile);
+  const userProfile = count;
+  console.log("countkldfdsgknds", userProfile);
   const dark = useSelector((state) => state.home.dark);
-  const initialValues = {
-    firstName: "",
-    lastName: "",
-    country: "",
-    phoneNumber: "",
-    businessType: "Small or Medium Business",
-    email: "",
-  };
   const validationSchema = Yup.object().shape({
-    first_name: Yup.string().required("First Name is required"),
-    last_name: Yup.string().required("Last Name is required"),
+    firstName: Yup.string().required("First Name is required"),
+    lastName: Yup.string().required("Last Name is required"),
     country: Yup.string().required("Country is required"),
-    phone_number: Yup.string()
+    phoneNumber: Yup.string()
       .matches(/^\d{10}$/, "Invalid phone number")
       .required("Phone number is required"),
-    business_type: Yup.string().required("Business Type is required"),
+    businessType: Yup.string().required("Business Type is required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
   });
 
-
   const onSubmit = async (values, { setSubmitting }) => {
-  
     try {
-      const response = await fetch("http://localhost:3000/v1/user/update-account/6520095c29371858a78fb1ec", {
-        method: "POST", 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values), 
-      });
+      const response = await fetch(
+        "http://localhost:8000/v1/user/update-account/6520095c29371858a78fb1ec",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       if (!response.ok) {
-        const errorData = await response.json(); 
-        throw new Error(errorData.message || "Failed to update user information");
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || "Failed to update user information"
+        );
       }
 
-      
       const updatedUserData = await response.json();
       console.log("User information updated:", updatedUserData);
 
@@ -72,16 +71,24 @@ const UserTabSettings = ({ onUpdate }) => {
   ];
   const businessTypeData = ["Small", "Large"];
 
-
   return (
     <>
       <Formik
-        initialValues={initialValues}
+        initialValues={{
+          first_name: userProfile?.first_name,
+          last_name: userProfile?.last_name,
+          email_address: userProfile?.email_address,
+          country: userProfile?.country,
+          phoneNumber: "empty",
+          businessType: userProfile?.businessType,
+        }}
         validationSchema={validationSchema}
-        onSubmit={onSubmit}
+        onSubmit={(values) => {
+          // Handle form submission
+          console.log("Form submitted with values:", values);
+        }}
       >
         <Form>
-       
           <div
             style={{
               backgroundColor: dark ? "#111317" : "#fff",
@@ -122,7 +129,7 @@ const UserTabSettings = ({ onUpdate }) => {
               inputType="tel"
             />
 
-     <FormikSelectInput label="Business" name="business_type">
+            <FormikSelectInput label="Business" name="business_type">
               <option value="" disabled>
                 Select Business
               </option>
@@ -137,18 +144,24 @@ const UserTabSettings = ({ onUpdate }) => {
               <div className="w-[63%]">
                 <FormikInput
                   inputLabel="Email"
-                  inputName="email"
+                  inputName="email_address"
                   inputType="email"
                 />
               </div>
 
-            
+              {/* Use the submit button from the first file */}
+              <div className="w-[35%]">
+                <SaveButton btnText="Change Email" />
+              </div>
             </div>
           </div>
-          <button type="submit">Submit</button>
+
+          {/* Submit button inside the form */}
+          <div className="w-[35%]">
+            <button type="submit">Submit</button>
+          </div>
         </Form>
       </Formik>
-
     </>
   );
 };
