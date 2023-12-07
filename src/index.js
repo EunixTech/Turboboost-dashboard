@@ -29,6 +29,8 @@ import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { PersistGate } from "redux-persist/integration/react";
+import OnbaordingPage from "./views/OnbaordingPage.jsx";
+
 const router = [
   {
     path: "/",
@@ -103,13 +105,15 @@ const App = () => {
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
+        <Route path={"/onbaording"} element={<OnbaordingPage />} />
+
       </Routes>
     </>
   );
 };
 
  
-
+OnbaordingPage
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
