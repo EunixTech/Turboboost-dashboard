@@ -29,7 +29,7 @@ import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { PersistGate } from "redux-persist/integration/react";
-import OnbaordingPage from "./views/OnbaordingPage.jsx";
+import OnboardingPage from "./views/OnboardingPage.jsx";
 
 const router = [
   {
@@ -91,7 +91,7 @@ const App = () => {
 
   return (
     <>
-      {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password" || location.pathname === "/auth/reset-password") &&
+      {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password" || location.pathname === "/auth/reset-password" || location.pathname === "/onboarding") &&
         <HomeLayout  >
           <Routes>
             {router.map((item, i) => {
@@ -105,15 +105,12 @@ const App = () => {
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
-        <Route path={"/onbaording"} element={<OnbaordingPage />} />
+        <Route path={"/onboarding"} element={<OnboardingPage />} />
 
       </Routes>
     </>
   );
 };
-
- 
-OnbaordingPage
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
