@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
@@ -29,6 +29,7 @@ import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { PersistGate } from "redux-persist/integration/react";
+import NewOnboard from "./routes/newOnboarding.jsx";
 const router = [
   {
     path: "/",
@@ -83,12 +84,18 @@ const router = [
 
 const App = () => {
   const location = useLocation();
-//   useEffect(() => {
-//     window.Intercom('show'); // trigger
-// }, []);
+  const [showOnboardingModal, setShowOnboardingModal] = useState(false);
+
+  useEffect(() => {
+    const shouldShowOnboarding = new URLSearchParams(window.location.search).get(
+      "new-onboarding"
+    );
+    setShowOnboardingModal(shouldShowOnboarding === "true");
+  }, [location.search]);
 
   return (
     <>
+          {showOnboardingModal && <NewOnboard />}
       {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password" || location.pathname === "/auth/reset-password") &&
         <HomeLayout  >
           <Routes>
