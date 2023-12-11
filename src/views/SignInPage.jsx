@@ -19,25 +19,27 @@ const validationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-const SignInPage = () => {
+const SignInPage = () => { 
   const router = useNavigate();
   const screenWidth = useWidth();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
 
   const submitForm = async (values) => {
-      axios.post("http://localhost:8000/v1/user/login-with-email", {
-        email_address: values.email_address,
-        password: values.password,
-      })
-      .then(response => {
-        console.log("API Response:", response.status, response.data);
-        if (response.status === 200) {
-          router("/");
-        } else {
-          console.error("Sign-in failed. Please try again.");
-        }
-      })
+    axios.post("http://localhost:8000/v1/user/login-with-email", {
+      email_address: values.email_address,
+      password: values.password,
+    })
+    .then(response => {
+      console.log("API Response:", response.status, response.data);
+      if (response.data?.status === 400) { 
+        console.error("Sign-in failed. Please try again.");
+      } else if (response.status === 200) {
+        router("/");
+      } else {
+        console.error("Sign-in failed. Please try again.");
+      }
+    })
       .catch(error => {
         console.error("API call error:", error);
         if (error.response && error.response.status === 400) {
@@ -46,6 +48,7 @@ const SignInPage = () => {
           console.error("Sign-in failed. Please try again.");
         }
       });
+    
   }
   
   
