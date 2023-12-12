@@ -461,17 +461,7 @@ const Plan = ({ cancel }) => {
           </div>
         </div>
         <div className="w-[100%] mt-[10px] mb-[10px] h-[36px] flex justify-end items-center">
-          <div
-            style={{
-              color: "#696E7E",
-            }}
-            onClick={() => {
-              cancel();
-            }}
-            className="px-[20px] rounded-[3px] mr-[10px] text-[14px] cursor-pointer font-medium h-[38px] hover:bg-[#e8e8eccb] bg-[#E8E8EC] flex items-center justify-center"
-          >
-            Cancel
-          </div>
+          
           <div
             style={{
               color: "#191925",
