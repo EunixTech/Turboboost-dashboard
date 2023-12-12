@@ -52,7 +52,8 @@ const SignInPage = () => {
   }
   
   
-  
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTczNjc2NThhZmU4N2QwODM2YzA4OGQiLCJpYXQiOjE3MDIzODc2NDgsImV4cCI6MTcwNDk3OTY0OH0.zSBQ512pcmmU2XXDeiYfvEY8gUrN1GwC0lniUHLLkhY";
+localStorage.setItem('accessToken', token);
 
   useEffect(() => {
     if (userInfo) {

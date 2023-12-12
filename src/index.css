@@ -273,7 +273,8 @@ button.variant-btn {
   border-radius: 5px;
   font-size: 12px;
   font-family: "Inter", sans-serif;
-  font-weight: 700
+  font-weight: 700;
+  margin-top: 10px;
 }
 
 
