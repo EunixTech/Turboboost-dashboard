@@ -106,6 +106,71 @@ export const planMockData = [
         ],
     },
 ];
+export const planOnboardData = [
+    {
+        name: "Starter",
+        desc: "For very small businesses",
+        monthlyPrice: 15,
+        annuallyPrice: 0,
+        pageViews: "50,000",
+        CDN_bandWidth: "25GB",
+        includes: [
+            "50,000 page views per month",
+            "25GB CDN bandwidth per month",
+            "Built-in global CDN",
+            "Image Optimization Stack",
+            "Advanced Caching Mechanism",
+            "All-in-one performance optimization",
+            "Image Lazy Loading",
+            "Critical CSS",
+            "Delay Resource Loading",
+            "Cache Warmup",
+            "Lazy Load hidden images",
+        ],
+    },
+    {
+        name: "Growth",
+        desc: "Our most popular plan for growing brands",
+        monthlyPrice: 40,
+        annuallyPrice: 12.50,
+        pageViews: "200,000",
+        CDN_bandWidth: "100GB",
+        includes: [
+            "200,000 page views per month",
+            "100 GB CDN bandwidth per month",
+            "Built-in global CDN",
+            "Image Optimization Stack",
+            "Advanced Caching Mechanism",
+            "All-in-one performance optimization",
+            "Image Lazy Loading",
+            "Critical CSS",
+            "Delay Resource Loading",
+            "Cache Warmup",
+            "Lazy Load hidden images",
+        ],
+    },
+    {
+        name: "Pro",
+        desc: "Best for big brands",
+        monthlyPrice: 150,
+        annuallyPrice: 33.30,
+        pageViews: "1,000,000",
+        CDN_bandWidth: "500GB ",
+        includes: [
+            "1000,000 page views per month",
+            "500 GB CDN bandwidth per month",
+            "Built-in global CDN",
+            "Image Optimization Stack",
+            "Advanced Caching Mechanism",
+            "All-in-one performance optimization",
+            "Image Lazy Loading",
+            "Critical CSS",
+            "Delay Resource Loading",
+            "Cache Warmup",
+            "Lazy Load hidden images"
+        ],
+    },
+];
 
 export const ComparePlans = [
     {

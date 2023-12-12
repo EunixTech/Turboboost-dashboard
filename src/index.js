@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
@@ -29,8 +29,7 @@ import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { PersistGate } from "redux-persist/integration/react";
-import OnboardingPage from "./views/OnboardingPage.jsx";
-
+import NewOnboard from "./routes/newOnboarding.jsx";
 const router = [
   {
     path: "/",
@@ -85,13 +84,19 @@ const router = [
 
 const App = () => {
   const location = useLocation();
-//   useEffect(() => {
-//     window.Intercom('show'); // trigger
-// }, []);
+  const [showOnboardingModal, setShowOnboardingModal] = useState(false);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userToken = urlParams.get('userToken');
+    setShowOnboardingModal(userToken ? true : false);
+  }, []);
 
   return (
     <>
-      {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password" || location.pathname === "/auth/reset-password" || location.pathname === "/onboarding") &&
+    
+          {showOnboardingModal && <NewOnboard />}
+      {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password" || location.pathname === "/auth/reset-password") &&
         <HomeLayout  >
           <Routes>
             {router.map((item, i) => {
@@ -105,7 +110,7 @@ const App = () => {
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
-        <Route path={"/onboarding"} element={<OnboardingPage />} />
+        {/* <Route path={"/onboarding"} element={<OnboardingPage />} /> */}
 
       </Routes>
     </>

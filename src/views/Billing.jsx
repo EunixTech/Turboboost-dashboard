@@ -19,6 +19,7 @@ const Billing = () => {
 			if(response?.data?.confirmationUrl){
 				console.log(response?.data?.confirmationUrl)
 				window.location.replace(response?.data?.confirmationUrl);
+				
 			}
 		} catch (e) {
 			console.log(e)
@@ -78,6 +79,7 @@ const Billing = () => {
 							</div>
 						</div>
 					</div>
+					
 					<div className="w-[100%] mt-[20px] grid laptop:grid-cols-4 mobile:gap-y-[10px] laptop:gap-[20px]">
 						{planMockData?.map((item, index) => {
 							return (

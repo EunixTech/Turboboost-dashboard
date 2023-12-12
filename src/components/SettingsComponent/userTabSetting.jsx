@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import FormikInput from "../forms/FormikInput";
 import SaveButton from "../button/SaveButton";
 import FormikSelectInput from "./FormikSelectInput";
+import ChangeEmail from "./ChangeEmail";
+import { Button } from "@mui/material";
 
 const UserTabSettings = ({ onUpdate, registrationData }) => {
+  const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
+
+  const handleOpenChangeEmailModal = () => setChangeEmailModalOpen(true);
+  const handleCloseChangeEmailModal = () => setChangeEmailModalOpen(false);
+
   const dispatch = useDispatch();
   const count = useSelector((state) => state?.userProfile?.userProfile);
   const userProfile = count;
-  console.log("countkldfdsgknds", userProfile);
+  console.log("userProfile", userProfile);
   const dark = useSelector((state) => state.home.dark);
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
@@ -151,14 +158,16 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
 
               {/* Use the submit button from the first file */}
               <div className="w-[35%]">
-                <SaveButton btnText="Change Email" />
+             <button onClick={handleOpenChangeEmailModal}  className='variant-btn'>Change Email</button>
+             {/* <SaveButton onClick={handleOpenChangeEmailModal} btnText="Change Email" /> */}
               </div>
+              <ChangeEmail isOpen={isChangeEmailModalOpen} onClose={handleCloseChangeEmailModal} />
             </div>
           </div>
 
           {/* Submit button inside the form */}
           <div className="w-[35%]">
-            <button type="submit">Submit</button>
+          <SaveButton btnText="Submit" />
           </div>
         </Form>
       </Formik>

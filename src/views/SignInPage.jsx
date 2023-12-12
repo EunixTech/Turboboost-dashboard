@@ -19,37 +19,40 @@ const validationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-const SignInPage = () => {
+const SignInPage = () => { 
   const router = useNavigate();
   const screenWidth = useWidth();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
 
   const submitForm = async (values) => {
-    try {
-      // Make the API request using Axios for signing in
-      const response = await axios.post(
-        "http://localhost:8000/v1/user/login-with-email",
-        {
-          email_address: values.email_address,
-          password: values.password,
-        }
-      );
-
-      // Handle the response as needed
-      if (response.status === 200) {
-        // Successful login, you can redirect or handle accordingly
-        router("/"); // Redirect to the home page
+    axios.post("http://localhost:8000/v1/user/login-with-email", {
+      email_address: values.email_address,
+      password: values.password,
+    })
+    .then(response => {
+      console.log("API Response:", response.status, response.data);
+      if (response.data?.status === 400) { 
+        console.error("Sign-in failed. Please try again.");
+      } else if (response.status === 200) {
+        router("/");
       } else {
-        // Handle other response statuses or errors
         console.error("Sign-in failed. Please try again.");
       }
-    } catch (error) {
-      console.error("API call error:", error);
-      // Handle the error, e.g., show an error message
-      console.error("Sign-in failed. Please try again.");
-    }
-  };
+    })
+      .catch(error => {
+        console.error("API call error:", error);
+        if (error.response && error.response.status === 400) {
+          console.error("Invalid email or password. Please try again.");
+        } else {
+          console.error("Sign-in failed. Please try again.");
+        }
+      });
+    
+  }
+  
+  
+  
 
   useEffect(() => {
     if (userInfo) {

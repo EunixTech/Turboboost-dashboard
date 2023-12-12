@@ -16,15 +16,32 @@ const ForgotPasswordForm = () => {
     };
 
 
+    
     const handleNextClick = async () => {
         if (isValid && !isEmpty) {
             try {
-
+                const response = await fetch("http://localhost:8000/v1/user/forgot-password", {
+                    method: "PATCH", 
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email }),
+                    mode: "cors",
+                    referrerPolicy: "strict-origin-when-cross-origin",
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    setEmailExists(data.emailExists);
+                } else {
+                    console.error("Error:", response.statusText);
+                }
             } catch (error) {
                 console.error("Error checking email:", error);
             }
         }
     };
+    
 
 
     return (
