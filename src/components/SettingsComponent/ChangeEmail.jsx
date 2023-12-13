@@ -68,7 +68,6 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
           }),
         }
       );
-      
 
       if (!updateResponse.ok) {
         const errorData = await updateResponse.json();
@@ -104,7 +103,8 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 400,
+            width: 380, // Adjusted width to accommodate the margin
+            // margin: "0 10px", // 10px margin from left and right
             bgcolor: "#fff",
             border: "2px solid #2fe49c",
             borderRadius: "5px",

@@ -264,7 +264,7 @@ span.ripple {
 
 .modal-style {
   background: #fff;
-  padding: 4rem;
+  padding:1rem;
 }
 button.variant-btn {
   background: #2fe49c;
@@ -285,4 +285,7 @@ button.variant-btn {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   margin-top: 10px;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+  height: 1rem !important;
 }

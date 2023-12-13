@@ -85,7 +85,7 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
           first_name: userProfile?.first_name,
           last_name: userProfile?.last_name,
           email_address: userProfile?.email_address,
-          country: userProfile?.country,
+          country: userProfile?.country || "", // Set default value to an empty string
           phoneNumber: "empty",
           businessType: userProfile?.businessType,
         }}
