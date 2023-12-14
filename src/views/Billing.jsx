@@ -17,9 +17,7 @@ const Billing = () => {
 			let response = await billingApi(item,selected);
 			console.log(response.data);
 			if(response?.data?.confirmationUrl){
-				console.log(response?.data?.confirmationUrl)
 				window.location.replace(response?.data?.confirmationUrl);
-				
 			}
 		} catch (e) {
 			console.log(e)

@@ -96,7 +96,7 @@ const App = () => {
     <>
     
           {showOnboardingModal && <NewOnboard />}
-      {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password" || location.pathname === "/auth/reset-password") &&
+      {/* {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password" || location.pathname === "/auth/reset-password") && */}
         <HomeLayout  >
           <Routes>
             {router.map((item, i) => {
@@ -104,15 +104,16 @@ const App = () => {
             })}
           </Routes>
         </HomeLayout>
-      }
-      <Routes>
+        
+      {/* <Routes>
         <Route path={"/auth/signIn"} element={<SignInRoute />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
         {/* <Route path={"/onboarding"} element={<OnboardingPage />} /> */}
 
-      </Routes>
+      {/* </Routes>  */}
+      
     </>
   );
 };
