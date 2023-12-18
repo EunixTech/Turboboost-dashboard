@@ -42,26 +42,26 @@ const router = [
     path: "/dashboard",
     element: <DashboardPageRoute />,
   },
-  {
-    path: "/connect-website",
-    element: <ConnectWebsite />,
-  },
-  {
-    path: "/cache-warmup",
-    element: <CacheWarmup />,
-  },
-  {
-    path: "/cache-status",
-    element: <CacheStatus />,
-  },
-  {
-    path: "/logs",
-    element: <Logs />,
-  },
-  {
-    path: "/integrations",
-    element: <Integrations />,
-  },
+  // {
+  //   path: "/connect-website",
+  //   element: <ConnectWebsite />,
+  // },
+  // {
+  //   path: "/cache-warmup",
+  //   element: <CacheWarmup />,
+  // },
+  // {
+  //   path: "/cache-status",
+  //   element: <CacheStatus />,
+  // },
+  // {
+  //   path: "/logs",
+  //   element: <Logs />,
+  // },
+  // {
+  //   path: "/integrations",
+  //   element: <Integrations />,
+  // },
   {
     path: "/billing",
     element: <Billing />,
@@ -70,14 +70,14 @@ const router = [
     path: "/settings",
     element: <Settings />,
   },
-  {
-    path: "/affiliate",
-    element: <Affiliate />,
-  },
-  {
-    path: "/store",
-    element: <Store />,
-  },
+  // {
+  //   path: "/affiliate",
+  //   element: <Affiliate />,
+  // },
+  // {
+  //   path: "/store",
+  //   element: <Store />,
+  // },
   {
     path: "/shopify-admin",
     element: <ShopifyAdmin />,

@@ -52,7 +52,7 @@ const Prompt = () => {
         />
         <Item
           onClick={() => {
-            window.open("/shopify-admin", "_blank");
+            window.open("https://admin.shopify.com", "_blank");
           }}
           new={true}
           src={"/graphic/navbar/link.svg"}
@@ -60,19 +60,19 @@ const Prompt = () => {
         />
         <Item
           onClick={() => {
-            window.open("/store", "_blank");
+            window.open("https://admin.shopify.com", "_blank");
           }}
           new={true}
           src={"/graphic/navbar/google.svg"}
           title="Go to Store"
         />
-        <Item
+        {/* <Item
           onClick={() => {
             router("/affiliate");
           }}
           src={"/graphic/navbar/message.svg"}
           title="Affiliates"
-        />
+        /> */}
       </div>
       <div
         style={{
@@ -98,7 +98,7 @@ const Prompt = () => {
             }}
           />
         </div>
-        <div
+        {/* <div
           onClick={() => {
             localStorage.removeItem("loggedIn");
             router("/auth/signIn");
@@ -111,7 +111,7 @@ const Prompt = () => {
             alt=""
           />
           <span className="translate-y-[1px]">Logout</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

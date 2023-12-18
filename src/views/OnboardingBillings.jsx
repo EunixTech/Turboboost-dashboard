@@ -163,8 +163,8 @@ const OnboardingBillings = () => {
                     }}
                     className="text-[14px]  px-[17px] text-[#0a0a187a]  tracking-wide"
                   >
-                    <span className="font-bold">{item?.CDN_bandWidth}</span> CDN
-                    bandwidth/mo
+                    {/* <span className="font-bold">{item?.CDN_bandWidth}</span> CDN
+                    bandwidth/mo */}
                   </p>
                   <div className="w-[100%] px-[17px] mt-[15px]">
                     {currentPlan == item?.name ? (

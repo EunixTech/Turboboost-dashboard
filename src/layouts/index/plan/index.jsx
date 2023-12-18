@@ -138,7 +138,7 @@ const Plan = ({ cancel }) => {
                       200,000 page views/mo
                     </p>
                   </div>
-                  <div className="w-[100%] mt-[10px] flex justify-between">
+                  {/* <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
                       className="w-[13px] mr-[10px] shrink-0"
@@ -150,7 +150,7 @@ const Plan = ({ cancel }) => {
                     >
                       100 GB CDN bandwidth/mo
                     </p>
-                  </div>
+                  </div> */}
                   <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -170,7 +170,7 @@ const Plan = ({ cancel }) => {
                 <>
                   {plan === 2 && (
                     <>
-                      <div className="w-[100%] mt-[10px] flex justify-between">
+                      {/* <div className="w-[100%] mt-[10px] flex justify-between">
                         <img
                           src="/graphic/status/check.svg"
                           className="w-[13px] mr-[10px] shrink-0"
@@ -182,7 +182,7 @@ const Plan = ({ cancel }) => {
                         >
                           100 GB CDN bandwidth/mo
                         </p>
-                      </div>
+                      </div> */}
                       <div className="w-[100%] mt-[10px] flex justify-between">
                         <img
                           src="/graphic/status/check.svg"
@@ -250,7 +250,7 @@ const Plan = ({ cancel }) => {
                       Complete image optimization stack
                     </p>
                   </div>
-                  <div className="w-[100%] mt-[10px] flex justify-between">
+                  {/* <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
                       className="w-[13px] mr-[10px] shrink-0"
@@ -262,7 +262,7 @@ const Plan = ({ cancel }) => {
                     >
                       Built in global CDN
                     </p>
-                  </div>
+                  </div> */}
                   <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -305,7 +305,7 @@ const Plan = ({ cancel }) => {
                   style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                   className="text-[14px] text-[#696e7e89] font-medium "
                 >
-                  5,000 page views/mo, 1.00GB CDN bandwidth/mo, “Optimized by
+                  5,000 page views/mo, “Optimized by
                   TurboBoost Badge” on website
                 </h1>
               </div>
@@ -347,7 +347,8 @@ const Plan = ({ cancel }) => {
                   style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                   className="text-[14px] text-[#696e7e89] font-medium "
                 >
-                  50,000 page views/mo, 25 GB CDN bandwidth/mo
+                  50,000 page views/mo
+                   {/* 25 GB CDN bandwidth/mo */}
                 </h1>
               </div>
               <div
@@ -391,7 +392,8 @@ const Plan = ({ cancel }) => {
                   style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                   className="text-[14px] text-[#696e7e89] font-medium "
                 >
-                  200,000 page views/mo, 100 GB CDN bandwidth/mo
+                  200,000 page views/mo
+                  {/* 100 GB CDN bandwidth/mo */}
                 </h1>
               </div>
 
@@ -438,7 +440,8 @@ const Plan = ({ cancel }) => {
                   style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                   className="text-[14px] text-[#696e7e89] font-medium "
                 >
-                  1,000,000 page views/mo, 500 GB CDN bandwidth/mo
+                  1,000,000 page views/mo
+                   {/* 500 GB CDN bandwidth/mo */}
                 </h1>
               </div>
               <div

@@ -184,7 +184,7 @@ const Sidebar = () => {
               ></div>
             </div>
           </div>
-          <div className="mt-[7px] mb-[10px]">
+          {/* <div className="mt-[7px] mb-[10px]">
             <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
               <p className="text-[12px] f2 text-white tracking-wide">
                 CDN Bandwidth/mo
@@ -202,7 +202,7 @@ const Sidebar = () => {
               ></div>
             </div>
           </div>
-          {/* <div
+          <div
             className="w-[100%] h-[34px] f2 text-[#000] rounded-[2px] text-[12px] font-medium tracking-wide flex items-center justify-center cursor-pointer bg-[#38F8AC]"
           >
 
