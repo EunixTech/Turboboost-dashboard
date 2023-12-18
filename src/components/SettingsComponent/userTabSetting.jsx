@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import FormikInput from "../forms/FormikInput";
@@ -7,9 +7,11 @@ import SaveButton from "../button/SaveButton";
 import FormikSelectInput from "./FormikSelectInput";
 import ChangeEmail from "./ChangeEmail";
 import { Button } from "@mui/material";
+import { toast } from "react-toastify";
 
-const UserTabSettings = ({ onUpdate, registrationData }) => {
+const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
+  const [isSubmitting, setSubmitting] = useState(false);
 
   const handleOpenChangeEmailModal = () => setChangeEmailModalOpen(true);
   const handleCloseChangeEmailModal = () => setChangeEmailModalOpen(false);
@@ -20,49 +22,17 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
   console.log("userProfile", userProfile);
   const dark = useSelector((state) => state.home.dark);
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("First Name is required"),
-    lastName: Yup.string().required("Last Name is required"),
+    first_name: Yup.string().required("First Name is required"),
+    last_name: Yup.string().required("Last Name is required"),
     country: Yup.string().required("Country is required"),
-    phoneNumber: Yup.string()
+    phone_number: Yup.string()
       .matches(/^\d{10}$/, "Invalid phone number")
       .required("Phone number is required"),
-    businessType: Yup.string().required("Business Type is required"),
-    email: Yup.string()
+    business_type: Yup.string().required("Business Type is required"),
+    email_address: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
   });
-
-  const onSubmit = async (values, { setSubmitting }) => {
-    try {
-      const response = await fetch(
-        "http://localhost:8000/v1/user/update-account/6520095c29371858a78fb1ec",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || "Failed to update user information"
-        );
-      }
-
-      const updatedUserData = await response.json();
-      console.log("User information updated:", updatedUserData);
-
-      onUpdate(updatedUserData);
-
-      setSubmitting(false);
-    } catch (error) {
-      console.error("Error updating user information:", error.message);
-      setSubmitting(false);
-    }
-  };
 
   const countriesData = [
     "United States",
@@ -77,22 +47,32 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
     "India",
   ];
   const businessTypeData = ["Small", "Large"];
-
+  const notifySuccess = () =>
+    toast.success("User profile updated successfully!");
+  const notifyError = (errorMessage) =>
+    toast.error(`Failed to update user profile: ${errorMessage}`);
   return (
     <>
       <Formik
         initialValues={{
-          first_name: userProfile?.first_name,
-          last_name: userProfile?.last_name,
-          email_address: userProfile?.email_address,
-          country: userProfile?.country || "", // Set default value to an empty string
-          phoneNumber: "empty",
-          businessType: userProfile?.businessType,
+          first_name: userProfile?.first_name || "",
+          last_name: userProfile?.last_name || "",
+          email_address: userProfile?.email_address || "",
+          country: userProfile?.country || "",
+          phone_number: "empty",
+          business_type: userProfile?.business_type || "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          // Handle form submission
-          console.log("Form submitted with values:", values);
+        onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(true);
+          onSubmit(values, (error) => {
+            setSubmitting(false);
+            if (error) {
+              notifyError(error.message || "An error occurred");
+            } else {
+              notifySuccess();
+            }
+          });
         }}
       >
         <Form>
@@ -109,6 +89,13 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
                 inputName="first_name"
                 inputType="text"
               />
+              {isSubmitting && (
+                <ErrorMessage
+                  name="first_name"
+                  component="div"
+                  className="text-red-500"
+                />
+              )}
             </div>
 
             <div className="w-[100%]">
@@ -117,6 +104,13 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
                 inputName="last_name"
                 inputType="text"
               />
+              {isSubmitting && (
+                <ErrorMessage
+                  name="last_name"
+                  component="div"
+                  className="text-red-500"
+                />
+              )}
             </div>
 
             <FormikSelectInput
@@ -133,12 +127,26 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
                 </option>
               ))}
             </FormikSelectInput>
+            {isSubmitting && (
+              <ErrorMessage
+                name="country"
+                component="div"
+                className="text-red-500"
+              />
+            )}
 
             <FormikInput
               inputLabel="Phone Number"
               inputName="phone_number"
               inputType="tel"
             />
+            {isSubmitting && (
+              <ErrorMessage
+                name="phone_number"
+                component="div"
+                className="text-red-500"
+              />
+            )}
 
             <FormikSelectInput label="Business" name="business_type">
               <option value="" disabled>
@@ -150,6 +158,13 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
                 </option>
               ))}
             </FormikSelectInput>
+            {isSubmitting && (
+              <ErrorMessage
+                name="business_type"
+                component="div"
+                className="text-red-500"
+              />
+            )}
 
             <div className="flex justify-between items-end h-[]">
               <div className="w-[63%]">
@@ -158,9 +173,15 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
                   inputName="email_address"
                   inputType="email"
                 />
+                {isSubmitting && (
+                  <ErrorMessage
+                    name="email_address"
+                    component="div"
+                    className="text-red-500"
+                  />
+                )}
               </div>
 
-              {/* Use the submit button from the first file */}
               <div className="w-[35%]">
                 <button
                   onClick={handleOpenChangeEmailModal}
@@ -168,7 +189,6 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
                 >
                   Change Email
                 </button>
-                {/* <SaveButton onClick={handleOpenChangeEmailModal} btnText="Change Email" /> */}
               </div>
               <ChangeEmail
                 isOpen={isChangeEmailModalOpen}
@@ -177,9 +197,10 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
             </div>
           </div>
 
-          {/* Submit button inside the form */}
           <div className="w-[35%]">
-            <SaveButton btnText="Submit" />
+            {/* <SaveButton btnText="Submit" type="submit" />
+             */}
+            <button type="submit" className="variant-btn">Submit</button>
           </div>
         </Form>
       </Formik>
