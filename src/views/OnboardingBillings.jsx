@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { planMockData, ComparePlans, planChangeText, planOnboardData } from "../utils/constant";
+import { ComparePlans, planChangeText, planOnboardData } from "../utils/constant";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { billingApi } from "../utils/billingApi";
 
 const OnboardingBillings = () => {
   const [currentPlan, setCurrentPlan] = useState("Starter");
-  const router = useNavigate();
+  const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
   const dark = useSelector((state) => state.home.dark);
 
@@ -23,6 +23,36 @@ const OnboardingBillings = () => {
       console.log(e);
     }
   };
+
+
+  const { search } = useLocation(),
+    query = new URLSearchParams(search),
+    userToken = query.get('userToken');
+
+  const fetchingUserDataByToken = async (values) => {
+    try {
+      // Make the API request using Axios for signing in
+      const res = await axios.get(`http://localhost:8000/v1/user/redirect/login/${userToken}`);
+      const data =res?.data?.data;
+      const redirectURL  = data?.redirectURI;
+      const token = data?.token;
+      console.log("data", data)
+      localStorage.setItem('authToken', token);
+
+      if (redirectURL == "/dashboard") {
+      
+        window.location.href = "/dashboard";
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+
+  useEffect(() => {
+    fetchingUserDataByToken();
+  }, []);
 
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">

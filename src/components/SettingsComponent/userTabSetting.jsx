@@ -85,7 +85,7 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
           first_name: userProfile?.first_name,
           last_name: userProfile?.last_name,
           email_address: userProfile?.email_address,
-          country: userProfile?.country,
+          country: userProfile?.country || "", // Set default value to an empty string
           phoneNumber: "empty",
           businessType: userProfile?.businessType,
         }}
@@ -119,7 +119,11 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
               />
             </div>
 
-            <FormikSelectInput label="Country" name="country">
+            <FormikSelectInput
+              label="Country"
+              name="country"
+              defaultValue={userProfile?.country || ""}
+            >
               <option value="" disabled>
                 Select Country
               </option>
@@ -158,16 +162,24 @@ const UserTabSettings = ({ onUpdate, registrationData }) => {
 
               {/* Use the submit button from the first file */}
               <div className="w-[35%]">
-             <button onClick={handleOpenChangeEmailModal}  className='variant-btn'>Change Email</button>
-             {/* <SaveButton onClick={handleOpenChangeEmailModal} btnText="Change Email" /> */}
+                <button
+                  onClick={handleOpenChangeEmailModal}
+                  className="variant-btn"
+                >
+                  Change Email
+                </button>
+                {/* <SaveButton onClick={handleOpenChangeEmailModal} btnText="Change Email" /> */}
               </div>
-              <ChangeEmail isOpen={isChangeEmailModalOpen} onClose={handleCloseChangeEmailModal} />
+              <ChangeEmail
+                isOpen={isChangeEmailModalOpen}
+                onClose={handleCloseChangeEmailModal}
+              />
             </div>
           </div>
 
           {/* Submit button inside the form */}
           <div className="w-[35%]">
-          <SaveButton btnText="Submit" />
+            <SaveButton btnText="Submit" />
           </div>
         </Form>
       </Formik>

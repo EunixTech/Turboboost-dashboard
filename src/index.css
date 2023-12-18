@@ -263,8 +263,8 @@ span.ripple {
 
 
 .modal-style {
-  background: #000;
-  padding: 1rem;
+  background: #fff;
+  padding:1rem;
 }
 button.variant-btn {
   background: #2fe49c;
@@ -296,4 +296,17 @@ body::-webkit-scrollbar-thumb {
 .loader-background{
   height: 100% !important;
   border-radius: 10px;
+}
+.variant-txt{
+  background: #2fe49c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+  height: 1rem !important;
 }

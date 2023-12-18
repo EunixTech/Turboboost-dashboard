@@ -8,11 +8,13 @@ export const billingApi=async(item,selected)=>{
 			planName: planName,
 		});
 
+		let authToken = localStorage.getItem('authToken');
 		let config = {
 			method: "post",
 			url: "http://localhost:8000/v1/user/createSubscription",
 			headers: { 
-				'Content-Type': 'application/json', 
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${authToken}`,
 			  },
 			data: data,
 		};

@@ -30,6 +30,9 @@ import HomeLayout from "./layouts/index";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { PersistGate } from "redux-persist/integration/react";
 import NewOnboard from "./routes/newOnboarding.jsx";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const router = [
   {
     path: "/",
@@ -95,7 +98,7 @@ const App = () => {
   return (
     <>
     
-          {showOnboardingModal && <NewOnboard />}
+      {showOnboardingModal && <NewOnboard />}
       {/* {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password" || location.pathname === "/auth/reset-password") && */}
         <HomeLayout  >
           <Routes>
@@ -114,6 +117,9 @@ const App = () => {
 
       {/* </Routes>  */}
       
+      {/* </Routes> */}
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
+
     </>
   );
 };
