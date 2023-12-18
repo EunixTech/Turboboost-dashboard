@@ -39,6 +39,14 @@ const OnboardingBillings = () => {
       console.log("data", data)
       localStorage.setItem('authToken', token);
 
+
+    window.Intercom('boot', {
+      app_id: 'eh6xj4vw',
+      name: "sdbf",
+      email: "manmohan@gmail.com",
+      user_id: "23423423423423",
+    });
+
       if (redirectURL == "/dashboard") {
       
         window.location.href = "/dashboard";

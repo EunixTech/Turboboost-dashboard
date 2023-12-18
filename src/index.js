@@ -93,6 +93,10 @@ const App = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get('userToken');
     setShowOnboardingModal(userToken ? true : false);
+    window.Intercom("boot", {
+      api_base: "https://api-iam.intercom.io",
+      app_id: "pz01qpvl"
+    });
   }, []);
 
   return (
