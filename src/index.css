@@ -289,3 +289,22 @@ button.variant-btn {
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
   height: 1rem !important;
 }
+p.notfound-txt{
+color: #0A0A18;
+font-family: Inter;
+font-size: 40px;
+font-style: normal;
+font-weight: 600;
+line-height: 82px; /* 205% */
+letter-spacing: -0.8px;
+text-align: center;
+}
+button.return-btn{
+  width: 209px;
+  height: var(--10, 40px);
+  flex-shrink: 0;
+/* display: flex;
+justify-content: center; */
+border-radius: var(--rounded, 4px);
+background: #38F8AC;
+}

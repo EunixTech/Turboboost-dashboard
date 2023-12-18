@@ -1,16 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
-import {store, persistor} from "./services/store";
-import { Toaster } from 'react-hot-toast';
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
-import DashboardPageRoute from "./routes/DashboardPag"
+import { store, persistor } from "./services/store";
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import DashboardPageRoute from "./routes/DashboardPag";
 import SignInRoute from "./routes/SignInRoute";
 import SignUp from "./routes/SignUpRoute";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute";
@@ -27,12 +22,12 @@ import ForgotPassword from "./routes/ForgotPassword";
 import ShopifyAdmin from "./routes/shopify-admin";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { PersistGate } from "redux-persist/integration/react";
 import NewOnboard from "./routes/newOnboarding.jsx";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./notFound.jsx";
 const router = [
   {
     path: "/",
@@ -82,7 +77,6 @@ const router = [
     path: "/shopify-admin",
     element: <ShopifyAdmin />,
   },
-
 ];
 
 const App = () => {
@@ -90,51 +84,56 @@ const App = () => {
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
   useEffect(() => {
-    const shouldShowOnboarding = new URLSearchParams(window.location.search).get(
-      "new-onboarding"
-    );
+    const shouldShowOnboarding = new URLSearchParams(
+      window.location.search
+    ).get("new-onboarding");
     setShowOnboardingModal(shouldShowOnboarding === "true");
   }, [location.search]);
 
   return (
     <>
-          {showOnboardingModal && <NewOnboard />}
-      {!(location.pathname === "/auth/signIn" || location.pathname === "/auth/signUp" || location.pathname === "/auth/forgot-password" || location.pathname === "/auth/reset-password") &&
-        <HomeLayout  >
+      {showOnboardingModal && <NewOnboard />}
+      {!(
+        location.pathname === "/auth/signIn" ||
+        location.pathname === "/auth/signUp" ||
+        location.pathname === "/auth/forgot-password" ||
+        location.pathname === "/auth/reset-password"
+      ) && (
+        <HomeLayout>
           <Routes>
             {router.map((item, i) => {
               return <Route key={i} path={item.path} element={item.element} />;
             })}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </HomeLayout>
-      }
-      <Routes>
+      )}
+       <Routes>
         <Route path={"/auth/signIn"} element={<SignInRoute />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
+        {/* Add the 404 Not Found route without any layout */}
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+      />
     </>
   );
 };
-
- 
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <GoogleOAuthProvider clientId="648805285797-kgc785jg9ffbt9u8t73leb6o9pcs59oh.apps.googleusercontent.com">
     <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter>
-        <App />
-        <Toaster
-          position="top-right"
-          reverseOrder={false}
-        />
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <App />
+          <Toaster position="top-right" reverseOrder={false} />
+        </BrowserRouter>
       </PersistGate>
     </Provider>
   </GoogleOAuthProvider>

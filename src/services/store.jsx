@@ -15,7 +15,7 @@ import {loginWithGoogle } from "../slice/userLoginWithGoogleSlice"
 import excludesReducer from "../slice/excludeSlice"
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
+import billingReducer from "../slice/billingSlice"; 
 
 const persistConfig = {
   key: 'root', // key is required
@@ -36,9 +36,9 @@ const persistedReducer = persistReducer(persistConfig, combineReducers({
   features: featuresReducer,
   loginGoogle: loginWithGoogle, 
   excludes: excludesReducer, 
+  billing: billingReducer,
 }));
 
-// Create the store with the persisted reducer
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
