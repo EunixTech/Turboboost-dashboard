@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ToggleButton from "./ToggleButton";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function FeatureCard({
   last,
@@ -14,15 +16,19 @@ export default function FeatureCard({
 }) {
   const [dropped, setDropped] = useState(false);
   const dark = useSelector((state) => state.home.dark);
+
   // Function to handle the toggle switch click
   const handleToggleClick = () => {
     setDropped(!dropped);
+    const switchStatus = dropped ? "off" : "on";
+    toast.success(`Switch turned ${switchStatus} for ${title}`);
   };
 
   // Function to save the toggle state and call the parent's callback
   const saveToggleState = () => {
     onSaveToggleState(dropped); // Save the toggle state in the parent component
   };
+
   return (
     <div
       className="w-[100%] px-[15px]   border-t-[1px]"
@@ -62,7 +68,7 @@ export default function FeatureCard({
           </h1>
         </div>
         <div className="shrink-0">
-        <ToggleButton onClick={handleToggleClick} />
+          <ToggleButton onClick={handleToggleClick} />
         </div>
       </div>
 

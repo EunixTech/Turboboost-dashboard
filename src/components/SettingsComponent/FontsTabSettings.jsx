@@ -2,6 +2,7 @@ import React from 'react';
 import FeatureCard from '../FeatureCard';
 import InputFields from '../InputFields';
 import OptimizationModeCard from '../OptimizationModeCard';
+import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 
 const FontsTabSettings = () => {

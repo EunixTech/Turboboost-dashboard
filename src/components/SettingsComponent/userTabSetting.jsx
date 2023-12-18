@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +8,22 @@ import FormikSelectInput from "./FormikSelectInput";
 import ChangeEmail from "./ChangeEmail";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
-
+import axios from "axios"; 
 const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
+    useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/v1/user/user-profile");
+        const userProfileData = response.data.data;
+        console.log('userProfileData',userProfileData);
+      } catch (error) {
+        console.error("Error fetching user profile:", error.message);
+      }
+    };
+
+   
+    fetchUserProfile();
+  }, []); 
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
 
