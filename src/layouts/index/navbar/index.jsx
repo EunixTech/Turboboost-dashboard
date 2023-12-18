@@ -73,6 +73,7 @@ const Prompt = () => {
           src={"/graphic/navbar/message.svg"}
           title="Affiliates"
         /> */}
+        
       </div>
       <div
         style={{
