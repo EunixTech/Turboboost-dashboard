@@ -1,7 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import HoverGreenButton from "../components/button/HoverGreenButton";
 import CircularProgressBar from "../components/CircularProgressBar";
@@ -18,30 +19,61 @@ import progressBarDataArr from "../static/progressBarData";
 import cacheStatDataArr from "../static/cacheStatData";
 import quickActionDataArr from "../static/quickActionData";
 import caccheStatusDataArr from "../static/caccheStatusData";
+import { googleSpeedAPI } from "../utils/googleSpeedAPI";
+import CircularProgressLoader from "../components/loader/CircularProgressLoader";
 
 const DashboardPage = () => {
-
+    const [coreVitalsData, updateCoreVitalsData] = useState([]);
+    const [performanceData, updatePerformanceData] = useState([]);
     const [coreVitals, setVitsals] = useState(true);
+    const [loading, toogleLoading] = useState(false);
 
-    const dark = useSelector((state) => state.home.dark),
-        router = useNavigate(),
-        deviceWidth = useWidth();
+    const dark = useSelector((state) => state.home.dark);
+    const router = useNavigate();
+    const deviceWidth = useWidth();
 
-        useEffect(()=>{
-            // console.log(user,"userdata")
-            if (typeof window.Intercom === 'function') {
-                window.intercomSettings = {
-                    api_base: "https://api-iam.intercom.io",
-                    app_id: "eh6xj4vw",
-                    name: "Manmohan", // Full name
-                    email: "manmohankumar023@gmail.com", // Email address
-                    created_at: new Date() // Signup date as a Unix timestamp
-                  };
-            }
-        },[])
+    const googleSpeedAPI = async (storeName = "https://menehariya.netscapelabs.com/") => {
+        try {
+            toogleLoading(true);
+            const response = await axios.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${storeName}&category=best-practices&category=seo&category=performance&category=accessibility`);
+            toogleLoading(false);
+            const data = response.data;
+
+            const lighthouseData = data.lighthouseResult;
+            toogleLoading(false);
+            const metrics = {
+                "First Contentful Paint": lighthouseData.audits['first-contentful-paint'].displayValue,
+                "Speed Index": lighthouseData.audits['speed-index'].displayValue,
+                "Total Blocking Time": lighthouseData.audits['total-blocking-time'].displayValue,
+                "Largest Contentful Paint": lighthouseData.audits['largest-contentful-paint'].displayValue,
+                "Performance": lighthouseData.categories.performance.score * 100,
+                "Accessibility": lighthouseData.categories.accessibility.score * 100,
+                "Best Practices": lighthouseData.categories['best-practices'].score * 100,
+                "SEO": lighthouseData.categories.seo.score * 100,
+            };
+
+            const performanceArr  = Object.keys(metrics)
+                .filter(key => ["Performance", "Accessibility", "Best Practices", "SEO"].includes(key))
+                .map(key => ({ name: key, value: Math.round(metrics[key] * 10) / 10 }));
+
+            const coreVitualsArr = Object.keys(metrics)
+                .filter(key => ["First Contentful Paint", "Speed Index", "Total Blocking Time", "Largest Contentful Paint"].includes(key))
+                .map(key => ({ name: key, value: metrics[key] }));
+
+            updateCoreVitalsData(coreVitualsArr);
+            updatePerformanceData(performanceArr);
+            toogleLoading(false);
+        } catch (e) {
+            toogleLoading(false);
+        }
+    };
         
-
-
+       
+        
+        useEffect(() => {
+            googleSpeedAPI();
+        }, []);
+        
     return (
         <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
             <div className="w-[100%] h-[50px] shrink-0"></div>
@@ -54,7 +86,7 @@ const DashboardPage = () => {
 
                         <div className="flex items-center mb-[20px] justify-center">
                             <GreetingCard />
-                            
+
                             <img
                                 src="/graphic/dashboard/hifi.png"
                                 alt="icon"
@@ -73,7 +105,7 @@ const DashboardPage = () => {
                         )}
                     </div>
 
-                    <div className="w-[100%] mobile:px-[10px] mt-[20px] grid desktop:grid-cols-4 laptop:grid-cols-2 gap-y-[10px] gap-x-[24px]">
+                    {/* <div className="w-[100%] mobile:px-[10px] mt-[20px] grid desktop:grid-cols-4 laptop:grid-cols-2 gap-y-[10px] gap-x-[24px]">
 
                         {cacheStatDataArr.map((data, index) => (
                             <CacheStatCard
@@ -87,8 +119,8 @@ const DashboardPage = () => {
                             />
                         ))}
 
-                    </div>
-
+                    </div>  */}
+                    {/* 
                     <div className="w-[100%] px-[10px]">
                         <div style={{ backgroundColor: dark ? "#111317" : "#fff", borderColor: dark ? "#1F2329" : "#ebebeb" }} className="w-[100%]  px-[15px] py-[15px] min-h-[110px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[10px] mt-[24px]">
 
@@ -97,15 +129,15 @@ const DashboardPage = () => {
                             <DomLineChart className="custom-chart" />
 
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:grid  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px]">
 
                         <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]`}>
                             <div className="w-[100%]  flex items-center justify-between">
 
-                                <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`}> Google Page Score </p>
-
+                                <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`}> Core Vitals </p>
+{/* 
                                 <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center`}>
                                     <div
                                         onClick={() => { setVitsals(true) }}
@@ -146,11 +178,11 @@ const DashboardPage = () => {
                                         <p className="text-[12px]  font-medium f2">Performance</p>
                                     </div>
 
-                                </div>
+                                </div> */}
 
                             </div>
 
-                            {!coreVitals ? (
+                            {/* {!coreVitals ? (
                                 <>
                                     <p className={`${dark ? "subHeadingDarkMode" : "subHeading"} text-[12px]  font-semibold f2`}> Performance </p>
 
@@ -166,12 +198,19 @@ const DashboardPage = () => {
                                     </div>
                                 </>
 
-                            ) : (<CoreVitalsReportCard />)}
+                             ) : 
+                              */}
+                              {
+                                !loading ? <CoreVitalsReportCard coreVitualData={coreVitalsData} /> : <CircularProgressLoader />
+                              }
+
+                       
 
                         </div>
 
+
                         <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px]`}>
-                            <div className="w-[100%]  flex items-center justify-between">
+                            {/* <div className="w-[100%]  flex items-center justify-between">
                                 <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`} > Total Cache Status </p>
 
                                 <div className={`${dark ? "subHeadingDarkMode" : "subHeading"} text-[#0a0a187e] f2 ${dark ? "text-[#ffffff74]  hover:bg-[#ffffff30]" : "text-[#0a0a187e] hover:bg-[#e1e1e1]"} px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium `}>
@@ -194,6 +233,32 @@ const DashboardPage = () => {
 
                                 </div>
 
+                            </div> */}
+
+                            <div className="w-[100%]  flex items-center justify-between">
+                                <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`} > Performance </p>
+                                {/* 
+                                <div className={`${dark ? "subHeadingDarkMode" : "subHeading"} text-[#0a0a187e] f2 ${dark ? "text-[#ffffff74]  hover:bg-[#ffffff30]" : "text-[#0a0a187e] hover:bg-[#e1e1e1]"} px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium `}>
+                                    View Details
+                                </div> */}
+                            </div>
+
+                            <div className="w-[100%] grid grid-cols-3  gap-x-[20px] gap-y-[40px] mt-4">{
+                                loading ? <CircularProgressLoader /> :
+                              <>
+                              
+                              {performanceData.length && performanceData.map((item, index) => (
+                                    <div key={index} className="flex items-center justify-center">
+                                        <CircularProgressBar
+                                            margin={item?.margin}
+                                            title={item?.name}
+                                            percentage={item?.value}
+                                        />
+                                    </div>
+                                ))}
+                              </>
+                            }
+                                
                             </div>
                         </div>
 
@@ -215,7 +280,7 @@ const DashboardPage = () => {
                                     <QuickActionCard key={index} text={action} />
                                 ))}
 
-                            <HoverGreenButton btnText="Purge all cache " />
+                            {/* <HoverGreenButton btnText="Purge all cache " /> */}
                         </div>
 
                     </div>

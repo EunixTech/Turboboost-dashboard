@@ -36,18 +36,10 @@ const OnboardingBillings = () => {
       const data = res?.data?.data;
       const redirectURL = data?.redirectURI;
       const token = data?.token;
-      console.log("data", data)
+     
       localStorage.setItem('authToken', token);
 
-      window.intercomSettings = {
-        api_base: "https://api-iam.intercom.io",
-        app_id: "pz01qpvl",
-        email: data?.userData?.email_address || "manmohankumar023@hmail.com", // the email for your user
-        user_id: data._id, // a UUID for your user
-        user_hash: data.hashToken // an Identity Verification user hash for your user
-      };
-
-
+    
       if (redirectURL == "/dashboard") {
 
         window.location.href = "/dashboard";
