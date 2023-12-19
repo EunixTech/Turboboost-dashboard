@@ -1,5 +1,3 @@
-// ChangeEmail.js
-
 import React, { useState } from "react";
 import { Modal, Typography, Button, TextField } from "@mui/material";
 import SaveButton from "../button/SaveButton";
@@ -53,7 +51,15 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
     try {
       console.log("Email address to be updated:", enteredValue);
       const token = localStorage.getItem("accessToken");
+      if (otp.length !== 4) {
+        toast.error("Please enter a valid 4-digit OTP");
+        return;
+      }
 
+      if (!otp) {
+        toast.error("Please enter the OTP");
+        return;
+      }
       const updateResponse = await fetch(
         "http://localhost:8000/v1/user/update-emailaddress",
         {
@@ -63,7 +69,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            email_address: enteredValue, // Make sure enteredValue is not empty here
+            email_address: enteredValue, 
             OTPCode: otp,
           }),
         }
@@ -86,7 +92,6 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
 
   const handleClose = () => {
     onClose();
-    // Additional logic if needed
   };
 
   return (
@@ -105,7 +110,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
             transform: "translate(-50%, -50%)",
             width: 380, // Adjusted width to accommodate the margin
             // margin: "0 10px", // 10px margin from left and right
-            bgcolor: "#fff",
+            bgcolor: "#000",
             border: "2px solid #2fe49c",
             borderRadius: "5px",
             boxShadow: 24,
@@ -121,7 +126,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
           <Typography
             variant="h6"
             component="h2"
-            style={{ color: "#000", margin: "5px" }}
+            style={{ color: "#fff", margin: "5px" }}
           >
             {!otpSent ? "Enter your new email address" : "Enter the OTP"}
           </Typography>
@@ -135,7 +140,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
                 required
                 InputProps={{
                   style: {
-                    color: "#000",
+                    color: "#fff",
                     border: "2px solid #2fe49c",
                     outline: "none",
                   },

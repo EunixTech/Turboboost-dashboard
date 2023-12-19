@@ -165,7 +165,7 @@ span.ripple {
 
 .checked {
   background-color: #38f8ab34;
-  border-color: #38F8AC;
+  /* border-color: #38F8AC; */
 }
 
 .check-icon {
@@ -263,10 +263,21 @@ span.ripple {
 
 
 .modal-style {
-  background: #fff;
+  background: #000;
   padding:1rem;
 }
 button.variant-btn {
+  background: #fff;
+
+  color: #2fe49c;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.variant-txt-email{
   background: #2fe49c;
   color: #fff;
   padding: 10px;
@@ -307,4 +318,11 @@ button.return-btn{
 justify-content: center; */
 border-radius: var(--rounded, 4px);
 background: #38F8AC;
+}
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.css-1l9sosn-MuiButtonBase-root-MuiButton-root {
+  color: #38F8AC;
+  border: 2px solid #38F8AC;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
+  height: 5px !important;
 }
