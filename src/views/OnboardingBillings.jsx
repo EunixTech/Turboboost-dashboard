@@ -33,22 +33,23 @@ const OnboardingBillings = () => {
     try {
       // Make the API request using Axios for signing in
       const res = await axios.get(`http://localhost:8000/v1/user/redirect/login/${userToken}`);
-      const data =res?.data?.data;
-      const redirectURL  = data?.redirectURI;
+      const data = res?.data?.data;
+      const redirectURL = data?.redirectURI;
       const token = data?.token;
       console.log("data", data)
       localStorage.setItem('authToken', token);
 
+      window.intercomSettings = {
+        api_base: "https://api-iam.intercom.io",
+        app_id: "pz01qpvl",
+        email: data?.userData?.email_address || "manmohankumar023@hmail.com", // the email for your user
+        user_id: data._id, // a UUID for your user
+        user_hash: data.hashToken // an Identity Verification user hash for your user
+      };
 
-    window.Intercom('boot', {
-      app_id: 'eh6xj4vw',
-      name: "sdbf",
-      email: "manmohan@gmail.com",
-      user_id: "23423423423423",
-    });
 
       if (redirectURL == "/dashboard") {
-      
+
         window.location.href = "/dashboard";
       }
 
@@ -193,9 +194,8 @@ const OnboardingBillings = () => {
                         style={{
                           borderColor: dark ? "#1F2329" : "#ebebeb",
                         }}
-                        className={`w-[100%] h-[38px] text-[${
-                          dark ? "#fff" : "#000"
-                        }] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
+                        className={`w-[100%] h-[38px] text-[${dark ? "#fff" : "#000"
+                          }] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
                       >
                         {planChangeText(item, currentPlan)}
                       </div>

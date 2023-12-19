@@ -1,28 +1,62 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { planMockData, ComparePlans, planChangeText } from "../utils/constant";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { billingApi } from "../utils/billingApi";
+import { setPlan, setSelected } from "../slice/billingSlice";
 
 const Billing = () => {
-	const [currentPlan, setCurrentPlan] = useState("Starter");
-	const router = useNavigate();
-	const [selected, setSelected] = useState(0);
-	const dark = useSelector((state) => state.home.dark);
+  const [currentPlan, setCurrentPlan] = useState("Starter");
+  const router = useNavigate();
+  const [selected, setSelected] = useState(0);
+  const dark = useSelector((state) => state.home.dark);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const storedPlanName = localStorage.getItem("planName");
+    const storedStoreName = localStorage.getItem("storeName");
 
-	const handleBilling = async (item) => {
+    if (storedPlanName) {
+      setCurrentPlan(storedPlanName);
+      dispatch(setPlan(storedPlanName)); // Use the correct action: setPlan
+    }
+
+    if (storedStoreName) {
+      // Use the appropriate action if needed
+      // dispatch(setStoreName(storedStoreName)); // This action is not defined in your billingSlice.js
+    }
+  }, [dispatch]);
+
+	// const handleBilling = async (item) => {
 		
-		try {
-			let response = await billingApi(item,selected);
-			console.log(response.data);
-			if(response?.data?.confirmationUrl){
-				window.location.replace(response?.data?.confirmationUrl);
-			}
-		} catch (e) {
-			console.log(e)
-		}
-	};
+	// 	try {
+	// 		let response = await billingApi(item,selected);
+	// 		console.log(response.data);
+	// 		if(response?.data?.confirmationUrl){
+	// 			window.location.replace(response?.data?.confirmationUrl);
+	// 		}
+	// 	} catch (e) {
+	// 		console.log(e)
+	// 	}
+	// };
+  const handleBilling = async (item) => {
+    try {
+      let response = await billingApi(item, selected);
+      console.log(response.data);
+      if (response?.data?.confirmationUrl) {
+        console.log(response?.data?.confirmationUrl);
+        window.location.replace(response?.data?.confirmationUrl);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const handlePlanChange = (item) => {
+	setCurrentPlan(item.name);
+	dispatch(setPlan(item.name)); 
+	localStorage.setItem("planName", item.name);
+  };
+  
 
 	return (
 		<div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
