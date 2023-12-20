@@ -17,16 +17,14 @@ export default function FeatureCard({
   const [dropped, setDropped] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
-  // Function to handle the toggle switch click
   const handleToggleClick = () => {
     setDropped(!dropped);
     const switchStatus = dropped ? "off" : "on";
     toast.success(`Switch turned ${switchStatus} for ${title}`);
   };
 
-  // Function to save the toggle state and call the parent's callback
   const saveToggleState = () => {
-    onSaveToggleState(dropped); // Save the toggle state in the parent component
+    onSaveToggleState(dropped); 
   };
 
   return (

@@ -24,12 +24,10 @@ const FontsTabSettings = () => {
   }, [unsavedChanges]);
 
   const handleInputChange = () => {
-    // Your logic to handle input changes and set unsavedChanges to true
     setUnsavedChanges(true);
   };
 
   const handleSaveChanges = () => {
-    // Your logic to save changes
     setUnsavedChanges(false); // Reset unsavedChanges after saving
   };
 
