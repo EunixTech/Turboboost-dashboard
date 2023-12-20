@@ -84,7 +84,7 @@ const FontsTabSettings = () => {
               />
             </div>
           </FeatureCard>
-          <FeatureCard
+          {/* <FeatureCard
             featured={true}
             title="Font Subsetting (Remove Unused Glyphs)"
             description="When this option is enabled, TurboBoost will optimize fonts by removing symbols(glyphs), when are not used anywhere. This can dramatically reduce the size of these fonts. Learn more"
@@ -94,11 +94,11 @@ const FontsTabSettings = () => {
             title="Enable Font Compression Upgrade"
             description="When this option is enabled, TurboBoost will optimize fonts by upgrading their compression to WOFF2 format. This can reduce the size of these fonts by up to 50%."
             h={"100px"}
-          />
+          /> */}
         </div>
       </div>
 
-      <OptimizationModeCard />
+      {/* <OptimizationModeCard /> */}
         {unsavedChanges && (
         <div className="confirmation-popup">
           <div>Save changes before leaving?</div>

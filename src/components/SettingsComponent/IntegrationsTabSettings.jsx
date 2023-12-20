@@ -119,7 +119,7 @@ const IntegrationsTabSettings = () => {
           </div>
         </div>
 
-        <OptimizationModeCard />
+        {/* <OptimizationModeCard /> */}
       </div>
     </>
   );

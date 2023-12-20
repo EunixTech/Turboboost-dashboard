@@ -20,19 +20,19 @@ const ImageTabSettings = () => {
           <FeatureCard
             last={true}
             title="Image Optimization"
-            isSubSectionExist={true}
+            // isSubSectionExist={true}
             p="10px 15px 20px 15px"
-            subSectionTitile={"Adjust Image Quality"}
+            // subSectionTitile={"Adjust Image Quality"}
             description="Enable or disable image optimization for size and delivery"
           >
-            <div className="w-[100%] py-[10px]">
+            {/* <div className="w-[100%] py-[10px]">
               <InputFields labelText="Image Quality" type="text" />
 
               <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                 Choose the desired optimization image quality, from 0 to 100,
                 Google recommends 80.
               </div>
-            </div>
+            </div> */}
           </FeatureCard>
 
           <FeatureCard
@@ -42,12 +42,12 @@ const ImageTabSettings = () => {
           />
           <FeatureCard
             title="Automatic Image Lazy Loading"
-            isSubSectionExist={true}
+            // isSubSectionExist={true}
             p="10px 15px 20px 15px"
-            subSectionTitile={"Additional Options"}
+            // subSectionTitile={"Additional Options"}
             description="Load images only when they become visible. This reduce the initial weight of the pages."
           >
-            <div className="w-[100%] py-[10px]">
+            {/* <div className="w-[100%] py-[10px]">
               <InputFields
                 labelText="Size Images Preemptively"
                 list={["Enabled"]}
@@ -112,18 +112,18 @@ const ImageTabSettings = () => {
                 they enter the viewport, and On visibility change to have them
                 loaded when their visibility property changes.
               </div>
-            </div>
+            </div> */}
           </FeatureCard>
 
-          <FeatureCard
+          {/* <FeatureCard
             title="Additional Images"
             description="Specify any custom DOM element attributes that contain image URLs to have TurboBoost optimize them as well."
             h={"80px"}
-          />
+          /> */}
         </div>
       </div>
 
-      <OptimizationModeCard />
+      {/* <OptimizationModeCard /> */}
     </div>
   );
 };

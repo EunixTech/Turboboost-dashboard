@@ -64,8 +64,7 @@ const SettingPage = ({ registrationData }) => {
       }
 
       const updatedUserData = await response.json();
-      console.log("User information updated:", updatedUserData);
-
+      
       toast.success("Settings updated successfully!");
       handleUserSettingsChange(updatedUserData);
       setUnsavedChanges(false); // Reset unsaved changes after successful save
