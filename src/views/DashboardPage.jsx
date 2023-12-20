@@ -26,7 +26,7 @@ const DashboardPage = () => {
     const [coreVitalsData, updateCoreVitalsData] = useState([]);
     const [performanceData, updatePerformanceData] = useState([]);
     const [coreVitals, setVitsals] = useState(true);
-    const [loading, toogleLoading] = useState(false);
+    const [loading, toogleLoading] = useState(true);
 
     const dark = useSelector((state) => state.home.dark);
     const router = useNavigate();
@@ -36,11 +36,11 @@ const DashboardPage = () => {
         try {
             toogleLoading(true);
             const response = await axios.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${storeName}&category=best-practices&category=seo&category=performance&category=accessibility`);
+
             toogleLoading(false);
             const data = response.data;
-
             const lighthouseData = data.lighthouseResult;
-            toogleLoading(false);
+
             const metrics = {
                 "First Contentful Paint": lighthouseData.audits['first-contentful-paint'].displayValue,
                 "Speed Index": lighthouseData.audits['speed-index'].displayValue,
@@ -52,7 +52,7 @@ const DashboardPage = () => {
                 "SEO": lighthouseData.categories.seo.score * 100,
             };
 
-            const performanceArr  = Object.keys(metrics)
+            const performanceArr = Object.keys(metrics)
                 .filter(key => ["Performance", "Accessibility", "Best Practices", "SEO"].includes(key))
                 .map(key => ({ name: key, value: Math.round(metrics[key] * 10) / 10 }));
 
@@ -62,18 +62,17 @@ const DashboardPage = () => {
 
             updateCoreVitalsData(coreVitualsArr);
             updatePerformanceData(performanceArr);
-            toogleLoading(false);
         } catch (e) {
             toogleLoading(false);
         }
     };
-        
-       
-        
-        useEffect(() => {
-            googleSpeedAPI();
-        }, []);
-        
+
+
+
+    useEffect(() => {
+        googleSpeedAPI();
+    }, []);
+
     return (
         <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
             <div className="w-[100%] h-[50px] shrink-0"></div>
@@ -137,7 +136,7 @@ const DashboardPage = () => {
                             <div className="w-[100%]  flex items-center justify-between">
 
                                 <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`}> Core Vitals </p>
-{/* 
+                                {/* 
                                 <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center`}>
                                     <div
                                         onClick={() => { setVitsals(true) }}
@@ -200,11 +199,14 @@ const DashboardPage = () => {
 
                              ) : 
                               */}
-                              {
-                                !loading ? <CoreVitalsReportCard coreVitualData={coreVitalsData} /> : <CircularProgressLoader />
-                              }
+                            {
+                                loading ?    <div style={{display:'flex'}} className="w-[100%]  w-[100%] grid grid-cols-3 spinner-wrapper  gap-x-[20px] gap-y-[40px] mt-4 flex justify-center">
+                                <CircularProgressLoader />
+                            </div>: <CoreVitalsReportCard coreVitualData={coreVitalsData} />
 
-                       
+                            }
+
+
 
                         </div>
 
@@ -243,23 +245,34 @@ const DashboardPage = () => {
                                 </div> */}
                             </div>
 
-                            <div className="w-[100%] grid grid-cols-3  gap-x-[20px] gap-y-[40px] mt-4">{
-                                loading ? <CircularProgressLoader /> :
-                              <>
-                              
-                              {performanceData.length && performanceData.map((item, index) => (
-                                    <div key={index} className="flex items-center justify-center">
-                                        <CircularProgressBar
-                                            margin={item?.margin}
-                                            title={item?.name}
-                                            percentage={item?.value}
-                                        />
+                            {
+                                loading ?
+                                    <div style={{display:'flex'}} className="w-[100%]  w-[100%] grid grid-cols-3 spinner-wrapper  gap-x-[20px] gap-y-[40px] mt-4 flex justify-center">
+                                        <CircularProgressLoader />
                                     </div>
-                                ))}
-                              </>
+
+
+                                    :
+                                    <div className="w-[100%] grid grid-cols-3 gap-x-[20px] gap-y-[40px] mt-4 flex justify-center">
+
+                                        {performanceData.length && performanceData.map((item, index) => (
+                                            <div key={index} className="flex items-center justify-center">
+                                                <CircularProgressBar
+                                                    margin={item?.margin}
+                                                    title={item?.name}
+                                                    percentage={item?.value}
+                                                />
+                                            </div>
+                                        ))}
+
+
+
+                                    </div>
                             }
-                                
-                            </div>
+
+
+
+
                         </div>
 
                         <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"}  relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  py-[14px] border-[#EBEBEB] rounded-[8px]`}>
