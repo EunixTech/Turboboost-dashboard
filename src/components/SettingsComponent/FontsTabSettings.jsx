@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FeatureCard from '../FeatureCard';
 import InputFields from '../InputFields';
 import OptimizationModeCard from '../OptimizationModeCard';
@@ -7,7 +7,36 @@ import { useSelector } from 'react-redux';
 
 const FontsTabSettings = () => {
   const dark = useSelector((state) => state.home.dark);
+  const [unsavedChanges, setUnsavedChanges] = useState(false);
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (unsavedChanges) {
+        const message = 'You have unsaved changes. Are you sure you want to leave?';
+        event.returnValue = message; // Standard for most browsers
+        return message; // For some older browsers
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
 
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [unsavedChanges]);
+
+  const handleInputChange = () => {
+    // Your logic to handle input changes and set unsavedChanges to true
+    setUnsavedChanges(true);
+  };
+
+  const handleSaveChanges = () => {
+    // Your logic to save changes
+    setUnsavedChanges(false); // Reset unsavedChanges after saving
+  };
+
+  const handleCancelChanges = () => {
+    // Your logic to cancel changes
+    setUnsavedChanges(false); // Reset unsavedChanges after canceling
+  };
   return (
     <>
     <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
@@ -70,6 +99,13 @@ const FontsTabSettings = () => {
       </div>
 
       <OptimizationModeCard />
+        {unsavedChanges && (
+        <div className="confirmation-popup">
+          <div>Save changes before leaving?</div>
+          <button onClick={handleSaveChanges}>Yes</button>
+          <button onClick={handleCancelChanges}>No</button>
+        </div>
+      )}
     </div>
   </>
   );
