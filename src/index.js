@@ -37,26 +37,26 @@ const router = [
     path: "/dashboard",
     element: <DashboardPageRoute />,
   },
-  {
-    path: "/connect-website",
-    element: <ConnectWebsite />,
-  },
-  {
-    path: "/cache-warmup",
-    element: <CacheWarmup />,
-  },
-  {
-    path: "/cache-status",
-    element: <CacheStatus />,
-  },
-  {
-    path: "/logs",
-    element: <Logs />,
-  },
-  {
-    path: "/integrations",
-    element: <Integrations />,
-  },
+  // {
+  //   path: "/connect-website",
+  //   element: <ConnectWebsite />,
+  // },
+  // {
+  //   path: "/cache-warmup",
+  //   element: <CacheWarmup />,
+  // },
+  // {
+  //   path: "/cache-status",
+  //   element: <CacheStatus />,
+  // },
+  // {
+  //   path: "/logs",
+  //   element: <Logs />,
+  // },
+  // {
+  //   path: "/integrations",
+  //   element: <Integrations />,
+  // },
   {
     path: "/billing",
     element: <Billing />,
@@ -69,10 +69,10 @@ const router = [
     path: "/affiliate",
     element: <Affiliate />,
   },
-  {
-    path: "/store",
-    element: <Store />,
-  },
+  // {
+  //   path: "/store",
+  //   element: <Store />,
+  // },
   {
     path: "/shopify-admin",
     element: <ShopifyAdmin />,
@@ -80,16 +80,20 @@ const router = [
 ];
 
 const App = () => {
+ 
   const location = useLocation();
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
   useEffect(() => {
-    const shouldShowOnboarding = new URLSearchParams(
-      window.location.search
-    ).get("new-onboarding");
-    setShowOnboardingModal(shouldShowOnboarding === "true");
-  }, [location.search]);
+    const urlParams = new URLSearchParams(window.location.search);
+    const userToken = urlParams.get('userToken');
+    setShowOnboardingModal(userToken ? true : false);
 
+   
+
+  }, []);
+
+  
   return (
     <>
       {showOnboardingModal && <NewOnboard />}

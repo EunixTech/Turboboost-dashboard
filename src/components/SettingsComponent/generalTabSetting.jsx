@@ -122,7 +122,7 @@ const GeneralTabSetting = () => {
         </div>
       </div>
 
-      <OptimizationModeCard />
+      {/* <OptimizationModeCard /> */}
     </div>
   );
 };

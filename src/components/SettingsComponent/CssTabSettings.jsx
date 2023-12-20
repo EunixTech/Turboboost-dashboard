@@ -21,12 +21,12 @@ const CssTabSettings = () => {
             <FeatureCard
               last={true}
               title="Optimize CSS Delivery"
-              isSubSectionExist={true}
+              // isSubSectionExist={true}
               p="10px 15px 20px 15px"
-              subSectionTitile={"Additional Options"}
+              // subSectionTitile={"Additional Options"}
               description="Create critical CSS as well as rework your website CSS for optimal delivery"
             >
-              <div className="w-[100%] py-[10px]">
+              {/* <div className="w-[100%] py-[10px]">
                 <InputFields
                   labelText="Remove @font-face rules from the critical CSS"
                   list={["Disabled"]}
@@ -49,17 +49,17 @@ const CssTabSettings = () => {
                   type="textarea"
                   inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                 />
-              </div>
+              </div> */}
             </FeatureCard>
 
             <FeatureCard
               title="Reduce Unused CSS"
-              isSubSectionExist={true}
+              // isSubSectionExist={true}
               p="10px 15px 20px 15px"
-              subSectionTitile={"Additional Options"}
+              // subSectionTitile={"Additional Options"}
               description="Unused CSS rules are removed from optimized CSS files for faster page rendering."
             >
-              <div className="w-[100%] py-[10px]">
+              {/* <div className="w-[100%] py-[10px]">
                 <InputFields
                   labelText="Debupe Based on Critical CSS"
                   list={["Disabled"]}
@@ -97,10 +97,10 @@ const CssTabSettings = () => {
                   type="textarea"
                   inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                 />
-              </div>
+              </div> */}
             </FeatureCard>
 
-            <FeatureCard
+            {/* <FeatureCard
               title="Combine CSS into one resource"
               isSubSectionExist={true}
               p="10px 15px 20px 15px"
@@ -120,7 +120,7 @@ const CssTabSettings = () => {
                   best results.
                 </div>
               </div>
-            </FeatureCard>
+            </FeatureCard> */}
 
             <FeatureCard
               title="Custom CSS"
@@ -128,7 +128,7 @@ const CssTabSettings = () => {
             />
           </div>
         </div>
-        <OptimizationModeCard />
+        {/* <OptimizationModeCard /> */}
       </div>
     </>
   );

@@ -24,9 +24,8 @@ body {
   height: calc(100% -50px);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+code { 
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 * {
@@ -286,6 +285,27 @@ button.variant-btn {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   margin-top: 10px;
+}
+
+
+/* Hide scrollbar on all elements */
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.MuiBox-root,
+.billing-modal-background{
+  height: 90% !important;
+  border-radius: 10px;
+}
+
+.loader-background{
+  height: 100% !important;
+  border-radius: 10px;
 }
 .variant-txt{
   background: #2fe49c;

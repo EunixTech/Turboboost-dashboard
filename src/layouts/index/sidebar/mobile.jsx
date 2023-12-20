@@ -145,14 +145,14 @@ const Sidebar = ({ transition, cancel }) => {
               </div>
             </div>
             <div className="mt-[7px] mb-[10px]">
-              <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
+              {/* <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
                 <p className="text-[11px] text-white tracking-wide">
                   CDN Bandwidth/mo
                 </p>
                 <p className="text-[11px] text-[#918EA2] tracking-wide">
                   13.98/100GB
                 </p>
-              </div>
+              </div> */}
               <div className="bg-[#ffffff14] w-[100%] h-[3px] rounded-[3px]">
                 <div
                   className=" bg-[#38F8AC] h-[100%]"

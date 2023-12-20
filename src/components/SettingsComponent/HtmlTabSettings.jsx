@@ -29,7 +29,7 @@ const HtmlTabSettings = () => {
                   />
                 </div>
               </div>
-              <OptimizationModeCard />
+              {/* <OptimizationModeCard /> */}
             </div>
   );
 }

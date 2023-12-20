@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { planMockData, ComparePlans, planChangeText, planOnboardData } from "../utils/constant";
+import { ComparePlans, planChangeText, planOnboardData } from "../utils/constant";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { billingApi } from "../utils/billingApi";
 
 const OnboardingBillings = () => {
   const [currentPlan, setCurrentPlan] = useState("Starter");
-  const router = useNavigate();
+  const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
   const dark = useSelector((state) => state.home.dark);
 
@@ -24,12 +24,43 @@ const OnboardingBillings = () => {
     }
   };
 
+
+  const { search } = useLocation(),
+    query = new URLSearchParams(search),
+    userToken = query.get('userToken');
+
+  const fetchingUserDataByToken = async (values) => {
+    try {
+      // Make the API request using Axios for signing in
+      const res = await axios.get(`http://localhost:8000/v1/user/redirect/login/${userToken}`);
+      const data = res?.data?.data;
+      const redirectURL = data?.redirectURI;
+      const token = data?.token;
+     
+      localStorage.setItem('authToken', token);
+
+    
+      if (redirectURL == "/dashboard") {
+
+        window.location.href = "/dashboard";
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+
+  useEffect(() => {
+    fetchingUserDataByToken();
+  }, []);
+
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <div className="w-[100%]"></div>
       <div
         style={{ backgroundColor: dark ? "#fff" : "#000" }}
-        className="w-[100%] h-[100%] flex flex-col items-center  overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] mobile:px-[20px]"
+        className="w-[100%] h-[100%] flex flex-col items-center billing-modal-background  overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] mobile:px-[20px]"
       >
         <div className="w-[100%] max-w-[1920px] min-h-[100vh]">
           <h1
@@ -133,8 +164,8 @@ const OnboardingBillings = () => {
                     }}
                     className="text-[14px]  px-[17px] text-[#0a0a187a]  tracking-wide"
                   >
-                    <span className="font-bold">{item?.CDN_bandWidth}</span> CDN
-                    bandwidth/mo
+                    {/* <span className="font-bold">{item?.CDN_bandWidth}</span> CDN
+                    bandwidth/mo */}
                   </p>
                   <div className="w-[100%] px-[17px] mt-[15px]">
                     {currentPlan == item?.name ? (
@@ -155,9 +186,8 @@ const OnboardingBillings = () => {
                         style={{
                           borderColor: dark ? "#1F2329" : "#ebebeb",
                         }}
-                        className={`w-[100%] h-[38px] text-[${
-                          dark ? "#fff" : "#000"
-                        }] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
+                        className={`w-[100%] h-[38px] text-[${dark ? "#fff" : "#000"
+                          }] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
                       >
                         {planChangeText(item, currentPlan)}
                       </div>

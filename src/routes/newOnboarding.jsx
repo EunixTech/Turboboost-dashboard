@@ -15,14 +15,15 @@ const NewOnboardModal = styled(Modal)(({ theme }) => ({
   justifyContent: 'center',
   '& .MuiBox-root': {
     position: 'absolute',
-    width: "1162px",
-    height: '100%',
+    width: "90%",
+    height: '90%',
     backgroundColor: 'black',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     outline: 'none',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    borderRadius: '10px'
   },
 }));
 
@@ -50,7 +51,7 @@ const NewOnboard = () => {
           style={{
             backgroundColor: dark ? "#090917" : "#fff",
           }}
-          className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
+          className="w-[100%] h-[100vh] loader-background bg-transparent flex items-center justify-center"
         >
           <video
             autoPlay

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import useWidth from "../../../hooks/useWidth";
-
+import { billingApi } from "../../../utils/billingApi";
+import { planMockData } from "../../../utils/constant";
+import toast from "react-hot-toast";
 const CurrentPlan = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -19,10 +21,33 @@ const CurrentPlan = () => {
 };
 
 const Plan = ({ cancel }) => {
+
   const [selected, setSelected] = useState(0);
   const [plan, setPlan] = useState(2);
+  const [itemData, updateItem] = useState({});
   const dark = useSelector((state) => state.home.dark);
   const w = useWidth();
+
+  const handleBilling = async () => {
+    try {
+
+       if(itemData && !Object.keys(itemData).length) return toast.error("Please change plan");
+      let response = await billingApi(itemData, selected);
+      
+      if (response?.data?.confirmationUrl) {
+        console.log(response?.data?.confirmationUrl);
+        window.location.replace(response?.data?.confirmationUrl);
+      }
+    } catch (e) {
+      return toast.error("Please try again");
+    }
+  };
+
+  const selectingPlan = (item, index) =>{
+    setPlan(index)
+    updateItem(item)
+  }
+
   return (
     <div
       style={{ zIndex: 100 }}
@@ -138,7 +163,7 @@ const Plan = ({ cancel }) => {
                       200,000 page views/mo
                     </p>
                   </div>
-                  <div className="w-[100%] mt-[10px] flex justify-between">
+                  {/* <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
                       className="w-[13px] mr-[10px] shrink-0"
@@ -150,7 +175,7 @@ const Plan = ({ cancel }) => {
                     >
                       100 GB CDN bandwidth/mo
                     </p>
-                  </div>
+                  </div> */}
                   <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -170,7 +195,7 @@ const Plan = ({ cancel }) => {
                 <>
                   {plan === 2 && (
                     <>
-                      <div className="w-[100%] mt-[10px] flex justify-between">
+                      {/* <div className="w-[100%] mt-[10px] flex justify-between">
                         <img
                           src="/graphic/status/check.svg"
                           className="w-[13px] mr-[10px] shrink-0"
@@ -182,7 +207,7 @@ const Plan = ({ cancel }) => {
                         >
                           100 GB CDN bandwidth/mo
                         </p>
-                      </div>
+                      </div> */}
                       <div className="w-[100%] mt-[10px] flex justify-between">
                         <img
                           src="/graphic/status/check.svg"
@@ -250,7 +275,7 @@ const Plan = ({ cancel }) => {
                       Complete image optimization stack
                     </p>
                   </div>
-                  <div className="w-[100%] mt-[10px] flex justify-between">
+                  {/* <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
                       className="w-[13px] mr-[10px] shrink-0"
@@ -262,7 +287,7 @@ const Plan = ({ cancel }) => {
                     >
                       Built in global CDN
                     </p>
-                  </div>
+                  </div> */}
                   <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -281,16 +306,15 @@ const Plan = ({ cancel }) => {
             </div>
           )}
 
-          <div className="laptop:w-[68%] mobile:w-[100%]">
-            <div
+          <div className="laptop:w-[68%] mobile:w-[100%] ">
+          {planMockData?.map((item, index) => {
+           return <div
               style={{
                 borderColor:
-                  plan === 0 ? "#38F8AC" : dark ? "#1F2329" : "#ebebeb",
+                  plan === index ? "#38F8AC" : dark ? "#1F2329" : "#ebebeb",
               }}
-              onClick={() => {
-                setPlan(0);
-              }}
-              className="w-[100%] cursor-pointer overflow-hidden h-[110px]  rounded-[5px] border-[1.5px] relative px-[17px] flex items-center justify-between"
+              onClick={() => {selectingPlan(item, index)}}
+              className="w-[100%] cursor-pointer overflow-hidden h-[110px] mb-[10px] rounded-[5px] border-[1.5px] relative px-[17px] flex items-center justify-between"
             >
               <div>
                 <h1
@@ -299,55 +323,13 @@ const Plan = ({ cancel }) => {
                   }}
                   className="text-[20px] font-bold "
                 >
-                  Free
+                  {item?.name}
                 </h1>
                 <h1
                   style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                   className="text-[14px] text-[#696e7e89] font-medium "
                 >
-                  5,000 page views/mo, 1.00GB CDN bandwidth/mo, “Optimized by
-                  TurboBoost Badge” on website
-                </h1>
-              </div>
-              <div
-                style={{
-                  color: dark ? "#fff" : "#000",
-                }}
-                className="w-[150px] ml-[10px] shrink-0 text-[30px] font-bold "
-              >
-                $0
-                <span
-                  style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                  className="text-[14px] font-medium text-[#696e7e89]"
-                >
-                  /month
-                </span>
-              </div>
-            </div>
-            <div
-              style={{
-                borderColor:
-                  plan === 1 ? "#38F8AC" : dark ? "#1F2329" : "#ebebeb",
-              }}
-              onClick={() => {
-                setPlan(1);
-              }}
-              className="w-[100%] cursor-pointer overflow-hidden h-[110px] mt-[10px]  rounded-[5px] relative border-[1px]  px-[17px] flex items-center justify-between"
-            >
-              <div>
-                <h1
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[20px] font-bold "
-                >
-                  Starter
-                </h1>
-                <h1
-                  style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                  className="text-[14px] text-[#696e7e89] font-medium "
-                >
-                  50,000 page views/mo, 25 GB CDN bandwidth/mo
+                  {item?.pageViews} page views/mogh
                 </h1>
               </div>
               <div
@@ -356,123 +338,25 @@ const Plan = ({ cancel }) => {
                 }}
                 className="w-[150px] ml-[10px] relative shrink-0 text-[30px] font-bold "
               >
-                {selected === 0 ? "$15" : "$12.50"}
+                {selected === 0 ? `$${item?.monthlyPrice.toFixed(1)}` : `$${(item?.monthlyPrice/12).toFixed(1)}`}
                 <span className="text-[14px] font-medium text-[#696e7e89]">
                   /month
                 </span>
                 {selected === 1 && (
                   <div className="absolute text-[12px] italic text-[#b0b0b0] font-medium top-[45px]">
-                    $150 billed Annually
+                    ${item?.annuallyPrice} billed Annually
                   </div>
                 )}
               </div>
             </div>
-            <div
-              style={{
-                borderColor:
-                  plan === 2 ? "#38F8AC" : dark ? "#1F2329" : "#ebebeb",
-              }}
-              onClick={() => {
-                setPlan(2);
-              }}
-              className="w-[100%] cursor-pointer overflow-hidden h-[110px] mt-[10px]  rounded-[5px] border-[1px] relative px-[17px] flex items-center justify-between"
-            >
-            <CurrentPlan />
-              <div>
-                <h1
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[20px] font-bold "
-                >
-                  Growth
-                </h1>
-                <h1
-                  style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                  className="text-[14px] text-[#696e7e89] font-medium "
-                >
-                  200,000 page views/mo, 100 GB CDN bandwidth/mo
-                </h1>
-              </div>
+})}
 
-              <div
-                style={{
-                  color: dark ? "#fff" : "#000",
-                }}
-                className="w-[150px] ml-[10px] shrink-0 relative  "
-              >
-                <div className="text-[30px] font-bold">
-                  {selected === 0 ? "$40" : "$33.33"}
-                  <span className="text-[14px] font-medium text-[#696e7e89]">
-                    /month
-                  </span>
-                </div>
-                {selected === 1 && (
-                  <div className="absolute text-[12px] italic text-[#b0b0b0] font-medium top-[45px]">
-                    $400 billed Annually
-                  </div>
-                )}
-              </div>
-            </div>
-            <div
-              style={{
-                borderColor:
-                  plan === 3 ? "#38F8AC" : dark ? "#1F2329" : "#ebebeb",
-              }}
-              onClick={() => {
-                setPlan(3);
-              }}
-              className="w-[100%] cursor-pointer overflow-hidden h-[110px] mt-[10px]  rounded-[5px] border-[1px] relative px-[17px] flex items-center justify-between"
-            >
-              <div>
-                <h1
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[20px] font-bold "
-                >
-                  {" "}
-                  Pro
-                </h1>
-                <h1
-                  style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                  className="text-[14px] text-[#696e7e89] font-medium "
-                >
-                  1,000,000 page views/mo, 500 GB CDN bandwidth/mo
-                </h1>
-              </div>
-              <div
-                style={{
-                  color: dark ? "#fff" : "#000",
-                }}
-                className="w-[150px] relative ml-[10px] shrink-0 text-[30px] font-bold "
-              >
-                {selected === 0 ? "$150" : "$125"}
-                <span className="text-[14px] font-medium text-[#696e7e89]">
-                  /month
-                </span>
-                {selected === 1 && (
-                  <div className="absolute text-[12px] italic text-[#b0b0b0] font-medium top-[45px]">
-                    $1500 billed Annually
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
         </div>
+
         <div className="w-[100%] mt-[10px] mb-[10px] h-[36px] flex justify-end items-center">
-          <div
-            style={{
-              color: "#696E7E",
-            }}
-            onClick={() => {
-              cancel();
-            }}
-            className="px-[20px] rounded-[3px] mr-[10px] text-[14px] cursor-pointer font-medium h-[38px] hover:bg-[#e8e8eccb] bg-[#E8E8EC] flex items-center justify-center"
-          >
-            Cancel
-          </div>
-          <div
+          
+          <div onClick={handleBilling}
             style={{
               color: "#191925",
             }}
@@ -487,3 +371,4 @@ const Plan = ({ cancel }) => {
 };
 
 export default Plan;
+
