@@ -8,22 +8,65 @@ import FormikSelectInput from "./FormikSelectInput";
 import ChangeEmail from "./ChangeEmail";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
+import getFetchConfig from '../../utils/getFetchConfig';
+import standardFetchHandlers from '../../utils/standardFetchHandlers';
+import handleFetchErrors from '../../utils/handleFetchErrors';
+import appURLs from '../../appURL';
 import axios from "axios"; 
 const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
-    useEffect(() => {
+  const fetchConfig = getFetchConfig(),
+    appURL = appURLs();
+
+  const [lodder,toggleLoader] = useState(false)
+  const [userData, updateUserData] = useState({
+    first_name: "",
+    last_name: "",
+    country: "",
+    phone_number: "",
+    business_type: "",
+    email_address: ""
+  })
+
+
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/v1/user/user-profile");
-        const userProfileData = response.data.data;
-        console.log('userProfileData',userProfileData);
+   
+        fetch(`${appURL}/user/user-profile`, fetchConfig)
+            .then(handleFetchErrors)
+            .then((res) => {
+              
+              if (Number(res?.status) === 200) {
+                const userDataObj = res?.acccount;
+                const dataObj = {
+                    first_name: userDataObj?.user_info?.first_name || "",
+                    email_address: userDataObj?.user_info?.email_address || "",
+                    last_name: userDataObj?.user_info?.last_name || "",
+                    country: userDataObj?.user_info?.country || "",
+                    bussiness_type: userDataObj?.user_info?.bussiness_type || "",                 
+                }
+
+                updateUserData(dataObj)
+
+            } else  {
+                return toast.error(res?.message);
+            }
+
+            })
+            .catch(standardFetchHandlers.error)
+            .finally(() => {
+                setTimeout(() => {
+                    // toggleLoader(false);
+                }, 1000);
+            });
       } catch (error) {
-        console.error("Error fetching user profile:", error.message);
+        return toast.error("Error fetching user profile");
       }
     };
 
-   
+    useEffect(() => {
     fetchUserProfile();
   }, []); 
+
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
 
@@ -33,7 +76,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
   const dispatch = useDispatch();
   const count = useSelector((state) => state?.userProfile?.userProfile);
   const userProfile = count;
-  console.log("userProfile", userProfile);
+
   const dark = useSelector((state) => state.home.dark);
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required("First Name is required"),
@@ -69,12 +112,12 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     <>
       <Formik
         initialValues={{
-          first_name: userProfile?.first_name || "",
-          last_name: userProfile?.last_name || "",
-          email_address: userProfile?.email_address || "",
-          country: userProfile?.country || "",
-          phone_number: "empty",
-          business_type: userProfile?.business_type || "",
+          first_name: userData?.first_name || "",
+          last_name: userData?.last_name || "",
+          email_address: userData?.email_address || "",
+          country: userData?.country || "",
+          phone_number:  userData?.phone_number || "" ,
+          business_type: userData?.business_type || "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -102,6 +145,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                 inputLabel="First Name"
                 inputName="first_name"
                 inputType="text"
+                inputValue= {userData?.first_name}
               />
               {isSubmitting && (
                 <ErrorMessage

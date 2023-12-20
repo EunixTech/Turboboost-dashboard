@@ -18,6 +18,7 @@ const SettingPage = ({ registrationData }) => {
   const [activeTab, updateActiveTab] = useState(0);
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
+  const [userDetail, updateUserDetail] =  useState()
   const [userSettings, setUserSettings] = useState({
    });
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -83,6 +84,10 @@ const SettingPage = ({ registrationData }) => {
     }
     window.history.back();
   };
+
+
+
+
 
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">

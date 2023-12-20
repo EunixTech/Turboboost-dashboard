@@ -3,7 +3,7 @@
 import React from "react";
 import { useField } from "formik";
 
-const FormikInput = ({ inputLabel, inputName, inputType, optionsData }) => {
+const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue }) => {
   const [field, meta] = useField(inputName);
 
   return (
