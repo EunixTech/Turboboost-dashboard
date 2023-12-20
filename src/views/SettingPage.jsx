@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
 import SaveButton from "../components/button/SaveButton";
@@ -14,22 +14,39 @@ import { toast, ToastContainer } from "react-toastify";
 import { useMediaQuery } from "react-responsive";
 
 const SettingPage = ({ registrationData }) => {
+  const [unsavedChanges, setUnsavedChanges] = useState(false);
   const [activeTab, updateActiveTab] = useState(0);
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
   const [userSettings, setUserSettings] = useState({
-    /* user settings data */
-  });
+   });
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (unsavedChanges) {
+        const message = "You have unsaved changes. Are you sure you want to leave?";
+        event.returnValue = message; 
+        return message; 
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [unsavedChanges]);
 
   const handleUserSettingsChange = (newData) => {
     setUserSettings(newData);
+    setUnsavedChanges(true);
   };
-  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
   const handleSaveSettings = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/v1/user/update-account/6520095c29371858a78fb1ec", // Replace with your actual API endpoint
+
         {
           method: "POST",
           headers: {
@@ -49,17 +66,23 @@ const SettingPage = ({ registrationData }) => {
       const updatedUserData = await response.json();
       console.log("User information updated:", updatedUserData);
 
-      // Show success toast
       toast.success("Settings updated successfully!");
-
-      // Call the onUpdate function passed to update local state
       handleUserSettingsChange(updatedUserData);
+      setUnsavedChanges(false); // Reset unsaved changes after successful save
     } catch (error) {
       console.error("Error updating user information:", error.message);
-
-      // Show error toast
       toast.error("Failed to update settings");
     }
+  };
+
+  const handleLeavePage = () => {
+    if (unsavedChanges) {
+      const userConfirmed = window.confirm("You have unsaved changes. Do you really want to leave?");
+      if (!userConfirmed) {
+        return;
+      }
+    }
+    window.history.back();
   };
 
   return (
