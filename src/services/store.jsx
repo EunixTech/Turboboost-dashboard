@@ -10,7 +10,7 @@ import featuresReducer from "./featureAppsDataSlice"
 import { apiSlice } from '../slice/apiSlice';
 import userSlice from "../slice/userSlice";
 import registrationReducer from '../slice/registerationSlice';
-
+import redirectUserSlice from "../slice/redirectUserSlice";
 import {loginWithGoogle } from "../slice/userLoginWithGoogleSlice"
 import excludesReducer from "../slice/excludeSlice"
 import { persistStore, persistReducer } from 'redux-persist';
@@ -28,6 +28,7 @@ const persistedReducer = persistReducer(persistConfig, combineReducers({
   auth: authReducer,
   home: homeReducer,
   userProfile: userSlice,
+  user: redirectUserSlice,
   registration: registrationReducer,
   cacheStatus: cacheStatusReducer,
   filter: filterReducer,
