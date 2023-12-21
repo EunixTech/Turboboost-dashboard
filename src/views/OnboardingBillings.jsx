@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { ComparePlans, planChangeText, planOnboardData } from "../utils/constant";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { billingApi } from "../utils/billingApi";
+import { useDispatch, useSelector } from "react-redux";
+import {getUserDataStart, getUserDataSuccess, getUserDataFailure } from "../slice/redirectUserSlice";
 
 const OnboardingBillings = () => {
+  const dispatch = useDispatch();
+
   const [currentPlan, setCurrentPlan] = useState("Starter");
   const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
@@ -29,25 +32,30 @@ const OnboardingBillings = () => {
     query = new URLSearchParams(search),
     userToken = query.get('userToken');
 
-  const fetchingUserDataByToken = async (values) => {
-    try {
-      // Make the API request using Axios for signing in
-      const res = await axios.get(`http://localhost:8000/v1/user/redirect/login/${userToken}`);
-      const data = res?.data?.data;
-      const redirectURL = data?.redirectURI;
-      const token = data?.token;
-    
-      localStorage.setItem('authToken', token);
-
-      if (redirectURL == "/dashboard") {
-
-        window.location.href = "/dashboard";
+    const fetchingUserDataByToken = async () => {
+      try {
+        dispatch(getUserDataStart());
+  
+        const res = await axios.get(
+          `http://localhost:8000/v1/user/redirect/login/${userToken}`
+        );
+  
+        const data = res?.data?.data;
+        const redirectURL = data?.redirectURI;
+        const token = data?.token;
+  
+        localStorage.setItem("authToken", token);
+  
+        if (redirectURL === "/dashboard") {
+          window.location.href = "/dashboard";
+        }
+  
+        dispatch(getUserDataSuccess(data)); 
+      } catch (error) {
+        console.log(error);
+        dispatch(getUserDataFailure(error.message)); 
       }
-
-    } catch (error) {
-      console.log(error)
-    }
-  };
+    };
 
 
   useEffect(() => {

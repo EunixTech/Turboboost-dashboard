@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setToggle } from "../slice/statusToggleSlice";
 
-const ToggleButton = ({ handlingToggle,value, setValue }) => {
-  const [toggle, updateToggle] = useState(false);
-  const [unsavedChanges, setUnsavedChanges] = useState(false);
+const ToggleButton = ({ toggleKey = "defaultKey", onSaveToggleState }) => {
+  const dispatch = useDispatch();
+  const storedToggleValue = useSelector((state) => state.toggles?.[toggleKey]);
   const dark = useSelector((state) => state.home.dark);
 
   const showToast = (message, type) => {
@@ -16,41 +17,32 @@ const ToggleButton = ({ handlingToggle,value, setValue }) => {
     }
   };
 
+  const [toggleValue, setToggleValue] = useState(() => {
+    const localStorageValue = localStorage.getItem(toggleKey);
+    return localStorageValue !== null ? JSON.parse(localStorageValue) : false;
+  });
+
   useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (unsavedChanges) {
-        const message = "You have unsaved changes. Are you sure you want to leave?";
-        event.returnValue = message; 
-        return message; 
-      }
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [unsavedChanges]);
+    setToggleValue(storedToggleValue !== undefined ? storedToggleValue : false);
+  }, [storedToggleValue]);
 
   const handleToggleClick = () => {
-    handlingToggle()
-    if (setValue) {
-      setValue(!value);
-      setUnsavedChanges(true)
-    } else {
-      updateToggle(!toggle);
-      setUnsavedChanges(true)
-    }
+    const newValue = !toggleValue;
+    console.log("newValue:", newValue);
+    setToggleValue(newValue);
+    dispatch(setToggle({ key: toggleKey, value: newValue }));
+    showToast(`Toggle switched to ${newValue ? "on" : "off"}`, "success");
+    onSaveToggleState && onSaveToggleState(newValue, toggleKey);
   };
+
+  useEffect(() => {
+    localStorage.setItem(toggleKey, JSON.stringify(toggleValue));
+  }, [toggleKey, toggleValue]);
 
   return (
     <div
       style={{
-        backgroundColor: (value ? value : toggle)
-          ? dark
-            ? "#272B33"
-            : "#EBEBEB"
-          : "#38F8AC",
+        backgroundColor: toggleValue ? (dark ? "#272B33" : "#EBEBEB") : "#38F8AC",
       }}
       onClick={handleToggleClick}
       className="w-[45px] cursor-pointer duration-100 bg-[#38F8AC] relative h-[25px] flex items-center rounded-[23px]"
@@ -58,7 +50,7 @@ const ToggleButton = ({ handlingToggle,value, setValue }) => {
       <img
         style={{
           position: "absolute",
-          left: (value ? !value : !toggle) ? "24px" : "3.5px",
+          left: toggleValue ? "24px" : "3.5px",
         }}
         src="/graphic/dashboard/toggle.svg"
         className="w-[19px] shrink-0 duration-100 h-[18.5px]"
