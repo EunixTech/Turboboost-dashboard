@@ -5,37 +5,38 @@ import InputFields from '../InputFields';
 import OptimizationModeCard from '../OptimizationModeCard';
 import toast from 'react-hot-toast';
 
-import getFetchConfig from '../../utils/getFetchConfig';
-import standardFetchHandlers from '../../utils/standardFetchHandlers';
-import handleFetchErrors from '../../utils/handleFetchErrors';
-import appURLs from '../../appURL';
+// import getFetchConfig from '../../utils/getFetchConfig';
+// import standardFetchHandlers from '../../utils/standardFetchHandlers';
+// import handleFetchErrors from '../../utils/handleFetchErrors';
+// import appURLs from '../../appURL';
+import { featureAPIHandling } from '../../utils/featureAPIHandling';
 
 const JSTabSettings = () => {
-  const fetchConfig = getFetchConfig(),
-  appURL = appURLs();
 
   const dark = useSelector((state) => state.home.dark);
 
-  const handlingToggleForCombineResources = () => {
-    // return toast.error("working")
+  const handlingToggleForCombineResources = async() => {
+    
+    await featureAPIHandling("akjdh");
+    // // return toast.error("working")
 
-    fetch(`${appURL}/user/user-profile`, fetchConfig)
-      .then(handleFetchErrors)
-      .then((res) => {
+    // fetch(`${appURL}/user/user-profile`, fetchConfig)
+    //   .then(handleFetchErrors)
+    //   .then((res) => {
 
-        if (Number(res?.status) === 200) {
+    //     if (Number(res?.status) === 200) {
       
-        } else {
-          return toast.error(res?.message);
-        }
+    //     } else {
+    //       return toast.error(res?.message);
+    //     }
 
-      })
-      .catch(standardFetchHandlers.error)
-      .finally(() => {
-        setTimeout(() => {
-          // toggleLoader(false);
-        }, 1000);
-      });
+    //   })
+    //   .catch(standardFetchHandlers.error)
+    //   .finally(() => {
+    //     setTimeout(() => {
+    //       // toggleLoader(false);
+    //     }, 1000);
+    //   });
   }
   console.log("ghagfsghd")
   return (
