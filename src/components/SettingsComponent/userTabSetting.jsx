@@ -20,7 +20,6 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
   const fetchConfig = getFetchConfig(),
     appURL = appURLs();
 
-    const [loader, toggleLoader] = useState(false);
     const [userData, updateUserData] = useState({
     first_name: user.first_name || "",
     last_name: user.last_name || "",
@@ -29,37 +28,6 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     business_type: user.business_type || "",
     email_address: user.email_address || "",
   });
-
-  const fetchUserProfile = async () => {
-    try {
-      fetch(`${appURL}/user/user-profile`, fetchConfig)
-        .then(handleFetchErrors)
-        .then((res) => {
-          if (Number(res?.status) === 200) {
-            const userDataObj = res?.acccount;
-            const dataObj = {
-              first_name: userDataObj?.user_info?.first_name || "",
-              email_address: userDataObj?.user_info?.email_address || "",
-              last_name: userDataObj?.user_info?.last_name || "",
-              country: userDataObj?.user_info?.country || "",
-              bussiness_type: userDataObj?.user_info?.bussiness_type || "",
-            };
-
-            updateUserData(dataObj);
-          } else {
-            return toast.error(res?.message);
-          }
-        })
-        .catch(standardFetchHandlers.error)
-        .finally(() => {
-          setTimeout(() => {
-            // toggleLoader(false);
-          }, 1000);
-        });
-    } catch (error) {
-      return toast.error("Error fetching user profile");
-    }
-  };
 
   useEffect(() => {
     // Fetch user profile data and dispatch the action to set it in the store
@@ -78,12 +46,6 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
 
     fetchUserProfile();
   }, [dispatch]);
-  const firstName = user?.first_name || "";
-  const lastName = user?.last_name || "";
-  const email_address = user?.email_address || "";
-  const country = user?.country || "";
-  const phone_number = user?.phone_number || "";
-  const business_type = user?.business_type || "";
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
 
