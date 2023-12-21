@@ -21,7 +21,7 @@ import profileSliceReducer from '../slice/profileSlice'
 const persistConfig = {
   key: 'root', 
   storage, 
-  whitelist: ['toggles'], 
+  whitelist: ['toggles', 'profile'], 
 };
 
 const rootReducer = combineReducers({
