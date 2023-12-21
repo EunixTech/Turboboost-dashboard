@@ -14,10 +14,15 @@ import { featureAPIHandling } from '../../utils/featureAPIHandling';
 const JSTabSettings = () => {
 
   const dark = useSelector((state) => state.home.dark);
-
+  
   const handlingToggleForCombineResources = async() => {
-    
-    await featureAPIHandling("akjdh");
+    // let switchoN = TRUE 
+    // ENDPOINT = ""
+    // IF(switchoN) ENDPOINT= RESTORECOMBUBE
+    // ELSE  ENDPOINT= ONCOMBUBE
+
+
+    // await featureAPIHandling("akjdh");
     // // return toast.error("working")
 
     // fetch(`${appURL}/user/user-profile`, fetchConfig)
@@ -38,6 +43,7 @@ const JSTabSettings = () => {
     //     }, 1000);
     //   });
   }
+  
   console.log("ghagfsghd")
   return (
     <>
@@ -50,6 +56,7 @@ const JSTabSettings = () => {
             }}
             className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
           >
+            <p onClick={handlingToggleForCombineResources}>Tetsign value= </p>
             <FeatureCard
               handlingToggle={handlingToggleForCombineResources}
               last={true}

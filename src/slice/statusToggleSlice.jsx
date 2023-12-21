@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  someKey: false, 
+  lazyloading: false, 
+  imageSizeAdaption: false,
+  fontLoading: false,
+  fontOptization: false,
+  minifyHTML: false,
+  criticalCSS: false,
+  removeUnsedCSS: false
 };
 
 const statusToggleSlice = createSlice({
