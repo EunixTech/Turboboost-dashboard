@@ -1,13 +1,14 @@
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  lazyloading: false, 
+  combinedjs: false,
   imageSizeAdaption: false,
   fontLoading: false,
   fontOptization: false,
   minifyHTML: false,
   criticalCSS: false,
-  removeUnsedCSS: false
+  removeUnsedCSS: false,
 };
 
 const statusToggleSlice = createSlice({
@@ -16,6 +17,7 @@ const statusToggleSlice = createSlice({
   reducers: {
     setToggle: (state, action) => {
       const { key, value } = action.payload;
+      console.log("Setting toggle:", key, value);
       state[key] = value;
     },
   },
