@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import useWidth from "../../../hooks/useWidth";
 import { billingApi } from "../../../utils/billingApi";
 import { planMockData } from "../../../utils/constant";
-import toast from "react-hot-toast";
+
+import getFetchConfig from '../../../utils/getFetchConfig';
+import standardFetchHandlers from '../../../utils/standardFetchHandlers';
+import handleFetchErrors from '../../../utils/handleFetchErrors';
+import appURLs from '../../../appURL';
+import toast from 'react-hot-toast';
 const CurrentPlan = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -24,9 +29,11 @@ const Plan = ({ cancel }) => {
 
   const [selected, setSelected] = useState(0);
   const [plan, setPlan] = useState(2);
+  const [currentPlan, updateCurrentPlan] = useState("Starter");
   const [itemData, updateItem] = useState({});
   const dark = useSelector((state) => state.home.dark);
   const w = useWidth();
+
 
   const handleBilling = async () => {
     try {
@@ -48,6 +55,42 @@ const Plan = ({ cancel }) => {
     updateItem(item)
   }
 
+
+   const fetchingBillingDetails = async () => {
+
+    const fetchConfig = getFetchConfig(),
+        appURL = appURLs();
+
+    fetch(`${appURL}/user/current-plan-detail`, fetchConfig)
+        .then(handleFetchErrors)
+        .then((res) => {
+           
+       
+            if (Number(res?.status) === 200) {
+              const planName = res?.data?.plan;
+              const planMap = {
+                "Free": 0,
+                "Starter": 1,
+                "Growth": 2,
+                "Pro": 3
+              };
+              setPlan(planMap[planName] || 0);
+
+              updateCurrentPlan(planName)
+            }
+            
+        })
+        .catch(standardFetchHandlers.error)
+        .finally(() => {
+            setTimeout(() => {
+                // return toast.error("Something went wrong1");
+            }, 1000);
+        });
+}
+useEffect(() => {
+  fetchingBillingDetails()
+}, [])
+
   return (
     <div
       style={{ zIndex: 100 }}
@@ -67,7 +110,7 @@ const Plan = ({ cancel }) => {
             }}
             className="text-[20px] font-bold "
           >
-            Choose Your Plan
+            Choose Your Plan {currentPlan}
           </h1>
           <img
             onClick={() => {
@@ -315,7 +358,11 @@ const Plan = ({ cancel }) => {
               }}
               onClick={() => {selectingPlan(item, index)}}
               className="w-[100%] cursor-pointer overflow-hidden h-[110px] mb-[10px] rounded-[5px] border-[1.5px] relative px-[17px] flex items-center justify-between"
-            >
+            >     
+            {
+              item?.name == currentPlan && <CurrentPlan />
+            }      
+
               <div>
                 <h1
                   style={{
