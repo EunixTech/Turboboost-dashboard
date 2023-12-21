@@ -5,6 +5,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { billingApi } from "../utils/billingApi";
 import { setPlan, setSelected } from "../slice/billingSlice";
+import apiRequestHanlder from "../utils/apiRequestHandler";
+
+import getFetchConfig from '../utils/getFetchConfig';
+import standardFetchHandlers from '../utils/standardFetchHandlers';
+import handleFetchErrors from '../utils/handleFetchErrors';
+import appURLs from '../appURL';
 
 const Billing = () => {
   const [currentPlan, setCurrentPlan] = useState("Starter");
@@ -57,15 +63,54 @@ const Billing = () => {
 	localStorage.setItem("planName", item.name);
   };
 
-  useEffect(() => {
-	window.intercomSettings = {
-		api_base: "https://api-iam.intercom.io",
-		app_id: "pz01qpvl",
-		email: "manmohankumar023@hmail.com", // the email for your user
-		user_id: "asd123", // a UUID for your user
-		user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
-	  };
-  }, [])
+//   useEffect(() => {
+// 	window.intercomSettings = {
+// 		api_base: "https://api-iam.intercom.io",
+// 		app_id: "pz01qpvl",
+// 		email: "manmohankumar023@hmail.com", // the email for your user
+// 		user_id: "asd123", // a UUID for your user
+// 		user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
+// 	  };
+//   }, [])
+
+
+
+  const fetchingBillingDetails = async () => {
+
+    const fetchConfig = getFetchConfig(),
+        appURL = appURLs();
+
+    fetch(`${appURL}/user/current-plan-detail`, fetchConfig)
+        .then(handleFetchErrors)
+        .then((res) => {
+
+			console.log(res)
+           
+       
+            // if (Number(res?.status) === 200) {
+            //   const planName = res?.data?.plan;
+            //   const planMap = {
+            //     "Free": 0,
+            //     "Starter": 1,
+            //     "Growth": 2,
+            //     "Pro": 3
+            //   };
+            //   setPlan(planMap[planName] || 0);
+
+            //   updateCurrentPlan(planName)
+            // }
+            
+        })
+        .catch(standardFetchHandlers.error)
+        .finally(() => {
+            setTimeout(() => {
+                // return toast.error("Something went wrong1");
+            }, 1000);
+        });
+}
+useEffect(() => {
+  fetchingBillingDetails()
+}, [])
   
 	return (
 		<div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">

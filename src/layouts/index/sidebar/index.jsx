@@ -1,9 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Plan from "../plan";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpgradePopUpShow } from "../../../services/home";
-
+import getFetchConfig from '../../../utils/getFetchConfig';
+import standardFetchHandlers from '../../../utils/standardFetchHandlers';
+import handleFetchErrors from '../../../utils/handleFetchErrors';
+import appURLs from '../../../appURL';
+import toast from 'react-hot-toast';
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -125,6 +129,37 @@ const Sidebar = () => {
   const upgradePopUpShow = useSelector((state) => state.home.upgradePopUpShow);
   const dark = useSelector((state) => state.home.dark);
   const dispatch = useDispatch();
+  const [currentPlan, updateCurrentPlan] = useState({})
+
+  const fetchingBillingDetails = async () => {
+
+    const fetchConfig = getFetchConfig(),
+        appURL = appURLs();
+
+    fetch(`${appURL}/user/current-plan-detail`, fetchConfig)
+        .then(handleFetchErrors)
+        .then((res) => {
+           
+       
+            if (Number(res?.status) === 200) {
+              const planData = res?.data;
+              console.log("planData",planData)
+              updateCurrentPlan(planData)
+            }
+            
+        })
+        .catch(standardFetchHandlers.error)
+        .finally(() => {
+            setTimeout(() => {
+                // return toast.error("Something went wrong1");
+            }, 1000);
+        });
+}
+useEffect(() => {
+  fetchingBillingDetails()
+}, [])
+
+
   return (
     <>
       {upgradePopUpShow && (
@@ -164,7 +199,7 @@ const Sidebar = () => {
             My Plan
           </p>
           <p className="text-[14px] f2 text-white tracking-wide font-medium">
-            Growth Plan
+            {currentPlan?.plan}
           </p>
           <div>
             <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
