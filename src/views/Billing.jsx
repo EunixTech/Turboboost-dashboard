@@ -13,17 +13,18 @@ import handleFetchErrors from '../utils/handleFetchErrors';
 import appURLs from '../appURL';
 
 const Billing = () => {
-  const [currentPlan, setCurrentPlan] = useState("Starter");
+  const [currentPlan, updateCurrentPlan] = useState("Starter");
   const router = useNavigate();
   const [selected, setSelected] = useState(0);
   const dark = useSelector((state) => state.home.dark);
+
   const dispatch = useDispatch();
   useEffect(() => {
     const storedPlanName = localStorage.getItem("planName");
     const storedStoreName = localStorage.getItem("storeName");
 
     if (storedPlanName) {
-      setCurrentPlan(storedPlanName);
+    //   setCurrentPlan(storedPlanName);
       dispatch(setPlan(storedPlanName)); // Use the correct action: setPlan
     }
 
@@ -33,18 +34,7 @@ const Billing = () => {
     }
   }, [dispatch]);
 
-	// const handleBilling = async (item) => {
-		
-	// 	try {
-	// 		let response = await billingApi(item,selected);
-	// 		console.log(response.data);
-	// 		if(response?.data?.confirmationUrl){
-	// 			window.location.replace(response?.data?.confirmationUrl);
-	// 		}
-	// 	} catch (e) {
-	// 		console.log(e)
-	// 	}
-	// };
+
   const handleBilling = async (item) => {
     try {
       let response = await billingApi(item, selected);
@@ -57,21 +47,9 @@ const Billing = () => {
       console.log(e);
     }
   };
-  const handlePlanChange = (item) => {
-	setCurrentPlan(item.name);
-	dispatch(setPlan(item.name)); 
-	localStorage.setItem("planName", item.name);
-  };
+ 
 
-//   useEffect(() => {
-// 	window.intercomSettings = {
-// 		api_base: "https://api-iam.intercom.io",
-// 		app_id: "pz01qpvl",
-// 		email: "manmohankumar023@hmail.com", // the email for your user
-// 		user_id: "asd123", // a UUID for your user
-// 		user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
-// 	  };
-//   }, [])
+ 
 
 
 
@@ -87,18 +65,10 @@ const Billing = () => {
 			console.log(res)
            
        
-            // if (Number(res?.status) === 200) {
-            //   const planName = res?.data?.plan;
-            //   const planMap = {
-            //     "Free": 0,
-            //     "Starter": 1,
-            //     "Growth": 2,
-            //     "Pro": 3
-            //   };
-            //   setPlan(planMap[planName] || 0);
-
-            //   updateCurrentPlan(planName)
-            // }
+            if (Number(res?.status) === 200) {
+              const planName = res?.data?.plan;
+              updateCurrentPlan(planName)
+            }
             
         })
         .catch(standardFetchHandlers.error)
@@ -234,7 +204,7 @@ useEffect(() => {
 												}}
 												className="w-[100%] h-[38px] rounded-[3px] border-[1px] bg-[#38f8ab27] hover:text-[#fff]  border-[#38f8ab27] text-[14px] font-bold text-[#fff] tracking-wide flex items-center justify-center"
 											>
-												Current Plan
+												{item?.name === currentPlan && "Current Plan" }
 											</div>
 										) : (
 											<div

@@ -185,7 +185,7 @@ const Navbar = () => {
               <span>1/1</span>
             </div>
           )}
-          <img
+          {/* <img
             src={
               dark ? "/graphic/navbar/bell-d.svg" : "/graphic/navbar/bell.svg"
             }
@@ -200,7 +200,7 @@ const Navbar = () => {
             }
             className="cursor-pointer w-[22px] mx-[10px]"
             alt=""
-          />
+          /> */}
           <div
             onMouseOver={() => {
               setHover(true);

@@ -3,6 +3,8 @@ import axios from "axios";
 export const billingApi=async(item,selected)=>{
     let planName = item?.name;
 
+	console.log("planName", planName)
+
 		let data = JSON.stringify({
 			planType: selected == 0 ? "monthly" : "annually",
 			planName: planName,

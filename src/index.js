@@ -89,11 +89,25 @@ const App = () => {
     const userToken = urlParams.get('userToken');
     setShowOnboardingModal(userToken ? true : false);
 
-   
+    window.intercomSettings = {
+      api_base: "https://api-iam.intercom.io",
+      app_id: "pz01qpvl",
+      email: "manmohankumar023@hmail.com", // the email for your user
+      user_id: "asd123", // a UUID for your user
+      user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
+      };
 
   }, []);
 
-  
+  // useEffect(() => {
+  //   window.intercomSettings = {
+  //     api_base: "https://api-iam.intercom.io",
+  //     app_id: "pz01qpvl",
+  //     email: "manmohankumar023@hmail.com", // the email for your user
+  //     user_id: "asd123", // a UUID for your user
+  //     user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
+  //     };
+  //   }, [])
   return (
     <>
       {showOnboardingModal && <NewOnboard />}
