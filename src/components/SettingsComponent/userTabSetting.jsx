@@ -8,72 +8,88 @@ import FormikSelectInput from "./FormikSelectInput";
 import ChangeEmail from "./ChangeEmail";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
-import getFetchConfig from '../../utils/getFetchConfig';
-import standardFetchHandlers from '../../utils/standardFetchHandlers';
-import handleFetchErrors from '../../utils/handleFetchErrors';
-import appURLs from '../../appURL';
-import axios from "axios"; 
+import getFetchConfig from "../../utils/getFetchConfig";
+import standardFetchHandlers from "../../utils/standardFetchHandlers";
+import handleFetchErrors from "../../utils/handleFetchErrors";
+import appURLs from "../../appURL";
+import { setUserProfile } from "../../slice/profileSlice";
+import axios from "axios";
 const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.profile.user);
   const fetchConfig = getFetchConfig(),
     appURL = appURLs();
 
-  const [lodder,toggleLoader] = useState(false)
-  const [userData, updateUserData] = useState({
-    first_name: "",
-    last_name: "",
-    country: "",
-    phone_number: "",
-    business_type: "",
-    email_address: ""
-  })
+    const [loader, toggleLoader] = useState(false);
+    const [userData, updateUserData] = useState({
+    first_name: user.first_name || "",
+    last_name: user.last_name || "",
+    country: user.country || "",
+    phone_number: user.phone_number || "",
+    business_type: user.business_type || "",
+    email_address: user.email_address || "",
+  });
 
+  const fetchUserProfile = async () => {
+    try {
+      fetch(`${appURL}/user/user-profile`, fetchConfig)
+        .then(handleFetchErrors)
+        .then((res) => {
+          if (Number(res?.status) === 200) {
+            const userDataObj = res?.acccount;
+            const dataObj = {
+              first_name: userDataObj?.user_info?.first_name || "",
+              email_address: userDataObj?.user_info?.email_address || "",
+              last_name: userDataObj?.user_info?.last_name || "",
+              country: userDataObj?.user_info?.country || "",
+              bussiness_type: userDataObj?.user_info?.bussiness_type || "",
+            };
 
+            updateUserData(dataObj);
+          } else {
+            return toast.error(res?.message);
+          }
+        })
+        .catch(standardFetchHandlers.error)
+        .finally(() => {
+          setTimeout(() => {
+            // toggleLoader(false);
+          }, 1000);
+        });
+    } catch (error) {
+      return toast.error("Error fetching user profile");
+    }
+  };
+
+  useEffect(() => {
+    // Fetch user profile data and dispatch the action to set it in the store
     const fetchUserProfile = async () => {
       try {
-   
-        fetch(`${appURL}/user/user-profile`, fetchConfig)
-            .then(handleFetchErrors)
-            .then((res) => {
-              
-              if (Number(res?.status) === 200) {
-                const userDataObj = res?.acccount;
-                const dataObj = {
-                    first_name: userDataObj?.user_info?.first_name || "",
-                    email_address: userDataObj?.user_info?.email_address || "",
-                    last_name: userDataObj?.user_info?.last_name || "",
-                    country: userDataObj?.user_info?.country || "",
-                    bussiness_type: userDataObj?.user_info?.bussiness_type || "",                 
-                }
-
-                updateUserData(dataObj)
-
-            } else  {
-                return toast.error(res?.message);
-            }
-
-            })
-            .catch(standardFetchHandlers.error)
-            .finally(() => {
-                setTimeout(() => {
-                    // toggleLoader(false);
-                }, 1000);
-            });
+        const response = await axios.get(
+          `${appURL}/user/user-profile`,
+          fetchConfig
+        );
+        const userData = response?.acccount?.user_info || {};
+        dispatch(setUserProfile(userData));
       } catch (error) {
-        return toast.error("Error fetching user profile");
+        // Handle error
       }
     };
 
-    useEffect(() => {
     fetchUserProfile();
-  }, []); 
-
+  }, [dispatch]);
+  const firstName = user?.first_name || "";
+  const lastName = user?.last_name || "";
+  const email_address = user?.email_address || "";
+  const country = user?.country || "";
+  const phone_number = user?.phone_number || "";
+  const business_type = user?.business_type || "";
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
 
   const handleOpenChangeEmailModal = () => setChangeEmailModalOpen(true);
   const handleCloseChangeEmailModal = () => setChangeEmailModalOpen(false);
 
-  const dispatch = useDispatch();
   const count = useSelector((state) => state?.userProfile?.userProfile);
   const userProfile = count;
 
@@ -112,12 +128,12 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     <>
       <Formik
         initialValues={{
-          first_name: userData?.first_name || "",
-          last_name: userData?.last_name || "",
-          email_address: userData?.email_address || "",
-          country: userData?.country || "",
-          phone_number:  userData?.phone_number || "" ,
-          business_type: userData?.business_type || "",
+          first_name: user?.first_name || "",
+          last_name: user?.last_name || "",
+          email_address: user?.email_address || "",
+          country: user?.country || "",
+          phone_number: user?.phone_number || "",
+          business_type: user?.business_type || "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -128,6 +144,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
               notifyError(error.message || "An error occurred");
             } else {
               notifySuccess();
+              dispatch(setUserProfile(values));
             }
           });
         }}
@@ -145,7 +162,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                 inputLabel="First Name"
                 inputName="first_name"
                 inputType="text"
-                inputValue= {userData?.first_name}
+                inputValue={userData?.first_name}
               />
               {isSubmitting && (
                 <ErrorMessage
@@ -258,7 +275,9 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
           <div className="w-[35%]">
             {/* <SaveButton btnText="Submit" type="submit" />
              */}
-            <button type="submit" className="variant-btn">Submit</button>
+            <button type="submit" className="variant-btn">
+              Submit
+            </button>
           </div>
         </Form>
       </Formik>

@@ -17,6 +17,7 @@ import billingReducer from "../slice/billingSlice";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import statusToggleReducer from '../slice/statusToggleSlice'
+import profileSliceReducer from '../slice/profileSlice'
 const persistConfig = {
   key: 'root', 
   storage, 
@@ -27,8 +28,8 @@ const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: authReducer,
   home: homeReducer,
-  userProfile: userSlice,
-  user: redirectUserSlice,
+  user: userSlice,
+  redirectUser: redirectUserSlice,
   toggles: statusToggleReducer,
   registration: registrationReducer,
   cacheStatus: cacheStatusReducer,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   loginGoogle: userLoginWithGoogleReducer, 
   excludes: excludesReducer, 
   billing: billingReducer,
+  profile: profileSliceReducer,  // Change the key to 'profile'
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
