@@ -66,7 +66,8 @@ export default function FeatureCard({
           </h1>
         </div>
         <div className="shrink-0">
-          <ToggleButton onClick={handleToggleClick} />
+        <ToggleButton toggleKey="someKey" saveToggleState={saveToggleState} onClick={handleToggleClick} />
+
         </div>
       </div>
 

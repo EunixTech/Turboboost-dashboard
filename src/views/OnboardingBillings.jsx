@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { ComparePlans, planChangeText, planOnboardData } from "../utils/constant";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
