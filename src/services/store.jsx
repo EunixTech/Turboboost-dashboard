@@ -10,14 +10,13 @@ import featuresReducer from "./featureAppsDataSlice"
 import userSlice from "../slice/userSlice";
 import registrationReducer from '../slice/registerationSlice';
 import redirectUserSlice from "../slice/redirectUserSlice";
-import statusToggleSlice from "../slice/statusToggleSlice";
 import userLoginWithGoogleReducer from "../slice/userLoginWithGoogleSlice";  
 
 import excludesReducer from "../slice/excludeSlice";
 import billingReducer from "../slice/billingSlice"; 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
+import statusToggleReducer from '../slice/statusToggleSlice'
 const persistConfig = {
   key: 'root', 
   storage, 
@@ -30,7 +29,7 @@ const rootReducer = combineReducers({
   home: homeReducer,
   userProfile: userSlice,
   user: redirectUserSlice,
-  toggles: statusToggleSlice.reducer,
+  toggles: statusToggleReducer,
   registration: registrationReducer,
   cacheStatus: cacheStatusReducer,
   filter: filterReducer,
@@ -46,6 +45,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
+  // reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
   devTools: true,

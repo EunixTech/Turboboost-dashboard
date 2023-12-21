@@ -1,50 +1,39 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import FeatureCard from '../FeatureCard';
-import InputFields from '../InputFields';
-import OptimizationModeCard from '../OptimizationModeCard';
-import toast from 'react-hot-toast';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import FeatureCard from "../FeatureCard";
+import InputFields from "../InputFields";
+import OptimizationModeCard from "../OptimizationModeCard";
+import toast from "react-hot-toast";
 
 // import getFetchConfig from '../../utils/getFetchConfig';
 // import standardFetchHandlers from '../../utils/standardFetchHandlers';
 // import handleFetchErrors from '../../utils/handleFetchErrors';
 // import appURLs from '../../appURL';
-import { featureAPIHandling } from '../../utils/featureAPIHandling';
+import { featureAPIHandling } from "../../utils/featureAPIHandling";
+import { setToggle } from "../../slice/statusToggleSlice";
 
 const JSTabSettings = () => {
-
+  const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
-  
-  const handlingToggleForCombineResources = async() => {
-    // let switchoN = TRUE 
-    // ENDPOINT = ""
-    // IF(switchoN) ENDPOINT= RESTORECOMBUBE
-    // ELSE  ENDPOINT= ONCOMBUBE
+  const combinedjs = useSelector((state) => state.toggles?.combinedjs);
+  console.log("Lazyloading value:", combinedjs);
+  // Use useEffect to set the initial value of combinedjs when the component mounts
+  useEffect(() => {
+    // Check if the combinedjs value is undefined or null, and set it to false
+    if (combinedjs === undefined || combinedjs === null) {
+      dispatch(setToggle({ key: "combinedjs", value: false }));
+    }
+  }, [combinedjs, dispatch]);
 
-
-    // await featureAPIHandling("akjdh");
-    // // return toast.error("working")
-
-    // fetch(`${appURL}/user/user-profile`, fetchConfig)
-    //   .then(handleFetchErrors)
-    //   .then((res) => {
-
-    //     if (Number(res?.status) === 200) {
-      
-    //     } else {
-    //       return toast.error(res?.message);
-    //     }
-
-    //   })
-    //   .catch(standardFetchHandlers.error)
-    //   .finally(() => {
-    //     setTimeout(() => {
-    //       // toggleLoader(false);
-    //     }, 1000);
-    //   });
-  }
-  
-  console.log("ghagfsghd")
+  const handlingToggleForCombineResources = () => {
+    if (combinedjs === false || combinedjs === undefined) {
+      dispatch(setToggle({ key: "combinedjs", value: true }));
+      toast.success("combinedjs switched to on");
+    } else {
+      dispatch(setToggle({ key: "combinedjs", value: false }));
+      toast.success("combinedjs switched to off");
+    }
+  };
   return (
     <>
       <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
@@ -56,7 +45,14 @@ const JSTabSettings = () => {
             }}
             className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
           >
-            <p onClick={handlingToggleForCombineResources}>Tetsign value= </p>
+            <p onClick={handlingToggleForCombineResources}>
+              Combine Js:{" "}
+              {combinedjs !== undefined
+                ? combinedjs
+                  ? "true"
+                  : "false"
+                : "loading..."}
+            </p>
             <FeatureCard
               handlingToggle={handlingToggleForCombineResources}
               last={true}
@@ -134,6 +130,6 @@ const JSTabSettings = () => {
       </div>
     </>
   );
-}
+};
 
 export default JSTabSettings;
