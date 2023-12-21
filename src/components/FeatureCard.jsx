@@ -12,7 +12,7 @@ export default function FeatureCard({
   isSubSectionExist = false,
   subSectionTitile = " ",
   children,
-  onSaveToggleState,
+  handlingToggle
 }) {
   const [dropped, setDropped] = useState(false);
   const dark = useSelector((state) => state.home.dark);
@@ -23,9 +23,6 @@ export default function FeatureCard({
     toast.success(`Switch turned ${switchStatus} for ${title}`);
   };
 
-  const saveToggleState = () => {
-    onSaveToggleState(dropped); 
-  };
 
   return (
     <div
@@ -66,7 +63,7 @@ export default function FeatureCard({
           </h1>
         </div>
         <div className="shrink-0">
-          <ToggleButton onClick={handleToggleClick} />
+          <ToggleButton handlingToggle={handlingToggle} />
         </div>
       </div>
 

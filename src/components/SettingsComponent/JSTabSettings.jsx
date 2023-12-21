@@ -3,27 +3,59 @@ import { useSelector } from 'react-redux';
 import FeatureCard from '../FeatureCard';
 import InputFields from '../InputFields';
 import OptimizationModeCard from '../OptimizationModeCard';
+import toast from 'react-hot-toast';
+
+import getFetchConfig from '../../utils/getFetchConfig';
+import standardFetchHandlers from '../../utils/standardFetchHandlers';
+import handleFetchErrors from '../../utils/handleFetchErrors';
+import appURLs from '../../appURL';
 
 const JSTabSettings = () => {
-    const dark = useSelector((state) => state.home.dark);
+  const fetchConfig = getFetchConfig(),
+  appURL = appURLs();
 
+  const dark = useSelector((state) => state.home.dark);
+
+  const handlingToggleForCombineResources = () => {
+    // return toast.error("working")
+
+    fetch(`${appURL}/user/user-profile`, fetchConfig)
+      .then(handleFetchErrors)
+      .then((res) => {
+
+        if (Number(res?.status) === 200) {
+      
+        } else {
+          return toast.error(res?.message);
+        }
+
+      })
+      .catch(standardFetchHandlers.error)
+      .finally(() => {
+        setTimeout(() => {
+          // toggleLoader(false);
+        }, 1000);
+      });
+  }
+  console.log("ghagfsghd")
   return (
     <>
-    <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
-      <div className="w-[100%] ">
-        <div
-          style={{
-            backgroundColor: dark ? "#111317" : "#fff",
-            borderColor: dark ? "#1F2329" : "#ebebeb",
-          }}
-          className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
-        >
-          <FeatureCard
-            last={true}
-            title="Combine JS into one resource"
-            description="Use a single file for all JavaScript code. This reduces the number of network requests and makes rendering more efficient"
-          />
-          {/* <FeatureCard
+      <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
+        <div className="w-[100%] ">
+          <div
+            style={{
+              backgroundColor: dark ? "#111317" : "#fff",
+              borderColor: dark ? "#1F2329" : "#ebebeb",
+            }}
+            className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
+          >
+            <FeatureCard
+              handlingToggle={handlingToggleForCombineResources}
+              last={true}
+              title="Combine JS into one resource"
+              description="Use a single file for all JavaScript code. This reduces the number of network requests and makes rendering more efficient"
+            />
+            {/* <FeatureCard
             title="Configure resource loading strategy"
             isSubSectionExist={true}
             p="10px 15px 20px 15px"
@@ -71,27 +103,28 @@ const JSTabSettings = () => {
               </div>
             </div>
           </FeatureCard> */}
-          <FeatureCard
-            title="Delayed Scripts"
-            description="Specify scripts that you would like to be loaded with a delay."
-          />
-          {/* <FeatureCard
+            <FeatureCard
+              handlingToggle={handlingToggleForCombineResources}
+              title="Delayed Scripts"
+              description="Specify scripts that you would like to be loaded with a delay."
+            />
+            {/* <FeatureCard
             title="Optimize Ads"
             description="Ads will not block the initial page render"
           /> */}
-          {/* <FeatureCard
+            {/* <FeatureCard
             title="Minify JSON for Linking Data"
             description="When enabled TurboBoost will minify the JSON-LD elements in the HTML document."
           /> */}
-          {/* <FeatureCard
+            {/* <FeatureCard
             title="Do not optimize OptinMonster scripts"
             description="OptinMonster scripts and scripts using the OptinMonster events will be automatically excluded from optimization"
           /> */}
+          </div>
         </div>
+        {/* <OptimizationModeCard /> */}
       </div>
-      {/* <OptimizationModeCard /> */}
-    </div>
-  </>
+    </>
   );
 }
 

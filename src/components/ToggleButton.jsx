@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ToggleButton = ({ value, setValue }) => {
+const ToggleButton = ({ handlingToggle,value, setValue }) => {
   const [toggle, updateToggle] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
   const dark = useSelector((state) => state.home.dark);
@@ -33,13 +33,12 @@ const ToggleButton = ({ value, setValue }) => {
   }, [unsavedChanges]);
 
   const handleToggleClick = () => {
+    handlingToggle()
     if (setValue) {
       setValue(!value);
-      showToast("Toggle switched successfully", "success");
       setUnsavedChanges(true)
     } else {
       updateToggle(!toggle);
-      showToast("Toggle switched successfully", "success");
       setUnsavedChanges(true)
     }
   };

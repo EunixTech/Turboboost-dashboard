@@ -36,10 +36,9 @@ const OnboardingBillings = () => {
       const data = res?.data?.data;
       const redirectURL = data?.redirectURI;
       const token = data?.token;
-     
+    
       localStorage.setItem('authToken', token);
 
-    
       if (redirectURL == "/dashboard") {
 
         window.location.href = "/dashboard";
