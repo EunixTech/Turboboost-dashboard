@@ -12,7 +12,8 @@ export default function FeatureCard({
   isSubSectionExist = false,
   subSectionTitile = " ",
   children,
-  handlingToggle
+  handlingToggle,
+  toggleValue
 }) {
   const [dropped, setDropped] = useState(false);
   const dark = useSelector((state) => state.home.dark);
@@ -63,7 +64,7 @@ export default function FeatureCard({
           </h1>
         </div>
         <div className="shrink-0">
-        <ToggleButton toggleKey="someKey"  onClick={handleToggleClick} />
+        <ToggleButton toggleValue={toggleValue} handlingToggle={handlingToggle}  toggleKey="someKey" />
 
         </div>
       </div>

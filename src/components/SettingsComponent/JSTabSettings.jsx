@@ -15,25 +15,20 @@ import { setToggle } from "../../slice/statusToggleSlice";
 const JSTabSettings = () => {
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
-  const combinedjs = useSelector((state) => state.toggles?.combinedjs);
-  console.log("Lazyloading value:", combinedjs);
-  // Use useEffect to set the initial value of combinedjs when the component mounts
-  useEffect(() => {
-    // Check if the combinedjs value is undefined or null, and set it to false
-    if (combinedjs === undefined || combinedjs === null) {
-      dispatch(setToggle({ key: "combinedjs", value: false }));
-    }
-  }, [combinedjs, dispatch]);
 
-  const handlingToggleForCombineResources = () => {
-    if (combinedjs === false || combinedjs === undefined) {
-      dispatch(setToggle({ key: "combinedjs", value: true }));
-      toast.success("combinedjs switched to on");
-    } else {
-      dispatch(setToggle({ key: "combinedjs", value: false }));
-      toast.success("combinedjs switched to off");
-    }
-  };
+  const combinedjs = useSelector((state) => state.toggles?.combinedjs),
+    delayScriptsValue = useSelector((state) => state.toggles?.delayScripts);
+
+  const handleDelayScript = () =>{
+    console.log("kjshfjsdhfkjdsh")
+    dispatch(setToggle({ key: "delayScripts", value: !delayScriptsValue }));
+  }
+
+
+  const handleCombineJsFeature = () =>{
+    console.log("kjshfjsdhfkjdsh")
+    dispatch(setToggle({ key: "combinedjs", value: !combinedjs }));
+  }
   return (
     <>
       <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
@@ -45,16 +40,10 @@ const JSTabSettings = () => {
             }}
             className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
           >
-            <p onClick={handlingToggleForCombineResources}>
-              Combine Js:{" "}
-              {combinedjs !== undefined
-                ? combinedjs
-                  ? "true"
-                  : "false"
-                : "loading..."}
-            </p>
+      
             <FeatureCard
-              handlingToggle={handlingToggleForCombineResources}
+              handlingToggle={handleCombineJsFeature}
+              toggleValue= {combinedjs}
               last={true}
               title="Combine JS into one resource"
               description="Use a single file for all JavaScript code. This reduces the number of network requests and makes rendering more efficient"
@@ -108,7 +97,8 @@ const JSTabSettings = () => {
             </div>
           </FeatureCard> */}
             <FeatureCard
-              handlingToggle={handlingToggleForCombineResources}
+               handlingToggle={handleDelayScript}
+               toggleValue= {delayScriptsValue}
               title="Delayed Scripts"
               description="Specify scripts that you would like to be loaded with a delay."
             />

@@ -1,10 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import FeatureCard from '../FeatureCard';
 import OptimizationModeCard from '../OptimizationModeCard';
+import { setToggle } from "../../slice/statusToggleSlice";
 
 const HtmlTabSettings = () => {
     const dark = useSelector((state) => state.home.dark);
+
+    const dispatch = useDispatch();
+
+    const minifyHTMLToggleValue = useSelector((state) => state.toggles?.minifyHTML);
+    const handleMinifyHTML = () =>{
+      console.log("kjshfjsdhfkjdsh")
+      dispatch(setToggle({ key: "minifyHTML", value: !minifyHTMLToggleValue }));
+    }
 
   return (
     <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
@@ -17,16 +26,20 @@ const HtmlTabSettings = () => {
                   className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
                 >
                   <FeatureCard
+                           handlingToggle={handleMinifyHTML}
+                           toggleValue= {minifyHTMLToggleValue}
                     last={true}
                     h="70px"
                     title="Minify HTML"
                     description="When enabled TurboBoost will minify the HTML by removing extra whitespace."
                   />
-                  <FeatureCard
+                  {/* <FeatureCard
+                           handlingToggle={handleCombineJsFeature}
+                           toggleValue= {criticalCSSToggleValue}
                     h="70px"
                     title="Keep HTML comments"
                     description="When enabled TurboBoost will not remove the HTML comments from the final cache files."
-                  />
+                  /> */}
                 </div>
               </div>
               {/* <OptimizationModeCard /> */}

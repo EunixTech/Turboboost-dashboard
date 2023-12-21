@@ -2,11 +2,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  combinedjs: false,
-  imageSizeAdaption: false,
+  fontRenderBehavior: false,
   fontLoading: false,
-  fontOptization: false,
+
+  imageSizeAdaption: false,
+  lazyLoading: false,
+
+  combinedjs: false,
+  delayScripts: false,
+
   minifyHTML: false,
+ 
   criticalCSS: false,
   removeUnsedCSS: false,
 };
