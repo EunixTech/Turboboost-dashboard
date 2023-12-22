@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import useWidth from "../hooks/useWidth";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -21,7 +20,10 @@ import quickActionDataArr from "../static/quickActionData";
 import caccheStatusDataArr from "../static/caccheStatusData";
 import { googleSpeedAPI } from "../utils/googleSpeedAPI";
 import CircularProgressLoader from "../components/loader/CircularProgressLoader";
-
+import ToggleButton from "../components/ToggleButton";
+import { useDispatch, useSelector } from "react-redux";
+import { featureAPIHandling } from "../utils/featureAPIHandling";
+import { setToggle } from "../slice/statusToggleSlice";
 const DashboardPage = () => {
     const [coreVitalsData, updateCoreVitalsData] = useState([]);
     const [performanceData, updatePerformanceData] = useState([]);
@@ -31,6 +33,7 @@ const DashboardPage = () => {
     const dark = useSelector((state) => state.home.dark);
     const router = useNavigate();
     const deviceWidth = useWidth();
+    const dispatch = useDispatch();
 
     const googleSpeedAPI = async (storeName = "https://menehariya.netscapelabs.com/") => {
         try {
@@ -66,8 +69,34 @@ const DashboardPage = () => {
             toogleLoading(false);
         }
     };
+    const criticalCSSToggleValue = useSelector((state) => state.toggles?.criticalCSS);
+    const imageSizeAdaptionToggleValue = useSelector((state) => state.toggles?.imageSizeAdaption);
+    const lazyLoadingToggleValue = useSelector((state) => state.toggles?.lazyLoading);
+
+     
+    const handleCriticalCSS = async() =>{
+        let endPoint = "";
+        if (!criticalCSSToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+        else endPoint = "/api/shopify/minify-javascript-code";
+        await featureAPIHandling(endPoint);
+        dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
+      }
 
 
+      const handleImageSizeAdaption = async() =>{
+        let endPoint = "";
+        if (!lazyLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+        else endPoint = "/api/shopify/minify-javascript-code";
+        await featureAPIHandling(endPoint);
+        dispatch(setToggle({ key: "imageSizeAdaption", value: !imageSizeAdaptionToggleValue }));
+      }
+        const handlelazyLoading = async() =>{
+        let endPoint = "";
+        if (!lazyLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+        else endPoint = "/api/shopify/minify-javascript-code";
+        await featureAPIHandling(endPoint);
+        dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
+      }
 
     useEffect(() => {
         googleSpeedAPI();
@@ -288,12 +317,39 @@ const DashboardPage = () => {
 
                             </div>
 
-                            {quickActionDataArr?.length &&
+                            <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
+            <p style={{ color: dark ? "#fff" : "#000" }}
+               className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+            >
+                Lazy Loading
+            </p>
+            <ToggleButton toggleValue={lazyLoadingToggleValue} handlingToggle={handlelazyLoading} />
+        </div>
+
+        <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
+            <p style={{ color: dark ? "#fff" : "#000" }}
+               className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+            >
+                Image Size Adaption
+            </p>
+            <ToggleButton toggleValue={imageSizeAdaptionToggleValue} handlingToggle={handleImageSizeAdaption} />
+        </div>
+
+        <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
+            <p style={{ color: dark ? "#fff" : "#000" }}
+               className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+            >
+                Critical CSS
+            </p>
+            <ToggleButton toggleValue={criticalCSSToggleValue} handlingToggle={handleCriticalCSS} />
+        </div>
+
+                            {/* {quickActionDataArr?.length &&
                                 quickActionDataArr.map((action, index) => (
                                     <QuickActionCard key={index} text={action} />
                                 ))}
 
-                            {/* <HoverGreenButton btnText="Purge all cache " /> */}
+                            <HoverGreenButton btnText="Purge all cache " /> */}
                         </div>
 
                     </div>

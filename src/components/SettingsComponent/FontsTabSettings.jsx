@@ -3,38 +3,33 @@ import FeatureCard from '../FeatureCard';
 import InputFields from '../InputFields';
 import OptimizationModeCard from '../OptimizationModeCard';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSelector } from 'react-redux';
-
+import { setToggle } from "../../slice/statusToggleSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { featureAPIHandling } from '../../utils/featureAPIHandling';
 const FontsTabSettings = () => {
   const dark = useSelector((state) => state.home.dark);
-  const [unsavedChanges, setUnsavedChanges] = useState(false);
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (unsavedChanges) {
-        const message = 'You have unsaved changes. Are you sure you want to leave?';
-        event.returnValue = message; // Standard for most browsers
-        return message; // For some older browsers
-      }
-    };
-    window.addEventListener('beforeunload', handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [unsavedChanges]);
+  const dispatch = useDispatch();
 
-  const handleInputChange = () => {
-    setUnsavedChanges(true);
-  };
+  const fontRenderBehaviorToggleValue = useSelector((state) => state.toggles?.fontRenderBehavior);
+  const fontLoadingToggleValue = useSelector((state) => state.toggles?.fontLoading);
 
-  const handleSaveChanges = () => {
-    setUnsavedChanges(false); // Reset unsavedChanges after saving
-  };
+  const handleFontRenderBehavior = async() =>{
+    let endPoint = "";
+    if (!fontRenderBehaviorToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+    else endPoint = "/api/shopify/minify-javascript-code";
+    await featureAPIHandling(endPoint);
+    dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
+  }
 
-  const handleCancelChanges = () => {
-    // Your logic to cancel changes
-    setUnsavedChanges(false); // Reset unsavedChanges after canceling
-  };
+  const handleFontLoading = async() =>{
+    let endPoint = "";
+    if (!fontLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+    else endPoint = "/api/shopify/minify-javascript-code";
+    await featureAPIHandling(endPoint);
+    dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
+  }
+ 
   return (
     <>
     <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
@@ -47,6 +42,8 @@ const FontsTabSettings = () => {
           className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
         >
           <FeatureCard
+            handlingToggle={handleFontRenderBehavior}
+            toggleValue= {fontRenderBehaviorToggleValue}
             last={true}
             title="Override Font Rendering Behavior"
             isSubSectionExist={true}
@@ -68,6 +65,8 @@ const FontsTabSettings = () => {
             </div>
           </FeatureCard>
           <FeatureCard
+                         handlingToggle={handleFontLoading}
+                         toggleValue= {fontLoadingToggleValue}
             title="Font Loading"
             isSubSectionExist={true}
             p="10px 15px 20px 15px"
@@ -97,13 +96,13 @@ const FontsTabSettings = () => {
       </div>
 
       {/* <OptimizationModeCard /> */}
-        {unsavedChanges && (
+        {/* {unsavedChanges && (
         <div className="confirmation-popup">
           <div>Save changes before leaving?</div>
           <button onClick={handleSaveChanges}>Yes</button>
           <button onClick={handleCancelChanges}>No</button>
         </div>
-      )}
+      )} */}
     </div>
   </>
   );

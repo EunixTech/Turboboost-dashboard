@@ -11,14 +11,10 @@ export const featureAPIHandling = async (endPoint = " ") => {
 
     fetch(`${appURL}${endPoint}`, fetchConfig)
         .then(handleFetchErrors)
-        .then((res) => {
-            if (Number(res?.status) === 200) return toast.success(res.message);
-            else return toast.error(res?.message)
+        .then((resJSON) => {
+            console.log(resJSON)
+            if (resJSON?.status === 200) return toast.success(resJSON.message);
+            else return toast.error(resJSON?.message)
         })
         .catch(standardFetchHandlers.error)
-        .finally(() => {
-            setTimeout(() => {
-                return toast.error("Something went wrong");
-            }, 1000);
-        });
 }

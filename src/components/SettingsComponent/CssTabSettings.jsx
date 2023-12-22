@@ -1,11 +1,32 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
 import FeatureCard from "../FeatureCard";
 import InputFields from "../InputFields";
 import OptimizationModeCard from "../OptimizationModeCard";
-
+import { setToggle } from "../../slice/statusToggleSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { featureAPIHandling } from "../../utils/featureAPIHandling";
 const CssTabSettings = () => {
     const dark = useSelector((state) => state.home.dark);
+    const dispatch = useDispatch();
+
+    const criticalCSSToggleValue = useSelector((state) => state.toggles?.criticalCSS);
+    const removeUnsedCSSToggleValue = useSelector((state) => state.toggles?.removeUnsedCSS);
+    
+    const handleCriticalCSS = async() =>{
+      let endPoint = "";
+      if (!criticalCSSToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+      else endPoint = "/api/shopify/minify-javascript-code";
+      await featureAPIHandling(endPoint);
+      dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
+    }
+    const handleRemoveUnsedCSS = async() =>{
+      let endPoint = "";
+      if (!removeUnsedCSSToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+      else endPoint = "/api/shopify/minify-javascript-code";
+      await featureAPIHandling(endPoint);
+      dispatch(setToggle({ key: "removeUnsedCSS", value: !removeUnsedCSSToggleValue }));
+    }
 
   return (
     <>
@@ -19,6 +40,8 @@ const CssTabSettings = () => {
             className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
           >
             <FeatureCard
+               handlingToggle={handleCriticalCSS}
+               toggleValue= {criticalCSSToggleValue}
               last={true}
               title="Optimize CSS Delivery"
               // isSubSectionExist={true}
@@ -53,7 +76,9 @@ const CssTabSettings = () => {
             </FeatureCard>
 
             <FeatureCard
-              title="Reduce Unused CSS"
+               handlingToggle={handleRemoveUnsedCSS}
+               toggleValue= {removeUnsedCSSToggleValue}
+              title="Remove Unused CSS"
               // isSubSectionExist={true}
               p="10px 15px 20px 15px"
               // subSectionTitile={"Additional Options"}
@@ -121,11 +146,13 @@ const CssTabSettings = () => {
                 </div>
               </div>
             </FeatureCard> */}
-
+{/* 
             <FeatureCard
+               handlingToggle={handleCombineJsFeature}
+              toggleValue= {criticalCSSToggleValue}
               title="Custom CSS"
               description="Specify custom CSS rules which will be applied to the optimized pages."
-            />
+            /> */}
           </div>
         </div>
         {/* <OptimizationModeCard /> */}
