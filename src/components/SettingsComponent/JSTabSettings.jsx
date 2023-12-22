@@ -16,19 +16,25 @@ const JSTabSettings = () => {
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
 
-  const combinedjs = useSelector((state) => state.toggles?.combinedjs),
+  const minifyJSFile = useSelector((state) => state.toggles?.minifyJSFile),
     delayScriptsValue = useSelector((state) => state.toggles?.delayScripts);
 
-  const handleDelayScript = () =>{
-    console.log("kjshfjsdhfkjdsh")
+  const handleDelayScript = async () => {
+    let endPoint = "";
+    if (!delayScriptsValue) endPoint = "/api/shopify/eliminate-render-blocking-resources";
+    else endPoint = "/api/shopify/eliminate-render-blocking-resources";
+    await featureAPIHandling(endPoint);
     dispatch(setToggle({ key: "delayScripts", value: !delayScriptsValue }));
   }
 
-
-  const handleCombineJsFeature = () =>{
-    console.log("kjshfjsdhfkjdsh")
-    dispatch(setToggle({ key: "combinedjs", value: !combinedjs }));
+  const handleMinifyJSFileFunc = async () => {
+    let endPoint = "";
+    if (!minifyJSFile) endPoint = "/api/shopify/minify-javascript-code";
+    else endPoint = "/api/shopify/minify-javascript-code";
+    await featureAPIHandling(endPoint);
+    dispatch(setToggle({ key: "minifyJSFile", value: !minifyJSFile }));
   }
+
   return (
     <>
       <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
@@ -40,12 +46,12 @@ const JSTabSettings = () => {
             }}
             className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
           >
-      
+
             <FeatureCard
-              handlingToggle={handleCombineJsFeature}
-              toggleValue= {combinedjs}
+              handlingToggle={handleMinifyJSFileFunc}
+              toggleValue={minifyJSFile}
               last={true}
-              title="Combine JS into one resource"
+              title="Minify javascript code"
               description="Use a single file for all JavaScript code. This reduces the number of network requests and makes rendering more efficient"
             />
             {/* <FeatureCard
@@ -97,8 +103,8 @@ const JSTabSettings = () => {
             </div>
           </FeatureCard> */}
             <FeatureCard
-               handlingToggle={handleDelayScript}
-               toggleValue= {delayScriptsValue}
+              handlingToggle={handleDelayScript}
+              toggleValue={delayScriptsValue}
               title="Delayed Scripts"
               description="Specify scripts that you would like to be loaded with a delay."
             />

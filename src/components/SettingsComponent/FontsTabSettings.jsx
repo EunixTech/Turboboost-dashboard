@@ -5,6 +5,7 @@ import OptimizationModeCard from '../OptimizationModeCard';
 import 'react-toastify/dist/ReactToastify.css';
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { featureAPIHandling } from '../../utils/featureAPIHandling';
 const FontsTabSettings = () => {
   const dark = useSelector((state) => state.home.dark);
 
@@ -13,43 +14,22 @@ const FontsTabSettings = () => {
   const fontRenderBehaviorToggleValue = useSelector((state) => state.toggles?.fontRenderBehavior);
   const fontLoadingToggleValue = useSelector((state) => state.toggles?.fontLoading);
 
-  const handleFontRenderBehavior = () =>{
-    console.log("kjshfjsdhfkjdsh")
+  const handleFontRenderBehavior = async() =>{
+    let endPoint = "";
+    if (!fontRenderBehaviorToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+    else endPoint = "/api/shopify/minify-javascript-code";
+    await featureAPIHandling(endPoint);
     dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
   }
 
-  const handlefontLoading = () =>{
-    console.log("kjshfjsdhfkjdsh")
+  const handleFontLoading = async() =>{
+    let endPoint = "";
+    if (!fontLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+    else endPoint = "/api/shopify/minify-javascript-code";
+    await featureAPIHandling(endPoint);
     dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
   }
-  // const [unsavedChanges, setUnsavedChanges] = useState(false);
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event) => {
-  //     if (unsavedChanges) {
-  //       const message = 'You have unsaved changes. Are you sure you want to leave?';
-  //       event.returnValue = message; // Standard for most browsers
-  //       return message; // For some older browsers
-  //     }
-  //   };
-  //   window.addEventListener('beforeunload', handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload);
-  //   };
-  // }, [unsavedChanges]);
-
-  // const handleInputChange = () => {
-  //   setUnsavedChanges(true);
-  // };
-
-  // const handleSaveChanges = () => {
-  //   setUnsavedChanges(false); // Reset unsavedChanges after saving
-  // };
-
-  // const handleCancelChanges = () => {
-  //   // Your logic to cancel changes
-  //   setUnsavedChanges(false); // Reset unsavedChanges after canceling
-  // };
+ 
   return (
     <>
     <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
@@ -85,7 +65,7 @@ const FontsTabSettings = () => {
             </div>
           </FeatureCard>
           <FeatureCard
-                         handlingToggle={handlefontLoading}
+                         handlingToggle={handleFontLoading}
                          toggleValue= {fontLoadingToggleValue}
             title="Font Loading"
             isSubSectionExist={true}

@@ -5,6 +5,7 @@ import InputFields from "../InputFields";
 import OptimizationModeCard from "../OptimizationModeCard";
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { featureAPIHandling } from "../../utils/featureAPIHandling";
 const CssTabSettings = () => {
     const dark = useSelector((state) => state.home.dark);
     const dispatch = useDispatch();
@@ -12,14 +13,21 @@ const CssTabSettings = () => {
     const criticalCSSToggleValue = useSelector((state) => state.toggles?.criticalCSS);
     const removeUnsedCSSToggleValue = useSelector((state) => state.toggles?.removeUnsedCSS);
     
-    const handleCriticalCSS = () =>{
-      console.log("kjshfjsdhfkjdsh")
+    const handleCriticalCSS = async() =>{
+      let endPoint = "";
+      if (!criticalCSSToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+      else endPoint = "/api/shopify/minify-javascript-code";
+      await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
     }
-    const handleRemoveUnsedCSS = () =>{
-      console.log("kjshfjsdhfkjdsh")
-      dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
+    const handleRemoveUnsedCSS = async() =>{
+      let endPoint = "";
+      if (!removeUnsedCSSToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+      else endPoint = "/api/shopify/minify-javascript-code";
+      await featureAPIHandling(endPoint);
+      dispatch(setToggle({ key: "removeUnsedCSS", value: !removeUnsedCSSToggleValue }));
     }
+
   return (
     <>
       <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">

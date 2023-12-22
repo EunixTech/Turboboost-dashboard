@@ -4,6 +4,7 @@ import InputFields from "../InputFields";
 import OptimizationModeCard from "../OptimizationModeCard";
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { featureAPIHandling } from "../../utils/featureAPIHandling";
 
 const ImageTabSettings = () => {
     const dark = useSelector((state) => state.home.dark);
@@ -12,14 +13,21 @@ const ImageTabSettings = () => {
     const imageSizeAdaptionToggleValue = useSelector((state) => state.toggles?.imageSizeAdaption);
     const lazyLoadingToggleValue = useSelector((state) => state.toggles?.lazyLoading);
 
-    const handleImageSizeAdaption = () =>{
-      console.log("kjshfjsdhfkjdsh")
+    const handleImageSizeAdaption = async() =>{
+      let endPoint = "";
+      if (!lazyLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+      else endPoint = "/api/shopify/minify-javascript-code";
+      await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "imageSizeAdaption", value: !imageSizeAdaptionToggleValue }));
     }
-      const handlelazyLoading = () =>{
-      console.log("kjshfjsdhfkjdsh")
+      const handlelazyLoading = async() =>{
+      let endPoint = "";
+      if (!lazyLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+      else endPoint = "/api/shopify/minify-javascript-code";
+      await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
     }
+    
   return (
     <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
       <div className="w-[100%] ">

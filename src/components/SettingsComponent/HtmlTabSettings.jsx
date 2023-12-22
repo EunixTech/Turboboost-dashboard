@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FeatureCard from '../FeatureCard';
 import OptimizationModeCard from '../OptimizationModeCard';
 import { setToggle } from "../../slice/statusToggleSlice";
+import { featureAPIHandling } from '../../utils/featureAPIHandling';
 
 const HtmlTabSettings = () => {
     const dark = useSelector((state) => state.home.dark);
@@ -10,8 +11,11 @@ const HtmlTabSettings = () => {
     const dispatch = useDispatch();
 
     const minifyHTMLToggleValue = useSelector((state) => state.toggles?.minifyHTML);
-    const handleMinifyHTML = () =>{
-      console.log("kjshfjsdhfkjdsh")
+    const handleMinifyHTML = async() =>{
+      let endPoint = "";
+      if (!minifyHTMLToggleValue) endPoint = "/api/shopify/minify-javascript-code";
+      else endPoint = "/api/shopify/minify-javascript-code";
+      await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "minifyHTML", value: !minifyHTMLToggleValue }));
     }
 

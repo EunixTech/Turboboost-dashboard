@@ -8,7 +8,7 @@ const initialState = {
   imageSizeAdaption: false,
   lazyLoading: false,
 
-  combinedjs: false,
+  minifyJSFile: false,
   delayScripts: false,
 
   minifyHTML: false,
