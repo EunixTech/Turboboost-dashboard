@@ -96,18 +96,14 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
 
     const handleSubmit = (values, { setSubmitting }) => {
       if (!isChangeEmailModalOpen) {
-        // Submit the form only if the "Change Email" modal is not open
         setSubmitting(true);
     
     console.log('data',values)
     try {
-      // Dispatch action to update Redux store
       dispatch(setUserProfile(values));
   
-      // Notify success
       notifySuccess();
     } catch (error) {
-      // Notify error
       notifyError(error.message || "An error occurred");
     } finally {
       setSubmitting(false);

@@ -40,14 +40,13 @@ const rootReducer = combineReducers({
   loginGoogle: userLoginWithGoogleReducer, 
   excludes: excludesReducer, 
   billing: billingReducer,
-  profile: profileSliceReducer,  // Change the key to 'profile'
+  profile: profileSliceReducer,  
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-  // reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
   devTools: true,
