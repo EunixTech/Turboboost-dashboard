@@ -289,6 +289,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
 
             <div className="w-[35%]">
               <button
+                type="button" 
                 onClick={handleOpenChangeEmailModal}
                 className="variant-txt-color"
               >
