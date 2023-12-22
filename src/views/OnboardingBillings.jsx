@@ -3,11 +3,14 @@ import { ComparePlans, planChangeText, planOnboardData } from "../utils/constant
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { billingApi } from "../utils/billingApi";
+import appURLs from '../appURL';
 import { useDispatch, useSelector } from "react-redux";
 import {getUserDataStart, getUserDataSuccess, getUserDataFailure } from "../slice/redirectUserSlice";
 
 const OnboardingBillings = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(),
+   appURL = appURLs();
+
 
   const [currentPlan, setCurrentPlan] = useState("Starter");
   const navigate = useNavigate();
@@ -36,21 +39,22 @@ const OnboardingBillings = () => {
       try {
         dispatch(getUserDataStart());
   
-        const res = await axios.get(
-          `http://localhost:8000/v1/user/redirect/login/${userToken}`
+        const resJson = await axios.get(
+          `${appURL}/user/redirect/login/${userToken}`
         );
   
-        const data = res?.data?.data;
-        const redirectURL = data?.redirectURI;
-        const token = data?.token;
+        const res = resJson?.data?.data;
+        const redirectURL = res?.redirectURI;
+        const token = res?.token;
+
+        console.log("resresresresres",res)
   
         localStorage.setItem("authToken", token);
-  
         if (redirectURL === "/dashboard") {
           window.location.href = "/dashboard";
         }
   
-        dispatch(getUserDataSuccess(data)); 
+        // dispatch(getUserDataSuccess(data)); 
       } catch (error) {
         console.log(error);
         dispatch(getUserDataFailure(error.message)); 

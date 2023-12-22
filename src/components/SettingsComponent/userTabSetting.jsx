@@ -11,13 +11,15 @@ import appURLs from "../../appURL";
 import { setUserProfile } from "../../slice/profileSlice";
 import axios from "axios";
 import "react-phone-number-input/style.css";
+import standardFetchHandlers from '../../utils/standardFetchHandlers';
+import handleFetchErrors from '../../utils/handleFetchErrors';
 import PhoneInput from "react-phone-number-input";
 import {
   isValidNumber,
   parsePhoneNumberFromString,
 } from "libphonenumber-js";
 const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
-  const [value, setValue] = useState();
+
   const [phoneNumberValue, setPhoneNumberValue] = useState();
 
   const dispatch = useDispatch();
@@ -27,34 +29,29 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
 
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
+  const [loading, toggoleLoading] = useState(false);
+  const [userData, updateUserData] = useState({
+    first_name:  "",
+    last_name:  "",
+    email_address:  "",
+    country:  "",
+    phone_number: "",
+    business_type: "",
+  })
 
   const [formValues, setFormValues] = useState({
-    first_name: user?.first_name || "",
-    last_name: user?.last_name || "",
-    email_address: user?.email_address || "",
-    country: user?.country || "",
-    phone_number: user?.phone_number || "",
-    business_type: user?.business_type || "",
+    first_name: userData?.first_name || "",
+    last_name: userData?.last_name || "",
+    email_address: userData?.email_address || "",
+    country: user?.userData || "",
+    phone_number: userData?.phone_number || "",
+    business_type: userData?.business_type || "",
   });
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await axios.get(
-          `${appURL}/user/user-profile`,
-          fetchConfig
-        );
-        const userData = response?.acccount?.user_info || {};
-        dispatch(setUserProfile(userData));
-      } catch (error) {}
-    };
 
-    fetchUserProfile();
-  }, [dispatch]);
-
-  useEffect(() => {
-    setPhoneNumberValue(formValues.phone_number);
-  }, [formValues.phone_number]);
+  // useEffect(() => {
+  //   setPhoneNumberValue(formValues.phone_number);
+  // }, [formValues.phone_number]);
 
   const handleOpenChangeEmailModal = () => setChangeEmailModalOpen(true);
   const handleCloseChangeEmailModal = () => setChangeEmailModalOpen(false);
@@ -69,27 +66,27 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     last_name: Yup.string().required("Last Name is required"),
     country: Yup.string().required("Country is required"),
     phone_number: Yup.string()
-    .transform((value, originalValue) => {
-      // Remove non-numeric characters from the input value
-      return originalValue.replace(/[^\d]/g, "");
-    })
-    .test("valid-phone-number", "Invalid phone number", function (value) {
-      const { country } = this.parent;
-      if (country && value) {
-        try {
-          const phoneNumber = parsePhoneNumberFromString(
-            `+${value}`,
-            country
-          );
-          return phoneNumber ? phoneNumber.isValid() : false;
-        } catch (error) {
-          console.error("Error parsing phone number:", error);
-          return false;
+      .transform((value, originalValue) => {
+        // Remove non-numeric characters from the input value
+        return originalValue.replace(/[^\d]/g, "");
+      })
+      .test("valid-phone-number", "Invalid phone number", function (value) {
+        const { country } = this.parent;
+        if (country && value) {
+          try {
+            const phoneNumber = parsePhoneNumberFromString(
+              `+${value}`,
+              country
+            );
+            return phoneNumber ? phoneNumber.isValid() : false;
+          } catch (error) {
+            console.error("Error parsing phone number:", error);
+            return false;
+          }
         }
-      }
-      return true; // Return true if either country or phone number is not provided
-    })
-    .required("Phone number is required"),
+        return true; // Return true if either country or phone number is not provided
+      })
+      .required("Phone number is required"),
     business_type: Yup.string().required("Business Type is required"),
     email_address: Yup.string()
       .email("Invalid email address")
@@ -115,14 +112,14 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     toast.error(`Failed to update user profile: ${errorMessage}`);
 
   const handleInputChange = (fieldName, value, { setFieldValue }) => {
-    setFieldValue(fieldName, value);
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [fieldName]: value,
-    }));
-    if (fieldName === "phone_number") {
-      setPhoneNumberValue(value);
-    }
+    // setFieldValue(fieldName, value);
+    // setFormValues((prevValues) => ({
+    //   ...prevValues,
+    //   [fieldName]: value,
+    // }));
+    // if (fieldName === "phone_number") {
+    //   setPhoneNumberValue(value);
+    // }
 
   };
 
@@ -144,9 +141,53 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     }
   };
 
+  const fetchProfileData = () => {
+    toggoleLoading(true)
+    fetch(`${appURL}/user/user-profile`, fetchConfig)
+      .then(handleFetchErrors)
+      .then((resJSON) => {
+
+        if (resJSON?.status === 200) {
+          const user = resJSON?.acccount
+
+          const dataObj = {
+            first_name: user?.user_info?.first_name,
+            last_name: user?.user_info?.last_name ,
+            email_address: user?.user_info?.email_address ,
+            country: user?.user_info?.country,
+            phone_number: user?.user_info?.phone_number,
+            business_type: user?.user_info?.business_type,
+          }
+
+          updateUserData(dataObj)
+          toggoleLoading(false)
+        }
+        
+      })
+      .catch(standardFetchHandlers.error)
+  }
+
+  useEffect(() => {
+     fetchProfileData();
+  
+  }, [])
+  
+  console.log("userData",userData)
+  
+
   return (
+    
+     
+    loading ? "ajdnka":
     <Formik
-      initialValues={formValues}
+      initialValues={{
+        first_name: userData?.first_name || "",
+        last_name: userData?.last_name || "",
+        email_address: userData?.email_address || "",
+        country: userData?.country || "",
+        phone_number: userData?.phone_number || "",
+        business_type: userData?.business_type || "",
+      }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
@@ -309,6 +350,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
         </div>
       </Form>
     </Formik>
+                  
   );
 };
 

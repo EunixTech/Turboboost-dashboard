@@ -73,7 +73,6 @@ const DashboardPage = () => {
     const imageSizeAdaptionToggleValue = useSelector((state) => state.toggles?.imageSizeAdaption);
     const lazyLoadingToggleValue = useSelector((state) => state.toggles?.lazyLoading);
 
-     
     const handleCriticalCSS = async() =>{
         let endPoint = "";
         if (!criticalCSSToggleValue) endPoint = "/api/shopify/minify-javascript-code";
@@ -81,7 +80,6 @@ const DashboardPage = () => {
         await featureAPIHandling(endPoint);
         dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
       }
-
 
       const handleImageSizeAdaption = async() =>{
         let endPoint = "";
