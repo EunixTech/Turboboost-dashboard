@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,16 @@ import getFetchConfig from "../../utils/getFetchConfig";
 import appURLs from "../../appURL";
 import { setUserProfile } from "../../slice/profileSlice";
 import axios from "axios";
-
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import {
+  isValidNumber,
+  parsePhoneNumberFromString,
+} from "libphonenumber-js";
 const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
+  const [value, setValue] = useState();
+  const [phoneNumberValue, setPhoneNumberValue] = useState();
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.profile.user);
   const fetchConfig = getFetchConfig();
@@ -38,12 +46,15 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
         );
         const userData = response?.acccount?.user_info || {};
         dispatch(setUserProfile(userData));
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchUserProfile();
   }, [dispatch]);
+
+  useEffect(() => {
+    setPhoneNumberValue(formValues.phone_number);
+  }, [formValues.phone_number]);
 
   const handleOpenChangeEmailModal = () => setChangeEmailModalOpen(true);
   const handleCloseChangeEmailModal = () => setChangeEmailModalOpen(false);
@@ -58,8 +69,27 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     last_name: Yup.string().required("Last Name is required"),
     country: Yup.string().required("Country is required"),
     phone_number: Yup.string()
-      .matches(/^\d{10}$/, "Invalid phone number")
-      .required("Phone number is required"),
+    .transform((value, originalValue) => {
+      // Remove non-numeric characters from the input value
+      return originalValue.replace(/[^\d]/g, "");
+    })
+    .test("valid-phone-number", "Invalid phone number", function (value) {
+      const { country } = this.parent;
+      if (country && value) {
+        try {
+          const phoneNumber = parsePhoneNumberFromString(
+            `+${value}`,
+            country
+          );
+          return phoneNumber ? phoneNumber.isValid() : false;
+        } catch (error) {
+          console.error("Error parsing phone number:", error);
+          return false;
+        }
+      }
+      return true; // Return true if either country or phone number is not provided
+    })
+    .required("Phone number is required"),
     business_type: Yup.string().required("Business Type is required"),
     email_address: Yup.string()
       .email("Invalid email address")
@@ -84,38 +114,42 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
   const notifyError = (errorMessage) =>
     toast.error(`Failed to update user profile: ${errorMessage}`);
 
-    const handleInputChange = (fieldName, value, { setFieldValue }) => {
-      setFieldValue(fieldName, value);
-      setFormValues((prevValues) => ({
-        ...prevValues,
-        [fieldName]: value,
-      }));
-    };
-  
-    
+  const handleInputChange = (fieldName, value, { setFieldValue }) => {
+    setFieldValue(fieldName, value);
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [fieldName]: value,
+    }));
+    if (fieldName === "phone_number") {
+      setPhoneNumberValue(value);
+    }
 
-    const handleSubmit = (values, { setSubmitting }) => {
-      if (!isChangeEmailModalOpen) {
-        setSubmitting(true);
-    
-    console.log('data',values)
+  };
+
+  const handleSubmit = async (values, { setSubmitting }) => {
+    setSubmitting(true);
+
+    console.log("data", values);
     try {
-      dispatch(setUserProfile(values));
-  
+      // Dispatch action to update Redux store
+      await dispatch(setUserProfile(values));
+
+      // Notify success
       notifySuccess();
     } catch (error) {
+      // Notify error
       notifyError(error.message || "An error occurred");
     } finally {
       setSubmitting(false);
     }
   };
-    }
+
   return (
     <Formik
-    initialValues={formValues}
-    validationSchema={validationSchema}
-    onSubmit={handleSubmit}
-  >
+      initialValues={formValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
       <Form>
         <div
           style={{
@@ -191,17 +225,17 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
           )}
 
           <Field name="phone_number">
-            {({ field }) => (
+            {({ field, form }) => (
               <div className="w-[100%]">
-                <FormikInput
-                  inputLabel="Phone Number"
-                  inputName="phone_number"
-                  inputType="tel"
-                  field={field}
-                  form={Form}
-                  handleInputChange={handleInputChange}
+                <PhoneInput
+                  placeholder="Enter phone number"
+                  value={phoneNumberValue}
+                  onChange={(formattedValue) => {
+                    setPhoneNumberValue(formattedValue);
+                    form.setFieldValue("phone_number", formattedValue);
+                  }}
                 />
-                {isSubmitting && (
+                {form.touched.phone_number && form.errors.phone_number && (
                   <ErrorMessage
                     name="phone_number"
                     component="div"
@@ -256,8 +290,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
             <div className="w-[35%]">
               <button
                 onClick={handleOpenChangeEmailModal}
-                className="variant-btn-color"
-                type="button"
+                className="variant-txt-color"
               >
                 Change Email
               </button>
@@ -270,7 +303,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
         </div>
 
         <div className="w-[35%]">
-          <button type="submit" className="variant-btn-color">
+          <button type="submit" className="variant-txt-color">
             Submit
           </button>
         </div>

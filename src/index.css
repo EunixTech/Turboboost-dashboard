@@ -328,6 +328,16 @@ body::-webkit-scrollbar-thumb {
   font-weight: 700;
   margin-top: 10px;
 }
+.variant-txt-color{
+  background: #2fe49c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
   height: 1rem !important;
 }
@@ -356,4 +366,18 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSe
 }
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
   height: 5px !important;
+}
+.PhoneInput {
+  display: flex;
+  align-items: center;
+  margin-top: 27px;
+  border: 1px solid #EBEBEB;
+  border-radius: 4px;
+  padding: 6px;
+}
+input.PhoneInputInput {
+  font-size: 13px;
+  padding: 3px;
+  font-family: inherit;
+  outline: 0
 }
