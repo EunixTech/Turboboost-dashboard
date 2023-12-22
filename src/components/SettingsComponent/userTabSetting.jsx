@@ -95,7 +95,9 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     
 
     const handleSubmit = (values, { setSubmitting }) => {
-      setSubmitting(true);
+      if (!isChangeEmailModalOpen) {
+        // Submit the form only if the "Change Email" modal is not open
+        setSubmitting(true);
     
     console.log('data',values)
     try {
@@ -111,7 +113,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
       setSubmitting(false);
     }
   };
-
+    }
   return (
     <Formik
     initialValues={formValues}
@@ -258,7 +260,8 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
             <div className="w-[35%]">
               <button
                 onClick={handleOpenChangeEmailModal}
-                className="variant-btn"
+                className="variant-btn-color"
+                type="button"
               >
                 Change Email
               </button>
@@ -271,7 +274,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
         </div>
 
         <div className="w-[35%]">
-          <button type="submit" className="variant-btn">
+          <button type="submit" className="variant-btn-color">
             Submit
           </button>
         </div>
