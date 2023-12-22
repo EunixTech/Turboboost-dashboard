@@ -116,7 +116,6 @@ const JSTabSettings = () => {
           /> */}
           </div>
         </div>
-        {/* <OptimizationModeCard /> */}
       </div>
     </>
   );
