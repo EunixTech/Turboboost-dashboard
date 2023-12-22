@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { apiSlice } from '../slice/apiSlice';
 import authReducer from '../slice/authSlice';
+import authMiddleware from '../slice/authMiddleware'; 
 import homeReducer from './home';
 import cacheStatusReducer from './cacheStatusSlice';
 import filterReducer from './filterSlice';
@@ -48,7 +49,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware().concat(apiSlice.middleware, authMiddleware),
   devTools: true,
 });
 
