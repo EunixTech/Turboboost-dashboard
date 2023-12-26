@@ -27,146 +27,180 @@ import { setToggle } from "../slice/statusToggleSlice";
 import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
 const DashboardPage = () => {
-    const [coreVitalsData, updateCoreVitalsData] = useState([]);
-    const [performanceData, updatePerformanceData] = useState([]);
-    const [coreVitals, setVitsals] = useState(true);
-    const [loading, toogleLoading] = useState(true);
+  const [coreVitalsData, updateCoreVitalsData] = useState([]);
+  const [performanceData, updatePerformanceData] = useState([]);
+  const [coreVitals, setVitsals] = useState(true);
+  const [loading, toogleLoading] = useState(true);
 
-    const dark = useSelector((state) => state.home.dark);
-    const router = useNavigate();
-    const deviceWidth = useWidth();
-    const dispatch = useDispatch();
+  const dark = useSelector((state) => state.home.dark);
+  const router = useNavigate();
+  const deviceWidth = useWidth();
+  const dispatch = useDispatch();
 
-    const fetchConfig = getFetchConfig();
-    const appURL = appURLs();
-  
+  const fetchConfig = getFetchConfig();
+  const appURL = appURLs();
 
-    const googleSpeedAPI = async (storeName = "") => {
-        console.log(storeName)
-        try {
-            toogleLoading(true);
-            const response = await axios.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${storeName}&category=best-practices&category=seo&category=performance&category=accessibility`);
+  const googleSpeedAPI = async (storeName = "") => {
+    console.log(storeName);
+    try {
+      toogleLoading(true);
+      const response = await axios.get(
+        `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${storeName}&category=best-practices&category=seo&category=performance&category=accessibility`
+      );
 
-            toogleLoading(false);
-            const data = response.data;
-            const lighthouseData = data.lighthouseResult;
+      toogleLoading(false);
+      const data = response.data;
+      const lighthouseData = data.lighthouseResult;
 
-            const metrics = {
-                "First Contentful Paint": lighthouseData.audits['first-contentful-paint'].displayValue,
-                "Speed Index": lighthouseData.audits['speed-index'].displayValue,
-                "Total Blocking Time": lighthouseData.audits['total-blocking-time'].displayValue,
-                "Largest Contentful Paint": lighthouseData.audits['largest-contentful-paint'].displayValue,
-                "Performance": lighthouseData.categories.performance.score * 100,
-                "Accessibility": lighthouseData.categories.accessibility.score * 100,
-                "Best Practices": lighthouseData.categories['best-practices'].score * 100,
-                "SEO": lighthouseData.categories.seo.score * 100,
-            };
+      const metrics = {
+        "First Contentful Paint":
+          lighthouseData.audits["first-contentful-paint"].displayValue,
+        "Speed Index": lighthouseData.audits["speed-index"].displayValue,
+        "Total Blocking Time":
+          lighthouseData.audits["total-blocking-time"].displayValue,
+        "Largest Contentful Paint":
+          lighthouseData.audits["largest-contentful-paint"].displayValue,
+        Performance: lighthouseData.categories.performance.score * 100,
+        Accessibility: lighthouseData.categories.accessibility.score * 100,
+        "Best Practices":
+          lighthouseData.categories["best-practices"].score * 100,
+        SEO: lighthouseData.categories.seo.score * 100,
+      };
 
-            const performanceArr = Object.keys(metrics)
-                .filter(key => ["Performance", "Accessibility", "Best Practices", "SEO"].includes(key))
-                .map(key => ({ name: key, value: Math.round(metrics[key] * 10) / 10 }));
+      const performanceArr = Object.keys(metrics)
+        .filter((key) =>
+          ["Performance", "Accessibility", "Best Practices", "SEO"].includes(
+            key
+          )
+        )
+        .map((key) => ({
+          name: key,
+          value: Math.round(metrics[key] * 10) / 10,
+        }));
 
-            const coreVitualsArr = Object.keys(metrics)
-                .filter(key => ["First Contentful Paint", "Speed Index", "Total Blocking Time", "Largest Contentful Paint"].includes(key))
-                .map(key => ({ name: key, value: metrics[key] }));
+      const coreVitualsArr = Object.keys(metrics)
+        .filter((key) =>
+          [
+            "First Contentful Paint",
+            "Speed Index",
+            "Total Blocking Time",
+            "Largest Contentful Paint",
+          ].includes(key)
+        )
+        .map((key) => ({ name: key, value: metrics[key] }));
 
-            updateCoreVitalsData(coreVitualsArr);
-            updatePerformanceData(performanceArr);
-        } catch (e) {
-            toogleLoading(false);
+      updateCoreVitalsData(coreVitualsArr);
+      updatePerformanceData(performanceArr);
+    } catch (e) {
+      toogleLoading(false);
+    }
+  };
+  const criticalCSSToggleValue = useSelector(
+    (state) => state.toggles?.criticalCSS
+  );
+  const imageSizeAdaptionToggleValue = useSelector(
+    (state) => state.toggles?.imageSizeAdaption
+  );
+  const lazyLoadingToggleValue = useSelector(
+    (state) => state.toggles?.lazyLoading
+  );
+
+  const handleCriticalCSS = async () => {
+    let endPoint = "";
+    if (!criticalCSSToggleValue)
+      endPoint = "/api/shopify/minify-javascript-code";
+    else endPoint = "/api/shopify/minify-javascript-code";
+    await featureAPIHandling(endPoint);
+    dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
+  };
+
+  const handleImageSizeAdaption = async () => {
+    let endPoint = "";
+    if (!lazyLoadingToggleValue)
+      endPoint = "/api/shopify/minify-javascript-code";
+    else endPoint = "/api/shopify/minify-javascript-code";
+    await featureAPIHandling(endPoint);
+    dispatch(
+      setToggle({
+        key: "imageSizeAdaption",
+        value: !imageSizeAdaptionToggleValue,
+      })
+    );
+  };
+  const handlelazyLoading = async () => {
+    let endPoint = "";
+    if (!lazyLoadingToggleValue)
+      endPoint = "/api/shopify/minify-javascript-code";
+    else endPoint = "/api/shopify/minify-javascript-code";
+    await featureAPIHandling(endPoint);
+    dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
+  };
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await fetch(
+          `${appURL}/user/user-profile`,
+          fetchConfig
+        );
+        const resJSON = await response.json();
+
+        if (resJSON?.status === 200) {
+          const user = resJSON?.acccount;
+          const shopName = user?.app_token?.shopify?.shop;
+          const shopURL = `https://${shopName}/`;
+          console.log("shopURL", shopURL);
+
+          googleSpeedAPI(shopURL);
         }
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
     };
-    const criticalCSSToggleValue = useSelector((state) => state.toggles?.criticalCSS);
-    const imageSizeAdaptionToggleValue = useSelector((state) => state.toggles?.imageSizeAdaption);
-    const lazyLoadingToggleValue = useSelector((state) => state.toggles?.lazyLoading);
 
-    const handleCriticalCSS = async() =>{
-        let endPoint = "";
-        if (!criticalCSSToggleValue) endPoint = "/api/shopify/minify-javascript-code";
-        else endPoint = "/api/shopify/minify-javascript-code";
-        await featureAPIHandling(endPoint);
-        dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
-      }
+    fetchProfileData();
+  }, []);
 
-      const handleImageSizeAdaption = async() =>{
-        let endPoint = "";
-        if (!lazyLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
-        else endPoint = "/api/shopify/minify-javascript-code";
-        await featureAPIHandling(endPoint);
-        dispatch(setToggle({ key: "imageSizeAdaption", value: !imageSizeAdaptionToggleValue }));
-      }
-        const handlelazyLoading = async() =>{
-        let endPoint = "";
-        if (!lazyLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
-        else endPoint = "/api/shopify/minify-javascript-code";
-        await featureAPIHandling(endPoint);
-        dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
-      }
+  return (
+    <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+      <div className="w-[100%] h-[50px] shrink-0"></div>
 
+      <div
+        className={`${
+          dark ? "backgroundDarkMode" : "background"
+        } w-[100%] h-[100%] flex flex-col items-center  overflow-y-auto scroll-bar-cool111 overflow-x-hidden laptop:px-[20px]  desktop:px-[80px]`}
+      >
+        <div className="w-[100%] pb-[50px] max-w-[1920px] min-h-[100vh]">
+          <div className="w-[100%] pt-[50px] h-[40px] mobile:px-[10px] flex items-center justify-between">
+            <div className="flex items-center mb-[20px] justify-center">
+              <GreetingCard />
 
-      useEffect(() => {
-        const fetchProfileData = async () => {
-      
-          try {
-            const response = await fetch(
-              `${appURL}/user/user-profile`,
-              fetchConfig
-            );
-            const resJSON = await response.json();
-    
-            if (resJSON?.status === 200) {
-              const user = resJSON?.acccount;
-            const shopName  = user?.app_token?.shopify?.shop
-            const shopURL = `https://${shopName}/`;
-            console.log("shopURL",shopURL)
+              <img
+                src="/graphic/dashboard/hifi.png"
+                alt="icon"
+                className="w-[18px] ml-[5px] text-[20px] translate-y-[-1px]"
+              />
+            </div>
 
-             
-              googleSpeedAPI(shopURL)
-    
-       
-           
-            }
-          } catch (error) {
-            console.error("Error fetching user profile data:", error);
-          }
-        };
-    
-        fetchProfileData();
-      }, []);
+            {deviceWidth > 1000 && (
+              <div className="flex items-center justify-center">
+                <div className="w-[18px] translate-y-[0px] h-[18px] justify-center items-center flex rounded-[50%] bg-[#38f8ab3a]">
+                  <div className="w-[10px] h-[10px] rounded-[50%] bg-[#38F8AC]"></div>
+                </div>
 
+                <h1
+                  className={`${
+                    dark ? "headingDarkMode" : "heading"
+                  } ml-[10px] f2 laptop:text-[16px] desktop:text-[18px] font-medium`}
+                >
+                  {" "}
+                  TurboBoost Service Status{" "}
+                </h1>
+              </div>
+            )}
+          </div>
 
-    return (
-        <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-            <div className="w-[100%] h-[50px] shrink-0"></div>
-
-            <div className={`${dark ? "backgroundDarkMode" : "background"} w-[100%] h-[100%] flex flex-col items-center  overflow-y-auto scroll-bar-cool111 overflow-x-hidden laptop:px-[20px]  desktop:px-[80px]`}>
-
-                <div className="w-[100%] pb-[50px] max-w-[1920px] min-h-[100vh]">
-
-                    <div className="w-[100%] pt-[50px] h-[40px] mobile:px-[10px] flex items-center justify-between">
-
-                        <div className="flex items-center mb-[20px] justify-center">
-                            <GreetingCard />
-
-                            <img
-                                src="/graphic/dashboard/hifi.png"
-                                alt="icon"
-                                className="w-[18px] ml-[5px] text-[20px] translate-y-[-1px]"
-                            />
-                        </div>
-
-                        {deviceWidth > 1000 && (
-                            <div className="flex items-center justify-center">
-                                <div className="w-[18px] translate-y-[0px] h-[18px] justify-center items-center flex rounded-[50%] bg-[#38f8ab3a]">
-                                    <div className="w-[10px] h-[10px] rounded-[50%] bg-[#38F8AC]"></div>
-                                </div>
-
-                                <h1 className={`${dark ? "headingDarkMode" : "heading"} ml-[10px] f2 laptop:text-[16px] desktop:text-[18px] font-medium`} > TurboBoost Service Status </h1>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* <div className="w-[100%] mobile:px-[10px] mt-[20px] grid desktop:grid-cols-4 laptop:grid-cols-2 gap-y-[10px] gap-x-[24px]">
+          {/* <div className="w-[100%] mobile:px-[10px] mt-[20px] grid desktop:grid-cols-4 laptop:grid-cols-2 gap-y-[10px] gap-x-[24px]">
 
                         {cacheStatDataArr.map((data, index) => (
                             <CacheStatCard
@@ -181,7 +215,7 @@ const DashboardPage = () => {
                         ))}
 
                     </div>  */}
-                    {/* 
+          {/* 
                     <div className="w-[100%] px-[10px]">
                         <div style={{ backgroundColor: dark ? "#111317" : "#fff", borderColor: dark ? "#1F2329" : "#ebebeb" }} className="w-[100%]  px-[15px] py-[15px] min-h-[110px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[10px] mt-[24px]">
 
@@ -192,13 +226,22 @@ const DashboardPage = () => {
                         </div>
                     </div> */}
 
-                    <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:grid  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px]">
-
-                        <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]`}>
-                            <div className="w-[100%]  flex items-center justify-between">
-
-                                <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`}> Core Vitals </p>
-                                {/* 
+          <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:grid  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px]">
+            <div
+              className={`${
+                dark ? "divWrapperDarkMode" : "divWrapper"
+              } h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]`}
+            >
+              <div className="w-[100%]  flex items-center justify-between">
+                <p
+                  className={`${
+                    dark ? "headingDarkMode" : "heading"
+                  } text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`}
+                >
+                  {" "}
+                  Core Vitals{" "}
+                </p>
+                {/* 
                                 <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center`}>
                                     <div
                                         onClick={() => { setVitsals(true) }}
@@ -240,10 +283,9 @@ const DashboardPage = () => {
                                     </div>
 
                                 </div> */}
+              </div>
 
-                            </div>
-
-                            {/* {!coreVitals ? (
+              {/* {!coreVitals ? (
                                 <>
                                     <p className={`${dark ? "subHeadingDarkMode" : "subHeading"} text-[12px]  font-semibold f2`}> Performance </p>
 
@@ -261,20 +303,24 @@ const DashboardPage = () => {
 
                              ) : 
                               */}
-                            {
-                                loading ?    <div style={{display:'flex'}} className="w-[100%]  w-[100%] grid grid-cols-3 spinner-wrapper  gap-x-[20px] gap-y-[40px] mt-4 flex justify-center">
-                                <CircularProgressLoader />
-                            </div>: <CoreVitalsReportCard coreVitualData={coreVitalsData} />
+              {loading ? (
+                <div
+                  style={{ display: "flex" }}
+                  className="w-[100%]  w-[100%] grid grid-cols-3 spinner-wrapper  gap-x-[20px] gap-y-[40px] mt-4 flex justify-center"
+                >
+                  <CircularProgressLoader />
+                </div>
+              ) : (
+                <CoreVitalsReportCard coreVitualData={coreVitalsData} />
+              )}
+            </div>
 
-                            }
-
-
-
-                        </div>
-
-
-                        <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px]`}>
-                            {/* <div className="w-[100%]  flex items-center justify-between">
+            <div
+              className={`${
+                dark ? "divWrapperDarkMode" : "divWrapper"
+              } h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px]`}
+            >
+              {/* <div className="w-[100%]  flex items-center justify-between">
                                 <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`} > Total Cache Status </p>
 
                                 <div className={`${dark ? "subHeadingDarkMode" : "subHeading"} text-[#0a0a187e] f2 ${dark ? "text-[#ffffff74]  hover:bg-[#ffffff30]" : "text-[#0a0a187e] hover:bg-[#e1e1e1]"} px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium `}>
@@ -299,103 +345,131 @@ const DashboardPage = () => {
 
                             </div> */}
 
-                            <div className="w-[100%]  flex items-center justify-between">
-                                <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`} > Performance </p>
-                                {/* 
+              <div className="w-[100%]  flex items-center justify-between">
+                <p
+                  className={`${
+                    dark ? "headingDarkMode" : "heading"
+                  } text-[15px] f2 translate-y-[0px] font-semibold tracking-wide`}
+                >
+                  {" "}
+                  Performance{" "}
+                </p>
+                {/* 
                                 <div className={`${dark ? "subHeadingDarkMode" : "subHeading"} text-[#0a0a187e] f2 ${dark ? "text-[#ffffff74]  hover:bg-[#ffffff30]" : "text-[#0a0a187e] hover:bg-[#e1e1e1]"} px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium `}>
                                     View Details
                                 </div> */}
-                            </div>
+              </div>
 
-                            {
-                                loading ?
-                                    <div style={{display:'flex'}} className="w-[100%]  w-[100%] grid grid-cols-3 spinner-wrapper  gap-x-[20px] gap-y-[40px] mt-4 flex justify-center">
-                                        <CircularProgressLoader />
-                                    </div>
+              {loading ? (
+                <div
+                  style={{ display: "flex" }}
+                  className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 spinner-wrapper gap-x-4 gap-y-8 mt-4 flex justify-center"
+                >
+                  <CircularProgressLoader />
+                </div>
+              ) : (
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4 flex justify-center">
+                  {performanceData.length &&
+                    performanceData.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-center"
+                      >
+                        <CircularProgressBar
+                          margin={item?.margin}
+                          title={item?.name}    
+                          percentage={item?.value}
+                        />
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
 
-
-                                    :
-                                    <div className="w-[100%] grid grid-cols-3 gap-x-[20px] gap-y-[40px] mt-4 flex justify-center">
-
-                                        {performanceData.length && performanceData.map((item, index) => (
-                                            <div key={index} className="flex items-center justify-center">
-                                                <CircularProgressBar
-                                                    margin={item?.margin}
-                                                    title={item?.name}
-                                                    percentage={item?.value}
-                                                />
-                                            </div>
-                                        ))}
-
-
-
-                                    </div>
-                            }
-
-
-
-
-                        </div>
-
-                        <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"}  relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  py-[14px] border-[#EBEBEB] rounded-[8px]`}>
-                            <div className="w-[100%] px-[15px] mb-[10px] flex items-center justify-between">
-                                <p className={`${dark ? "headingDarkMode" : "heading"} text-[15px] f2 translate-y-[0px] font-medium tracking-wide`} > Quick Actions </p>
-
-                                <div
-                                    onClick={() => { router("/settings") }}
-                                    className={`${dark ? "subHeadingDarkMode" : "subHeading"} text-[#0a0a187e] f2 ${dark ? "text-[#ffffff74]  hover:bg-[#ffffff30]" : "text-[#0a0a187e] hover:bg-[#e1e1e1]"}  px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium`}
-                                >
-                                    All Settings
-                                </div>
-
-                            </div>
-
-                            <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
-            <p style={{ color: dark ? "#fff" : "#000" }}
-               className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+            <div
+              className={`${
+                dark ? "divWrapperDarkMode" : "divWrapper"
+              }  relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  py-[14px] border-[#EBEBEB] rounded-[8px]`}
             >
-                Lazy Loading
-            </p>
-            <ToggleButton toggleValue={lazyLoadingToggleValue} handlingToggle={handlelazyLoading} />
-        </div>
+              <div className="w-[100%] px-[15px] mb-[10px] flex items-center justify-between">
+                <p
+                  className={`${
+                    dark ? "headingDarkMode" : "heading"
+                  } text-[15px] f2 translate-y-[0px] font-medium tracking-wide`}
+                >
+                  {" "}
+                  Quick Actions{" "}
+                </p>
 
-        <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
-            <p style={{ color: dark ? "#fff" : "#000" }}
-               className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
-            >
-                Image Size Adaption
-            </p>
-            <ToggleButton toggleValue={imageSizeAdaptionToggleValue} handlingToggle={handleImageSizeAdaption} />
-        </div>
+                <div
+                  onClick={() => {
+                    router("/settings");
+                  }}
+                  className={`${
+                    dark ? "subHeadingDarkMode" : "subHeading"
+                  } text-[#0a0a187e] f2 ${
+                    dark
+                      ? "text-[#ffffff74]  hover:bg-[#ffffff30]"
+                      : "text-[#0a0a187e] hover:bg-[#e1e1e1]"
+                  }  px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium`}
+                >
+                  All Settings
+                </div>
+              </div>
 
-        <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
-            <p style={{ color: dark ? "#fff" : "#000" }}
-               className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
-            >
-                Critical CSS
-            </p>
-            <ToggleButton toggleValue={criticalCSSToggleValue} handlingToggle={handleCriticalCSS} />
-        </div>
+              <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
+                <p
+                  style={{ color: dark ? "#fff" : "#000" }}
+                  className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+                >
+                  Lazy Loading
+                </p>
+                <ToggleButton
+                  toggleValue={lazyLoadingToggleValue}
+                  handlingToggle={handlelazyLoading}
+                />
+              </div>
 
-                            {/* {quickActionDataArr?.length &&
+              <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
+                <p
+                  style={{ color: dark ? "#fff" : "#000" }}
+                  className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+                >
+                  Image Size Adaption
+                </p>
+                <ToggleButton
+                  toggleValue={imageSizeAdaptionToggleValue}
+                  handlingToggle={handleImageSizeAdaption}
+                />
+              </div>
+
+              <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
+                <p
+                  style={{ color: dark ? "#fff" : "#000" }}
+                  className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+                >
+                  Critical CSS
+                </p>
+                <ToggleButton
+                  toggleValue={criticalCSSToggleValue}
+                  handlingToggle={handleCriticalCSS}
+                />
+              </div>
+
+              {/* {quickActionDataArr?.length &&
                                 quickActionDataArr.map((action, index) => (
                                     <QuickActionCard key={index} text={action} />
                                 ))}
 
                             <HoverGreenButton btnText="Purge all cache " /> */}
-                        </div>
-
-                    </div>
-
-                    <div className="w-[100%] h-[50px]"></div>
-                </div>
-
             </div>
+          </div>
 
+          <div className="w-[100%] h-[50px]"></div>
         </div>
-
-    );
+      </div>
+    </div>
+  );
 };
 
 export default DashboardPage;
-
