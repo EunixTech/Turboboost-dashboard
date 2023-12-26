@@ -366,6 +366,7 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSe
 }
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
   height: 5px !important;
+  background-color: white;
 }
 .PhoneInput {
   display: flex;

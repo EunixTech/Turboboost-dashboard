@@ -56,8 +56,8 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
   const handleOpenChangeEmailModal = () => setChangeEmailModalOpen(true);
   const handleCloseChangeEmailModal = () => setChangeEmailModalOpen(false);
 
-  const count = useSelector((state) => state?.userProfile?.userProfile);
-  const userProfile = count;
+  // const count = useSelector((state) => state?.userProfile?.userProfile);
+  // const userProfile = count;
 
   const dark = useSelector((state) => state.home.dark);
 
@@ -111,34 +111,28 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
   const notifyError = (errorMessage) =>
     toast.error(`Failed to update user profile: ${errorMessage}`);
 
-  const handleInputChange = (fieldName, value, { setFieldValue }) => {
-    // setFieldValue(fieldName, value);
-    // setFormValues((prevValues) => ({
-    //   ...prevValues,
-    //   [fieldName]: value,
-    // }));
-    // if (fieldName === "phone_number") {
-    //   setPhoneNumberValue(value);
-    // }
-
-  };
-
+  
   const handleSubmit = async (values, { setSubmitting }) => {
-    setSubmitting(true);
+
+    console.log("working")
+        fetch(`${appURL}/user/update-account`, {
+          ...fetchConfig,
+          method: "PATCH",
+          body: JSON.stringify(values)
+        })
+      .then(handleFetchErrors)
+      .then((resJSON) => {
+        console.log(resJSON)
+    
+  
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
 
     console.log("data", values);
-    try {
-      // Dispatch action to update Redux store
-      await dispatch(setUserProfile(values));
 
-      // Notify success
-      notifySuccess();
-    } catch (error) {
-      // Notify error
-      notifyError(error.message || "An error occurred");
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   const fetchProfileData = () => {
@@ -154,11 +148,10 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
             first_name: user?.user_info?.first_name,
             last_name: user?.user_info?.last_name ,
             email_address: user?.user_info?.email_address ,
-            country: user?.user_info?.country,
+            country: user?.user_basic_info?.country,
             phone_number: user?.user_info?.phone_number,
-            business_type: user?.user_info?.business_type,
+            business_type: user?.user_basic_info?.business_type,
           }
-
           updateUserData(dataObj)
           toggoleLoading(false)
         }
@@ -169,11 +162,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
 
   useEffect(() => {
      fetchProfileData();
-  
   }, [])
-  
-  console.log("userData",userData)
-  
 
   return (
     
@@ -208,7 +197,6 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                   inputType="text"
                   field={field}
                   form={Form}
-                  handleInputChange={handleInputChange}
                 />
                 {isSubmitting && (
                   <ErrorMessage
@@ -230,7 +218,6 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                   inputType="text"
                   field={field}
                   form={Form}
-                  handleInputChange={handleInputChange}
                 />
                 {isSubmitting && (
                   <ErrorMessage
@@ -246,7 +233,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
           <FormikSelectInput
             label="Country"
             name="country"
-            defaultValue={userProfile?.country || ""}
+            defaultValue={userData?.country || ""}
           >
             <option value="" disabled>
               Select Country
@@ -287,7 +274,11 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
             )}
           </Field>
 
-          <FormikSelectInput label="Business" name="business_type">
+          <FormikSelectInput 
+          label="Business"
+           name="business_type"
+           defaultValue={userData?.business_type || ""}
+           >
             <option value="" disabled>
               Select Business
             </option>
@@ -315,7 +306,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                     inputType="email"
                     field={field}
                     form={Form}
-                    handleInputChange={handleInputChange}
+   
                   />
                   {isSubmitting && (
                     <ErrorMessage

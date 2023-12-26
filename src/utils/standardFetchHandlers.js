@@ -8,6 +8,7 @@ const standardFetchSuccessHandler = (res, showMessageRcvdFromServer = true) => {
 };
 
 const standardFetchErrorHandler = (err) => {
+    console.log(err)
     return toast.error(err.message || `Internal Server Error`);
 };
 

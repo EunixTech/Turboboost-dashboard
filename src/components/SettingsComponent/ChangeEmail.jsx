@@ -3,8 +3,16 @@ import { Modal, Typography, Button, TextField } from "@mui/material";
 import SaveButton from "../button/SaveButton";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { toast } from "react-toastify";
-
+import standardFetchHandlers from '../../utils/standardFetchHandlers';
+import handleFetchErrors from '../../utils/handleFetchErrors';
+import PhoneInput from "react-phone-number-input";
+import getFetchConfig from "../../utils/getFetchConfig";
+import appURLs from "../../appURL";
+import { isValidEmailAddress } from "../../utils/verification";
 const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
+  const fetchConfig = getFetchConfig(),
+    appURL = appURLs();
+
   const [otpSent, setOtpSent] = useState(false);
   const [enteredValue, setEnteredValue] = useState("");
   const [otp, setOtp] = useState("");
@@ -15,75 +23,110 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
 
   const handleSendOtp = async () => {
     try {
-      console.log("Email address to be updated:", enteredValue);
+      toast.dismiss();
 
-      const token = localStorage.getItem("accessToken");
-      const response = await fetch(
-        "http://localhost:8000/v1/user/sending-otp",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            email_address: enteredValue,
-          }),
-        }
-      );
+      if (!enteredValue) return toast.error("Please provide email address");
+      else if (enteredValue && !isValidEmailAddress(enteredValue)) return toast.error("Please provide valid email address");
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to send OTP");
-      }
+      fetch(`${appURL}/user/sending-otp`, {
+        ...fetchConfig,
+        method: "POST",
+        body: JSON.stringify({
+          email_address: enteredValue
+        })
+      })
+        .then(handleFetchErrors)
+        .then((resJson) => {
+          if (resJson.status === 200) {
+            setOtpSent(true);
+            // setEnteredValue(""); // Reset the input box
+            return toast.success(resJson?.message);
+          }
+          else return toast.error(resJson?.message);
 
-      setOtpSent(true);
-      // setEnteredValue(""); // Reset the input box
+        })
+        .catch((err) => {
+          return toast.error("Something went wrong");
+        })
+
     } catch (error) {
-      console.error("Error sending OTP:", error.message);
-      toast.error("Failed to send OTP");
+      return toast.error("Something went wrong");
     }
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  
     try {
-      console.log("Email address to be updated:", enteredValue);
-      const token = localStorage.getItem("accessToken");
-      if (otp.length !== 4) {
-        toast.error("Please enter a valid 4-digit OTP");
-        return;
-      }
 
-      if (!otp) {
-        toast.error("Please enter the OTP");
-        return;
-      }
-      const updateResponse = await fetch(
-        "http://localhost:8000/v1/user/update-emailaddress",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            email_address: enteredValue, 
-            OTPCode: otp,
-          }),
-        }
-      );
+      event.preventDefault();
+      toast.dismiss();
 
-      if (!updateResponse.ok) {
-        const errorData = await updateResponse.json();
-        throw new Error(errorData.message || "Failed to update email address");
-      }
+      if (!otp) return toast.error("Please enter OTP");
+      else if (otp && otp.length !== 4) return toast.error("Please enter a valid 4-digit OTP");
 
-      console.log("Email address updated successfully:", enteredValue);
+      if (!enteredValue) return toast.error("Please provide email address");
+      else if (enteredValue && !isValidEmailAddress(enteredValue)) return toast.error("Please provide valid email address");
 
-      onClose();
-      toast.success("Email address updated successfully");
+      fetch(`${appURL}/user/update-emailaddress`, {
+        ...fetchConfig,
+        method: "POST",
+        body: JSON.stringify({
+          email_address: enteredValue,
+          OTPCode: otp,
+        })
+      })
+        .then(handleFetchErrors)
+        .then((resJson) => {
+          if (resJson.status === 200) {
+            toast.success(resJson?.message);
+            onClose();
+            setOtp("")
+            setOtpSent(false);
+            return
+          }
+          else return toast.error(resJson?.message);
+
+        })
+        .catch((err) => {
+          return toast.error("Something went wrong");
+        })
+
+
+      // console.log("Email address to be updated:", enteredValue);
+      // const token = localStorage.getItem("accessToken");
+      // if (otp.length !== 4) {
+      //   toast.error("Please enter a valid 4-digit OTP");
+      //   return;
+      // }
+
+      // if (!otp) {
+      //   toast.error("Please enter the OTP");
+      //   return;
+      // }
+      // const updateResponse = await fetch(
+      //   "http://localhost:8000/v1/user/update-emailaddress",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //     body: JSON.stringify({
+      //       email_address: enteredValue,
+      //       OTPCode: otp,
+      //     }),
+      //   }
+      // );
+
+      // if (!updateResponse.ok) {
+      //   const errorData = await updateResponse.json();
+      //   throw new Error(errorData.message || "Failed to update email address");
+      // }
+
+      // console.log("Email address updated successfully:", enteredValue);
+
+      // onClose();
+      // toast.success("Email address updated successfully");
     } catch (error) {
       console.error("Error updating email address:", error.message);
       toast.error("Failed to update email address");
@@ -92,6 +135,8 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
 
   const handleClose = () => {
     onClose();
+    setOtp("")
+    setOtpSent(false);
   };
 
   return (
