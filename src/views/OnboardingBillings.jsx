@@ -37,8 +37,7 @@ const OnboardingBillings = () => {
 
     const fetchingUserDataByToken = async () => {
       try {
-        dispatch(getUserDataStart());
-  
+
         const resJson = await axios.get(
           `${appURL}/user/redirect/login/${userToken}`
         );
@@ -46,18 +45,15 @@ const OnboardingBillings = () => {
         const res = resJson?.data?.data;
         const redirectURL = res?.redirectURI;
         const token = res?.token;
+        const websiteURL = res?.userData?.app_token?.shopify?.shop;
 
-        console.log("resresresresres",res)
-  
         localStorage.setItem("authToken", token);
+        localStorage.setItem("websiteURL", websiteURL);
         if (redirectURL === "/dashboard") {
           window.location.href = "/dashboard";
-        }
-  
-        // dispatch(getUserDataSuccess(data)); 
+        } 
       } catch (error) {
         console.log(error);
-        dispatch(getUserDataFailure(error.message)); 
       }
     };
 

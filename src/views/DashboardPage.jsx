@@ -24,6 +24,8 @@ import ToggleButton from "../components/ToggleButton";
 import { useDispatch, useSelector } from "react-redux";
 import { featureAPIHandling } from "../utils/featureAPIHandling";
 import { setToggle } from "../slice/statusToggleSlice";
+import getFetchConfig from "../utils/getFetchConfig";
+import appURLs from "../appURL";
 const DashboardPage = () => {
     const [coreVitalsData, updateCoreVitalsData] = useState([]);
     const [performanceData, updatePerformanceData] = useState([]);
@@ -35,7 +37,12 @@ const DashboardPage = () => {
     const deviceWidth = useWidth();
     const dispatch = useDispatch();
 
-    const googleSpeedAPI = async (storeName = "https://menehariya.netscapelabs.com/") => {
+    const fetchConfig = getFetchConfig();
+    const appURL = appURLs();
+  
+
+    const googleSpeedAPI = async (storeName = "") => {
+        console.log(storeName)
         try {
             toogleLoading(true);
             const response = await axios.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${storeName}&category=best-practices&category=seo&category=performance&category=accessibility`);
@@ -96,9 +103,37 @@ const DashboardPage = () => {
         dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
       }
 
-    useEffect(() => {
-        googleSpeedAPI();
-    }, []);
+
+      useEffect(() => {
+        const fetchProfileData = async () => {
+      
+          try {
+            const response = await fetch(
+              `${appURL}/user/user-profile`,
+              fetchConfig
+            );
+            const resJSON = await response.json();
+    
+            if (resJSON?.status === 200) {
+              const user = resJSON?.acccount;
+            const shopName  = user?.app_token?.shopify?.shop
+            const shopURL = `https://${shopName}/`;
+            console.log("shopURL",shopURL)
+
+             
+              googleSpeedAPI(shopURL)
+    
+       
+           
+            }
+          } catch (error) {
+            console.error("Error fetching user profile data:", error);
+          }
+        };
+    
+        fetchProfileData();
+      }, []);
+
 
     return (
         <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
