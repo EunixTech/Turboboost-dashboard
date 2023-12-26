@@ -167,7 +167,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
   return (
     
      
-    loading ? "ajdnka":
+    loading ? "":
     <Formik
       initialValues={{
         first_name: userData?.first_name || "",
@@ -299,7 +299,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
           <div className="flex justify-between items-end h-[]">
             <Field name="email_address">
               {({ field }) => (
-                <div className="w-[63%]">
+                <div className="w-[100%] mr-[10px]">
                   <FormikInput
                     inputLabel="Email"
                     inputName="email_address"
@@ -333,13 +333,15 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
               onClose={handleCloseChangeEmailModal}
             />
           </div>
-        </div>
 
-        <div className="w-[35%]">
+          <div className="w-[35%]">
           <button type="submit" className="variant-txt-color">
             Submit
           </button>
         </div>
+        </div>
+
+       
       </Form>
     </Formik>
                   

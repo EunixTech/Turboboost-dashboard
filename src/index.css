@@ -262,13 +262,22 @@ span.ripple {
 
 
 .modal-style {
-  background: #000;
-  padding:1rem;
+  background: white;
+  padding:2rem;
+  border: none;
+  color: rgba(10, 10, 24, 0.494) !important;
 }
-button.variant-btn {
-  background: #fff;
 
-  color: #2fe49c;
+.css-2ulfj5-MuiTypography-root{
+  color: rgb(47 58 69 / 1) !important;
+  font-size: 1rem !important;
+  
+}
+
+button.variant-btn {
+  background: #2fe49c ;
+
+  color: #fff;
   padding: 10px;
   border-radius: 5px;
   font-size: 12px;
@@ -327,6 +336,7 @@ body::-webkit-scrollbar-thumb {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   margin-top: 10px;
+  justify-content: center;
 }
 .variant-txt-color{
   background: #2fe49c;
@@ -339,7 +349,10 @@ body::-webkit-scrollbar-thumb {
   margin-top: 10px;
 }
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
-  height: 1rem !important;
+  height: .3rem !important;
+  color: rgb(47 58 69 / 1) !important;
+  font-size: .7rem;
+  background-color: white;
 }
 p.notfound-txt{
 color: #0A0A18;
@@ -381,4 +394,14 @@ input.PhoneInputInput {
   padding: 3px;
   font-family: inherit;
   outline: 0
+}
+
+
+/* modal */
+.modal-close-btn{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -16px;
+  margin-top: -16px;
+  cursor: pointer;
 }

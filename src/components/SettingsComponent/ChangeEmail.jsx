@@ -163,10 +163,10 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
           }}
           className="modal-style"
         >
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button onClick={handleClose} variant="outlined" color="secondary">
-              X
-            </Button>
+          <div className="modal-close-btn">
+            <p onClick={handleClose} variant="outlined" color="secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2fe49c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </p>
           </div>
           <Typography
             variant="h6"
@@ -208,11 +208,16 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
               />
             )}
             {!otpSent ? (
-              <button className="variant-btn" onClick={handleSendOtp}>
+              <button 
+               type="button" 
+                className="variant-btn" 
+                onClick={handleSendOtp}
+                style={{ width: "100%" }}
+              >
                 Send OTP
               </button>
             ) : (
-              <button className="variant-btn" onClick={handleSubmit}>
+              <button  type="button"  className="variant-btn"  style={{ width: "100%" }} onClick={handleSubmit}>
                 Submit OTP
               </button>
             )}
