@@ -112,17 +112,15 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
         })
       .then(handleFetchErrors)
       .then((resJSON) => {
-        console.log(resJSON)
+        if (resJSON?.status === 200) {
+          return  toast.success(resJSON.message)
+        }
+        else return toast.error(resJSON.message)
     
-  
       })
       .catch((err)=>{
         console.log(err)
       })
-
-
-    console.log("data", values);
-
   };
 
   useEffect(() => {
@@ -149,7 +147,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
           updateUserData(dataObj);
           setPhoneNumberValue(user?.user_info?.phone_number || ""); 
           toggoleLoading(false);
-          console.log("data", user);
+       
         }
       } catch (error) {
         console.error("Error fetching user profile data:", error);
