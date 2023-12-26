@@ -39,16 +39,6 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     business_type: "",
   })
 
-  const [formValues, setFormValues] = useState({
-    first_name: userData?.first_name || "",
-    last_name: userData?.last_name || "",
-    email_address: userData?.email_address || "",
-    country: user?.userData || "",
-    phone_number: userData?.phone_number || "",
-    business_type: userData?.business_type || "",
-  });
-
-
   // useEffect(() => {
   //   setPhoneNumberValue(formValues.phone_number);
   // }, [formValues.phone_number]);
@@ -135,38 +125,41 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
 
   };
 
-  const fetchProfileData = () => {
-    toggoleLoading(true)
-    fetch(`${appURL}/user/user-profile`, fetchConfig)
-      .then(handleFetchErrors)
-      .then((resJSON) => {
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      toggoleLoading(true);
+      try {
+        const response = await fetch(
+          `${appURL}/user/user-profile`,
+          fetchConfig
+        );
+        const resJSON = await response.json();
 
         if (resJSON?.status === 200) {
-          const user = resJSON?.acccount
+          const user = resJSON?.acccount;
 
           const dataObj = {
             first_name: user?.user_info?.first_name,
-            last_name: user?.user_info?.last_name ,
-            email_address: user?.user_info?.email_address ,
+            last_name: user?.user_info?.last_name,
+            email_address: user?.user_info?.email_address,
             country: user?.user_basic_info?.country,
-            phone_number: user?.user_info?.phone_number,
-            business_type: user?.user_basic_info?.business_type,
-          }
-          updateUserData(dataObj)
-          toggoleLoading(false)
+            phone_number: user?.user_info?.phone_number || "", 
+            business_type: user?.user_basic_info?.business_type || "small",
+          };
+          updateUserData(dataObj);
+          setPhoneNumberValue(user?.user_info?.phone_number || ""); 
+          toggoleLoading(false);
+          console.log("data", user);
         }
-        
-      })
-      .catch(standardFetchHandlers.error)
-  }
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+    };
 
-  useEffect(() => {
-     fetchProfileData();
-  }, [])
+    fetchProfileData();
+  }, []);
 
   return (
-    
-     
     loading ? "":
     <Formik
       initialValues={{
