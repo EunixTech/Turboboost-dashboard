@@ -189,6 +189,7 @@ useEffect(() => {
           <Item title={"Integrations"} route="/integrations" src="/icon6.svg" /> */}
           <Item title={"Billing"} route="/billing" src="/icon7.svg" />
           <Item title={"Settings"} route="/settings" src="/icon8.svg" />
+          <Item title={"Feedback"} route="/feedback" src="/icon8.svg" />
         </div>
         <div
           style={{
