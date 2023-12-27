@@ -77,11 +77,13 @@ const router = [
     path: "/shopify-admin",
     element: <ShopifyAdmin />,
   },
+
 ];
+
 
 const App = () => {
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
@@ -89,7 +91,7 @@ const App = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
-    
+
     if (userToken && !localStorage.getItem("token")) {
       navigate("/not-found");
     } else {
@@ -123,15 +125,21 @@ const App = () => {
         location.pathname === "/auth/forgot-password" ||
         location.pathname === "/auth/reset-password"
       ) && (
-        <HomeLayout>
-          <Routes>
-            {router.map((item, i) => {
-              return <Route key={i} path={item.path} element={item.element} />;
-            })}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </HomeLayout>
-      )}
+          <HomeLayout>
+            <Routes>
+              {router.map((item, i) => {
+                return <Route key={i} path={item.path} element={item.element} />;
+              })}
+
+              {/* <Route path="/feedback">
+                <IndexRoute component={CannyWidget} />
+                <Route path="*" component={CannyWidget} />
+              </Route> */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+
+          </HomeLayout>
+        )}
       <Routes>
         <Route path={"/auth/signIn"} element={<SignInRoute />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
