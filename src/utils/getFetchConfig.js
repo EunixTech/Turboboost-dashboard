@@ -7,7 +7,8 @@ const fetchReqConfig = {
     credentials: `same-origin`,
     headers: {
         'Content-Type': 'application/json',
-        'fetch-req': true
+        'fetch-req': true,
+        'Content-Security-Policy': 'upgrade-insecure-requests',
     }
 };
 
