@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { isValidEmailAddress } from "../../utils/verification";
 import InputFields from "../InputFields";
+import appURLs from "../../appURL";
 
 const ForgotPasswordForm = () => {
     const [email, setEmail] = useState("");
@@ -14,13 +15,13 @@ const ForgotPasswordForm = () => {
         setIsValid(isValidEmailAddress(inputEmail));
         setIsEmpty(inputEmail.trim() === ""); // Check if email is empty
     };
-
+    const appURL = appURLs();
 
     
     const handleNextClick = async () => {
         if (isValid && !isEmpty) {
             try {
-                const response = await fetch("http://localhost:8000/v1/user/forgot-password", {
+                const response = await fetch(`${appURL}/user/forgot-password`, {
                     method: "PATCH", 
                     headers: {
                         "Content-Type": "application/json",

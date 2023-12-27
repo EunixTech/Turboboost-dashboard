@@ -17,14 +17,5 @@ export const googleSpeedAPI = async (storeName = "https://menehariya.netscapelab
         "SEO": lighthouseData.categories.seo.score * 100,
     };
 
-    // let config = {
-    //     method: "post",
-    //     url: "http://localhost:8000/v1/user/createSubscription",
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Bearer ${authToken}`,
-    //     },
-    //     data: data,
-    // };
     return metrics
 }

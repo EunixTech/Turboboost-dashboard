@@ -1,6 +1,8 @@
 import axios from "axios";
-
+import appURLs from "../appURL";
 export const billingApi=async(item,selected)=>{
+
+	const  appURL = appURLs();
     let planName = item?.name;
 
 	console.log("planName", planName)
@@ -13,7 +15,7 @@ export const billingApi=async(item,selected)=>{
 		let authToken = localStorage.getItem('authToken');
 		let config = {
 			method: "post",
-			url: "http://localhost:8000/v1/user/createSubscription",
+			url: `${appURL}/user/createSubscription`,
 			headers: { 
 				'Content-Type': 'application/json',
 				'Authorization': `Bearer ${authToken}`,

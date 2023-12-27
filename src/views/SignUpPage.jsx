@@ -11,6 +11,7 @@ import FormikInput from "../components/forms/FormikInput";
 import UserTabSettings from "../components/SettingsComponent/userTabSetting";
 import { useDispatch, useSelector } from "react-redux";
 import { storeUserData } from "../slice/userSlice";
+import appURLs from "../appURL";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required("First Name is required"),
@@ -34,13 +35,15 @@ const SignUpPage = () => {
   const dispatch =useDispatch()
   const count = useSelector((state) => state)
 
+  const appURL = appURLs();
+
 
   const handleCreateAccount = async (values, { setSubmitting }) => {
     debugger
     try {
       // Make the API request using Axios
       const response = await axios.post(
-        "http://localhost:8000/v1/user/register-account",
+        `${appURL}/user/register-account`,
         {
           first_name: values.first_name,
           last_name: values.last_name,
