@@ -114,6 +114,7 @@ const DashboardPage = () => {
     dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
   };
 
+  
   const handleImageSizeAdaption = async () => {
     let endPoint = "";
     if (!lazyLoadingToggleValue)
