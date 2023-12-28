@@ -15,11 +15,11 @@ import CacheStatus from "./routes/cache-status";
 import Home from "./routes/home.jsx";
 import Logs from "./routes/logs";
 import Integrations from "./routes/integrations";
-import Billing from "./routes/billing";
-import Settings from "./routes/settings";
+import Billing from "./views/Billing.jsx";
+import Settings from "./views/SettingPage.jsx";
 import Affiliate from "./routes/affiliate";
 import ForgotPassword from "./routes/ForgotPassword";
-import ShopifyAdmin from "./routes/shopify-admin";
+import ShopifyAdmin from "./views/ShopifyAdmin.jsx";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -28,7 +28,6 @@ import NewOnboard from "./routes/newOnboarding.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./notFound.jsx";
-import Feedback from "./views/Feedback.js";
 const router = [
   {
     path: "/",
@@ -66,10 +65,10 @@ const router = [
     path: "/settings",
     element: <Settings />,
   },
-  {
-    path: "/affiliate",
-    element: <Affiliate />,
-  },
+  // {
+  //   path: "/affiliate",
+  //   element: <Affiliate />,
+  // },
   // {
   //   path: "/store",
   //   element: <Store />,
@@ -78,13 +77,13 @@ const router = [
     path: "/shopify-admin",
     element: <ShopifyAdmin />,
   },
-
+  
 ];
 
 
 const App = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
@@ -92,12 +91,12 @@ const App = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
-
-    // if (userToken && !localStorage.getItem("token")) {
-    //   navigate("/not-found");
-    // } else {
-    //   setShowOnboardingModal(!!userToken);
-    // }
+    
+    if (userToken && !localStorage.getItem("token")) {
+      navigate("/not-found");
+    } else {
+      setShowOnboardingModal(!!userToken);
+    }
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
       app_id: "pz01qpvl",
@@ -126,26 +125,25 @@ const App = () => {
         location.pathname === "/auth/forgot-password" ||
         location.pathname === "/auth/reset-password"
       ) && ( */}
-          {/* <HomeLayout>
-            <Routes>
-              {router.map((item, i) => {
-                return <Route key={i} path={item.path} element={item.element} />;
-              })}
-
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-
-          </HomeLayout> */}
-       <HomeLayout>
-      <Routes>
-        {/* <Route path={"/auth/signIn"} element={<SignInRoute />} />
+        <HomeLayout>
+          <Routes>
+            {router.map((item, i) => {
+              return <Route key={i} path={item.path} element={item.element} />;
+            })}
+            
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          
+        </HomeLayout>
+      {/* )} */}
+      {/* <Routes>
+        <Route path={"/auth/signIn"} element={<SignInRoute />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
-        <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} /> */}
-        {/* Add the 404 Not Found route without any layout */}
-        <Route path="test" element={<DashboardPageRoute />} />
-      </Routes>
-      </HomeLayout>
+        <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
+        Add the 404 Not Found route without any layout
+        <Route path="*" element={<NotFound />} />
+      </Routes> */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
