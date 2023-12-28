@@ -144,6 +144,7 @@ const App = () => {
         Add the 404 Not Found route without any layout
         <Route path="*" element={<NotFound />} />
       </Routes> */}
+      
       <ToastContainer
         position="top-right"
         autoClose={5000}
