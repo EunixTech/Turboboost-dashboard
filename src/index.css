@@ -268,7 +268,7 @@ span.ripple {
   color: rgba(10, 10, 24, 0.494) !important;
 }
 
-.css-2ulfj5-MuiTypography-root{
+.custom-class{
   color: rgb(47 58 69 / 1) !important;
   font-size: 1rem !important;
   
@@ -348,11 +348,11 @@ body::-webkit-scrollbar-thumb {
   font-weight: 700;
   margin-top: 10px;
 }
-.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+.custom-textfieldt{
   height: .3rem !important;
   color: rgb(47 58 69 / 1) !important;
-  font-size: .7rem;
-  background-color: white;
+  font-size: .7rem !important;
+  background-color: white !important;
 }
 p.notfound-txt{
 color: #0A0A18;

@@ -171,7 +171,8 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
           <Typography
             variant="h6"
             component="h2"
-            style={{ margin: "5px", color: "rgb(47 58 69 / 1) !important", fontSize: "1rem !important" }}
+            className="custom-class"
+            style={{ margin: "5px", color: "rgb(47 58 69 / 1) !important", fontSize: "1rem"}}
           >
             {!otpSent ? "Enter your new email address" : "Enter the OTP"}
           </Typography>
@@ -186,9 +187,11 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
                 InputProps={{
                   style: {
                     color: "#fff",
+                    height:"7px",
                     border: "2px solid #2fe49c",
                     outline: "none",
                   },
+                  className: "custom-textfield" // adding class
                 }}
               />
             ) : (
