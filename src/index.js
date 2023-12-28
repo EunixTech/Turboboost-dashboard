@@ -136,15 +136,15 @@ const App = () => {
           
         </HomeLayout>
       {/* )} */}
-      {/* <Routes>
-        <Route path={"/auth/signIn"} element={<SignInRoute />} />
+      {/* <Routes> */}
+        {/* <Route path={"/auth/signIn"} element={<SignInRoute />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
-        Add the 404 Not Found route without any layout
-        <Route path="*" element={<NotFound />} />
+        Add the 404 Not Found route without any layout */}
+        {/* <Route path="*" element={<NotFound />} />
       </Routes> */}
-      
+
       <ToastContainer
         position="top-right"
         autoClose={5000}
