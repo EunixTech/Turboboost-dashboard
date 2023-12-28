@@ -186,6 +186,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
                 required
                 InputProps={{
                   style: {
+                    height:"40px",
                     border: "2px solid #2fe49c",
                     outline: "none",
                   },
