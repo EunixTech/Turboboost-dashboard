@@ -92,11 +92,11 @@ const App = () => {
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
     
-    if (userToken && !localStorage.getItem("token")) {
-      navigate("/not-found");
-    } else {
-      setShowOnboardingModal(!!userToken);
-    }
+    // if (userToken && !localStorage.getItem("token")) {
+    //   navigate("/not-found");
+    // } else {
+    //   setShowOnboardingModal(!!userToken);
+    // }
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
       app_id: "pz01qpvl",
