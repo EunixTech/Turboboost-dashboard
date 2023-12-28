@@ -48,7 +48,7 @@ const OnboardingBillings = () => {
         const token = res?.token;
         const websiteURL = res?.userData?.app_token?.shopify?.shop;
 
-        console.log("res",res)
+        console.log("resresres",res)
 
         localStorage.setItem("authToken", token);
         localStorage.setItem("websiteURL", websiteURL);
