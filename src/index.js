@@ -136,7 +136,7 @@ const App = () => {
             </Routes>
 
           </HomeLayout> */}
-       
+       <HomeLayout>
       <Routes>
         {/* <Route path={"/auth/signIn"} element={<SignInRoute />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
@@ -145,6 +145,7 @@ const App = () => {
         {/* Add the 404 Not Found route without any layout */}
         <Route path="test" element={<Feedback />} />
       </Routes>
+      </HomeLayout>
       <ToastContainer
         position="top-right"
         autoClose={5000}
