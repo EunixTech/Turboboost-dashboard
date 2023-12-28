@@ -186,7 +186,6 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
                 required
                 InputProps={{
                   style: {
-                    height:"7px",
                     border: "2px solid #2fe49c",
                     outline: "none",
                   },
@@ -204,6 +203,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
                   borderRadius: "5px",
                   outline: "none",
                   marginRight: "5px",
+                  fontSize:"1.2rem"
                 }}
                 className="custom-textfield" // adding class
               />
