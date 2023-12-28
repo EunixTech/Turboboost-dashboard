@@ -6,7 +6,11 @@
 .inter {
   font-family: "Roboto", sans-serif;
 }
-
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -20,9 +24,8 @@ body {
   height: calc(100% -50px);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+code { 
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 * {
@@ -161,7 +164,7 @@ span.ripple {
 
 .checked {
   background-color: #38f8ab34;
-  border-color: #38F8AC;
+  /* border-color: #38F8AC; */
 }
 
 .check-icon {
@@ -228,4 +231,177 @@ span.ripple {
 
 .text-red {
   color: #FF465C;
+}
+
+
+
+/* formik input fiels css */
+.formikInputField{
+    height: 35px;
+    color: black;
+    font-size: .8rem;
+    background: white;
+}
+
+.formikInputField:focus {
+  background-color: white !important;
+}
+
+.formikInputField:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+.formikErrorText{
+  font-size: .8rem;
+  margin-left: 3px;
+}
+
+.formikInputLabel{
+  font-size: .8rem;
+}
+
+
+.modal-style {
+  background: white;
+  padding:2rem;
+  border: none;
+  color: rgba(10, 10, 24, 0.494) !important;
+}
+
+.custom-class{
+  color: rgb(47 58 69 / 1) !important;
+  font-size: 1rem !important;
+  
+}
+
+button.variant-btn {
+  background: #2fe49c ;
+
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+button.variant-btn-color {
+  background: #2fe49c;
+
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.variant-txt-email{
+  background: #2fe49c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+
+/* Hide scrollbar on all elements */
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.MuiBox-root,
+.billing-modal-background{
+  height: 90% !important;
+  border-radius: 10px;
+}
+
+.loader-background{
+  height: 100% !important;
+  border-radius: 10px;
+}
+.variant-txt{
+  background: #2fe49c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+  justify-content: center;
+}
+.variant-txt-color{
+  background: #2fe49c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.custom-textfieldt{
+  height: .3rem !important;
+  color: rgb(47 58 69 / 1)!important;
+  font-size: .7rem !important;
+  background-color: white !important;
+}
+p.notfound-txt{
+color: #0A0A18;
+font-family: Inter;
+font-size: 40px;
+font-style: normal;
+font-weight: 600;
+line-height: 82px; /* 205% */
+letter-spacing: -0.8px;
+text-align: center;
+}
+button.return-btn{
+  width: 209px;
+  height: var(--10, 40px);
+  flex-shrink: 0;
+/* display: flex;
+justify-content: center; */
+border-radius: var(--rounded, 4px);
+background: #38F8AC;
+}
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.css-1l9sosn-MuiButtonBase-root-MuiButton-root {
+  color: #38F8AC;
+  border: 2px solid #38F8AC;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
+  height: 5px !important;
+  background-color: white;
+}
+.PhoneInput {
+  display: flex;
+  align-items: center;
+  margin-top: 27px;
+  border: 1px solid #EBEBEB;
+  border-radius: 4px;
+  padding: 6px;
+}
+input.PhoneInputInput {
+  font-size: 13px;
+  padding: 3px;
+  font-family: inherit;
+  outline: 0
+}
+
+
+/* modal */
+.modal-close-btn{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -16px;
+  margin-top: -16px;
+  cursor: pointer;
 }

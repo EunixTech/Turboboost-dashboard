@@ -28,15 +28,7 @@ const DemoPie = () => {
     radius: 1,
     innerRadius: 0.6,
     color: ["#FF465c70", "#FFCB6570", "#38F8AC70"],
-    // legend: {
-    //   layout: "vertical", // Set the layout to vertical
-    //   position: "left", // Position the legend on the right side of the chart
-    //   itemName: {
-    //     style: {
-    //       fontSize: 12, // Customize the font size of the legend items
-    //     },
-    //   },
-    // },
+ 
     label: {
       type: "inner",
       offset: "-70%",
@@ -46,14 +38,7 @@ const DemoPie = () => {
         fontSize: 0,
       },
     },
-    // interactions: [
-    //   {
-    //     type: "element-selected",
-    //   },
-    //   {
-    //     type: "element-active",
-    //   },
-    // ],
+  
     statistic: {
       title: false,
       content: {

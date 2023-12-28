@@ -1,9 +1,5 @@
 const commonRegex = require(`./commonRegex`);
 
-exports.isValidIndianMobileNumber = (mobileNumber = null) => {
-    return mobileNumber && String(mobileNumber) && String(mobileNumber).match(commonRegex.indianMobileNumberRegex);
-};
-
 // /**
 //  * @function
 //  * @description Validates whether provided value is a String and is truthy

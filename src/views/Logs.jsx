@@ -429,14 +429,14 @@ const TableHeader1 = ({ change }) => {
       >
         Pageviews
       </div>
-      <div
+      {/* <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
         className="w-[12.5%] text-[10px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         CDN Bandwidth (MiB)
-      </div>
+      </div> */}
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
@@ -922,7 +922,7 @@ const CacheStatus = () => {
                       }}
                       className="text-[20px] mobile:mb-[5px] laptop:mb-0 font-bold tracking-wide "
                     >
-                      CDN Bandwidth and Pageviews
+                      Pageviews
                     </h1>
                     {/* <div className="flex mobile:mb-[10px] laptop:mb-0 items-center h-[100%]">
                       <div className="flex items-center h-[100%]">
@@ -973,14 +973,14 @@ const CacheStatus = () => {
                   className="w-[100%] px-[15px] pb-[20px] pt-[15px] mt-[13px] border-[1px] border-[#ebebeb]"
                 >
                   <div className="w-[100%] mb-[15px] flex  mobile:flex-col laptop:flex-row laptop:items-center justify-between">
-                    <h1
+                    {/* <h1
                       style={{
                         color: dark ? "#fff" : "#000",
                       }}
                       className="text-[20px] mobile font-bold tracking-wide "
                     >
                       CDN Distribution
-                    </h1>
+                    </h1> */}
                     {/* <div className="flex items-center h-[100%]">
                       <div className="flex items-center h-[100%]">
                         <div
@@ -1192,7 +1192,7 @@ const CacheStatus = () => {
                     }}
                     className="text-[14px] font-bold tracking-wide text-[#0a0a1877]"
                   >
-                    6055 Pageviews, 15407.75MiB CDN Bandwidth
+                    6055 Pageviews
                   </p>
                 </div>
                 {/* <div className="laptop:w-[170px]  mobile:w-[100%] hover:bg-[#2FE49C] cursor-pointer mobile:mb-[10px] laptop:mb-0 h-[38px] bg-[#38F8AC] rounded-[3px] flex items-center justify-center text-[14px] font-bold tracking-wide">

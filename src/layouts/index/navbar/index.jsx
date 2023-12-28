@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Toggle from "../../../utils/toggle";
 import { setDark } from "../../../services/home";
 import { useNavigate } from "react-router-dom";
-
+import { useHistory } from 'react-router-dom';
 const Item = ({ src, title, onClick }) => {
   return (
     <div
@@ -27,6 +27,15 @@ const Prompt = () => {
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
   const router = useNavigate();
+
+  const openShopHandler = () =>{
+    console.log("wrokingdjg")
+    const websiteURL = localStorage.getItem("websiteURL") || "";
+    console.log("wrokingdjg", websiteURL)
+    if (websiteURL) {
+      window.open(`https://${websiteURL}`, '_blank');
+    }
+  }
   return (
     <div
       style={{
@@ -52,27 +61,26 @@ const Prompt = () => {
         />
         <Item
           onClick={() => {
-            window.open("/shopify-admin", "_blank");
+            window.open("https://admin.shopify.com", "_blank");
           }}
           new={true}
           src={"/graphic/navbar/link.svg"}
           title="Go to Shopify Admin"
         />
         <Item
-          onClick={() => {
-            window.open("/store", "_blank");
-          }}
+          onClick={openShopHandler}
           new={true}
           src={"/graphic/navbar/google.svg"}
           title="Go to Store"
         />
-        <Item
+        {/* <Item
           onClick={() => {
             router("/affiliate");
           }}
           src={"/graphic/navbar/message.svg"}
           title="Affiliates"
-        />
+        /> */}
+        
       </div>
       <div
         style={{
@@ -98,7 +106,7 @@ const Prompt = () => {
             }}
           />
         </div>
-        <div
+        {/* <div
           onClick={() => {
             localStorage.removeItem("loggedIn");
             router("/auth/signIn");
@@ -111,7 +119,7 @@ const Prompt = () => {
             alt=""
           />
           <span className="translate-y-[1px]">Logout</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -184,7 +192,7 @@ const Navbar = () => {
               <span>1/1</span>
             </div>
           )}
-          <img
+          {/* <img
             src={
               dark ? "/graphic/navbar/bell-d.svg" : "/graphic/navbar/bell.svg"
             }
@@ -199,7 +207,7 @@ const Navbar = () => {
             }
             className="cursor-pointer w-[22px] mx-[10px]"
             alt=""
-          />
+          /> */}
           <div
             onMouseOver={() => {
               setHover(true);

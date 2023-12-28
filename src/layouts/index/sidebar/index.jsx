@@ -1,9 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Plan from "../plan";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpgradePopUpShow } from "../../../services/home";
-
+import getFetchConfig from '../../../utils/getFetchConfig';
+import standardFetchHandlers from '../../../utils/standardFetchHandlers';
+import handleFetchErrors from '../../../utils/handleFetchErrors';
+import appURLs from '../../../appURL';
+import { planMockData } from "../../../utils/constant";
+import toast from 'react-hot-toast';
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -125,6 +130,37 @@ const Sidebar = () => {
   const upgradePopUpShow = useSelector((state) => state.home.upgradePopUpShow);
   const dark = useSelector((state) => state.home.dark);
   const dispatch = useDispatch();
+  const [currentPlan, updateCurrentPlan] = useState({})
+
+  const fetchingBillingDetails = async () => {
+
+    const fetchConfig = getFetchConfig(),
+        appURL = appURLs();
+
+    fetch(`${appURL}/user/current-plan-detail`, fetchConfig)
+        .then(handleFetchErrors)
+        .then((res) => {
+           
+       
+            if (Number(res?.status) === 200) {
+              const planData = res?.data;
+            
+              updateCurrentPlan(planData)
+            }
+            
+        })
+        .catch(standardFetchHandlers.error)
+        .finally(() => {
+            setTimeout(() => {
+                // return toast.error("Something went wrong1");
+            }, 1000);
+        });
+}
+useEffect(() => {
+  fetchingBillingDetails()
+}, [])
+
+
   return (
     <>
       {upgradePopUpShow && (
@@ -142,49 +178,51 @@ const Sidebar = () => {
       >
         <div className="w-[100%] mt-[20px]">
           <Item title={"Dashboard"} route="/dashboard" src="/icon1.svg" />
-          <Item
-            title={"Connect Website"}
+          {/* <Item
+            title={"Connect Websitesss"}
             route="/connect-website"
             src="/icon2.svg"
-          />
-          <Item title={"Cache Warmup"} route="/cache-warmup" src="/icon3.svg" />
+          /> */}
+          {/* <Item title={"Cache Warmup"} route="/cache-warmup" src="/icon3.svg" />
           <Item title={"Cache Status"} route="/cache-status" src="/icon4.svg" />
           <Item title={"Logs"} route="/logs" src="/icon5.svg" />
-          <Item title={"Integrations"} route="/integrations" src="/icon6.svg" />
+          <Item title={"Integrations"} route="/integrations" src="/icon6.svg" /> */}
           <Item title={"Billing"} route="/billing" src="/icon7.svg" />
           <Item title={"Settings"} route="/settings" src="/icon8.svg" />
+          <Item title={"Feedback"} route="/feedback" src="/icon8.svg" />
         </div>
         <div
           style={{
             backgroundColor: dark ? "#191B21" : "#191925",
           }}
-          className="w-[100%] p-[13px] border-[1px] border-[#292935] py-[13px] h-[180px] mb-[10px] rounded-sm bg-[#191925]"
+          className="w-[100%] p-[13px] border-[1px] border-[#292935] py-[13px] h-[130px] mb-[10px] rounded-sm bg-[#191925]"
         >
           <p className="text-[#918EA2] f2 text-[12px] tracking-wide font-medium">
             My Plan
           </p>
           <p className="text-[14px] f2 text-white tracking-wide font-medium">
-            Growth Plan
+            {currentPlan?.plan}
           </p>
           <div>
-            <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
+            {/* <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
               <p className="text-[12px] f2 text-white tracking-wide">
                 Page Views/mo
               </p>
               <p className="text-[12px] f2 text-[#918EA2] tracking-wide">
-                90,000/200,000
+                
+                {planMockData[currentPlan?.plan]}/200,000
               </p>
-            </div>
-            <div className="bg-[#ffffff14] w-[100%] h-[3px] rounded-[3px]">
+            </div> */}
+            {/* <div className="bg-[#ffffff14] w-[100%] h-[3px] rounded-[3px]">
               <div
                 className="bg-[#38F8AC] h-[100%]"
                 style={{
                   width: `${30}%`,
                 }}
               ></div>
-            </div>
+            </div> */}
           </div>
-          <div className="mt-[7px] mb-[10px]">
+          {/* <div className="mt-[7px] mb-[10px]">
             <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
               <p className="text-[12px] f2 text-white tracking-wide">
                 CDN Bandwidth/mo
@@ -202,7 +240,7 @@ const Sidebar = () => {
               ></div>
             </div>
           </div>
-          {/* <div
+          <div
             className="w-[100%] h-[34px] f2 text-[#000] rounded-[2px] text-[12px] font-medium tracking-wide flex items-center justify-center cursor-pointer bg-[#38F8AC]"
           >
 
