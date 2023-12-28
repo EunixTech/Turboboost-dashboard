@@ -18,6 +18,7 @@ const JSTabSettings = () => {
 
   const minifyJSFile = useSelector((state) => state.toggles?.minifyJSFile),
     delayScriptsValue = useSelector((state) => state.toggles?.delayScripts);
+   
 
   const handleDelayScript = async () => {
     let endPoint = "";

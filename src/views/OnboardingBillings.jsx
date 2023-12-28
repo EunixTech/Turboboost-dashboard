@@ -6,12 +6,13 @@ import { billingApi } from "../utils/billingApi";
 import appURLs from '../appURL';
 import { useDispatch, useSelector } from "react-redux";
 import {getUserDataStart, getUserDataSuccess, getUserDataFailure } from "../slice/redirectUserSlice";
+import { setToggle } from "../slice/statusToggleSlice";
+
 
 
 const OnboardingBillings = () => {
   const dispatch = useDispatch(),
    appURL = appURLs();
-
 
   const [currentPlan, setCurrentPlan] = useState("Starter");
   const navigate = useNavigate();
@@ -53,6 +54,15 @@ const OnboardingBillings = () => {
         localStorage.setItem("authToken", token);
         localStorage.setItem("websiteURL", websiteURL);
 
+        dispatch(setToggle({ key: "delayScripts", value: true }));
+        dispatch(setToggle({ key: "minifyJSFile", value: true }));
+        dispatch(setToggle({ key: "lazyLoading", value: true }));
+        dispatch(setToggle({ key: "imageSizeAdaption", value: true }));
+        dispatch(setToggle({ key: "minifyHTML", value: true }));
+        dispatch(setToggle({ key: "fontLoading", value: true }));
+        dispatch(setToggle({ key: "fontRenderBehavior", value: true }));
+        dispatch(setToggle({ key: "criticalCSS", value: true }));
+        dispatch(setToggle({ key: "removeUnsedCSS", value: true }));
         if (redirectURL === "/dashboard") {
           window.location.href = "/dashboard";
         } 
