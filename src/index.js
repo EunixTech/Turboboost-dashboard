@@ -143,7 +143,7 @@ const App = () => {
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} /> */}
         {/* Add the 404 Not Found route without any layout */}
-        <Route path="test" element={<Feedback />} />
+        <Route path="test" element={<DashboardPageRoute />} />
       </Routes>
       </HomeLayout>
       <ToastContainer
