@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./services/store";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import DashboardPageRoute from "./routes/DashboardPag";
+import DashboardPageRoute from "./views/DashboardPage.jsx";
 import SignInRoute from "./routes/SignInRoute";
 import SignUp from "./routes/SignUpRoute";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute";
