@@ -64,28 +64,7 @@ const NewOnboard = () => {
           ></video>
         </div>
       ) : (
-        <Suspense
-          fallback={
-            <div
-              style={{
-                backgroundColor: dark ? "#090917" : "#fff",
-              }}
-              className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
-            >
-              <video
-                autoPlay
-                className={"w-[300px]"}
-                muted
-                onEnded={() => {
-                  setVidLoad(true);
-                }}
-                src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-              ></video>
-            </div>
-          }
-        >
-          <OnboardingBillings />
-        </Suspense>
+        <OnboardingBillings />
       )}
     </>
         </Box>
