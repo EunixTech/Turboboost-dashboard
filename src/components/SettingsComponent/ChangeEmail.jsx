@@ -171,7 +171,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
           <Typography
             variant="h6"
             component="h2"
-            style={{ color: "#fff", margin: "5px" }}
+            style={{ margin: "5px", color: "rgb(47 58 69 / 1) !important", fontSize: "1rem !important" }}
           >
             {!otpSent ? "Enter your new email address" : "Enter the OTP"}
           </Typography>

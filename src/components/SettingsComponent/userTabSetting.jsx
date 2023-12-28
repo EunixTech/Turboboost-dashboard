@@ -158,7 +158,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
   }, []);
 
   return (
-    loading ? "":
+    loading ?"":
     <Formik
       initialValues={{
         first_name: userData?.first_name || "",
