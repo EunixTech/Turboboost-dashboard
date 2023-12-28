@@ -8,7 +8,6 @@ const fetchReqConfig = {
     headers: {
         'Content-Type': 'application/json',
         'fetch-req': true,
-        'Content-Security-Policy': 'upgrade-insecure-requests',
     }
 };
 

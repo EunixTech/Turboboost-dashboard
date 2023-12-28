@@ -4,7 +4,7 @@ export const googleSpeedAPI = async (storeName = "https://menehariya.netscapelab
 
     const response = await axios.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${storeName}&category=best-practices&category=seo&category=performance&category=accessibility`);
     const data = response.data;
-    console.log("wroking2");
+  
     const lighthouseData = data.lighthouseResult;
     const metrics = {
         "First Contentful Paint": lighthouseData.audits['first-contentful-paint'].displayValue,
