@@ -28,6 +28,7 @@ import NewOnboard from "./routes/newOnboarding.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./notFound.jsx";
+import Feedback from "./views/Feedback.js";
 const router = [
   {
     path: "/",
@@ -125,25 +126,25 @@ const App = () => {
         location.pathname === "/auth/forgot-password" ||
         location.pathname === "/auth/reset-password"
       ) && ( */}
-          <HomeLayout>
+          {/* <HomeLayout>
             <Routes>
               {router.map((item, i) => {
                 return <Route key={i} path={item.path} element={item.element} />;
               })}
 
-              {/* <Route path="*" element={<NotFound />} /> */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
 
-          </HomeLayout>
+          </HomeLayout> */}
        
-      {/* <Routes>
-        <Route path={"/auth/signIn"} element={<SignInRoute />} />
+      <Routes>
+        {/* <Route path={"/auth/signIn"} element={<SignInRoute />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
-        <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
-        Add the 404 Not Found route without any layout
-        <Route path="*" element={<NotFound />} />
-      </Routes> */}
+        <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} /> */}
+        {/* Add the 404 Not Found route without any layout */}
+        <Route path="test" element={<Feedback />} />
+      </Routes>
       <ToastContainer
         position="top-right"
         autoClose={5000}
