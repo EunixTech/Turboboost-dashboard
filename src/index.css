@@ -350,7 +350,7 @@ body::-webkit-scrollbar-thumb {
 }
 .custom-textfieldt{
   height: .3rem !important;
-  color: rgb(47 58 69 / 1) !important;
+  color: rgb(47 58 69 / 1)!important;
   font-size: .7rem !important;
   background-color: white !important;
 }

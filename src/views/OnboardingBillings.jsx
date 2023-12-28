@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ComparePlans, planChangeText, planOnboardData } from "../utils/constant";
+import { ComparePlans,planMockData, planChangeText, planOnboardData } from "../utils/constant";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { billingApi } from "../utils/billingApi";
@@ -119,8 +119,8 @@ const OnboardingBillings = () => {
               </div>
             </div>
           </div>
-          <div className="w-[100%] mt-[20px] grid laptop:grid-cols-3 mobile:gap-y-[10px] laptop:gap-[20px]">
-            {planOnboardData.slice(0, 4).map((item, index) => {
+          <div className="w-[100%] mt-[20px] grid laptop:grid-cols-4 mobile:gap-y-[10px] laptop:gap-[20px]">
+            {planMockData.map((item, index) => {
               return (
                 <div
                   key={index}

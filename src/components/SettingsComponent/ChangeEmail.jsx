@@ -186,7 +186,6 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
                 required
                 InputProps={{
                   style: {
-                    color: "#fff",
                     height:"7px",
                     border: "2px solid #2fe49c",
                     outline: "none",
@@ -201,13 +200,12 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
                 autoFocus
                 numInputs={6} // Specify the number of OTP digits
                 inputStyle={{
-                  backgroundColor: "#2fe49c",
-                  color: "#fff",
                   border: "2px solid #2fe49c",
                   borderRadius: "5px",
                   outline: "none",
                   marginRight: "5px",
                 }}
+                className="custom-textfield" // adding class
               />
             )}
             {!otpSent ? (
