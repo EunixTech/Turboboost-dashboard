@@ -119,12 +119,12 @@ const App = () => {
   return (
     <>
       {showOnboardingModal && <NewOnboard />}
-      {!(
+      {/* {!(
         location.pathname === "/auth/signIn" ||
         location.pathname === "/auth/signUp" ||
         location.pathname === "/auth/forgot-password" ||
         location.pathname === "/auth/reset-password"
-      ) && (
+      ) && ( */}
           <HomeLayout>
             <Routes>
               {router.map((item, i) => {
@@ -135,15 +135,15 @@ const App = () => {
             </Routes>
 
           </HomeLayout>
-        )}
-      <Routes>
+       
+      {/* <Routes>
         <Route path={"/auth/signIn"} element={<SignInRoute />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
-        {/* Add the 404 Not Found route without any layout */}
-        {/* <Route path="*" element={<NotFound />} /> */}
-      </Routes>
+        Add the 404 Not Found route without any layout
+        <Route path="*" element={<NotFound />} />
+      </Routes> */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
