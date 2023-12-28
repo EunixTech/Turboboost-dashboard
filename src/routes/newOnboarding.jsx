@@ -7,7 +7,7 @@ import Backdrop from '@mui/material/Backdrop';
 import { styled, ThemeProvider } from '@mui/system';
 import theme from "../components/Theme"; // Adjust the path accordingly
 import { useSelector } from 'react-redux';
-const OnboardingBillings = React.lazy(() => import("../views/OnboardingBillings.jsx"));
+import OnboardingBillings from "../views/OnboardingBillings";
 
 const NewOnboardModal = styled(Modal)(({ theme }) => ({
   display: 'flex',
@@ -67,7 +67,10 @@ const NewOnboard = () => {
         <OnboardingBillings />
       )}
     </>
+
+       
         </Box>
+      
       </NewOnboardModal>
     </ThemeProvider>
   );
