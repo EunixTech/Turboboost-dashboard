@@ -120,7 +120,7 @@ const OnboardingBillings = () => {
             </div>
           </div>
           <div className="w-[100%] mt-[20px] grid laptop:grid-cols-3 mobile:gap-y-[10px] laptop:gap-[20px]">
-            {planOnboardData.slice(0, 3).map((item, index) => {
+            {planOnboardData.slice(0, 4).map((item, index) => {
               return (
                 <div
                   key={index}

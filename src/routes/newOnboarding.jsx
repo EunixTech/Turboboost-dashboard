@@ -28,9 +28,9 @@ const NewOnboardModal = styled(Modal)(({ theme }) => ({
 }));
 
 const NewOnboard = () => {
-    const auth = useSelector((state) => state.home.auth);
-    const [vidLoad, setVidLoad] = useState(auth);
-    const dark = localStorage.getItem("dark");
+  const auth = useSelector((state) => state.home.auth);
+  const [vidLoad, setVidLoad] = useState(auth);
+  const dark = localStorage.getItem("dark");
 
   return (
     <ThemeProvider theme={theme}>
@@ -42,15 +42,15 @@ const NewOnboard = () => {
         }}
       >
         <Box
-         style={{
+          style={{
             backgroundColor: 'black',            // You can add more specific margin values if needed
           }}>
-  
-    
-  <OnboardingBillings />
-       
+
+
+          <OnboardingBillings />
+
         </Box>
-      
+
       </NewOnboardModal>
     </ThemeProvider>
   );
