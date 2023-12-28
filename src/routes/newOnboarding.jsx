@@ -45,29 +45,9 @@ const NewOnboard = () => {
          style={{
             backgroundColor: 'black',            // You can add more specific margin values if needed
           }}>
-        <>
-      {!vidLoad ? (
-        <div
-          style={{
-            backgroundColor: dark ? "#090917" : "#fff",
-          }}
-          className="w-[100%] h-[100vh] loader-background bg-transparent flex items-center justify-center"
-        >
-          <video
-            autoPlay
-            className={"w-[300px]"}
-            muted
-            onEnded={() => {
-              setVidLoad(true);
-            }}
-            src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-          ></video>
-        </div>
-      ) : (
-        <OnboardingBillings />
-      )}
-    </>
-
+  
+    
+  <OnboardingBillings />
        
         </Box>
       
