@@ -64,7 +64,7 @@ const CacheStatus = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <>
-      {false ? (
+      {true ? (
         <div
           style={{
             backgroundColor: dark ? "#090917" : "#fff",
