@@ -39,7 +39,7 @@ const CacheStatus = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [vidLoad, setVidLoad] = useState(auth);
+  const [vidLoad, setVidLoad] = useState(false);
   useEffect(() => {
     const loggedIn = localStorage.getItem("loggedIn");
     const dark = localStorage.getItem("dark");
@@ -60,6 +60,7 @@ const CacheStatus = () => {
     //   }, 1000);
     // }
   });
+ 
   const dark = useSelector((state) => state.home.dark);
   return (
     <>
