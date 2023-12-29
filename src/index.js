@@ -42,7 +42,7 @@ import NotFound from "./notFound.jsx";
 const router = [
   {
     path: "/",
-    element: <Home />,
+    element:  <DashboardPageRoute />,
   },
   {
     path: "/dashboard",
