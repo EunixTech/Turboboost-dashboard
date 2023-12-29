@@ -60,6 +60,7 @@ const CacheStatus = () => {
     // }
   });
   const dark = useSelector((state) => state.home.dark);
+  console.log("process.env.REACT_APP_API_URL",process.env.REACT_APP_API_URL)
   return (
     <>
       {true ? (
@@ -69,7 +70,17 @@ const CacheStatus = () => {
           }}
           className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
         >
-          {/* <video
+        <video
+                autoPlay
+                className={"w-[300px]"}
+                muted
+                 
+                onEnded={() => {
+                  setVidLoad(true);
+                }}
+                src={dark ? "/load-b.mp4" : "/load-w.mp4"}
+              ></video>
+           <video
             autoPlay
             className={"w-[300px]"}
             muted
@@ -77,10 +88,11 @@ const CacheStatus = () => {
             onEnded={() => {
               setVidLoad(true);
             }}
-            src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-          ></video> */}
+            src={dark ? "https://turboboost-dashboard.d1cf44z4f8lic9.amplifyapp.com/load-w.mp4" : "https://turboboost-dashboard.d1cf44z4f8lic9.amplifyapp.com/load-w.mp4"}
+          ></video>
           ...loading
         </div>
+        
       ) : (
         <Suspense
           fallback={
