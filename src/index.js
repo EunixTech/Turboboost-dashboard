@@ -9,15 +9,26 @@ import DashboardPageRoute from "./views/DashboardPage.jsx";
 import SignInRoute from "./routes/SignInRoute";
 import SignUp from "./routes/SignUpRoute";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute";
-import ConnectWebsite from "./routes/connect-website";
-import CacheWarmup from "./routes/cache-warmup";
-import CacheStatus from "./routes/cache-status";
-import Home from "./routes/home.jsx";
-import Logs from "./routes/logs";
-import Integrations from "./routes/integrations";
+// import ConnectWebsite from "./Routes/connect-website";
+import ConnectWebsite from "./views/ConnectWebsite.jsx";
+// import CacheWarmup from "./routes/cache-warmup";
+import CacheWarmup from "./views/CacheWarmupage.jsx";
+
+// import CacheStatus from "./routes/cache-status";
+import CacheStatus from "./views/CacheStatus.jsx";
+
+import Home from "./views/home.jsx";
+
+// import Logs from "./views/logs";
+import Logs from "./views/Logs.jsx";
+
+// import Integrations from "./routes/integrations";
+import Integrations from "./views/integrations.jsx";
+
 import Billing from "./views/Billing.jsx";
 import Settings from "./views/SettingPage.jsx";
-import Affiliate from "./routes/affiliate";
+// import Affiliate from "./routes/affiliate";
+import Affiliate from "./views/Affiliate.jsx";
 import ForgotPassword from "./routes/ForgotPassword";
 import ShopifyAdmin from "./views/ShopifyAdmin.jsx";
 import Store from "./routes/store";
@@ -92,11 +103,11 @@ const App = () => {
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
     
-    // if (userToken && !localStorage.getItem("token")) {
-    //   navigate("/not-found");
-    // } else {
-    //   setShowOnboardingModal(!!userToken);
-    // }
+    if (!localStorage.getItem("authToken")) {
+      navigate("/auth/signIn");
+    } else {
+      setShowOnboardingModal(!!userToken);
+    }
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
       app_id: "pz01qpvl",
@@ -119,12 +130,12 @@ const App = () => {
   return (
     <>
       {showOnboardingModal && <NewOnboard />}
-      {/* {!(
+      {!(
         location.pathname === "/auth/signIn" ||
         location.pathname === "/auth/signUp" ||
         location.pathname === "/auth/forgot-password" ||
         location.pathname === "/auth/reset-password"
-      ) && ( */}
+      ) && (
         <HomeLayout>
           <Routes>
             {router.map((item, i) => {
@@ -135,15 +146,15 @@ const App = () => {
           </Routes>
           
         </HomeLayout>
-      {/* )} */}
-      {/* <Routes> */}
-        {/* <Route path={"/auth/signIn"} element={<SignInRoute />} />
+      )} 
+      <Routes>
+        <Route path={"/auth/signIn"} element={<SignInRoute />} />
         <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
-        Add the 404 Not Found route without any layout */}
-        {/* <Route path="*" element={<NotFound />} />
-      </Routes> */}
+        {/* Add the 404 Not Found route without any layout */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
 
       <ToastContainer
         position="top-right"
