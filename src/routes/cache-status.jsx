@@ -38,7 +38,7 @@ const CacheStatus = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [vidLoad, setVidLoad] = useState(auth);
+  const [vidLoad, setVidLoad] = useState(true);
   useEffect(() => {
     const loggedIn = localStorage.getItem("loggedIn");
     const dark = localStorage.getItem("dark");
