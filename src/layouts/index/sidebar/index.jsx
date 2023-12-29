@@ -363,7 +363,7 @@ const Item = ({ title, src, route }) => {
     >
       <img
         src={
-          "/graphic/sidebar/" +
+          "https://dashboard.turbo-boost.io/graphic/sidebar/" +
           ((hover ? true : selected) ? "dark/" : "light/") +
           src
         }
