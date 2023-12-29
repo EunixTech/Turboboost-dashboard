@@ -64,7 +64,7 @@ const CacheStatus = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <>
-      {!vidLoad ? (
+      {false ? (
         <div
           style={{
             backgroundColor: dark ? "#090917" : "#fff",
