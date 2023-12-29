@@ -116,9 +116,9 @@ const App = () => {
       user_hash:
         "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c", // an Identity Verification user hash for your user
     };
-    if(location.pathname === "/"){
-      navigate("/");
-    }
+    // if(location.pathname === "/"){
+    //   navigate("/");
+    // }
   }, []);
 
   // useEffect(() => {
@@ -145,7 +145,7 @@ const App = () => {
               return <Route key={i} path={item.path} element={item.element} />;
             })}
             
-            <Route path="*" element={<NotFound />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
           
         </HomeLayout>
@@ -156,7 +156,7 @@ const App = () => {
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
         {/* Add the 404 Not Found route without any layout */}
-        <Route path="*" element={<NotFound />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
 
       <ToastContainer
