@@ -77,7 +77,7 @@ const CacheStatus = () => {
             // onEnded={() => {
             //   setVidLoad(true);
             // }}
-            src={dark ? "../load-b.mp4" : "../load-w.mp4"}
+            src={dark ? "https://www.youtube.com/watch?v=F_OQDxX8MKQ" : "https://www.youtube.com/watch?v=F_OQDxX8MKQ"}
           ></video>
           <video
             autoPlay
