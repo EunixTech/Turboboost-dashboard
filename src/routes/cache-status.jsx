@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setAuth, setDark } from "../services/home";
 import HomeLayout from "../layouts/index";
-import CacheStatusPage from "../views/CacheStatus.jsx";
 
-// const CacheStatusPage = React.lazy(() => import("../views/CacheStatus.jsx"));
+const CacheStatusPage = React.lazy(() => import("../views/CacheStatus.jsx"));
 
 const Loader = () => {
   return (
@@ -39,7 +38,7 @@ const CacheStatus = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [vidLoad, setVidLoad] = useState(false);
+  const [vidLoad, setVidLoad] = useState(auth);
   useEffect(() => {
     const loggedIn = localStorage.getItem("loggedIn");
     const dark = localStorage.getItem("dark");
@@ -60,7 +59,6 @@ const CacheStatus = () => {
     //   }, 1000);
     // }
   });
- 
   const dark = useSelector((state) => state.home.dark);
   return (
     <>
@@ -84,30 +82,29 @@ const CacheStatus = () => {
           ...loading
         </div>
       ) : (
-        <CacheStatusPage />
-        // <Suspense
-        //   fallback={
-        //     <div
-        //       style={{
-        //         backgroundColor: dark ? "#090917" : "#fff",
-        //       }}
-        //       className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
-        //     >
-        //       <video
-        //         autoPlay
-        //         className={"w-[300px]"}
-        //         muted
+        <Suspense
+          fallback={
+            <div
+              style={{
+                backgroundColor: dark ? "#090917" : "#fff",
+              }}
+              className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
+            >
+              <video
+                autoPlay
+                className={"w-[300px]"}
+                muted
                  
-        //         onEnded={() => {
-        //           setVidLoad(true);
-        //         }}
-        //         src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-        //       ></video>
-        //     </div>
-        //   }
-        // >
-        //   <CacheStatusPage />
-        // </Suspense>
+                onEnded={() => {
+                  setVidLoad(true);
+                }}
+                src={dark ? "/load-b.mp4" : "/load-w.mp4"}
+              ></video>
+            </div>
+          }
+        >
+          <CacheStatusPage />
+        </Suspense>
       )}
     </>
   );
