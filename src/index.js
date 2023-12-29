@@ -116,6 +116,9 @@ const App = () => {
       user_hash:
         "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c", // an Identity Verification user hash for your user
     };
+    if(location.pathname === ""){
+      navigate("/");
+    }
   }, []);
 
   // useEffect(() => {
