@@ -63,7 +63,9 @@ const CacheStatus = () => {
   console.log("process.env.REACT_APP_API_URL",process.env.REACT_APP_API_URL)
   return (
     <>
-     <video src={"https://dashboard.turbo-boost.io/load-w.mp4"} width="320" height="240" controls />
+     <video  autoPlay
+            className={"w-[300px]"}
+            muted src={"https://dashboard.turbo-boost.io/load-w.mp4"} width="320" height="240" controls />
       {true ? (
         <div
           style={{
@@ -71,7 +73,9 @@ const CacheStatus = () => {
           }}
           className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
         >
-          <video src={"https://dashboard.turbo-boost.io/load-w.mp4"} width="320" height="240" controls />
+          <video  autoPlay
+            className={"w-[300px]"}
+            muted src={"https://dashboard.turbo-boost.io/load-w.mp4"} width="320" height="240" controls />
         <video
             autoPlay
             className={"w-[300px]"}
