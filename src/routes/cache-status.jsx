@@ -38,7 +38,7 @@ const CacheStatus = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [vidLoad, setVidLoad] = useState(true);
+  const [vidLoad, setVidLoad] = useState(auth);
   useEffect(() => {
     const loggedIn = localStorage.getItem("loggedIn");
     const dark = localStorage.getItem("dark");
@@ -60,12 +60,8 @@ const CacheStatus = () => {
     // }
   });
   const dark = useSelector((state) => state.home.dark);
-  console.log("process.env.REACT_APP_API_URL",process.env.REACT_APP_API_URL)
   return (
     <>
-     <video  autoPlay
-            className={"w-[300px]"}
-            muted src={"https://dashboard.turbo-boost.io/load-w.mp4"} width="320" height="240" controls />
       {true ? (
         <div
           style={{
@@ -73,31 +69,28 @@ const CacheStatus = () => {
           }}
           className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
         >
-          <video  autoPlay
-            className={"w-[300px]"}
-            muted src={"https://dashboard.turbo-boost.io/load-w.mp4"} width="320" height="240" controls />
-        <video
-            autoPlay
-            className={"w-[300px]"}
-            muted
-            onEnded={() => {
-              setVidLoad(true);
-            }}
-            src={dark ? "https://dashboard.turbo-boost.io/load-b.mp4" : "https://dashboard.turbo-boost.io/load-w.mp4"}
-          ></video>
-           <video
+          <video
             autoPlay
             className={"w-[300px]"}
             muted
              
-            onEnded={() => {
-              setVidLoad(true);
-            }}
-            src={dark ? "https://turboboost-dashboard.d1cf44z4f8lic9.amplifyapp.com/load-w.mp4" : "https://turboboost-dashboard.d1cf44z4f8lic9.amplifyapp.com/load-w.mp4"}
+            // onEnded={() => {
+            //   setVidLoad(true);
+            // }}
+            src={dark ? "../load-b.mp4" : "../load-w.mp4"}
+          ></video>
+          <video
+            autoPlay
+            className={"w-[300px]"}
+            muted
+             
+            // onEnded={() => {
+            //   setVidLoad(true);
+            // }}
+            src={dark ? "../Users/Dkr/Desktop/Turboboost-dashboard/src/video/load-b.mp4" : "../Users/Dkr/Desktop/Turboboost-dashboard/src/video/load-b.mp4"}
           ></video>
           ...loading
         </div>
-        
       ) : (
         <Suspense
           fallback={
