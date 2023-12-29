@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setAuth, setDark } from "../services/home";
 import HomeLayout from "../layouts/index";
+import CacheStatusPage from "../views/CacheStatus.jsx";
 
-const CacheStatusPage = React.lazy(() => import("../views/CacheStatus.jsx"));
+// const CacheStatusPage = React.lazy(() => import("../views/CacheStatus.jsx"));
 
 const Loader = () => {
   return (

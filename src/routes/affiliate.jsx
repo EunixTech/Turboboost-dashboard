@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setAuth, setDark } from "../services/home";
 import HomeLayout from "../layouts/index";
+import AffiliatePage from "../views/Affiliate.jsx"
 
-const AffiliatePage = React.lazy(() => import("../views/Affiliate.jsx"));
+// const AffiliatePage = React.lazy(() => import("../views/Affiliate.jsx"));
 
 const Loader = () => {
   return (

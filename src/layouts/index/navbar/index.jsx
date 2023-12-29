@@ -73,13 +73,13 @@ const Prompt = () => {
           src={"/graphic/navbar/google.svg"}
           title="Go to Store"
         />
-        {/* <Item
+        <Item
           onClick={() => {
             router("/affiliate");
           }}
           src={"/graphic/navbar/message.svg"}
           title="Affiliates"
-        /> */}
+        />
         
       </div>
       <div
