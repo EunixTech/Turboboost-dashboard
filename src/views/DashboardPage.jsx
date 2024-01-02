@@ -807,35 +807,6 @@ const HoverDetail = () => {
 };
 
 const Dashboard = () => {
-  const fetchConfig = getFetchConfig();
-  const appURL = appURLs();
-
-    const fetchProfileData = async () => {
-      try {
-        const res = await fetch(
-          `${appURL}/api/shopify/shopify-auth`,
-          {
-            ...fetchConfig,
-          method: "POST",
-          body: JSON.stringify({
-            shop_name:"turboboost-dev.myshopify.com"
-          })
-          }
-        );
-
-        const resJSON = await response.json();
-
-        console.log("resJSON",resJSON)
-
-        // if(res)
-
-        // window.location.href = "https://turboboost-dev.myshopify.com/admin/oauth/authorize?client_id=a50a540950555a0188574ba6475e53ef&scope=read_files,write_files,read_themes,write_themes,read_script_tags,write_script_tags,&state=757bcddf-0e29-48e1-b111-5718f9add478&redirect_uri=https://backend.turbo-boost.io/v1/api/shopify/auth-callback";
-
-    
-      } catch (error) {
-        console.error("Error fetching user profile data:", error);
-      }
-    };
 
  
   const w = useWidth();
@@ -852,7 +823,7 @@ const Dashboard = () => {
         <div className="w-[100%] pb-[50px] max-w-[1920px] min-h-[100vh]">
           <div className="w-[100%] pt-[50px] h-[40px] mobile:px-[10px] flex items-center justify-between">
             <div className="flex items-center mb-[20px] justify-center">
-              <h1 onClick={fetchProfileData}
+              <h1
                 style={{ color: dark ? "#fff" : "#000" }}
                 className="text-[18px] f2 font-medium"
               >

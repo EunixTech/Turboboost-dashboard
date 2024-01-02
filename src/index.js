@@ -6,7 +6,9 @@ import { store, persistor } from "./services/store";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import DashboardPageRoute from "./views/DashboardPage.jsx";
+// import DashboardPageRoute from "./routes/DashboardPag";
 import SignInRoute from "./routes/SignInRoute";
+import ConnectStore from "./views/ShopifyAuth.jsx";
 import SignUp from "./routes/SignUpRoute";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute";
 // import ConnectWebsite from "./Routes/connect-website";
@@ -89,6 +91,10 @@ const router = [
     element: <ShopifyAdmin />,
   },
   
+  {
+    path: "/connect-to-store",
+    element: <ConnectStore />,
+  },
 ];
 
 
@@ -132,31 +138,33 @@ const App = () => {
   //   }, [])
   return (
     <>
-      {showOnboardingModal && <NewOnboard />}
       {!(
         location.pathname === "/auth/signIn" ||
         location.pathname === "/auth/signUp" ||
         location.pathname === "/auth/forgot-password" ||
-        location.pathname === "/auth/reset-password"
+        location.pathname === "/auth/reset-password" ||
+        location.pathname === "/shopify-auth"
       ) && (
         <HomeLayout>
           <Routes>
             {router.map((item, i) => {
               return <Route key={i} path={item.path} element={item.element} />;
             })}
-            
-            {/* <Route path="*" element={<NotFound />} /> */}
+            {/* Include the connect-to-store route here */}
+            {/* <Route path="/connect-to-store" element={<ConnectStore />} /> */}
           </Routes>
           
         </HomeLayout>
-      )} 
+      )}
       <Routes>
-        <Route path={"/auth/signIn"} element={<SignInRoute />} />
-        <Route path={"/auth/signUp"} element={<SignUp />} />
+        {/* Include the connect-to-store route here as well */}
+        {/* <Route path="/connect-to-store" element={<ConnectStore />} />  */}
+        <Route path={"/shopify-auth"} element={<ConnectStore />} />
+        {/* <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
-        <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} />
+        <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} /> */}
         {/* Add the 404 Not Found route without any layout */}
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <ToastContainer
@@ -172,12 +180,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <GoogleOAuthProvider clientId="648805285797-kgc785jg9ffbt9u8t73leb6o9pcs59oh.apps.googleusercontent.com">
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <App />
-          <Toaster position="top-right" reverseOrder={false} />
-        </BrowserRouter>
-      </PersistGate>
+      <BrowserRouter>
+        <App />
+        <Toaster position="top-right" reverseOrder={false} />
+      </BrowserRouter>
     </Provider>
   </GoogleOAuthProvider>
 );
