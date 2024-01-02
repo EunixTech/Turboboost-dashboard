@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
+import toast from "react-hot-toast";
 
 const ShopifyAuth = () => {
   const fetchConfig = getFetchConfig();
@@ -11,7 +12,11 @@ const ShopifyAuth = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("domain", domain)
+    if(!domain) toast.error("Please provide domain name");
+    if (!/^(http|https):\/\/[^ "]+$/.test(domain)) {
+      toast.error("Invalid domain name format");
+      return;
+    }
     // rest of the code
       try {
         const res = await fetch(
@@ -27,10 +32,11 @@ const ShopifyAuth = () => {
 
         const resJSON = await res.json();
         const redirectURL = resJSON.redirectURI;
-        window.location.href = redirectURL;
-        console.log("resJSON",resJSON)
-
-
+        if(resJSON.status === 200){
+          window.location.href = redirectURL;
+        } else {
+          toast.error(resJSON.message)
+        }
 
       } catch (error) {
         console.error("Error fetching user profile data:", error);
