@@ -24,8 +24,8 @@
 // import { useDispatch, useSelector } from "react-redux";
 // import { featureAPIHandling } from "../utils/featureAPIHandling";
 // import { setToggle } from "../slice/statusToggleSlice";
-// import getFetchConfig from "../utils/getFetchConfig";
-// import appURLs from "../appURL";
+import getFetchConfig from "../utils/getFetchConfig";
+import appURLs from "../appURL";
 // const DashboardPage = () => {
 //   const [coreVitalsData, updateCoreVitalsData] = useState([]);
 //   const [performanceData, updatePerformanceData] = useState([]);
@@ -807,6 +807,28 @@ const HoverDetail = () => {
 };
 
 const Dashboard = () => {
+  const fetchConfig = getFetchConfig();
+  const appURL = appURLs();
+
+    const fetchProfileData = async () => {
+      try {
+        const response = await fetch(
+          `${appURL}/api/shopify/shopify-auth`,
+          {
+            ...fetchConfig,
+          method: "POST",
+          body: JSON.stringify({
+            shop_name:"turboboost-dev.myshopify.com"
+          })
+          }
+        );
+    
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+    };
+
+ 
   const w = useWidth();
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
@@ -821,11 +843,11 @@ const Dashboard = () => {
         <div className="w-[100%] pb-[50px] max-w-[1920px] min-h-[100vh]">
           <div className="w-[100%] pt-[50px] h-[40px] mobile:px-[10px] flex items-center justify-between">
             <div className="flex items-center mb-[20px] justify-center">
-              <h1
+              <h1 onClick={fetchProfileData}
                 style={{ color: dark ? "#fff" : "#000" }}
                 className="text-[18px] f2 font-medium"
               >
-                Good evening, Kyle!
+                Good evening, Kyle! 
               </h1>
               <img
                 src="/graphic/dashboard/hifi.png"
