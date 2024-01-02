@@ -26,7 +26,8 @@ const ShopifyAuth = () => {
         );
 
         const resJSON = await res.json();
-
+        const redirectURL = resJSON.redirectURI;
+        window.location.href = redirectURL;
         console.log("resJSON",resJSON)
 
 
