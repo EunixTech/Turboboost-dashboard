@@ -812,16 +812,19 @@ const Dashboard = () => {
 
     const fetchProfileData = async () => {
       try {
-        const response = await fetch(
-          `${appURL}/api/shopify/shopify-auth`,
-          {
-            ...fetchConfig,
-          method: "POST",
-          body: JSON.stringify({
-            shop_name:"turboboost-dev.myshopify.com"
-          })
-          }
-        );
+        // const response = await fetch(
+        //   `${appURL}/api/shopify/shopify-auth`,
+        //   {
+        //     ...fetchConfig,
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     shop_name:"turboboost-dev.myshopify.com"
+        //   })
+        //   }
+        // );
+
+        window.location.href = "https://turboboost-dev.myshopify.com/admin/oauth/authorize?client_id=a50a540950555a0188574ba6475e53ef&scope=read_files,write_files,read_themes,write_themes,read_script_tags,write_script_tags,&state=757bcddf-0e29-48e1-b111-5718f9add478&redirect_uri=https://backend.turbo-boost.io/v1/api/shopify/auth-callback";
+
     
       } catch (error) {
         console.error("Error fetching user profile data:", error);
