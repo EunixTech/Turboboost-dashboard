@@ -13,7 +13,7 @@ const ShopifyAuth = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if(!domain) toast.error("Please provide domain name");
-    if (!/^(http|https):\/\/[^ "]+$/.test(domain)) {
+    else if (!/^(http|https):\/\/[^ "]+$/.test(domain)) {
       toast.error("Invalid domain name format");
       return;
     }
