@@ -143,7 +143,8 @@ const App = () => {
         location.pathname === "/auth/signUp" ||
         location.pathname === "/auth/forgot-password" ||
         location.pathname === "/auth/reset-password" ||
-        location.pathname === "/shopify-auth"
+        location.pathname === "/shopify-auth" ||
+        location.pathname === "/connect-to-store"
       ) && (
         <HomeLayout>
           <Routes>
@@ -158,8 +159,8 @@ const App = () => {
       )}
       <Routes>
         {/* Include the connect-to-store route here as well */}
-        {/* <Route path="/connect-to-store" element={<ConnectStore />} />  */}
-        <Route path={"/shopify-auth"} element={<ConnectStore />} />
+        <Route path="/connect-to-store" element={<ConnectStore />} /> 
+        <Route path={"/shopify-auth"} element={<SignInRoute />} />
         {/* <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} /> */}

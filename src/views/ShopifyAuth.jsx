@@ -35,7 +35,7 @@ const ShopifyAuth = () => {
         if(resJSON.status === 200){
           window.location.href = redirectURL;
         } else {
-          toast.error(resJSON.message)
+          return toast.error(resJSON.message)
         }
 
       } catch (error) {

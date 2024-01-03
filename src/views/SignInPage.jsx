@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
@@ -11,12 +11,16 @@ import SideBanner from "../components/SideBanner";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+
+import getFetchConfig from "../utils/getFetchConfig";
+import appURLs from "../appURL";
+import toast from "react-hot-toast";
+
+
 const validationSchema = Yup.object().shape({
-  email_address: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
-  password: Yup.string()
-    .required("Password is required"),
+  domain: Yup.string()
+    .matches(/^(http|https):\/\/[^ "]+(\.[^ "]+)?$/, "Invalid domain name format")
+    .required("Domain name is required"),
 });
 
 const SignInPage = () => { 
@@ -25,41 +29,37 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
 
-  const submitForm = async (values) => {
-    axios.post("http://localhost:8000/v1/user/login-with-email", {
-      email_address: values.email_address,
-      password: values.password,
-    })
-    .then(response => {
-      console.log("API Response:", response.status, response.data);
-      if (response.data?.status === 400) { 
-        console.error("Sign-in failed. Please try again.");
-      } else if (response.status === 200) {
-        router("/");
-      } else {
-        console.error("Sign-in failed. Please try again.");
-      }
-    })
-      .catch(error => {
-        console.error("API call error:", error);
-        if (error.response && error.response.status === 400) {
-          console.error("Invalid email or password. Please try again.");
-        } else {
-          console.error("Sign-in failed. Please try again.");
-        }
-      });
-    
-  }
-  
-  
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTczNjc2NThhZmU4N2QwODM2YzA4OGQiLCJpYXQiOjE3MDIzODc2NDgsImV4cCI6MTcwNDk3OTY0OH0.zSBQ512pcmmU2XXDeiYfvEY8gUrN1GwC0lniUHLLkhY";
-localStorage.setItem('accessToken', token);
+  const fetchConfig = getFetchConfig();
+  const appURL = appURLs();
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
+  const handleFormSubmit = async (values, { setSubmitting }) => {
+    console.log(values)
+   
+      try {
+        const res = await fetch(
+          `${appURL}/api/shopify/shopify-auth`,
+          {
+            ...fetchConfig,
+          method: "POST",
+          body: JSON.stringify({
+            shop_name: values.domain
+          })
+          }
+        );
+
+        const resJSON = await res.json();
+        const redirectURL = resJSON.redirectURI;
+        if(resJSON.status === 200){
+          window.location.href = redirectURL;
+        } else {
+          return toast.error(resJSON.message)
+        }
+
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+  };
+
 
   return (
     <div className="w-[100%] h-[100vh] flex items-center justify-center">
@@ -67,53 +67,25 @@ localStorage.setItem('accessToken', token);
         <div className="w-[100%]">
           <Formik
             initialValues={{
-              email_address: "",
-              password: "",
+              domain: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={submitForm}
+            onSubmit={handleFormSubmit}
           >
 
             {() => (
               <Form>
                 <img src="/logo-b.png" className="w-[150px]" alt="" />
-                <h1 className="text-[34px] mt-[10px] font-bold">Sign In</h1>
-                <p className="text-[#969AA5] inter text-[14px] mb-[10px]">
-                  {" "}
-                  Please enter your credentials below.
-                </p>
+                <h1 className="text-[34px] mt-[10px] font-bold">Login to Existing <span className="turbo-boost-text">TurboBoost</span> Account</h1>
+               
 
-                <div className="w-[100%] mt-[20px] mb-[13px]">
+                <div className="w-[100%] mt-[10px]">
                   <FormikInput
-                    inputLabel="Email"
-                    inputName="email_address"
-                    inputType="email"
+                    inputLabel="Enter your Shopify domain"
+                    inputName="domain"
+                    inputType="text"
                   />
 
-                  <FormikInput
-                    inputLabel="Password"
-                    inputName="password"
-                    inputType="password"
-                  />
-
-                  <div className="w-[100%] flex justify-between">
-                    <div className="flex">
-                      <input
-                        type="checkbox"
-                        className="mr-[5px]"
-                        name="remember_me"
-                        // onChange={onChangeHandler}
-                      />
-                      <p className="text-[13px] font-medium text-[#000] translate-y-[1px]">
-                        Remember me
-                      </p>
-                    </div>
-                    <a href="/auth/forgot-password">
-                      <p className="text-[13px] font-medium text-[#06F] text-[#06F] cursor-pointer translate-y-[1px]">
-                        Forgot password
-                      </p>
-                    </a>
-                  </div>
                   <button
                     type="submit"
                     className="h-[38px] text-[#000] w-[100%] font-medium cursor-pointer font-medium flex items-center justify-center px-[20px] mt-[15px] inter text-[12px] bg-[#38F8AC] rounded-sm mb-[20px]"
@@ -125,7 +97,7 @@ localStorage.setItem('accessToken', token);
             )}
           </Formik>
 
-          <GoogleLoginButton />
+          {/* <GoogleLoginButton /> */}
           <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
             Don’t have an account?
             <span

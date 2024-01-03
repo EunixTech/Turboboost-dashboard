@@ -3,7 +3,7 @@
 import React from "react";
 import { useField } from "formik";
 
-const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue }) => {
+const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue, customClassName= "" }) => {
   const [field, meta] = useField(inputName);
 
   return (
@@ -30,11 +30,11 @@ const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue
         <input
           {...field}
           type={inputType}
-          className="w-full border-[1px] border-[#EBEBEB] rounded-[4px] h-[38px] px-[12px] text-[13px] text-[#2F3A45] placeholder-[#969AA5] focus:outline-none focus:border-blue-500"
+          className="w-full border-[1px] border-[#EBEBEB] rounded-[4px] h-[38px] px-[12px] text-[13px] text-[#2F3A45] placeholder-[#969AA5] focus:outline-none focus:border-blue-500 mb-[10px]"
         />
       )}
       {meta.touched && meta.error ? (
-        <div className="text-red-500 text-[13px] mt-1">{meta.error}</div>
+        <div className="text-red-500 text-[13px]">{meta.error}</div>
       ) : null}
     </div>
   );
