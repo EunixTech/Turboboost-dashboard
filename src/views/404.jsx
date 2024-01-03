@@ -4,7 +4,7 @@ import TitleManager from "../components/TitleManager";
 export default function NotFound() {
   return (
     <>
-        <TitleManager title="404" conicalURL="" />
+        {/* <TitleManager title="404" conicalURL="*" /> */}
       <div
         style={{
           display: "flex",
