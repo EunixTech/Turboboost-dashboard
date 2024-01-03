@@ -10,6 +10,7 @@ import {
   setSelectedTab,
 } from "../services/integrationDataSlice";
 import { selectFeaturedApps } from "../services/featureAppsDataSlice";
+import TitleManager from "../components/TitleManager";
 
 const Integrations = ({ setShow }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -57,6 +58,8 @@ const Integrations = ({ setShow }) => {
 
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+         <TitleManager title="Integrations" conicalURL="integrations" />
+ 
       <div className="w-[100%] h-[50px] shrink-0"></div>
       <div
         className={`w-[100%] h-[100%] flex flex-col items-center overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] pb-[40px] mobile:px-[10px] laptop:px-[80px] ${wrapperClassName}`}

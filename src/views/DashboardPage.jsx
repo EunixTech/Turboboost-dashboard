@@ -26,6 +26,7 @@
 // import { setToggle } from "../slice/statusToggleSlice";
 import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
+import TitleManager from "../components/TitleManager";
 // const DashboardPage = () => {
 //   const [coreVitalsData, updateCoreVitalsData] = useState([]);
 //   const [performanceData, updatePerformanceData] = useState([]);
@@ -115,7 +116,7 @@ import appURLs from "../appURL";
 //     dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
 //   };
 
-  
+
 //   const handleImageSizeAdaption = async () => {
 //     let endPoint = "";
 //     if (!lazyLoadingToggleValue)
@@ -217,7 +218,7 @@ import appURLs from "../appURL";
 //                         ))}
 
 //                     </div> 
-          
+
 //                     <div className="w-[100%] px-[10px]">
 //                         <div style={{ backgroundColor: dark ? "#111317" : "#fff", borderColor: dark ? "#1F2329" : "#ebebeb" }} className="w-[100%]  px-[15px] py-[15px] min-h-[110px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[10px] mt-[24px]">
 
@@ -243,7 +244,7 @@ import appURLs from "../appURL";
 //                   {" "}
 //                   Core Vitals{" "}
 //                 </p>
-                
+
 //                                 <div className={`${dark ? "divWrapperDarkMode" : "divWrapper"} w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center`}>
 //                                     <div
 //                                         onClick={() => { setVitsals(true) }}
@@ -304,7 +305,7 @@ import appURLs from "../appURL";
 //                                 </>
 
 //                              ) :(  <CoreVitalsReportCard coreVitualData={coreVitalsData} />)}
-                             
+
 //               {/* (
 //                 <div
 //                   style={{ display: "flex" }}
@@ -534,18 +535,14 @@ const Button = () => {
       <div
         className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
-        h-[32px] ${dark?"hover:bg-[#1F2329]":"hover:bg-[#f3f3f3]"}  cursor-pointer rounded-[4px] ${
-          dark ? "border-[#1F2329]" : "border-[#38F8AC] "
-        } flex items-center justify-center`}
+        h-[32px] ${dark ? "hover:bg-[#1F2329]" : "hover:bg-[#f3f3f3]"}  cursor-pointer rounded-[4px] ${dark ? "border-[#1F2329]" : "border-[#38F8AC] "
+          } flex items-center justify-center`}
       >
         <p
-          className={`text-[${
-            dark ? "#fff" : "#000"
-          }]   f2 text-[12px]  border-[1px] hover:border-[#38F8AC] ${
-            dark ? "border-[#38F8AC]" : "border-[#38F8AC]"
-          } ${
-            dark ? "bg-[#111317]" : "bg-[#fff]"
-          } rounded-[4px] hover:bg-[#38f8ac] hover:text-white active:translate-y-[0px] active:border-0 active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+          className={`text-[${dark ? "#fff" : "#000"
+            }]   f2 text-[12px]  border-[1px] hover:border-[#38F8AC] ${dark ? "border-[#38F8AC]" : "border-[#38F8AC]"
+            } ${dark ? "bg-[#111317]" : "bg-[#fff]"
+            } rounded-[4px] hover:bg-[#38f8ac] hover:text-white active:translate-y-[0px] active:border-0 active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
         >
           Purge all cache
         </p>
@@ -641,15 +638,15 @@ const GooglePageScore = () => {
             style={{
               ...(coreVitals
                 ? {
-                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                    color: dark ? "#fff" : "#000",
-                  }
+                  backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                  borderColor: dark ? "#1F2329" : "#ebebeb",
+                  color: dark ? "#fff" : "#000",
+                }
                 : {
-                    backgroundColor: dark ? "#111317" : "#fff",
-                    color: dark ? "#fff" : "#000",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                  }),
+                  backgroundColor: dark ? "#111317" : "#fff",
+                  color: dark ? "#fff" : "#000",
+                  borderColor: dark ? "#1F2329" : "#ebebeb",
+                }),
             }}
             className="w-[50%] h-[100%]  flex items-center justify-center bg-[#ebebeb8b] border-r-[1px] "
           >
@@ -662,14 +659,14 @@ const GooglePageScore = () => {
             style={{
               ...(!coreVitals
                 ? {
-                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                    color: dark ? "#fff" : "#000",
-                  }
+                  backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                  borderColor: dark ? "#1F2329" : "#ebebeb",
+                  color: dark ? "#fff" : "#000",
+                }
                 : {
-                    backgroundColor: dark ? "#111317" : "#fff",
-                    color: dark ? "#fff" : "#000",
-                  }),
+                  backgroundColor: dark ? "#111317" : "#fff",
+                  color: dark ? "#fff" : "#000",
+                }),
             }}
             className="w-[50%] h-[100%] flex items-center justify-center bg-[#fff]"
           >
@@ -808,13 +805,15 @@ const HoverDetail = () => {
 
 const Dashboard = () => {
 
- 
+
   const w = useWidth();
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
   const router = useNavigate();
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+      <TitleManager title="Dashboard" conicalURL="dashboard" />
+
       <div className="w-[100%] h-[50px] shrink-0"></div>
       <div
         style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
@@ -827,7 +826,7 @@ const Dashboard = () => {
                 style={{ color: dark ? "#fff" : "#000" }}
                 className="text-[18px] f2 font-medium"
               >
-                Good evening, Kyle! 
+                Good evening, Kyle!
               </h1>
               <img
                 src="/graphic/dashboard/hifi.png"

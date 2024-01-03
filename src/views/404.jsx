@@ -1,8 +1,10 @@
 import React from "react";
+import TitleManager from "../components/TitleManager";
 
 export default function NotFound() {
   return (
     <>
+        <TitleManager title="404" conicalURL="" />
       <div
         style={{
           display: "flex",
@@ -24,4 +26,5 @@ export default function NotFound() {
       </div>
     </>
   );
+  
 }

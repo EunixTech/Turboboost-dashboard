@@ -11,6 +11,7 @@ import getFetchConfig from '../utils/getFetchConfig';
 import standardFetchHandlers from '../utils/standardFetchHandlers';
 import handleFetchErrors from '../utils/handleFetchErrors';
 import appURLs from '../appURL';
+import TitleManager from "../components/TitleManager";
 
 const Billing = () => {
   const [currentPlan, updateCurrentPlan] = useState("Starter");
@@ -84,6 +85,8 @@ useEffect(() => {
   
 	return (
 		<div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+			   <TitleManager title="Billing" conicalURL="billing" />
+ 
 			<div className="w-[100%] h-[50px] shrink-0"></div>
 			<div
 				style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}

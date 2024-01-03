@@ -3,7 +3,7 @@ import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpgradePopUpShow } from "../services/home";
-
+import TitleManager from "../components/TitleManager";
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -170,6 +170,8 @@ const CacheWarmup = ({ setShow }) => {
   return (
     <>
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+      <TitleManager title="Cache Warmup" conicalURL="cache-warmup" />
+ 
         <div className="w-[100%] h-[50px] shrink-0"></div>
         <div
           style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}

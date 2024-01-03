@@ -7,7 +7,7 @@ import axios from "axios"; // Import axios
 import GoogleLoginButton from "../components/button/GoogleLogin";
 import FormikInput from "../components/forms/FormikInput";
 import SideBanner from "../components/SideBanner";
-
+import TitleManager from "../components/TitleManager";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -15,7 +15,6 @@ import * as Yup from "yup";
 import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
 import toast from "react-hot-toast";
-
 
 const validationSchema = Yup.object().shape({
   domain: Yup.string()
@@ -63,6 +62,8 @@ const SignInPage = () => {
 
   return (
     <div className="w-[100%] h-[100vh] flex items-center justify-center">
+      <TitleManager title="Sign In" conicalURL="shopify-auth" />
+      
       <div className="laptop:w-[50%] mobile:w-[100%] mobile:overflow-y-auto px-[100px] h-[100vh] px-[7%] flex items-center laptop:justify-center">
         <div className="w-[100%]">
           <Formik

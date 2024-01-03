@@ -3,6 +3,7 @@ import HomeLayout from "../layouts/index/index";
 import { useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
+import TitleManager from "../components/TitleManager";
 
 const Button = () => {
 
@@ -339,6 +340,8 @@ const ConnectWebsite = ({ setShow }) => {
   return (
     <>
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+      <TitleManager title="Connect Website" conicalURL="connect-website" />
+ 
         <div className="w-[100%] h-[50px] shrink-0"></div>
         <div
           style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}

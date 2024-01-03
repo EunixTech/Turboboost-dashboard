@@ -13,8 +13,10 @@ import Table from "../components/Table";
 import CacheStatus from "../components/CacheStatus";
 import Button2 from "../components/button/Button2";
 import Filter from "../components/Filter";
-
+import TitleManager from "../components/TitleManager";
 <>
+<TitleManager title="Cache Status" conicalURL="cache-status" />
+ 
   <Button2 />
   <HeaderItem />
   <InputText />

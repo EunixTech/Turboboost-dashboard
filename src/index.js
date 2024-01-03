@@ -40,7 +40,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import NewOnboard from "./routes/newOnboarding.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import NotFound from "./notFound.jsx";
+import NotFound from "./views/404.jsx";
 const router = [
   {
     path: "/",
@@ -90,11 +90,11 @@ const router = [
     path: "/shopify-admin",
     element: <ShopifyAdmin />,
   },
-  
   {
     path: "/connect-to-store",
     element: <ConnectStore />,
   },
+
 ];
 
 
@@ -139,12 +139,11 @@ const App = () => {
   return (
     <>
       {!(
-        location.pathname === "/auth/signIn" ||
-        location.pathname === "/auth/signUp" ||
-        location.pathname === "/auth/forgot-password" ||
-        location.pathname === "/auth/reset-password" ||
-        location.pathname === "/shopify-auth" ||
-        location.pathname === "/connect-to-store"
+        // location.pathname === "/auth/signIn" ||
+        // location.pathname === "/auth/signUp" ||
+        // location.pathname === "/auth/forgot-password" ||
+        // location.pathname === "/auth/reset-password" ||
+        location.pathname === "/shopify-auth"
       ) && (
         <HomeLayout>
           <Routes>
@@ -159,7 +158,7 @@ const App = () => {
       )}
       <Routes>
         {/* Include the connect-to-store route here as well */}
-        <Route path="/connect-to-store" element={<ConnectStore />} /> 
+        {/* <Route path="/connect-to-store" element={<ConnectStore />} />  */}
         <Route path={"/shopify-auth"} element={<SignInRoute />} />
         {/* <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />

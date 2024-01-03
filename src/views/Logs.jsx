@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Chart2 from "../components/charts/chart2";
 import Chart3 from "../components/charts/chart3";
 import Chart4 from "../components/charts/chart4";
-
+import TitleManager from "../components/TitleManager";
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -888,6 +888,8 @@ const CacheStatus = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+         <TitleManager title="Logs" conicalURL="logs" />
+ 
       <div className="w-[100%] h-[50px] shrink-0"></div>
       <div
         style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}

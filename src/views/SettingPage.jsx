@@ -12,6 +12,7 @@ import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
 import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
 import { toast, ToastContainer } from "react-toastify";
 import { useMediaQuery } from "react-responsive";
+import TitleManager from "../components/TitleManager";
 
 const SettingPage = ({ registrationData }) => {
   const [unsavedChanges, setUnsavedChanges] = useState(false);
@@ -91,6 +92,7 @@ const SettingPage = ({ registrationData }) => {
 
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+       <TitleManager title="Settings" conicalURL="settings" />
       <div className="w-[100%] h-[50px] shrink-0"></div>
 
       <div

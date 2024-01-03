@@ -7,7 +7,7 @@ import appURLs from '../appURL';
 import { useDispatch, useSelector } from "react-redux";
 import {getUserDataStart, getUserDataSuccess, getUserDataFailure } from "../slice/redirectUserSlice";
 import { setToggle } from "../slice/statusToggleSlice";
-
+import TitleManager from "../components/TitleManager";
 
 
 const OnboardingBillings = () => {
@@ -78,6 +78,7 @@ const OnboardingBillings = () => {
 
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+        <TitleManager title="Onboarding" conicalURL="onboarding" />
       <div className="w-[100%]"></div>
       <div
         style={{ backgroundColor: dark ? "#fff" : "#000" }}
