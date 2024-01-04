@@ -62,7 +62,7 @@ const SignInPage = () => {
 
   return (
     <div className="w-[100%] h-[100vh] flex items-center justify-center">
-      <TitleManager title="Sign In" conicalURL="shopify-auth" />
+      <TitleManager title={authType ? "Sign In" : "Sign Up"} conicalURL="shopify-auth" />
       
       <div className="laptop:w-[50%] mobile:w-[100%] mobile:overflow-y-auto px-[100px] h-[100vh] px-[7%] flex items-center laptop:justify-center">
         <div className="w-[100%]">
