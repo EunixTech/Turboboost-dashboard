@@ -27,7 +27,7 @@ const SignInPage = () => {
   const screenWidth = useWidth();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
-
+  const [authType, toggleAuthType] = useState("login");
   const fetchConfig = getFetchConfig();
   const appURL = appURLs();
 
@@ -77,8 +77,12 @@ const SignInPage = () => {
             {() => (
               <Form>
                 <img src="/logo-b.png" className="w-[150px]" alt="" />
-                <h1 className="text-[34px] mt-[10px] font-bold">Login to Existing <span className="turbo-boost-text">TurboBoost</span> Account</h1>
-               
+
+               {
+                authType === "login" ?
+                <h1 className="text-[34px] mt-[10px] font-bold">Login to Existing <span className="turbo-boost-text">TurboBoost</span> Account</h1>:
+                <h1 className="text-[34px] mt-[10px] font-bold">Connect Your Store</h1>
+               }
 
                 <div className="w-[100%] mt-[10px]">
                   <FormikInput
@@ -99,18 +103,35 @@ const SignInPage = () => {
           </Formik>
 
           {/* <GoogleLoginButton /> */}
-          <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
+
+          {
+            authType === "login" ?
+            <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
             Don’t have an account?
             <span
               onClick={() => {
-                router("/auth/signUp");
+                toggleAuthType("register")
               }}
               className="text-[#06F] font-bold cursor-pointer"
             >
               {" "}
               Sign up{" "}
             </span>
-          </p>
+          </p>:
+ <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
+ Already signed up?
+ <span
+   onClick={() => {
+     toggleAuthType("login")
+   }}
+   className="text-[#06F] font-bold cursor-pointer"
+ >
+   {" "}
+   login here{" "}
+ </span>
+</p>
+          }
+         
         </div>
       </div>
 

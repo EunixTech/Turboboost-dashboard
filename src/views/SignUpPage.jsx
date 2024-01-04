@@ -33,6 +33,7 @@ const SignUpPage = () => {
   const screenWidth = useWidth();
   const router = useNavigate();
   const [registrationData, setRegistrationData] = useState(null);
+  const [authType, toggleAuthType] = useState("login");
   const dispatch =useDispatch()
   const count = useSelector((state) => state)
 
