@@ -15,7 +15,7 @@ const NewOnboardModal = styled(Modal)(({ theme }) => ({
   justifyContent: 'center',
   '& .MuiBox-root': {
     position: 'absolute',
-    width: "90%",
+    width: "70%",
     height: '90%',
     backgroundColor: 'black',
     top: '50%',

@@ -1,6 +1,6 @@
 export const planMockData = [
     {
-        name: "Free",
+        name: "Basic",
         desc: "Try out TurboBoost on a limited plan",
         monthlyPrice: 0,
         annuallyPrice: 0,
@@ -9,7 +9,7 @@ export const planMockData = [
         includes: [
             "5,000 page views per month",
             // "1.00 GB CDN bandwidth per month",
-            // "Optimized by TurboBoost Badge",
+            "Optimized by TurboBoost Badge",
             // "Built-in global CDN",
             "Image Optimization Stack",
             // "Advanced Caching Mechanism",
@@ -51,7 +51,7 @@ export const planMockData = [
         includes: [
             "200,000 page views per month",
             // "100 GB CDN bandwidth per month",
-            // "Optimized by TurboBoost Badge",
+            "Optimized by TurboBoost Badge",
             // "Built-in global CDN",
             "Image Optimization Stack",
             // "Advanced Caching Mechanism",
@@ -82,7 +82,7 @@ export const planMockData = [
         includes: [
             "200,000 page views per month",
             // "100 GB CDN bandwidth per month",
-            // "Optimized by TurboBoost Badge",
+            "Optimized by TurboBoost Badge",
             // "Built-in global CDN",
             "Image Optimization Stack",
             // "Advanced Caching Mechanism",
@@ -173,13 +173,13 @@ export const planOnboardData = [
 ];
 
 export const ComparePlans = [
-    // {
-    //     title: "Optimized by TurboBoost Badge",
-    //     free: true,
-    //     starter: false,
-    //     growth: false,
-    //     pro: false,
-    // },
+    {
+        title: "Optimized by TurboBoost Badge",
+        free: true,
+        starter: false,
+        growth: false,
+        pro: false,
+    },
     // {
     //     title: "Built-in Global CDN",
     //     free: true,
@@ -328,8 +328,8 @@ export const planChangeText = (item,currentPlan) => {
     let buttenText = "";
 
     switch (currentPlan) {
-        case "Free":
-            if (itemPlan === "Free") {
+        case "Basic":
+            if (itemPlan === "Basic") {
                 buttenText = "Current Plan";
             }
             if (itemPlan == "Starter") {
@@ -343,8 +343,8 @@ export const planChangeText = (item,currentPlan) => {
             }
     break;
         case "Starter":
-            if (itemPlan === "Free") {
-                buttenText = "Downgrade to Free";
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
             }
             if (itemPlan == "Starter") {
                 buttenText = "Current Plan";
@@ -357,8 +357,8 @@ export const planChangeText = (item,currentPlan) => {
             }
     break;
         case "Growth":
-            if (itemPlan === "Free") {
-                buttenText = "Downgrade to Free";
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
             }
             if (itemPlan == "Starter") {
                 buttenText = "Downgrade to Starter";
@@ -371,8 +371,8 @@ export const planChangeText = (item,currentPlan) => {
             }
     break;
         case "Pro":
-            if (itemPlan === "Free") {
-                buttenText = "Downgrade to Free";
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
             }
             if (itemPlan == "Starter") {
                 buttenText = "Downgrade to Starter";

@@ -335,7 +335,7 @@ const TableHeader1 = ({ change }) => {
 				}}
 				className="w-[18%] text-[16px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
 			>
-				Free
+				Basic
 			</div>
 			<div
 				style={{

@@ -14,7 +14,7 @@ const OnboardingBillings = () => {
   const dispatch = useDispatch(),
    appURL = appURLs();
 
-  const [currentPlan, setCurrentPlan] = useState("Starter");
+  const [currentPlan, setCurrentPlan] = useState("");
   const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
   const dark = useSelector((state) => state.home.dark);
@@ -130,16 +130,17 @@ const OnboardingBillings = () => {
               </div>
             </div>
           </div>
-          <div className="w-[100%] mt-[20px] grid laptop:grid-cols-4 mobile:gap-y-[10px] laptop:gap-[20px]">
-            {planMockData.map((item, index) => {
+          <div className="w-[100%] mt-[20px] gap-[20px] grid laptop:grid-cols-3">
+            {planMockData.slice(0, 3).map((item, index) => {
               return (
                 <div
                   key={index}
                   style={{
                     backgroundColor: dark ? "#111317" : "#fff",
                     borderColor: dark ? "#1F2329" : "#ebebeb",
+                    width: "100%",
                   }}
-                  className=" bg-[#fff] border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px]"
+                  className="bg-[#fff]  border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px]"
                 >
                   <h1
                     style={{
@@ -190,17 +191,7 @@ const OnboardingBillings = () => {
                     bandwidth/mo */}
                   </p>
                   <div className="w-[100%] px-[17px] mt-[15px]">
-                    {currentPlan == item?.name ? (
-                      <div
-                        style={{
-                          backgroundColor: "#18df903f",
-                          color: "#0FE38F",
-                        }}
-                        className="w-[100%] h-[38px] rounded-[3px] border-[1px] bg-[#38f8ab27] hover:text-[#fff]  border-[#38f8ab27] text-[14px] font-bold text-[#fff] tracking-wide flex items-center justify-center"
-                      >
-                        Current Plan
-                      </div>
-                    ) : (
+                  
                       <div
                         onClick={() => {
                           handleBilling(item);
@@ -211,9 +202,9 @@ const OnboardingBillings = () => {
                         className={`w-[100%] h-[38px] text-[${dark ? "#fff" : "#000"
                           }] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
                       >
-                        {planChangeText(item, currentPlan)}
+                        Start Free Trail
                       </div>
-                    )}
+                   
                   </div>
                   <div className="w-[100%]  px-[17px] mt-[15px] pt-[15px] border-t-[1px] border-[#ebebeb]">
                     <p
