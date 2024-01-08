@@ -43,7 +43,10 @@ const NewOnboard = () => {
       >
         <Box
           style={{
-            backgroundColor: 'black',            // You can add more specific margin values if needed
+            backgroundColor: 'black', 
+            marginTop: '70px', 
+            marginLeft: '70px'
+                      // You can add more specific margin values if needed
           }}>
 
 

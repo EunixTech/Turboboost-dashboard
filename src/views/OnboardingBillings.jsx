@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { ComparePlans,planMockData, planChangeText, planOnboardData } from "../utils/constant";
+import {
+  ComparePlans,
+  planMockData,
+  planChangeText,
+  planOnboardData,
+} from "../utils/constant";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { billingApi } from "../utils/billingApi";
-import appURLs from '../appURL';
+import appURLs from "../appURL";
 import { useDispatch, useSelector } from "react-redux";
-import {getUserDataStart, getUserDataSuccess, getUserDataFailure } from "../slice/redirectUserSlice";
+import {
+  getUserDataStart,
+  getUserDataSuccess,
+  getUserDataFailure,
+} from "../slice/redirectUserSlice";
 import { setToggle } from "../slice/statusToggleSlice";
 import TitleManager from "../components/TitleManager";
 
-
 const OnboardingBillings = () => {
   const dispatch = useDispatch(),
-   appURL = appURLs();
+    appURL = appURLs();
 
   const [currentPlan, setCurrentPlan] = useState("");
   const navigate = useNavigate();
@@ -32,45 +40,42 @@ const OnboardingBillings = () => {
     }
   };
 
-
   const { search } = useLocation(),
     query = new URLSearchParams(search),
-    userToken = query.get('userToken');
+    userToken = query.get("userToken");
 
-    const fetchingUserDataByToken = async () => {
-      try {
+  const fetchingUserDataByToken = async () => {
+    try {
+      const resJson = await axios.get(
+        `${appURL}/user/redirect/login/${userToken}`
+      );
 
-        const resJson = await axios.get(
-          `${appURL}/user/redirect/login/${userToken}`
-        );
-  
-        const res = resJson?.data?.data;
-        const redirectURL = res?.redirectURI;
-        const token = res?.token;
-        const websiteURL = res?.userData?.app_token?.shopify?.shop;
+      const res = resJson?.data?.data;
+      const redirectURL = res?.redirectURI;
+      const token = res?.token;
+      const websiteURL = res?.userData?.app_token?.shopify?.shop;
 
-        console.log("resresres",res)
+      console.log("resresres", res);
 
-        localStorage.setItem("authToken", token);
-        localStorage.setItem("websiteURL", websiteURL);
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("websiteURL", websiteURL);
 
-        dispatch(setToggle({ key: "delayScripts", value: true }));
-        dispatch(setToggle({ key: "minifyJSFile", value: true }));
-        dispatch(setToggle({ key: "lazyLoading", value: true }));
-        dispatch(setToggle({ key: "imageSizeAdaption", value: true }));
-        dispatch(setToggle({ key: "minifyHTML", value: true }));
-        dispatch(setToggle({ key: "fontLoading", value: true }));
-        dispatch(setToggle({ key: "fontRenderBehavior", value: true }));
-        dispatch(setToggle({ key: "criticalCSS", value: true }));
-        dispatch(setToggle({ key: "removeUnsedCSS", value: true }));
-        if (redirectURL === "/dashboard") {
-          window.location.href = "/dashboard";
-        } 
-      } catch (error) {
-        console.log(error);
+      dispatch(setToggle({ key: "delayScripts", value: true }));
+      dispatch(setToggle({ key: "minifyJSFile", value: true }));
+      dispatch(setToggle({ key: "lazyLoading", value: true }));
+      dispatch(setToggle({ key: "imageSizeAdaption", value: true }));
+      dispatch(setToggle({ key: "minifyHTML", value: true }));
+      dispatch(setToggle({ key: "fontLoading", value: true }));
+      dispatch(setToggle({ key: "fontRenderBehavior", value: true }));
+      dispatch(setToggle({ key: "criticalCSS", value: true }));
+      dispatch(setToggle({ key: "removeUnsedCSS", value: true }));
+      if (redirectURL === "/dashboard") {
+        window.location.href = "/dashboard";
       }
-    };
-
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchingUserDataByToken();
@@ -78,7 +83,7 @@ const OnboardingBillings = () => {
 
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-        <TitleManager title="Onboarding" conicalURL="onboarding" />
+      <TitleManager title="Onboarding" conicalURL="onboarding" />
       <div className="w-[100%]"></div>
       <div
         style={{ backgroundColor: dark ? "#fff" : "#000" }}
@@ -129,7 +134,9 @@ const OnboardingBillings = () => {
                 Annually
               </div>
             </div>
+              <img src="/AnualArrow.svg" className="ml-[1px] annualArrow"  alt=""  />
           </div>
+          <p className="annualText">2 months free!</p>
           <div className="w-[100%] mt-[20px] gap-[20px] grid laptop:grid-cols-3">
             {planMockData.slice(0, 3).map((item, index) => {
               return (
@@ -191,20 +198,19 @@ const OnboardingBillings = () => {
                     bandwidth/mo */}
                   </p>
                   <div className="w-[100%] px-[17px] mt-[15px]">
-                  
-                      <div
-                        onClick={() => {
-                          handleBilling(item);
-                        }}
-                        style={{
-                          borderColor: dark ? "#1F2329" : "#ebebeb",
-                        }}
-                        className={`w-[100%] h-[38px] text-[${dark ? "#fff" : "#000"
-                          }] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
-                      >
-                        Start Free Trail
-                      </div>
-                   
+                    <div
+                      onClick={() => {
+                        handleBilling(item);
+                      }}
+                      style={{
+                        borderColor: dark ? "#1F2329" : "#ebebeb",
+                      }}
+                      className={`w-[100%] h-[38px] text-[${
+                        dark ? "#fff" : "#000"
+                      }] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
+                    >
+                      Start Free Trail
+                    </div>
                   </div>
                   <div className="w-[100%]  px-[17px] mt-[15px] pt-[15px] border-t-[1px] border-[#ebebeb]">
                     <p

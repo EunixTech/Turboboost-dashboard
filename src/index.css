@@ -538,3 +538,22 @@ form input {
   right: 2%;
   position: absolute;
 }
+.annualArrow {
+  display: flex;
+  height: 100%;
+  margin-bottom: -3rem;
+  margin-left: 0.1rem;
+  width: 19.585px;
+}
+p.annualText {
+  color: #38F8AC;
+  /* font-family: Inter; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  margin-left: 5rem;
+  margin-top: 0.5rem;
+}
