@@ -46,9 +46,12 @@ const OnboardingBillings = () => {
 
   const fetchingUserDataByToken = async () => {
     try {
+      axios.defaults.withCredentials = true;
+
       const resJson = await axios.get(
         `${appURL}/user/redirect/login/${userToken}`
       );
+
 
       const res = resJson?.data?.data;
       const redirectURL = res?.redirectURI;
