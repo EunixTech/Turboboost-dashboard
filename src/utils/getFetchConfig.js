@@ -4,7 +4,7 @@
 const fetchReqConfig = {
     method: `GET`,
     redirect: `follow`,
-    credentials: `same-origin`,
+    credentials: "include",
     headers: {
         'Content-Type': 'application/json',
         'fetch-req': true,
