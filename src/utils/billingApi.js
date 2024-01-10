@@ -14,6 +14,8 @@ export const billingApi=async(item,selected)=>{
 
 		let authToken = localStorage.getItem('authToken');
 		let config = {
+			redirect: `follow`,
+			credentials: "same-origin",
 			method: "post",
 			url: `${appURL}/user/createSubscription`,
 			headers: { 
