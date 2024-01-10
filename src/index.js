@@ -150,7 +150,7 @@ const App = () => {
       <Routes>
         {/* Include the connect-to-store route here as well */}
         {/* <Route path="/connect-to-store" element={<ConnectStore />} />  */}
-        <Route path={"/shopify-auth"} element={<SignInRoute />} />
+        <Route path={"/login-shopify"} element={<SignInRoute />} />
         {/* <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} /> */}
