@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
 import axios from "axios"; // Import axios
-
 import GoogleLoginButton from "../components/button/GoogleLogin";
+
 import FormikInput from "../components/forms/FormikInput";
 import SideBanner from "../components/SideBanner";
 import TitleManager from "../components/TitleManager";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
 
 import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
@@ -23,10 +22,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignInPage = () => { 
-  const router = useNavigate();
   const screenWidth = useWidth();
-  const navigate = useNavigate();
-  const { userInfo } = useSelector((state) => state.auth);
   const [authType, toggleAuthType] = useState("login");
   const fetchConfig = getFetchConfig();
   const appURL = appURLs();
@@ -47,6 +43,7 @@ const SignInPage = () => {
 
         const resJSON = await res.json();
         const redirectURL = resJSON.redirectURI;
+
         if(resJSON.status === 200){
           window.location.href = redirectURL;
         } else {

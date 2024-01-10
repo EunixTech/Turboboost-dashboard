@@ -23,6 +23,7 @@ import Home from "./views/home.jsx";
 
 // import Logs from "./views/logs";
 import Logs from "./views/Logs.jsx";
+import { useCookies } from "react-cookie";
 
 // import Integrations from "./routes/integrations";
 import Integrations from "./views/integrations.jsx";
@@ -99,6 +100,7 @@ const router = [
 
 
 const App = () => {
+  const [cookies, removeCookie] = useCookies([]);
   const location = useLocation();
   const navigate = useNavigate(); 
 
@@ -117,6 +119,7 @@ const App = () => {
  
   }, []);
 
+
   // useEffect(() => {
   //   window.intercomSettings = {
   //     api_base: "https://api-iam.intercom.io",
@@ -126,6 +129,8 @@ const App = () => {
   //     user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
   //     };
   //   }, [])
+
+  console.log("workingworking***", cookies)
   return (
     <>
     {showOnboardingModal && <NewOnboard />}
