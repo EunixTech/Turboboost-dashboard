@@ -86,10 +86,11 @@ const OnboardingBillings = () => {
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Onboarding" conicalURL="onboarding" />
       <div className="w-[100%]"></div>
+      
       <div
         style={{ backgroundColor: dark ? "#fff" : "#000" }}
-        className="w-[100%] h-[100%] flex flex-col items-center billing-modal-background  overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] mobile:px-[20px]"
-      >
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] flex flex-col items-center billing-modal-background overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] mobile:px-[20px] rounded-md relative"
+        >
         <div className="w-[100%] max-w-[1920px] min-h-[100vh]">
           <h1
             style={{
@@ -135,7 +136,11 @@ const OnboardingBillings = () => {
                 Annually
               </div>
             </div>
-              <img src="/AnualArrow.svg" className="ml-[1px] annualArrow"  alt=""  />
+            <img
+              src="/AnualArrow.svg"
+              className="ml-[1px] annualArrow"
+              alt=""
+            />
           </div>
           <p className="annualText">2 months free!</p>
           <div className="w-[100%] mt-[20px] gap-[20px] grid laptop:grid-cols-3">
