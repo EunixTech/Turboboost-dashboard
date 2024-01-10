@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const ShopifyAuth = () => {
   const fetchConfig = getFetchConfig();
