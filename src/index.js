@@ -134,7 +134,7 @@ const App = () => {
         // location.pathname === "/auth/signUp" ||
         // location.pathname === "/auth/forgot-password" ||
         // location.pathname === "/auth/reset-password" ||
-        location.pathname === "/shopify-auth"
+        location.pathname === "/login-shopify"
       ) && (
         <HomeLayout>
           <Routes>

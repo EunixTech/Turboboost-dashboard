@@ -32,8 +32,7 @@ const SignInPage = () => {
   const appURL = appURLs();
 
   const handleFormSubmit = async (values, { setSubmitting }) => {
-    console.log(values)
-   
+
       try {
         const res = await fetch(
           `${appURL}/api/shopify/shopify-auth`,
