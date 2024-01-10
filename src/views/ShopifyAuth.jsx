@@ -19,23 +19,31 @@ const ShopifyAuth = () => {
     }
     // rest of the code
       try {
-        const res = await fetch(
+        const { data } = await axios.post(
           `${appURL}/api/shopify/shopify-auth`,
           {
-            ...fetchConfig,
-          method: "POST",
-          body: JSON.stringify({
             shop_name:"turboboost-dev.myshopify.com"
-          })
-          }
+          },
+          { withCredentials: true }
         );
+        // const res = await fetch(
+        //   `${appURL}/api/shopify/shopify-auth`,
+        //   {
+        //     ...fetchConfig,
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     shop_name:"turboboost-dev.myshopify.com"
+        //   })
+        //   }
+        // );
 
-        const resJSON = await res.json();
-        const redirectURL = resJSON.redirectURI;
-        if(resJSON.status === 200){
+        // const resJSON = await res.json();
+        console.log("data",data)
+        const redirectURL = data.redirectURI;
+        if(data.status === 200){
           window.location.href = redirectURL;
         } else {
-          return toast.error(resJSON.message)
+          return toast.error(data.message)
         }
 
       } catch (error) {
