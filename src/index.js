@@ -128,7 +128,7 @@ const App = () => {
   //   }, [])
   return (
     <>
-    {showOnboardingModal && <NewOnboard />}
+    {true && <NewOnboard />}
       {!(
         // location.pathname === "/auth/signIn" ||
         // location.pathname === "/auth/signUp" ||

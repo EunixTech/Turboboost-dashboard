@@ -1,6 +1,7 @@
 import axios from "axios";
 import appURLs from "../appURL";
 export const billingApi=async(item,selected)=>{
+	axios.defaults.withCredentials = true;
 
 	const  appURL = appURLs();
     let planName = item?.name;
