@@ -488,6 +488,7 @@ import DemoPie from "../components/charts/donut";
 import MultiLineChart from "../components/charts/chart5";
 import CustomDonutChart from "../components/charts/chart5";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -807,6 +808,7 @@ const HoverDetail = () => {
 
 const Dashboard = () => {
 
+  const [imageData, updateImageData]= useState({});
 
   const w = useWidth();
   const dispatch = useDispatch();
@@ -819,10 +821,13 @@ const Dashboard = () => {
   const fetchImageOptimizationData = async () => {
     console.log("asjdhhjasgdhjgasjhdgajhsg")
       try {
-        const res = await fetch(`${appURL}/api/dashboard/fetch-image-optimization-data`,fetchConfig);
+        const res = await axios.get(`${appURL}/api/dashboard/fetch-image-optimization-data`);
 
-        const resJSON = await res.json();
-        console.log("resJSONresJSONresJSONresJSON",resJSON)
+        const imageDataObj = res?.data?.dataObj;
+
+        updateImageData(imageDataObj)
+        // const resJSON = await res.json();
+        console.log("resJSONresJSONresJSONresJSON",res)
      
       } catch (error) {
         console.error("Error fetching user profile data:", error);
@@ -894,7 +899,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[25px] f2 desktop:text-[25px]  font-bold "
                 >
-                  96%
+                  {imageData?.percentageImageOptimize || " "}%
                 </p>
                 <div className=" flex bg-[#18df902e] px-[13px] py-[2px] rounded-[23px] ml-[10px]">
                   <img
@@ -951,9 +956,9 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
                 >
-                  125.93 MB
+                   {imageData?.totalOptimizeImage || " "}
                 </p>
-                <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
+                {/* <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
                   <img
                     src="/graphic/dashboard/trend-red-down.svg"
                     className="mr-[5px] translate-y-[1px] w-[14px]"
@@ -962,9 +967,9 @@ const Dashboard = () => {
                   <p className="text-[#ff004c] f2 text-[13px] font-medium tracking-wide ">
                     3%
                   </p>
-                </div>
+                </div> */}
               </div>
-              <div className="flex">
+              {/* <div className="flex">
                 <p
                   style={{
                     color: dark ? "#ffffff74" : "#0a0a187e",
@@ -981,7 +986,7 @@ const Dashboard = () => {
                 >
                   136.71 MB
                 </p>
-              </div>
+              </div> */}
             </div>
             <div
               style={{
@@ -1193,7 +1198,7 @@ const Dashboard = () => {
                   </p>
                 </div> */}
                 {/* <DemoPie /> */}
-                <CustomDonutChart />
+                <CustomDonutChart imageData = {imageData} />
                 <div className="max-w-[250px] w-[50%] ml-auto">
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex  items-center">
@@ -1217,7 +1222,7 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                      244
+                      {imageData?.totalImages || ""}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1242,7 +1247,7 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                      72
+                       {imageData?.totalOptimizeImage || ""}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1267,7 +1272,7 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] font-bold translate-y-[-2px]"
                     >
-                      19
+                       {imageData?.totalOriginImage || ""}
                     </div>
                   </div>
                 </div>
