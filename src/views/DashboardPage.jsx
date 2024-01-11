@@ -6,7 +6,7 @@
 // import HoverGreenButton from "../components/button/HoverGreenButton";
 // import CircularProgressBar from "../components/CircularProgressBar";
 // import CoreVitalsReportCard from "../components/CoreVitalsReportCard";
-// import GreetingCard from "../components/GreetingCard";
+import GreetingCard from "../components/GreetingCard";
 // import CacheStatCard from "../components/CacheStatCard";
 // import QuickActionCard from "../components/QuickActionCard";
 // import CacheStatusCard from "../components/CacheStatusCard";
@@ -822,18 +822,14 @@ const Dashboard = () => {
         <div className="w-[100%] pb-[50px] max-w-[1920px] min-h-[100vh]">
           <div className="w-[100%] pt-[50px] h-[40px] mobile:px-[10px] flex items-center justify-between">
             <div className="flex items-center mb-[20px] justify-center">
-              <h1
-                style={{ color: dark ? "#fff" : "#000" }}
-                className="text-[18px] f2 font-medium"
-              >
-                Good evening, Kyle!
-              </h1>
+            <GreetingCard />
               <img
                 src="/graphic/dashboard/hifi.png"
                 alt=""
                 className="w-[18px] ml-[5px] text-[20px] translate-y-[-1px]"
               />
             </div>
+         
             {w > 1000 && (
               <div className="flex items-center justify-center">
                 <div className="w-[18px] translate-y-[0px] h-[18px] justify-center items-center flex rounded-[50%] bg-[#38f8ab3a]">
@@ -1132,7 +1128,7 @@ const Dashboard = () => {
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
                 >
-                  Total Cache Status
+                  Image Optimizations
                 </p>
                 {dark ? (
                   <div
@@ -1190,7 +1186,7 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Optimized URLs
+                       Total No Images
                       </p>
                     </div>
                     <div
@@ -1215,7 +1211,7 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Pending Optimizations
+                      No of Image Optimize
                       </p>
                     </div>
                     <div
@@ -1240,7 +1236,7 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Not Optimized URLs
+                        Pending Optimizations
                       </p>
                     </div>
                     <div

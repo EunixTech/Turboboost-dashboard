@@ -118,7 +118,7 @@ const Sidebar = ({ transition, cancel }) => {
             style={{
               backgroundColor: dark ? "#191B21" : "#191925",
             }}
-            className="w-[100%] p-[13px] border-[1px] border-[#292935] py-[13px] h-[180px] mb-[10px] rounded-sm bg-[#191925]"
+            className="w-[100%] p-[13px] border-[1px] border-[#292935] py-[13px] h-[150px] mb-[10px] rounded-sm bg-[#191925]"
           >
             <p className="text-[#918EA2] text-[12px] tracking-wide font-medium">
               My Plan
