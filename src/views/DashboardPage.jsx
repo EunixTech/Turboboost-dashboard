@@ -863,7 +863,7 @@ const Dashboard = () => {
                   }}
                   className="text-[16px] f2 tracking-wide font-bold"
                 >
-                  Cache Hit Ratio
+                  % Image Optimized
                 </p>
                 <HoverDetail />
               </div>
@@ -920,7 +920,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#0a0a187e] f2 text-[16px] tracking-wide font-bold"
                 >
-                  Cache Size
+                  # Images Optimized
                 </p>
                 <HoverDetail />
               </div>
