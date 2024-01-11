@@ -477,7 +477,7 @@ import TitleManager from "../components/TitleManager";
 
 // export default DashboardPage;
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import useWidth from "../hooks/useWidth";
@@ -803,6 +803,8 @@ const HoverDetail = () => {
   );
 };
 
+
+
 const Dashboard = () => {
 
 
@@ -810,6 +812,28 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
   const router = useNavigate();
+
+  const fetchConfig = getFetchConfig();
+  const appURL = appURLs();
+
+  const fetchImageOptimizationData = async () => {
+    console.log("asjdhhjasgdhjgasjhdgajhsg")
+      try {
+        const res = await fetch(`${appURL}/api/dashboard/fetch-image-optimization-data`,fetchConfig);
+
+        const resJSON = await res.json();
+        console.log("resJSONresJSONresJSONresJSON",resJSON)
+     
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+  };
+
+  useEffect(() => {
+    fetchImageOptimizationData();
+  }, [])
+  
+
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Dashboard" conicalURL="dashboard" />
