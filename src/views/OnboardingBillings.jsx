@@ -82,15 +82,15 @@ const OnboardingBillings = () => {
   }, []);
 
   return (
-    <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+    <div className="overflow-hidden flex flex-col">
       <TitleManager title="Onboarding" conicalURL="onboarding" />
       <div className="w-[100%]"></div>
       
       <div
         style={{ backgroundColor: dark ? "#fff" : "#000" }}
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] flex flex-col items-center billing-modal-background overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] mobile:px-[20px] rounded-md relative"
-        >
-        <div className="w-[100%] max-w-[1920px] min-h-[100vh]">
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100%] flex flex-col items-center billing-modal-background overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] mobile:px-[20px] rounded-md relative"
+        >x1
+        <div className="max-w-[1920px]">
           <h1
             style={{
               color: dark ? "#fff" : "#fff",
@@ -105,8 +105,8 @@ const OnboardingBillings = () => {
           <div className="w-[100%] mt-[15px] flex items-center justify-center">
             <div
               style={{
-                backgroundColor: dark ? "#12122B" : "#12122B",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
+                // backgroundColor: dark ? "#12122B" : "#12122B",
+                // borderColor: dark ? "#1F2329" : "#ebebeb",
               }}
               className="flex w-[200px] h-[40px]  border-[1px]   rounded-[4px] px-[3px] py-[3px]"
             >
@@ -115,7 +115,7 @@ const OnboardingBillings = () => {
                   setSelected(0);
                 }}
                 style={{
-                  backgroundColor: selected === 0 ? "#18df903f" : "",
+                  // backgroundColor: selected === 0 ? "#18df903f" : "",
                   color: selected === 0 ? "#0FE38F" : "#85858C",
                 }}
                 className="w-[50%] cursor-pointer h-[100%] rounded-[4px] text-[14px] font-medium flex items-center justify-center tracking-wide"
