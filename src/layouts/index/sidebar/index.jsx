@@ -420,7 +420,7 @@ const Sidebar = () => {
           style={{
             backgroundColor: dark ? "#191B21" : "#191925",
           }}
-          className="w-[100%] p-[13px] border-[1px] border-[#292935] py-[13px] h-[180px] mb-[10px] rounded-sm bg-[#191925]"
+          className="w-[100%] p-[13px] border-[1px] border-[#292935] py-[13px] h-[150px] mb-[10px] rounded-sm bg-[#191925]"
         >
           <p className="text-[#918EA2] f2 text-[12px] tracking-wide font-medium">
             My Plan
@@ -446,7 +446,7 @@ const Sidebar = () => {
               ></div>
             </div>
           </div>
-          <div className="mt-[7px] mb-[10px]">
+          {/* <div className="mt-[7px] mb-[10px]">
             <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
               <p className="text-[12px] f2 text-white tracking-wide">
                 CDN Bandwidth/mo
@@ -463,7 +463,7 @@ const Sidebar = () => {
                 }}
               ></div>
             </div>
-          </div>
+          </div> */}
           {/* <div
             className="w-[100%] h-[34px] f2 text-[#000] rounded-[2px] text-[12px] font-medium tracking-wide flex items-center justify-center cursor-pointer bg-[#38F8AC]"
           >

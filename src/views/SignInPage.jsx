@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
 import axios from "axios"; // Import axios
-
 import GoogleLoginButton from "../components/button/GoogleLogin";
+
 import FormikInput from "../components/forms/FormikInput";
 import SideBanner from "../components/SideBanner";
 import TitleManager from "../components/TitleManager";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
 
 import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
@@ -18,22 +17,18 @@ import toast from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
   domain: Yup.string()
-    .matches(/^(http|https):\/\/[^ "]+(\.[^ "]+)?$/, "Invalid domain name format")
+    .matches(/^(http|https):\/\/[^\s$.?#].[^\s]*$/, "Invalid domain name format")
     .required("Domain name is required"),
 });
 
 const SignInPage = () => { 
-  const router = useNavigate();
   const screenWidth = useWidth();
-  const navigate = useNavigate();
-  const { userInfo } = useSelector((state) => state.auth);
   const [authType, toggleAuthType] = useState("login");
   const fetchConfig = getFetchConfig();
   const appURL = appURLs();
 
   const handleFormSubmit = async (values, { setSubmitting }) => {
-    console.log(values)
-   
+
       try {
         const res = await fetch(
           `${appURL}/api/shopify/shopify-auth`,
@@ -48,6 +43,7 @@ const SignInPage = () => {
 
         const resJSON = await res.json();
         const redirectURL = resJSON.redirectURI;
+
         if(resJSON.status === 200){
           window.location.href = redirectURL;
         } else {

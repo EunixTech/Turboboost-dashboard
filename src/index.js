@@ -11,8 +11,8 @@ import SignInRoute from "./routes/SignInRoute";
 import ConnectStore from "./views/ShopifyAuth.jsx";
 import SignUp from "./routes/SignUpRoute";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute";
-// import ConnectWebsite from "./Routes/connect-website";
-import ConnectWebsite from "./views/ConnectWebsite.jsx";
+import ConnectWebsite from "./routes/connect-website.jsx";
+// import ConnectWebsite from "./views/ConnectWebsite.jsx";
 // import CacheWarmup from "./routes/cache-warmup";
 import CacheWarmup from "./views/CacheWarmupage.jsx";
 
@@ -23,6 +23,7 @@ import Home from "./views/home.jsx";
 
 // import Logs from "./views/logs";
 import Logs from "./views/Logs.jsx";
+import { useCookies } from "react-cookie";
 
 // import Integrations from "./routes/integrations";
 import Integrations from "./views/integrations.jsx";
@@ -99,6 +100,7 @@ const router = [
 
 
 const App = () => {
+  const [cookies, removeCookie] = useCookies([]);
   const location = useLocation();
   const navigate = useNavigate(); 
 
@@ -114,18 +116,9 @@ const App = () => {
     // } else {
     //   setShowOnboardingModal(!!userToken);
     // }
-    window.intercomSettings = {
-      api_base: "https://api-iam.intercom.io",
-      app_id: "pz01qpvl",
-      email: "manmohankumar023@hmail.com", // the email for your user
-      user_id: "asd123", // a UUID for your user
-      user_hash:
-        "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c", // an Identity Verification user hash for your user
-    };
-    // if(location.pathname === "/"){
-    //   navigate("/");
-    // }
+ 
   }, []);
+
 
   // useEffect(() => {
   //   window.intercomSettings = {
@@ -136,15 +129,17 @@ const App = () => {
   //     user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
   //     };
   //   }, [])
+
+  console.log("workingworking***", cookies)
   return (
     <>
-    {true && <NewOnboard />}
+    {showOnboardingModal && <NewOnboard />}
       {!(
         // location.pathname === "/auth/signIn" ||
         // location.pathname === "/auth/signUp" ||
         // location.pathname === "/auth/forgot-password" ||
         // location.pathname === "/auth/reset-password" ||
-        location.pathname === "/shopify-auth"
+        location.pathname === "/login-shopify"
       ) && (
         <HomeLayout>
           <Routes>
@@ -160,7 +155,7 @@ const App = () => {
       <Routes>
         {/* Include the connect-to-store route here as well */}
         {/* <Route path="/connect-to-store" element={<ConnectStore />} />  */}
-        <Route path={"/shopify-auth"} element={<SignInRoute />} />
+        <Route path={"/login-shopify"} element={<SignInRoute />} />
         {/* <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
         <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} /> */}

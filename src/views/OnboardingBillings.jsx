@@ -46,16 +46,17 @@ const OnboardingBillings = () => {
 
   const fetchingUserDataByToken = async () => {
     try {
+      axios.defaults.withCredentials = true;
+
       const resJson = await axios.get(
         `${appURL}/user/redirect/login/${userToken}`
       );
+
 
       const res = resJson?.data?.data;
       const redirectURL = res?.redirectURI;
       const token = res?.token;
       const websiteURL = res?.userData?.app_token?.shopify?.shop;
-
-      console.log("resresres", res);
 
       localStorage.setItem("authToken", token);
       localStorage.setItem("websiteURL", websiteURL);

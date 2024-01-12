@@ -6,7 +6,7 @@
 // import HoverGreenButton from "../components/button/HoverGreenButton";
 // import CircularProgressBar from "../components/CircularProgressBar";
 // import CoreVitalsReportCard from "../components/CoreVitalsReportCard";
-// import GreetingCard from "../components/GreetingCard";
+import GreetingCard from "../components/GreetingCard";
 // import CacheStatCard from "../components/CacheStatCard";
 // import QuickActionCard from "../components/QuickActionCard";
 // import CacheStatusCard from "../components/CacheStatusCard";
@@ -477,7 +477,7 @@ import TitleManager from "../components/TitleManager";
 
 // export default DashboardPage;
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import useWidth from "../hooks/useWidth";
@@ -488,6 +488,7 @@ import DemoPie from "../components/charts/donut";
 import MultiLineChart from "../components/charts/chart5";
 import CustomDonutChart from "../components/charts/chart5";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -803,13 +804,41 @@ const HoverDetail = () => {
   );
 };
 
+
+
 const Dashboard = () => {
 
+  const [imageData, updateImageData]= useState({});
 
   const w = useWidth();
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
   const router = useNavigate();
+
+  const fetchConfig = getFetchConfig();
+  const appURL = appURLs();
+
+  const fetchImageOptimizationData = async () => {
+    console.log("asjdhhjasgdhjgasjhdgajhsg")
+      try {
+        const res = await axios.get(`${appURL}/api/dashboard/fetch-image-optimization-data`);
+
+        const imageDataObj = res?.data?.dataObj;
+
+        updateImageData(imageDataObj)
+        // const resJSON = await res.json();
+        console.log("resJSONresJSONresJSONresJSON",res)
+     
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+  };
+
+  useEffect(() => {
+    fetchImageOptimizationData();
+  }, [])
+  
+
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Dashboard" conicalURL="dashboard" />
@@ -822,18 +851,14 @@ const Dashboard = () => {
         <div className="w-[100%] pb-[50px] max-w-[1920px] min-h-[100vh]">
           <div className="w-[100%] pt-[50px] h-[40px] mobile:px-[10px] flex items-center justify-between">
             <div className="flex items-center mb-[20px] justify-center">
-              <h1
-                style={{ color: dark ? "#fff" : "#000" }}
-                className="text-[18px] f2 font-medium"
-              >
-                Good evening, Kyle!
-              </h1>
+            <GreetingCard />
               <img
                 src="/graphic/dashboard/hifi.png"
                 alt=""
                 className="w-[18px] ml-[5px] text-[20px] translate-y-[-1px]"
               />
             </div>
+         
             {w > 1000 && (
               <div className="flex items-center justify-center">
                 <div className="w-[18px] translate-y-[0px] h-[18px] justify-center items-center flex rounded-[50%] bg-[#38f8ab3a]">
@@ -863,7 +888,7 @@ const Dashboard = () => {
                   }}
                   className="text-[16px] f2 tracking-wide font-bold"
                 >
-                  Cache Hit Ratio
+                  % Image Optimized
                 </p>
                 <HoverDetail />
               </div>
@@ -874,7 +899,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[25px] f2 desktop:text-[25px]  font-bold "
                 >
-                  96%
+                  {imageData?.percentageImageOptimize || " "}%
                 </p>
                 <div className=" flex bg-[#18df902e] px-[13px] py-[2px] rounded-[23px] ml-[10px]">
                   <img
@@ -920,7 +945,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#0a0a187e] f2 text-[16px] tracking-wide font-bold"
                 >
-                  Cache Size
+                  # Images Optimized
                 </p>
                 <HoverDetail />
               </div>
@@ -931,9 +956,9 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
                 >
-                  125.93 MB
+                   {imageData?.totalOptimizeImage || " "}
                 </p>
-                <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
+                {/* <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
                   <img
                     src="/graphic/dashboard/trend-red-down.svg"
                     className="mr-[5px] translate-y-[1px] w-[14px]"
@@ -942,9 +967,9 @@ const Dashboard = () => {
                   <p className="text-[#ff004c] f2 text-[13px] font-medium tracking-wide ">
                     3%
                   </p>
-                </div>
+                </div> */}
               </div>
-              <div className="flex">
+              {/* <div className="flex">
                 <p
                   style={{
                     color: dark ? "#ffffff74" : "#0a0a187e",
@@ -961,7 +986,7 @@ const Dashboard = () => {
                 >
                   136.71 MB
                 </p>
-              </div>
+              </div> */}
             </div>
             <div
               style={{
@@ -1132,7 +1157,7 @@ const Dashboard = () => {
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
                 >
-                  Total Cache Status
+                  Image Optimizations
                 </p>
                 {dark ? (
                   <div
@@ -1173,7 +1198,7 @@ const Dashboard = () => {
                   </p>
                 </div> */}
                 {/* <DemoPie /> */}
-                <CustomDonutChart />
+                <CustomDonutChart imageData = {imageData} />
                 <div className="max-w-[250px] w-[50%] ml-auto">
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex  items-center">
@@ -1190,14 +1215,14 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Optimized URLs
+                       Total No Images
                       </p>
                     </div>
                     <div
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                      244
+                      {imageData?.totalImages || ""}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1215,14 +1240,14 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Pending Optimizations
+                      No of Image Optimize
                       </p>
                     </div>
                     <div
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                      72
+                       {imageData?.totalOptimizeImage || ""}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1240,14 +1265,14 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Not Optimized URLs
+                        Pending Optimizations
                       </p>
                     </div>
                     <div
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] font-bold translate-y-[-2px]"
                     >
-                      19
+                       {imageData?.totalOriginImage || ""}
                     </div>
                   </div>
                 </div>
