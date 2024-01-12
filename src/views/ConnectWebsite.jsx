@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import TitleManager from "../components/TitleManager";
+import axios from "axios"
+import appURLs from "../appURL";
+import { toast } from "react-toastify";
 
 const Button = () => {
 
@@ -141,7 +144,7 @@ const Status = ({ i }) => {
   );
 };
 
-const TableItem = ({ name, url, id, secret, status, onDelete }) => {
+const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) => {
   const dark = useSelector((state) => state.home.dark);
   const [clipboardHover, setClipboardHover] = useState(false);
   const [copyText, setCopyText] = useState(false);
@@ -188,7 +191,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
         }}
         className="w-[23%] overflow-hidden pr-[10px] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
-        {url}
+        https://{site_url}
       </div>
       {/* Site ID */}
       <div
@@ -198,7 +201,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
         onClick={() => {
           if (clipboardHover) {
             // Copy the Site ID when the clipboardHover state is true
-            copyToClipboard(id);
+            copyToClipboard(site_id);
           }
         }}
         onMouseOver={() => {
@@ -210,7 +213,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
         }}
         className="w-[17%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
-        {copyText ? id : "••••••••••"}
+        {copyText ? site_id : "••••••••••"}
         <div className="flex ml-[10px] cursor-pointer translate-y-[-2px]">
           <img
             src={
@@ -240,7 +243,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
         onClick={() => {
           if (clipboardHover) {
             // Copy the Site Secret when the clipboardHover state is true
-            copyToClipboard(secret);
+            copyToClipboard(site_secret);
           }
         }}
         onMouseOver={() => {
@@ -252,7 +255,7 @@ const TableItem = ({ name, url, id, secret, status, onDelete }) => {
         }}
         className="w-[17%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
-        {copyText ? secret : "••••••••••"}
+        {copyText ? site_secret : "••••••••••"}
         <div className="flex ml-[10px] cursor-pointer translate-y-[-2px]">
           <img
             src={
@@ -308,6 +311,26 @@ const Table = ({ websites, deleteWebsite, dark }) => (
 const ConnectWebsite = ({ setShow }) => {
   const dark = useSelector((state) => state.home.dark);
   const [websites, setWebsites] = useState([]);
+  const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
+
+    const appURL = appURLs();
+
+  const fetchConnectedWebsiteData = async () => {
+ 
+      try {
+        const res = await axios.get(`${appURL}/api/dashboard/fetch-connected-website-data`);
+
+        const dataArr = res?.data?.conectedWebsite;
+        updateConnectedWebsiteData(dataArr)
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+  };
+
+  useEffect(() => {
+    fetchConnectedWebsiteData();
+  }, [])
+  
 
   // Load data from localStorage when the component mounts
   useEffect(() => {
@@ -336,6 +359,11 @@ const ConnectWebsite = ({ setShow }) => {
       .required('Website URL is required'),
     name: Yup.string().required('Website Name is required'),
   });
+
+  const handleSubmitForm = () =>{
+    toast.dismiss();
+    return toast.success("Comming soon");
+  }
 
   return (
     <>
@@ -375,7 +403,7 @@ const ConnectWebsite = ({ setShow }) => {
                     {websites.length !== 1 ? "s" : ""}
                   </p>
                 </div>
-                <Table websites={websites} deleteWebsite={deleteWebsite} />
+                <Table websites={connectedWebsiteData} deleteWebsite={deleteWebsite} />
               </div>
               <div className="mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[26%]">
                 <div
@@ -398,20 +426,21 @@ const ConnectWebsite = ({ setShow }) => {
                       url: "",
                       name: "",
                     }}
-                    validationSchema={validationSchema} // Use the validationSchema here
-                    onSubmit={(values, { resetForm }) => {
+                    // validationSchema={validationSchema} // Use the validationSchema here
+                    // onSubmit={(values, { resetForm }) => {
                       // Handle form submission here
-                      addWebsiteToList({
-                        name: values.name,
-                        url: values.url,
-                        id: "NewWebsiteID123", // Replace with the actual ID
-                        secret: "NewWebsiteSecret", // Replace with the actual secret
-                        status: 1, // Replace with the actual status
-                      });
+                      // addWebsiteToList({
+                      //   name: values.name,
+                      //   url: values.url,
+                      //   id: "NewWebsiteID123", // Replace with the actual ID
+                      //   secret: "NewWebsiteSecret", // Replace with the actual secret
+                      //   status: 1, // Replace with the actual status
+                      // });
 
                       // Reset the form after submission
-                      resetForm();
-                    }}
+                      // resetForm();
+                    //  return toast.success("Comming soon")
+                    // }}
                   >
                     {({ errors, touched }) => (
                       <Form>
@@ -468,6 +497,7 @@ const ConnectWebsite = ({ setShow }) => {
                           />
                         </div>
                         <button
+                          onClick = {handleSubmitForm}
                           type="submit"
                           className={`w-[100%] h-[40px] cursor-pointer mt-[18px] hover:bg-[#2FE49C] rounded-[3px] flex items-center justify-center bg-[#38F8AC] ${
                             dark ? "text-white" : "text-black"
