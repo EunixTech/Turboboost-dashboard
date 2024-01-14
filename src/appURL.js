@@ -1,5 +1,5 @@
 export default ()=>{
-    return "https://backend.turbo-boost.io/v1/"
+    return "https://backend.turbo-boost.io/v1"
 };
 
 
