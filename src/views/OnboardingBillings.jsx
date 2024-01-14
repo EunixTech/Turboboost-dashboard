@@ -58,7 +58,7 @@ const OnboardingBillings = () => {
       const token = res?.token;
       const websiteURL = res?.userData?.app_token?.shopify?.shop;
 
-      localStorage.setItem("authToken", token);
+      localStorage.setItem("authToken", true);
       localStorage.setItem("websiteURL", websiteURL);
 
       dispatch(setToggle({ key: "delayScripts", value: true }));

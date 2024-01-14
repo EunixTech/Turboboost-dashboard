@@ -1,9 +1,11 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState,useEffect } from "react";
 import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpgradePopUpShow } from "../services/home";
 import TitleManager from "../components/TitleManager";
+import axios from "axios";
+import appURLs from "../appURL";
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -165,8 +167,31 @@ const HoverDetail = () => {
 
 const CacheWarmup = ({ setShow }) => {
   const [enabled, setEnabled] = useState(false);
+  const [pageOptimizationData, updatePageOptimizationData] = useState({});
   const dark = useSelector((state) => state.home.dark);
   const dispatch = useDispatch();
+  const appURL = appURLs();
+
+  const fetchPageOptimizationData = async () => {
+    console.log("asjdhhjasgdhjgasjhdgajhsg")
+      try {
+        const res = await axios.get(`${appURL}/api/dashboard/fetch-page-optimization-data`);
+
+        const imageDataObj = res?.data?.pageData;
+
+        // updateImageData(imageDataObj)
+        // const resJSON = await res.json();
+        console.log("resJSONresJSONresJSONresJSON",res)
+        console.log("resJSONresJSONresJSONresJSON",imageDataObj)
+     
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+  };
+
+  useEffect(() => {
+    fetchPageOptimizationData();
+  }, [])
   return (
     <>
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
