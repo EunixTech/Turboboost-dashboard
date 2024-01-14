@@ -758,9 +758,9 @@ const [assetsData, updateAssetsData] = useState({});
                 style={{
                   color: dark ? "#fff" : "#000",
                 }}
-                className="text-[30px] mt-[10px] font-bold tracking-wide "
+                className="text-[30px] mt-[10px] font-bold tracking-wide"
               >
-                sub={assetsData && assetsData?.totalOptimizedSize}
+                {assetsData && assetsData?.totalOptimizedSize}
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
