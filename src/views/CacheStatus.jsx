@@ -42,6 +42,8 @@ import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
 import { useSelector } from "react-redux";
 import TitleManager from "../components/TitleManager.jsx";
+import axios from "axios";
+import appURLs from "../appURL";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -658,6 +660,29 @@ const Table = ({ setSelected1 }) => {
 const CacheStatus = () => {
   const [selected, setSelected] = useState([]);
   const dark = useSelector((state) => state.home.dark);
+
+  const appURL = appURLs();
+
+  const fetchPageOptimizationData = async () => {
+    console.log("asjdhhjasgdhjgasjhdgajhsg")
+      try {
+        const res = await axios.get(`${appURL}/api/dashboard/fetch-assets-optimization-data`);
+
+        const imageDataObj = res?.data?.objectToSend;
+
+        // updateImageData(imageDataObj)
+        // const resJSON = await res.json();
+        console.log("resJSONresJSONresJSONresJSON",res)
+        console.log("resJSONresJSONresJSONresJSON",imageDataObj)
+     
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+  };
+
+  useEffect(() => {
+    fetchPageOptimizationData();
+  }, [])
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
        <TitleManager title="Cache Status" conicalURL="cache-status" />
