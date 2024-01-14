@@ -296,7 +296,7 @@ const Table = ({ websites, deleteWebsite, dark }) => (
   <div className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool">
     <div className="mobile:w-[900px]  laptop:min-w-[900px] laptop:w-[100%]">
       <TableHeader dark={dark} />
-      {websites.map((website, i) => (
+      {websites.length && websites.map((website, i) => (
         <TableItem
           key={i}
           {...website}
