@@ -30,25 +30,37 @@ const SignInPage = () => {
   const handleFormSubmit = async (values, { setSubmitting }) => {
 
       try {
-        const res = await fetch(
+        const authResponse = await axios.post(
           `${appURL}/api/shopify/shopify-auth`,
           {
-            ...fetchConfig,
-          method: "POST",
-          body: JSON.stringify({
-            shop_name: values.domain
-          })
+              shop_name: values.domain
+          },
+          {
+              withCredentials: true // Enable sending cookies
           }
-        );
+      );
 
-        const resJSON = await res.json();
-        const redirectURL = resJSON.redirectURI;
+      console.log("authResponse",authResponse)
 
-        if(resJSON.status === 200){
-          window.location.href = redirectURL;
-        } else {
-          return toast.error(resJSON.message)
-        }
+        // const res = await fetch(
+        //   `${appURL}/api/shopify/shopify-auth`,
+        //   {
+        //     ...fetchConfig,
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     shop_name: values.domain
+        //   })
+        //   }
+        // );
+
+        // const resJSON = await res.json();
+        // const redirectURL = resJSON.redirectURI;
+
+        // if(resJSON.status === 200){
+        //   window.location.href = redirectURL;
+        // } else {
+        //   return toast.error(resJSON.message)
+        // }
 
       } catch (error) {
         console.error("Error fetching user profile data:", error);

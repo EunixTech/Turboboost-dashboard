@@ -14,7 +14,7 @@ const SignInRoute = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const loggedIn = localStorage.getItem("loggedIn");
+        const loggedIn = localStorage.getItem("authToken");
         const dark = localStorage.getItem("dark");
 
         if (dark) dispatch(setDark(true));
