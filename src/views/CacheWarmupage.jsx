@@ -1,4 +1,4 @@
-import React, { Suspense, useState,useEffect } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,9 +48,8 @@ const Button = () => {
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
-        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+          } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         <img
           src="/graphic/warmup/play.svg"
@@ -107,9 +106,8 @@ const Button1 = ({ onClick }) => {
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
-        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#000]" : "bg-[#000]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : "bg-[#000]"
+          } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         <img
           src="/graphic/warmup/plus.svg"
@@ -166,8 +164,9 @@ const HoverDetail = () => {
   );
 };
 
-const Table1 = ({ setSelected1 }) => {
+const Table1 = ({ tableData }) => {
   const arr = [1, 2, 3];
+  const {title, is_optimized,optimized_at} =  tableData;
 
   const [selected, setSelected] = useState([]);
   const dark = useSelector((state) => state.home.dark);
@@ -180,8 +179,8 @@ const Table1 = ({ setSelected1 }) => {
     >
       <div className="mobile:w-[1200px] laptop:w-[100%]">
         <TableHeader1 />
-        {arr.map((item, i) => {
-          return <TableItem1 key={i} last={i === arr.length - 1} />;
+        {tableData.map((item, i) => {
+          return <TableItem1 key={i} last={i === arr.length - 1} item={item} />;
         })}
       </div>
     </div>
@@ -236,14 +235,42 @@ const TableHeader1 = ({ change }) => {
         }}
         className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
-       
+
       </div>
-    
+
     </div>
   );
 };
 
-const TableItem1 = ({ last, change, selected }) => {
+const Status = ({ i }) => {
+  return (
+    <div
+      className="h-[22px] flex items-center px-[9.5px] justify-between rounded-[23px] "
+      style={{
+        backgroundColor:
+          i === 1 ? "#38f8ab31" : i === 2 ? "#ffcc6538" : "#ff465c38",
+      }}
+    >
+      <div
+        className="w-[6px] h-[6px] shrink-0 rounded-[50%]"
+        style={{
+          backgroundColor:
+            i === 1 ? "#0FE38F" : i === 2 ? "#FFCB65" : "#FF465C",
+        }}
+      ></div>
+      <p
+        className="text-[11px] tracking-wide ml-[5px]"
+        style={{
+          color: i === 1 ? "#0FE38F" : i === 2 ? "#FFCB65" : "#FF465C",
+        }}
+      >
+        {i === 1 ? "Optimized" : i === 2 ? "Incomplete" : "Disconnected"}
+      </p>
+    </div>
+  );
+};
+
+const TableItem1 = ({ last, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
@@ -262,7 +289,7 @@ const TableItem1 = ({ last, change, selected }) => {
         }}
         className="w-[40.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        2023-05-25
+        {item?.title}
       </div>
       <div
         style={{
@@ -270,7 +297,7 @@ const TableItem1 = ({ last, change, selected }) => {
         }}
         className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        142
+        {item?.optimized_at ? new Date(item.optimized_at).toLocaleString() : ''}
       </div>
       <div
         style={{
@@ -278,9 +305,9 @@ const TableItem1 = ({ last, change, selected }) => {
         }}
         className="w-[20.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        107.97 MiB
+        <Status i= {item?.is_optimized === true ? 1 : 2} />
       </div>
-     
+
     </div>
   );
 };
@@ -293,20 +320,17 @@ const CacheWarmup = ({ setShow }) => {
   const appURL = appURLs();
 
   const fetchPageOptimizationData = async () => {
-    console.log("asjdhhjasgdhjgasjhdgajhsg")
-      try {
-        const res = await axios.get(`${appURL}/api/dashboard/fetch-page-optimization-data`);
 
-        const imageDataObj = res?.data?.pageData;
+    try {
+      const res = await axios.get(`${appURL}/api/dashboard/fetch-page-optimization-data`);
 
-        // updateImageData(imageDataObj)
-        // const resJSON = await res.json();
-        console.log("resJSONresJSONresJSONresJSON",res)
-        console.log("resJSONresJSONresJSONresJSON",imageDataObj)
-     
-      } catch (error) {
-        console.error("Error fetching user profile data:", error);
-      }
+      const pageDataObj = res?.data?.pageData;
+
+      updatePageOptimizationData(pageDataObj)
+
+    } catch (error) {
+      console.error("Error fetching user profile data:", error);
+    }
   };
 
   useEffect(() => {
@@ -315,8 +339,8 @@ const CacheWarmup = ({ setShow }) => {
   return (
     <>
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-      <TitleManager title="Cache Warmup" conicalURL="cache-warmup" />
- 
+        <TitleManager title="Cache Warmup" conicalURL="cache-warmup" />
+
         <div className="w-[100%] h-[50px] shrink-0"></div>
         <div
           style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
@@ -372,7 +396,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      8 hours
+                      {pageOptimizationData && pageOptimizationData?.totalPage}
                     </p>
                   </div>
                 </div>
@@ -401,7 +425,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      320$
+                      {pageOptimizationData && pageOptimizationData?.optimizedPageCoun}
                     </p>
                   </div>
                 </div>
@@ -419,7 +443,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                       Pending pages
+                      Pending pages
                     </p>
                     <Tooltip text="This indicates the number of pages pending optimization." />
                   </div>
@@ -430,7 +454,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      72
+                      {pageOptimizationData && pageOptimizationData?.notOptimizedPage}
                     </p>
                   </div>
                 </div>
@@ -522,7 +546,7 @@ const CacheWarmup = ({ setShow }) => {
                           />
                           <span>Get Feature</span>
                         </div> */}
-                      {/* </h1>
+                    {/* </h1>
                       <p
                         style={{
                           color: dark ? "#ffffff74" : "#0a0a187e",
@@ -542,8 +566,8 @@ const CacheWarmup = ({ setShow }) => {
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
                     </div>  */}
+                    {pageOptimizationData && pageOptimizationData?.pages.length === 0 ? "cot show text" : <Table1 tableData = {pageOptimizationData?.pages} />}
 
-<Table1 />
                   </div>
                 </div>
                 <div className="laptop:w-[32%] mobile:mt-[10px] laptop:mt-[0]  mobile:w-[100%] ">
@@ -628,7 +652,7 @@ const CacheWarmup = ({ setShow }) => {
                         />
                         <span>Get Feature</span>
                       </div> */}
-                      {/* <div className="bg-[#000] ml-[5px] font-medium tracking-wide h-[24px] rounded-[3px] flex items-center text-[13px] px-[10px] py-[4px] text-[#fff]">
+                  {/* <div className="bg-[#000] ml-[5px] font-medium tracking-wide h-[24px] rounded-[3px] flex items-center text-[13px] px-[10px] py-[4px] text-[#fff]">
                           <img
                             src="/graphic/warmup/lock.svg"
                             className="w-[10px] mr-[4px] "
@@ -636,8 +660,8 @@ const CacheWarmup = ({ setShow }) => {
                           />
                           <span className="translate-y-[1px]">Pro</span>
                         </div> */}
-                    {/* </div> */}
-                    {/* <div
+                  {/* </div> */}
+                  {/* <div
                     onClick={() => {
                       setShow(true);
                     }}
@@ -652,7 +676,7 @@ const CacheWarmup = ({ setShow }) => {
                       Get HTML Sitemap
                     </h1>
                   </div> */}
-                    {/* <Button1
+                  {/* <Button1
                       onClick={() => {
                         setShow(true);
                       }}
