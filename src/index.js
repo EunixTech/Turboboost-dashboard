@@ -56,11 +56,11 @@ const router = [
     element: <ConnectWebsite />,
   },
   {
-    path: "/cache-warmup",
+    path: "/page-optimization",
     element: <CacheWarmup />,
   },
   {
-    path: "/cache-status",
+    path: "/assets-status",
     element: <CacheStatus />,
   },
   {
