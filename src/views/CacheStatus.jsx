@@ -660,7 +660,7 @@ const Table = ({ setSelected1 }) => {
 const CacheStatus = () => {
   const [selected, setSelected] = useState([]);
   const dark = useSelector((state) => state.home.dark);
-
+const [assetsData, updateAssetsData] = useState({});
   const appURL = appURLs();
 
   const fetchPageOptimizationData = async () => {
@@ -668,13 +668,10 @@ const CacheStatus = () => {
       try {
         const res = await axios.get(`${appURL}/api/dashboard/fetch-assets-optimization-data`);
 
-        const imageDataObj = res?.data?.objectToSend;
+        const assetsDataObj = res?.data?.assets;
 
-        // updateImageData(imageDataObj)
-        // const resJSON = await res.json();
-        console.log("resJSONresJSONresJSONresJSON",res)
-        console.log("resJSONresJSONresJSONresJSON",imageDataObj)
-     
+        updateAssetsData(assetsDataObj)
+    
       } catch (error) {
         console.error("Error fetching user profile data:", error);
       }
@@ -725,7 +722,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide "
               >
-                335
+                {assetsData && assetsData?.totalAssets}
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
@@ -733,11 +730,11 @@ const CacheStatus = () => {
                 <div className="w-[33%] h-[100%] rounded-[10px] bg-[#FF465C]" />
               </div>
               <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="Optimized Assets" sub="246" color="#38F8AC" />
-                <HeaderItem title="Pending Assets" sub="72" color="#FFCB65" />
+                <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#38F8AC" />
+                <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#FFCB65" />
                 <HeaderItem
                   title="Not Optimized Assets"
-                  sub="19"
+                  sub={assetsData && assetsData?.notOptimizedAssets} 
                   color="#FF465C"
                 />
               </div>
@@ -763,7 +760,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide "
               >
-                467.08 MB
+                sub={assetsData && assetsData?.totalOptimizedSize}
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
@@ -773,9 +770,9 @@ const CacheStatus = () => {
                 <div className="w-[10%] h-[100%] bg-[#E9DEFC]" /> */}
               </div>
               <div className="w-[100%] mobile:grid-cols-2 grid laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="HTML Assets" sub="114.79MB" color="#391F87" />
-                <HeaderItem title="JS Assets" sub="21.54MB" color="#766695" />
-                <HeaderItem title="CSS Assets" sub="67.67MB" color="#9963FE" />
+                <HeaderItem title="HTML Assets" sub={assetsData && assetsData?.liquidAssetSize} color="#391F87" />
+                <HeaderItem title="JS Assets" sub={assetsData && assetsData?.jsAssetSize} color="#766695" />
+                <HeaderItem title="CSS Assets" sub={assetsData && assetsData?.cssAssetSize} color="#9963FE" />
                 {/* <HeaderItem
                   title="Fonts Cache"
                   sub="766.48kB"
