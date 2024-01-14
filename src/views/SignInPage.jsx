@@ -54,13 +54,15 @@ const SignInPage = () => {
         // );
 
         // const resJSON = await res.json();
-        // const redirectURL = resJSON.redirectURI;
+        
+         const resJSON = authResponse?.data;
+        const redirectURL = resJSON.redirectURI;
 
-        // if(resJSON.status === 200){
-        //   window.location.href = redirectURL;
-        // } else {
-        //   return toast.error(resJSON.message)
-        // }
+        if(resJSON.status === 200){
+          window.location.href = redirectURL;
+        } else {
+          return toast.error(resJSON.message)
+        }
 
       } catch (error) {
         console.error("Error fetching user profile data:", error);
