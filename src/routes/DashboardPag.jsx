@@ -36,7 +36,11 @@ const DashboardPageRoute = () => {
           dispatch(setAuth(false));
         }, 1000);
       }
-    });
+    },[]);
+
+    console.log("authauthauthauth", auth)
+
+
 
 
     return (
