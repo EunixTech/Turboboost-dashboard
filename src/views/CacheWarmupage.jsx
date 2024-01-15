@@ -339,7 +339,7 @@ const CacheWarmup = ({ setShow }) => {
   return (
     <>
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-        <TitleManager title="Cache Warmup" conicalURL="cache-warmup" />
+        <TitleManager title="pages-optimization" conicalURL="pages-optimization" />
 
         <div className="w-[100%] h-[50px] shrink-0"></div>
         <div

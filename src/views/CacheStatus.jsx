@@ -682,7 +682,7 @@ const [assetsData, updateAssetsData] = useState({});
   }, [])
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-       <TitleManager title="Cache Status" conicalURL="cache-status" />
+       <TitleManager title="assets-optimization" conicalURL="assets-optimization" />
       <div className="w-[100%] h-[50px] shrink-0"></div>
       <div
         style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
