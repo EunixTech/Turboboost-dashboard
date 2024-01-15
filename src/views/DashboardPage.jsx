@@ -27,6 +27,7 @@ import GreetingCard from "../components/GreetingCard";
 import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
 import TitleManager from "../components/TitleManager";
+import toast from "react-hot-toast";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 // const DashboardPage = () => {
 //   const [coreVitalsData, updateCoreVitalsData] = useState([]);
@@ -809,7 +810,8 @@ const HoverDetail = () => {
 
 const Dashboard = () => {
 
-  const [imageData, updateImageData]= useState({});
+  const [imageData, updateImageData] = useState({});
+  const [loader, toggleLoader] = useState(false);
 
   const w = useWidth();
   const dispatch = useDispatch();
@@ -820,28 +822,38 @@ const Dashboard = () => {
   const appURL = appURLs();
 
   const fetchImageOptimizationData = async () => {
-    console.log("asjdhhjasgdhjgasjhdgajhsg")
-      try {
-        const res = await axios.get(`${appURL}/api/dashboard/fetch-image-optimization-data`);
 
-        const imageDataObj = res?.data?.dataObj;
+    try {
+      toggleLoader(true)
+      const res = await axios.get(`${appURL}/api/dashboard/fetch-image-optimization-data`);
+      toggleLoader(false)
+      const resJSON = res?.data;
 
+      if (resJSON.status === 200) {
+        const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj)
-        // const resJSON = await res.json();
-        console.log("resJSONresJSONresJSONresJSON",res)
-     
-      } catch (error) {
-        console.error("Error fetching user profile data:", error);
+      } else {
+        return toast.error("Please try again");
       }
+    } catch (error) {
+      toggleLoader(false)
+      console.error("Error fetching user profile data:", error);
+    }
   };
 
   useEffect(() => {
     fetchImageOptimizationData();
   }, [])
-  
+
+
+  {loader && <AnimatedLoader />}
+    
 
   return (
- 
+
+    loader ? 
+    <AnimatedLoader /> :
+
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Dashboard" conicalURL="dashboard" />
 
@@ -853,14 +865,14 @@ const Dashboard = () => {
         <div className="w-[100%] pb-[50px] max-w-[1920px] min-h-[100vh]">
           <div className="w-[100%] pt-[50px] h-[40px] mobile:px-[10px] flex items-center justify-between">
             <div className="flex items-center mb-[20px] justify-center">
-            <GreetingCard />
+              <GreetingCard />
               <img
                 src="/graphic/dashboard/hifi.png"
                 alt=""
                 className="w-[18px] ml-[5px] text-[20px] translate-y-[-1px]"
               />
             </div>
-         
+
             {w > 1000 && (
               <div className="flex items-center justify-center">
                 <div className="w-[18px] translate-y-[0px] h-[18px] justify-center items-center flex rounded-[50%] bg-[#38f8ab3a]">
@@ -958,7 +970,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
                 >
-                   {imageData?.totalOptimizeImage || " "}
+                  {imageData?.totalOptimizeImage || " "}
                 </p>
                 {/* <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
                   <img
@@ -1200,7 +1212,7 @@ const Dashboard = () => {
                   </p>
                 </div> */}
                 {/* <DemoPie /> */}
-                <CustomDonutChart imageData = {imageData} />
+                <CustomDonutChart imageData={imageData} />
                 <div className="max-w-[250px] w-[50%] ml-auto">
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex  items-center">
@@ -1217,7 +1229,7 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                       Total No Images
+                        Total No Images
                       </p>
                     </div>
                     <div
@@ -1242,14 +1254,14 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                      No of Image Optimize
+                        No of Image Optimize
                       </p>
                     </div>
                     <div
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                       {imageData?.totalOptimizeImage || ""}
+                      {imageData?.totalOptimizeImage || ""}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1274,7 +1286,7 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] font-bold translate-y-[-2px]"
                     >
-                       {imageData?.totalOriginImage || ""}
+                      {imageData?.totalOriginImage || ""}
                     </div>
                   </div>
                 </div>
