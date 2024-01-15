@@ -13,9 +13,21 @@ export default function AnimatedLoader() {
     }}
     className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
   >
-   <video controls autoPlay loop muted>
+   {/* <video controls autoPlay loop muted>
   <source src={dark ? "/load-b.mp4" : "/load-w.mp4"} type="video/mp4" />
-</video>
+</video> */}
+
+<video
+            autoPlay
+            className={"w-[300px]"}
+            muted
+            controls
+            type="video/mp4"
+            onEnded={() => {
+              setVidLoad(true);
+            }}
+            src={dark ? "/load-b.mp4" : "/load-w.mp4"}
+          ></video>
 
   </div>
   )

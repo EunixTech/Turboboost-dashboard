@@ -73,7 +73,8 @@ const Logs = () => {
             autoPlay
             className={"w-[300px]"}
             muted
-             
+            controls
+            type="video/mp4"
             onEnded={() => {
               setVidLoad(true);
             }}
