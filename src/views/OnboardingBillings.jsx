@@ -89,13 +89,14 @@ const OnboardingBillings = () => {
       <div
         style={{
           backgroundColor: dark ? "#fff" : "#000",
-          // height: "auto",
-          // width: "auto",
+          // height: '100vh',
+          width: "90%",
+          overflowY: "auto",
         }}
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center billing-modal-background overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] mobile:px-[20px] rounded-md relative"
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center billing-modal-background bg-[#FAFAFC] mobile:px-[20px] rounded-md relative"
       >
         x1
-        <div className="max-w-[1200px] w-full mx-auto">
+        <div className="max-w-[1200px] w-full mx-auto h-[92vh]" >
           <h1
             style={{
               color: dark ? "#fff" : "#fff",
