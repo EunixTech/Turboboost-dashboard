@@ -54,24 +54,24 @@ const DashboardPageRoute = () => {
                 </div>
 
             ) : (
-                <DashboardPage />
-            //     <Suspense
-            //         fallback={
-            //             <div className={`${dark ? "heading": "headingDarkMode"} w-[100%] h-[100vh] bg-transparent flex items-center justify-center`}>
+               
+                <Suspense
+                    fallback={
+                        <div className={`${dark ? "heading": "headingDarkMode"} w-[100%] h-[100vh] bg-transparent flex items-center justify-center`}>
                         
-            //                 <video
-            //                     autoPlay
-            //                     className={"w-[300px]"}
-            //                     muted
-            //                     onEnded={() => { setVidLoad(true);}}
-            //                     src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-            //                 ></video>
-            //             </div>
-            //         }
-            //     >
-            //         <DashboardPage />
+                            <video
+                                autoPlay
+                                className={"w-[300px]"}
+                                muted
+                                onEnded={() => { setVidLoad(true);}}
+                                src={dark ? "/load-b.mp4" : "/load-w.mp4"}
+                            ></video>
+                        </div>
+                    }
+                >
+                    <DashboardPage />
 
-            //     </Suspense>
+                </Suspense>
             )}
             
 
