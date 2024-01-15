@@ -5,24 +5,24 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./services/store";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import DashboardPageRoute from "./views/DashboardPage.jsx";
-// import DashboardPageRoute from "./routes/DashboardPag";
+// import DashboardPageRoute from "./views/DashboardPage.jsx";
+import DashboardPageRoute from "./routes/DashboardPag.jsx";
 import SignInRoute from "./routes/SignInRoute";
 import ConnectStore from "./views/ShopifyAuth.jsx";
 import SignUp from "./routes/SignUpRoute";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute";
 import ConnectWebsite from "./routes/connect-website.jsx";
 // import ConnectWebsite from "./views/ConnectWebsite.jsx";
-// import CacheWarmup from "./routes/cache-warmup";
-import CacheWarmup from "./views/CacheWarmupage.jsx";
+import CacheWarmup from "./routes/cache-warmup";
+// import CacheWarmup from "./views/CacheWarmupage.jsx";
 
-// import CacheStatus from "./routes/cache-status";
-import CacheStatus from "./views/CacheStatus.jsx";
+import CacheStatus from "./routes/cache-status";
+// import CacheStatus from "./views/CacheStatus.jsx";
 
 import Home from "./views/home.jsx";
 
 // import Logs from "./views/logs";
-import Logs from "./views/Logs.jsx";
+import Logs from "./routes/logs.jsx";
 import { useCookies } from "react-cookie";
 
 // import Integrations from "./routes/integrations";
