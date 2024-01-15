@@ -201,7 +201,7 @@ const CacheStatus = () => {
             onEnded={() => {
               setVidLoad(true);
             }}
-            src={dark ? "/load-b.mp4" : "/load-w.mp4"}
+            src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4"}
           ></video>
         </div>
       ) : (
@@ -221,7 +221,7 @@ const CacheStatus = () => {
                 onEnded={() => {
                   setVidLoad(true);
                 }}
-                src={dark ? "/load-b.mp4" : "/load-w.mp4"}
+                src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4"}
               ></video>
             </div>
           }

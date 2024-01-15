@@ -36,7 +36,7 @@ const DashboardPageRoute = () => {
           dispatch(setAuth(false));
         }, 1000);
       }
-    });
+    },[auth]);
 
 
     return (
