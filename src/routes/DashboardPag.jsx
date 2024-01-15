@@ -28,7 +28,7 @@ const DashboardPageRoute = () => {
       if (loggedIn == "true") {
         setTimeout(() => {
           setLoading(false);
-          dispatch(setAuth(false));
+          dispatch(setAuth(true));
         }, 1000);
       } else {
         setTimeout(() => {
@@ -36,7 +36,7 @@ const DashboardPageRoute = () => {
           dispatch(setAuth(false));
         }, 1000);
       }
-    },[]);
+    },[auth]);
 
     console.log("authauthauthauth", auth)
 
@@ -45,7 +45,7 @@ const DashboardPageRoute = () => {
 
     return (
         <>
-            {!true ? (
+            {!vidLoad ? (
                 <div className={`${dark ? "heading": "headingDarkMode"} w-[100%] h-[100vh] bg-transparent flex items-center justify-center`}>
                     {/* <video
                         autoPlay
