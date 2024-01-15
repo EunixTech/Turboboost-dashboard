@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import myVideo from "../../video/load-b.mp4";
+import { useSelector } from "react-redux";
 
 export default function AnimatedLoader() {
     const [vidLoad,setVidLoad] = useState(false);
@@ -21,21 +20,10 @@ export default function AnimatedLoader() {
      onEnded={() => {
        setTimeout(() => {
          setVidLoad(true);
-       }, 1000);
+       }, 500);
      }}
-     src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4"}
+     src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705343705/load-w_zgr2he.mp4"}
    ></video>
-{/* <video
-            autoPlay
-            className={"w-[300px]"}
-            muted
-            controls
-            type="video/mp4"
-            onEnded={() => {
-              setVidLoad(true);
-            }}
-            src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-          ></video> */}
 
   </div>
   )

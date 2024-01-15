@@ -73,7 +73,7 @@
 //             autoPlay
 //             className={"w-[300px]"}
 //             muted
-             
+
 //             // onEnded={() => {
 //             //   setVidLoad(true);
 //             // }}
@@ -83,7 +83,7 @@
 //             autoPlay
 //             className={"w-[300px]"}
 //             muted
-             
+
 //             // onEnded={() => {
 //             //   setVidLoad(true);
 //             // }}
@@ -104,7 +104,7 @@
 //                 autoPlay
 //                 className={"w-[300px]"}
 //                 muted
-                 
+
 //                 onEnded={() => {
 //                   setVidLoad(true);
 //                 }}
@@ -197,12 +197,15 @@ const CacheStatus = () => {
             autoPlay
             className={"w-[300px]"}
             muted
-             
+            loop
             onEnded={() => {
-              setVidLoad(true);
+              setTimeout(() => {
+                setVidLoad(true);
+              }, 500);
             }}
-            src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4"}
+            src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705343705/load-w_zgr2he.mp4"}
           ></video>
+
         </div>
       ) : (
         <Suspense
@@ -217,12 +220,15 @@ const CacheStatus = () => {
                 autoPlay
                 className={"w-[300px]"}
                 muted
-                 
+                loop
                 onEnded={() => {
-                  setVidLoad(true);
+                  setTimeout(() => {
+                    setVidLoad(true);
+                  }, 500);
                 }}
-                src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4"}
+                src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705343705/load-w_zgr2he.mp4"}
               ></video>
+
             </div>
           }
         >

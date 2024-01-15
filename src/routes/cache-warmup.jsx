@@ -458,15 +458,18 @@ const CacheWarmupage = () => {
           className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
         >
           <video
-            autoPlay
-            className={"w-[300px]"}
-            muted
-             
-            onEnded={() => {
-              setVidLoad(true);
-            }}
-            src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-          ></video>
+     autoPlay
+     className={"w-[300px]"}
+     muted
+     loop
+     onEnded={() => {
+       setTimeout(() => {
+         setVidLoad(true);
+       }, 500);
+     }}
+     src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705343705/load-w_zgr2he.mp4"}
+   ></video>
+
         </div>
       ) : (
         <Suspense
@@ -477,16 +480,19 @@ const CacheWarmupage = () => {
               }}
               className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
             >
-              <video
-                autoPlay
-                className={"w-[300px]"}
-                muted
-                 
-                onEnded={() => {
-                  setVidLoad(true);
-                }}
-                src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-              ></video>
+             <video
+     autoPlay
+     className={"w-[300px]"}
+     muted
+     loop
+     onEnded={() => {
+       setTimeout(() => {
+         setVidLoad(true);
+       }, 500);
+     }}
+     src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705343705/load-w_zgr2he.mp4"}
+   ></video>
+
             </div>
           }
         >

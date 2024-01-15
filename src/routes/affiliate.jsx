@@ -48,17 +48,17 @@ const Affiliate = () => {
     } else {
       dispatch(setDark(false));
     }
-    // if (loggedIn === "true") {
-    //   setTimeout(() => {
-    //     setLoading(false);
-    //     dispatch(setAuth(true));
-    //   }, 1000);
-    // } else {
-    //   setTimeout(() => {
-    //     navigate("/auth/signIn");
-    //     dispatch(setAuth(false));
-    //   }, 1000);
-    // }
+    if (loggedIn === "true") {
+      setTimeout(() => {
+        setLoading(false);
+        dispatch(setAuth(true));
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        navigate("/auth/signIn");
+        dispatch(setAuth(false));
+      }, 1000);
+    }
   });
   const dark = useSelector((state) => state.home.dark);
 
@@ -75,12 +75,15 @@ const Affiliate = () => {
             autoPlay
             className={"w-[300px]"}
             muted
-             
+            loop
             onEnded={() => {
-              setVidLoad(true);
+              setTimeout(() => {
+                setVidLoad(true);
+              }, 500);
             }}
-            src={dark ? "/load-b.mp4" : "/load-w.mp4"}
+            src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705343705/load-w_zgr2he.mp4"}
           ></video>
+
         </div>
       ) : (
         <Suspense fallback={null}>
