@@ -6,7 +6,9 @@
 .inter {
   font-family: "Roboto", sans-serif;
 }
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -24,8 +26,9 @@ body {
   height: calc(100% -50px);
 }
 
-code { 
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 * {
@@ -266,26 +269,24 @@ span.ripple {
   margin-left: 3px;
 }
 
-.formikInputLabel{
-  font-size: .8rem;
+.formikInputLabel {
+  font-size: 0.8rem;
 }
-
 
 .modal-style {
   background: white;
-  padding:2rem;
+  padding: 2rem;
   border: none;
   color: rgba(10, 10, 24, 0.494) !important;
 }
 
-.custom-class{
+.custom-class {
   color: rgb(47 58 69 / 1) !important;
   font-size: 1rem !important;
-  
 }
 
 button.variant-btn {
-  background: #2fe49c ;
+  background: #2fe49c;
 
   color: #fff;
   padding: 10px;
@@ -306,7 +307,7 @@ button.variant-btn-color {
   font-weight: 700;
   margin-top: 10px;
 }
-.variant-txt-email{
+.variant-txt-email {
   background: #2fe49c;
   color: #fff;
   padding: 10px;
@@ -316,7 +317,6 @@ button.variant-btn-color {
   font-weight: 700;
   margin-top: 10px;
 }
-
 
 /* Hide scrollbar on all elements */
 body::-webkit-scrollbar {
@@ -328,16 +328,23 @@ body::-webkit-scrollbar-thumb {
 }
 
 .MuiBox-root,
-.billing-modal-background{
-  height: 90% !important;
+.billing-modal-background {
+  /* height: calc(100vh - 40px) !important; Adjust the value (40px) as needed/ */
+  /* max-height: 50vw; */
   border-radius: 10px;
+  /* margin-top: 52px; */
+  max-width: 60vw;
+  /* width: 100vw; */
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
 }
 
-.loader-background{
+.loader-background {
   height: 100% !important;
   border-radius: 10px;
 }
-.variant-txt{
+.variant-txt {
   background: #2fe49c;
   color: #fff;
   padding: 10px;
@@ -348,7 +355,7 @@ body::-webkit-scrollbar-thumb {
   margin-top: 10px;
   justify-content: center;
 }
-.variant-txt-color{
+.variant-txt-color {
   background: #2fe49c;
   color: #fff;
   padding: 10px;
@@ -358,34 +365,34 @@ body::-webkit-scrollbar-thumb {
   font-weight: 700;
   margin-top: 10px;
 }
-.custom-textfieldt{
-  height: .3rem !important;
-  color: rgb(47 58 69 / 1)!important;
-  font-size: .7rem !important;
+.custom-textfieldt {
+  height: 0.3rem !important;
+  color: rgb(47 58 69 / 1) !important;
+  font-size: 0.7rem !important;
   background-color: white !important;
 }
-p.notfound-txt{
-color: #0A0A18;
-font-family: Inter;
-font-size: 40px;
-font-style: normal;
-font-weight: 600;
-line-height: 82px; /* 205% */
-letter-spacing: -0.8px;
-text-align: center;
+p.notfound-txt {
+  color: #0a0a18;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 82px; /* 205% */
+  letter-spacing: -0.8px;
+  text-align: center;
 }
-button.return-btn{
+button.return-btn {
   width: 209px;
   height: var(--10, 40px);
   flex-shrink: 0;
-/* display: flex;
+  /* display: flex;
 justify-content: center; */
-border-radius: var(--rounded, 4px);
-background: #38F8AC;
+  border-radius: var(--rounded, 4px);
+  background: #38f8ac;
 }
 button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.css-1l9sosn-MuiButtonBase-root-MuiButton-root {
-  color: #38F8AC;
-  border: 2px solid #38F8AC;
+  color: #38f8ac;
+  border: 2px solid #38f8ac;
 }
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
   height: 5px !important;
@@ -395,7 +402,7 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSe
   display: flex;
   align-items: center;
   margin-top: 27px;
-  border: 1px solid #EBEBEB;
+  border: 1px solid #ebebeb;
   border-radius: 4px;
   padding: 6px;
 }
@@ -403,12 +410,11 @@ input.PhoneInputInput {
   font-size: 13px;
   padding: 3px;
   font-family: inherit;
-  outline: 0
+  outline: 0;
 }
 
-
 /* modal */
-.modal-close-btn{
+.modal-close-btn {
   display: flex;
   justify-content: flex-end;
   margin-right: -16px;
@@ -418,9 +424,9 @@ input.PhoneInputInput {
 .formikInputLabel {
   font-size: 0.8rem;
 }
-.main{
+.main {
   position: relative;
-  background-color: #F4F7FA;
+  background-color: #f4f7fa;
 }
 .connect-store-container {
   display: flex;
@@ -460,11 +466,11 @@ input.PhoneInputInput {
   font-weight: 600;
   font-size: 36px;
   letter-spacing: 0.2px;
-  color: #2B2B2B;
+  color: #2b2b2b;
   margin-bottom: 12px;
-}   
+}
 .turbo-boost-text {
-  color: rgb(56, 248, 172)
+  color: rgb(56, 248, 172);
   /* Add any additional styling properties as needed */
 }
 .content-wrapper .heading h4 {
@@ -479,61 +485,60 @@ form input {
   max-width: 550px;
   width: 100%;
   height: 57px;
-  background: #FFFFFF;
-  border: 1px solid #D0D0D0;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
   border-radius: 4px;
   /* font-family: Karla; */
   font-size: 20px;
-  color: #B7B7B7;
+  color: #b7b7b7;
   padding: 0 25px;
   transition: all 0.3s ease-in-out 0s;
   margin: auto;
   margin-bottom: 30px;
 }
-.connect-button{
+.connect-button {
   width: 206px;
-    height: 44px;
-    border: 1px solid #35C946;
-    background: #35C946;
-    border-radius: 7px;
-    /* font-family: Rubik; */
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 44px;
-    letter-spacing: 0.2px;
-    color: #FFFFFF;
-    margin: auto;
-    margin-bottom: 15px;
-    text-align: center;
-    cursor: pointer;
+  height: 44px;
+  border: 1px solid #35c946;
+  background: #35c946;
+  border-radius: 7px;
+  /* font-family: Rubik; */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 44px;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  margin: auto;
+  margin-bottom: 15px;
+  text-align: center;
+  cursor: pointer;
 }
-.link-signup{
-  color: #35C946;
+.link-signup {
+  color: #35c946;
 }
-.shapes-verticals{
+.shapes-verticals {
   position: absolute;
   /* z-index: -1; */
   width: 100vw;
   height: 100vh;
 }
-.shapes-verticals .vertical-1{
+.shapes-verticals .vertical-1 {
   top: 35%;
   left: 15%;
   position: relative;
-} 
-.shapes-verticals .vertical-2{
+}
+.shapes-verticals .vertical-2 {
   top: 35%;
   right: 15%;
   position: absolute;
-} 
-.shapes-verticals .vertical-3{
+}
+.shapes-verticals .vertical-3 {
   bottom: 30%;
   left: 2%;
   position: absolute;
-
-} 
-.shapes-verticals .vertical-4{
+}
+.shapes-verticals .vertical-4 {
   bottom: 30%;
   right: 2%;
   position: absolute;
@@ -546,7 +551,7 @@ form input {
   width: 19.585px;
 }
 p.annualText {
-  color: #38F8AC;
+  color: #38f8ac;
   /* font-family: Inter; */
   font-size: 14px;
   font-style: normal;
