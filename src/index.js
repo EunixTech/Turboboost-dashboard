@@ -11,8 +11,8 @@ import SignInRoute from "./routes/SignInRoute";
 import ConnectStore from "./views/ShopifyAuth.jsx";
 import SignUp from "./routes/SignUpRoute";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute";
-import ConnectWebsite from "./routes/connect-website.jsx";
-// import ConnectWebsite from "./views/ConnectWebsite.jsx";
+// import ConnectWebsite from "./routes/connect-website.jsx";
+import ConnectWebsite from "./views/ConnectWebsite.jsx";
 import CacheWarmup from "./routes/cache-warmup";
 // import CacheWarmup from "./views/CacheWarmupage.jsx";
 
