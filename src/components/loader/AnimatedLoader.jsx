@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
+import myVideo from "../../video/load-b.mp4";
 
 export default function AnimatedLoader() {
+    const [vidLoad,setVidLoad] = useState(false);
     const dark = useSelector((state) => state.home.dark);
 
   return (
@@ -11,13 +13,10 @@ export default function AnimatedLoader() {
     }}
     className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
   >
-    <video
-      autoPlay
-      className={"w-[300px]"}
-      muted
-    
-      src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4"}
-    ></video>
+   <video controls autoPlay loop muted>
+  <source src={dark ? "/load-b.mp4" : "/load-w.mp4"} type="video/mp4" />
+</video>
+
   </div>
   )
 }
