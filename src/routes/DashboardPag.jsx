@@ -36,29 +36,23 @@ const DashboardPageRoute = () => {
           dispatch(setAuth(false));
         }, 1000);
       }
-    },[auth]);
-
-    console.log("authauthauthauth", auth)
-
-
+    });
 
 
     return (
         <>
             {!vidLoad ? (
                 <div className={`${dark ? "heading": "headingDarkMode"} w-[100%] h-[100vh] bg-transparent flex items-center justify-center`}>
-                    {/* <video
+                    <video
                         autoPlay
                         className={"w-[300px]"}
                         muted
                         onEnded={() => { setVidLoad(true)}}
                         src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-                    > </video> */}
-                    ...loading
+                    > </video>
                 </div>
 
             ) : (
-               
                 <Suspense
                     fallback={
                         <div className={`${dark ? "heading": "headingDarkMode"} w-[100%] h-[100vh] bg-transparent flex items-center justify-center`}>
@@ -77,7 +71,6 @@ const DashboardPageRoute = () => {
 
                 </Suspense>
             )}
-            
 
         </>
 
