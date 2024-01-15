@@ -52,7 +52,6 @@ const OnboardingBillings = () => {
         `${appURL}/user/redirect/login/${userToken}`
       );
 
-
       const res = resJson?.data?.data;
       const redirectURL = res?.redirectURI;
       const token = res?.token;
@@ -83,15 +82,20 @@ const OnboardingBillings = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden flex flex-col">
+    <div className="overflow-hidden flex flex-col items-center justify-center">
       <TitleManager title="Onboarding" conicalURL="onboarding" />
-      <div className="w-[100%]"></div>
-      
+      <div className="w-full max-w-screen-xl"></div>
+
       <div
-        style={{ backgroundColor: dark ? "#fff" : "#000" }}
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100%] flex flex-col items-center billing-modal-background overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] mobile:px-[20px] rounded-md relative"
-        >x1
-        <div className="max-w-[1920px]">
+        style={{
+          backgroundColor: dark ? "#fff" : "#000",
+          // height: "auto",
+          // width: "auto",
+        }}
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center billing-modal-background overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] mobile:px-[20px] rounded-md relative"
+      >
+        x1
+        <div className="max-w-[1200px] w-full mx-auto">
           <h1
             style={{
               color: dark ? "#fff" : "#fff",
@@ -105,10 +109,12 @@ const OnboardingBillings = () => {
           </h1>
           <div className="w-[100%] mt-[15px] flex items-center justify-center">
             <div
-              style={{
-                // backgroundColor: dark ? "#12122B" : "#12122B",
-                // borderColor: dark ? "#1F2329" : "#ebebeb",
-              }}
+              style={
+                {
+                  // backgroundColor: dark ? "#12122B" : "#12122B",
+                  // borderColor: dark ? "#1F2329" : "#ebebeb",
+                }
+              }
               className="flex w-[200px] h-[40px]  border-[1px]   rounded-[4px] px-[3px] py-[3px]"
             >
               <div
