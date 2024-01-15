@@ -6,18 +6,20 @@ export default function CoreVitalsReportCard({ coreVitualData = [] }) {
     const dark = useSelector((state) => state.home.dark);
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-8">
+        <>
+            <div className="flex mt-[5%] justify-around ">
             {coreVitualData?.length && coreVitualData.map((item, index) => (
-                <div key={index} className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                <div key={index} className="w-[150px]">
                     <p
-                        style={{ color: dark ? "#fff" : "#000", wordWrap: "break-word" }}
-                        className="text-sm md:text-base lg:text-lg xl:text-xl font-medium mb-2"
+                        style={{ color: dark ? "#fff" : "#000" }}
+                        className="text-[12px] f2 font-medium"
                     >
                         {item?.name || " "}
                     </p>
-                    <p className="text-[#0CD16A] text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium leading-6"> {item?.value || " "} </p>
+                    <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]"> {item?.value || " "} </p>
                 </div>
             ))}
-        </div>
+            </div>
+        </>
     );
 }
