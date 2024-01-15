@@ -13,10 +13,18 @@ export default function AnimatedLoader() {
     }}
     className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
   >
-   <video controls autoPlay loop muted>
-  <source src="https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" type="video/mp4" />
-</video>
-
+   <video
+     autoPlay
+     className={"w-[300px]"}
+     muted
+     loop
+     onEnded={() => {
+       setTimeout(() => {
+         setVidLoad(true);
+       }, 1000);
+     }}
+     src={dark ? "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" : "https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4"}
+   ></video>
 {/* <video
             autoPlay
             className={"w-[300px]"}
