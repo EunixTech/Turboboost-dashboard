@@ -562,3 +562,9 @@ p.annualText {
   margin-left: 5rem;
   margin-top: 0.5rem;
 }
+@media only screen and (max-width: 599px) {
+  .MuiBox-root,
+  .billing-modal-background {
+    max-width: 100% !important;
+  }
+}
