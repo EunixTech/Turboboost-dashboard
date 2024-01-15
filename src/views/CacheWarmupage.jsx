@@ -566,7 +566,7 @@ const CacheWarmup = ({ setShow }) => {
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
                     </div>  */}
-                    {pageOptimizationData && pageOptimizationData?.pages?.length === 0 ? "cot show text" : <Table1 tableData = {pageOptimizationData?.pages} />}
+                    {pageOptimizationData && pageOptimizationData?.pages?.length === 0 ? "cot show text" : "<Table1 tableData = {pageOptimizationData?.pages} />"}
 
                   </div>
                 </div>
