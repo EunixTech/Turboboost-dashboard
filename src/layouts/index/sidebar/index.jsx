@@ -409,8 +409,8 @@ const Sidebar = () => {
             route="/connect-website"
             src="/icon2.svg"
           />
-          <Item title={"Cache Warmup"} route="/cache-warmup" src="/icon3.svg" />
-          <Item title={"Cache Status"} route="/cache-status" src="/icon4.svg" />
+          <Item title={"Page Optimization"} route="/page-optimization" src="/icon3.svg" />
+          <Item title={"Assets Status"} route="/assets-status" src="/icon4.svg" />
           <Item title={"Logs"} route="/logs" src="/icon5.svg" />
           <Item title={"Integrations"} route="/integrations" src="/icon6.svg" />
           <Item title={"Billing"} route="/billing" src="/icon7.svg" />

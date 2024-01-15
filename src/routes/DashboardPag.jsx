@@ -1,39 +1,60 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setDark } from "../services/home";
-
+import { useNavigate } from "react-router-dom";
+import { setDark , setAuth} from "../services/home";
 const DashboardPage = React.lazy(() => import("../views/DashboardPage"));
 
 const DashboardPageRoute = () => {
+    const dark = useSelector((state) => state.home.dark);
 
     const auth = useSelector((state) => state.home.auth);
     const dispatch = useDispatch();
     const [vidLoad, setVidLoad] = useState(auth);
 
+    const [loading, setLoading] = useState(!auth);
+  
+    const navigate = useNavigate();
+
     useEffect(() => {
+      const loggedIn = localStorage.getItem("loggedIn");
 
-        const dark = localStorage.getItem("dark");
-
-        if (dark) { dispatch(setDark(true));
-        } else { dispatch(setDark(false))}
-
+      console.log("loggedInloggedIn", loggedIn )
+      const dark = localStorage.getItem("dark");
+      if (dark) {
+        dispatch(setDark(true));
+      } else {
+        dispatch(setDark(false));
+      }
+      if (loggedIn == "true") {
+        setTimeout(() => {
+          setLoading(false);
+          dispatch(setAuth(false));
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          navigate("/auth/signIn");
+          dispatch(setAuth(false));
+        }, 1000);
+      }
     });
-    const dark = useSelector((state) => state.home.dark);
+
 
     return (
         <>
-            {!vidLoad ? (
+            {!true ? (
                 <div className={`${dark ? "heading": "headingDarkMode"} w-[100%] h-[100vh] bg-transparent flex items-center justify-center`}>
-                    <video
+                    {/* <video
                         autoPlay
                         className={"w-[300px]"}
                         muted
                         onEnded={() => { setVidLoad(true)}}
                         src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-                    > </video>
+                    > </video> */}
+                    ...loading
                 </div>
 
             ) : (
+               
                 <Suspense
                     fallback={
                         <div className={`${dark ? "heading": "headingDarkMode"} w-[100%] h-[100vh] bg-transparent flex items-center justify-center`}>
@@ -52,6 +73,7 @@ const DashboardPageRoute = () => {
 
                 </Suspense>
             )}
+            
 
         </>
 

@@ -12,5 +12,15 @@ const fetchReqConfig = {
 };
 
 export default () => {
+    let token = null;
+
+    if (typeof window !== `undefined`) {
+         token = localStorage.getItem(`authToken`);
+    }
+
+    if (token) fetchReqConfig.headers.Authorization = `Bearer ${token}`;
+
     return fetchReqConfig;
 };
+
+

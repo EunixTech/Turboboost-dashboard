@@ -21,7 +21,7 @@ const validationSchema = Yup.object().shape({
     .required("Domain name is required"),
 });
 
-const SignInPage = () => { 
+const SignInPage = () => {
   const screenWidth = useWidth();
   const [authType, toggleAuthType] = useState("login");
   const fetchConfig = getFetchConfig();
@@ -29,37 +29,36 @@ const SignInPage = () => {
 
   const handleFormSubmit = async (values, { setSubmitting }) => {
 
-      try {
-        const res = await fetch(
-          `${appURL}/api/shopify/shopify-auth`,
-          {
-            ...fetchConfig,
-          method: "POST",
-          body: JSON.stringify({
-            shop_name: values.domain
-          })
-          }
-        );
-
-        const resJSON = await res.json();
-        const redirectURL = resJSON.redirectURI;
-
-        if(resJSON.status === 200){
-          window.location.href = redirectURL;
-        } else {
-          return toast.error(resJSON.message)
+    try {
+      const authResponse = await axios.post(
+        `${appURL}/api/shopify/shopify-auth`,
+        {
+          shop_name: values.domain
+        },
+        {
+          withCredentials: true // Enable sending cookies
         }
+      );
 
-      } catch (error) {
-        console.error("Error fetching user profile data:", error);
+
+      const resJSON = authResponse?.data;
+      const redirectURL = resJSON.redirectURI;
+
+      if (resJSON.status === 200) {
+        window.location.href = redirectURL;
+      } else {
+        return toast.error(resJSON.message)
       }
-  };
 
+    } catch (error) {
+      console.error("Error fetching user profile data:", error);
+    }
+  };
 
   return (
     <div className="w-[100%] h-[100vh] flex items-center justify-center">
       <TitleManager title={authType ? "Sign In" : "Sign Up"} conicalURL="shopify-auth" />
-      
+
       <div className="laptop:w-[50%] mobile:w-[100%] mobile:overflow-y-auto px-[100px] h-[100vh] px-[7%] flex items-center laptop:justify-center">
         <div className="w-[100%]">
           <Formik
@@ -74,11 +73,11 @@ const SignInPage = () => {
               <Form>
                 <img src="/logo-b.png" className="w-[150px]" alt="" />
 
-               {
-                authType === "login" ?
-                <h1 className="text-[34px] mt-[10px] font-bold">Login to Existing <span className="turbo-boost-text">TurboBoost</span> Account</h1>:
-                <h1 className="text-[34px] mt-[10px] font-bold">Connect Your Store</h1>
-               }
+                {
+                  authType === "login" ?
+                    <h1 className="text-[34px] mt-[10px] font-bold">Login to Existing <span className="turbo-boost-text">TurboBoost</span> Account</h1> :
+                    <h1 className="text-[34px] mt-[10px] font-bold">Connect Your Store</h1>
+                }
 
                 <div className="w-[100%] mt-[10px]">
                   <FormikInput
@@ -102,32 +101,32 @@ const SignInPage = () => {
 
           {
             authType === "login" ?
-            <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
-            Don’t have an account?
-            <span
-              onClick={() => {
-                toggleAuthType("register")
-              }}
-              className="text-[#06F] font-bold cursor-pointer"
-            >
-              {" "}
-              Sign up{" "}
-            </span>
-          </p>:
- <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
- Already signed up?
- <span
-   onClick={() => {
-     toggleAuthType("login")
-   }}
-   className="text-[#06F] font-bold cursor-pointer"
- >
-   {" "}
-   login here{" "}
- </span>
-</p>
+              <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
+                Don’t have an account?
+                <span
+                  onClick={() => {
+                    toggleAuthType("register")
+                  }}
+                  className="text-[#06F] font-bold cursor-pointer"
+                >
+                  {" "}
+                  Sign up{" "}
+                </span>
+              </p> :
+              <p className="text-center text-[#b2b3b6] text-[13px] font-medium mt-[10px]">
+                Already signed up?
+                <span
+                  onClick={() => {
+                    toggleAuthType("login")
+                  }}
+                  className="text-[#06F] font-bold cursor-pointer"
+                >
+                  {" "}
+                  login here{" "}
+                </span>
+              </p>
           }
-         
+
         </div>
       </div>
 

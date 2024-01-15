@@ -42,6 +42,8 @@ import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
 import { useSelector } from "react-redux";
 import TitleManager from "../components/TitleManager.jsx";
+import axios from "axios";
+import appURLs from "../appURL";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -111,7 +113,7 @@ const Button2 = ({ onClick, check }) => {
           alt=""
         />{" "}
         <div className="translate-y-[1px]">
-          {check ? "Purge Selected" : "Purge All Cache"}
+          {check ? "Purge Selected" : "Purge All Assets"}
         </div>
       </p>
     </div>
@@ -432,24 +434,31 @@ const TableHeader = ({ change }) => {
       }}
       className="w-[100%] flex h-[25px] border-b-[1px] border-[#ebebeb]"
     >
-      <div className="w-[7%]  px-[10px] items-center flex h-[100%] ">
-        <CheckBox change={change} check={check} setCheck={setCheck} />
-      </div>
-      <div
+      <div className="w-[20%]  px-[10px] items-center flex h-[100%] ">
+       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
         }}
         className="w-[27%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
       >
-        URL
+        Name
       </div>
+      </div>
+      {/* <div
+        style={{
+          color: dark ? "#fff" : "#0a0a1876",
+        }}
+        className="w-[27%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
+      >
+        Name
+      </div> */}
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
         }}
         className="w-[11%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
-        Device
+        Asset Type
       </div>
       <div
         style={{
@@ -457,7 +466,15 @@ const TableHeader = ({ change }) => {
         }}
         className="w-[28%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
-        Tags
+        Original Size
+      </div>
+      <div
+        style={{
+          color: dark ? "#fff" : "#0a0a1876",
+        }}
+        className="w-[28%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+      >
+        Optimize Size
       </div>
       <div
         style={{
@@ -475,14 +492,14 @@ const TableHeader = ({ change }) => {
       >
         Status
       </div>
-      <div
+      {/* <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
         }}
         className="w-[9%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Actions
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -527,8 +544,15 @@ const TableItem = ({ last, change, selected }) => {
       }}
       className="w-[100%] flex h-[70px] border-b-[1px] border-[#ebebeb]"
     >
-      <div className="w-[7%]  px-[10px] items-center flex h-[100%] ">
-        <CheckBox check={selected} setCheck={setCheck} change={change} />
+      <div className="w-[20%]  px-[10px] items-center flex h-[100%] ">
+      <div
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
+        className="w-[11%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+      >
+        Desktop
+      </div>
       </div>
       <div
         style={{
@@ -566,19 +590,22 @@ const TableItem = ({ last, change, selected }) => {
       <div className="w-[9%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <Status i={1} />
       </div>
-      <div className="w-[9%]  text-[10px] tracking-wide px-[10px] cursor-pointer text-[#0a0a1876] font-bold  flex h-[100%] items-center">
+      <div className="w-[9%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
+        <Status i={1} />
+      </div>
+      {/* <div className="w-[9%]  text-[10px] tracking-wide px-[10px] cursor-pointer text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <img
           src="/graphic/status/trash.svg"
           className="w-[15px] h-[15px]"
           alt=""
         />
-      </div>
+      </div> */}
     </div>
   );
 };
 
 const Table = ({ setSelected1 }) => {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const arr = [1, 2, 3, 4, 5, 6];
 
   const [selected, setSelected] = useState([]);
   const dark = useSelector((state) => state.home.dark);
@@ -633,9 +660,29 @@ const Table = ({ setSelected1 }) => {
 const CacheStatus = () => {
   const [selected, setSelected] = useState([]);
   const dark = useSelector((state) => state.home.dark);
+const [assetsData, updateAssetsData] = useState({});
+  const appURL = appURLs();
+
+  const fetchPageOptimizationData = async () => {
+    console.log("asjdhhjasgdhjgasjhdgajhsg")
+      try {
+        const res = await axios.get(`${appURL}/api/dashboard/fetch-assets-optimization-data`);
+
+        const assetsDataObj = res?.data?.assets;
+
+        updateAssetsData(assetsDataObj)
+    
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+  };
+
+  useEffect(() => {
+    fetchPageOptimizationData();
+  }, [])
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-       <TitleManager title="Cache Status" conicalURL="cache-status" />
+       <TitleManager title="assets-optimization" conicalURL="assets-optimization" />
       <div className="w-[100%] h-[50px] shrink-0"></div>
       <div
         style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
@@ -649,7 +696,7 @@ const CacheStatus = () => {
               }}
               className="text-[24px] font-bold tracking-wide "
             >
-              Cache Status
+              Assets Optimization Status
             </h1>
           </div>
 
@@ -667,7 +714,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[20px] font-bold tracking-wide "
               >
-                Total Cache Status
+                Total Assets Status
               </h1>
               <h1
                 style={{
@@ -675,7 +722,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide "
               >
-                335
+                {assetsData && assetsData?.totalAssets}
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
@@ -683,11 +730,11 @@ const CacheStatus = () => {
                 <div className="w-[33%] h-[100%] rounded-[10px] bg-[#FF465C]" />
               </div>
               <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="Optimized URLs" sub="246" color="#38F8AC" />
-                <HeaderItem title="Pending URLs" sub="72" color="#FFCB65" />
+                <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#38F8AC" />
+                <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#FFCB65" />
                 <HeaderItem
-                  title="Not Optimized URLs"
-                  sub="19"
+                  title="Not Optimized Assets"
+                  sub={assetsData && assetsData?.notOptimizedAssets} 
                   color="#FF465C"
                 />
               </div>
@@ -705,28 +752,28 @@ const CacheStatus = () => {
                 }}
                 className="text-[20px] font-bold tracking-wide "
               >
-                Total Cache Size
+                Total Assets Size
               </h1>
               <h1
                 style={{
                   color: dark ? "#fff" : "#000",
                 }}
-                className="text-[30px] mt-[10px] font-bold tracking-wide "
+                className="text-[30px] mt-[10px] font-bold tracking-wide"
               >
-                467.08 MB
+                {assetsData && assetsData?.totalOptimizedSize}
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
-                <div className="w-[25%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
-                <div className="w-[23%] h-[100%] mr-[2px] rounded-[10px] bg-[#766695]" />
-                <div className="w-[22%] h-[100%] mr-[2px] rounded-[10px] bg-[#9963FE]" />
-                <div className="w-[18%] h-[100%] mr-[2px] rounded-[10px] bg-[#CCB0FF]" />
-                <div className="w-[10%] h-[100%] bg-[#E9DEFC]" />
+                <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
+                <div className="w-[35%] h-[100%] mr-[2px] rounded-[10px] bg-[#766695]" />
+                <div className="w-[25%] h-[100%] mr-[2px] rounded-[10px] bg-[#9963FE]" />
+                {/* <div className="w-[18%] h-[100%] mr-[2px] rounded-[10px] bg-[#CCB0FF]" />
+                <div className="w-[10%] h-[100%] bg-[#E9DEFC]" /> */}
               </div>
               <div className="w-[100%] mobile:grid-cols-2 grid laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="HTML Cache" sub="114.79MB" color="#391F87" />
-                <HeaderItem title="JS Cache" sub="21.54MB" color="#766695" />
-                <HeaderItem title="CSS Cache" sub="67.67MB" color="#9963FE" />
-                <HeaderItem
+                <HeaderItem title="HTML Assets" sub={assetsData && assetsData?.liquidAssetSize} color="#391F87" />
+                <HeaderItem title="JS Assets" sub={assetsData && assetsData?.jsAssetSize} color="#766695" />
+                <HeaderItem title="CSS Assets" sub={assetsData && assetsData?.cssAssetSize} color="#9963FE" />
+                {/* <HeaderItem
                   title="Fonts Cache"
                   sub="766.48kB"
                   color="#CCB0FF"
@@ -735,7 +782,7 @@ const CacheStatus = () => {
                   title="Images Cache"
                   sub="262.46MB"
                   color="#E9DEFC"
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -754,7 +801,7 @@ const CacheStatus = () => {
                   }}
                   className="text-[20px] font-bold tracking-wide "
                 >
-                  Search
+                  Total Optimize Assets
                 </h1>
                 <p
                   style={{
@@ -788,7 +835,7 @@ const CacheStatus = () => {
                 <Button2 check={selected.length > 0} />
               </div>
             </div>
-            <Filter />
+            {/* <Filter /> */}
             <Table setSelected1={setSelected} />
           </div>
         </div>

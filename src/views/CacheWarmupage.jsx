@@ -1,9 +1,12 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpgradePopUpShow } from "../services/home";
 import TitleManager from "../components/TitleManager";
+import axios from "axios";
+import appURLs from "../appURL";
+import Tooltip from "../components/Tooltip"
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -45,9 +48,8 @@ const Button = () => {
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
-        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+          } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         <img
           src="/graphic/warmup/play.svg"
@@ -104,9 +106,8 @@ const Button1 = ({ onClick }) => {
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
-        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#000]" : "bg-[#000]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : "bg-[#000]"
+          } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         <img
           src="/graphic/warmup/plus.svg"
@@ -163,15 +164,183 @@ const HoverDetail = () => {
   );
 };
 
+const Table1 = ({ tableData }) => {
+  const arr = [1, 2, 3];
+  const {title, is_optimized,optimized_at} =  tableData;
+
+  const [selected, setSelected] = useState([]);
+  const dark = useSelector((state) => state.home.dark);
+  return (
+    <div
+      style={{
+        borderColor: dark ? "#1F2329" : "#ebebeb",
+      }}
+      className="w-[100%] border-t-[1px]  border-[#ebebeb] mt-[10px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool"
+    >
+      <div className="mobile:w-[1200px] laptop:w-[100%]">
+        <TableHeader1 />
+        {tableData.map((item, i) => {
+          return <TableItem1 key={i} last={i === arr.length - 1} item={item} />;
+        })}
+      </div>
+    </div>
+  );
+};
+
+const TableHeader1 = ({ change }) => {
+  const [check, setCheck] = useState(false);
+  const dark = useSelector((state) => state.home.dark);
+  return (
+    <div
+      style={{
+        borderColor: dark ? "#1F2329" : "#ebebeb",
+      }}
+      className="w-[100%] px-[10px] flex h-[28px] border-b-[1px] border-[#ebebeb]"
+    >
+      <div
+        style={{
+          color: dark ? "#ffffff74" : "#0a0a187e",
+        }}
+        className="w-[40.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+      >
+        Name
+      </div>
+      <div
+        style={{
+          color: dark ? "#ffffff74" : "#0a0a187e",
+        }}
+        className="w-[30.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+      >
+        Optimized At
+      </div>
+      {/* <div
+        style={{
+          color: dark ? "#ffffff74" : "#0a0a187e",
+        }}
+        className="w-[12.5%] text-[10px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+      >
+        CDN Bandwidth (MiB)
+      </div> */}
+      <div
+        style={{
+          color: dark ? "#ffffff74" : "#0a0a187e",
+        }}
+        className="w-[20.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+      >
+        Status
+      </div>
+      <div
+        style={{
+          color: dark ? "#ffffff74" : "#0a0a187e",
+        }}
+        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+      >
+
+      </div>
+
+    </div>
+  );
+};
+
+const Status = ({ i }) => {
+  return (
+    <div
+      className="h-[22px] flex items-center px-[9.5px] justify-between rounded-[23px] "
+      style={{
+        backgroundColor:
+          i === 1 ? "#38f8ab31" : i === 2 ? "#ffcc6538" : "#ff465c38",
+      }}
+    >
+      <div
+        className="w-[6px] h-[6px] shrink-0 rounded-[50%]"
+        style={{
+          backgroundColor:
+            i === 1 ? "#0FE38F" : i === 2 ? "#FFCB65" : "#FF465C",
+        }}
+      ></div>
+      <p
+        className="text-[11px] tracking-wide ml-[5px]"
+        style={{
+          color: i === 1 ? "#0FE38F" : i === 2 ? "#FFCB65" : "#FF465C",
+        }}
+      >
+        {i === 1 ? "Optimized" : i === 2 ? "Incomplete" : "Disconnected"}
+      </p>
+    </div>
+  );
+};
+
+const TableItem1 = ({ last, item }) => {
+  const [check, setCheck] = useState(false);
+  const dark = useSelector((state) => state.home.dark);
+
+  return (
+    <div
+      style={{
+        border: last && "0px !important",
+
+        borderColor: dark ? "#1F2329" : "#ebebeb",
+      }}
+      className="w-[100%] flex px-[10px] h-[45px] border-b-[1px] border-[#ebebeb]"
+    >
+      <div
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
+        className="w-[40.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+      >
+        {item?.title}
+      </div>
+      <div
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
+        className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+      >
+        {item?.optimized_at ? new Date(item.optimized_at).toLocaleString() : ''}
+      </div>
+      <div
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
+        className="w-[20.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+      >
+        <Status i= {item?.is_optimized === true ? 1 : 2} />
+      </div>
+
+    </div>
+  );
+};
+
 const CacheWarmup = ({ setShow }) => {
   const [enabled, setEnabled] = useState(false);
+  const [pageOptimizationData, updatePageOptimizationData] = useState({});
   const dark = useSelector((state) => state.home.dark);
   const dispatch = useDispatch();
+  const appURL = appURLs();
+
+  const fetchPageOptimizationData = async () => {
+
+    try {
+      const res = await axios.get(`${appURL}/api/dashboard/fetch-page-optimization-data`);
+
+      const pageDataObj = res?.data?.pageData;
+
+      updatePageOptimizationData(pageDataObj)
+
+    } catch (error) {
+      console.error("Error fetching user profile data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPageOptimizationData();
+  }, [])
   return (
     <>
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-      <TitleManager title="Cache Warmup" conicalURL="cache-warmup" />
- 
+        <TitleManager title="pages-optimization" conicalURL="pages-optimization" />
+
         <div className="w-[100%] h-[50px] shrink-0"></div>
         <div
           style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
@@ -186,7 +355,7 @@ const CacheWarmup = ({ setShow }) => {
                   }}
                   className="text-[24px] font-bold tracking-wide "
                 >
-                  Cache Warmup
+                  Page Optimization
                 </h1>
                 {/* {enabled && (
                   <div className="w-[120px] h-[34px] text-[#fff] cursor-pointer mt-[18px] rounded-[3px] flex items-center justify-center bg-[#000]">
@@ -216,9 +385,9 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      Estimated Time Saved
+                      Total No. Pages
                     </p>
-                    <HoverDetail />
+                    <Tooltip text="This statement serves to indicate the count of pages" />
                   </div>
                   <div className="flex mt-[6px] items-center">
                     <p
@@ -227,7 +396,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      8 hours
+                      {pageOptimizationData && pageOptimizationData?.totalPage}
                     </p>
                   </div>
                 </div>
@@ -245,9 +414,9 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      Estimated Costs Saved
+                      No of Optimized pages
                     </p>
-                    <HoverDetail />
+                    <Tooltip text="This indicates the number of pages optimized by TurboBoost." />
                   </div>
                   <div className="flex mt-[6px] items-center">
                     <p
@@ -256,7 +425,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      320$
+                      {pageOptimizationData && pageOptimizationData?.optimizedPageCoun}
                     </p>
                   </div>
                 </div>
@@ -274,9 +443,9 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      No. of Pages
+                      Pending pages
                     </p>
-                    <HoverDetail />
+                    <Tooltip text="This indicates the number of pages pending optimization." />
                   </div>
                   <div className="flex mt-[6px] items-center">
                     <p
@@ -285,7 +454,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      72
+                      {pageOptimizationData && pageOptimizationData?.notOptimizedPage}
                     </p>
                   </div>
                 </div>
@@ -304,7 +473,7 @@ const CacheWarmup = ({ setShow }) => {
                     }}
                     className="text-[20px] px-[15px] font-bold tracking-wide "
                   >
-                    Cache Warmup Status
+                    Page Optimization Status
                   </h1>
                   <div className="flex px-[15px] justify-between mt-[4px] items-center">
                     <p
@@ -313,7 +482,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[14px] tracking-wide font-medium text-[#0a0a186f]"
                     >
-                      Automatically re-optimizes purged/invalidated pages.
+                      When TurboBoost is enabled, it will minify the HTML by removing extra whitespace.
                     </p>
                     <Toggle
                       value={!enabled}
@@ -328,7 +497,7 @@ const CacheWarmup = ({ setShow }) => {
                     }}
                     className="w-[100%] laptop:flex justify-between border-t-[1px] px-[15px] border-[#ebebeb] mt-[8px]"
                   >
-                    <div className="laptop:w-[49%] mobile:w-[100%] pt-[13px] flex flex-col justify-between">
+                    {/* <div className="laptop:w-[49%] mobile:w-[100%] pt-[13px] flex flex-col justify-between">
                       <div>
                         <h1
                           style={{
@@ -377,7 +546,7 @@ const CacheWarmup = ({ setShow }) => {
                           />
                           <span>Get Feature</span>
                         </div> */}
-                      </h1>
+                    {/* </h1>
                       <p
                         style={{
                           color: dark ? "#ffffff74" : "#0a0a187e",
@@ -396,7 +565,9 @@ const CacheWarmup = ({ setShow }) => {
                         className="w-[100%] mt-[4px] h-[34px] rounded-[4px] border-[1px] bg-transparent
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
-                    </div>
+                    </div>  */}
+                    {pageOptimizationData && pageOptimizationData?.pages?.length === 0 ? "cot show text" : "<Table1 tableData = {pageOptimizationData?.pages} />"}
+
                   </div>
                 </div>
                 <div className="laptop:w-[32%] mobile:mt-[10px] laptop:mt-[0]  mobile:w-[100%] ">
@@ -414,7 +585,7 @@ const CacheWarmup = ({ setShow }) => {
                         }}
                         className="text-[20px] font-bold tracking-wide "
                       >
-                        Cache Warmup Details
+                        Page Optimization Details
                       </h1>
                       <div
                         style={{
@@ -456,7 +627,7 @@ const CacheWarmup = ({ setShow }) => {
                   </div> */}
                     <Button />
                   </div>
-                  <div
+                  {/* <div
                     style={{
                       color: dark ? "#fff" : "#000",
                       borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -464,7 +635,7 @@ const CacheWarmup = ({ setShow }) => {
                     }}
                     className="w-[100%] mt-[10px]  px-[15px] py-[14px]  bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
                   >
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                       <h1 className="text-[20px] font-bold tracking-wide ">
                         Generate Sitemap
                       </h1>
@@ -480,8 +651,8 @@ const CacheWarmup = ({ setShow }) => {
                           alt=""
                         />
                         <span>Get Feature</span>
-                      </div>
-                      {/* <div className="bg-[#000] ml-[5px] font-medium tracking-wide h-[24px] rounded-[3px] flex items-center text-[13px] px-[10px] py-[4px] text-[#fff]">
+                      </div> */}
+                  {/* <div className="bg-[#000] ml-[5px] font-medium tracking-wide h-[24px] rounded-[3px] flex items-center text-[13px] px-[10px] py-[4px] text-[#fff]">
                           <img
                             src="/graphic/warmup/lock.svg"
                             className="w-[10px] mr-[4px] "
@@ -489,8 +660,8 @@ const CacheWarmup = ({ setShow }) => {
                           />
                           <span className="translate-y-[1px]">Pro</span>
                         </div> */}
-                    </div>
-                    {/* <div
+                  {/* </div> */}
+                  {/* <div
                     onClick={() => {
                       setShow(true);
                     }}
@@ -505,12 +676,12 @@ const CacheWarmup = ({ setShow }) => {
                       Get HTML Sitemap
                     </h1>
                   </div> */}
-                    <Button1
+                  {/* <Button1
                       onClick={() => {
                         setShow(true);
                       }}
                     />
-                  </div>
+                  </div>  */}
                 </div>
               </div>
             </div>

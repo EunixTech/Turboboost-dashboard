@@ -6,6 +6,10 @@ import Chart2 from "../components/charts/chart2";
 import Chart3 from "../components/charts/chart3";
 import Chart4 from "../components/charts/chart4";
 import TitleManager from "../components/TitleManager";
+import axios from "axios"
+import appURLs from "../appURL";
+import dateFormatter from "../utils/dateFormatter";
+import moment from 'moment';
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -37,16 +41,14 @@ const Button = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
-      className={`laptop:w-[170px]  mobile:w-[100%] ${
-        !dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"
-      }
+      className={`laptop:w-[170px]  mobile:w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"
+        }
         
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
-        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+          } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         Download Log (.csv)
       </p>
@@ -225,10 +227,10 @@ const Status = ({ i }) => {
           i === 1
             ? "#38f8ab31"
             : i === 2
-            ? "#ffcc6538"
-            : i === 3
-            ? "#ff465c38"
-            : "#9963fe36",
+              ? "#ffcc6538"
+              : i === 3
+                ? "#ff465c38"
+                : "#9963fe36",
       }}
     >
       <div
@@ -238,10 +240,10 @@ const Status = ({ i }) => {
             i === 1
               ? "#0FE38F"
               : i === 2
-              ? "#FFCB65"
-              : i === 3
-              ? "#FF465C"
-              : "#9963FE",
+                ? "#FFCB65"
+                : i === 3
+                  ? "#FF465C"
+                  : "#9963FE",
         }}
       ></div>
       <p
@@ -251,19 +253,19 @@ const Status = ({ i }) => {
             i === 1
               ? "#0FE38F"
               : i === 2
-              ? "#FFCB65"
-              : i === 3
-              ? "#FF465C"
-              : "#9963FE",
+                ? "#FFCB65"
+                : i === 3
+                  ? "#FF465C"
+                  : "#9963FE",
         }}
       >
         {i === 1
           ? "Optimization Started"
           : i === 2
-          ? "Incomplete"
-          : i === 3
-          ? "Disconnected"
-          : "Tag Create"}
+            ? "Incomplete"
+            : i === 3
+              ? "Disconnected"
+              : "Tag Create"}
       </p>
     </div>
   );
@@ -582,7 +584,7 @@ const Table2 = ({ setSelected1 }) => {
   );
 };
 
-const Table3 = ({ setSelected1 }) => {
+const Table3 = ({ connectedWebsiteData }) => {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   const dark = useSelector((state) => state.home.dark);
   const [selected, setSelected] = useState([]);
@@ -595,8 +597,8 @@ const Table3 = ({ setSelected1 }) => {
       className="w-[100%] border-t-[1px]  border-[#ebebeb] mt-[10px]"
     >
       <TableHeader3 />
-      {arr.map((item, i) => {
-        return <TableItem3 key={i} last={i === arr.length - 1} />;
+      {connectedWebsiteData.length && connectedWebsiteData.map((item, i) => {
+        return <TableItem3 key={i} last={i === arr.length - 1} item = {item}/>;
       })}
     </div>
   );
@@ -648,7 +650,7 @@ const TableHeader3 = ({ change }) => {
   );
 };
 
-const TableItem3 = ({ last, change, selected }) => {
+const TableItem3 = ({ last, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -665,7 +667,7 @@ const TableItem3 = ({ last, change, selected }) => {
         }}
         className="w-[30%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        May 8th, 05:10:01 EST 2023
+        { item?.connected_at && moment(item.connected_at).format('MMMM Do, HH:mm:ss z YYYY')}
       </div>
       <div
         style={{
@@ -673,7 +675,7 @@ const TableItem3 = ({ last, change, selected }) => {
         }}
         className="w-[30%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        Plugin Updated
+        { item?.event_type === 1 ? "connected" :"updated"} Plugin
       </div>
       <div
         style={{
@@ -681,7 +683,8 @@ const TableItem3 = ({ last, change, selected }) => {
         }}
         className="w-[30%] text-[14px] px-[15px]  cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        WordPress
+        { item?.platform ===1 ? "shopify" : "wordpress"}
+        
       </div>
       <div
         style={{
@@ -689,7 +692,8 @@ const TableItem3 = ({ last, change, selected }) => {
         }}
         className="w-[10%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        6.1.1
+         { item?.app_version }
+        
       </div>
     </div>
   );
@@ -718,8 +722,8 @@ const Navigator = ({ current, setCurrent }) => {
                 ? "#fff"
                 : "#82828A"
               : current === 0
-              ? "#000"
-              : "#0a0a1876",
+                ? "#000"
+                : "#0a0a1876",
           }}
           className=" h-[100%] flex items-center"
         >
@@ -740,8 +744,8 @@ const Navigator = ({ current, setCurrent }) => {
                 ? "#fff"
                 : "#82828A"
               : current === 1
-              ? "#000"
-              : "#0a0a1876",
+                ? "#000"
+                : "#0a0a1876",
           }}
           className=" h-[100%] flex items-center"
         >
@@ -762,8 +766,8 @@ const Navigator = ({ current, setCurrent }) => {
                 ? "#fff"
                 : "#82828A"
               : current === 2
-              ? "#000"
-              : "#0a0a1876",
+                ? "#000"
+                : "#0a0a1876",
           }}
           className=" h-[100%] flex items-center"
         >
@@ -774,7 +778,7 @@ const Navigator = ({ current, setCurrent }) => {
   );
 };
 
-const InputDate = ({}) => {
+const InputDate = ({ }) => {
   const [curr, setCurr] = useState(0);
   const [hover, setHover] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -860,8 +864,8 @@ const InputDate = ({}) => {
                           ? "#000"
                           : "#ebebeb"
                         : dark
-                        ? "#111317"
-                        : "#fff",
+                          ? "#111317"
+                          : "#fff",
                   }}
                   onClick={() => {
                     setCurr(i);
@@ -886,10 +890,33 @@ const CacheStatus = () => {
   const [current, setCurrent] = useState(0);
   const w = useWidth();
   const dark = useSelector((state) => state.home.dark);
+
+  const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
+
+  const appURL = appURLs();
+
+  const fetchConnectedWebsiteData = async () => {
+
+    try {
+      const res = await axios.get(`${appURL}/api/dashboard/fetch-connected-website-data`);
+
+      const dataArr = res?.data?.conectedWebsite;
+      updateConnectedWebsiteData(dataArr);
+
+      console.log("********", dataArr)
+    } catch (error) {
+      console.error("Error fetching user profile data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchConnectedWebsiteData();
+  }, [])
+
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-         <TitleManager title="Logs" conicalURL="logs" />
- 
+      <TitleManager title="Logs" conicalURL="logs" />
+
       <div className="w-[100%] h-[50px] shrink-0"></div>
       <div
         style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
@@ -1174,7 +1201,7 @@ const CacheStatus = () => {
                     Connector History
                   </p>
                 </div>
-                <Table3 />
+                <Table3 connectedWebsiteData={connectedWebsiteData} />
               </>
             )}
           </div>
