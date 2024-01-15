@@ -43,13 +43,14 @@ const DashboardPageRoute = () => {
         <>
             {!vidLoad ? (
                 <div className={`${dark ? "heading": "headingDarkMode"} w-[100%] h-[100vh] bg-transparent flex items-center justify-center`}>
-                    <video
+                    {/* <video
                         autoPlay
                         className={"w-[300px]"}
                         muted
                         onEnded={() => { setVidLoad(true)}}
                         src={dark ? "/load-b.mp4" : "/load-w.mp4"}
-                    > </video>
+                    > </video> */}
+                    ...loading
                 </div>
 
             ) : (
