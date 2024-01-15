@@ -28,7 +28,7 @@ const DashboardPageRoute = () => {
       if (loggedIn == "true") {
         setTimeout(() => {
           setLoading(false);
-          dispatch(setAuth(true));
+          dispatch(setAuth(false));
         }, 1000);
       } else {
         setTimeout(() => {
