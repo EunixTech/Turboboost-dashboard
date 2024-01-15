@@ -14,7 +14,7 @@ export default function AnimatedLoader() {
     className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
   >
    <video controls autoPlay loop muted>
-  <source src={myVideo} type="video/mp4" />
+  <source src="https://res.cloudinary.com/hpnoardgude/video/upload/v1705325221/load-b_fvtai6.mp4" type="video/mp4" />
 </video>
 
 {/* <video
