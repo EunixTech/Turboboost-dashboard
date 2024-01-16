@@ -480,9 +480,6 @@ import CustomDonutChart from "../components/charts/chart5";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "../components/Tooltip";
 import axios from "axios";
-import AnimatedLoader from "../components/loader/AnimatedLoader";
-import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
-import { setToggle } from "../slice/statusToggleSlice";
 
 const Dashboard = () => {
   const [imageData, updateImageData] = useState({});
@@ -628,7 +625,7 @@ const Dashboard = () => {
   const handleImageOptimization = async() =>{
     let endPoint = "";
     if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
-    else endPoint = "api/shopify/restore-page-optimization";
+    else endPoint = "api/shopify/restore-image-optimization";
    
     try {
       toggleLoader(true);
