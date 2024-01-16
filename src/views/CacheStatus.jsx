@@ -483,14 +483,7 @@ const TableHeader = ({ change }) => {
       >
         Optimize Size
       </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-        }}
-        className="w-[9%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
-      >
-        Last Optimized
-      </div>
+     
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
@@ -772,7 +765,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide "
               >
-                {kbToMb(assetsData && assetsData?.totalAssets)}
+                {kbToMb(assetsData && assetsData?.totalAssets)} 
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
