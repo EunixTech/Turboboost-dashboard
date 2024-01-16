@@ -65,7 +65,6 @@ const Integrations = ({ setShow }) => {
   };
 
   return (
-    loader ? <AnimatedLoader />:
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
          <TitleManager title="Integrations" conicalURL="integrations" />
  
