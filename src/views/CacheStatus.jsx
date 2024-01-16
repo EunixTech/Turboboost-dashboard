@@ -696,7 +696,7 @@ const CacheStatus = () => {
 
   const handleOptimizeAssets = async() =>{
     let endPoint = "";
-    if (!assetsOptimizationValue) endPoint = "removed-unused-javascript-code";
+    if (!assetsOptimizationValue) endPoint = "api/shopify/removed-unused-javascript-code";
     else endPoint = "api/shopify/restore-page-optimization";
    
     try {
