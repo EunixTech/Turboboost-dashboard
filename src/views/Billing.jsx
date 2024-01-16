@@ -59,12 +59,12 @@ const Billing = () => {
     fetch(`${appURL}/user/current-plan-detail`, fetchConfig)
         .then(handleFetchErrors)
         .then((res) => {
-			toggleLoader(false)
-		
+
             if (Number(res?.status) === 200) {
-			toggleLoader(false)
+			
               const planName = res?.data?.plan;
               updateCurrentPlan(planName)
+			  toggleLoader(false)
             } else {
 				toggleLoader(false)
 			}
@@ -83,7 +83,7 @@ useEffect(() => {
 }, [])
   
 	return (
-	
+	loader ? <AnimatedLoader /> :
 		<div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
 			   <TitleManager title="Billing" conicalURL="billing" />
  

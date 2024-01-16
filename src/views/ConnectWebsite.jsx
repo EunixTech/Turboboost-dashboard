@@ -587,12 +587,13 @@ const ConnectWebsite = () => {
       try {
         toggleLoader(true)
         const res = await GetAxiosConfig(`api/dashboard/fetch-connected-website-data`);
-        toggleLoader(false)
+        
         const resJSON = res?.data;
 
         if(resJSON.status === 200){
           const dataArr = resJSON?.conectedWebsite;
           updateConnectedWebsiteData(dataArr)
+          toggleLoader(false)
         } else {
           return toast.error("Please try again")
         }
