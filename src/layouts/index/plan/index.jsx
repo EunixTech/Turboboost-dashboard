@@ -95,12 +95,14 @@ useEffect(() => {
 }, [])
 
   return (
-    loader ? <AnimatedLoader /> :
+    
     <div
       style={{ zIndex: 100 }}
       className="w-[100%] h-[100vh] fixed  bg-[#00000074] flex items-center justify-center laptop:px-0 mobile:px-[10px] py-[50px]"
     >
-      <div
+      {
+        loader ? <AnimatedLoader /> :
+        <div
         style={{
           backgroundColor: dark ? "#111317" : "#fff",
           borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -417,6 +419,8 @@ useEffect(() => {
           </div>
         </div>
       </div>
+      }
+     
     </div>
   );
 };
