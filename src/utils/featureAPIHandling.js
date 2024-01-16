@@ -3,18 +3,18 @@ import standardFetchHandlers from '../utils/standardFetchHandlers';
 import handleFetchErrors from '../utils/handleFetchErrors';
 import appURLs from '../appURL';
 import toast from 'react-hot-toast';
+import { GetAxiosConfig, PostAxiosConfig } from "../utils/axiosConfig.js";
 
 export const featureAPIHandling = async (endPoint = " ") => {
 
-    const fetchConfig = getFetchConfig(),
-        appURL = appURLs();
+   try {
+    const res = await GetAxiosConfig(endPoint)
+    const resJSON = res?.data;
 
-    fetch(`${appURL}${endPoint}`, fetchConfig)
-        .then(handleFetchErrors)
-        .then((resJSON) => {
-            console.log(resJSON)
-            if (resJSON?.status === 200) return toast.success(resJSON.message);
-            else return toast.error(resJSON?.message)
-        })
-        .catch(standardFetchHandlers.error)
+    if (resJSON?.status === 200) return toast.success(resJSON.message);
+    else return toast.error(resJSON?.message)
+
+   } catch (error) {
+    return toast.error("Please try again")
+   }
 }

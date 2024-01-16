@@ -12,7 +12,8 @@ const initialState = {
   delayScripts: false,
 
   minifyHTML: false,
- 
+  pageOptimization: false,
+  assetsOptimization: false,
   criticalCSS: false,
   removeUnsedCSS: false,
 };

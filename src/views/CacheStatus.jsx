@@ -40,13 +40,14 @@
 
 import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
-import { useSelector } from "react-redux";
 import TitleManager from "../components/TitleManager.jsx";
 import axios from "axios";
 import appURLs from "../appURL";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
-
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
+import { setToggle } from "../slice/statusToggleSlice";
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -93,7 +94,7 @@ const Button = () => {
   );
 };
 
-const Button2 = ({ onClick, check }) => {
+const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -106,17 +107,21 @@ const Button2 = ({ onClick, check }) => {
           backgroundColor: check ? "#F87238" : "#FF465C",
         }}
         className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#000]" : "bg-[#000]"
+          dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
         } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
-        <img
-          src="/graphic/status/del.svg"
-          className="w-[12px] ml-[6px] mr-[6px] translate-y-[0px]"
-          alt=""
-        />{" "}
-        <div className="translate-y-[1px]">
-          {check ? "Purge Selected" : "Purge All Assets"}
+        {
+          assetsOptimizationValue ? 
+           <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
+           Disable Assets Optimization
         </div>
+        :
+         <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
+           Purge All Assets
+        </div>
+        }
+       
+       
       </p>
     </div>
   );
@@ -208,7 +213,7 @@ const Button1 = ({ onClick }) => {
   );
 };
 
-const HeaderItem = ({ color, title, sub }) => {
+const HeaderItem = ({ color, title, sub , assets= false }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -233,7 +238,7 @@ const HeaderItem = ({ color, title, sub }) => {
         </h1>
       </div>
       <h1 className="text-[24px] mobile:mt-[2px] laptop:mt-[0px] font-bold tracking-wide ">
-        {sub}
+        {sub} {assets && "KB"} 
       </h1>
     </div>
   );
@@ -478,14 +483,7 @@ const TableHeader = ({ change }) => {
       >
         Optimize Size
       </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-        }}
-        className="w-[9%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
-      >
-        Last Optimized
-      </div>
+     
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
@@ -534,7 +532,7 @@ const Status = ({ i }) => {
   );
 };
 
-const TableItem = ({ last, change, selected }) => {
+const TableItem = ({ last,item  }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
@@ -553,7 +551,7 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[11%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
-        Desktop
+        {item?.name}
       </div>
       </div>
       <div
@@ -562,7 +560,7 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[27%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
       >
-        http://txtcartapp.com/sms-library/sms-marketing-calendar-for-ecommerce-may-2022/
+         {item?.file_type}
       </div>
       <div
         style={{
@@ -570,7 +568,7 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[11%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
-        Desktop
+        {item?.file_size?.before}
       </div>
       <div
         style={{
@@ -578,8 +576,7 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[28%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
-        Author:1, pageType:sms:library,{" "}
-        <span className="text-[#0a0a1876] ml-[3px]">more...</span>
+        {item?.file_size?.after}
       </div>
       <div
         style={{
@@ -587,13 +584,11 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[9%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
-        05/23/23
+        {item?.is_optimized}
       </div>
+      
       <div className="w-[9%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
-        <Status i={1} />
-      </div>
-      <div className="w-[9%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
-        <Status i={1} />
+        <Status i={item?.is_optimized ? 1 : 2} />
       </div>
       {/* <div className="w-[9%]  text-[10px] tracking-wide px-[10px] cursor-pointer text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <img
@@ -606,9 +601,10 @@ const TableItem = ({ last, change, selected }) => {
   );
 };
 
-const Table = ({ setSelected1 }) => {
-  const arr = [1, 2, 3, 4, 5, 6];
+const Table = ({ assetsDataArr, assetsData ,setSelected1 }) => {
+  const arr = [1, 2, 3, 4];
 
+  
   const [selected, setSelected] = useState([]);
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -622,9 +618,9 @@ const Table = ({ setSelected1 }) => {
       <div className="mobile:w-[1200px] laptop:w-[100%]">
         <TableHeader
           change={() => {
-            if (selected.length !== arr.length) {
+            if (selected.length !== assetsDataArr.length) {
               const arrr = [];
-              for (let i = 0; i < arr.length; i++) {
+              for (let i = 0; i < assetsDataArr.length; i++) {
                 arrr.push(i);
               }
               setSelected(arrr);
@@ -635,7 +631,7 @@ const Table = ({ setSelected1 }) => {
             }
           }}
         />
-        {arr.map((item, i) => {
+        {assetsData.map((item, i) => {
           return (
             <TableItem
               key={i}
@@ -651,6 +647,7 @@ const Table = ({ setSelected1 }) => {
                 }
               }}
               last={i === arr.length - 1}
+              item={item}
             />
           );
         })}
@@ -664,16 +661,20 @@ const CacheStatus = () => {
    const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const [assetsData, updateAssetsData] = useState({});
-  const appURL = appURLs();
+  const dispatch = useDispatch();
 
-  const fetchPageOptimizationData = async () => {
+  const assetsOptimizationValue = useSelector((state) => state.toggles?.assetsOptimization);
+
+
+  const fetchAssetsOptimizationData = async () => {
     
       try {
         toggleLoader(true);
-        const res = await axios.get(`${appURL}/api/dashboard/fetch-assets-optimization-data`);
+        const res = await GetAxiosConfig(`api/dashboard/fetch-assets-optimization-data`);
         toggleLoader(false);
 
         const resData = res?.data;
+        console.log("resData",resData)
         if(resData?.status === 200){
           const assetsDataObj = resData?.assets;
           updateAssetsData(assetsDataObj)
@@ -686,10 +687,39 @@ const CacheStatus = () => {
       }
   };
 
+  const handleOptimizeAssets = async() =>{
+    let endPoint = "";
+    if (!assetsOptimizationValue) endPoint = "api/shopify/removed-unused-javascript-code";
+    else endPoint = "api/shopify/restore-assets-optimization";
+   
+    try {
+      toggleLoader(true);
+      const res = await GetAxiosConfig(endPoint);
+      toggleLoader(false);
+
+      const resData = res?.data;
+     
+      if(resData?.status === 200){
+      dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
+      fetchAssetsOptimizationData();
+        return toast.success(resData?.message);
+      } else {
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  }
+
+
   useEffect(() => {
-    fetchPageOptimizationData();
+    fetchAssetsOptimizationData();
   }, [])
 
+  function kbToMb(kb) {
+    return kb / 1024;
+  }
   return (
     loader ?
     <AnimatedLoader /> :
@@ -735,7 +765,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide "
               >
-                {assetsData && assetsData?.totalAssets}
+                {assetsData && assetsData?.totalAssets} 
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
@@ -773,7 +803,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide"
               >
-                {assetsData && assetsData?.totalOptimizedSize}
+                {kbToMb(assetsData && assetsData?.totalOptimizedSize)} MB
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
@@ -783,9 +813,9 @@ const CacheStatus = () => {
                 <div className="w-[10%] h-[100%] bg-[#E9DEFC]" /> */}
               </div>
               <div className="w-[100%] mobile:grid-cols-2 grid laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="HTML Assets" sub={assetsData && assetsData?.liquidAssetSize} color="#391F87" />
-                <HeaderItem title="JS Assets" sub={assetsData && assetsData?.jsAssetSize} color="#766695" />
-                <HeaderItem title="CSS Assets" sub={assetsData && assetsData?.cssAssetSize} color="#9963FE" />
+                <HeaderItem title="HTML Assets" sub={ kbToMb(assetsData && assetsData?.liquidAssetSize)} assets={true} color="#391F87" />
+                <HeaderItem title="JS Assets" sub={kbToMb(assetsData && assetsData?.jsAssetSize)} assets={true}  color="#766695" />
+                <HeaderItem title="CSS Assets" sub={kbToMb(assetsData && assetsData?.cssAssetSize)}  assets={true} color="#9963FE" />
                 {/* <HeaderItem
                   title="Fonts Cache"
                   sub="766.48kB"
@@ -822,7 +852,7 @@ const CacheStatus = () => {
                   }}
                   className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
                 >
-                  1,357 Results
+                  {assetsData?.files?.length}
                 </p>
               </div>
               <div className="flex items-center">
@@ -845,11 +875,13 @@ const CacheStatus = () => {
                   />
                   {selected.length > 0 ? "Purge Selected" : "Purge All Cache"}
                 </div> */}
-                <Button2 check={selected.length > 0} />
+                <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
               </div>
             </div>
             {/* <Filter /> */}
-            <Table setSelected1={setSelected} />
+            {(assetsData?.assetFileArr && assetsData?.assetFileArr?.length) ? <Table assetsData={assetsData?.assetFileArr} setSelected1={setSelected}  /> : ""}
+
+            
           </div>
         </div>
       </div>

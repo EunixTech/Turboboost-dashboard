@@ -9,17 +9,22 @@ import appURLs from "../appURL";
 import Tooltip from "../components/Tooltip"
 import toast from "react-hot-toast";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
+import { setToggle } from "../slice/statusToggleSlice";
+import ToggleButton from "../components/ToggleButton.jsx";
 
-
-const Button = () => {
+const Button = ({pageOptimizationValue, handleOptimizePage}) => {
   const dark = useSelector((state) => state.home.dark);
   return (
-    <div
+    <div onClick={handleOptimizePage}
       className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
-      <p
+
+      {
+        !pageOptimizationValue ?
+        <p
         className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
           } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
@@ -29,7 +34,20 @@ const Button = () => {
           alt=""
         />{" "}
         Start Optimizations
-      </p>
+      </p>:
+       <p
+       className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+         } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+     >
+       <img
+         src="/graphic/warmup/play.svg"
+         className="w-[8px] mr-[5px] translate-y-[0px]"
+         alt=""
+       />{" "}
+       Disable Optimizations
+     </p>
+      }
+     
     </div>
   );
 };
@@ -217,12 +235,13 @@ const CacheWarmup = ({ setShow }) => {
    const [loader, toggleLoader] = useState(false);
   const dispatch = useDispatch();
   const appURL = appURLs();
+  const pageOptimizationValue = useSelector((state) => state.toggles?.pageOptimization);
 
   const fetchPageOptimizationData = async () => {
 
     try {
       toggleLoader(true);
-      const res = await axios.get(`${appURL}/api/dashboard/fetch-page-optimization-data`);
+      const res = await GetAxiosConfig(`api/dashboard/fetch-page-optimization-data`);
       toggleLoader(false);
 
       const resData = res?.data;
@@ -239,6 +258,31 @@ const CacheWarmup = ({ setShow }) => {
 
   };
 
+  const handleOptimizePage = async() =>{
+    let endPoint = "";
+    if (!pageOptimizationValue) endPoint = "api/shopify/removed-page-unused-code";
+    else endPoint = "api/shopify/restore-page-optimization";
+   
+    try {
+      toggleLoader(true);
+      const res = await GetAxiosConfig(endPoint);
+      toggleLoader(false);
+      console.log()
+      dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
+      const resData = res?.data;
+      if(resData?.status === 200){
+      dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
+      fetchPageOptimizationData();
+        return toast.success(resData?.message);
+      } else {
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  }
+
   useEffect(() => {
     fetchPageOptimizationData();
   }, [])
@@ -248,7 +292,6 @@ const CacheWarmup = ({ setShow }) => {
       loader ?
       <AnimatedLoader /> :
   
-    
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
         <TitleManager title="pages-optimization" conicalURL="pages-optimization" />
 
@@ -336,7 +379,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      {pageOptimizationData && pageOptimizationData?.optimizedPageCoun}
+                      {pageOptimizationData && pageOptimizationData?.optimizedPageCount}
                     </p>
                   </div>
                 </div>
@@ -395,12 +438,15 @@ const CacheWarmup = ({ setShow }) => {
                     >
                       When TurboBoost is enabled, it will minify the HTML by removing extra whitespace.
                     </p>
-                    <Toggle
+                    {/* <Toggle
                       value={!enabled}
                       setValue={(e) => {
                         setEnabled(!enabled);
                       }}
-                    />
+                    /> */}
+
+                    <ToggleButton toggleValue={pageOptimizationValue} handlingToggle={handleOptimizePage}  toggleKey="someKey" />
+
                   </div>
                   <div
                     style={{
@@ -477,7 +523,7 @@ const CacheWarmup = ({ setShow }) => {
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
                     </div>  */}
-                    {pageOptimizationData && pageOptimizationData?.pages?.length === 0 ? "cot show text" : "<Table1 tableData = {pageOptimizationData?.pages} />"}
+                    {(pageOptimizationData?.pages && pageOptimizationData?.pages?.length) ? <Table1 tableData = {pageOptimizationData?.pages} /> : ""}
 
                   </div>
                 </div>
@@ -504,7 +550,7 @@ const CacheWarmup = ({ setShow }) => {
                         }}
                         className="flex text-[14px] font-medium items-center"
                       >
-                        {enabled ? (
+                        {pageOptimizationValue ? (
                           <>
                             <img
                               src="/graphic/warmup/elli1.svg"
@@ -536,7 +582,7 @@ const CacheWarmup = ({ setShow }) => {
                       Start Optimizations
                     </h1>
                   </div> */}
-                    <Button />
+                    <Button pageOptimizationValue={pageOptimizationValue} handleOptimizePage = {handleOptimizePage} />
                   </div>
                   {/* <div
                     style={{

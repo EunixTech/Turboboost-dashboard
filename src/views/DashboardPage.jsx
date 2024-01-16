@@ -27,6 +27,8 @@ import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
 import TitleManager from "../components/TitleManager";
 import toast from "react-hot-toast";
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
+
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 // const DashboardPage = () => {
 //   const [coreVitalsData, updateCoreVitalsData] = useState([]);
@@ -554,13 +556,11 @@ const Dashboard = () => {
 
   const fetchImageOptimizationData = async () => {
     try {
-      toogleLoadingAPI(true);
-      const res = await axios.get(
-        `${appURL}/api/dashboard/fetch-image-optimization-data`
-      );
-      toogleLoadingAPI(false);
+      toogleLoadingAPI(true)
+      const res = await GetAxiosConfig(`api/dashboard/fetch-image-optimization-data`);
+      toogleLoadingAPI(false)
       const resJSON = res?.data;
-
+      console.log("resresJSON",resJSON)
       if (resJSON.status === 200) {
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
