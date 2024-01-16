@@ -705,6 +705,7 @@ const CacheStatus = () => {
       toggleLoader(false);
 
       const resData = res?.data;
+      console.log("resDataresDataresDataresData",resData)
       if(resData?.status === 200){
       dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
       fetchAssetsOptimizationData();
