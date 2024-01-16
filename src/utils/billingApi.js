@@ -2,6 +2,11 @@ import axios from "axios";
 import appURLs from "../appURL";
 
 export const billingApi=async(item,selected)=>{
+    let token = null;
+
+    if (typeof window !== `undefined`) {
+         token = localStorage.getItem(`authToken`);
+    }
 
 	const  appURL = appURLs();
     let planName = item?.name;
@@ -17,6 +22,7 @@ export const billingApi=async(item,selected)=>{
             {
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 withCredentials: true,  // Set this to true to include credentials in the request
             }

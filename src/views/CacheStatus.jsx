@@ -46,6 +46,7 @@ import axios from "axios";
 import appURLs from "../appURL";
 import toast from "react-hot-toast";
 import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -670,8 +671,10 @@ const CacheStatus = () => {
     
       try {
         toggleLoader(true);
-        const res = await axios.get(`${appURL}/api/dashboard/fetch-assets-optimization-data`);
+        const res = await GetAxiosConfig(`api/dashboard/fetch-assets-optimization-data`);
         toggleLoader(false);
+
+        console.log("resresres",res)
 
         const resData = res?.data;
         if(resData?.status === 200){
