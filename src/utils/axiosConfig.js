@@ -44,3 +44,26 @@ export const GetAxiosConfig = async (URL="") => {
     );
     return response;
 }
+
+export const PatchAxiosConfig = async (URL="", data) => {
+    let token = null;
+	const  appURL = appURLs();
+    
+    if (typeof window !== `undefined`) {
+        token = localStorage.getItem(`authToken`);
+    }
+
+    const response = await axios.patch(
+        `${appURL}/${URL}`,
+        data,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            withCredentials: true,  // Set this to true to include credentials in the request
+        }
+    );
+    return response;
+
+}
