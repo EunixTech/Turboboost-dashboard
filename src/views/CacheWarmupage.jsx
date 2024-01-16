@@ -13,10 +13,10 @@ import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
 import { setToggle } from "../slice/statusToggleSlice";
 import ToggleButton from "../components/ToggleButton.jsx";
 
-const Button = ({pageOptimizationValue}) => {
+const Button = ({pageOptimizationValue, handleOptimizePage}) => {
   const dark = useSelector((state) => state.home.dark);
   return (
-    <div
+    <div onClick={handleOptimizePage}
       className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
@@ -240,7 +240,7 @@ const CacheWarmup = ({ setShow }) => {
   const handleOptimizePage = async() =>{
     let endPoint = "";
     if (!handleOptimizePage) endPoint = "api/shopify/removed-page-unused-code";
-    else endPoint = "api/shopify/removed-page-unused-code";
+    else endPoint = "api/shopify/restore-page-optimization";
    
     try {
       toggleLoader(true);
@@ -251,8 +251,6 @@ const CacheWarmup = ({ setShow }) => {
       const resData = res?.data;
       if(resData?.status === 200){
       dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
-        // const pageDataObj = resData?.pageData;
-        // updatePageOptimizationData(pageDataObj)
         return toast.error(resData?.message);
       } else {
         return toast.error("Please try again");
@@ -583,7 +581,7 @@ const CacheWarmup = ({ setShow }) => {
                       Start Optimizations
                     </h1>
                   </div> */}
-                    <Button pageOptimizationValue={pageOptimizationValue} />
+                    <Button pageOptimizationValue={pageOptimizationValue} handleOptimizePage = {handleOptimizePage} />
                   </div>
                   {/* <div
                     style={{
