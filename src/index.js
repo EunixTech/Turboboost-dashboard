@@ -13,8 +13,8 @@ import SignUp from "./routes/SignUpRoute";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute";
 // import ConnectWebsite from "./routes/connect-website.jsx";
 import ConnectWebsite from "./views/ConnectWebsite.jsx";
-import CacheWarmup from "./routes/cache-warmup";
-// import CacheWarmup from "./views/CacheWarmupage.jsx";
+// import CacheWarmup from "./routes/cache-warmup";
+import CacheWarmup from "./views/CacheWarmupage.jsx";
 
 // import CacheStatus from "./routes/cache-status";
 import CacheStatus from "./views/CacheStatus.jsx";

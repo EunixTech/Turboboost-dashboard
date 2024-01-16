@@ -10,37 +10,6 @@ import Tooltip from "../components/Tooltip"
 import toast from "react-hot-toast";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 
-// const Button = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         // onClick();
-//       }}
-//       className={`w-[100%] ${!dark ? "bg-[#ebebeb] " : "bg-[#204c3a]"}
-//         h-[40px]   cursor-pointer rounded-[4px] border-[1px] ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb] "
-//         } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           false ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[2.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         <img
-//           src="/graphic/warmup/play.svg"
-//           className="w-[8px] mr-[5px] translate-y-[0px]"
-//           alt=""
-//         />{" "}
-//         Start Optimizations
-//       </p>
-//     </div>
-//   );
-// };
 
 const Button = () => {
   const dark = useSelector((state) => state.home.dark);
@@ -65,37 +34,6 @@ const Button = () => {
   );
 };
 
-// const Button1 = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         onClick();
-//       }}
-//       className={`w-[100%] ${!dark ? "bg-[#ebebeb] " : "bg-[#1c1f26]"}
-//       h-[40px]   cursor-pointer rounded-[4px] border-[1px] ${
-//         dark ? "border-[#1F2329]" : "border-[#ebebeb] "
-//       } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           true ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#1F2329]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#000]" : "bg-[#000]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[2.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         <img
-//           src="/graphic/warmup/plus.svg"
-//           className="w-[8px] mr-[5px] translate-y-[0px]"
-//           alt=""
-//         />{" "}
-//         Get HTML Sitemap
-//       </p>
-//     </div>
-//   );
-// };
 
 const Button1 = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -123,49 +61,6 @@ const Button1 = ({ onClick }) => {
   );
 };
 
-const HoverDetail = () => {
-  const [hover, setHover] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false); // Track whether the image has loaded
-
-  const handleImageLoad = () => {
-    console.log(true);
-    setImageLoaded(true); // Set imageLoaded to true when the image is loaded
-  };
-  return (
-    <div
-      onMouseOver={() => {
-        setHover(true);
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
-      className="relative "
-    >
-      {hover && (
-        <div className="absolute shrink-0  w-[150px] left-[-62.1px]  z-50 bottom-[13px]">
-          <Suspense fallback={null}>
-            <img
-              onLoad={handleImageLoad}
-              src="/hover.svg"
-              className="z-0 w-[145px] h-[88px]"
-              alt=""
-            />
-            {imageLoaded && (
-              <div className="w-[100%] h-[100%] px-[10px] py-[14px] font-medium text-[12px] leading-[16px] top-0 left-0 absolute z-10">
-                Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet.
-              </div>
-            )}
-          </Suspense>
-        </div>
-      )}
-      <img
-        className="w-[20px] cursor-pointer"
-        src="/graphic/dashboard/info.svg"
-        alt=""
-      />
-    </div>
-  );
-};
 
 const Table1 = ({ tableData }) => {
   const arr = [1, 2, 3];
