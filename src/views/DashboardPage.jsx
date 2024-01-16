@@ -558,10 +558,10 @@ const Dashboard = () => {
     try {
       toogleLoadingAPI(true)
       const res = await GetAxiosConfig(`api/dashboard/fetch-image-optimization-data`);
-      toogleLoadingAPI(false)
       const resJSON = res?.data;
       console.log("resresJSON",resJSON)
       if (resJSON.status === 200) {
+        toogleLoadingAPI(false)
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
       } else {
@@ -681,7 +681,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[25px] f2 desktop:text-[25px]  font-bold "
                 >
-                  {imageData?.percentageImageOptimize || " "}%
+                  {imageData?.percentageImageOptimize}%
                 </p>
                 <div className=" flex bg-[#18df902e] px-[13px] py-[2px] rounded-[23px] ml-[10px]">
                   <img
@@ -1073,7 +1073,7 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                      {imageData?.totalImages || ""}
+                      {imageData?.totalImages}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1098,7 +1098,7 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                      {imageData?.totalOptimizeImage || ""}
+                      {imageData?.totalOptimizeImage}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1123,7 +1123,7 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] font-bold translate-y-[-2px]"
                     >
-                      {imageData?.totalOriginImage || ""}
+                      {imageData?.totalOriginImage}
                     </div>
                   </div>
                 </div>
