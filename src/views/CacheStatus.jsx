@@ -40,14 +40,14 @@
 
 import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
-import { useSelector } from "react-redux";
 import TitleManager from "../components/TitleManager.jsx";
 import axios from "axios";
 import appURLs from "../appURL";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
 import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
-
+import { setToggle } from "../slice/statusToggleSlice";
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -94,7 +94,7 @@ const Button = () => {
   );
 };
 
-const Button2 = ({ onClick, check }) => {
+const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -110,10 +110,18 @@ const Button2 = ({ onClick, check }) => {
           dark ? "bg-[#000]" : "bg-[#000]"
         } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
-       
-        <div className="translate-y-[1px]">
+        {
+          assetsOptimizationValue ? 
+           <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
+           "Disable Assets Optimization"
+        </div>
+        :
+         <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
            "Purge All Assets"
         </div>
+        }
+       
+       
       </p>
     </div>
   );
@@ -660,8 +668,12 @@ const CacheStatus = () => {
    const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const [assetsData, updateAssetsData] = useState({});
+  const dispatch = useDispatch();
 
-  const fetchPageOptimizationData = async () => {
+  const assetsOptimizationValue = useSelector((state) => state.toggles?.assetsOptimization);
+
+
+  const fetchAssetsOptimizationData = async () => {
     
       try {
         toggleLoader(true);
@@ -682,8 +694,33 @@ const CacheStatus = () => {
       }
   };
 
+  const handleOptimizeAssets = async() =>{
+    let endPoint = "";
+    if (!assetsOptimizationValue) endPoint = "removed-unused-javascript-code";
+    else endPoint = "api/shopify/restore-page-optimization";
+   
+    try {
+      toggleLoader(true);
+      const res = await GetAxiosConfig(endPoint);
+      toggleLoader(false);
+
+      const resData = res?.data;
+      if(resData?.status === 200){
+      dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
+      fetchAssetsOptimizationData();
+        return toast.success(resData?.message);
+      } else {
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  }
+
+
   useEffect(() => {
-    fetchPageOptimizationData();
+    fetchAssetsOptimizationData();
   }, [])
 
   return (
@@ -841,7 +878,7 @@ const CacheStatus = () => {
                   />
                   {selected.length > 0 ? "Purge Selected" : "Purge All Cache"}
                 </div> */}
-                <Button2 check={selected.length > 0} />
+                <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
               </div>
             </div>
             {/* <Filter /> */}

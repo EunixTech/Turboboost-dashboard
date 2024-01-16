@@ -13,7 +13,7 @@ const initialState = {
 
   minifyHTML: false,
   pageOptimization: false,
-  
+  assetsOptimization: false,
   criticalCSS: false,
   removeUnsedCSS: false,
 };
