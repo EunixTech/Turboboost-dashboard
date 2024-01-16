@@ -705,7 +705,7 @@ const CacheStatus = () => {
       toggleLoader(false);
 
       const resData = res?.data;
-      console.log("resDataresDataresDataresData",resData)
+     
       if(resData?.status === 200){
       dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
       fetchAssetsOptimizationData();
@@ -883,7 +883,7 @@ const CacheStatus = () => {
               </div>
             </div>
             {/* <Filter /> */}
-            {(assetsData?.files && assetsData?.files?.length) ? <Table assetsData={assetsData?.files} setSelected1={setSelected}  /> : ""}
+            {(assetsData) ? <Table assetsData={assetsData?.files} setSelected1={setSelected}  /> : ""}
 
             
           </div>
