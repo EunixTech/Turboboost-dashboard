@@ -267,8 +267,6 @@ const CacheWarmup = ({ setShow }) => {
       toggleLoader(true);
       const res = await GetAxiosConfig(endPoint);
       toggleLoader(false);
-      console.log()
-      dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
       const resData = res?.data;
       if(resData?.status === 200){
       dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
