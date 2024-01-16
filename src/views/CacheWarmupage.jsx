@@ -13,7 +13,7 @@ import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
 import { setToggle } from "../slice/statusToggleSlice";
 import ToggleButton from "../components/ToggleButton.jsx";
 
-const Button = () => {
+const Button = ({pageOptimizationValue}) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -21,7 +21,10 @@ const Button = () => {
 
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
-      <p
+
+      {
+        !pageOptimizationValue ?
+        <p
         className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
           } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
@@ -31,7 +34,20 @@ const Button = () => {
           alt=""
         />{" "}
         Start Optimizations
-      </p>
+      </p>:
+       <p
+       className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+         } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+     >
+       <img
+         src="/graphic/warmup/play.svg"
+         className="w-[8px] mr-[5px] translate-y-[0px]"
+         alt=""
+       />{" "}
+       Disable Optimizations
+     </p>
+      }
+     
     </div>
   );
 };
@@ -567,7 +583,7 @@ const CacheWarmup = ({ setShow }) => {
                       Start Optimizations
                     </h1>
                   </div> */}
-                    <Button />
+                    <Button pageOptimizationValue={pageOptimizationValue} />
                   </div>
                   {/* <div
                     style={{
