@@ -269,7 +269,7 @@ const CacheWarmup = ({ setShow }) => {
       toggleLoader(false);
       console.log()
 
-      const resData = res?.data;
+      const      dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue })); resData = res?.data;
       if(resData?.status === 200){
       dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
       fetchPageOptimizationData();
