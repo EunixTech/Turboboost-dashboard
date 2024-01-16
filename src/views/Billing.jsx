@@ -12,7 +12,8 @@ import standardFetchHandlers from '../utils/standardFetchHandlers';
 import handleFetchErrors from '../utils/handleFetchErrors';
 import appURLs from '../appURL';
 import TitleManager from "../components/TitleManager";
-import { GetAxiosConfig } from "../../utils/axiosConfig.js";
+import toast from "react-hot-toast";
+import { GetAxiosConfig } from "../utils/axiosConfig.js";
 import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
 
 const Billing = () => {
