@@ -60,12 +60,14 @@ const Billing = () => {
         .then(handleFetchErrors)
         .then((res) => {
 			toggleLoader(false)
-			console.log(res)
-                  
+		
             if (Number(res?.status) === 200) {
+			toggleLoader(false)
               const planName = res?.data?.plan;
               updateCurrentPlan(planName)
-            }
+            } else {
+				toggleLoader(false)
+			}
             
         })
         .catch(standardFetchHandlers.error)
