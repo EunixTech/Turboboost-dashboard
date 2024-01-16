@@ -100,8 +100,8 @@ useEffect(() => {
       style={{ zIndex: 100 }}
       className="w-[100%] h-[100vh] fixed  bg-[#00000074] flex items-center justify-center laptop:px-0 mobile:px-[10px] py-[50px]"
     >
-      {
-        loader ? <AnimatedLoader /> :
+      
+      
         <div
         style={{
           backgroundColor: dark ? "#111317" : "#fff",
@@ -109,6 +109,7 @@ useEffect(() => {
         }}
         className="mobile:w-[100%] custom-h scroll-hidden laptop:w-[900px] overflow-y-auto flex px-[15px] flex-col pt-[15px] rounded-[13px] bg-[#fff] relative border-[1px] border-[#ebebeb] "
       >
+          { loader ? <AnimatedLoader /> :<>
         <div className="flex  items-center shrink-0 justify-between ">
           <h1
             style={{
@@ -127,12 +128,14 @@ useEffect(() => {
             alt=""
           />
         </div>
+
         <div
           style={{
             backgroundColor: dark ? "#191B21" : "#0A0A18",
           }}
           className="w-[100%] mobile:h-[120px] py-[10px] laptop:h-[60px] flex mobile:flex-col laptop:mobile:flex-row mobile:items-center laptop:justify-between items-center bg-[#0A0A18] rounded-[3px] mt-[20px] px-[18px]"
         >
+        
           <div>
             <p className="text-[12px] mobile:text-center laptop:text-left text-[#fff] tracking-wide font-medium">
               Plan to stick around for a while?
@@ -406,7 +409,6 @@ useEffect(() => {
 
           </div>
         </div>
-
         <div className="w-[100%] mt-[10px] mb-[10px] h-[36px] flex justify-end items-center">
           
           <div onClick={handleBilling}
@@ -417,9 +419,12 @@ useEffect(() => {
           >
             Continue
           </div>
+         
         </div>
+        </>
+          }
       </div>
-      }
+      
      
     </div>
   );
