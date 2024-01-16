@@ -107,17 +107,17 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
           backgroundColor: check ? "#F87238" : "#FF465C",
         }}
         className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#000]" : "bg-[#000]"
+          dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
         } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         {
           assetsOptimizationValue ? 
            <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
-           "Disable Assets Optimization"
+           Disable Assets Optimization
         </div>
         :
          <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
-           "Purge All Assets"
+           Purge All Assets
         </div>
         }
        
@@ -238,7 +238,7 @@ const HeaderItem = ({ color, title, sub }) => {
         </h1>
       </div>
       <h1 className="text-[24px] mobile:mt-[2px] laptop:mt-[0px] font-bold tracking-wide ">
-        {sub}
+        {sub} KB
       </h1>
     </div>
   );
@@ -609,7 +609,7 @@ const TableItem = ({ last,item  }) => {
 };
 
 const Table = ({ assetsDataArr, assetsData ,setSelected1 }) => {
-  const arr = [1, 2, 3, 4, 5, 6];
+  const arr = [1, 2, 3, 4];
 
   
   const [selected, setSelected] = useState([]);
@@ -724,6 +724,9 @@ const CacheStatus = () => {
     fetchAssetsOptimizationData();
   }, [])
 
+  function kbToMb(kb) {
+    return kb / 1024;
+  }
   return (
     loader ?
     <AnimatedLoader /> :
@@ -769,7 +772,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide "
               >
-                {assetsData && assetsData?.totalAssets}
+                {kbToMb(assetsData && assetsData?.totalAssets)}
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
@@ -777,11 +780,11 @@ const CacheStatus = () => {
                 <div className="w-[33%] h-[100%] rounded-[10px] bg-[#FF465C]" />
               </div>
               <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#38F8AC" />
-                <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#FFCB65" />
+                <HeaderItem title="Total Assets" sub={kbToMb(assetsData && assetsData?.totalAssets)} color="#38F8AC" />
+                <HeaderItem title="Optimized Assets" sub={kbToMb(assetsData && assetsData?.totalOptimizeAssets)} color="#FFCB65" />
                 <HeaderItem
                   title="Not Optimized Assets"
-                  sub={assetsData && assetsData?.notOptimizedAssets} 
+                  sub={kbToMb(assetsData && assetsData?.notOptimizedAssets)} 
                   color="#FF465C"
                 />
               </div>
