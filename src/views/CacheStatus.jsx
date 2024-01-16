@@ -110,13 +110,9 @@ const Button2 = ({ onClick, check }) => {
           dark ? "bg-[#000]" : "bg-[#000]"
         } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
-        <img
-          src="/graphic/status/del.svg"
-          className="w-[12px] ml-[6px] mr-[6px] translate-y-[0px]"
-          alt=""
-        />{" "}
+       
         <div className="translate-y-[1px]">
-          {check ? "Purge Selected" : "Purge All Assets"}
+           "Purge All Assets"
         </div>
       </p>
     </div>
@@ -535,7 +531,7 @@ const Status = ({ i }) => {
   );
 };
 
-const TableItem = ({ last, change, selected }) => {
+const TableItem = ({ last,item  }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
@@ -554,7 +550,7 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[11%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
-        Desktop
+        {item?.name}
       </div>
       </div>
       <div
@@ -563,7 +559,7 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[27%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
       >
-        http://txtcartapp.com/sms-library/sms-marketing-calendar-for-ecommerce-may-2022/
+         {item?.file_type}
       </div>
       <div
         style={{
@@ -571,7 +567,7 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[11%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
-        Desktop
+        {item?.file_size?.before}
       </div>
       <div
         style={{
@@ -579,8 +575,7 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[28%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
-        Author:1, pageType:sms:library,{" "}
-        <span className="text-[#0a0a1876] ml-[3px]">more...</span>
+        {item?.file_size?.after}
       </div>
       <div
         style={{
@@ -588,13 +583,11 @@ const TableItem = ({ last, change, selected }) => {
         }}
         className="w-[9%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
-        05/23/23
+        {item?.is_optimized}
       </div>
+      
       <div className="w-[9%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
-        <Status i={1} />
-      </div>
-      <div className="w-[9%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
-        <Status i={1} />
+        <Status i={item?.is_optimized ? 1 : 2} />
       </div>
       {/* <div className="w-[9%]  text-[10px] tracking-wide px-[10px] cursor-pointer text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <img
@@ -607,9 +600,10 @@ const TableItem = ({ last, change, selected }) => {
   );
 };
 
-const Table = ({ setSelected1 }) => {
+const Table = ({ assetsDataArr ,setSelected1 }) => {
   const arr = [1, 2, 3, 4, 5, 6];
 
+  
   const [selected, setSelected] = useState([]);
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -623,9 +617,9 @@ const Table = ({ setSelected1 }) => {
       <div className="mobile:w-[1200px] laptop:w-[100%]">
         <TableHeader
           change={() => {
-            if (selected.length !== arr.length) {
+            if (selected.length !== assetsDataArr.length) {
               const arrr = [];
-              for (let i = 0; i < arr.length; i++) {
+              for (let i = 0; i < assetsDataArr.length; i++) {
                 arrr.push(i);
               }
               setSelected(arrr);
@@ -636,7 +630,7 @@ const Table = ({ setSelected1 }) => {
             }
           }}
         />
-        {arr.map((item, i) => {
+        {assetsDataArr.map((item, i) => {
           return (
             <TableItem
               key={i}
@@ -652,6 +646,7 @@ const Table = ({ setSelected1 }) => {
                 }
               }}
               last={i === arr.length - 1}
+              item={item}
             />
           );
         })}
@@ -823,7 +818,7 @@ const CacheStatus = () => {
                   }}
                   className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
                 >
-                  1,357 Results
+                  {assetsData?.files?.length}
                 </p>
               </div>
               <div className="flex items-center">
@@ -850,7 +845,9 @@ const CacheStatus = () => {
               </div>
             </div>
             {/* <Filter /> */}
-            <Table setSelected1={setSelected} />
+            {(assetsData?.files && assetsData?.files?.length) ? <Table assetsData={assetsData?.files} setSelected1={setSelected}  /> : ""}
+
+            
           </div>
         </div>
       </div>
