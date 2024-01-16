@@ -9,7 +9,7 @@ function TimeDifferenceFromCurrent(dateString) {
     const daysDiff = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
   
     if (minutesDiff < 60) {
-      return `${minutesDiff} minute${minutesDiff !== 1 ? 's' : ''} ago`;
+      return `${minutesDiff} min${minutesDiff !== 1 ? 's' : ''} ago`;
     } else if (hoursDiff < 24) {
       return `${hoursDiff} hour${hoursDiff !== 1 ? 's' : ''} ago`;
     } else {

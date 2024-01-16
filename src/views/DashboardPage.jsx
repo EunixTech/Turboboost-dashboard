@@ -592,19 +592,21 @@ const Dashboard = () => {
   );
 
   const handleCriticalCSS = async () => {
+    toogleLoadingAPI(true)
     let endPoint = "";
     if (!criticalCSSToggleValue)
-      endPoint = "/api/shopify/minify-javascript-code";
-    else endPoint = "/api/shopify/minify-javascript-code";
+      endPoint = "api/shopify/minify-javascript-code";
+    else endPoint = "api/shopify/minify-javascript-code";
     await featureAPIHandling(endPoint);
+    toogleLoadingAPI(false)
     dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
   };
 
   const handleImageSizeAdaption = async () => {
     let endPoint = "";
     if (!lazyLoadingToggleValue)
-      endPoint = "/api/shopify/minify-javascript-code";
-    else endPoint = "/api/shopify/minify-javascript-code";
+      endPoint = "api/shopify/minify-javascript-code";
+    else endPoint = "api/shopify/minify-javascript-code";
     await featureAPIHandling(endPoint);
     dispatch(
       setToggle({
@@ -614,11 +616,13 @@ const Dashboard = () => {
     );
   };
   const handlelazyLoading = async () => {
+    toogleLoadingAPI(true)
     let endPoint = "";
     if (!lazyLoadingToggleValue)
-      endPoint = "/api/shopify/minify-javascript-code";
-    else endPoint = "/api/shopify/minify-javascript-code";
+      endPoint = "api/shopify/minify-javascript-code";
+    else endPoint = "api/shopify/minify-javascript-code";
     await featureAPIHandling(endPoint);
+    toogleLoadingAPI(false)
     dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
   };
 
@@ -626,12 +630,13 @@ const Dashboard = () => {
 
 
   const handleImageOptimization = async() =>{
+    toggleLoader(true);
     let endPoint = "";
     if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
     else endPoint = "api/shopify/restore-image-optimization";
    
     try {
-      toggleLoader(true);
+     
       const res = await GetAxiosConfig(endPoint);
       toggleLoader(false);
       const resData = res?.data;
@@ -712,7 +717,7 @@ const Dashboard = () => {
                 >
                   {imageData?.percentageImageOptimize}%
                 </p>
-                <div className=" flex bg-[#18df902e] px-[13px] py-[2px] rounded-[23px] ml-[10px]">
+                {/* <div className=" flex bg-[#18df902e] px-[13px] py-[2px] rounded-[23px] ml-[10px]">
                   <img
                     src="/graphic/dashboard/trend.svg"
                     className="mr-[5px] translate-y-[1px] w-[14px]"
@@ -721,7 +726,7 @@ const Dashboard = () => {
                   <p className="text-[#18DF90] f2 text-[13px] font-bold tracking-wide ">
                     3%
                   </p>
-                </div>
+                </div> */}
               </div>
               <div className="flex">
                 <p
@@ -730,7 +735,7 @@ const Dashboard = () => {
                   }}
                   className=" mr-[2px] f2 text-[14px] tracking-wide font-bold"
                 >
-                  vs last purge:
+                  last purge:
                 </p>
                 <p
                   style={{
@@ -738,7 +743,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
-                  89%
+                   {imageData?.lastPurge ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
                 </p>
               </div>
             </div>
@@ -798,7 +803,7 @@ const Dashboard = () => {
                 >
                   17.23%
                 </p>
-                <div className=" flex bg-[#18df902e] f2 px-[13px] py-[3px] rounded-[23px] ml-[10px]">
+                {/* <div className=" flex bg-[#18df902e] f2 px-[13px] py-[3px] rounded-[23px] ml-[10px]">
                   <img
                     src="/graphic/dashboard/trend.svg"
                     style={{
@@ -810,7 +815,7 @@ const Dashboard = () => {
                   <p className="text-[#18DF90] f2 text-[13px] font-medium tracking-wide ">
                     3%
                   </p>
-                </div>
+                </div> */}
               </div>
               <div className="flex">
                 <p
@@ -858,16 +863,16 @@ const Dashboard = () => {
                 >
                   {TimeDifferenceFromCurrent(handlerData?.lastPurge)}
                 </p>
-                <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
+                {/* <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
                   <img
                     src="/graphic/dashboard/trend-red-down.svg"
                     className="mr-[5px] translate-y-[1px] w-[14px]"
                     alt=""
                   />
-                  {/* <p className="text-[#ff004c] f2 text-[13px] font-medium tracking-wide ">
+                  <p className="text-[#ff004c] f2 text-[13px] font-medium tracking-wide ">
                     3%
-                  </p> */}
-                </div>
+                  </p>
+                </div> */}
               </div>
               <div className="flex">
                 <p
