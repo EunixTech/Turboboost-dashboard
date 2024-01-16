@@ -239,7 +239,7 @@ const CacheWarmup = ({ setShow }) => {
 
   const handleOptimizePage = async() =>{
     let endPoint = "";
-    if (!handleOptimizePage) endPoint = "api/shopify/removed-page-unused-code";
+    if (!pageOptimizationValue) endPoint = "api/shopify/removed-page-unused-code";
     else endPoint = "api/shopify/restore-page-optimization";
    
     try {
