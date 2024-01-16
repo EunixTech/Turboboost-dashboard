@@ -608,7 +608,7 @@ const TableItem = ({ last,item  }) => {
   );
 };
 
-const Table = ({ assetsDataArr ,setSelected1 }) => {
+const Table = ({ assetsDataArr, assetsData ,setSelected1 }) => {
   const arr = [1, 2, 3, 4, 5, 6];
 
   
@@ -638,7 +638,7 @@ const Table = ({ assetsDataArr ,setSelected1 }) => {
             }
           }}
         />
-        {assetsDataArr.map((item, i) => {
+        {assetsData.map((item, i) => {
           return (
             <TableItem
               key={i}
