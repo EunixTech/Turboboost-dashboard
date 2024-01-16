@@ -380,7 +380,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      {pageOptimizationData && pageOptimizationData?.optimizedPageCoun}
+                      {pageOptimizationData && pageOptimizationData?.optimizedPageCount}
                     </p>
                   </div>
                 </div>
@@ -524,7 +524,7 @@ const CacheWarmup = ({ setShow }) => {
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
                     </div>  */}
-                    {pageOptimizationData?.pages?.length === 0 && <Table1 tableData = {pageOptimizationData?.pages} />}
+                    {pageOptimizationData?.pages.length && <Table1 tableData = {pageOptimizationData?.pages} />}
 
                   </div>
                 </div>
