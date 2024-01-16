@@ -28,7 +28,7 @@ import appURLs from "../appURL";
 import TitleManager from "../components/TitleManager";
 import toast from "react-hot-toast";
 import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
-
+import TimeDifferenceFromCurrent from "../utils/timeCalculator.js";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 // const DashboardPage = () => {
 //   const [coreVitalsData, updateCoreVitalsData] = useState([]);
@@ -483,6 +483,7 @@ import axios from "axios";
 
 const Dashboard = () => {
   const [imageData, updateImageData] = useState({});
+  const [handlerData, updateHandlerData] = useState({});
   const [loader, toggleLoader] = useState(false);
   const [coreVitalsData, updateCoreVitalsData] = useState([]);
   const [performanceData, updatePerformanceData] = useState([]);
@@ -562,8 +563,10 @@ const Dashboard = () => {
       console.log("resresJSON",resJSON)
       if (resJSON.status === 200) {
         toogleLoadingAPI(false)
+        const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
+        updateHandlerData(OptimizationHandlerData)
       } else {
         return toast.error("Please try again");
       }
@@ -853,7 +856,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
                 >
-                  1 Day Ago
+                  {TimeDifferenceFromCurrent(handlerData?.lastPurge)}
                 </p>
                 <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
                   <img
@@ -861,9 +864,9 @@ const Dashboard = () => {
                     className="mr-[5px] translate-y-[1px] w-[14px]"
                     alt=""
                   />
-                  <p className="text-[#ff004c] f2 text-[13px] font-medium tracking-wide ">
+                  {/* <p className="text-[#ff004c] f2 text-[13px] font-medium tracking-wide ">
                     3%
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <div className="flex">
@@ -881,7 +884,9 @@ const Dashboard = () => {
                   }}
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
-                  4/26/94
+                 
+                  {handlerData?.previousPurge ? new Date(handlerData?.previousPurge).toLocaleDateString("en-US") : ""}
+
                 </p>
               </div>
             </div>

@@ -1,4 +1,4 @@
-function timeDifferenceFromCurrent(dateString) {
+function TimeDifferenceFromCurrent(dateString) {
     const inputDate = new Date(dateString);
     const currentDate = new Date();
     const timeDifference = currentDate - inputDate;
@@ -17,9 +17,4 @@ function timeDifferenceFromCurrent(dateString) {
     }
   }
   
-  // Example usage:
-  const inputDateString = "2024-01-14T14:33:15.229+00:00"; // Use the appropriate date string format
-  const result = timeDifferenceFromCurrent(inputDateString);
-  
-  console.log(`Time difference from ${inputDateString} to current date: ${result}`);
-  
+  export default TimeDifferenceFromCurrent
