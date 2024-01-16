@@ -10,7 +10,8 @@ import Tooltip from "../components/Tooltip"
 import toast from "react-hot-toast";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
-
+import { setToggle } from "../slice/statusToggleSlice";
+import ToggleButton from "../components/ToggleButton.jsx";
 
 const Button = () => {
   const dark = useSelector((state) => state.home.dark);
@@ -218,6 +219,28 @@ const CacheWarmup = ({ setShow }) => {
    const [loader, toggleLoader] = useState(false);
   const dispatch = useDispatch();
   const appURL = appURLs();
+  const pageOptimizationValue = useSelector((state) => state.toggles?.pageOptimization);
+
+  const handleOptimizePage = async() =>{
+console.log("working.....",)
+    // try {
+    //   toggleLoader(true);
+    //   const res = await GetAxiosConfig(`api/dashboard/fetch-page-optimization-data`);
+    //   toggleLoader(false);
+
+    //   const resData = res?.data;
+    //   if(resData?.status === 200){
+      dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
+    //     const pageDataObj = resData?.pageData;
+    //     updatePageOptimizationData(pageDataObj)
+    //   } else {
+    //     return toast.error("Please try again");
+    //   }
+    // } catch (error) {
+    //   toggleLoader(false);
+    //   console.error("Error fetching user profile data:", error);
+    // }
+  }
 
   const fetchPageOptimizationData = async () => {
 
@@ -395,12 +418,15 @@ const CacheWarmup = ({ setShow }) => {
                     >
                       When TurboBoost is enabled, it will minify the HTML by removing extra whitespace.
                     </p>
-                    <Toggle
+                    {/* <Toggle
                       value={!enabled}
                       setValue={(e) => {
                         setEnabled(!enabled);
                       }}
-                    />
+                    /> */}
+
+                    <ToggleButton toggleValue={pageOptimizationValue} handlingToggle={handleOptimizePage}  toggleKey="someKey" />
+
                   </div>
                   <div
                     style={{
@@ -477,7 +503,7 @@ const CacheWarmup = ({ setShow }) => {
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
                     </div>  */}
-                    {pageOptimizationData && pageOptimizationData?.pages?.length === 0 ? "Nothing To Show" : "<Table1 tableData = {pageOptimizationData?.pages} />"}
+                    {pageOptimizationData && pageOptimizationData?.pages?.length === 0 ? "" : <Table1 tableData = {pageOptimizationData?.pages} />}
 
                   </div>
                 </div>
@@ -504,7 +530,7 @@ const CacheWarmup = ({ setShow }) => {
                         }}
                         className="flex text-[14px] font-medium items-center"
                       >
-                        {enabled ? (
+                        {pageOptimizationValue ? (
                           <>
                             <img
                               src="/graphic/warmup/elli1.svg"
