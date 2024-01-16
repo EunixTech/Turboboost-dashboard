@@ -14,6 +14,7 @@ const initialState = {
   minifyHTML: false,
   pageOptimization: false,
   assetsOptimization: false,
+  imageOptimization: false,
   criticalCSS: false,
   removeUnsedCSS: false,
 };

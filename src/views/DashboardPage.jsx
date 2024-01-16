@@ -480,6 +480,9 @@ import CustomDonutChart from "../components/charts/chart5";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "../components/Tooltip";
 import axios from "axios";
+import AnimatedLoader from "../components/loader/AnimatedLoader";
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
+import { setToggle } from "../slice/statusToggleSlice";
 
 const Dashboard = () => {
   const [imageData, updateImageData] = useState({});
@@ -619,6 +622,32 @@ const Dashboard = () => {
     dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
   };
 
+  const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization);
+
+
+  const handleImageOptimization = async() =>{
+    let endPoint = "";
+    if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
+    else endPoint = "api/shopify/restore-page-optimization";
+   
+    try {
+      toggleLoader(true);
+      const res = await GetAxiosConfig(endPoint);
+      toggleLoader(false);
+      const resData = res?.data;
+      if(resData?.status === 200){
+      dispatch(setToggle({ key: "imageOptimization", value: !imageOptimizationValue }));
+      fetchImageOptimizationData();
+        return toast.success(resData?.message);
+      } else {
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  }
+
   return loadingAPI ? (
     <AnimatedLoader />
   ) : (
@@ -738,7 +767,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
                 >
-                  {imageData?.totalOptimizeImage || " "}
+                  {imageData?.totalOptimizeImage}
                 </p>
               </div>
             </div>
@@ -1180,8 +1209,8 @@ const Dashboard = () => {
                   Image Size Adaption
                 </p>
                 <ToggleButton
-                  toggleValue={imageSizeAdaptionToggleValue}
-                  handlingToggle={handleImageSizeAdaption}
+                  toggleValue={imageOptimizationValue}
+                  handlingToggle={handleImageOptimization}
                 />
               </div>
 
