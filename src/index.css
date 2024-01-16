@@ -153,6 +153,7 @@ span.ripple {
   background-color: #fff;
   border-color: #ebebeb;
   color: #000;
+  width: 250px;
 }
 .background {
   background-color: #fafafc;
@@ -562,9 +563,20 @@ p.annualText {
   margin-left: 5rem;
   margin-top: 0.5rem;
 }
+.justify-around {
+  display: flex;
+  flex-wrap: wrap;  
+}
 @media only screen and (max-width: 599px) {
   .MuiBox-root,
   .billing-modal-background {
     max-width: 100% !important;
   }
+  .mobile-cols {
+    display: block;
+  }
+  .mobile\:mb-\[10px\] {
+    width: 100%;
+    margin-bottom: 10px;
+}
 }
