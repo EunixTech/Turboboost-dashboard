@@ -46,7 +46,7 @@ import appURLs from "../appURL";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
-import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
+import { GetAxiosConfig, PostAxiosConfig } from "../utils/axiosConfig.js";
 import { setToggle } from "../slice/statusToggleSlice";
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -84,9 +84,8 @@ const Button = () => {
         h-[34px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
-        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c]  active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+          } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c]  active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         Clear
       </p>
@@ -106,22 +105,21 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
         style={{
           backgroundColor: check ? "#F87238" : "#FF465C",
         }}
-        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
-        } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
+          } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         {
-          assetsOptimizationValue ? 
-           <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
-           Disable Assets Optimization
-        </div>
-        :
-         <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
-           Purge All Assets
-        </div>
+          assetsOptimizationValue ?
+            <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
+              Disable Assets Optimization
+            </div>
+            :
+            <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
+              Purge All Assets
+            </div>
         }
-       
-       
+
+
       </p>
     </div>
   );
@@ -197,15 +195,14 @@ const Button1 = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
-      onClick={() => {}}
+      onClick={() => { }}
       className={`w-[48%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
         h-[34px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
-        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#000]" : "bg-[#000]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : "bg-[#000]"
+          } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         Apply
       </p>
@@ -213,7 +210,7 @@ const Button1 = ({ onClick }) => {
   );
 };
 
-const HeaderItem = ({ color, title, sub , assets= false }) => {
+const HeaderItem = ({ color, title, sub, assets = false }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -238,7 +235,7 @@ const HeaderItem = ({ color, title, sub , assets= false }) => {
         </h1>
       </div>
       <h1 className="text-[24px] mobile:mt-[2px] laptop:mt-[0px] font-bold tracking-wide ">
-        {sub} {assets && "KB"} 
+        {sub} {assets && "KB"}
       </h1>
     </div>
   );
@@ -349,8 +346,8 @@ const InputDropdown = ({ label, list }) => {
                           ? "#000"
                           : "#ebebeb"
                         : dark
-                        ? "#111317"
-                        : "#fff",
+                          ? "#111317"
+                          : "#fff",
                   }}
                   onClick={() => {
                     setCurr(i);
@@ -442,14 +439,14 @@ const TableHeader = ({ change }) => {
       className="w-[100%] flex h-[25px] border-b-[1px] border-[#ebebeb]"
     >
       <div className="w-[20%]  px-[10px] items-center flex h-[100%] ">
-       <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-        }}
-        className="w-[27%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
-      >
-        Name
-      </div>
+        <div
+          style={{
+            color: dark ? "#fff" : "#0a0a1876",
+          }}
+          className="w-[27%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
+        >
+          Name
+        </div>
       </div>
       {/* <div
         style={{
@@ -483,7 +480,7 @@ const TableHeader = ({ change }) => {
       >
         Optimize Size
       </div>
-     
+
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
@@ -532,7 +529,7 @@ const Status = ({ i }) => {
   );
 };
 
-const TableItem = ({ last,item  }) => {
+const TableItem = ({ last, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
@@ -545,14 +542,14 @@ const TableItem = ({ last,item  }) => {
       className="w-[100%] flex h-[70px] border-b-[1px] border-[#ebebeb]"
     >
       <div className="w-[20%]  px-[10px] items-center flex h-[100%] ">
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[11%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
-      >
-        {item?.name}
-      </div>
+        <div
+          style={{
+            color: dark ? "#fff" : "#000",
+          }}
+          className="w-[11%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+        >
+          {item?.name}
+        </div>
       </div>
       <div
         style={{
@@ -560,7 +557,7 @@ const TableItem = ({ last,item  }) => {
         }}
         className="w-[27%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
       >
-         {item?.file_type}
+        {item?.file_type}
       </div>
       <div
         style={{
@@ -586,7 +583,7 @@ const TableItem = ({ last,item  }) => {
       >
         {item?.is_optimized}
       </div>
-      
+
       <div className="w-[9%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <Status i={item?.is_optimized ? 1 : 2} />
       </div>
@@ -601,10 +598,10 @@ const TableItem = ({ last,item  }) => {
   );
 };
 
-const Table = ({ assetsDataArr, assetsData ,setSelected1 }) => {
+const Table = ({ assetsDataArr, assetsData, setSelected1 }) => {
   const arr = [1, 2, 3, 4];
 
-  
+
   const [selected, setSelected] = useState([]);
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -658,7 +655,7 @@ const Table = ({ assetsDataArr, assetsData ,setSelected1 }) => {
 
 const CacheStatus = () => {
   const [selected, setSelected] = useState([]);
-   const [loader, toggleLoader] = useState(false);
+  const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const [assetsData, updateAssetsData] = useState({});
   const dispatch = useDispatch();
@@ -667,41 +664,41 @@ const CacheStatus = () => {
 
 
   const fetchAssetsOptimizationData = async () => {
-    
-      try {
-        toggleLoader(true);
-        const res = await GetAxiosConfig(`api/dashboard/fetch-assets-optimization-data`);
-        toggleLoader(false);
 
-        const resData = res?.data;
-        console.log("resData",resData)
-        if(resData?.status === 200){
-          const assetsDataObj = resData?.assets;
-          updateAssetsData(assetsDataObj)
-        } else {
-          return toast.error("Please try again");
-        }
-      } catch (error) {
-        toggleLoader(false);
-        console.error("Error fetching user profile data:", error);
+    try {
+      toggleLoader(true);
+      const res = await GetAxiosConfig(`api/dashboard/fetch-assets-optimization-data`);
+      toggleLoader(false);
+
+      const resData = res?.data;
+      console.log("resData", resData)
+      if (resData?.status === 200) {
+        const assetsDataObj = resData?.assets;
+        updateAssetsData(assetsDataObj)
+      } else {
+        return toast.error("Please try again");
       }
+    } catch (error) {
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
   };
 
-  const handleOptimizeAssets = async() =>{
+  const handleOptimizeAssets = async () => {
     let endPoint = "";
     if (!assetsOptimizationValue) endPoint = "api/shopify/removed-unused-javascript-code";
     else endPoint = "api/shopify/restore-assets-optimization";
-   
+
     try {
       toggleLoader(true);
       const res = await GetAxiosConfig(endPoint);
       toggleLoader(false);
 
       const resData = res?.data;
-     
-      if(resData?.status === 200){
-      dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
-      fetchAssetsOptimizationData();
+
+      if (resData?.status === 200) {
+        dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
+        fetchAssetsOptimizationData();
         return toast.success(resData?.message);
       } else {
         return toast.error("Please try again");
@@ -718,105 +715,106 @@ const CacheStatus = () => {
   }, [])
 
   function kbToMb(kb) {
-    return kb / 1024;
+    return Math.ceil(kb / 1024 * 100) / 100;
   }
+
   return (
     loader ?
-    <AnimatedLoader /> :
+      <AnimatedLoader /> :
 
-    <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-       <TitleManager title="assets-optimization" conicalURL="assets-optimization" />
-      <div className="w-[100%] h-[50px] shrink-0"></div>
-      <div
-        style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
-        className="w-[100%] h-[100%] flex flex-col items-center overflow-y-auto scroll-bar-cool111  laptop:px-[80px] mobile:px-[10px] desktop:px-[80px]"
-      >
-        <div className="w-[100%] max-w-[1920px]  min-h-[100vh]">
-          <div className="flex pt-[40px] justify-between mb-[20px] h-[34px] items-center w-[100%]">
-            <h1
-              style={{
-                color: dark ? "#fff" : "#000",
-              }}
-              className="text-[24px] font-bold tracking-wide "
-            >
-              Assets Optimization Status
-            </h1>
-          </div>
-
-          <div className="w-[100%] mt-[40px]  laptop:flex justify-between ">
-            <div
-              style={{
-                backgroundColor: dark ? "#111317" : "#fff",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
-              }}
-              className="laptop:w-[49%] mobile:mb-[10px] laptop:mb-[0px] mobile:w-[100%]  px-[15px] py-[14px]  bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
-            >
+      <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+        <TitleManager title="assets-optimization" conicalURL="assets-optimization" />
+        <div className="w-[100%] h-[50px] shrink-0"></div>
+        <div
+          style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
+          className="w-[100%] h-[100%] flex flex-col items-center overflow-y-auto scroll-bar-cool111  laptop:px-[80px] mobile:px-[10px] desktop:px-[80px]"
+        >
+          <div className="w-[100%] max-w-[1920px]  min-h-[100vh]">
+            <div className="flex pt-[40px] justify-between mb-[20px] h-[34px] items-center w-[100%]">
               <h1
                 style={{
                   color: dark ? "#fff" : "#000",
                 }}
-                className="text-[20px] font-bold tracking-wide "
+                className="text-[24px] font-bold tracking-wide "
               >
-                Total Assets Status
+                Assets Optimization Status
               </h1>
-              <h1
-                style={{
-                  color: dark ? "#fff" : "#000",
-                }}
-                className="text-[30px] mt-[10px] font-bold tracking-wide "
-              >
-                {assetsData && assetsData?.totalAssets} 
-              </h1>
-              <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
-                <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
-                <div className="w-[27%] h-[100%] mr-[2px] rounded-[10px] bg-[#FFCB65]" />
-                <div className="w-[33%] h-[100%] rounded-[10px] bg-[#FF465C]" />
-              </div>
-              <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#38F8AC" />
-                <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#FFCB65" />
-                <HeaderItem
-                  title="Not Optimized Assets"
-                  sub={assetsData && assetsData?.notOptimizedAssets} 
-                  color="#FF465C"
-                />
-              </div>
             </div>
-            <div
-              style={{
-                backgroundColor: dark ? "#111317" : "#fff",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
-              }}
-              className="laptop:w-[49%] mobile:mb-[10px] laptop:mb-[0px] mobile:w-[100%]  px-[15px] py-[14px] h-[100%] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
-            >
-              <h1
+
+            <div className="w-[100%] mt-[40px]  laptop:flex justify-between ">
+              <div
                 style={{
-                  color: dark ? "#fff" : "#000",
+                  backgroundColor: dark ? "#111317" : "#fff",
+                  borderColor: dark ? "#1F2329" : "#ebebeb",
                 }}
-                className="text-[20px] font-bold tracking-wide "
+                className="laptop:w-[49%] mobile:mb-[10px] laptop:mb-[0px] mobile:w-[100%]  px-[15px] py-[14px]  bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
               >
-                Total Assets Size
-              </h1>
-              <h1
-                style={{
-                  color: dark ? "#fff" : "#000",
-                }}
-                className="text-[30px] mt-[10px] font-bold tracking-wide"
-              >
-                {kbToMb(assetsData && assetsData?.totalOptimizedSize)} MB
-              </h1>
-              <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
-                <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
-                <div className="w-[35%] h-[100%] mr-[2px] rounded-[10px] bg-[#766695]" />
-                <div className="w-[25%] h-[100%] mr-[2px] rounded-[10px] bg-[#9963FE]" />
-                {/* <div className="w-[18%] h-[100%] mr-[2px] rounded-[10px] bg-[#CCB0FF]" />
-                <div className="w-[10%] h-[100%] bg-[#E9DEFC]" /> */}
+                <h1
+                  style={{
+                    color: dark ? "#fff" : "#000",
+                  }}
+                  className="text-[20px] font-bold tracking-wide "
+                >
+                  Total Assets Status
+                </h1>
+                <h1
+                  style={{
+                    color: dark ? "#fff" : "#000",
+                  }}
+                  className="text-[30px] mt-[10px] font-bold tracking-wide "
+                >
+                  {assetsData && assetsData?.totalAssets}
+                </h1>
+                <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
+                  <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
+                  <div className="w-[27%] h-[100%] mr-[2px] rounded-[10px] bg-[#FFCB65]" />
+                  <div className="w-[33%] h-[100%] rounded-[10px] bg-[#FF465C]" />
+                </div>
+                <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
+                  <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#38F8AC" />
+                  <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#FFCB65" />
+                  <HeaderItem
+                    title="Not Optimized Assets"
+                    sub={assetsData && assetsData?.notOptimizedAssets}
+                    color="#FF465C"
+                  />
+                </div>
               </div>
-              <div className="w-[100%] mobile:grid-cols-2 grid laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="HTML Assets" sub={ kbToMb(assetsData && assetsData?.liquidAssetSize)} assets={true} color="#391F87" />
-                <HeaderItem title="JS Assets" sub={kbToMb(assetsData && assetsData?.jsAssetSize)} assets={true}  color="#766695" />
-                <HeaderItem title="CSS Assets" sub={kbToMb(assetsData && assetsData?.cssAssetSize)}  assets={true} color="#9963FE" />
-                {/* <HeaderItem
+              <div
+                style={{
+                  backgroundColor: dark ? "#111317" : "#fff",
+                  borderColor: dark ? "#1F2329" : "#ebebeb",
+                }}
+                className="laptop:w-[49%] mobile:mb-[10px] laptop:mb-[0px] mobile:w-[100%]  px-[15px] py-[14px] h-[100%] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
+              >
+                <h1
+                  style={{
+                    color: dark ? "#fff" : "#000",
+                  }}
+                  className="text-[20px] font-bold tracking-wide "
+                >
+                  Total Assets Size
+                </h1>
+                <h1
+                  style={{
+                    color: dark ? "#fff" : "#000",
+                  }}
+                  className="text-[30px] mt-[10px] font-bold tracking-wide"
+                >
+                  {kbToMb(assetsData && assetsData?.totalOptimizedSize)} MB
+                </h1>
+                <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
+                  <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
+                  <div className="w-[35%] h-[100%] mr-[2px] rounded-[10px] bg-[#766695]" />
+                  <div className="w-[25%] h-[100%] mr-[2px] rounded-[10px] bg-[#9963FE]" />
+                  {/* <div className="w-[18%] h-[100%] mr-[2px] rounded-[10px] bg-[#CCB0FF]" />
+                <div className="w-[10%] h-[100%] bg-[#E9DEFC]" /> */}
+                </div>
+                <div className="w-[100%] mobile:grid-cols-2 grid laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
+                  <HeaderItem title="HTML Assets" sub={kbToMb(assetsData && assetsData?.liquidAssetSize)} assets={true} color="#391F87" />
+                  <HeaderItem title="JS Assets" sub={kbToMb(assetsData && assetsData?.jsAssetSize)} assets={true} color="#766695" />
+                  <HeaderItem title="CSS Assets" sub={kbToMb(assetsData && assetsData?.cssAssetSize)} assets={true} color="#9963FE" />
+                  {/* <HeaderItem
                   title="Fonts Cache"
                   sub="766.48kB"
                   color="#CCB0FF"
@@ -826,42 +824,42 @@ const CacheStatus = () => {
                   sub="262.46MB"
                   color="#E9DEFC"
                 /> */}
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            style={{
-              backgroundColor: dark ? "#111317" : "#fff",
-              borderColor: dark ? "#1F2329" : "#ebebeb",
-            }}
-            className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0]  mb-[30px]  pt-[14px]  bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
-          >
-            <div className=" px-[15px] flex justify-between items-center">
-              <div className="">
-                <h1
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[20px] font-bold tracking-wide "
-                >
-                  Total Optimize Assets
-                </h1>
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
-                >
-                  {assetsData?.files?.length}
-                </p>
-              </div>
-              <div className="flex items-center">
-                {selected.length > 0 && (
-                  <p className="text-[12px] mr-[10px] font-bold tracking-wide  text-[#0a0a187a]">
-                    1,357 Results
+            <div
+              style={{
+                backgroundColor: dark ? "#111317" : "#fff",
+                borderColor: dark ? "#1F2329" : "#ebebeb",
+              }}
+              className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0]  mb-[30px]  pt-[14px]  bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
+            >
+              <div className=" px-[15px] flex justify-between items-center">
+                <div className="">
+                  <h1
+                    style={{
+                      color: dark ? "#fff" : "#000",
+                    }}
+                    className="text-[20px] font-bold tracking-wide "
+                  >
+                    Total Optimize Assets
+                  </h1>
+                  <p
+                    style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}
+                    className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
+                  >
+                    {assetsData?.files?.length}
                   </p>
-                )}
-                {/* <div
+                </div>
+                <div className="flex items-center">
+                  {selected.length > 0 && (
+                    <p className="text-[12px] mr-[10px] font-bold tracking-wide  text-[#0a0a187a]">
+                      1,357 Results
+                    </p>
+                  )}
+                  {/* <div
                   style={{
                     backgroundColor:
                       selected.length > 0 ? "#F87238" : "#FF465C",
@@ -875,17 +873,17 @@ const CacheStatus = () => {
                   />
                   {selected.length > 0 ? "Purge Selected" : "Purge All Cache"}
                 </div> */}
-                <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
+                  <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
+                </div>
               </div>
-            </div>
-            {/* <Filter /> */}
-            {(assetsData?.assetFileArr && assetsData?.assetFileArr?.length) ? <Table assetsData={assetsData?.assetFileArr} setSelected1={setSelected}  /> : ""}
+              {/* <Filter /> */}
+              {(assetsData?.assetFileArr && assetsData?.assetFileArr?.length) ? <Table assetsData={assetsData?.assetFileArr} setSelected1={setSelected} /> : ""}
 
-            
+
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
