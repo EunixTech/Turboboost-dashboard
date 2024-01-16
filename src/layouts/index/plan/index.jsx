@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import useWidth from "../../../hooks/useWidth";
 import { billingApi } from "../../../utils/billingApi";
 import { planMockData } from "../../../utils/constant";
-
+import AnimatedLoader from "../../../components/loader/AnimatedLoader";
+import { GetAxiosConfig } from "../../../utils/axiosConfig.js";
 import getFetchConfig from '../../../utils/getFetchConfig';
 import standardFetchHandlers from '../../../utils/standardFetchHandlers';
 import handleFetchErrors from '../../../utils/handleFetchErrors';
@@ -28,6 +29,7 @@ const CurrentPlan = () => {
 const Plan = ({ cancel }) => {
 
   const [selected, setSelected] = useState(0);
+  const [loader, toggleLoader] = useState(false);
   const [plan, setPlan] = useState(2);
   const [currentPlan, updateCurrentPlan] = useState("Starter");
   const [itemData, updateItem] = useState({});
@@ -60,12 +62,12 @@ const Plan = ({ cancel }) => {
 
     const fetchConfig = getFetchConfig(),
         appURL = appURLs();
-
+        toggleLoader(true)
     fetch(`${appURL}/user/current-plan-detail`, fetchConfig)
         .then(handleFetchErrors)
         .then((res) => {
            
-       
+          toggleLoader(false)
             if (Number(res?.status) === 200) {
               const planName = res?.data?.plan;
               const planMap = {
@@ -83,6 +85,7 @@ const Plan = ({ cancel }) => {
         .catch(standardFetchHandlers.error)
         .finally(() => {
             setTimeout(() => {
+              toggleLoader(false)
                 // return toast.error("Something went wrong1");
             }, 1000);
         });
@@ -92,6 +95,7 @@ useEffect(() => {
 }, [])
 
   return (
+    loader ? <AnimatedLoader /> :
     <div
       style={{ zIndex: 100 }}
       className="w-[100%] h-[100vh] fixed  bg-[#00000074] flex items-center justify-center laptop:px-0 mobile:px-[10px] py-[50px]"

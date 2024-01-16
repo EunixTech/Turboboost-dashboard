@@ -12,79 +12,78 @@ import standardFetchHandlers from '../utils/standardFetchHandlers';
 import handleFetchErrors from '../utils/handleFetchErrors';
 import appURLs from '../appURL';
 import TitleManager from "../components/TitleManager";
-import toast from "react-hot-toast";
-import { GetAxiosConfig } from "../utils/axiosConfig.js";
-import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
+import AnimatedLoader from "../components/loader/AnimatedLoader";
 
 const Billing = () => {
-	const [currentPlan, updateCurrentPlan] = useState("Starter");
-	const router = useNavigate();
-	const [selected, setSelected] = useState(0);
-	const [loader, toggleLoader] = useState(false);
-	const dark = useSelector((state) => state.home.dark);
+  const [currentPlan, updateCurrentPlan] = useState("Starter");
+  const router = useNavigate();
+  const [selected, setSelected] = useState(0);
+  const dark = useSelector((state) => state.home.dark);
+  const [loader, toggleLoader] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const storedPlanName = localStorage.getItem("planName");
+    const storedStoreName = localStorage.getItem("storeName");
 
-	const dispatch = useDispatch();
-	useEffect(() => {
-		const storedPlanName = localStorage.getItem("planName");
-		const storedStoreName = localStorage.getItem("storeName");
+    if (storedPlanName) {
+    //   setCurrentPlan(storedPlanName);
+      dispatch(setPlan(storedPlanName)); // Use the correct action: setPlan
+    }
 
-		if (storedPlanName) {
-			//   setCurrentPlan(storedPlanName);
-			dispatch(setPlan(storedPlanName)); // Use the correct action: setPlan
-		}
-
-		if (storedStoreName) {
-			// Use the appropriate action if needed
-			// dispatch(setStoreName(storedStoreName)); // This action is not defined in your billingSlice.js
-		}
-	}, [dispatch]);
-
-
-	const handleBilling = async (item) => {
-		try {
-			let response = await billingApi(item, selected);
-			console.log(response.data);
-			if (response?.data?.confirmationUrl) {
-				console.log(response?.data?.confirmationUrl);
-				window.location.replace(response?.data?.confirmationUrl);
-			}
-		} catch (e) {
-			console.log(e);
-		}
-	};
+    if (storedStoreName) {
+      // Use the appropriate action if needed
+      // dispatch(setStoreName(storedStoreName)); // This action is not defined in your billingSlice.js
+    }
+  }, [dispatch]);
 
 
+  const handleBilling = async (item) => {
+    try {
+      let response = await billingApi(item, selected);
+      console.log(response.data);
+      if (response?.data?.confirmationUrl) {
+        console.log(response?.data?.confirmationUrl);
+        window.location.replace(response?.data?.confirmationUrl);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+ 
 
+  const fetchingBillingDetails = async () => {
 
-
-
-	const fetchingBillingDetails = async () => {
-		try {
-			toggleLoader(true);
-			const res = await GetAxiosConfig(`user/current-plan-detail`);
-			toggleLoader(false);
-
-			const resJOSN = res?.data;
-			if (resJOSN?.status === 200) {
-			} else {
-				return toast.error("Please try again");
-			}
-		}
-		catch (error) {
-			toggleLoader(false);
-			console.error("Error fetching user profile data:", error);
-		}
-
-	}
-	useEffect(() => {
-		fetchingBillingDetails()
-	}, [])
-
+    const fetchConfig = getFetchConfig(),
+        appURL = appURLs();
+		toggleLoader(true)
+    fetch(`${appURL}/user/current-plan-detail`, fetchConfig)
+        .then(handleFetchErrors)
+        .then((res) => {
+			toggleLoader(false)
+			console.log(res)
+                  
+            if (Number(res?.status) === 200) {
+              const planName = res?.data?.plan;
+              updateCurrentPlan(planName)
+            }
+            
+        })
+        .catch(standardFetchHandlers.error)
+        .finally(() => {
+            setTimeout(() => {
+				toggleLoader(false)
+                // return toast.error("Something went wrong1");
+            }, 1000);
+        });
+}
+useEffect(() => {
+  fetchingBillingDetails()
+}, [])
+  
 	return (
-		loader ? <AnimatedLoader /> :
 		<div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-			<TitleManager title="Billing" conicalURL="billing" />
-
+			   <TitleManager title="Billing" conicalURL="billing" />
+ 
 			<div className="w-[100%] h-[50px] shrink-0"></div>
 			<div
 				style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
@@ -136,7 +135,7 @@ const Billing = () => {
 							</div>
 						</div>
 					</div>
-
+					
 					<div className="w-[100%] mt-[20px] grid laptop:grid-cols-4 mobile:gap-y-[10px] laptop:gap-[20px]">
 						{planMockData?.map((item, index) => {
 							return (
@@ -205,7 +204,7 @@ const Billing = () => {
 												}}
 												className="w-[100%] h-[38px] rounded-[3px] border-[1px] bg-[#38f8ab27] hover:text-[#fff]  border-[#38f8ab27] text-[14px] font-bold text-[#fff] tracking-wide flex items-center justify-center"
 											>
-												{item?.name === currentPlan && "Current Plan"}
+												{item?.name === currentPlan && "Current Plan" }
 											</div>
 										) : (
 											<div
@@ -215,8 +214,9 @@ const Billing = () => {
 												style={{
 													borderColor: dark ? "#1F2329" : "#ebebeb",
 												}}
-												className={`w-[100%] h-[38px] text-[${dark ? "#fff" : "#000"
-													}] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
+												className={`w-[100%] h-[38px] text-[${
+													dark ? "#fff" : "#000"
+												}] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
 											>
 												{planChangeText(item, currentPlan)}
 											</div>
