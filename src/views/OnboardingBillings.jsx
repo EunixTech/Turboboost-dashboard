@@ -17,6 +17,7 @@ import {
 } from "../slice/redirectUserSlice";
 import { setToggle } from "../slice/statusToggleSlice";
 import TitleManager from "../components/TitleManager";
+import AnimatedLoader from "../components/loader/AnimatedLoader";
 
 const OnboardingBillings = () => {
   const dispatch = useDispatch(),
@@ -25,6 +26,7 @@ const OnboardingBillings = () => {
   const [currentPlan, setCurrentPlan] = useState("");
   const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
+  const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
   const handleBilling = async (item) => {
@@ -46,12 +48,14 @@ const OnboardingBillings = () => {
 
   const fetchingUserDataByToken = async () => {
     try {
+
+      toggleLoader(true)
       axios.defaults.withCredentials = true;
 
       const resJson = await axios.get(
         `${appURL}/user/redirect/login/${userToken}`
       );
-
+      toggleLoader(false)
       const res = resJson?.data?.data;
       const redirectURL = res?.redirectURI;
       const token = res?.token;
@@ -73,6 +77,7 @@ const OnboardingBillings = () => {
         window.location.href = "/dashboard";
       }
     } catch (error) {
+      toggleLoader(false)
       console.log(error);
     }
   };
@@ -82,6 +87,8 @@ const OnboardingBillings = () => {
   }, []);
 
   return (
+    loader ?
+    <AnimatedLoader /> :
     <div className="overflow-hidden flex flex-col items-center justify-center">
       <TitleManager title="Onboarding" conicalURL="onboarding" />
       <div className="w-full max-w-screen-xl"></div>
@@ -150,6 +157,7 @@ const OnboardingBillings = () => {
             />
           </div>
           <p className="annualText">2 months free!</p>
+          
           <div className="w-[100%] mt-[20px] gap-[20px] grid laptop:grid-cols-3">
             {planMockData.slice(0, 3).map((item, index) => {
               return (

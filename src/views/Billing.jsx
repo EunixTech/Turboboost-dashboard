@@ -81,6 +81,7 @@ useEffect(() => {
 }, [])
   
 	return (
+		loader ? <AnimatedLoader /> :
 		<div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
 			   <TitleManager title="Billing" conicalURL="billing" />
  
