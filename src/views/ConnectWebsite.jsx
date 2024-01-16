@@ -595,6 +595,7 @@ const ConnectWebsite = () => {
           updateConnectedWebsiteData(dataArr)
           toggleLoader(false)
         } else {
+          toggleLoader(false)
           return toast.error("Please try again")
         }
       
@@ -652,7 +653,7 @@ const ConnectWebsite = () => {
         />
       )}
     {
-      loader ? AnimatedLoader :
+      loader ? <AnimatedLoader /> :
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Connect Website" conicalURL="connect-website" />
  
