@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSelector } from "react-redux";
 
-export default function HoverGreenButton({ btnText = " " }) {
+export default function HoverGreenButton({ btnText = " " , handlePurgeAll }) {
     const dark = useSelector((state) => state.home.dark);
 
     return (
-        <div style={{ borderColor: dark ? "#1F2329" : "#ebebeb" }}
+        <div onClick={handlePurgeAll} style={{ borderColor: dark ? "#1F2329" : "#ebebeb" }}
             className="w-[100%]  mt-[10px] h-[50px] px-[15px] flex items-center justify-center  border-t-[1px] left-0"
         >
 

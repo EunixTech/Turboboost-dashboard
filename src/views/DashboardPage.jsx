@@ -653,6 +653,36 @@ const Dashboard = () => {
     }
   }
 
+  const handlePurgeAll = async() =>{
+    toggleLoader(true);
+    let endPoint = "";
+    if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
+    else endPoint = "api/shopify/restore-image-optimization";
+   
+    try {
+      if(!imageOptimizationValue){
+
+        const res = await GetAxiosConfig(endPoint);
+        toggleLoader(false);
+        const resData = res?.data;
+        if(resData?.status === 200){
+        dispatch(setToggle({ key: "imageOptimization", value: true }));
+        dispatch(setToggle({ key: "lazyLoading", value: true }));
+        dispatch(setToggle({ key: "criticalCSS", value: true }));
+        fetchImageOptimizationData();
+          return toast.success(resData?.message);
+        } else {
+          return toast.error("Please try again");
+        }
+      }
+     
+   
+    } catch (error) {
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  }
+
   return loadingAPI ? (
     <AnimatedLoader />
   ) : (
@@ -1239,7 +1269,7 @@ const Dashboard = () => {
                                     <QuickActionCard key={index} text={action} />
                                 ))} */}
 
-              <HoverGreenButton btnText="Purge all cache " />
+              <HoverGreenButton handlePurgeAll={handlePurgeAll} btnText="Purge all cache " />
             </div>
           </div>
           <div className="w-[100%] h-[50px]"></div>
