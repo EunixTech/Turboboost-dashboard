@@ -697,7 +697,7 @@ const CacheStatus = () => {
   const handleOptimizeAssets = async() =>{
     let endPoint = "";
     if (!assetsOptimizationValue) endPoint = "api/shopify/removed-unused-javascript-code";
-    else endPoint = "api/shopify/restore-page-optimization";
+    else endPoint = "api/shopify/restore-assets-optimization";
    
     try {
       toggleLoader(true);
