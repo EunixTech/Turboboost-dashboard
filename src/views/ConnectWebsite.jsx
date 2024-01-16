@@ -8,7 +8,7 @@ import axios from "axios"
 import appURLs from "../appURL";
 import { toast } from "react-toastify";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
-
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
 const Button = () => {
 
   const dark = useSelector((state) => state.home.dark);
@@ -586,7 +586,7 @@ const ConnectWebsite = () => {
  
       try {
         toggleLoader(true)
-        const res = await axios.get(`${appURL}/api/dashboard/fetch-connected-website-data`);
+        const res = await GetAxiosConfig(`api/dashboard/fetch-connected-website-data`);
         toggleLoader(false)
         const resJSON = res?.data;
 
@@ -594,7 +594,7 @@ const ConnectWebsite = () => {
           const dataArr = resJSON?.conectedWebsite;
           updateConnectedWebsiteData(dataArr)
         } else {
-          toast.error("Please try again")
+          return toast.error("Please try again")
         }
       
       } catch (error) {
