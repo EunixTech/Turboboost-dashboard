@@ -10,17 +10,19 @@ export default function GreetingCard() {
     const updateGreeting = useCallback(() => {
         const currentTime = time.getHours();
         let newGreeting = '';
-
+    
         if (currentTime >= 0 && currentTime < 12) {
             newGreeting = 'Good morning';
         } else if (currentTime >= 12 && currentTime < 18) {
             newGreeting = 'Good afternoon';
         } else {
+            // Fix the condition for the evening and night
             newGreeting = 'Good evening';
         }
-
+    
         setGreeting(newGreeting);
-    }, [time]);
+    }, [time, setGreeting]);
+    
 
     useEffect(() => {
         updateGreeting();
