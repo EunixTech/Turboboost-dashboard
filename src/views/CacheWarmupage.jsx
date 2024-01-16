@@ -7,6 +7,9 @@ import TitleManager from "../components/TitleManager";
 import axios from "axios";
 import appURLs from "../appURL";
 import Tooltip from "../components/Tooltip"
+import toast from "react-hot-toast";
+import AnimatedLoader from "../components/loader/AnimatedLoader";
+
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -316,21 +319,29 @@ const CacheWarmup = ({ setShow }) => {
   const [enabled, setEnabled] = useState(false);
   const [pageOptimizationData, updatePageOptimizationData] = useState({});
   const dark = useSelector((state) => state.home.dark);
+   const [loader, toggleLoader] = useState(false);
   const dispatch = useDispatch();
   const appURL = appURLs();
 
   const fetchPageOptimizationData = async () => {
 
     try {
+      toggleLoader(true);
       const res = await axios.get(`${appURL}/api/dashboard/fetch-page-optimization-data`);
+      toggleLoader(false);
 
-      const pageDataObj = res?.data?.pageData;
-
-      updatePageOptimizationData(pageDataObj)
-
+      const resData = res?.data;
+      if(resData?.status === 200){
+        const pageDataObj = resData?.pageData;
+        updatePageOptimizationData(pageDataObj)
+      } else {
+        return toast.error("Please try again");
+      }
     } catch (error) {
+      toggleLoader(false);
       console.error("Error fetching user profile data:", error);
     }
+
   };
 
   useEffect(() => {
@@ -338,6 +349,11 @@ const CacheWarmup = ({ setShow }) => {
   }, [])
   return (
     <>
+    {
+      loader ?
+      <AnimatedLoader /> :
+  
+    
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
         <TitleManager title="pages-optimization" conicalURL="pages-optimization" />
 
@@ -688,6 +704,7 @@ const CacheWarmup = ({ setShow }) => {
           </div>
         </div>
       </div>
+}
     </>
   );
 };

@@ -44,6 +44,8 @@ import { useSelector } from "react-redux";
 import TitleManager from "../components/TitleManager.jsx";
 import axios from "axios";
 import appURLs from "../appURL";
+import toast from "react-hot-toast";
+import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -659,20 +661,27 @@ const Table = ({ setSelected1 }) => {
 
 const CacheStatus = () => {
   const [selected, setSelected] = useState([]);
+   const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
-const [assetsData, updateAssetsData] = useState({});
+  const [assetsData, updateAssetsData] = useState({});
   const appURL = appURLs();
 
   const fetchPageOptimizationData = async () => {
-    console.log("asjdhhjasgdhjgasjhdgajhsg")
-      try {
-        const res = await axios.get(`${appURL}/api/dashboard/fetch-assets-optimization-data`);
-
-        const assetsDataObj = res?.data?.assets;
-
-        updateAssetsData(assetsDataObj)
     
+      try {
+        toggleLoader(true);
+        const res = await axios.get(`${appURL}/api/dashboard/fetch-assets-optimization-data`);
+        toggleLoader(false);
+
+        const resData = res?.data;
+        if(resData?.status === 200){
+          const assetsDataObj = resData?.assets;
+          updateAssetsData(assetsDataObj)
+        } else {
+          return toast.error("Please try again");
+        }
       } catch (error) {
+        toggleLoader(false);
         console.error("Error fetching user profile data:", error);
       }
   };
@@ -680,7 +689,11 @@ const [assetsData, updateAssetsData] = useState({});
   useEffect(() => {
     fetchPageOptimizationData();
   }, [])
+
   return (
+    loader ?
+    <AnimatedLoader /> :
+
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
        <TitleManager title="assets-optimization" conicalURL="assets-optimization" />
       <div className="w-[100%] h-[50px] shrink-0"></div>

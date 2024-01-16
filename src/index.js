@@ -16,8 +16,8 @@ import ConnectWebsite from "./views/ConnectWebsite.jsx";
 import CacheWarmup from "./routes/cache-warmup";
 // import CacheWarmup from "./views/CacheWarmupage.jsx";
 
-import CacheStatus from "./routes/cache-status";
-// import CacheStatus from "./views/CacheStatus.jsx";
+// import CacheStatus from "./routes/cache-status";
+import CacheStatus from "./views/CacheStatus.jsx";
 
 import Home from "./views/home.jsx";
 
