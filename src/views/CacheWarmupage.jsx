@@ -9,6 +9,7 @@ import appURLs from "../appURL";
 import Tooltip from "../components/Tooltip"
 import toast from "react-hot-toast";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
 
 
 const Button = () => {
@@ -222,7 +223,7 @@ const CacheWarmup = ({ setShow }) => {
 
     try {
       toggleLoader(true);
-      const res = await axios.get(`${appURL}/api/dashboard/fetch-page-optimization-data`);
+      const res = await GetAxiosConfig(`api/dashboard/fetch-page-optimization-data`);
       toggleLoader(false);
 
       const resData = res?.data;
@@ -248,7 +249,6 @@ const CacheWarmup = ({ setShow }) => {
       loader ?
       <AnimatedLoader /> :
   
-    
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
         <TitleManager title="pages-optimization" conicalURL="pages-optimization" />
 
@@ -477,7 +477,7 @@ const CacheWarmup = ({ setShow }) => {
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
                     </div>  */}
-                    {pageOptimizationData && pageOptimizationData?.pages?.length === 0 ? "cot show text" : "<Table1 tableData = {pageOptimizationData?.pages} />"}
+                    {pageOptimizationData && pageOptimizationData?.pages?.length === 0 ? "Nothing To Show" : "<Table1 tableData = {pageOptimizationData?.pages} />"}
 
                   </div>
                 </div>

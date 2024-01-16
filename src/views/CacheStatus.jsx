@@ -665,7 +665,6 @@ const CacheStatus = () => {
    const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const [assetsData, updateAssetsData] = useState({});
-  const appURL = appURLs();
 
   const fetchPageOptimizationData = async () => {
     
@@ -674,9 +673,8 @@ const CacheStatus = () => {
         const res = await GetAxiosConfig(`api/dashboard/fetch-assets-optimization-data`);
         toggleLoader(false);
 
-        console.log("resresres",res)
-
         const resData = res?.data;
+        console.log("resData",resData)
         if(resData?.status === 200){
           const assetsDataObj = resData?.assets;
           updateAssetsData(assetsDataObj)
