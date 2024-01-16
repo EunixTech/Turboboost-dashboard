@@ -237,30 +237,6 @@ const CacheWarmup = ({ setShow }) => {
   const appURL = appURLs();
   const pageOptimizationValue = useSelector((state) => state.toggles?.pageOptimization);
 
-  const handleOptimizePage = async() =>{
-    let endPoint = "";
-    if (!pageOptimizationValue) endPoint = "api/shopify/removed-page-unused-code";
-    else endPoint = "api/shopify/restore-page-optimization";
-   
-    try {
-      toggleLoader(true);
-      const res = await GetAxiosConfig(endPoint);
-      toggleLoader(false);
-      console.log()
-
-      const resData = res?.data;
-      if(resData?.status === 200){
-      dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
-        return toast.error(resData?.message);
-      } else {
-        return toast.error("Please try again");
-      }
-    } catch (error) {
-      toggleLoader(false);
-      console.error("Error fetching user profile data:", error);
-    }
-  }
-
   const fetchPageOptimizationData = async () => {
 
     try {
@@ -281,6 +257,31 @@ const CacheWarmup = ({ setShow }) => {
     }
 
   };
+
+  const handleOptimizePage = async() =>{
+    let endPoint = "";
+    if (!pageOptimizationValue) endPoint = "api/shopify/removed-page-unused-code";
+    else endPoint = "api/shopify/restore-page-optimization";
+   
+    try {
+      toggleLoader(true);
+      const res = await GetAxiosConfig(endPoint);
+      toggleLoader(false);
+      console.log()
+
+      const resData = res?.data;
+      if(resData?.status === 200){
+      dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
+      fetchPageOptimizationData();
+        return toast.error(resData?.message);
+      } else {
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  }
 
   useEffect(() => {
     fetchPageOptimizationData();
