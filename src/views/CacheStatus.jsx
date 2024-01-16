@@ -883,7 +883,7 @@ const CacheStatus = () => {
               </div>
             </div>
             {/* <Filter /> */}
-            {(assetsData) ? <Table assetsData={assetsData?.files} setSelected1={setSelected}  /> : ""}
+            {(assetsData?.assetFileArr && assetsData?.assetFileArr?.length) ? <Table assetsData={assetsData?.assetFileArr} setSelected1={setSelected}  /> : ""}
 
             
           </div>
