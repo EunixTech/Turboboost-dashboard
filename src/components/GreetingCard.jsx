@@ -34,6 +34,6 @@ export default function GreetingCard() {
     }, [updateGreeting]);
 
     return (
-           <h1 className={`${dark ? "headingDarkMode" : "heading"} text-[18px] f2 font-medium`} > {greeting}, Kyle! </h1>
+           <h1 className={`${dark ? "headingDarkMode" : "heading"} text-[18px] f2 font-medium`} > {greeting}, {localStorage.getItem('shopifyDashboardUserName') || ""}! </h1>
     )
 }
