@@ -21,8 +21,8 @@ import CacheStatus from "./views/CacheStatus.jsx";
 
 import Home from "./views/home.jsx";
 
-// import Logs from "./views/logs";
-import Logs from "./routes/logs.jsx";
+import Logs from "./views/logs";
+// import Logs from "./routes/logs.jsx";
 import { useCookies } from "react-cookie";
 
 // import Integrations from "./routes/integrations";

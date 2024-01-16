@@ -11,6 +11,7 @@ import {
 } from "../services/integrationDataSlice";
 import { selectFeaturedApps } from "../services/featureAppsDataSlice";
 import TitleManager from "../components/TitleManager";
+import AnimatedLoader from "../components/loader/AnimatedLoader";
 
 const Integrations = ({ setShow }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -19,7 +20,8 @@ const Integrations = ({ setShow }) => {
   const featuredApps = useSelector(selectFeaturedApps);
   const selectedTab = useSelector(selectSelectedTab);
   const dispatch = useDispatch();
-  console.log('integrations---------->>>>',integrations);
+  const [loader, toggleLoader] = useState(true)
+  
   useEffect(() => {
     // Fetch integration data when the component mounts
     dispatch(fetchIntegrationData());
@@ -31,6 +33,12 @@ const Integrations = ({ setShow }) => {
 
   const wrapperClassName = dark ? "divWrapperDarkMode" : "divWrapper";
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      toggleLoader(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Function to render IntegrationItem components based on selected tab
   const renderIntegrationItems = () => {
@@ -57,6 +65,7 @@ const Integrations = ({ setShow }) => {
   };
 
   return (
+    loader ? <AnimatedLoader />:
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
          <TitleManager title="Integrations" conicalURL="integrations" />
  

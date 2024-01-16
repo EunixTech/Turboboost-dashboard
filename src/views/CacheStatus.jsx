@@ -213,7 +213,7 @@ const Button1 = ({ onClick }) => {
   );
 };
 
-const HeaderItem = ({ color, title, sub }) => {
+const HeaderItem = ({ color, title, sub , assets= false }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -238,7 +238,7 @@ const HeaderItem = ({ color, title, sub }) => {
         </h1>
       </div>
       <h1 className="text-[24px] mobile:mt-[2px] laptop:mt-[0px] font-bold tracking-wide ">
-        {sub} KB
+        {sub} {assets && "KB"} 
       </h1>
     </div>
   );
@@ -765,7 +765,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide "
               >
-                {kbToMb(assetsData && assetsData?.totalAssets)} 
+                {assetsData && assetsData?.totalAssets} 
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
@@ -773,11 +773,11 @@ const CacheStatus = () => {
                 <div className="w-[33%] h-[100%] rounded-[10px] bg-[#FF465C]" />
               </div>
               <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="Total Assets" sub={kbToMb(assetsData && assetsData?.totalAssets)} color="#38F8AC" />
-                <HeaderItem title="Optimized Assets" sub={kbToMb(assetsData && assetsData?.totalOptimizeAssets)} color="#FFCB65" />
+                <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#38F8AC" />
+                <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#FFCB65" />
                 <HeaderItem
                   title="Not Optimized Assets"
-                  sub={kbToMb(assetsData && assetsData?.notOptimizedAssets)} 
+                  sub={assetsData && assetsData?.notOptimizedAssets} 
                   color="#FF465C"
                 />
               </div>
@@ -803,7 +803,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide"
               >
-                {assetsData && assetsData?.totalOptimizedSize}
+                {kbToMb(assetsData && assetsData?.totalOptimizedSize)} MB
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
@@ -813,9 +813,9 @@ const CacheStatus = () => {
                 <div className="w-[10%] h-[100%] bg-[#E9DEFC]" /> */}
               </div>
               <div className="w-[100%] mobile:grid-cols-2 grid laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                <HeaderItem title="HTML Assets" sub={assetsData && assetsData?.liquidAssetSize} color="#391F87" />
-                <HeaderItem title="JS Assets" sub={assetsData && assetsData?.jsAssetSize} color="#766695" />
-                <HeaderItem title="CSS Assets" sub={assetsData && assetsData?.cssAssetSize} color="#9963FE" />
+                <HeaderItem title="HTML Assets" sub={ kbToMb(assetsData && assetsData?.liquidAssetSize)} assets={true} color="#391F87" />
+                <HeaderItem title="JS Assets" sub={kbToMb(assetsData && assetsData?.jsAssetSize)} assets={true}  color="#766695" />
+                <HeaderItem title="CSS Assets" sub={kbToMb(assetsData && assetsData?.cssAssetSize)}  assets={true} color="#9963FE" />
                 {/* <HeaderItem
                   title="Fonts Cache"
                   sub="766.48kB"
