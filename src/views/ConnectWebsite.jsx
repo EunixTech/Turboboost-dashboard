@@ -279,7 +279,7 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
       </div>
 
       <div className="w-[15%] font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
-        <Status i={status} />
+        <Status i={1} />
       </div>
       <div className="w-[13%] flex  items-center justify-center font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
         <img
