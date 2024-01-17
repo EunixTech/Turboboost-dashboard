@@ -387,7 +387,7 @@ const TableItem2 = ({ last, change, selected }) => {
   );
 };
 
-const Table1 = ({ setSelected1 }) => {
+const Table1 = ({ pageViewDataArr }) => {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const [selected, setSelected] = useState([]);
@@ -401,8 +401,8 @@ const Table1 = ({ setSelected1 }) => {
     >
       <div className="mobile:w-[1200px] laptop:w-[100%]">
         <TableHeader1 />
-        {arr.map((item, i) => {
-          return <TableItem1 key={i} last={i === arr.length - 1} />;
+        {pageViewDataArr.map((item, i) => {
+          return <TableItem1 key={i} i={i} item ={item} last={i === arr.length - 1} />;
         })}
       </div>
     </div>
@@ -425,7 +425,7 @@ const TableHeader1 = ({ change }) => {
         }}
         className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
-        Date/Time
+        S.No
       </div>
       <div
         style={{
@@ -433,7 +433,7 @@ const TableHeader1 = ({ change }) => {
         }}
         className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
-        Pageviews
+        Store
       </div>
       {/* <div
         style={{
@@ -449,45 +449,14 @@ const TableHeader1 = ({ change }) => {
         }}
         className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
-        Images (MiB)
+        View At
       </div>
-      <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-        CSS (MiB)
-      </div>
-      <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-        JS (MiB)
-      </div>
-      <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-        Fonts (MiB)
-      </div>
-      <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-        Others (MiB)
-      </div>
+      
     </div>
   );
 };
 
-const TableItem1 = ({ last, change, selected }) => {
+const TableItem1 = ({ last, i, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
@@ -506,7 +475,7 @@ const TableItem1 = ({ last, change, selected }) => {
         }}
         className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        2023-05-25
+        {i}
       </div>
       <div
         style={{
@@ -514,7 +483,7 @@ const TableItem1 = ({ last, change, selected }) => {
         }}
         className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        142
+        {item?.location}
       </div>
       <div
         style={{
@@ -522,48 +491,9 @@ const TableItem1 = ({ last, change, selected }) => {
         }}
         className="w-[12.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        107.97 MiB
+       {new Date(item?.viewed_at).toLocaleString()}
       </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        107.97 MiB
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        0 MiB
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px]   leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        0 MiB
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        0 MiB
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        0 MiB
-      </div>
+    
     </div>
   );
 };
@@ -1023,7 +953,7 @@ const CacheStatus = () => {
                         </h1>
                       </div>
                     </div> */}
-                    <InputDate />
+                    {/* <InputDate /> */}
                   </div>
                   {/* <img
                     src={
@@ -1033,7 +963,7 @@ const CacheStatus = () => {
                     }
                     alt=""
                   /> */}
-                   {(pageViewData && pageViewData?.length) ? <Chart2 pageViewArr={pageViewData?.length ? pageViewData?.length: []} /> : ""}
+                    <Chart2 />
 
 
                 </div>
@@ -1271,7 +1201,8 @@ const CacheStatus = () => {
               </div> */}
                 <Button />
               </div>
-              <Table1 />
+              
+              <Table1 pageViewDataArr={pageViewData} />
             </div>
           )}
           {current === 1 && (
