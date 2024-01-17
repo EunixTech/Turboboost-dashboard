@@ -652,6 +652,8 @@ const Dashboard = () => {
 
   const handlePurgeAll = async() =>{
     toggleLoader(true);
+    dispatch(setToggle({ key: "lazyLoading", value: true }));
+    dispatch(setToggle({ key: "criticalCSS", value: true }));
     let endPoint = "";
     if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
     else endPoint = "api/shopify/restore-image-optimization";
