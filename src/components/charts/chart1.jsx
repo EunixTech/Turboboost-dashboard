@@ -5,17 +5,17 @@ import { Area } from "@ant-design/plots";
 import { useSelector } from "react-redux";
 
 const DemoLine = ({pageViewArr=[]}) => {
-  // const [data, setData] = useState([
-  //   { name: "Page Views", year: 0, gdp: 100 },
-  //   { name: "Page Views", year: 1, gdp: 200 },
+  const [newData, setData] = useState([
+    { name: "Page Views", year: 0, gdp: 100 },
+    { name: "Page Views", year: 1, gdp: 200 },
     
-  // ]);
+  ]);
 
-  const newData = pageViewArr.map((item, index) => ({
-    name: "Page Views",
-    year: index,
-    gdp: item,
-  }));
+  // const newData = pageViewArr.map((item, index) => ({
+  //   name: "Page Views",
+  //   year: index,
+  //   gdp: item,
+  // }));
 
   const dark = useSelector((state) => state.home.dark);
   const config = {

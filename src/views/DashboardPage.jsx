@@ -589,7 +589,7 @@ const Dashboard = () => {
       if (resJSON.status === 200) {
         toogleLoadingAPI(false)
         const pageViews = resJSON?.pageViewsArr;
-     
+        console.log("pageViews",pageViews)
         updatePageViewData(pageViews);
       } else {
         toggleLoader(false);
