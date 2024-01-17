@@ -892,6 +892,7 @@ const InputDate = ({ }) => {
 
 const CacheStatus = () => {
   const [current, setCurrent] = useState(0);
+  const [pageViewData, updatePageViewData] = useState([]);
     const [loader, toggleLoader] = useState(false);
   const w = useWidth();
   const dark = useSelector((state) => state.home.dark);
@@ -922,7 +923,32 @@ const CacheStatus = () => {
     }
   };
 
-  useEffect(() => {
+  const fetchPageViewData = async () => {
+    try {
+      toggleLoader(true)
+      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
+      const resJSON = res?.data;
+
+      console.log("resJSONresJSONPagevView",resJSON)
+ 
+      if (resJSON.status === 200) {
+        toggleLoader(false)
+        const pageViews = resJSON?.pageViewsArr;
+        updatePageViewData(pageViews);
+      } else {
+        toggleLoader(false);
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  };
+
+
+
+  useEffect(async() => {
+    await fetchPageViewData();
     fetchConnectedWebsiteData();
   }, [])
 
@@ -1007,7 +1033,9 @@ const CacheStatus = () => {
                     }
                     alt=""
                   /> */}
-                  <Chart2 />
+                   {pageViewData?.length ? <Chart2 pageViewArr={pageViewData} /> : ""}
+
+
                 </div>
                 <div
                   style={{
