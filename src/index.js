@@ -130,7 +130,7 @@ const App = () => {
       // }
     };
 
-    checkAuth();
+    // checkAuth();
  
   }, []);
 
