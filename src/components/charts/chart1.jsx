@@ -22,11 +22,32 @@ const DemoLine = () => {
       if (resJSON.status === 200) {
         toogleLoadingAPI(false)
         const pageViews = resJSON?.pageViewsArr;
+
+
+
+        // Extracting month and year from the "viewed_at" timestamp
+const monthlyData = pageViews.map(item => {
+  const date = new Date(item.viewed_at);
+  const monthYear = `${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
+  return { monthYear, count: 1 }; // Assuming each entry represents one view
+});
+
+// Grouping data by month and summing the counts
+const monthlyViews = monthlyData.reduce((accumulator, item) => {
+  const { monthYear, count } = item;
+  accumulator[monthYear] = (accumulator[monthYear] || 0) + count;
+  return accumulator;
+}, {});
+
+// Converting grouped data to an array of objects for the chart
+const chartData = Object.keys(monthlyViews).map(monthYear => ({
+  monthYear,
+  views: monthlyViews[monthYear]
+}));
+
         console.log("pageViews",pageViews)
-        const updatedData = pageViews.map((item, i) => {
-          return { name: "Page Views", year: i, gdp: 1 };
-        });
-        setData(updatedData);
+      
+        setData(chartData);
         // updatePageViewData(pageViews);
       } else {
         toogleLoadingAPI(false);
