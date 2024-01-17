@@ -487,6 +487,7 @@ const Dashboard = () => {
   const [loader, toggleLoader] = useState(false);
   const [coreVitalsData, updateCoreVitalsData] = useState([]);
   const [performanceData, updatePerformanceData] = useState([]);
+  const [pageViewData, updatePageViewData] = useState([]);
   const [coreVitals, setVitsals] = useState(true);
   const [loading, toogleLoading] = useState(true);
   const [loadingAPI, toogleLoadingAPI] = useState(true);
@@ -560,7 +561,7 @@ const Dashboard = () => {
       toogleLoadingAPI(true)
       const res = await GetAxiosConfig(`api/dashboard/fetch-image-optimization-data`);
       const resJSON = res?.data;
-      console.log("resresJSON",resJSON)
+ 
       if (resJSON.status === 200) {
         toogleLoadingAPI(false)
         const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
@@ -568,6 +569,7 @@ const Dashboard = () => {
         updateImageData(imageDataObj);
         updateHandlerData(OptimizationHandlerData)
       } else {
+        toggleLoader(false);
         return toast.error("Please try again");
       }
     } catch (error) {
@@ -576,9 +578,33 @@ const Dashboard = () => {
     }
   };
 
-  useEffect(() => {
-    googleSpeedAPI();
-    fetchImageOptimizationData();
+  const fetchPageViewData = async () => {
+    try {
+      toogleLoadingAPI(true)
+      const res = await GetAxiosConfig(`api/dashboard/etch-page-views-data`);
+      const resJSON = res?.data;
+
+      console.log("resJSONresJSONPagevView",resJSON)
+ 
+      if (resJSON.status === 200) {
+        toogleLoadingAPI(false)
+        const pageViews = resJSON?.pageViewsArr;
+        updatePageViewData(pageViews);
+      } else {
+        toggleLoader(false);
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toogleLoadingAPI(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  };
+
+
+  useEffect(async() => {
+    await fetchPageViewData();
+    await googleSpeedAPI();
+    await fetchImageOptimizationData();
   }, []);
 
   const criticalCSSToggleValue = useSelector(
@@ -645,6 +671,7 @@ const Dashboard = () => {
       fetchImageOptimizationData();
         return toast.success(resData?.message);
       } else {
+        toggleLoader(false);
         return toast.error("Please try again");
       }
     } catch (error) {
@@ -672,6 +699,7 @@ const Dashboard = () => {
         fetchImageOptimizationData();
           return toast.success(resData?.message);
         } else {
+          toggleLoader(false);
           return toast.error("Please try again");
         }
       }
@@ -949,7 +977,7 @@ const Dashboard = () => {
                 This Month
               </p>
 
-              <Chart1 className="custom-chart" />
+              <Chart1 pageViewArr={pageViewData} className="custom-chart" />
             </div>
           </div>
           <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:flex  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px] flex h-[250px] mobile-cols">
