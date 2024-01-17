@@ -567,6 +567,22 @@ p.annualText {
   display: flex;
   flex-wrap: wrap;  
 }
+input.PhoneInputInput {
+  /* border: 0; */
+  height: 2.4rem;
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0;
+  border-color: #ebebeb;
+
+}
+.PhoneInput {
+  height: 2.4rem;
+  /* border: 1px solid; */
+}
+input.PhoneInputInput {
+  margin: 0;
+}
 @media only screen and (max-width: 599px) {
   .MuiBox-root,
   .billing-modal-background {

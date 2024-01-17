@@ -117,36 +117,36 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
  
   };
 
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      toggoleLoading(true);
-      try {
-        const res = GetAxiosConfig(`user/user-profile`);
-        const resJSON = res?.data;
+  // useEffect(() => {
+  //   const fetchProfileData = async () => {
+  //     toggoleLoading(true);
+  //     try {
+  //       const res = GetAxiosConfig(`user/user-profile`);
+  //       const resJSON = res?.data;
 
-        if (resJSON?.status === 200) {
-          const user = resJSON?.acccount;
+  //       if (resJSON?.status === 200) {
+  //         const user = resJSON?.acccount;
 
-          const dataObj = {
-            first_name: user?.user_info?.first_name,
-            last_name: user?.user_info?.last_name,
-            email_address: user?.user_info?.email_address,
-            country: user?.user_basic_info?.country,
-            phone_number: user?.user_info?.phone_number || "", 
-            business_type: user?.user_basic_info?.business_type || "small",
-          };
-          updateUserData(dataObj);
-          setPhoneNumberValue(user?.user_info?.phone_number || ""); 
-          toggoleLoading(false);
+  //         const dataObj = {
+  //           first_name: user?.user_info?.first_name,
+  //           last_name: user?.user_info?.last_name,
+  //           email_address: user?.user_info?.email_address,
+  //           country: user?.user_basic_info?.country,
+  //           phone_number: user?.user_info?.phone_number || "", 
+  //           business_type: user?.user_basic_info?.business_type || "small",
+  //         };
+  //         updateUserData(dataObj);
+  //         setPhoneNumberValue(user?.user_info?.phone_number || ""); 
+  //         toggoleLoading(false);
        
-        }
-      } catch (error) {
-        console.error("Error fetching user profile data:", error);
-      }
-    };
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user profile data:", error);
+  //     }
+  //   };
 
-    fetchProfileData();
-  }, []);
+  //   fetchProfileData();
+  // }, []);
 
 
   return (
