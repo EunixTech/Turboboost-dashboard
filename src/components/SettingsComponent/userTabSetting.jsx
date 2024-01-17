@@ -459,7 +459,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
       try {
         const res =await GetAxiosConfig(`user/user-profile`);
    
-        const resJSON =resJSON?.data;
+        const resJSON =res?.data;
         console.log("******resJSON**********",resJSON)
 
         if (resJSON?.status === 200) {
