@@ -581,7 +581,7 @@ const Dashboard = () => {
   const fetchPageViewData = async () => {
     try {
       toogleLoadingAPI(true)
-      const res = await GetAxiosConfig(`api/dashboard/etch-page-views-data`);
+      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
       const resJSON = res?.data;
 
       console.log("resJSONresJSONPagevView",resJSON)

@@ -734,7 +734,7 @@ const Navigator = ({ current, setCurrent }) => {
           <span className=" translate-y-[0px]">Resource Usage</span>
         </div>
       </div>
-      <div
+      {/* <div
         onClick={() => {
           setCurrent(1);
         }}
@@ -755,7 +755,7 @@ const Navigator = ({ current, setCurrent }) => {
         >
           <span className="translate-y-[0px]"> Cache API</span>
         </div>
-      </div>
+      </div> */}
       <div
         onClick={() => {
           setCurrent(2);
@@ -1110,7 +1110,7 @@ const CacheStatus = () => {
                     alt=""
                   /> */}
 
-                  <Chart3 />
+                  {/* <Chart3 /> */}
                 </div>
               </>
             )}
