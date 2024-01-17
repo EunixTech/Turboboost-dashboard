@@ -719,9 +719,17 @@ const Dashboard = () => {
 
             {w > 1000 && (
               <div className="flex items-center justify-center">
+                {
+                  true ?  <img
+                  src="/graphic/warmup/elli.svg"
+                  className="mr-[3px] w-[14px]"
+                  alt=""
+                />:
                 <div className="w-[18px] translate-y-[0px] h-[18px] justify-center items-center flex rounded-[50%] bg-[#38f8ab3a]">
-                  <div className="w-[10px] h-[10px] rounded-[50%] bg-[#38F8AC]"></div>
-                </div>
+                <div className="w-[10px] h-[10px] rounded-[50%] bg-[#38F8AC]"></div>
+              </div>
+                }
+               
                 <h1
                   style={{ color: dark ? "#fff" : "#000" }}
                   className=" ml-[10px] f2 laptop:text-[16px] desktop:text-[18px] font-medium"
