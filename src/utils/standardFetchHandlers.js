@@ -9,7 +9,12 @@ const standardFetchSuccessHandler = (res, showMessageRcvdFromServer = true) => {
 
 const standardFetchErrorHandler = (err) => {
     console.log(err)
-    return toast.error(err.message || `Internal Server Error`);
+    // return toast.error(err.message || `Internal Server Error`);
+    // if (response.status === 401) {
+    //     localStorage.removeItem('authToken');
+    //     window.location.replace('/login-shopify');
+    //   }
+    return
 };
 
 export default {

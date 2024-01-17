@@ -42,7 +42,15 @@ export const GetAxiosConfig = async (URL="") => {
             withCredentials: true,  // Set this to true to include credentials in the request
         }
     );
-    return response;
+    console.log("response.status response.status ",response.status )
+    if (response.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      } else {
+        return response;
+      }
+
+  
 }
 
 export const PatchAxiosConfig = async (URL="", data) => {
@@ -64,6 +72,12 @@ export const PatchAxiosConfig = async (URL="", data) => {
             withCredentials: true,  // Set this to true to include credentials in the request
         }
     );
-    return response;
+    if (response.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      } else {
+        return response;
+      }
+ 
 
 }
