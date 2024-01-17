@@ -14,10 +14,12 @@ const DemoLine = ({pageViewData}) => {
  
   useEffect(() => {
     // Fixing the code
+    if(pageViewData?.length){
     const updatedData = pageViewData.map((item) => {
       return { name: "Page Views", year: item.year, gdp: item.gdp };
     });
     setData(updatedData);
+  }
   }, [pageViewData])
   
   
