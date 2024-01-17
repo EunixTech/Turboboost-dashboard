@@ -14,6 +14,7 @@ import "react-phone-number-input/style.css";
 import standardFetchHandlers from '../../utils/standardFetchHandlers';
 import handleFetchErrors from '../../utils/handleFetchErrors';
 import PhoneInput from "react-phone-number-input";
+import { GetAxiosConfig, PostAxiosConfig } from "../utils/axiosConfig.js";
 import {
   isValidNumber,
   parsePhoneNumberFromString,
@@ -127,16 +128,11 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     const fetchProfileData = async () => {
       toggoleLoading(true);
       try {
-        const response = await fetch(
-          `${appURL}/user/user-profile`,
-          {
-            ...fetchConfig,
-            credentials: "true"
-          }
+        const res = await GetAxiosConfig(`user/user-profile`)
+         
           
-          
-        );
-        const resJSON = await response.json();
+        
+        const resJSON = await res.data;
 
         if (resJSON?.status === 200) {
           const user = resJSON?.acccount;
@@ -188,6 +184,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     );
   };
 
+  
   return (
     loading ? <Loader />:
     <Formik
