@@ -963,8 +963,8 @@ const CacheStatus = () => {
                     }
                     alt=""
                   /> */}
-                    <Chart2 />
-
+                    {/* <Chart2 />
+ */}
 
                 </div>
                 <div
