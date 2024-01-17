@@ -486,7 +486,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
 
 
   return (
-    loading ? <AnimatedLoader />:
+    // loading ? <AnimatedLoader />:
     <Formik
       initialValues={{
         first_name: userData?.first_name || "",
