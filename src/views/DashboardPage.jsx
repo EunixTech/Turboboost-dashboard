@@ -978,7 +978,7 @@ const Dashboard = () => {
               >
                 This Month
               </p>
-              {(pageViewData && pageViewData?.length) ? <Chart1 pageViewArr={pageViewData} className="custom-chart" />  : ""}
+              {(pageViewData && pageViewData?.length) ? <Chart1 pageViewArr={pageViewData} className="custom-chart" />  : null}
               
             </div>
           </div>
