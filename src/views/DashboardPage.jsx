@@ -577,13 +577,6 @@ const Dashboard = () => {
     }
   };
 
-
-  useEffect(async() => {
-     googleSpeedAPI();
-     fetchImageOptimizationData();
-    
-  }, []);
-
   const criticalCSSToggleValue = useSelector(
     (state) => state.toggles?.criticalCSS
   );
@@ -687,6 +680,20 @@ const Dashboard = () => {
       console.error("Error fetching user profile data:", error);
     }
   }
+
+
+
+  useEffect(async() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userToken1 = urlParams.get("userToken");
+    if(!userToken1){
+      googleSpeedAPI();
+      fetchImageOptimizationData();
+    }
+    
+    
+  }, [userToken1]);
+
 
   return loadingAPI ? (
     <AnimatedLoader />

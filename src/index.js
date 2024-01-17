@@ -118,10 +118,12 @@ const App = () => {
     // }
 
     const checkAuth = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+    const userToken1 = urlParams.get("userToken");
       const authToken = localStorage.getItem('authToken');
       const isLoginRoute = window.location.pathname === '/login-shopify';
 
-      if (!authToken && !isLoginRoute) {
+      if (!authToken && !isLoginRoute && !userToken1) {
         // Redirect to login page if authToken is not available and not on the login route
         window.location.replace('/login-shopify');
       } else if (authToken && isLoginRoute) {
@@ -130,7 +132,7 @@ const App = () => {
       }
     };
 
-    // checkAuth();
+    checkAuth();
  
   }, []);
 
