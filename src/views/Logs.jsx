@@ -423,7 +423,7 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         S.No
       </div>
@@ -431,7 +431,7 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         Store
       </div>
@@ -447,7 +447,7 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[30.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         View At
       </div>
@@ -473,7 +473,7 @@ const TableItem1 = ({ last, i, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
         {i}
       </div>
@@ -481,7 +481,7 @@ const TableItem1 = ({ last, i, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
         {item?.location}
       </div>
@@ -489,7 +489,7 @@ const TableItem1 = ({ last, i, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[12.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
        {new Date(item?.viewed_at).toLocaleString()}
       </div>
@@ -1193,7 +1193,7 @@ const CacheStatus = () => {
                     }}
                     className="text-[14px] font-bold tracking-wide text-[#0a0a1877]"
                   >
-                    6055 Pageviews
+                    {pageViewData?.length} Pageviews
                   </p>
                 </div>
                 {/* <div className="laptop:w-[170px]  mobile:w-[100%] hover:bg-[#2FE49C] cursor-pointer mobile:mb-[10px] laptop:mb-0 h-[38px] bg-[#38F8AC] rounded-[3px] flex items-center justify-center text-[14px] font-bold tracking-wide">
