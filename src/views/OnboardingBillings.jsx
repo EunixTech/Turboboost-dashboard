@@ -87,8 +87,8 @@ const OnboardingBillings = () => {
   }, []);
 
   return (
-    loader ?
-    <AnimatedLoader /> :
+    // loader ?
+    // <AnimatedLoader /> :
     <div className="overflow-hidden flex flex-col items-center justify-center">
       <TitleManager title="Onboarding" conicalURL="onboarding" />
       <div className="w-full max-w-screen-xl"></div>
