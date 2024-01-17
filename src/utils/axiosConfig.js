@@ -72,6 +72,7 @@ export const PatchAxiosConfig = async (URL="", data) => {
             withCredentials: true,  // Set this to true to include credentials in the request
         }
     );
+    console.log("response.status response.status ",response.status )
     if (response.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');

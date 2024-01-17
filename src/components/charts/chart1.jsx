@@ -9,11 +9,7 @@ import { GetAxiosConfig,PostAxiosConfig } from "../../utils/axiosConfig.js";
 const DemoLine = () => {
   const [loadingAPI, toogleLoadingAPI] = useState(true);
   const [pageViewData, updatePageViewData] = useState([]);
-  const [data, setData] = useState([
-    { name: "Page Views", year: 0, gdp: 100 },
-    { name: "Page Views", year: 1, gdp: 200 },
-    
-  ]);
+  const [data, setData] = useState([]);
 
   const fetchPageViewData = async () => {
     try {
@@ -42,6 +38,11 @@ const DemoLine = () => {
     }
   };
 
+  // [
+  //   { name: "Page Views", year: 0, gdp: 100 },
+  //   { name: "Page Views", year: 1, gdp: 200 },
+    
+  // ]
 
   useEffect(async() => {
      fetchPageViewData();
@@ -49,15 +50,15 @@ const DemoLine = () => {
 
 
  
-  useEffect(() => {
-    // Fixing the code
-    if(pageViewData?.length){
-    const updatedData = pageViewData.map((item) => {
-      return { name: "Page Views", year: item.year, gdp: item.gdp };
-    });
-    setData(updatedData);
-  }
-  }, [pageViewData])
+  // useEffect(() => {
+  //   // Fixing the code
+  //   if(pageViewData?.length){
+  //   const updatedData = pageViewData.map((item) => {
+  //     return { name: "Page Views", year: item.year, gdp: item.gdp };
+  //   });
+  //   setData(updatedData);
+  // }
+  // }, [pageViewData])
   
   
   const dark = useSelector((state) => state.home.dark);
