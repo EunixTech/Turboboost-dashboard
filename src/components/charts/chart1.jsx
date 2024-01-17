@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Area } from "@ant-design/plots";
 import { useSelector } from "react-redux";
 
-const DemoLine = ({pageViewArr}) => {
+const DemoLine = ({pageViewArr=[]}) => {
   // const [data, setData] = useState([
   //   { name: "Page Views", year: 0, gdp: 100 },
   //   { name: "Page Views", year: 1, gdp: 200 },
