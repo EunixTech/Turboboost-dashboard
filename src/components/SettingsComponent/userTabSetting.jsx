@@ -457,9 +457,8 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     const fetchProfileData = async () => {
       toggoleLoading(true);
       try {
-        const res = GetAxiosConfig(`user/user-profile`);
-        const resJSON = res?.data;
-
+        const resJSON = GetAxiosConfig(`user/user-profile`);
+   
         console.log("******resJSON**********",resJSON)
 
         if (resJSON?.status === 200) {
