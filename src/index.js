@@ -135,7 +135,6 @@ const App = () => {
   }, []);
 
 
-  console.log("workingworking***", cookies)
   return (
     <>
     {showOnboardingModal && <NewOnboard />}
