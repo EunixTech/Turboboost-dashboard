@@ -10,35 +10,39 @@ const Chart2 = ({}) => {
 
   const [loadingAPI, toogleLoadingAPI] = useState(true);
   const [pageViewData, updatePageViewData] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState( [
+    { name: "Page Views", year: 0, gdp: 100 },
+    { name: "Page Views", year: 1, gdp: 200 },
+    
+  ]);
 
-  const fetchPageViewData = async () => {
-    try {
-      toogleLoadingAPI(true)
-      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
-      const resJSON = res?.data;
+  // const fetchPageViewData = async () => {
+  //   try {
+  //     toogleLoadingAPI(true)
+  //     const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
+  //     const resJSON = res?.data;
 
-      console.log("resJSONresJSONPagevView",resJSON)
+  //     console.log("resJSONresJSONPagevView",resJSON)
  
-      if (resJSON.status === 200) {
-        toogleLoadingAPI(false)
-        const pageViews = resJSON?.pageViewsArr;
+  //     if (resJSON.status === 200) {
+  //       toogleLoadingAPI(false)
+  //       const pageViews = resJSON?.pageViewsArr;
         
-        // console.log("pageViews",pageViews)
-        // const updatedData = pageViews.map((item, i) => {
-        //   return { name: "Page Views", year: i, gdp: 1 };
-        // });
-        setData([{ name: "Page Views", year: 1, gdp: pageViews?.length },]);
-        // updatePageViewData(pageViews);
-      } else {
-        toogleLoadingAPI(false);
-        return toast.error("Please try again");
-      }
-    } catch (error) {
-      toogleLoadingAPI(false);
-      console.error("Error fetching user profile data:", error);
-    }
-  };
+  //       // console.log("pageViews",pageViews)
+  //       // const updatedData = pageViews.map((item, i) => {
+  //       //   return { name: "Page Views", year: i, gdp: 1 };
+  //       // });
+  //       setData([{ name: "Page Views", year: 1, gdp: pageViews?.length },]);
+  //       // updatePageViewData(pageViews);
+  //     } else {
+  //       toogleLoadingAPI(false);
+  //       return toast.error("Please try again");
+  //     }
+  //   } catch (error) {
+  //     toogleLoadingAPI(false);
+  //     console.error("Error fetching user profile data:", error);
+  //   }
+  // };
 
   // const [data, setData] = useState([
    
@@ -46,12 +50,12 @@ const Chart2 = ({}) => {
 
   // ]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchPageViewData();
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await fetchPageViewData();
+  //   };
+  //   fetchData();
+  // }, []);
 
 
  

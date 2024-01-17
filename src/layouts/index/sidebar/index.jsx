@@ -493,7 +493,7 @@ console.log("planMockData[currentPlan?.plan]",planMockData[currentPlan?.plan]?.p
               </p>
               <p className="text-[12px] f2 text-[#918EA2] tracking-wide">
                 
-                {PageViewCount || 0}/ { (currentPlan?.plan === "Basic" || currentPlan?.plan === "Starter") ? 5000 : 20000 }
+                {PageViewCount || 0}/ { (currentPlan?.plan === "Basic" || currentPlan?.plan === "Starter") ? 50000 : 200000 }
               </p>
             </div>
             <div className="bg-[#ffffff14] w-[100%] h-[3px] rounded-[3px]">
