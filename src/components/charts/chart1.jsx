@@ -24,7 +24,7 @@ const DemoLine = () => {
         const pageViews = resJSON?.pageViewsArr;
         console.log("pageViews",pageViews)
         const updatedData = pageViews.map((item, i) => {
-          return { name: "Page Views", year: 1, gdp: i };
+          return { name: "Page Views", year: i, gdp: 1 };
         });
         setData(updatedData);
         // updatePageViewData(pageViews);
