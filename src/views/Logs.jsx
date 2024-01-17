@@ -10,6 +10,10 @@ import axios from "axios"
 import appURLs from "../appURL";
 import dateFormatter from "../utils/dateFormatter";
 import moment from 'moment';
+import toast from "react-hot-toast";
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
+import TimeDifferenceFromCurrent from "../utils/timeCalculator.js";
+import AnimatedLoader from "../components/loader/AnimatedLoader";
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
@@ -888,6 +892,7 @@ const InputDate = ({ }) => {
 
 const CacheStatus = () => {
   const [current, setCurrent] = useState(0);
+    const [loader, toggleLoader] = useState(false);
   const w = useWidth();
   const dark = useSelector((state) => state.home.dark);
 
@@ -898,13 +903,21 @@ const CacheStatus = () => {
   const fetchConnectedWebsiteData = async () => {
 
     try {
-      const res = await axios.get(`${appURL}/api/dashboard/fetch-connected-website-data`);
+      toggleLoader(true)
+      const res = await  GetAxiosConfig(`api/dashboard/fetch-connected-website-data`);
 
-      const dataArr = res?.data?.conectedWebsite;
-      updateConnectedWebsiteData(dataArr);
+      const resData = res?.data;
+      if(resData?.status === 200){
+        toggleLoader(false)
+        const dataArr = resData?.conectedWebsite;
+        updateConnectedWebsiteData(dataArr);
+      } else {
+         toggleLoader(false)
+        return toast.error(resData?.message)
+      }
 
-      console.log("********", dataArr)
     } catch (error) {
+      toggleLoader(false)
       console.error("Error fetching user profile data:", error);
     }
   };
@@ -914,6 +927,7 @@ const CacheStatus = () => {
   }, [])
 
   return (
+    loader ? <AnimatedLoader /> :
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Logs" conicalURL="logs" />
 
