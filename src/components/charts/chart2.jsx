@@ -3,22 +3,68 @@ import ReactDOM from "react-dom";
 import { Line } from "@ant-design/plots";
 import { Area } from "@ant-design/plots";
 import { useSelector } from "react-redux";
-const Chart2 = ({pageViewArr}) => {
-  const [data, setData] = useState([
+import toast from "react-hot-toast";
+import { GetAxiosConfig,PostAxiosConfig } from "../../utils/axiosConfig.js";
+
+const Chart2 = ({}) => {
+
+  const [loadingAPI, toogleLoadingAPI] = useState(true);
+  const [pageViewData, updatePageViewData] = useState([]);
+  const [data, setData] = useState([]);
+
+  const fetchPageViewData = async () => {
+    try {
+      toogleLoadingAPI(true)
+      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
+      const resJSON = res?.data;
+
+      console.log("resJSONresJSONPagevView",resJSON)
+ 
+      if (resJSON.status === 200) {
+        toogleLoadingAPI(false)
+        const pageViews = resJSON?.pageViewsArr;
+        
+        console.log("pageViews",pageViews)
+        const updatedData = pageViews.map((item, i) => {
+          return { name: "Page Views", year: i, gdp: 1 };
+        });
+        setData(updatedData);
+        // updatePageViewData(pageViews);
+      } else {
+        toogleLoadingAPI(false);
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toogleLoadingAPI(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  };
+
+  // const [data, setData] = useState([
    
-    { name: "Pageviews", year: 0, gdp: 1800 },
+  //   { name: "Pageviews", year: 0, gdp: 1800 },
 
-  ]);
+  // ]);
 
-  const newData = pageViewArr.map((item, index) => ({
-    name: "Page Views",
-    year: index,
-    gdp: item,
-  }));
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchPageViewData();
+    };
+    fetchData();
+  }, []);
+
+
+ 
+
+  // const newData = pageViewArr.map((item, index) => ({
+  //   name: "Page Views",
+  //   year: index,
+  //   gdp: item,
+  // }));
 
   const dark = useSelector((state) => state.home.dark);
   const config = {
-    newData,
+    data,
     isStack: false,
     xField: "year",
     yField: "gdp",
