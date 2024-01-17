@@ -440,6 +440,7 @@ useEffect(() => {
   fetchingBillingDetails()
 }, [])
 
+
 console.log("planMockData[currentPlan?.plan]",planMockData[currentPlan?.plan])
 
 console.log("planMockData[currentPlan?.plan]",planMockData[currentPlan?.plan]?.pageViews)
@@ -491,7 +492,8 @@ console.log("planMockData[currentPlan?.plan]",planMockData[currentPlan?.plan]?.p
                 Page Views/mo
               </p>
               <p className="text-[12px] f2 text-[#918EA2] tracking-wide">
-                {PageViewCount || 0}/ {planMockData[currentPlan?.plan]?.pageViews}
+                
+                {PageViewCount || 0}/ { (currentPlan?.plan === "Basic" || currentPlan?.plan === "Starter") ? 5000 : 20000 }
               </p>
             </div>
             <div className="bg-[#ffffff14] w-[100%] h-[3px] rounded-[3px]">

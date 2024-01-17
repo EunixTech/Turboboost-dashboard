@@ -75,10 +75,10 @@ const router = [
     path: "/billing",
     element: <Billing />,
   },
-  // {
-  //   path: "/settings",
-  //   element: <Settings />,
-  // },
+  {
+    path: "/settings",
+    element: <Settings />,
+  },
   {
     path: "/affiliate",
     element: <Affiliate />,
