@@ -24,7 +24,7 @@ const DemoLine = () => {
         const pageViews = resJSON?.pageViewsArr;
         console.log("pageViews",pageViews)
         const updatedData = pageViews.map((item, i) => {
-          return { name: "Page Views", year: item.year, gdp: i };
+          return { name: "Page Views", year: 1, gdp: i };
         });
         setData(updatedData);
         // updatePageViewData(pageViews);
@@ -44,8 +44,11 @@ const DemoLine = () => {
     
   // ]
 
-  useEffect(async() => {
-     fetchPageViewData();
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchPageViewData();
+    };
+    fetchData();
   }, []);
 
 
