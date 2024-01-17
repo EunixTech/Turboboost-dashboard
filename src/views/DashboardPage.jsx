@@ -589,6 +589,7 @@ const Dashboard = () => {
       if (resJSON.status === 200) {
         toogleLoadingAPI(false)
         const pageViews = resJSON?.pageViewsArr;
+     
         updatePageViewData(pageViews);
       } else {
         toggleLoader(false);
@@ -605,6 +606,7 @@ const Dashboard = () => {
     await fetchPageViewData();
     await googleSpeedAPI();
     await fetchImageOptimizationData();
+    console.log("pageViewspageViewspageViews",pageViews)
   }, []);
 
   const criticalCSSToggleValue = useSelector(
@@ -976,8 +978,7 @@ const Dashboard = () => {
               >
                 This Month
               </p>
-              {pageViewData?.length ? <Chart1 pageViewArr={pageViewData} className="custom-chart" /> : ""}
-
+              {(pageViewData && pageViewData?.length) ? <Chart1 pageViewArr={pageViewData} className="custom-chart" />  : ""}
               
             </div>
           </div>
