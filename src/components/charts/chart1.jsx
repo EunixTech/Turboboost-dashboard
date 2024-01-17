@@ -4,22 +4,16 @@ import ReactDOM from "react-dom";
 import { Area } from "@ant-design/plots";
 import { useSelector } from "react-redux";
 
-const DemoLine = ({pageViewArr=[]}) => {
-  const [newData, setData] = useState([
+const DemoLine = () => {
+  const [data, setData] = useState([
     { name: "Page Views", year: 0, gdp: 100 },
     { name: "Page Views", year: 1, gdp: 200 },
     
   ]);
 
-  // const newData = pageViewArr.map((item, index) => ({
-  //   name: "Page Views",
-  //   year: index,
-  //   gdp: item,
-  // }));
-
   const dark = useSelector((state) => state.home.dark);
   const config = {
-    newData,
+    data,
     xField: "year",
     yField: "gdp",
     xAxis: {
@@ -28,7 +22,7 @@ const DemoLine = ({pageViewArr=[]}) => {
       label: {
         formatter: (text) => `${parseInt(text) + 1}`, // Add 1 to the x-axis label
       },
-      tickCount: newData.length, // Ensure there's a tick for each data point
+      tickCount: data.length, // Ensure there's a tick for each data point
       nice: true, //
     },
     seriesField: "name",

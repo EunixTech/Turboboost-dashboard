@@ -1033,7 +1033,7 @@ const CacheStatus = () => {
                     }
                     alt=""
                   /> */}
-                   {pageViewData && pageViewData?.length ? <Chart2 pageViewArr={pageViewData} /> : ""}
+                   {(pageViewData && pageViewData?.length) ? <Chart2 pageViewArr={pageViewData?.length ? pageViewData?.length: []} /> : ""}
 
 
                 </div>
