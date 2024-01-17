@@ -682,10 +682,10 @@ const Dashboard = () => {
   }
 
 
-
+  const urlParams = new URLSearchParams(window.location.search);
+  const userToken1 = urlParams.get("userToken");
   useEffect(async() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const userToken1 = urlParams.get("userToken");
+ 
     if(!userToken1){
       googleSpeedAPI();
       fetchImageOptimizationData();
