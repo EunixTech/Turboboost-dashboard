@@ -770,7 +770,9 @@ const Dashboard = () => {
                   </p>
                 </div> */}
               </div>
-              <div className="flex">
+              {
+                imageData?.lastPurge ?
+                <div className="flex">
                 <p
                   style={{
                     color: dark ? "#ffffff74" : "#0a0a187e",
@@ -787,7 +789,10 @@ const Dashboard = () => {
                 >
                    {imageData?.lastPurge ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
                 </p>
-              </div>
+              </div>: ``
+
+              }
+              
             </div>
             <div
               style={{
@@ -903,7 +908,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
                 >
-                  {TimeDifferenceFromCurrent(handlerData?.lastPurge)}
+                  {Math.abs(TimeDifferenceFromCurrent(handlerData?.lastPurge))}
                 </p>
                 {/* <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
                   <img
