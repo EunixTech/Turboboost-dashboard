@@ -843,7 +843,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
                 >
-                  17.23%
+                  0%
                 </p>
                 {/* <div className=" flex bg-[#18df902e] f2 px-[13px] py-[3px] rounded-[23px] ml-[10px]">
                   <img
@@ -874,7 +874,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
-                  21.92%
+                  0%
                 </p>
               </div>
             </div>
