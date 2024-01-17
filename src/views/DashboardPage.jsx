@@ -960,7 +960,7 @@ const Dashboard = () => {
               >
                 This Month
               </p>
-              <Chart1 className="custom-chart" />  
+              {/* <Chart1 className="custom-chart" />   */}
               
             </div>
           </div>
