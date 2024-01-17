@@ -15,15 +15,15 @@ const ImageTabSettings = () => {
 
     const handleImageSizeAdaption = async() =>{
       let endPoint = "";
-      if (!lazyLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
-      else endPoint = "/api/shopify/minify-javascript-code";
+      if (!lazyLoadingToggleValue) endPoint = "api/shopify/minify-javascript-code";
+      else endPoint = "api/shopify/minify-javascript-code";
       await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "imageSizeAdaption", value: !imageSizeAdaptionToggleValue }));
     }
       const handlelazyLoading = async() =>{
       let endPoint = "";
-      if (!lazyLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
-      else endPoint = "/api/shopify/minify-javascript-code";
+      if (!lazyLoadingToggleValue) endPoint = "api/shopify/minify-javascript-code";
+      else endPoint = "api/shopify/minify-javascript-code";
       await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
     }

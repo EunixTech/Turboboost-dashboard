@@ -15,8 +15,8 @@ const CssTabSettings = () => {
     
     const handleCriticalCSS = async() =>{
       let endPoint = "";
-      if (!criticalCSSToggleValue) endPoint = "/api/shopify/minify-javascript-code";
-      else endPoint = "/api/shopify/minify-javascript-code";
+      if (!criticalCSSToggleValue) endPoint = "api/shopify/minify-javascript-code";
+      else endPoint = "api/shopify/minify-javascript-code";
       await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
     }

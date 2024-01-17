@@ -13,8 +13,8 @@ const HtmlTabSettings = () => {
     const minifyHTMLToggleValue = useSelector((state) => state.toggles?.minifyHTML);
     const handleMinifyHTML = async() =>{
       let endPoint = "";
-      if (!minifyHTMLToggleValue) endPoint = "/api/shopify/minify-javascript-code";
-      else endPoint = "/api/shopify/minify-javascript-code";
+      if (!minifyHTMLToggleValue) endPoint = "api/shopify/minify-javascript-code";
+      else endPoint = "api/shopify/minify-javascript-code";
       await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "minifyHTML", value: !minifyHTMLToggleValue }));
     }

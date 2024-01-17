@@ -16,8 +16,8 @@ const FontsTabSettings = () => {
 
   const handleFontRenderBehavior = async() =>{
     let endPoint = "";
-    if (!fontRenderBehaviorToggleValue) endPoint = "/api/shopify/minify-javascript-code";
-    else endPoint = "/api/shopify/minify-javascript-code";
+    if (!fontRenderBehaviorToggleValue) endPoint = "api/shopify/minify-javascript-code";
+    else endPoint = "api/shopify/minify-javascript-code";
     await featureAPIHandling(endPoint);
     dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
   }

@@ -606,7 +606,7 @@ const Dashboard = () => {
     await fetchPageViewData();
     await googleSpeedAPI();
     await fetchImageOptimizationData();
-    console.log("pageViewspageViewspageViews",pageViews)
+    console.log("pageViewspageViewspageViews",pageViewData)
   }, []);
 
   const criticalCSSToggleValue = useSelector(
