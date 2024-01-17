@@ -487,7 +487,6 @@ const Dashboard = () => {
   const [loader, toggleLoader] = useState(false);
   const [coreVitalsData, updateCoreVitalsData] = useState([]);
   const [performanceData, updatePerformanceData] = useState([]);
-  const [pageViewData, updatePageViewData] = useState([]);
   const [coreVitals, setVitsals] = useState(true);
   const [loading, toogleLoading] = useState(true);
   const [loadingAPI, toogleLoadingAPI] = useState(true);
@@ -569,30 +568,7 @@ const Dashboard = () => {
         updateImageData(imageDataObj);
         updateHandlerData(OptimizationHandlerData)
       } else {
-        toggleLoader(false);
-        return toast.error("Please try again");
-      }
-    } catch (error) {
-      toogleLoadingAPI(false);
-      console.error("Error fetching user profile data:", error);
-    }
-  };
-
-  const fetchPageViewData = async () => {
-    try {
-      toogleLoadingAPI(true)
-      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
-      const resJSON = res?.data;
-
-      console.log("resJSONresJSONPagevView",resJSON)
- 
-      if (resJSON.status === 200) {
-        toogleLoadingAPI(false)
-        const pageViews = resJSON?.pageViewsArr;
-        console.log("pageViews",pageViews)
-        updatePageViewData(pageViews);
-      } else {
-        toggleLoader(false);
+        toogleLoadingAPI(false);
         return toast.error("Please try again");
       }
     } catch (error) {
@@ -603,7 +579,6 @@ const Dashboard = () => {
 
 
   useEffect(async() => {
-     fetchPageViewData();
      googleSpeedAPI();
      fetchImageOptimizationData();
     
@@ -978,7 +953,7 @@ const Dashboard = () => {
               >
                 This Month
               </p>
-              {(pageViewData && pageViewData?.length) ? <Chart1 pageViewArr={pageViewData} className="custom-chart" />  : null}
+              <Chart1 className="custom-chart" />  
               
             </div>
           </div>
