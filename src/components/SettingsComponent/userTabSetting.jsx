@@ -14,7 +14,7 @@ import "react-phone-number-input/style.css";
 import standardFetchHandlers from '../../utils/standardFetchHandlers';
 import handleFetchErrors from '../../utils/handleFetchErrors';
 import PhoneInput from "react-phone-number-input";
-import { GetAxiosConfig, PostAxiosConfig } from "../utils/axiosConfig.js";
+import { GetAxiosConfig, PostAxiosConfig } from "../../utils/axiosConfig.js";
 import {
   isValidNumber,
   parsePhoneNumberFromString,
@@ -184,7 +184,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     );
   };
 
-  
+
   return (
     loading ? <Loader />:
     <Formik
