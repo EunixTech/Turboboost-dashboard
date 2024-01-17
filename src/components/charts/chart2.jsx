@@ -24,11 +24,11 @@ const Chart2 = ({}) => {
         toogleLoadingAPI(false)
         const pageViews = resJSON?.pageViewsArr;
         
-        console.log("pageViews",pageViews)
-        const updatedData = pageViews.map((item, i) => {
-          return { name: "Page Views", year: i, gdp: 1 };
-        });
-        setData(updatedData);
+        // console.log("pageViews",pageViews)
+        // const updatedData = pageViews.map((item, i) => {
+        //   return { name: "Page Views", year: i, gdp: 1 };
+        // });
+        setData([{ name: "Page Views", year: 1, gdp: pageViews?.length },]);
         // updatePageViewData(pageViews);
       } else {
         toogleLoadingAPI(false);

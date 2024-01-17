@@ -8,6 +8,9 @@ import standardFetchHandlers from '../../../utils/standardFetchHandlers';
 import handleFetchErrors from '../../../utils/handleFetchErrors';
 import appURLs from '../../../appURL';
 import { planMockData } from "../../../utils/constant";
+import toast from "react-hot-toast";
+  import { GetAxiosConfig,PostAxiosConfig } from "../../../utils/axiosConfig.js";
+  
 // import toast from 'react-hot-toast';
 // // const Button = ({ onClick }) => {
 // //   const dark = useSelector((state) => state.home.dark);
@@ -382,12 +385,31 @@ const Item = ({ title, src, route }) => {
   );
 };
 
+
+
 const Sidebar = () => {
   const [show, setShow] = useState(false);
+  const [PageViewCount, updatePageViewCount] = useState(0);
   const upgradePopUpShow = useSelector((state) => state.home.upgradePopUpShow);
   const dark = useSelector((state) => state.home.dark);
   const dispatch = useDispatch();
   const [currentPlan, updateCurrentPlan] = useState({})
+  
+  const fetchPageViewData = async () => {
+    try {
+    
+      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
+      const resJSON = res?.data;
+
+      if (resJSON.status === 200) {
+        const pageViews = resJSON?.pageViewsArr;
+        updatePageViewCount(pageViews?.length)
+      } 
+    } catch (error) {
+      console.error("Error fetching user profile data:", error);
+    }
+  };
+
 
   const fetchingBillingDetails = async () => {
 
@@ -414,6 +436,7 @@ const Sidebar = () => {
         });
 }
 useEffect(() => {
+  fetchPageViewData();
   fetchingBillingDetails()
 }, [])
 
@@ -464,7 +487,7 @@ useEffect(() => {
                 Page Views/mo
               </p>
               <p className="text-[12px] f2 text-[#918EA2] tracking-wide">
-                90,000/ {planMockData[currentPlan?.plan]}/200,000
+                {PageViewCount || 0}/ {planMockData[currentPlan?.plan]}
               </p>
             </div>
             <div className="bg-[#ffffff14] w-[100%] h-[3px] rounded-[3px]">
