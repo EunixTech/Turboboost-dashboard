@@ -603,9 +603,9 @@ const Dashboard = () => {
 
 
   useEffect(async() => {
-    await fetchPageViewData();
-    await googleSpeedAPI();
-    await fetchImageOptimizationData();
+     fetchPageViewData();
+     googleSpeedAPI();
+     fetchImageOptimizationData();
     console.log("pageViewspageViewspageViews",pageViewData)
   }, []);
 

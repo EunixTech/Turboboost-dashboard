@@ -948,7 +948,7 @@ const CacheStatus = () => {
 
 
   useEffect(async() => {
-    await fetchPageViewData();
+    fetchPageViewData();
     fetchConnectedWebsiteData();
   }, [])
 
@@ -1033,7 +1033,7 @@ const CacheStatus = () => {
                     }
                     alt=""
                   /> */}
-                   {pageViewData?.length ? <Chart2 pageViewArr={pageViewData} /> : ""}
+                   {pageViewData && pageViewData?.length ? <Chart2 pageViewArr={pageViewData} /> : ""}
 
 
                 </div>
