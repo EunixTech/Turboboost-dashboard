@@ -440,6 +440,10 @@ useEffect(() => {
   fetchingBillingDetails()
 }, [])
 
+console.log("planMockData[currentPlan?.plan]",planMockData[currentPlan?.plan])
+
+console.log("planMockData[currentPlan?.plan]",planMockData[currentPlan?.plan]?.pageViews)
+
   return (
     <>
       {upgradePopUpShow && (
@@ -487,7 +491,7 @@ useEffect(() => {
                 Page Views/mo
               </p>
               <p className="text-[12px] f2 text-[#918EA2] tracking-wide">
-                {PageViewCount || 0}/ {planMockData[currentPlan?.plan]}
+                {PageViewCount || 0}/ {planMockData[currentPlan?.plan]?.pageViews}
               </p>
             </div>
             <div className="bg-[#ffffff14] w-[100%] h-[3px] rounded-[3px]">
