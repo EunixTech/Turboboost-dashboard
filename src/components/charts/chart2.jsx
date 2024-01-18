@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { GetAxiosConfig,PostAxiosConfig } from "../../utils/axiosConfig.js";
 
-const Chart2 = ({}) => {
+const Chart2 = () => {
 
   const [loadingAPI, toogleLoadingAPI] = useState(true);
   const [pageViewData, updatePageViewData] = useState([]);
@@ -23,11 +23,7 @@ const Chart2 = ({}) => {
       if (resJSON.status === 200) {
         toogleLoadingAPI(false)
         const pageViews = resJSON?.pageViewsArr;
-        
-        // console.log("pageViews",pageViews)
-        // const updatedData = pageViews.map((item, i) => {
-        //   return { name: "Page Views", year: i, gdp: 1 };
-        // });
+       
         setData([{ name: "Page Views", year: 1, gdp: pageViews?.length },]);
         // updatePageViewData(pageViews);
       } else {

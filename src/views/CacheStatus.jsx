@@ -460,7 +460,7 @@ const TableHeader = ({ change }) => {
         style={{
           color: dark ? "#fff" : "#0a0a1876",
         }}
-        className="w-[11%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[27%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Asset Type
       </div>
@@ -468,7 +468,7 @@ const TableHeader = ({ change }) => {
         style={{
           color: dark ? "#fff" : "#0a0a1876",
         }}
-        className="w-[28%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[20%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Original Size
       </div>
@@ -476,7 +476,7 @@ const TableHeader = ({ change }) => {
         style={{
           color: dark ? "#fff" : "#0a0a1876",
         }}
-        className="w-[28%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[20%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Optimize Size
       </div>
@@ -546,7 +546,7 @@ const TableItem = ({ last, item }) => {
           style={{
             color: dark ? "#fff" : "#000",
           }}
-          className="w-[11%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+          className="w-[27%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
         >
           {item?.name}
         </div>
@@ -563,7 +563,7 @@ const TableItem = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[11%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+        className="w-[20%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.before}
       </div>
@@ -571,7 +571,7 @@ const TableItem = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[28%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+        className="w-[20%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.after}
       </div>

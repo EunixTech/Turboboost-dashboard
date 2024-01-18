@@ -531,7 +531,7 @@ const Table3 = ({ connectedWebsiteData }) => {
       className="w-[100%] border-t-[1px]  border-[#ebebeb] mt-[10px]"
     >
       <TableHeader3 />
-      {connectedWebsiteData.length && connectedWebsiteData.map((item, i) => {
+      {connectedWebsiteData?.length && connectedWebsiteData.map((item, i) => {
         return <TableItem3 key={i} last={i === arr.length - 1} item = {item}/>;
       })}
     </div>
