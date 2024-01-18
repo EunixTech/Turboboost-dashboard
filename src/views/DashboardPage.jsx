@@ -634,15 +634,15 @@ const Dashboard = () => {
   const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization) ;
 
   const handleImageOptimization = async() =>{
-    toggleLoader(true);
+   
+    try {
+      toggleLoader(true);
     let endPoint = "";
     if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
     else endPoint = "api/shopify/restore-image-optimization";
    
-    try {
-     
       const res = await GetAxiosConfig(endPoint);
-      toggleLoader(false);
+
       const resData = res?.data;
       if(resData?.status === 200){
       dispatch(setToggle({ key: "imageOptimization", value: !imageOptimizationValue }));
@@ -1297,7 +1297,7 @@ const Dashboard = () => {
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
                 >
-                  Image Size Adaption
+                  Product Image Optimization
                 </p>
                 <ToggleButton
                   toggleValue={imageOptimizationValue}
