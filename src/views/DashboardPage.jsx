@@ -640,7 +640,7 @@ const Dashboard = () => {
     let endPoint = "";
     if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
     else endPoint = "api/shopify/restore-image-optimization";
-    
+
     toggleLoader(true);
       const res = await GetAxiosConfig(endPoint);
       toggleLoader(false);
@@ -1298,7 +1298,7 @@ const Dashboard = () => {
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
                 >
-                  Product Image Optimization
+                  Image Optimization
                 </p>
                 <ToggleButton
                   toggleValue={imageOptimizationValue}
