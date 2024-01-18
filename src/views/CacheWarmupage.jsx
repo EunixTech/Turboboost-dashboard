@@ -315,10 +315,10 @@ const CacheWarmup = ({ setShow }) => {
   // }
 
 
-  useEffect(() => {
-    fetchPageOptimizationData();
-    // fetchOptimizationHandlerData();
-  }, [])
+  // useEffect(() => {
+  //   fetchPageOptimizationData();
+  //   // fetchOptimizationHandlerData();
+  // }, [])
   return (
     <>
     {

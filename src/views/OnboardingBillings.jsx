@@ -88,9 +88,9 @@ const OnboardingBillings = () => {
     }
   };
 
-  useEffect(() => {
-    fetchingUserDataByToken();
-  }, []);
+  // useEffect(() => {
+  //   fetchingUserDataByToken();
+  // }, []);
 
   return (
     // loader ?

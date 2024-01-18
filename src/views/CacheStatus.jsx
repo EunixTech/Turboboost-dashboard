@@ -718,9 +718,9 @@ const CacheStatus = () => {
   }
 
 
-  useEffect(() => {
-    fetchAssetsOptimizationData();
-  }, [])
+  // useEffect(() => {
+  //   fetchAssetsOptimizationData();
+  // }, [])
 
   function kbToMb(kb) {
     return Math.ceil(kb / 1024 * 100) / 100;

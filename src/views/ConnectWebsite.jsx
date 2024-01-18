@@ -619,33 +619,33 @@ const ConnectWebsite = () => {
   }, [])
   
 
-  // Load data from localStorage when the component mounts
-  useEffect(() => {
-    const storedData = localStorage.getItem("websites");
-    if (storedData) {
-      setWebsites(JSON.parse(storedData));
-    }
-  }, []);
+  // // Load data from localStorage when the component mounts
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem("websites");
+  //   if (storedData) {
+  //     setWebsites(JSON.parse(storedData));
+  //   }
+  // }, []);
 
-  // Save data to localStorage whenever the websites state changes
-  useEffect(() => {
-    localStorage.setItem("websites", JSON.stringify(websites));
-  }, [websites]);
+  // // Save data to localStorage whenever the websites state changes
+  // useEffect(() => {
+  //   localStorage.setItem("websites", JSON.stringify(websites));
+  // }, [websites]);
 
-  const addWebsiteToList = (website) => {
-    setWebsites((prevWebsites) => [...prevWebsites, website]);
-    console.log("add data", website);
-  };
+  // const addWebsiteToList = (website) => {
+  //   setWebsites((prevWebsites) => [...prevWebsites, website]);
+  //   console.log("add data", website);
+  // };
 
-  const deleteWebsite = (index) => {
-    setWebsites((prevWebsites) => prevWebsites.filter((_, i) => i !== index));
-  };
-  const validationSchema = Yup.object().shape({
-    url: Yup.string()
-      .url('Invalid URL format')
-      .required('Website URL is required'),
-    name: Yup.string().required('Website Name is required'),
-  });
+  // const deleteWebsite = (index) => {
+  //   setWebsites((prevWebsites) => prevWebsites.filter((_, i) => i !== index));
+  // };
+  // const validationSchema = Yup.object().shape({
+  //   url: Yup.string()
+  //     .url('Invalid URL format')
+  //     .required('Website URL is required'),
+  //   name: Yup.string().required('Website Name is required'),
+  // });
 
   const handleSubmitForm = () =>{
     toast.dismiss();
@@ -699,7 +699,7 @@ const ConnectWebsite = () => {
                     {connectedWebsiteData.length !== 1 ? "s" : ""}
                   </p>
                 </div>
-                <Table websites={connectedWebsiteData} deleteWebsite={deleteWebsite} />
+                <Table websites={connectedWebsiteData}  />
               </div>
               <div className="mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[26%]">
                 <div
@@ -879,7 +879,7 @@ const ConnectWebsite = () => {
                     {connectedWebsiteData.length !== 1 ? "s" : ""}
                   </p>
                 </div>
-                <Table websites={connectedWebsiteData} deleteWebsite={deleteWebsite} />
+                <Table websites={connectedWebsiteData}  />
               </div>
               <div className="mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[26%]">
                 <div

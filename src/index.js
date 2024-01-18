@@ -66,10 +66,10 @@ const router = [
     path: "/logs",
     element: <Logs />,
   },
-  {
-    path: "/integrations",
-    element: <Integrations />,
-  },
+  // {
+  //   path: "/integrations",
+  //   element: <Integrations />,
+  // },
   {
     path: "/billing",
     element: <Billing />,
@@ -105,45 +105,7 @@ const App = () => {
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const userToken = urlParams.get("userToken");
-    setShowOnboardingModal(userToken ? true : false);
-    
-    // if (!localStorage.getItem("authToken")) {
-    //   navigate("/auth/signIn");
-    // } else {
-    //   setShowOnboardingModal(!!userToken);
-    // }
 
-    // window.intercomSettings = {
-    //   api_base: "https://api-iam.intercom.io",
-    //   app_id: "pz01qpvl",
-    //   email: "manmohankumar023@hmail.com", // the email for your user
-    //   user_id: "asd123", // a UUID for your user
-    //   user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
-    //   };
-
-    // const checkAuth = () => {
-    //   const urlParams = new URLSearchParams(window.location.search);
-    // const userToken1 = urlParams.get("userToken");
-    //   const authToken = localStorage.getItem('authToken');
-    //   const isLoginRoute = window.location.pathname === '/login-shopify';
-
-    //   if (!authToken && !isLoginRoute && !userToken1) {
-    //     // Redirect to login page if authToken is not available and not on the login route
-    //     window.location.replace('/login-shopify');
-    //   } else if (authToken && isLoginRoute) {
-    //     // Redirect to dashboard page if authToken is available and on the login route
-    //     window.location.replace('/dashboard');
-    //   }
-    // };
-
-    // checkAuth();
-
-   
- 
-  }, []);
 
   return (
     <>
