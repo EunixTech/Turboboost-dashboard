@@ -703,7 +703,7 @@ const Dashboard = () => {
   const fetchOptimizationHandlerData = async() =>{
     toggleLoader(true);
    try{
-      const res = await GetAxiosConfig(`api/shopify/fetch-optimization-handler-data`);
+      const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
       toggleLoader(false);
       const resData = res?.data;
       console.log("resDataresDataresDataresDataHandler",resData)
@@ -731,10 +731,10 @@ const Dashboard = () => {
       fetchImageOptimizationData();
       fetchOptimizationHandlerData();
     }
-    console.log("handlerDatahandlerDatahandlerData", handlerData)
-    
+ 
   }, [userToken1]);
-
+  console.log("handlerDatahandlerDatahandlerData**********", handlerData)
+    
 
   return loadingAPI ? (
     <AnimatedLoader />
