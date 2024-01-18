@@ -576,9 +576,7 @@ const Dashboard = () => {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
-      } else {
-        return response;
-      }
+      } 
       console.error("Error fetching user profile data:", error);
     }
   };
@@ -655,9 +653,7 @@ const Dashboard = () => {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
-      } else {
-        return response;
-      }
+      } 
       console.error("Error fetching user profile data:", error);
     }
   }
@@ -695,8 +691,6 @@ const Dashboard = () => {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
-      } else {
-        return response;
       }
     
     }
