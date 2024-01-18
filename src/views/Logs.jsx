@@ -475,7 +475,7 @@ const TableItem1 = ({ last, i, item }) => {
         }}
         className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        {i}
+        {i+1}
       </div>
       <div
         style={{
