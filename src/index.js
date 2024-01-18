@@ -145,11 +145,6 @@ const App = () => {
  
   }, []);
 
-
-
-
-
-
   return (
     <>
     {showOnboardingModal && <NewOnboard />}
@@ -165,6 +160,7 @@ const App = () => {
             {router.map((item, i) => {
               return <Route key={i} path={item.path} element={item.element} />;
             })}
+               <Route path="*" element={<NotFound />} />
             {/* Include the connect-to-store route here */}
             {/* <Route path="/connect-to-store" element={<ConnectStore />} /> */}
           </Routes>
