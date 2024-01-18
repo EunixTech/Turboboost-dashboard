@@ -590,6 +590,9 @@ const ConnectWebsite = () => {
         
         const resJSON = res?.data;
 
+        console.log("resJSONresresresresres", res)
+        console.log("resJSONresresresresres", resJSON)
+
         if(resJSON.status === 200){
           const dataArr = resJSON?.conectedWebsite;
           updateConnectedWebsiteData(dataArr)
