@@ -99,7 +99,7 @@ const router = [
 
 
 const App = () => {
-  const [cookies, removeCookie] = useCookies([]);
+ 
   const location = useLocation();
   const navigate = useNavigate(); 
 
