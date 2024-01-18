@@ -567,7 +567,12 @@ const Dashboard = () => {
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
         updateHandlerData(OptimizationHandlerData)
-      } else {
+      } else if(resJSON.status === 403){
+     
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+  
+      }else{
         toogleLoadingAPI(false);
         return toast.error("Please try again");
       }
@@ -677,10 +682,15 @@ const Dashboard = () => {
         dispatch(setToggle({ key: "criticalCSS", value: true }));
         fetchImageOptimizationData();
           return toast.success(resData?.message);
-        } else {
-          toggleLoader(false);
-          return toast.error("Please try again");
-        }
+        } else if(resData.status === 403){
+     
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+  
+      }else{
+        toogleLoadingAPI(false);
+        return toast.error("Please try again");
+      }
       }
      
    
@@ -701,7 +711,11 @@ const Dashboard = () => {
 
  
   useEffect(() => {
-
+    // const loggedIn = localStorage.getItem("loggedIn");
+    // if(loggedIn){
+    //   navigate("/login-shopify");
+    // }
+    
     if(!userToken1){
       googleSpeedAPI();
       fetchImageOptimizationData();

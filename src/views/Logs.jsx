@@ -842,10 +842,15 @@ const CacheStatus = () => {
         toggleLoader(false)
         const dataArr = resData?.conectedWebsite;
         updateConnectedWebsiteData(dataArr);
-      } else {
-         toggleLoader(false)
-        return toast.error(resData?.message)
-      }
+      } else if(resData.status === 403){
+     
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+    }else{
+      toggleLoader(false);
+      return toast.error("Please try again");
+    }
 
     } catch (error) {
       toggleLoader(false)
@@ -865,10 +870,15 @@ const CacheStatus = () => {
         toggleLoader(false)
         const pageViews = resJSON?.pageViewsArr;
         updatePageViewData(pageViews);
-      } else {
-        toggleLoader(false);
-        return toast.error("Please try again");
-      }
+      } else if(resJSON.status === 403){
+     
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+    }else{
+      toggleLoader(false);
+      return toast.error("Please try again");
+    }
     } catch (error) {
       toggleLoader(false);
       console.error("Error fetching user profile data:", error);
@@ -878,8 +888,8 @@ const CacheStatus = () => {
 
 
   useEffect(async() => {
-    // fetchPageViewData();
-    fetchConnectedWebsiteData();
+    fetchPageViewData();
+    // fetchConnectedWebsiteData();
   }, [])
 
   return (

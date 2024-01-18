@@ -171,7 +171,12 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
           setPhoneNumberValue(user?.user_info?.phone_number || ""); 
           toggoleLoading(false);
        
-        }
+        }else if(resJSON.status === 403){
+     
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+  
+      }
       } catch (error) {
         if (error?.response?.status === 401) {
           localStorage.removeItem('authToken');

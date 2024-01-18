@@ -597,10 +597,15 @@ const ConnectWebsite = () => {
           const dataArr = resJSON?.conectedWebsite;
           updateConnectedWebsiteData(dataArr)
           toggleLoader(false)
-        } else {
-          toggleLoader(false)
-          return toast.error("Please try again")
-        }
+        } else if(resJSON.status === 403){
+     
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+  
+      }else{
+        toggleLoader(false);
+        return toast.error("Please try again");
+      }
       
       } catch (error) {
         toggleLoader(false)

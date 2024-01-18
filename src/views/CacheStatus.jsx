@@ -675,9 +675,15 @@ const CacheStatus = () => {
       if (resData?.status === 200) {
         const assetsDataObj = resData?.assets;
         updateAssetsData(assetsDataObj)
-      } else {
-        return toast.error("Please try again");
-      }
+      } else if(resData.status === 403){
+     
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+    }else{
+      toggleLoader(false);
+      return toast.error("Please try again");
+    }
     } catch (error) {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
