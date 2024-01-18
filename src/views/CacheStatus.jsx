@@ -716,15 +716,15 @@ const CacheStatus = () => {
       console.error("Error fetching user profile data:", error);
     }
   }
-
-
-  // useEffect(() => {
-  //   fetchAssetsOptimizationData();
-  // }, [])
-
-  function kbToMb(kb) {
+  const kbToMb=(kb)=> {
     return Math.ceil(kb / 1024 * 100) / 100;
   }
+
+
+  useEffect(() => {
+    fetchAssetsOptimizationData();
+  }, [])
+
 
   return (
     loader ?
