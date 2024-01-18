@@ -23,7 +23,7 @@ const CssTabSettings = () => {
     const handleRemoveUnsedCSS = async() =>{
       let endPoint = "";
       if (!removeUnsedCSSToggleValue) endPoint = "api/shopify/minify-javascript-code";
-      else endPoint = "/api/shopify/minify-javascript-code";
+      else endPoint = "api/shopify/minify-javascript-code";
       await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "removeUnsedCSS", value: !removeUnsedCSSToggleValue }));
     }

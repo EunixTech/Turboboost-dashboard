@@ -25,7 +25,7 @@ const FontsTabSettings = () => {
   const handleFontLoading = async() =>{
     let endPoint = "";
     if (!fontLoadingToggleValue) endPoint = "api/shopify/minify-javascript-code";
-    else endPoint = "/api/shopify/minify-javascript-code";
+    else endPoint = "api/shopify/minify-javascript-code";
     await featureAPIHandling(endPoint);
     dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
   }

@@ -104,7 +104,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
         setOtp("")
         setOtpSent(false);
         // setEnteredValue(""); // Reset the input box
-     
+        window.location.reload();
         return toast.success(resJSON.message);
         
       }else {
