@@ -1199,7 +1199,7 @@ const CacheStatus = () => {
                 {/* <div className="laptop:w-[170px]  mobile:w-[100%] hover:bg-[#2FE49C] cursor-pointer mobile:mb-[10px] laptop:mb-0 h-[38px] bg-[#38F8AC] rounded-[3px] flex items-center justify-center text-[14px] font-bold tracking-wide">
                 Download Log (.csv)
               </div> */}
-                <Button />
+                {/* <Button /> */}
               </div>
               
               <Table1 pageViewDataArr={pageViewData} />
