@@ -721,13 +721,15 @@ const CacheStatus = () => {
   const fetchOptimizationHandlerData = async() =>{
     try{
        const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
-       toggleLoader(false);
+    
        const resData = res?.data;
        if(resData?.status === 200){
          const assetsOptimization = resData?.optimizationHandlers?.dataArr?.assets_optimization;
+
+         console.log("assetsOptimization", assetsOptimization)
          updateIsAssetsOptimization(assetsOptimization)
        } else {
-         toggleLoader(false);
+   
          return toast.error("Please try again");
        }
      } catch (error) {
