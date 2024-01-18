@@ -439,15 +439,12 @@ const Sidebar = () => {
             }, 1000);
         });
 }
-useEffect(() => {
-  fetchPageViewData();
-  fetchingBillingDetails()
-}, [])
+// useEffect(() => {
+//   fetchPageViewData();
+//   fetchingBillingDetails()
+// }, [])
 
 
-console.log("planMockData[currentPlan?.plan]",planMockData[currentPlan?.plan])
-
-console.log("planMockData[currentPlan?.plan]",planMockData[currentPlan?.plan]?.pageViews)
 
   return (
     <>
