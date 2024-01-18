@@ -12,7 +12,6 @@ import dateFormatter from "../utils/dateFormatter";
 import moment from 'moment';
 import toast from "react-hot-toast";
 import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
-import TimeDifferenceFromCurrent from "../utils/timeCalculator.js";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -402,7 +401,7 @@ const Table1 = ({ pageViewDataArr }) => {
       <div className="mobile:w-[1200px] laptop:w-[100%]">
         <TableHeader1 />
         {pageViewDataArr.map((item, i) => {
-          return <TableItem1 key={i} i={i} item ={item} last={i === arr.length - 1} />;
+          return <TableItem1 key={i} item ={item} last={i === arr.length - 1} />;
         })}
       </div>
     </div>
@@ -456,7 +455,7 @@ const TableHeader1 = ({ change }) => {
   );
 };
 
-const TableItem1 = ({ last, i, item }) => {
+const TableItem1 = ({ last, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
@@ -475,7 +474,7 @@ const TableItem1 = ({ last, i, item }) => {
         }}
         className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        {i+1}
+        {/* {i+1} */}
       </div>
       <div
         style={{
@@ -829,8 +828,6 @@ const CacheStatus = () => {
 
   const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
 
-  const appURL = appURLs();
-
   const fetchConnectedWebsiteData = async () => {
 
     try {
@@ -864,8 +861,6 @@ const CacheStatus = () => {
       const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
       const resJSON = res?.data;
 
-      console.log("resJSONresJSONPagevView",resJSON)
- 
       if (resJSON.status === 200) {
         toggleLoader(false)
         const pageViews = resJSON?.pageViewsArr;
@@ -889,7 +884,7 @@ const CacheStatus = () => {
 
   useEffect(() => {
     //fetchPageViewData();
-    // fetchConnectedWebsiteData();
+    fetchConnectedWebsiteData();
   }, [])
 
   return (
