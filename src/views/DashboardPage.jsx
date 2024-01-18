@@ -696,18 +696,18 @@ const Dashboard = () => {
   }
 
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const userToken1 = urlParams.get("userToken");
+
  
+  useEffect(() => {
+
+    if(!userToken1){
+      googleSpeedAPI();
+      fetchImageOptimizationData();
+    }
  
-  // useEffect(() => {
-  //   const urlParams = new URLSearchParams(window.location.search);
-  //   const userToken1 = urlParams.get("userToken");
-  
-  //   if(!userToken1){
-  //     googleSpeedAPI();
-  //     fetchImageOptimizationData();
-  //   }
- 
-  // }, []);
+  }, [userToken1]);
 
   return loadingAPI ? (
     <AnimatedLoader />
