@@ -626,8 +626,7 @@ const Dashboard = () => {
     dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
   };
 
-  const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization);
-
+  const imageOptimizationValue = handlerData?.dataArr?.image_size_adaption || false;
 
   const handleImageOptimization = async() =>{
     toggleLoader(true);
