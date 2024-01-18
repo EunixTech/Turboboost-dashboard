@@ -406,6 +406,10 @@ const Sidebar = () => {
         updatePageViewCount(pageViews?.length)
       } 
     } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
       console.error("Error fetching user profile data:", error);
     }
   };

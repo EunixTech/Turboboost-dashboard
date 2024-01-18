@@ -14,7 +14,7 @@ import "react-phone-number-input/style.css";
 import standardFetchHandlers from '../../utils/standardFetchHandlers';
 import handleFetchErrors from '../../utils/handleFetchErrors';
 import PhoneInput from "react-phone-number-input";
-import { GetAxiosConfig, PostAxiosConfig } from "../../utils/axiosConfig.js";
+import { GetAxiosConfig, PatchAxiosConfig } from "../../utils/axiosConfig.js";
 import {
   isValidNumber,
   parsePhoneNumberFromString,
@@ -104,24 +104,45 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
 
   
   const handleSubmit = async (values, { setSubmitting }) => {
+    try {
 
-    console.log("working")
-        fetch(`${appURL}/user/update-account`, {
-          ...fetchConfig,
-          method: "PATCH",
-          body: JSON.stringify(values)
-        })
-      .then(handleFetchErrors)
-      .then((resJSON) => {
-        if (resJSON?.status === 200) {
-          return  toast.success(resJSON.message)
-        }
-        else return toast.error(resJSON.message)
+      const res = await PatchAxiosConfig(`user/update-account`,values)
+         
+      const resJSON = await res.data;
+
+      if (resJSON?.status === 200) {
+        return toast.success(resJSON.message);
+        
+      }else {
+        return toast.success(resJSON.message);
+      }
+      
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
+    }
+
     
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+
+    // console.log("working")
+    //     fetch(`${appURL}/user/update-account`, {
+    //       ...fetchConfig,
+    //       method: "PATCH",
+    //       body: JSON.stringify(values)
+    //     })
+    //   .then(handleFetchErrors)
+    //   .then((resJSON) => {
+    //     if (resJSON?.status === 200) {
+    //       return  toast.success(resJSON.message)
+    //     }
+    //     else return toast.error(resJSON.message)
+    
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err)
+    //   })
   };
 
   useEffect(() => {
@@ -151,6 +172,10 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
        
         }
       } catch (error) {
+        if (error?.response?.status === 401) {
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+        }
         console.error("Error fetching user profile data:", error);
       }
     };

@@ -252,6 +252,10 @@ const CacheWarmup = ({ setShow }) => {
         return toast.error("Please try again");
       }
     } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
       toggleLoader(false);
       console.error("Error fetching user profile data:", error);
     }
@@ -276,6 +280,10 @@ const CacheWarmup = ({ setShow }) => {
         return toast.error("Please try again");
       }
     } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
       toggleLoader(false);
       console.error("Error fetching user profile data:", error);
     }

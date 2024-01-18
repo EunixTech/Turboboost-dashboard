@@ -9,6 +9,7 @@ import PhoneInput from "react-phone-number-input";
 import getFetchConfig from "../../utils/getFetchConfig";
 import appURLs from "../../appURL";
 import { isValidEmailAddress } from "../../utils/verification";
+import { GetAxiosConfig, PostAxiosConfig } from "../../utils/axiosConfig.js";
 const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
   const fetchConfig = getFetchConfig(),
     appURL = appURLs();
@@ -28,30 +29,52 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
       if (!enteredValue) return toast.error("Please provide email address");
       else if (enteredValue && !isValidEmailAddress(enteredValue)) return toast.error("Please provide valid email address");
 
-      fetch(`${appURL}/user/sending-otp`, {
-        ...fetchConfig,
-        method: "POST",
-        body: JSON.stringify({
-          email_address: enteredValue
-        })
-      })
-        .then(handleFetchErrors)
-        .then((resJson) => {
-          if (resJson.status === 200) {
-            setOtpSent(true);
-            // setEnteredValue(""); // Reset the input box
-            return toast.success(resJson?.message);
-          }
-          else return toast.error(resJson?.message);
+      const res = await PostAxiosConfig(`user/sending-otp`,{email_address: enteredValue})
+         
+      const resJSON = await res.data;
 
-        })
-        .catch((err) => {
-          return toast.error("Something went wrong");
-        })
-
+      if (resJSON?.status === 200) {
+        setOtpSent(true);
+        // setEnteredValue(""); // Reset the input box
+     
+        return toast.success(resJSON.message);
+        
+      }else {
+        return toast.success(resJSON.message);
+      }
+      
     } catch (error) {
-      return toast.error("Something went wrong");
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
     }
+
+  
+      // fetch(`${appURL}/user/sending-otp`, {
+      //   ...fetchConfig,
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     email_address: enteredValue
+      //   })
+      // })
+      //   .then(handleFetchErrors)
+      //   .then((resJson) => {
+      //     if (resJson.status === 200) {
+      //       setOtpSent(true);
+      //       // setEnteredValue(""); // Reset the input box
+      //       return toast.success(resJson?.message);
+      //     }
+      //     else return toast.error(resJson?.message);
+
+      //   })
+      //   .catch((err) => {
+      //     return toast.error("Something went wrong");
+      //   })
+
+    // } catch (error) {
+    //   return toast.error("Something went wrong");
+    // }
   };
 
   const handleSubmit = async (event) => {
@@ -67,29 +90,57 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
       if (!enteredValue) return toast.error("Please provide email address");
       else if (enteredValue && !isValidEmailAddress(enteredValue)) return toast.error("Please provide valid email address");
 
-      fetch(`${appURL}/user/update-emailaddress`, {
-        ...fetchConfig,
-        method: "POST",
-        body: JSON.stringify({
-          email_address: enteredValue,
-          OTPCode: otp,
-        })
-      })
-        .then(handleFetchErrors)
-        .then((resJson) => {
-          if (resJson.status === 200) {
-            toast.success(resJson?.message);
-            onClose();
-            setOtp("")
-            setOtpSent(false);
-            return
-          }
-          else return toast.error(resJson?.message);
 
-        })
-        .catch((err) => {
-          return toast.error("Something went wrong");
-        })
+
+      const res = await PostAxiosConfig(`user/update-emailaddress`,{
+        email_address: enteredValue,
+        OTPCode: otp,
+      })
+         
+      const resJSON = await res.data;
+
+      if (resJSON?.status === 200) {
+        onClose();
+        setOtp("")
+        setOtpSent(false);
+        // setEnteredValue(""); // Reset the input box
+     
+        return toast.success(resJSON.message);
+        
+      }else {
+        return toast.success(resJSON.message);
+      }
+      
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
+    }
+
+      // fetch(`${appURL}/user/update-emailaddress`, {
+      //   ...fetchConfig,
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     email_address: enteredValue,
+      //     OTPCode: otp,
+      //   })
+      // })
+      //   .then(handleFetchErrors)
+      //   .then((resJson) => {
+      //     if (resJson.status === 200) {
+      //       toast.success(resJson?.message);
+      //       onClose();
+      //       setOtp("")
+      //       setOtpSent(false);
+      //       return
+      //     }
+      //     else return toast.error(resJson?.message);
+
+      //   })
+      //   .catch((err) => {
+      //     return toast.error("Something went wrong");
+      //   })
 
 
       // console.log("Email address to be updated:", enteredValue);
@@ -127,10 +178,10 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
 
       // onClose();
       // toast.success("Email address updated successfully");
-    } catch (error) {
-      console.error("Error updating email address:", error.message);
-      toast.error("Failed to update email address");
-    }
+    // } catch (error) {
+    //   console.error("Error updating email address:", error.message);
+    //   toast.error("Failed to update email address");
+    // }
   };
 
   const handleClose = () => {
