@@ -15,6 +15,7 @@ import standardFetchHandlers from '../../utils/standardFetchHandlers';
 import handleFetchErrors from '../../utils/handleFetchErrors';
 import PhoneInput from "react-phone-number-input";
 import { GetAxiosConfig, PatchAxiosConfig } from "../../utils/axiosConfig.js";
+import AnimatedLoader from "../loader/AnimatedLoader.jsx";
 import {
   isValidNumber,
   parsePhoneNumberFromString,
@@ -211,7 +212,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
 
 
   return (
-    loading ? <Loader />:
+    loading ? <AnimatedLoader />:
     <Formik
       initialValues={{
         first_name: userData?.first_name || "",
