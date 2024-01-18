@@ -887,8 +887,8 @@ const CacheStatus = () => {
 
 
 
-  useEffect(async() => {
-    // fetchPageViewData();
+  useEffect(() => {
+    //fetchPageViewData();
     // fetchConnectedWebsiteData();
   }, [])
 

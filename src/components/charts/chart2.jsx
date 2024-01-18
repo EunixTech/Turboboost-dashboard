@@ -71,6 +71,8 @@ const Chart2 = () => {
       label: {
         formatter: (text) => `${parseInt(text) + 1}`, // Add 1 to the x-axis label
       },
+      tickCount: data.length, // Ensure there's a tick for each data point
+      nice: true, //
     },
     legend: {
       position: "top-right",
