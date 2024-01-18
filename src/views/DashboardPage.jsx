@@ -636,13 +636,14 @@ const Dashboard = () => {
   const handleImageOptimization = async() =>{
    
     try {
-      toggleLoader(true);
+     
     let endPoint = "";
     if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
     else endPoint = "api/shopify/restore-image-optimization";
-   
+    
+    toggleLoader(true);
       const res = await GetAxiosConfig(endPoint);
-
+      toggleLoader(false);
       const resData = res?.data;
       if(resData?.status === 200){
       dispatch(setToggle({ key: "imageOptimization", value: !imageOptimizationValue }));
@@ -824,7 +825,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
-                   {imageData?.lastPurge ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
+                   {imageData?.lastPurge !== null ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
                 </p>
               </div>: ``
 
