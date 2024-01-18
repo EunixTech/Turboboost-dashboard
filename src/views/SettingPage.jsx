@@ -76,15 +76,6 @@ const SettingPage = ({ registrationData }) => {
     }
   };
 
-  const handleLeavePage = () => {
-    if (unsavedChanges) {
-      const userConfirmed = window.confirm("You have unsaved changes. Do you really want to leave?");
-      if (!userConfirmed) {
-        return;
-      }
-    }
-    window.history.back();
-  };
 
 
 
