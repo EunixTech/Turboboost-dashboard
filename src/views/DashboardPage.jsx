@@ -573,6 +573,10 @@ const Dashboard = () => {
       }
     } catch (error) {
       toogleLoadingAPI(false);
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      } 
       console.error("Error fetching user profile data:", error);
     }
   };
@@ -646,6 +650,10 @@ const Dashboard = () => {
       }
     } catch (error) {
       toggleLoader(false);
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      } 
       console.error("Error fetching user profile data:", error);
     }
   }
@@ -678,8 +686,13 @@ const Dashboard = () => {
      
    
     } catch (error) {
-      toggleLoader(false);
       console.error("Error fetching user profile data:", error);
+      toggleLoader(false);
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
+    
     }
   }
 
