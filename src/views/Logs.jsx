@@ -877,10 +877,10 @@ const CacheStatus = () => {
 
 
 
-  // useEffect(async() => {
-  //   fetchPageViewData();
-  //   fetchConnectedWebsiteData();
-  // }, [])
+  useEffect(async() => {
+    // fetchPageViewData();
+    fetchConnectedWebsiteData();
+  }, [])
 
   return (
     loader ? <AnimatedLoader /> :
