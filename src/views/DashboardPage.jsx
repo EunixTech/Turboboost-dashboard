@@ -734,7 +734,7 @@ const Dashboard = () => {
             {w > 1000 && (
               <div className="flex items-center justify-center">
                 {
-                  handlerData?.isOptimizationActive ?  <img
+                  true ?  <img
                   src="/graphic/warmup/elli.svg"
                   className="mr-[3px] w-[14px]"
                   alt=""
