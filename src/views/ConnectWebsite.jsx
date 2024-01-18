@@ -695,8 +695,8 @@ const ConnectWebsite = () => {
                     }}
                     className="text-[#0a0a187e] f2 text-[14px] font-medium"
                   >
-                    {websites.length} Connection
-                    {websites.length !== 1 ? "s" : ""}
+                    {connectedWebsiteData.length} Connection
+                    {connectedWebsiteData.length !== 1 ? "s" : ""}
                   </p>
                 </div>
                 <Table websites={connectedWebsiteData} deleteWebsite={deleteWebsite} />

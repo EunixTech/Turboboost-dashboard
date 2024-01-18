@@ -721,18 +721,19 @@ const CacheStatus = () => {
     toggleLoader(true);
    try{
       const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
-      toggleLoader(false);
-      const resData = res?.data;
-      console.log("resDataresDataresDataresDataHandler",resData)
-      if(resData?.status === 200){
+      console.log("**********res**************",res)
+      // toggleLoader(false);
+      // const resData = res?.data;
+      // console.log("resDataresDataresDataresDataHandler",resData)
+      // if(resData?.status === 200){
 
-        return toast.success(resData?.message);
-      } else {
-        toggleLoader(false);
-        return toast.error("Please try again");
-      }
+      //   return toast.success(resData?.message);
+      // } else {
+      //   toggleLoader(false);
+      //   return toast.error("Please try again");
+      // }
     } catch (error) {
-      toggleLoader(false);
+      // toggleLoader(false);
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
