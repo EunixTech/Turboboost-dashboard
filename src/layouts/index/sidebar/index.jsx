@@ -439,12 +439,10 @@ const Sidebar = () => {
             }, 1000);
         });
 }
-// useEffect(() => {
-//   fetchPageViewData();
-//   fetchingBillingDetails()
-// }, [])
-
-
+useEffect(() => {
+  fetchPageViewData();
+  fetchingBillingDetails()
+}, [])
 
   return (
     <>
