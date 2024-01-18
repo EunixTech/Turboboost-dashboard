@@ -231,7 +231,6 @@ const TableItem1 = ({ last, item }) => {
 const CacheWarmup = ({ setShow }) => {
   const [enabled, setEnabled] = useState(false);
   const [pageOptimizationData, updatePageOptimizationData] = useState({});
-  const [isPageOptimization, updateisPageOptimization] = useState(false);
   const dark = useSelector((state) => state.home.dark);
    const [loader, toggleLoader] = useState(false);
   const dispatch = useDispatch();
@@ -265,7 +264,7 @@ const CacheWarmup = ({ setShow }) => {
 
   const handleOptimizePage = async() =>{
     let endPoint = "";
-    if (!isPageOptimization) endPoint = "api/shopify/removed-page-unused-code";
+    if (!pageOptimizationValue) endPoint = "api/shopify/removed-page-unused-code";
     else endPoint = "api/shopify/restore-page-optimization";
    
     try {
@@ -274,7 +273,7 @@ const CacheWarmup = ({ setShow }) => {
       toggleLoader(false);
       const resData = res?.data;
       if(resData?.status === 200){
-      dispatch(setToggle({ key: "pageOptimization", value: !isPageOptimization }));
+      dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
       fetchPageOptimizationData();
         return toast.success(resData?.message);
       } else {
@@ -290,31 +289,35 @@ const CacheWarmup = ({ setShow }) => {
     }
   }
 
-  const fetchOptimizationHandlerData = async() =>{
-   try{
-      const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
-    
-      const resData = res?.data;
-      if(resData?.status === 200){
-        const isPageOpt = resData?.optimizationHandlers?.dataArr?.page_optimization;
-        updateisPageOptimization(isPageOpt)
-      } else {
-    
-        return toast.error("Please try again");
-      }
-    } catch (error) {
-      if (error?.response?.status === 401) {
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
-      } 
-      console.error("Error fetching user profile data:", error);
-    }
-  }
+  // const fetchOptimizationHandlerData = async() =>{
+  //   toggleLoader(true);
+  //  try{
+  //     const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
+  //     console.log("**********res**************",res)
+  //     // toggleLoader(false);
+  //     // const resData = res?.data;
+  //     // console.log("resDataresDataresDataresDataHandler",resData)
+  //     // if(resData?.status === 200){
+
+  //     //   return toast.success(resData?.message);
+  //     // } else {
+  //     //   toggleLoader(false);
+  //     //   return toast.error("Please try again");
+  //     // }
+  //   } catch (error) {
+  //     toggleLoader(false);
+  //     if (error?.response?.status === 401) {
+  //       localStorage.removeItem('authToken');
+  //       window.location.replace('/login-shopify');
+  //     } 
+  //     console.error("Error fetching user profile data:", error);
+  //   }
+  // }
 
 
   useEffect(() => {
     fetchPageOptimizationData();
-    fetchOptimizationHandlerData();
+    // fetchOptimizationHandlerData();
   }, [])
   return (
     <>
@@ -475,7 +478,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                     /> */}
 
-                    <ToggleButton toggleValue={isPageOptimization} handlingToggle={handleOptimizePage}  toggleKey="someKey" />
+                    <ToggleButton toggleValue={pageOptimizationValue} handlingToggle={handleOptimizePage}  toggleKey="someKey" />
 
                   </div>
                   <div
@@ -580,7 +583,7 @@ const CacheWarmup = ({ setShow }) => {
                         }}
                         className="flex text-[14px] font-medium items-center"
                       >
-                        {isPageOptimization ? (
+                        {pageOptimizationValue ? (
                           <>
                             <img
                               src="/graphic/warmup/elli1.svg"
@@ -612,7 +615,7 @@ const CacheWarmup = ({ setShow }) => {
                       Start Optimizations
                     </h1>
                   </div> */}
-                    <Button pageOptimizationValue={isPageOptimization} handleOptimizePage = {handleOptimizePage} />
+                    <Button pageOptimizationValue={pageOptimizationValue} handleOptimizePage = {handleOptimizePage} />
                   </div>
                   {/* <div
                     style={{
