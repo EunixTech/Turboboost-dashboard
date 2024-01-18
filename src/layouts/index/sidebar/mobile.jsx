@@ -130,6 +130,7 @@ const Sidebar = ({ transition, cancel }) => {
               <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
                 <p className="text-[11px] text-white tracking-wide">
                   Page Views/mo
+                  
                 </p>
                 <p className="text-[11px] text-[#918EA2] tracking-wide">
                   90,000/200,000
