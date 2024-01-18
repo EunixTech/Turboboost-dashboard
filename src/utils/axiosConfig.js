@@ -43,12 +43,7 @@ export const GetAxiosConfig = async (URL="") => {
         }
     );
     console.log("response.status response.status ",response.status )
-    if (response.status === 401) {
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
-      } else {
-        return response;
-      }
+   
 
   
 }
