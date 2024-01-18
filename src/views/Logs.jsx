@@ -883,7 +883,7 @@ const CacheStatus = () => {
 
 
   useEffect(() => {
-    //fetchPageViewData();
+      fetchPageViewData();
     fetchConnectedWebsiteData();
   }, [])
 
