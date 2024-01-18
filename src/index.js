@@ -66,10 +66,10 @@ const router = [
     path: "/logs",
     element: <Logs />,
   },
-  // {
-  //   path: "/integrations",
-  //   element: <Integrations />,
-  // },
+  {
+    path: "/integrations",
+    element: <Integrations />,
+  },
   {
     path: "/billing",
     element: <Billing />,
@@ -145,7 +145,7 @@ const App = () => {
  
   }, []);
 
-  
+
 
   return (
     <>
