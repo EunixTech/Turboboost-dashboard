@@ -490,7 +490,7 @@ const Dashboard = () => {
   const [coreVitals, setVitsals] = useState(true);
   const [loading, toogleLoading] = useState(true);
   const [loadingAPI, toogleLoadingAPI] = useState(true);
-
+  const [handlerDataObj, UpdateHandlerDataObj] = useState(true);
   const w = useWidth();
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
@@ -699,13 +699,39 @@ const Dashboard = () => {
 
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");
+
+  const fetchOptimizationHandlerData = async() =>{
+    toggleLoader(true);
+   try{
+      const res = await GetAxiosConfig(`api/shopify/fetch-optimization-handler-data`);
+      toggleLoader(false);
+      const resData = res?.data;
+      console.log("resDataresDataresDataresDataHandler",resData)
+      if(resData?.status === 200){
+
+        return toast.success(resData?.message);
+      } else {
+        toggleLoader(false);
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toggleLoader(false);
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      } 
+      console.error("Error fetching user profile data:", error);
+    }
+  }
+
   useEffect(async() => {
  
     if(!userToken1){
       googleSpeedAPI();
       fetchImageOptimizationData();
+      fetchOptimizationHandlerData();
     }
-    
+    console.log("handlerDatahandlerDatahandlerData", handlerData)
     
   }, [userToken1]);
 
