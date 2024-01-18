@@ -658,8 +658,9 @@ const CacheStatus = () => {
   const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const [assetsData, updateAssetsData] = useState({});
+  const [isAssetsOptimization, updateIsAssetsOptimization] = useState(false);
   const dispatch = useDispatch();
-
+  
   const assetsOptimizationValue = useSelector((state) => state.toggles?.assetsOptimization);
 
 
@@ -690,7 +691,7 @@ const CacheStatus = () => {
 
   const handleOptimizeAssets = async () => {
     let endPoint = "";
-    if (!assetsOptimizationValue) endPoint = "api/shopify/removed-unused-javascript-code";
+    if (!isAssetsOptimization) endPoint = "api/shopify/removed-unused-javascript-code";
     else endPoint = "api/shopify/restore-assets-optimization";
 
     try {
@@ -701,7 +702,7 @@ const CacheStatus = () => {
       const resData = res?.data;
 
       if (resData?.status === 200) {
-        dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
+        dispatch(setToggle({ key: "assetsOptimization", value: !isAssetsOptimization }));
         fetchAssetsOptimizationData();
         return toast.success(resData?.message);
       } else {
@@ -718,29 +719,25 @@ const CacheStatus = () => {
   }
 
   const fetchOptimizationHandlerData = async() =>{
-    toggleLoader(true);
-   try{
-      const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
-      console.log("**********res**************",res)
-      // toggleLoader(false);
-      // const resData = res?.data;
-      // console.log("resDataresDataresDataresDataHandler",resData)
-      // if(resData?.status === 200){
-
-      //   return toast.success(resData?.message);
-      // } else {
-      //   toggleLoader(false);
-      //   return toast.error("Please try again");
-      // }
-    } catch (error) {
-      // toggleLoader(false);
-      if (error?.response?.status === 401) {
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
-      } 
-      console.error("Error fetching user profile data:", error);
-    }
-  }
+    try{
+       const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
+       toggleLoader(false);
+       const resData = res?.data;
+       if(resData?.status === 200){
+         const assetsOptimization = resData?.optimizationHandlers?.dataArr?.assets_optimization;
+         updateIsAssetsOptimization(assetsOptimization)
+       } else {
+         toggleLoader(false);
+         return toast.error("Please try again");
+       }
+     } catch (error) {
+       if (error?.response?.status === 401) {
+         localStorage.removeItem('authToken');
+         window.location.replace('/login-shopify');
+       } 
+       console.error("Error fetching user profile data:", error);
+     }
+   }
 
 
   useEffect(() => {
@@ -907,7 +904,7 @@ const CacheStatus = () => {
                   />
                   {selected.length > 0 ? "Purge Selected" : "Purge All Cache"}
                 </div> */}
-                  <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
+                  <Button2 assetsOptimizationValue={isAssetsOptimization} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
                 </div>
               </div>
               {/* <Filter /> */}
