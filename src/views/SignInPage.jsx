@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
   domain: Yup.string()
-    .matches(/^(http|https)?:\/\/(www\.)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/, "Invalid domain name format")
+    .matches(/^(http|https)?:\/\/(www\.)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?|[\w-]+\.myshopify\.com$/, "Invalid domain name format")
     .required("Domain name is required"),
 });
 
