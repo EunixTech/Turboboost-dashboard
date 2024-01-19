@@ -24,8 +24,8 @@ import Home from "./views/home.jsx";
 import Logs from "./views/Logs.jsx";
 // import Logs from "./routes/logs.jsx";
 
-// import Integrations from "./routes/integrations";
-import Integrations from "./views/integrations.jsx";
+import Integrations from "./routes/integrations";
+// import Integrations from "./views/integrations.jsx";
 
 import Billing from "./views/Billing.jsx";
 import Settings from "./views/SettingPage.jsx";
