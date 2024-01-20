@@ -827,7 +827,7 @@ const ConnectWebsite = () => {
                     )}
                   </Formik>
                 </div>
-                <div
+                {/* <div
                   style={{
                     backgroundColor: dark ? "#111317" : "#fff",
                     borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -858,7 +858,7 @@ const ConnectWebsite = () => {
                       setShow(true);
                     }}
                   />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
