@@ -481,6 +481,161 @@ import { useNavigate } from "react-router-dom";
 import Tooltip from "../components/Tooltip";
 import axios from "axios";
 
+const GooglePageScore = () => {
+  const dark = useSelector((state) => state.home.dark);
+  const [coreVitals, setVitsals] = useState(true);
+
+  return (
+    <div
+      style={{
+        backgroundColor: dark ? "#111317" : "#fff",
+        borderColor: dark ? "#1F2329" : "#ebebeb",
+      }}
+      className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]"
+    >
+      <div className="w-[100%]  flex items-center justify-between">
+        <p
+          style={{ color: dark ? "#fff" : "#000" }}
+          className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
+        >
+          Google Page Score
+        </p>
+        <div
+          style={{
+            backgroundColor: dark ? "#111317" : "#fff",
+            borderColor: dark ? "#1F2329" : "#ebebeb",
+          }}
+          className="w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center"
+        >
+          <div
+            onClick={() => {
+              setVitsals(true);
+            }}
+            style={{
+              ...(coreVitals
+                ? {
+                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                    borderColor: dark ? "#1F2329" : "#ebebeb",
+                    color: dark ? "#fff" : "#000",
+                  }
+                : {
+                    backgroundColor: dark ? "#111317" : "#fff",
+                    color: dark ? "#fff" : "#000",
+                    borderColor: dark ? "#1F2329" : "#ebebeb",
+                  }),
+            }}
+            className="w-[50%] h-[100%]  flex items-center justify-center bg-[#ebebeb8b] border-r-[1px] "
+          >
+            <p className="text-[12px] f2  font-medium">Core Vitals</p>
+          </div>
+          <div
+            onClick={() => {
+              setVitsals(false);
+            }}
+            style={{
+              ...(!coreVitals
+                ? {
+                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                    borderColor: dark ? "#1F2329" : "#ebebeb",
+                    color: dark ? "#fff" : "#000",
+                  }
+                : {
+                    backgroundColor: dark ? "#111317" : "#fff",
+                    color: dark ? "#fff" : "#000",
+                  }),
+            }}
+            className="w-[50%] h-[100%] flex items-center justify-center bg-[#fff]"
+          >
+            <p className="text-[12px]  font-medium f2">Performance</p>
+          </div>
+        </div>
+      </div>
+      {!coreVitals ? (
+        <>
+          <p
+            style={{
+              color: dark ? "#ffffff74" : "#0a0a187e",
+            }}
+            className="text-[12px]  font-semibold f2"
+          >
+            Performance
+          </p>
+          <div className="flex items-center  justify-around h-[140px]">
+            <CircularProgressBar
+              mr="20px"
+              title="Performence"
+              percentage={98}
+            />
+            <CircularProgressBar
+              mr="20px"
+              title="Accessibility"
+              percentage={98}
+            />
+            <CircularProgressBar
+              mr="20px"
+              title="Best Practices"
+              percentage={98}
+            />
+            <CircularProgressBar title="SEO" percentage={98} />
+          </div>
+        </>
+      ) : (
+        <div className="w-[100%] mt-[20px]">
+          <div className="flex  justify-around ">
+            <div className="w-[150px]">
+              <p
+                style={{ color: dark ? "#fff" : "#000" }}
+                className="text-[12px] f2 font-medium"
+              >
+                First Contentful Paint
+              </p>
+              <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
+                0.5s
+              </p>
+            </div>
+            <div className="w-[150px]">
+              <p
+                style={{ color: dark ? "#fff" : "#000" }}
+                className="text-[12px] f2 font-medium"
+              >
+                Speed Index
+              </p>
+              <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
+                1.3 s
+              </p>
+            </div>
+          </div>
+          <div className="flex mt-[5%] justify-around ">
+            <div className="w-[150px]">
+              <p
+                style={{ color: dark ? "#fff" : "#000" }}
+                className="text-[12px] f2 font-medium"
+              >
+                Total Blocking Time
+              </p>
+              <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
+                0ms
+              </p>
+            </div>
+            <div className="w-[150px]">
+              <p
+                style={{ color: dark ? "#fff" : "#000" }}
+                className="text-[12px] f2 font-medium"
+              >
+                Largest Contentful Paint
+              </p>
+              <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
+                1.1s
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
 const Dashboard = () => {
   const [imageData, updateImageData] = useState({});
   const [handlerData, updateHandlerData] = useState({});
@@ -1008,7 +1163,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:flex  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px] flex h-[250px] mobile-cols">
-            <div
+            {/* <div
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
                 borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -1115,8 +1270,8 @@ const Dashboard = () => {
                   )}
                 </>
               )}
-            </div>
-
+            </div> */}
+            <GooglePageScore />
             <div
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",

@@ -75,7 +75,7 @@ const IntegrationItem = ({
         backgroundColor: dark ? "#111317" : "#fff",
         borderColor: dark ? "#1F2329" : "#ebebeb",
       }}
-      className="px-[15px] bg-[#fff] border-[1px] border-[#ebebeb] rounded-[9px] py-[18px] h-[190px] "
+      className="px-[15px] bg-[#fff] border-[1px] border-[#ebebeb] rounded-[9px] py-[18px] h-[220px] "
     >
       <div className="flex justify-between w-[100%]">
         <img src={src} className="w-[50px] rounded-[7px]" alt="" />
@@ -94,7 +94,7 @@ const IntegrationItem = ({
             onClick={() => {
               connectClick();
             }}
-            className="w-[100px] rounded-[3px] text-[14px]  hover:bg-[#38F8AC] cursor-pointer font-medium h-[38px] border-[1px] border-[#ebebeb] flex items-center justify-center"
+            className="w-[110px] rounded-[3px] text-[14px]  hover:bg-[#38F8AC] cursor-pointer font-medium h-[38px] border-[1px] border-[#ebebeb] flex items-center justify-center"
           >
             Connect
           </div>
@@ -171,7 +171,7 @@ const Integrations = ({ setShow }) => {
 
   const showToastAlert = () =>{
     toast.dismiss();
-    return toast.warning("Comming Soon");
+    // return toast.warning("Comming Soon");
   }
   return (
     <>
@@ -198,18 +198,26 @@ const Integrations = ({ setShow }) => {
                 title="TxtCart"
                 connectClick={showToastAlert}
               connect={true}
-                sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                sub="Conversational SMS Marketing and Cart recovery with AI"
               />
               <IntegrationItem
                 connected={false}
-                src="/graphic/integrations/p2.png"
-                title="Appstack"
+                src="/graphic/integrations/chargebacks.webp"
+                title="Chargeflow Dispute Chargebacks"
                 connectClick={showToastAlert}
                 connect={true}
-                sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                sub="Automate chargebacks, Fight Fraud Prevention, Order Protection"
+              />
+                <IntegrationItem
+                connected={false}
+                src="/graphic/integrations/appstlelogo.webp"
+                title="Appstle℠ Subscriptions App"
+                connectClick={showToastAlert}
+                connect={true}
+                sub="App for recurring payments, subscriptions, build a box, bundle"
               />
             </div>
-            <div className="w-[100%] pt-[30px]">
+            {/* <div className="w-[100%] pt-[30px]">
               <h1
                 style={{
                   color: dark ? "#fff" : "#000",
@@ -438,7 +446,7 @@ const Integrations = ({ setShow }) => {
                 )}
                
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

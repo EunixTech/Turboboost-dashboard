@@ -39,21 +39,14 @@ export default function GreetingCard() {
         const fetchProfileData = async () => {
        
           try {
-            const res = await GetAxiosConfig(`user/user-profile`)
-             
-              
-            
+            const res = await GetAxiosConfig(`user/user-profile`);
+
             const resJSON = await res.data;
     
             if (resJSON?.status === 200) {
               const user = resJSON?.acccount;
     
-              const dataObj = {
-                first_name: user?.user_info?.first_name,
-                last_name: user?.user_info?.last_name,
-             
-              };
-                const full_name = `${dataObj.first_name} ${dataObj.last_name}`;
+                const full_name = user?.user_info?.first_name;
                 updateUserName(full_name);
            
             }
