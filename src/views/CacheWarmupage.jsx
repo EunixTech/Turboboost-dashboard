@@ -117,7 +117,7 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[40.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center justify-center"
       >
         Name
       </div>
@@ -125,7 +125,7 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[30.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[40%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center justify-center"
       >
         Optimized At
       </div>
@@ -141,18 +141,18 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[20.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center justify-center"
       >
         Status
       </div>
-      <div
+      {/* <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
         className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
 
-      </div>
+      </div> */}
 
     </div>
   );
@@ -203,7 +203,7 @@ const TableItem1 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[40.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
         {item?.title}
       </div>
@@ -211,7 +211,7 @@ const TableItem1 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[40%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
         {item?.optimized_at ? new Date(item.optimized_at).toLocaleString() : ''}
       </div>
@@ -219,7 +219,7 @@ const TableItem1 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[20.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
         <Status i= {item?.is_optimized === true ? 1 : 2} />
       </div>
@@ -556,6 +556,14 @@ const CacheWarmup = ({ setShow }) => {
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
                     </div>  */}
+                     <p
+                        style={{
+                          color: dark ? "#ffffff74" : "#0a0a187e",
+                        }}
+                        className="text-[14px] mt-[4px] tracking-wide  text-[#0a0a186f]"
+                      >
+                        {pageOptimizationData?.pages?.length && `${pageOptimizationData?.pages?.length} Pages`} 
+                      </p>
                     {(pageOptimizationData?.pages && pageOptimizationData?.pages?.length) ? <Table1 tableData = {pageOptimizationData?.pages} /> : ""}
 
                   </div>
