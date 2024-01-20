@@ -69,7 +69,8 @@ const TableHeader = () => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[12%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[40%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center justify-center px-[15px]"
+       
       >
         Site Name
       </div>
@@ -77,11 +78,11 @@ const TableHeader = () => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[23%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[40%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center justify-center px-[15px]"
       >
         Site URL
       </div>
-      <div
+      {/* <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
@@ -96,23 +97,23 @@ const TableHeader = () => {
         className="w-[17%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
         Site Secret
-      </div>
+      </div> */}
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[15%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[40%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center justify-center px-[15px]"
       >
         Status
       </div>
-      <div
+      {/* <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
         className="w-[13%] font-medium text-[#0a0a187b] justify-center text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
         Actions
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -182,7 +183,8 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[12%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[40%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center justify-center px-[15px]"
+       
       >
         {name}
       </div>
@@ -190,12 +192,12 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[23%] overflow-hidden pr-[10px] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[40%] overflow-hidden pr-[10px] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
         https://{site_url}
       </div>
       {/* Site ID */}
-      <div
+      {/* <div
         style={{
           color: dark ? "#fff" : "#000",
         }}
@@ -234,10 +236,10 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
             Copy
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Site Secret */}
-      <div
+      {/* <div
         style={{
           color: dark ? "#fff" : "#000",
         }}
@@ -276,26 +278,26 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
             Copy
           </p>
         </div>
-      </div>
+      </div> */}
 
-      <div className="w-[15%] font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
+      <div className="w-[20%] font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
         <Status i={1} />
       </div>
-      <div className="w-[13%] flex  items-center justify-center font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
+      {/* <div className="w-[13%] flex  items-center justify-center font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
         <img
           src="/graphic/status/trash.svg"
           className="w-[15px] hover:opacity-70 cursor-pointer h-[15px]"
           alt=""
           onClick={handleTrashIconClick}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
 
 const Table = ({ websites, deleteWebsite, dark }) => (
   <div className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool">
-    <div className="mobile:w-[900px]  laptop:min-w-[900px] laptop:w-[100%]">
+    <div className="mobile:w-[500px]  laptop:min-w-[500px] laptop:w-[100%]">
       <TableHeader dark={dark} />
       {websites.length && websites.map((website, i) => (
         <TableItem
