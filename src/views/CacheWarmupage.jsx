@@ -484,6 +484,7 @@ const CacheWarmup = ({ setShow }) => {
                   <div
                     style={{
                       borderColor: dark ? "#1F2329" : "#ebebeb",
+                      display:"block"
                     }}
                     className="w-[100%] laptop:flex justify-between border-t-[1px] px-[15px] border-[#ebebeb] mt-[8px] block"
                    
