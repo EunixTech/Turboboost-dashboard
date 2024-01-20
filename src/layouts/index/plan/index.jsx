@@ -39,7 +39,14 @@ const Plan = ({ cancel }) => {
 
   const handleBilling = async () => {
     try {
-
+      const planMap = {
+        0: "Free",
+        1: "Starter",
+        2:"Growth",
+        3: "Pro"
+      };
+  
+      if(currentPlan === planMap[plan]) return toast.error("Please change plan");
       if (itemData && !Object.keys(itemData).length) return toast.error("Please change plan");
       let response = await billingApi(itemData, selected);
 
