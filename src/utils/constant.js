@@ -21,7 +21,7 @@ export const planMockData = [
         name: "Starter",
         desc: "For very small businesses",
         monthlyPrice: 15,
-        annuallyPrice: 12.50,
+        annuallyPrice: 150,
         pageViews: "50,000",
         CDN_bandWidth: "25GB",
         includes: [
@@ -45,7 +45,7 @@ export const planMockData = [
         name: "Growth",
         desc: "Our most popular plan for growing brands",
         monthlyPrice: 40,
-        annuallyPrice: 33.30,
+        annuallyPrice: 400,
         pageViews: "200,000 ",
         CDN_bandWidth: "100GB ",
         includes: [
@@ -76,7 +76,7 @@ export const planMockData = [
         name: "Pro",
         desc: "Best for big brands",
         monthlyPrice: 150,
-        annuallyPrice: 125,
+        annuallyPrice: 1500,
         pageViews: "1,000,000",
         CDN_bandWidth: "500GB",
         includes: [

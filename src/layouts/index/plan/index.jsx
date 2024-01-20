@@ -199,7 +199,7 @@ useEffect(() => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                     >
-                      1 website
+                      5,000 page views per month
                     </p>
                   </div>
                   <div className="w-[100%] mt-[10px] flex justify-between">
@@ -212,7 +212,35 @@ useEffect(() => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                     >
-                      200,000 page views/mo
+                     Optimized by TurboBoost Badge
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                     Image Optimization Stack
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                    Fast and easy setup
                     </p>
                   </div>
                   {/* <div className="w-[100%] mt-[10px] flex justify-between">
@@ -238,43 +266,14 @@ useEffect(() => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                     >
-                      Adaptive image sizing
+                     Basic Support
                     </p>
                   </div>
                 </>
               )}
-              {plan > 0 && (
+
+{plan === 1 && (
                 <>
-                  {plan === 2 && (
-                    <>
-                      {/* <div className="w-[100%] mt-[10px] flex justify-between">
-                        <img
-                          src="/graphic/status/check.svg"
-                          className="w-[13px] mr-[10px] shrink-0"
-                          alt=""
-                        />
-                        <p
-                          style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                          className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
-                        >
-                          100 GB CDN bandwidth/mo
-                        </p>
-                      </div> */}
-                      <div className="w-[100%] mt-[10px] flex justify-between">
-                        <img
-                          src="/graphic/status/check.svg"
-                          className="w-[13px] mr-[10px] shrink-0"
-                          alt=""
-                        />
-                        <p
-                          style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                          className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
-                        >
-                          Adaptive image sizing
-                        </p>
-                      </div>
-                    </>
-                  )}
                   <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -285,7 +284,7 @@ useEffect(() => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                     >
-                      14-day money back guarantee
+                     50,000 page views per month
                     </p>
                   </div>
                   <div className="w-[100%] mt-[10px] flex justify-between">
@@ -298,9 +297,10 @@ useEffect(() => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                     >
-                      Expert support team
+                    Image Optimization Stack
                     </p>
                   </div>
+
                   <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -311,9 +311,10 @@ useEffect(() => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                     >
-                      Advanced caching mechanism
+                    All-in-one performance optimization
                     </p>
                   </div>
+
                   <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -324,7 +325,7 @@ useEffect(() => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                     >
-                      Complete image optimization stack
+                    Image Lazy Loading
                     </p>
                   </div>
                   {/* <div className="w-[100%] mt-[10px] flex justify-between">
@@ -337,7 +338,7 @@ useEffect(() => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                     >
-                      Built in global CDN
+                      100 GB CDN bandwidth/mo
                     </p>
                   </div> */}
                   <div className="w-[100%] mt-[10px] flex justify-between">
@@ -350,11 +351,330 @@ useEffect(() => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                     >
-                      World class proprietary speed algorithm
+                    Critical CSS
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                    Lazy Load hidden images
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                   Delay Resource Loading
+                    </p>
+                  </div>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                   Fast and easy setup
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                   Expert Support
                     </p>
                   </div>
                 </>
               )}
+
+{plan === 2 && (
+                <>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                     200,000 page views per month
+                    </p>
+                  </div>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                     Image Optimization Stack
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                     All-in-one performance optimization
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                    Image Lazy Loading
+                    </p>
+                  </div>
+                  {/* <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                      100 GB CDN bandwidth/mo
+                    </p>
+                  </div> */}
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                    Critical CSS
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                   Delay Resource Loading
+                    </p>
+                  </div>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                   Lazy Load hidden images
+                    </p>
+                  </div>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                Image Optimization
+                    </p>
+                  </div>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                   Remove unused CSS
+                    </p>
+                  </div>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                   Adaptive Image Sizing
+                    </p>
+                  </div>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                   Fast and easy setup
+                    </p>
+                  </div>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                   24/7 Support
+                    </p>
+                  </div>
+                </>
+              )}
+
+{plan === 3 && (
+                <>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                      5,000 page views per month
+                    </p>
+                  </div>
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                     Optimized by TurboBoost Badge
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                     Image Optimization Stack
+                    </p>
+                  </div>
+
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                    Fast and easy setup
+                    </p>
+                  </div>
+                  {/* <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                      100 GB CDN bandwidth/mo
+                    </p>
+                  </div> */}
+                  <div className="w-[100%] mt-[10px] flex justify-between">
+                    <img
+                      src="/graphic/status/check.svg"
+                      className="w-[13px] mr-[10px] shrink-0"
+                      alt=""
+                    />
+                    <p
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                    >
+                     Basic Support
+                    </p>
+                  </div>
+                </>
+              )}
+             
+             
             </div>
           )}
 
