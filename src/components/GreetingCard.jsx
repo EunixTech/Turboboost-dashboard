@@ -58,10 +58,8 @@ export default function GreetingCard() {
             console.error("Error fetching user profile data:", error);
           }
         };
-    if(localStorage.removeItem('authToken')){
-      fetchProfileData();
-    }
-        
+    
+        fetchProfileData();
       }, []);
 
     return (
