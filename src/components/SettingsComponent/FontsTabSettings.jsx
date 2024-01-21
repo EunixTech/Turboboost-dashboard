@@ -16,16 +16,16 @@ const FontsTabSettings = () => {
 
   const handleFontRenderBehavior = async() =>{
     let endPoint = "";
-    if (!fontRenderBehaviorToggleValue) endPoint = "api/shopify/minify-javascript-code";
-    else endPoint = "api/shopify/minify-javascript-code";
+    if (!fontRenderBehaviorToggleValue) endPoint = "api/shopify/adding-font-swap-properties";
+    else endPoint = "api/shopify/restore-adding-font-swap-properties";
     await featureAPIHandling(endPoint);
     dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
   }
 
   const handleFontLoading = async() =>{
     let endPoint = "";
-    if (!fontLoadingToggleValue) endPoint = "api/shopify/minify-javascript-code";
-    else endPoint = "api/shopify/minify-javascript-code";
+    if (!fontLoadingToggleValue) endPoint = "api/shopify/font-loading-optimization";
+    else endPoint = "api/shopify/restore-font-loading-optimization";
     await featureAPIHandling(endPoint);
     dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
   }

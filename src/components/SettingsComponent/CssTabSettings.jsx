@@ -15,15 +15,15 @@ const CssTabSettings = () => {
     
     const handleCriticalCSS = async() =>{
       let endPoint = "";
-      if (!criticalCSSToggleValue) endPoint = "api/shopify/minify-javascript-code";
-      else endPoint = "api/shopify/minify-javascript-code";
+      if (!criticalCSSToggleValue) endPoint = "api/shopify/critical-css-optimization";
+      else endPoint = "api/shopify/restore-critical-css-optimization";
       await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
     }
     const handleRemoveUnsedCSS = async() =>{
       let endPoint = "";
-      if (!removeUnsedCSSToggleValue) endPoint = "api/shopify/minify-javascript-code";
-      else endPoint = "api/shopify/minify-javascript-code";
+      if (!removeUnsedCSSToggleValue) endPoint = "api/shopify/remove-unused-css-optimization";
+      else endPoint = "api/shopify/restore-remove-unused-css-optimization";
       await featureAPIHandling(endPoint);
       dispatch(setToggle({ key: "removeUnsedCSS", value: !removeUnsedCSSToggleValue }));
     }

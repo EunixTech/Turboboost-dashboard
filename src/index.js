@@ -114,7 +114,7 @@ const App = () => {
       toogleLoadingAPI(true)
       const res = await GetAxiosConfig(`api/dashboard/checking-subsription`);
       const resJSON = res?.data;
- 
+      console.log("res@@@@@@@@@",resJSON)
       if (resJSON.status === 200) {
       
       }else if(resJSON.status === 400){
