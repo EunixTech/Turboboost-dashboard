@@ -116,10 +116,7 @@ const App = () => {
       const resJSON = res?.data;
       console.log("res@@@@@@@@@",resJSON)
       if (resJSON.status === 200) {
-        if(!resJSON?.isSubscriptionExist) {
-          setShowOnboardingModal(true)
-        }
-      
+     
       }else{
         toogleLoadingAPI(false);
         return toast.error("Please try again");
