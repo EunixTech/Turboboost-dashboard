@@ -250,6 +250,62 @@ const Plan = ({ cancel }) => {
                         Fast and easy setup
                       </p>
                     </div>
+
+                    <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        Assets Optimization
+                      </p>
+                    </div>
+
+                    <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        Page Optimization
+                      </p>
+                    </div>
+
+                      <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        All-in-one performance optimization
+                      </p>
+                    </div>
+
+                    <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        Image Lazy Loading
+                      </p>
+                    </div>
                     {/* <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -335,6 +391,34 @@ const Plan = ({ cancel }) => {
                         Image Lazy Loading
                       </p>
                     </div>
+                    <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        Assets Optimization
+                      </p>
+                    </div>
+
+                    <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        Page Optimization
+                      </p>
+                    </div>
+
                     {/* <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -475,6 +559,34 @@ const Plan = ({ cancel }) => {
                         Image Lazy Loading
                       </p>
                     </div>
+                    <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        Assets Optimization
+                      </p>
+                    </div>
+
+                    <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        Page Optimization
+                      </p>
+                    </div>
+
                     {/* <div className="w-[100%] mt-[10px] flex justify-between">
                     <img
                       src="/graphic/status/check.svg"
@@ -652,6 +764,34 @@ const Plan = ({ cancel }) => {
                         Image Lazy Loading
                       </p>
                     </div>
+                    <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        Assets Optimization
+                      </p>
+                    </div>
+
+                    <div className="w-[100%] mt-[10px] flex justify-between">
+                      <img
+                        src="/graphic/status/check.svg"
+                        className="w-[13px] mr-[10px] shrink-0"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      >
+                        Page Optimization
+                      </p>
+                    </div>
+
                     {/* <div className="w-[100%] mt-[10px] flex justify-between">
                   <img
                     src="/graphic/status/check.svg"
