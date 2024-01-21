@@ -6,6 +6,8 @@ import OptimizationModeCard from "../OptimizationModeCard";
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { featureAPIHandling } from "../../utils/featureAPIHandling";
+import toast from "react-hot-toast";
+
 const CssTabSettings = () => {
     const dark = useSelector((state) => state.home.dark);
     const dispatch = useDispatch();
@@ -20,8 +22,8 @@ const CssTabSettings = () => {
       const data = await featureAPIHandling(endPoint);
       if(data.status === 200){
         dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
-        return toast.success(resJSON.message);
-      }  else return toast.error(resJSON?.message)
+        return toast.success(data.message);
+      }  else return toast.error(data?.message)
     
      
     }
