@@ -41,6 +41,7 @@ import NewOnboard from "./routes/newOnboarding.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./views/404.jsx";
+import { GetAxiosConfig,PostAxiosConfig } from "./utils/axiosConfig.js";
 const router = [
   {
     path: "/",
@@ -107,7 +108,7 @@ const App = () => {
 
   const fetchImageOptimizationData = async () => {
     try {
-      toogleLoadingAPI(true)
+      // toogleLoadingAPI(true)
       const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
       const resJSON = res?.data;
 
