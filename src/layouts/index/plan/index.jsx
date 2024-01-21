@@ -233,7 +233,7 @@ const Plan = ({ cancel }) => {
                         style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                         className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                       >
-                        Image Optimization Stack
+                        Image Optimization
                       </p>
                     </div>
 
@@ -360,7 +360,7 @@ const Plan = ({ cancel }) => {
                         style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                         className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                       >
-                        Image Optimization Stack
+                        Image Optimization
                       </p>
                     </div>
 
@@ -528,7 +528,7 @@ const Plan = ({ cancel }) => {
                         style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                         className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                       >
-                        Image Optimization Stack
+                        Image Optimization
                       </p>
                     </div>
 
@@ -640,19 +640,7 @@ const Plan = ({ cancel }) => {
                         Lazy Load hidden images
                       </p>
                     </div>
-                    <div className="w-[100%] mt-[10px] flex justify-between">
-                      <img
-                        src="/graphic/status/check.svg"
-                        className="w-[13px] mr-[10px] shrink-0"
-                        alt=""
-                      />
-                      <p
-                        style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                        className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
-                      >
-                        Image Optimization
-                      </p>
-                    </div>
+                   
                     <div className="w-[100%] mt-[10px] flex justify-between">
                       <img
                         src="/graphic/status/check.svg"
@@ -733,7 +721,7 @@ const Plan = ({ cancel }) => {
                         style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                         className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                       >
-                        Image Optimization Stack
+                        Image Optimization
                       </p>
                     </div>
 
