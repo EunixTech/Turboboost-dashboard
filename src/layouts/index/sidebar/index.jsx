@@ -440,8 +440,11 @@ const Sidebar = () => {
         });
 }
 useEffect(() => {
-  fetchPageViewData();
-  fetchingBillingDetails()
+  if(localStorage.removeItem('authToken')){
+    fetchPageViewData();
+    fetchingBillingDetails()
+  }
+
 }, [])
 
   return (
