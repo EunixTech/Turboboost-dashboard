@@ -41,6 +41,9 @@ import NewOnboard from "./routes/newOnboarding.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./views/404.jsx";
+import getFetchConfig from "./utils/getFetchConfig.js";
+import { GetAxiosConfig } from "./utils/axiosConfig.js";
+import toast from "react-hot-toast";
 const router = [
   {
     path: "/",
@@ -104,6 +107,46 @@ const App = () => {
   const navigate = useNavigate(); 
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
+  const [LoadingAPI, toogleLoadingAPI] = useState(false);
+
+  const fetchImageOptimizationData = async () => {
+    try {
+      toogleLoadingAPI(true)
+      const res = await GetAxiosConfig(`api/dashboard/checking-subsription`);
+      const resJSON = res?.data;
+
+      console.log("resJSON@@@@@@@@",resJSON)
+ 
+      if (resJSON.status === 200) {
+        toogleLoadingAPI(false)
+        const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
+      
+        console.log("OptimizationHandlerDataresJSON@@@@@@@",OptimizationHandlerData)
+ 
+      }else if(resJSON.status === 400){
+     
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+    } else if(resJSON.status === 403){
+     
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+  
+      }else{
+        toogleLoadingAPI(false);
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toogleLoadingAPI(false);
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      } 
+      console.error("Error fetching user profile data:", error);
+    }
+  };
+
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -140,9 +183,7 @@ const App = () => {
     };
 
     checkAuth();
-
-   
- 
+    fetchImageOptimizationData();
   }, []);
 
 
