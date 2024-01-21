@@ -169,9 +169,9 @@ const App = () => {
 
 
   useEffect(() => {
-    if(localStorage.getItem('authToken')){
-      fetchImageOptimizationData();
-    }
+    // if(localStorage.getItem('authToken')){
+    //   fetchImageOptimizationData();
+    // }
     
   }, [localStorage.getItem('authToken')])
   
