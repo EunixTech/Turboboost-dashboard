@@ -83,9 +83,9 @@ const OnboardingBillings = () => {
       if (redirectURL === "/dashboard") {
         window.location.href = "/dashboard";
       } else {
-        setTimeout(() => {
-          toggleLoader(false)
-        }, 2000);
+        // setTimeout(() => {
+        //   toggleLoader(false)
+        // }, 2000);
       }
     } catch (error) {
       toggleLoader(false)
