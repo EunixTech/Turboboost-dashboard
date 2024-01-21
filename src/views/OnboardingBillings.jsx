@@ -56,7 +56,7 @@ const OnboardingBillings = () => {
       const resJson = await axios.get(
         `${appURL}/user/redirect/login/${userToken}`
       );
-      toggleLoader(false)
+
       const res = resJson?.data?.data;
       const redirectURL = res?.redirectURI;
       const token = res?.token;
@@ -81,7 +81,10 @@ const OnboardingBillings = () => {
       dispatch(setToggle({ key: "imageOptimization", value: false }));
 
       if (redirectURL === "/dashboard") {
+        toggleLoader(false)
         window.location.href = "/dashboard";
+      } else {
+        toggleLoader(false)
       }
     } catch (error) {
       toggleLoader(false)
