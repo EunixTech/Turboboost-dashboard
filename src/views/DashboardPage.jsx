@@ -872,7 +872,7 @@ const Dashboard = () => {
     //   navigate("/login-shopify");
     // }
     
-    if(!userToken1 && localStorage.getItem('authToken')){
+    if(!userToken1){
       googleSpeedAPI();
       fetchImageOptimizationData();
     }

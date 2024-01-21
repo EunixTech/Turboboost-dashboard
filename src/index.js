@@ -41,9 +41,6 @@ import NewOnboard from "./routes/newOnboarding.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./views/404.jsx";
-import getFetchConfig from "./utils/getFetchConfig.js";
-import { GetAxiosConfig } from "./utils/axiosConfig.js";
-import toast from "react-hot-toast";
 const router = [
   {
     path: "/",
@@ -107,27 +104,6 @@ const App = () => {
   const navigate = useNavigate(); 
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
-  const [LoadingAPI, toogleLoadingAPI] = useState(false);
-
-  const fetchImageOptimizationData = async () => {
-    try {
-      toogleLoadingAPI(true)
-      const res = await GetAxiosConfig(`api/dashboard/checking-subsription`);
-      const resJSON = res?.data;
-      console.log("res@@@@@@@@@",resJSON)
-      if (resJSON.status === 200) {
-     
-      }else{
-        toogleLoadingAPI(false);
-        return toast.error("Please try again");
-      }
-    } catch (error) {
-      toogleLoadingAPI(false);
-   
-      console.error("Error fetching user profile data:", error);
-    }
-  };
-
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -164,17 +140,11 @@ const App = () => {
     };
 
     checkAuth();
-  
+
   }, []);
 
 
-  useEffect(() => {
-    // if(localStorage.getItem('authToken')){
-    //   fetchImageOptimizationData();
-    // }
-    
-  }, [localStorage.getItem('authToken')])
-  
+
   return (
     <>
     {showOnboardingModal && <NewOnboard />}
