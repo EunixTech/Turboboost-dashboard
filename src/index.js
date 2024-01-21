@@ -119,19 +119,19 @@ const App = () => {
        
         const dataObj = resJSON?.optimizationHandlers?.dataArr;
 
-        dispatch(setToggle({ key: "delayScripts", value: dataObj?.delay_js_resources }));
-        dispatch(setToggle({ key: "minifyJSFile", value: dataObj?.minify_js_code }));
-        dispatch(setToggle({ key: "lazyLoading", value: dataObj?.lazy_loading }));
-        dispatch(setToggle({ key: "imageSizeAdaption", value: dataObj?.image_size_adaption }));
-        dispatch(setToggle({ key: "minifyHTML", value: dataObj?.minify_html_code }));
-        dispatch(setToggle({ key: "fontLoading", value: dataObj?.font_optimization }));
-        dispatch(setToggle({ key: "fontRenderBehavior", value: dataObj?.font_swap_optimization }));
-        dispatch(setToggle({ key: "criticalCSS", value: dataObj?.critical_css }));
-        dispatch(setToggle({ key: "removeUnsedCSS", value: dataObj?.unused_css_code }));
+        dispatch(setToggle({ key: "delayScripts", value: dataObj?.delay_js_resources?.value }));
+        dispatch(setToggle({ key: "minifyJSFile", value: dataObj?.minify_js_code?.value }));
+        dispatch(setToggle({ key: "lazyLoading", value: dataObj?.lazy_loading?.value }));
+        dispatch(setToggle({ key: "imageSizeAdaption", value: dataObj?.image_size_adaption?.value }));
+        dispatch(setToggle({ key: "minifyHTML", value: dataObj?.minify_html_code?.value }));
+        dispatch(setToggle({ key: "fontLoading", value: dataObj?.font_optimization?.value }));
+        dispatch(setToggle({ key: "fontRenderBehavior", value: dataObj?.font_swap_optimization?.value }));
+        dispatch(setToggle({ key: "criticalCSS", value: dataObj?.critical_css?.value }));
+        dispatch(setToggle({ key: "removeUnsedCSS", value: dataObj?.unused_css_code?.value }));
   
-        dispatch(setToggle({ key: "assetsOptimization", value: dataObj?.assets_optimization }));
-        dispatch(setToggle({ key: "pageOptimization", value: dataObj?.page_optimization }));
-        dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization }));
+        dispatch(setToggle({ key: "assetsOptimization", value: dataObj?.assets_optimization?.value }));
+        dispatch(setToggle({ key: "pageOptimization", value: dataObj?.page_optimization?.value }));
+        dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization?.value }));
         localStorage.setItem('apiCalled', 'true');
       } else if(resJSON.status === 403){
 
