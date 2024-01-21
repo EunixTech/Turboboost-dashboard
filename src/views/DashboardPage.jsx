@@ -490,6 +490,7 @@ const GooglePageScore = () => {
       style={{
         backgroundColor: dark ? "#111317" : "#fff",
         borderColor: dark ? "#1F2329" : "#ebebeb",
+        height: "fit-content"
       }}
       className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]"
     >
