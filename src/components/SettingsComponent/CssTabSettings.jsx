@@ -17,8 +17,13 @@ const CssTabSettings = () => {
       let endPoint = "";
       if (!criticalCSSToggleValue) endPoint = "api/shopify/critical-css-optimization";
       else endPoint = "api/shopify/restore-critical-css-optimization";
-      await featureAPIHandling(endPoint);
-      dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
+      const data = await featureAPIHandling(endPoint);
+      if(data.status === 200){
+        dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
+        return toast.success(resJSON.message);
+      }  else return toast.error(resJSON?.message)
+    
+     
     }
     const handleRemoveUnsedCSS = async() =>{
       let endPoint = "";

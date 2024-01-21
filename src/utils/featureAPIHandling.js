@@ -8,12 +8,9 @@ import { GetAxiosConfig, PostAxiosConfig } from "../utils/axiosConfig.js";
 export const featureAPIHandling = async (endPoint = " ") => {
 
    try {
-    const res = await GetAxiosConfig(endPoint)
-    const resJSON = res?.data;
-
-    if (resJSON?.status === 200) return toast.success(resJSON.message);
-    else return toast.error(resJSON?.message)
-
+      const res = await GetAxiosConfig(endPoint)
+      const resJSON = res?.data;
+     return resJSON;
    } catch (error) {
     return toast.error("Please try again")
    }
