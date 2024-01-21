@@ -81,10 +81,11 @@ const OnboardingBillings = () => {
       dispatch(setToggle({ key: "imageOptimization", value: false }));
 
       if (redirectURL === "/dashboard") {
-        toggleLoader(false)
         window.location.href = "/dashboard";
       } else {
-        toggleLoader(false)
+        setTimeout(() => {
+          toggleLoader(false)
+        }, 2000);
       }
     } catch (error) {
       toggleLoader(false)
