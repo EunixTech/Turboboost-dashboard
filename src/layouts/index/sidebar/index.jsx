@@ -9,8 +9,8 @@ import handleFetchErrors from '../../../utils/handleFetchErrors';
 import appURLs from '../../../appURL';
 import { planMockData } from "../../../utils/constant";
 import toast from "react-hot-toast";
-  import { GetAxiosConfig,PostAxiosConfig } from "../../../utils/axiosConfig.js";
-  
+import { GetAxiosConfig, PostAxiosConfig } from "../../../utils/axiosConfig.js";
+
 // import toast from 'react-hot-toast';
 // // const Button = ({ onClick }) => {
 // //   const dark = useSelector((state) => state.home.dark);
@@ -20,7 +20,7 @@ import toast from "react-hot-toast";
 // //         onClick();
 // //       }}
 // //       className={`w-[100%] ${!dark ? "bg-[#204c3a] " : "bg-[#204c3a]"}
-        
+
 // //         h-[34px]   cursor-pointer rounded-[4px] border-[1px] ${
 // //           dark ? "border-[#204c3a]" : "border-[#204c3a] "
 // //         } flex items-center justify-center mt-[20px]`}
@@ -143,14 +143,14 @@ import toast from "react-hot-toast";
 //     fetch(`${appURL}/user/current-plan-detail`, fetchConfig)
 //         .then(handleFetchErrors)
 //         .then((res) => {
-           
-       
+
+
 //             if (Number(res?.status) === 200) {
 //               const planData = res?.data;
-            
+
 //               updateCurrentPlan(planData)
 //             }
-            
+
 //         })
 //         .catch(standardFetchHandlers.error)
 //         .finally(() => {
@@ -212,7 +212,7 @@ import toast from "react-hot-toast";
 //                 Page Views/mo
 //               </p>
 //               <p className="text-[12px] f2 text-[#918EA2] tracking-wide">
-                
+
 //                 {planMockData[currentPlan?.plan]}/200,000
 //               </p>
 //             </div>
@@ -277,7 +277,7 @@ import toast from "react-hot-toast";
 //         onClick();
 //       }}
 //       className={`w-[100%] ${!dark ? "bg-[#204c3a] " : "bg-[#204c3a]"}
-        
+
 //         h-[34px]   cursor-pointer rounded-[4px] border-[1px] ${
 //           dark ? "border-[#204c3a]" : "border-[#204c3a] "
 //         } flex items-center justify-center mt-[20px]`}
@@ -309,9 +309,8 @@ const Button = ({ onClick }) => {
         h-[34px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
-        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-        } rounded-[4px] hover:bg-[#2fe49c] active:translate-y-[0px] font-bold active:border-0 translate-y-[-3px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide `}
+        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+          } rounded-[4px] hover:bg-[#2fe49c] active:translate-y-[0px] font-bold active:border-0 translate-y-[-3px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide `}
       >
         Upgrade Plan
       </p>
@@ -394,17 +393,17 @@ const Sidebar = () => {
   const dark = useSelector((state) => state.home.dark);
   const dispatch = useDispatch();
   const [currentPlan, updateCurrentPlan] = useState({})
-  
+
   const fetchPageViewData = async () => {
     try {
-    
+
       const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
       const resJSON = res?.data;
 
       if (resJSON.status === 200) {
         const pageViews = resJSON?.pageViewsArr;
         updatePageViewCount(pageViews?.length)
-      } 
+      }
     } catch (error) {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
@@ -418,31 +417,37 @@ const Sidebar = () => {
   const fetchingBillingDetails = async () => {
 
     const fetchConfig = getFetchConfig(),
-        appURL = appURLs();
+      appURL = appURLs();
 
     fetch(`${appURL}/user/current-plan-detail`, fetchConfig)
-        .then(handleFetchErrors)
-        .then((res) => {
-           
-       
-            if (Number(res?.status) === 200) {
-              const planData = res?.data;
-            
-              updateCurrentPlan(planData)
-            }
-            
-        })
-        .catch(standardFetchHandlers.error)
-        .finally(() => {
-            setTimeout(() => {
-                // return toast.error("Something went wrong1");
-            }, 1000);
-        });
-}
-useEffect(() => {
-  fetchPageViewData();
-  fetchingBillingDetails()
-}, [])
+      .then(handleFetchErrors)
+      .then((res) => {
+
+
+        if (Number(res?.status) === 200) {
+          const planData = res?.data;
+
+          updateCurrentPlan(planData)
+        }
+
+      })
+      .catch(standardFetchHandlers.error)
+      .finally(() => {
+        setTimeout(() => {
+          // return toast.error("Something went wrong1");
+        }, 1000);
+      });
+  }
+  const planPageViewData = {
+    "Basic": 5000,
+    "Starter":50000,
+    "Growth": 200000,
+    "Pro": 1000000
+  }
+  useEffect(() => {
+    fetchPageViewData();
+    fetchingBillingDetails()
+  }, [])
 
   return (
     <>
@@ -483,7 +488,7 @@ useEffect(() => {
             My Plan
           </p>
           <p className="text-[14px] f2 text-white tracking-wide font-medium">
-          {currentPlan?.plan}
+            {currentPlan?.plan}
           </p>
           <div>
             <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
@@ -491,8 +496,8 @@ useEffect(() => {
                 Page Views/mo
               </p>
               <p className="text-[12px] f2 text-[#918EA2] tracking-wide">
-                
-                {PageViewCount || 0}/ { (currentPlan?.plan === "Basic" || currentPlan?.plan === "Starter") ? 50000 : 200000 }
+
+                {PageViewCount || 0}/ {currentPlan?.plan && planPageViewData[currentPlan?.plan] }
               </p>
             </div>
             <div className="bg-[#ffffff14] w-[100%] h-[3px] rounded-[3px]">
