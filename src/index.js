@@ -119,15 +119,13 @@ const App = () => {
  
       if (resJSON.status === 200) {
         toogleLoadingAPI(false)
-        const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
+        const OptimizationHandlerData = resJSON?.optimizationHandlerData;
       
         console.log("OptimizationHandlerDataresJSON@@@@@@@",OptimizationHandlerData)
  
       }else if(resJSON.status === 400){
      
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
-
+      
     } else if(resJSON.status === 403){
      
           localStorage.removeItem('authToken');
