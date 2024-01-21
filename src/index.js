@@ -114,22 +114,12 @@ const App = () => {
       toogleLoadingAPI(true)
       const res = await GetAxiosConfig(`api/dashboard/checking-subsription`);
       const resJSON = res?.data;
-
-      console.log("resJSON@@@@@@@@",resJSON)
  
       if (resJSON.status === 200) {
-        toogleLoadingAPI(false)
-        const OptimizationHandlerData = resJSON?.optimizationHandlerData;
       
-        console.log("OptimizationHandlerDataresJSON@@@@@@@",OptimizationHandlerData)
- 
       }else if(resJSON.status === 400){
      
-      
     } else if(resJSON.status === 403){
-     
-          localStorage.removeItem('authToken');
-          window.location.replace('/login-shopify');
   
       }else{
         toogleLoadingAPI(false);
@@ -137,7 +127,7 @@ const App = () => {
       }
     } catch (error) {
       toogleLoadingAPI(false);
-    
+   
       console.error("Error fetching user profile data:", error);
     }
   };
