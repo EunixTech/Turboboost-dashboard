@@ -17,7 +17,7 @@ import {
 } from "../slice/redirectUserSlice";
 import { setToggle } from "../slice/statusToggleSlice";
 import TitleManager from "../components/TitleManager";
-import AnimatedLoader from "../components/loader/AnimatedLoader";
+import AnimatedLoader from "../components/loader/AnimatedLoader1";
 
 const OnboardingBillings = () => {
   const dispatch = useDispatch(),
