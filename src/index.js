@@ -139,6 +139,9 @@ const App = () => {
   };
 
   useEffect(() => {
+    if(localStorage.getItem('authToken')){
+      fetchImageOptimizationData();
+     }
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
@@ -173,10 +176,6 @@ const App = () => {
     };
 
     checkAuth();
-
-   if(!userToken &&  localStorage.getItem('authToken')){
-    fetchImageOptimizationData();
-   }
  
   }, []);
 
