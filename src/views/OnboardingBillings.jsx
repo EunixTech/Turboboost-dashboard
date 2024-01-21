@@ -64,8 +64,7 @@ const OnboardingBillings = () => {
 
       localStorage.setItem("authToken", token);
       localStorage.setItem("websiteURL", websiteURL);
-      localStorage.setItem("shopifyUserName", "Manmohan");
-
+     
       dispatch(setToggle({ key: "delayScripts", value: true }));
       dispatch(setToggle({ key: "minifyJSFile", value: true }));
       dispatch(setToggle({ key: "lazyLoading", value: true }));

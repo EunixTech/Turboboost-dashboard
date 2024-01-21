@@ -42,6 +42,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./views/404.jsx";
 import { GetAxiosConfig,PostAxiosConfig } from "./utils/axiosConfig.js";
+import { setToggle } from "./slice/statusToggleSlice";
+import { useDispatch, useSelector } from "react-redux";
 const router = [
   {
     path: "/",
@@ -103,27 +105,36 @@ const App = () => {
  
   const location = useLocation();
   const navigate = useNavigate(); 
+  const dispatch = useDispatch();
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
   const fetchImageOptimizationData = async () => {
     try {
-      // toogleLoadingAPI(true)
+
       const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
       const resJSON = res?.data;
 
-      console.log("*********resJSON*********",resJSON)
- 
       if (resJSON.status === 200) {
-        // toogleLoadingAPI(false)
-        // const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
-        // const imageDataObj = resJSON?.dataObj;
-        // updateImageData(imageDataObj);
-        // updateHandlerData(OptimizationHandlerData)
-      } else if(resJSON.status === 403){
-          // localStorage.removeItem('authToken');
-          // window.location.replace('/login-shopify');
+       
+        const dataObj = resJSON?.optimizationHandlers?.dataArr;
+
+        dispatch(setToggle({ key: "delayScripts", value: dataObj?.delay_js_resources }));
+        dispatch(setToggle({ key: "minifyJSFile", value: dataObj?.minify_js_code }));
+        dispatch(setToggle({ key: "lazyLoading", value: dataObj?.lazy_loading }));
+        dispatch(setToggle({ key: "imageSizeAdaption", value: dataObj?.image_size_adaption }));
+        dispatch(setToggle({ key: "minifyHTML", value: dataObj?.minify_html_code }));
+        dispatch(setToggle({ key: "fontLoading", value: dataObj?.font_optimization }));
+        dispatch(setToggle({ key: "fontRenderBehavior", value: dataObj?.font_swap_optimization }));
+        dispatch(setToggle({ key: "criticalCSS", value: dataObj?.critical_css }));
+        dispatch(setToggle({ key: "removeUnsedCSS", value: dataObj?.unused_css_code }));
   
+        dispatch(setToggle({ key: "assetsOptimization", value: dataObj?.assets_optimization }));
+        dispatch(setToggle({ key: "pageOptimization", value: dataObj?.page_optimization }));
+        dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization }));
+        localStorage.setItem('apiCalled', 'true');
+      } else if(resJSON.status === 403){
+
       }else{
         // toogleLoadingAPI(false);
         // return toast.error("Please try again");
@@ -139,7 +150,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    if(localStorage.getItem('authToken')){
+        const hasApiBeenCalled = localStorage.getItem('apiCalled');
+    if(localStorage.getItem('authToken') && !hasApiBeenCalled){
       fetchImageOptimizationData();
      }
     const urlParams = new URLSearchParams(window.location.search);
