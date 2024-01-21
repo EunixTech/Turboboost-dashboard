@@ -80,13 +80,13 @@ const OnboardingBillings = () => {
       dispatch(setToggle({ key: "pageOptimization", value: false }));
       dispatch(setToggle({ key: "imageOptimization", value: false }));
 
-      // if (redirectURL === "/dashboard") {
-      //   window.location.href = "/dashboard";
-      // } else {
-      //   // setTimeout(() => {
-      //   //   toggleLoader(false)
-      //   // }, 2000);
-      // }
+      if (redirectURL === "/dashboard") {
+        window.location.href = "/dashboard";
+      } else {
+        setTimeout(() => {
+          toggleLoader(false)
+        }, 2000);
+      }
     } catch (error) {
       toggleLoader(false)
       console.log(error);
