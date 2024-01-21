@@ -105,6 +105,39 @@ const App = () => {
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
+  const fetchImageOptimizationData = async () => {
+    try {
+      toogleLoadingAPI(true)
+      const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
+      const resJSON = res?.data;
+
+      console.log("*********resJSON*********",resJSON)
+ 
+      if (resJSON.status === 200) {
+        // toogleLoadingAPI(false)
+        // const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
+        // const imageDataObj = resJSON?.dataObj;
+        // updateImageData(imageDataObj);
+        // updateHandlerData(OptimizationHandlerData)
+      } else if(resJSON.status === 403){
+     
+          // localStorage.removeItem('authToken');
+          // window.location.replace('/login-shopify');
+  
+      }else{
+        // toogleLoadingAPI(false);
+        // return toast.error("Please try again");
+      }
+    } catch (error) {
+      // toogleLoadingAPI(false);
+      // if (error?.response?.status === 401) {
+      //   localStorage.removeItem('authToken');
+      //   window.location.replace('/login-shopify');
+      // } 
+      // console.error("Error fetching user profile data:", error);
+    }
+  };
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
@@ -141,7 +174,9 @@ const App = () => {
 
     checkAuth();
 
-   
+   if(!userToken &&  localStorage.getItem('authToken')){
+    fetchImageOptimizationData();
+   }
  
   }, []);
 
