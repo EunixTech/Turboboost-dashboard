@@ -146,6 +146,16 @@ const App = () => {
   }, []);
 
 
+  // useEffect(() => {
+  //   const hasApiBeenCalled = localStorage.getItem('apiCalled');
+  //   if (!hasApiBeenCalled) {
+  //     // Make the API call here
+  //     // ...
+  //     // Set the flag in local storage to indicate that the API call has been made
+  //     localStorage.setItem('apiCalled', 'true');
+  //   }
+  // }, []);
+  
 
   return (
     <>

@@ -492,7 +492,7 @@ const GooglePageScore = () => {
         borderColor: dark ? "#1F2329" : "#ebebeb",
         height: "fit-content"
       }}
-      className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px]"
+      className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[25px] pb-[55px] pt-[10px] border-[#EBEBEB]  rounded-[8px]"
     >
       <div className="w-[100%]  flex items-center justify-between">
         <p
@@ -561,19 +561,19 @@ const GooglePageScore = () => {
           >
             Performance
           </p>
-          <div className="flex items-center  justify-around h-[140px]">
+          <div className="flex items-center gap-[30px] justify-around h-[140px]">
             <CircularProgressBar
-              mr="20px"
+              mr="0"
               title="Performence"
               percentage={98}
             />
             <CircularProgressBar
-              mr="20px"
+              mr="0"
               title="Accessibility"
               percentage={98}
             />
             <CircularProgressBar
-              mr="20px"
+              mr="0"
               title="Best Practices"
               percentage={98}
             />
@@ -581,7 +581,7 @@ const GooglePageScore = () => {
           </div>
         </>
       ) : (
-        <div className="w-[100%] mt-[20px]">
+        <div style={{marginBottom:"-40px"}} className="w-[100%] mt-[20px]">
           <div className="flex  justify-around ">
             <div className="w-[150px]">
               <p
@@ -1163,7 +1163,7 @@ const Dashboard = () => {
               
             </div>
           </div>
-          <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:flex  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px] flex h-[250px] mobile-cols">
+          <div style={{height:"fit-content"}} className="w-[100%] mt-[24px] mobile:px-[10px] desktop:flex  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px] flex h-[250px] mobile-cols">
             {/* <div
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",

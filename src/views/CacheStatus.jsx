@@ -99,7 +99,7 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
     <div
       className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
-        h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
+        h-[40px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
         style={{
@@ -845,8 +845,9 @@ const CacheStatus = () => {
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
                 borderColor: dark ? "#1F2329" : "#ebebeb",
+                paddingBottom:"14px",
               }}
-              className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0]  mb-[30px]  pt-[14px]  bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
+              className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0]  mb-[30px]  pt-[14px]   bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
             >
               <div className=" px-[15px] flex justify-between items-center">
                 <div className="">
