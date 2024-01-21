@@ -167,11 +167,17 @@ const App = () => {
     };
 
     checkAuth();
-    fetchImageOptimizationData();
+  
   }, []);
 
 
-
+  useEffect(() => {
+    if(localStorage.getItem('authToken')){
+      fetchImageOptimizationData();
+    }
+    
+  }, [localStorage.getItem('authToken')])
+  
   return (
     <>
     {showOnboardingModal && <NewOnboard />}
