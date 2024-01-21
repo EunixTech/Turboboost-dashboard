@@ -64,21 +64,6 @@ const OnboardingBillings = () => {
 
       localStorage.setItem("authToken", token);
       localStorage.setItem("websiteURL", websiteURL);
-     
-      dispatch(setToggle({ key: "delayScripts", value: true }));
-      dispatch(setToggle({ key: "minifyJSFile", value: true }));
-      dispatch(setToggle({ key: "lazyLoading", value: true }));
-      dispatch(setToggle({ key: "imageSizeAdaption", value: true }));
-      dispatch(setToggle({ key: "minifyHTML", value: true }));
-      dispatch(setToggle({ key: "fontLoading", value: true }));
-      dispatch(setToggle({ key: "fontRenderBehavior", value: true }));
-      dispatch(setToggle({ key: "criticalCSS", value: true }));
-      dispatch(setToggle({ key: "removeUnsedCSS", value: true }));
-
-      dispatch(setToggle({ key: "assetsOptimization", value: false }));
-      dispatch(setToggle({ key: "pageOptimization", value: false }));
-      dispatch(setToggle({ key: "imageOptimization", value: false }));
-
       if (redirectURL === "/dashboard") {
         window.location.href = "/dashboard";
       } else {
