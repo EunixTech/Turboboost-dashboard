@@ -110,36 +110,36 @@ const App = () => {
   const [LoadingAPI, toogleLoadingAPI] = useState(false);
 
   const fetchImageOptimizationData = async () => {
-    // try {
-    //   toogleLoadingAPI(true)
-    //   const res = await GetAxiosConfig(`api/dashboard/checking-subsription`);
-    //   const resJSON = res?.data;
+    try {
+      toogleLoadingAPI(true)
+      const res = await GetAxiosConfig(`api/dashboard/checking-subsription`);
+      const resJSON = res?.data;
 
-    //   console.log("resJSON@@@@@@@@",resJSON)
+      console.log("resJSON@@@@@@@@",resJSON)
  
-    //   if (resJSON.status === 200) {
-    //     toogleLoadingAPI(false)
-    //     const OptimizationHandlerData = resJSON?.optimizationHandlerData;
+      if (resJSON.status === 200) {
+        toogleLoadingAPI(false)
+        const OptimizationHandlerData = resJSON?.optimizationHandlerData;
       
-    //     console.log("OptimizationHandlerDataresJSON@@@@@@@",OptimizationHandlerData)
+        console.log("OptimizationHandlerDataresJSON@@@@@@@",OptimizationHandlerData)
  
-    //   }else if(resJSON.status === 400){
+      }else if(resJSON.status === 400){
      
       
-    // } else if(resJSON.status === 403){
+    } else if(resJSON.status === 403){
      
-    //       localStorage.removeItem('authToken');
-    //       window.location.replace('/login-shopify');
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
   
-    //   }else{
-    //     toogleLoadingAPI(false);
-    //     return toast.error("Please try again");
-    //   }
-    // } catch (error) {
-    //   toogleLoadingAPI(false);
+      }else{
+        toogleLoadingAPI(false);
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toogleLoadingAPI(false);
     
-    //   console.error("Error fetching user profile data:", error);
-    // }
+      console.error("Error fetching user profile data:", error);
+    }
   };
 
 
