@@ -728,7 +728,7 @@ const Dashboard = () => {
 
       updateCoreVitalsData(coreVitualsDataObj);
       updatePerformanceData(performaceDataObj);
-
+      window.location.reload();
       } else if(resJSON.status === 403){
      
           localStorage.removeItem('authToken');
