@@ -401,7 +401,7 @@ const Table1 = ({ pageViewDataArr }) => {
       <div className="mobile:w-[1200px] laptop:w-[100%]">
         <TableHeader1 />
         {pageViewDataArr.map((item, i) => {
-          return <TableItem1 key={i} item ={item} last={i === arr.length - 1} />;
+          return <TableItem1 key={i} s_no={i} item ={item} last={i === arr.length - 1} />;
         })}
       </div>
     </div>
@@ -421,6 +421,9 @@ const TableHeader1 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
@@ -429,6 +432,9 @@ const TableHeader1 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
@@ -445,6 +451,9 @@ const TableHeader1 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
@@ -455,7 +464,7 @@ const TableHeader1 = ({ change }) => {
   );
 };
 
-const TableItem1 = ({ last, item }) => {
+const TableItem1 = ({ last,s_no, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
@@ -471,22 +480,31 @@ const TableItem1 = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        {/* {i+1} */}
+        {s_no}
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
         {item?.location}
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
@@ -550,6 +568,9 @@ const TableHeader3 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
@@ -558,6 +579,9 @@ const TableHeader3 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
@@ -566,6 +590,9 @@ const TableHeader3 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
@@ -574,8 +601,11 @@ const TableHeader3 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[10%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[20%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         Version
       </div>
@@ -597,6 +627,9 @@ const TableItem3 = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
@@ -605,6 +638,9 @@ const TableItem3 = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
@@ -613,6 +649,9 @@ const TableItem3 = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] px-[15px]  cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
@@ -622,8 +661,11 @@ const TableItem3 = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[10%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[20%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
          { item?.app_version }
         
@@ -1198,7 +1240,7 @@ const CacheStatus = () => {
                     }}
                     className="text-[14px] font-bold tracking-wide text-[#0a0a1877]"
                   >
-                    {pageViewData?.length} Pageviews
+                    {pageViewData?.length} Page View{pageViewData?.length > 1 ? 's' : ''}
                   </p>
                 </div>
                 {/* <div className="laptop:w-[170px]  mobile:w-[100%] hover:bg-[#2FE49C] cursor-pointer mobile:mb-[10px] laptop:mb-0 h-[38px] bg-[#38F8AC] rounded-[3px] flex items-center justify-center text-[14px] font-bold tracking-wide">
