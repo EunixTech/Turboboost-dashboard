@@ -878,24 +878,24 @@ const Dashboard = () => {
 
   const handlePurgeAll = async() =>{
     toggleLoader(true);
-    if(imageOptimizationValue && lazyLoadingToggleValue && minifyHTMLToggleValue){
+    if(!imageOptimizationValue && !lazyLoadingToggleValue && !minifyHTMLToggleValue){
       handleImageOptimization();
       handlelazyLoading();
       minifyHTMLToggleValue();
-    } else if(imageOptimizationValue && lazyLoadingToggleValue){
+    } else if(!imageOptimizationValue && !lazyLoadingToggleValue){
       handleImageOptimization();
       handlelazyLoading();
-    } else if(imageOptimizationValue && minifyHTMLToggleValue){
+    } else if(!imageOptimizationValue && !minifyHTMLToggleValue){
       handleImageOptimization();
       minifyHTMLToggleValue();
-    } else if(lazyLoadingToggleValue && minifyHTMLToggleValue){
+    } else if(!lazyLoadingToggleValue && !minifyHTMLToggleValue){
       handlelazyLoading();
       minifyHTMLToggleValue();
-    } else if(imageOptimizationValue){
+    } else if(!imageOptimizationValue){
       handleImageOptimization();
-    } else if(lazyLoadingToggleValue){
+    } else if(!lazyLoadingToggleValue){
       handlelazyLoading();
-    } else if(minifyHTMLToggleValue){
+    } else if(!minifyHTMLToggleValue){
       minifyHTMLToggleValue();
     }
   
