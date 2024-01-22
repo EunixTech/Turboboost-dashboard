@@ -97,9 +97,13 @@ const Plan = ({ cancel }) => {
         }, 1000);
       });
   }
+  const urlParams = new URLSearchParams(window.location.search);
+  const userToken1 = urlParams.get("userToken");
+
   useEffect(() => {
-    localStorage.removeItem('apiCalled')
-    fetchingBillingDetails()
+    if(!userToken1){
+      fetchingBillingDetails()
+    }
   }, [])
 
   return (
