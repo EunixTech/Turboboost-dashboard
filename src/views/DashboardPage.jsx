@@ -655,61 +655,61 @@ const Dashboard = () => {
   const fetchConfig = getFetchConfig();
   const appURL = appURLs();
 
-  const googleSpeedAPI = async (storeName = "") => {
-    console.log(storeName);
-    try {
-      toogleLoading(true);
-      const response = await axios.get(
-        `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://spokeherd.com/&category=best-practices&category=seo&category=performance&category=accessibility`
-      );
+  // const googleSpeedAPI = async (storeName = "") => {
+  //   console.log(storeName);
+  //   try {
+  //     toogleLoading(true);
+  //     const response = await axios.get(
+  //       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://spokeherd.com/&category=best-practices&category=seo&category=performance&category=accessibility`
+  //     );
 
-      toogleLoading(false);
-      const data = response.data;
-      const lighthouseData = data.lighthouseResult;
+  //     toogleLoading(false);
+  //     const data = response.data;
+  //     const lighthouseData = data.lighthouseResult;
 
-      const metrics = {
-        "First Contentful Paint":
-          lighthouseData.audits["first-contentful-paint"].displayValue,
-        "Speed Index": lighthouseData.audits["speed-index"].displayValue,
-        "Total Blocking Time":
-          lighthouseData.audits["total-blocking-time"].displayValue,
-        "Largest Contentful Paint":
-          lighthouseData.audits["largest-contentful-paint"].displayValue,
-        Performance: lighthouseData.categories.performance.score * 100,
-        Accessibility: lighthouseData.categories.accessibility.score * 100,
-        "Best Practices":
-          lighthouseData.categories["best-practices"].score * 100,
-        SEO: lighthouseData.categories.seo.score * 100,
-      };
+  //     const metrics = {
+  //       "First Contentful Paint":
+  //         lighthouseData.audits["first-contentful-paint"].displayValue,
+  //       "Speed Index": lighthouseData.audits["speed-index"].displayValue,
+  //       "Total Blocking Time":
+  //         lighthouseData.audits["total-blocking-time"].displayValue,
+  //       "Largest Contentful Paint":
+  //         lighthouseData.audits["largest-contentful-paint"].displayValue,
+  //       Performance: lighthouseData.categories.performance.score * 100,
+  //       Accessibility: lighthouseData.categories.accessibility.score * 100,
+  //       "Best Practices":
+  //         lighthouseData.categories["best-practices"].score * 100,
+  //       SEO: lighthouseData.categories.seo.score * 100,
+  //     };
 
-      const performanceArr = Object.keys(metrics)
-        .filter((key) =>
-          ["Performance", "Accessibility", "Best Practices", "SEO"].includes(
-            key
-          )
-        )
-        .map((key) => ({
-          name: key,
-          value: Math.round(metrics[key] * 10) / 10,
-        }));
+  //     const performanceArr = Object.keys(metrics)
+  //       .filter((key) =>
+  //         ["Performance", "Accessibility", "Best Practices", "SEO"].includes(
+  //           key
+  //         )
+  //       )
+  //       .map((key) => ({
+  //         name: key,
+  //         value: Math.round(metrics[key] * 10) / 10,
+  //       }));
 
-      const coreVitualsArr = Object.keys(metrics)
-        .filter((key) =>
-          [
-            "First Contentful Paint",
-            "Speed Index",
-            "Total Blocking Time",
-            "Largest Contentful Paint",
-          ].includes(key)
-        )
-        .map((key) => ({ name: key, value: metrics[key] }));
+  //     const coreVitualsArr = Object.keys(metrics)
+  //       .filter((key) =>
+  //         [
+  //           "First Contentful Paint",
+  //           "Speed Index",
+  //           "Total Blocking Time",
+  //           "Largest Contentful Paint",
+  //         ].includes(key)
+  //       )
+  //       .map((key) => ({ name: key, value: metrics[key] }));
 
-      updateCoreVitalsData(coreVitualsArr);
-      updatePerformanceData(performanceArr);
-    } catch (e) {
-      toogleLoading(false);
-    }
-  };
+  //     updateCoreVitalsData(coreVitualsArr);
+  //     updatePerformanceData(performanceArr);
+  //   } catch (e) {
+  //     toogleLoading(false);
+  //   }
+  // };
 
   
   const fetchPageSpeedInsight = async () => {
@@ -720,12 +720,17 @@ const Dashboard = () => {
  
       if (resJSON.status === 200) {
         toogleLoadingAPI(false)
-        const OptimizationHandlerData = resJSON?.data;
-        const imageDataObj = resJSON?.dataObj;
-        updateImageData(imageDataObj);
-        updateHandlerData(OptimizationHandlerData)
-      updateCoreVitalsData(coreVitualsArr);
-      updatePerformanceData(performanceArr);
+        const pageSpeedInsightData = resJSON?.data?.updated;
+        const coreVitualsDataObj = pageSpeedInsightData?.performance;
+         const performaceDataObj = pageSpeedInsightData?.core_vitals;
+
+         console.log("pageSpeedInsightData",pageSpeedInsightData)
+         console.log("coreVitualsDataObj",coreVitualsDataObj)
+         console.log("performaceDataObj",performaceDataObj)
+      //   updateImageData(imageDataObj);
+      //   updateHandlerData(OptimizationHandlerData)
+      // updateCoreVitalsData(coreVitualsArr);
+      // updatePerformanceData(performanceArr);
 
       } else if(resJSON.status === 403){
      
