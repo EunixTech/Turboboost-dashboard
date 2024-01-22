@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { featureAPIHandling } from '../../utils/featureAPIHandling';
+import toast from "react-hot-toast";
+
 const FontsTabSettings = () => {
   const dark = useSelector((state) => state.home.dark);
 

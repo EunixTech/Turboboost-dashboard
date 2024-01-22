@@ -4,6 +4,7 @@ import FeatureCard from '../FeatureCard';
 import OptimizationModeCard from '../OptimizationModeCard';
 import { setToggle } from "../../slice/statusToggleSlice";
 import { featureAPIHandling } from '../../utils/featureAPIHandling';
+import toast from "react-hot-toast";
 
 const HtmlTabSettings = () => {
     const dark = useSelector((state) => state.home.dark);
