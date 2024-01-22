@@ -55,6 +55,11 @@ const SignInPage = () => {
     }
   };
 
+  useEffect(() => {
+    localStorage.clear();
+  }, [])
+  
+
   return (
     <div className="w-[100%] h-[100vh] flex items-center justify-center">
       <TitleManager title={authType ? "Sign In" : "Sign Up"} conicalURL="shopify-auth" />
