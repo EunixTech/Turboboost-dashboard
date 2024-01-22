@@ -673,7 +673,7 @@ const ConnectWebsite = () => {
 
   const handleSubmitForm = () =>{
     toast.dismiss();
-    return toast.success("Comming soon");
+    return toast.success("Coming soon");
   }
 
   return (

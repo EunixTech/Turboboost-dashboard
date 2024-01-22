@@ -881,22 +881,22 @@ const Dashboard = () => {
     if(!imageOptimizationValue && !lazyLoadingToggleValue && !minifyHTMLToggleValue){
       handleImageOptimization();
       handlelazyLoading();
-      minifyHTMLToggleValue();
+      handleMinifyHTML();
     } else if(!imageOptimizationValue && !lazyLoadingToggleValue){
       handleImageOptimization();
       handlelazyLoading();
     } else if(!imageOptimizationValue && !minifyHTMLToggleValue){
       handleImageOptimization();
-      minifyHTMLToggleValue();
+      handleMinifyHTML();
     } else if(!lazyLoadingToggleValue && !minifyHTMLToggleValue){
       handlelazyLoading();
-      minifyHTMLToggleValue();
+      handleMinifyHTML();
     } else if(!imageOptimizationValue){
       handleImageOptimization();
     } else if(!lazyLoadingToggleValue){
       handlelazyLoading();
     } else if(!minifyHTMLToggleValue){
-      minifyHTMLToggleValue();
+      handleMinifyHTML();
     }
   
   }
