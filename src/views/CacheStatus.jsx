@@ -438,7 +438,7 @@ const TableHeader = ({ change }) => {
       }}
       className="w-[100%] flex h-[25px] border-b-[1px] border-[#ebebeb]"
     >
-      <div className="w-[20%]  px-[10px] items-center flex h-[100%] ">
+      <div className="w-[60%]  px-[10px] items-center flex h-[100%] ">
         <div
           style={{
             color: dark ? "#fff" : "#0a0a1876",
@@ -466,7 +466,7 @@ const TableHeader = ({ change }) => {
           alignItems:"center",
           justifyContent:"center"
         }}
-        className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[50%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Asset Type
       </div>
@@ -477,7 +477,7 @@ const TableHeader = ({ change }) => {
           alignItems:"center",
           justifyContent:"center"
         }}
-        className="w-[10%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Original Size
       </div>
@@ -488,7 +488,7 @@ const TableHeader = ({ change }) => {
           alignItems:"center",
           justifyContent:"center"
         }}
-        className="w-[10%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Optimize Size
       </div>
@@ -500,7 +500,7 @@ const TableHeader = ({ change }) => {
           alignItems:"center",
           justifyContent:"center"
         }}
-        className="w-[10%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Status
       </div>
@@ -564,7 +564,7 @@ const TableItem = ({ last, item }) => {
             alignItems:"center",
             justifyContent:"center"
           }}
-          className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+          className="w-[60%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
         >
           {item?.name}
         </div>
@@ -576,7 +576,7 @@ const TableItem = ({ last, item }) => {
           alignItems:"center",
           justifyContent:"center"
         }}
-        className="w-[30%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
+        className="w-[50%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
       >
         {item?.file_type}
       </div>
@@ -587,7 +587,7 @@ const TableItem = ({ last, item }) => {
           alignItems:"center",
           justifyContent:"center"
         }}
-        className="w-[10%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+        className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.before}
       </div>
@@ -598,7 +598,7 @@ const TableItem = ({ last, item }) => {
           alignItems:"center",
           justifyContent:"center"
         }}
-        className="w-[10%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+        className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.after}
       </div>
@@ -608,7 +608,7 @@ const TableItem = ({ last, item }) => {
           display:"flex",
           alignItems:"center",
           justifyContent:"center"
-        }} className="w-[10%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
+        }} className="w-[30%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <Status i={item?.is_optimized ? 1 : 2} />
       </div>
       {/* <div className="w-[9%]  text-[10px] tracking-wide px-[10px] cursor-pointer text-[#0a0a1876] font-bold  flex h-[100%] items-center">
