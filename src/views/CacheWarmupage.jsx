@@ -564,7 +564,7 @@ const CacheWarmup = ({ setShow }) => {
                         }}
                         className="text-[14px] mt-[4px] tracking-wide  text-[#0a0a186f]"
                       >
-                        {pageOptimizationData?.pages?.length && `${pageOptimizationData?.pages?.length} Pages`} 
+                        {pageOptimizationData?.pages?.length ? `${pageOptimizationData?.pages?.length} Pages`:''} 
                       </p>
                     {(pageOptimizationData?.pages && pageOptimizationData?.pages?.length) ? <Table1 tableData = {pageOptimizationData?.pages} /> : ""}
 
