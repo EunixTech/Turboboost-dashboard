@@ -83,7 +83,6 @@ const OnboardingBillings = () => {
   };
 
   useEffect(() => {
-    localStorage.removeItem("authToken");
     fetchingUserDataByToken();
   }, []);
 
