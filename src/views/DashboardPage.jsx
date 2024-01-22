@@ -711,6 +711,38 @@ const Dashboard = () => {
     }
   };
 
+  
+  const fetchPageSpeedInsight = async () => {
+    try {
+      toogleLoadingAPI(true)
+      const res = await GetAxiosConfig(`api/dashboard/page-speed-insight-data`);
+      const resJSON = res?.data;
+ 
+      if (resJSON.status === 200) {
+        toogleLoadingAPI(false)
+        // const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
+        // const imageDataObj = resJSON?.dataObj;
+        // updateImageData(imageDataObj);
+        // updateHandlerData(OptimizationHandlerData)
+      } else if(resJSON.status === 403){
+     
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+  
+      }else{
+        toogleLoadingAPI(false);
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toogleLoadingAPI(false);
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      } 
+      console.error("Error fetching user profile data:", error);
+    }
+  };
+
   const fetchImageOptimizationData = async () => {
     try {
       toogleLoadingAPI(true)
@@ -874,7 +906,8 @@ const Dashboard = () => {
     // }
     
     if(!userToken1){
-      googleSpeedAPI();
+      fetchPageSpeedInsight();
+      // googleSpeedAPI();
       fetchImageOptimizationData();
     }
  
