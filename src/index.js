@@ -169,20 +169,20 @@ const App = () => {
       user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
       };
 
-    const checkAuth = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-    const userToken1 = urlParams.get("userToken");
-      const authToken = localStorage.getItem('authToken');
-      const isLoginRoute = window.location.pathname === '/login-shopify';
+    // const checkAuth = () => {
+    //   const urlParams = new URLSearchParams(window.location.search);
+    // const userToken1 = urlParams.get("userToken");
+    //   const authToken = localStorage.getItem('authToken');
+    //   const isLoginRoute = window.location.pathname === '/login-shopify';
 
-      if (!authToken && !isLoginRoute && !userToken1) {
-        // Redirect to login page if authToken is not available and not on the login route
-        window.location.replace('/login-shopify');
-      } else if (authToken && isLoginRoute) {
-        // Redirect to dashboard page if authToken is available and on the login route
-        window.location.replace('/dashboard');
-      }
-    };
+    //   if (!authToken && !isLoginRoute && !userToken1) {
+    //     // Redirect to login page if authToken is not available and not on the login route
+    //     window.location.replace('/login-shopify');
+    //   } else if (authToken && isLoginRoute) {
+    //     // Redirect to dashboard page if authToken is available and on the login route
+    //     window.location.replace('/dashboard');
+    //   }
+    // };
     fetchImageOptimizationData();
     // checkAuth();
  
