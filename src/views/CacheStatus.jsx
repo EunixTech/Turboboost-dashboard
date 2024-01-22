@@ -557,7 +557,7 @@ const TableItem = ({ last, item }) => {
       }}
       className="w-[100%] flex h-[70px] border-b-[1px] border-[#ebebeb]"
     >
-      <div className="w-[20%]  px-[10px] items-center flex h-[100%] ">
+      <div className="w-[60%]  px-[10px] items-center flex h-[100%] ">
         <div
           style={{
             color: dark ? "#fff" : "#000",
