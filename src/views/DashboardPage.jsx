@@ -641,8 +641,8 @@ const Dashboard = () => {
   const [imageData, updateImageData] = useState({});
   const [handlerData, updateHandlerData] = useState({});
   const [loader, toggleLoader] = useState(false);
-  const [coreVitalsData, updateCoreVitalsData] = useState([]);
-  const [performanceData, updatePerformanceData] = useState([]);
+  const [coreVitalsData, updateCoreVitalsData] = useState({});
+  const [performanceData, updatePerformanceData] = useState({});
   const [coreVitals, setVitsals] = useState(true);
   const [loading, toogleLoading] = useState(true);
   const [loadingAPI, toogleLoadingAPI] = useState(true);
@@ -720,10 +720,13 @@ const Dashboard = () => {
  
       if (resJSON.status === 200) {
         toogleLoadingAPI(false)
-        // const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
-        // const imageDataObj = resJSON?.dataObj;
-        // updateImageData(imageDataObj);
-        // updateHandlerData(OptimizationHandlerData)
+        const OptimizationHandlerData = resJSON?.data;
+        const imageDataObj = resJSON?.dataObj;
+        updateImageData(imageDataObj);
+        updateHandlerData(OptimizationHandlerData)
+      updateCoreVitalsData(coreVitualsArr);
+      updatePerformanceData(performanceArr);
+
       } else if(resJSON.status === 403){
      
           localStorage.removeItem('authToken');
@@ -973,7 +976,7 @@ const Dashboard = () => {
                   }}
                   className="text-[16px] f2 tracking-wide font-bold"
                 >
-                  % Image Optimized
+                  Total Images
                 </p>
                 <Tooltip text="This indicates the percentage of image optimization achieved by TurboBoost." />
               </div>
@@ -984,7 +987,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[25px] f2 desktop:text-[25px]  font-bold "
                 >
-                  {imageData?.percentageImageOptimize}%
+                  {imageData?.totalImages}%
                 </p>
                 {/* <div className=" flex bg-[#18df902e] px-[13px] py-[2px] rounded-[23px] ml-[10px]">
                   <img
