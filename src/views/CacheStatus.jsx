@@ -442,8 +442,11 @@ const TableHeader = ({ change }) => {
         <div
           style={{
             color: dark ? "#fff" : "#0a0a1876",
+            display:"flex",
+            alignItems:"center",
+            justifyContent:"center"
           }}
-          className="w-[27%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
+          className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
         >
           Name
         </div>
@@ -459,24 +462,33 @@ const TableHeader = ({ change }) => {
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[27%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Asset Type
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[20%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[10%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Original Size
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[20%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[10%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Optimize Size
       </div>
@@ -484,8 +496,11 @@ const TableHeader = ({ change }) => {
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[9%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+        className="w-[10%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Status
       </div>
@@ -545,8 +560,11 @@ const TableItem = ({ last, item }) => {
         <div
           style={{
             color: dark ? "#fff" : "#000",
+            display:"flex",
+            alignItems:"center",
+            justifyContent:"center"
           }}
-          className="w-[27%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+          className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
         >
           {item?.name}
         </div>
@@ -554,37 +572,43 @@ const TableItem = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[27%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
+        className="w-[30%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
       >
         {item?.file_type}
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[20%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+        className="w-[10%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.before}
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[20%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+        className="w-[10%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.after}
       </div>
-      <div
-        style={{
+    
+      <div   style={{
           color: dark ? "#fff" : "#000",
-        }}
-        className="w-[9%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
-      >
-        {item?.is_optimized}
-      </div>
-
-      <div className="w-[9%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
+        }} className="w-[10%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <Status i={item?.is_optimized ? 1 : 2} />
       </div>
       {/* <div className="w-[9%]  text-[10px] tracking-wide px-[10px] cursor-pointer text-[#0a0a1876] font-bold  flex h-[100%] items-center">
