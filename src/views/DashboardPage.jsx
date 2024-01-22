@@ -882,7 +882,6 @@ const Dashboard = () => {
 
   const handlePurgeAll = async() =>{
 
-    toggleLoader(true);
     if(!imageOptimizationValue && !lazyLoadingToggleValue && !minifyHTMLToggleValue){
       handleImageOptimization();
       handlelazyLoading();
@@ -903,8 +902,7 @@ const Dashboard = () => {
     } else if(!minifyHTMLToggleValue){
       handleMinifyHTML();
     }
-    toggleLoader(false);
-  
+
   }
 
 
