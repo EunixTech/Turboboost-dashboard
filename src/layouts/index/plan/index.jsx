@@ -937,7 +937,7 @@ const Plan = ({ cancel }) => {
                       style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                       className="text-[14px] text-[#696e7e89] font-medium "
                     >
-                      {item?.pageViews} page views/mogh
+                      {item?.pageViews} page views/month
                     </h1>
                   </div>
                   <div
