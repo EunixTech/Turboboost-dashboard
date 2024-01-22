@@ -98,6 +98,7 @@ const Plan = ({ cancel }) => {
       });
   }
   useEffect(() => {
+    localStorage.removeItem('apiCalled')
     fetchingBillingDetails()
   }, [])
 

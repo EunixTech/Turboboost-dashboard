@@ -78,6 +78,7 @@ const OnboardingBillings = () => {
   };
 
   useEffect(() => {
+    localStorage.removeItem('apiCalled')
     fetchingUserDataByToken();
   }, []);
 

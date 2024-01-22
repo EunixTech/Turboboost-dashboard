@@ -22,6 +22,7 @@ const Billing = () => {
   const [loader, toggleLoader] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
+	localStorage.removeItem('apiCalled')
     const storedPlanName = localStorage.getItem("planName");
     const storedStoreName = localStorage.getItem("storeName");
 
