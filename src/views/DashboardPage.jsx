@@ -745,12 +745,12 @@ const Dashboard = () => {
 
   const fetchImageOptimizationData = async () => {
     try {
-      toogleLoadingAPI(true)
+      // toogleLoadingAPI(true)
       const res = await GetAxiosConfig(`api/dashboard/fetch-image-optimization-data`);
       const resJSON = res?.data;
  
       if (resJSON.status === 200) {
-        toogleLoadingAPI(false)
+        // toogleLoadingAPI(false)
         const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
@@ -761,11 +761,11 @@ const Dashboard = () => {
           window.location.replace('/login-shopify');
   
       }else{
-        toogleLoadingAPI(false);
+        // toogleLoadingAPI(false);
         return toast.error("Please try again");
       }
     } catch (error) {
-      toogleLoadingAPI(false);
+      // toogleLoadingAPI(false);
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
