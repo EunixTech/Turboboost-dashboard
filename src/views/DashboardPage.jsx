@@ -481,7 +481,7 @@ import { useNavigate } from "react-router-dom";
 import Tooltip from "../components/Tooltip";
 import axios from "axios";
 
-const GooglePageScore = ({coreVitalsData={}, performanceData={}}) => {
+const GooglePageScore = ({coreVitalsData, performanceData}) => {
   const dark = useSelector((state) => state.home.dark);
   const [coreVitals, setVitsals] = useState(true);
 

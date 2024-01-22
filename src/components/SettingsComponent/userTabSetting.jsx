@@ -106,15 +106,17 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
   
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-
+      toggoleLoading(true);
       const res = await PatchAxiosConfig(`user/update-account`,values)
          
       const resJSON = await res.data;
 
       if (resJSON?.status === 200) {
+        toggoleLoading(false);
         return toast.success(resJSON.message);
         
       }else {
+        toggoleLoading(false);
         return toast.success(resJSON.message);
       }
       
@@ -369,7 +371,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
               )}
             </Field>
 
-            <div className="w-[35%]">
+            <div style={{marginBottom:"10px"}} className="w-[35%]">
               <button
                 type="button" 
                 onClick={handleOpenChangeEmailModal}
