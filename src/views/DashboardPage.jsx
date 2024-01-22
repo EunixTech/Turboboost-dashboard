@@ -736,7 +736,7 @@ const Dashboard = () => {
   
       }else{
         toogleLoadingAPI(false);
-        return toast.error("Please try again");
+        // return toast.error("Please try again");
       }
     } catch (error) {
       toogleLoadingAPI(false);
@@ -750,12 +750,12 @@ const Dashboard = () => {
 
   const fetchImageOptimizationData = async () => {
     try {
-      // toogleLoadingAPI(true)
+      toogleLoadingAPI(true)
       const res = await GetAxiosConfig(`api/dashboard/fetch-image-optimization-data`);
       const resJSON = res?.data;
  
       if (resJSON.status === 200) {
-        // toogleLoadingAPI(false)
+        toogleLoadingAPI(false)
         const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
@@ -767,7 +767,7 @@ const Dashboard = () => {
   
       }else{
         // toogleLoadingAPI(false);
-        return toast.error("Please try again");
+        // return toast.error("Please try again");
       }
     } catch (error) {
       // toogleLoadingAPI(false);
@@ -798,7 +798,9 @@ const Dashboard = () => {
     if(data.status === 200){
       dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
       return toast.success(data.message);
-    }  else return toast.error(data?.message)
+    }  
+    
+    // else return toast.error(data?.message)
   ;
   };
 
@@ -825,7 +827,9 @@ const Dashboard = () => {
       
       dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
       return toast.success(data.message);
-    }  else return toast.error(data?.message)
+    }  
+    
+    // else return toast.error(data?.message)
 
   };
 
@@ -850,7 +854,7 @@ const Dashboard = () => {
         return toast.success(resData?.message);
       } else {
         toggleLoader(false);
-        return toast.error("Please try again");
+        // return toast.error("Please try again");
       }
     } catch (error) {
       toggleLoader(false);
@@ -877,6 +881,7 @@ const Dashboard = () => {
   }
 
   const handlePurgeAll = async() =>{
+
     toggleLoader(true);
     if(!imageOptimizationValue && !lazyLoadingToggleValue && !minifyHTMLToggleValue){
       handleImageOptimization();
