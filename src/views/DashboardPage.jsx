@@ -903,6 +903,7 @@ const Dashboard = () => {
     } else if(!minifyHTMLToggleValue){
       handleMinifyHTML();
     }
+    toggleLoader(false);
   
   }
 
