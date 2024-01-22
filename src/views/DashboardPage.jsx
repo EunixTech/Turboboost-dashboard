@@ -567,7 +567,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
             <CircularProgressBar
               mr="0"
               title="Performence"
-              percentage={coreVitalsData?.performance}
+              percentage={coreVitalsData?.performence}
             />
             <CircularProgressBar
               mr="0"
@@ -579,7 +579,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
               title="Best Practices"
               percentage={coreVitalsData?.best_practices}
             />
-            <CircularProgressBar title="SEO" percentage={performanceData?.seo} />
+            <CircularProgressBar title="SEO" percentage={coreVitalsData?.seo} />
           </div>
         </>
       ) : (
@@ -1320,6 +1320,7 @@ const Dashboard = () => {
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
                 borderColor: dark ? "#1F2329" : "#ebebeb",
+                paddingBottom:"60px"
               }}
               className=" h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px] w-[400px]"
             >
