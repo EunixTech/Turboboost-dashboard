@@ -482,6 +482,8 @@ import Tooltip from "../components/Tooltip";
 import axios from "axios";
 
 const GooglePageScore = ({coreVitalsData, performanceData}) => {
+    console.log("GooglePageScore",coreVitalsData)
+        console.log("GooglePageScore",performanceData)
   const dark = useSelector((state) => state.home.dark);
   const [coreVitals, setVitsals] = useState(true);
 
@@ -1312,7 +1314,8 @@ const Dashboard = () => {
                 </>
               )}
             </div> */}
-            <GooglePageScore coreVitalsData={coreVitalsData} performanceData={performanceData} />
+            {(Object.keys(coreVitalsData).length && Object.keys(performanceData).length) &&  <GooglePageScore coreVitalsData={coreVitalsData} performanceData={performanceData} />}
+           
             <div
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
