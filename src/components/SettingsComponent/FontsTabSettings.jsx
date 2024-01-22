@@ -18,16 +18,27 @@ const FontsTabSettings = () => {
     let endPoint = "";
     if (!fontRenderBehaviorToggleValue) endPoint = "api/shopify/adding-font-swap-properties";
     else endPoint = "api/shopify/restore-adding-font-swap-properties";
-    await featureAPIHandling(endPoint);
-    dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
+    const data = await featureAPIHandling(endPoint);
+      if(data.status === 200){
+        dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
+        return toast.success(data.message);
+      }  else return toast.error(data?.message)
+    
+   
+
   }
 
   const handleFontLoading = async() =>{
     let endPoint = "";
     if (!fontLoadingToggleValue) endPoint = "api/shopify/font-loading-optimization";
     else endPoint = "api/shopify/restore-font-loading-optimization";
-    await featureAPIHandling(endPoint);
-    dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
+    const data = await featureAPIHandling(endPoint);
+    if(data.status === 200){
+      dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
+      return toast.success(data.message);
+    }  else return toast.error(data?.message)
+  
+    
   }
  
   return (

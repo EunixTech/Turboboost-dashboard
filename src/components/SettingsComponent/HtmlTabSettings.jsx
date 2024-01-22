@@ -15,8 +15,13 @@ const HtmlTabSettings = () => {
       let endPoint = "";
       if (!minifyHTMLToggleValue) endPoint = "api/shopify/minify-html";
       else endPoint = "api/shopify/restore-minify-html";
-      await featureAPIHandling(endPoint);
+      const data = await featureAPIHandling(endPoint);
+    if(data.status === 200){
       dispatch(setToggle({ key: "minifyHTML", value: !minifyHTMLToggleValue }));
+      return toast.success(data.message);
+    }  else return toast.error(data?.message)
+  
+      
     }
 
   return (

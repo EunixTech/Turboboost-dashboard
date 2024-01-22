@@ -31,8 +31,13 @@ const CssTabSettings = () => {
       let endPoint = "";
       if (!removeUnsedCSSToggleValue) endPoint = "api/shopify/remove-unused-css-optimization";
       else endPoint = "api/shopify/restore-remove-unused-css-optimization";
-      await featureAPIHandling(endPoint);
-      dispatch(setToggle({ key: "removeUnsedCSS", value: !removeUnsedCSSToggleValue }));
+      const data = await featureAPIHandling(endPoint);
+      if(data.status === 200){
+        dispatch(setToggle({ key: "removeUnsedCSS", value: !removeUnsedCSSToggleValue }));
+        return toast.success(data.message);
+      }  else return toast.error(data?.message)
+    
+   
     }
 
     
