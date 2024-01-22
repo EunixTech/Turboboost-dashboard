@@ -868,8 +868,7 @@ const Dashboard = () => {
 
   const handlePurgeAll = async() =>{
     toggleLoader(true);
-    dispatch(setToggle({ key: "lazyLoading", value: true }));
-    dispatch(setToggle({ key: "criticalCSS", value: true }));
+  
     let endPoint = "";
     if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
     else endPoint = "api/shopify/restore-image-optimization";
@@ -878,12 +877,11 @@ const Dashboard = () => {
       if(!imageOptimizationValue){
 
         const res = await GetAxiosConfig(endPoint);
-        toggleLoader(false);
+        
         const resData = res?.data;
         if(resData?.status === 200){
         dispatch(setToggle({ key: "imageOptimization", value: true }));
-        dispatch(setToggle({ key: "lazyLoading", value: true }));
-        dispatch(setToggle({ key: "criticalCSS", value: true }));
+        toggleLoader(false);
         fetchImageOptimizationData();
           return toast.success(resData?.message);
         } else if(resData.status === 403){
