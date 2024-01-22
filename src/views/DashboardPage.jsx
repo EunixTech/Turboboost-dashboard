@@ -567,7 +567,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
             <CircularProgressBar
               mr="0"
               title="Performence"
-              percentage={performanceData?.performence}
+              percentage={accessibility}
             />
             <CircularProgressBar
               mr="0"
