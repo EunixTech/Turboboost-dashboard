@@ -3,7 +3,7 @@ import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+import AnimatedLoader from "../components/loader/AnimatedLoader";
 const Button = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -168,288 +168,298 @@ const IntegrationItem = ({
 const Integrations = ({ setShow }) => {
   const dark = useSelector((state) => state.home.dark);
   const [selected, setSelected] = useState(0);
-
+  const [loader, toggleLoader] = useState(true);
   const showToastAlert = () =>{
     toast.dismiss();
     // return toast.warning("Comming Soon");
   }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      toggleLoader(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
+    {
+      loader ?<AnimatedLoader />:
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-        <div className="w-[100%] h-[50px] shrink-0"></div>
-        <div
-          style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
-          className="w-[100%] h-[100%] flex flex-col items-center overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] pb-[40px] mobile:px-[10px] laptop:px-[80px]"
-        >
-          <div className="w-[100%] max-w-[1920px] min-h-[100vh]">
-            <div className="w-[100%] pt-[30px]">
-              <h1
-                style={{
-                  color: dark ? "#fff" : "#000",
-                }}
-                className="text-[20px] font-bold tracking-wide "
-              >
-                Featured Apps
-              </h1>
-            </div>
-            <div className="grid laptop:grid-cols-3 mt-[14px] gap-[20px] w-[100%]">
-              <IntegrationItem
-                src="/graphic/integrations/p1.png"
-                title="TxtCart"
-                connectClick={showToastAlert}
-              connect={true}
-                sub="Conversational SMS Marketing and Cart recovery with AI"
-              />
-              <IntegrationItem
-                connected={false}
-                src="/graphic/integrations/chargebacks.jpg"
-                title="Chargeflow Dispute Chargebacks"
-                connectClick={showToastAlert}
-                connect={true}
-                sub="Automate chargebacks, Fight Fraud Prevention, Order Protection"
-              />
-                <IntegrationItem
-                connected={false}
-                src="/graphic/integrations/appstlelogo.jpg"
-                title="Appstle℠ Subscriptions App"
-                connectClick={showToastAlert}
-                connect={true}
-                sub="App for recurring payments, subscriptions, build a box, bundle"
-              />
-            </div>
-            {/* <div className="w-[100%] pt-[30px]">
-              <h1
-                style={{
-                  color: dark ? "#fff" : "#000",
-                }}
-                className="text-[18px] font-bold tracking-wide "
-              >
-                Integrations
-              </h1>
-              <div className="w-[100%] mt-[10px] flex">
-                <div
-                  onClick={() => {
-                    setSelected(0);
-                  }}
-                  className={`px-[22px] border-[${
-                    selected === 0
-                      ? dark
-                        ? "#fff"
-                        : "#000"
-                      : dark
-                      ? "#1F2329"
-                      : "#ebebeb"
-                  }] text-[${
-                    selected === 0
-                      ? dark
-                        ? "#fff"
-                        : "#000"
-                      : dark
-                      ? "#ffffff74"
-                      : "#0a0a187e"
-                  }] ${dark?"hover:border-[#fff] hover:text-[#fff]":"hover:border-[#000] hover:text-[#000]"}  rounded-[3px] text-[12px] mr-[10px] cursor-pointer font-medium h-[34px] border-[1px] flex items-center justify-center`}
-                >
-                  All
-                </div>
-                <div
-                  onClick={() => {
-                    setSelected(1);
-                  }}
-                  style={{}}
-                  className={`px-[22px] border-[${
-                    selected === 1
-                      ? dark
-                        ? "#fff"
-                        : "#000"
-                      : dark
-                      ? "#1F2329"
-                      : "#ebebeb"
-                  }] text-[${
-                    selected === 1
-                      ? dark
-                        ? "#fff"
-                        : "#000"
-                      : dark
-                      ? "#ffffff74"
-                      : "#0a0a187e"
-                  }] ${dark?"hover:border-[#fff] hover:text-[#fff]":"hover:border-[#000] hover:text-[#000]"}  rounded-[3px] text-[12px] mr-[10px] cursor-pointer font-medium h-[34px] border-[1px] flex items-center justify-center`}
-                >
-                  Installed
-                </div>
-                <div
-                  onClick={() => {
-                    setSelected(2);
-                  }}
-                  className={`px-[22px] border-[${
-                    selected === 2
-                      ? dark
-                        ? "#fff"
-                        : "#000"
-                      : dark
-                      ? "#1F2329"
-                      : "#ebebeb"
-                  }] text-[${
-                    selected === 2
-                      ? dark
-                        ? "#fff"
-                        : "#000"
-                      : dark
-                      ? "#ffffff74"
-                      : "#0a0a187e"
-                  }]  ${dark?"hover:border-[#fff] hover:text-[#fff]":"hover:border-[#000] hover:text-[#000]"}  rounded-[3px] text-[12px] mr-[10px] cursor-pointer font-medium h-[34px] border-[1px] flex items-center justify-center`}
-                >
-                  Not Installed
-                </div>
-              </div>
-              <div className="w-[100%] mt-[20px] grid laptop:grid-cols-3 gap-[20px] ">
-                {selected === 0 && (
-                  <>
-                    <IntegrationItem
-                      connected={false}
-                      src="/graphic/integrations/p3.png"
-                      title="HubSpot"
-                      connectClick={showToastAlert}
-                    connect={true}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      src="/graphic/integrations/p4.png"
-                      title="Shopify"
-                    connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      src="/graphic/integrations/p5.png"
-                      title="Klaviyo"
-                    connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-
-                    <IntegrationItem
-                      src="/graphic/integrations/p6.png"
-                      title="Zapier"
-                    connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      connected={false}
-                      src="/graphic/integrations/p7.png"
-                      title="Slack"
-                    connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      connected={false}
-                      src="/graphic/integrations/p8.png"
-                      title="WooCommerce"
-                      connectClick={showToastAlert}
-                    connect={true}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      src="/graphic/integrations/p9.png"
-                      title="TxtCart"
-                      connectClick={showToastAlert}
-                    connect={true}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      connected={false}
-                      src="/graphic/integrations/p2.png"
-                      title="Appstack"
-                      connectClick={showToastAlert}
-                    connect={true}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      src="/graphic/integrations/p9.png"
-                      title="TxtCart"
-                      connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-
-<IntegrationItem
-                      connected={false}
-                      src="/graphic/integrations/p3.png"
-                      title="HubSpot"
-                      connectClick={showToastAlert}
-                    connect={true}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      src="/graphic/integrations/p4.png"
-                      title="Shopify"
-                    connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      src="/graphic/integrations/p5.png"
-                      title="Klaviyo"
-                    connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-
-                    <IntegrationItem
-                      src="/graphic/integrations/p6.png"
-                      title="Zapier"
-                    connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      connected={false}
-                      src="/graphic/integrations/p7.png"
-                      title="Slack"
-                    connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      connected={false}
-                      src="/graphic/integrations/p8.png"
-                      title="WooCommerce"
-                      connectClick={showToastAlert}
-                    connect={true}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-
-<IntegrationItem
-                      src="/graphic/integrations/p9.png"
-                      title="TxtCart"
-                      connectClick={showToastAlert}
-                    connect={true}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      connected={false}
-                      src="/graphic/integrations/p2.png"
-                      title="Appstack"
-                      connectClick={showToastAlert}
-                    connect={true}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                    <IntegrationItem
-                      src="/graphic/integrations/p9.png"
-                      title="TxtCart"
-                    connect={true}
-                      connectClick={showToastAlert}
-                      sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
-                    />
-                  </>
-                )}
-               
-              </div>
-            </div> */}
+      <div className="w-[100%] h-[50px] shrink-0"></div>
+      <div
+        style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
+        className="w-[100%] h-[100%] flex flex-col items-center overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] pb-[40px] mobile:px-[10px] laptop:px-[80px]"
+      >
+        <div className="w-[100%] max-w-[1920px] min-h-[100vh]">
+          <div className="w-[100%] pt-[30px]">
+            <h1
+              style={{
+                color: dark ? "#fff" : "#000",
+              }}
+              className="text-[20px] font-bold tracking-wide "
+            >
+              Featured Apps
+            </h1>
           </div>
+          <div className="grid laptop:grid-cols-3 mt-[14px] gap-[20px] w-[100%]">
+            <IntegrationItem
+              src="/graphic/integrations/p1.png"
+              title="TxtCart"
+              connectClick={showToastAlert}
+            connect={true}
+              sub="Conversational SMS Marketing and Cart recovery with AI"
+            />
+            <IntegrationItem
+              connected={false}
+              src="/graphic/integrations/chargebacks.jpg"
+              title="Chargeflow Dispute Chargebacks"
+              connectClick={showToastAlert}
+              connect={true}
+              sub="Automate chargebacks, Fight Fraud Prevention, Order Protection"
+            />
+              <IntegrationItem
+              connected={false}
+              src="/graphic/integrations/appstlelogo.jpg"
+              title="Appstle℠ Subscriptions App"
+              connectClick={showToastAlert}
+              connect={true}
+              sub="App for recurring payments, subscriptions, build a box, bundle"
+            />
+          </div>
+          {/* <div className="w-[100%] pt-[30px]">
+            <h1
+              style={{
+                color: dark ? "#fff" : "#000",
+              }}
+              className="text-[18px] font-bold tracking-wide "
+            >
+              Integrations
+            </h1>
+            <div className="w-[100%] mt-[10px] flex">
+              <div
+                onClick={() => {
+                  setSelected(0);
+                }}
+                className={`px-[22px] border-[${
+                  selected === 0
+                    ? dark
+                      ? "#fff"
+                      : "#000"
+                    : dark
+                    ? "#1F2329"
+                    : "#ebebeb"
+                }] text-[${
+                  selected === 0
+                    ? dark
+                      ? "#fff"
+                      : "#000"
+                    : dark
+                    ? "#ffffff74"
+                    : "#0a0a187e"
+                }] ${dark?"hover:border-[#fff] hover:text-[#fff]":"hover:border-[#000] hover:text-[#000]"}  rounded-[3px] text-[12px] mr-[10px] cursor-pointer font-medium h-[34px] border-[1px] flex items-center justify-center`}
+              >
+                All
+              </div>
+              <div
+                onClick={() => {
+                  setSelected(1);
+                }}
+                style={{}}
+                className={`px-[22px] border-[${
+                  selected === 1
+                    ? dark
+                      ? "#fff"
+                      : "#000"
+                    : dark
+                    ? "#1F2329"
+                    : "#ebebeb"
+                }] text-[${
+                  selected === 1
+                    ? dark
+                      ? "#fff"
+                      : "#000"
+                    : dark
+                    ? "#ffffff74"
+                    : "#0a0a187e"
+                }] ${dark?"hover:border-[#fff] hover:text-[#fff]":"hover:border-[#000] hover:text-[#000]"}  rounded-[3px] text-[12px] mr-[10px] cursor-pointer font-medium h-[34px] border-[1px] flex items-center justify-center`}
+              >
+                Installed
+              </div>
+              <div
+                onClick={() => {
+                  setSelected(2);
+                }}
+                className={`px-[22px] border-[${
+                  selected === 2
+                    ? dark
+                      ? "#fff"
+                      : "#000"
+                    : dark
+                    ? "#1F2329"
+                    : "#ebebeb"
+                }] text-[${
+                  selected === 2
+                    ? dark
+                      ? "#fff"
+                      : "#000"
+                    : dark
+                    ? "#ffffff74"
+                    : "#0a0a187e"
+                }]  ${dark?"hover:border-[#fff] hover:text-[#fff]":"hover:border-[#000] hover:text-[#000]"}  rounded-[3px] text-[12px] mr-[10px] cursor-pointer font-medium h-[34px] border-[1px] flex items-center justify-center`}
+              >
+                Not Installed
+              </div>
+            </div>
+            <div className="w-[100%] mt-[20px] grid laptop:grid-cols-3 gap-[20px] ">
+              {selected === 0 && (
+                <>
+                  <IntegrationItem
+                    connected={false}
+                    src="/graphic/integrations/p3.png"
+                    title="HubSpot"
+                    connectClick={showToastAlert}
+                  connect={true}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    src="/graphic/integrations/p4.png"
+                    title="Shopify"
+                  connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    src="/graphic/integrations/p5.png"
+                    title="Klaviyo"
+                  connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+
+                  <IntegrationItem
+                    src="/graphic/integrations/p6.png"
+                    title="Zapier"
+                  connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    connected={false}
+                    src="/graphic/integrations/p7.png"
+                    title="Slack"
+                  connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    connected={false}
+                    src="/graphic/integrations/p8.png"
+                    title="WooCommerce"
+                    connectClick={showToastAlert}
+                  connect={true}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    src="/graphic/integrations/p9.png"
+                    title="TxtCart"
+                    connectClick={showToastAlert}
+                  connect={true}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    connected={false}
+                    src="/graphic/integrations/p2.png"
+                    title="Appstack"
+                    connectClick={showToastAlert}
+                  connect={true}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    src="/graphic/integrations/p9.png"
+                    title="TxtCart"
+                    connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+
+<IntegrationItem
+                    connected={false}
+                    src="/graphic/integrations/p3.png"
+                    title="HubSpot"
+                    connectClick={showToastAlert}
+                  connect={true}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    src="/graphic/integrations/p4.png"
+                    title="Shopify"
+                  connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    src="/graphic/integrations/p5.png"
+                    title="Klaviyo"
+                  connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+
+                  <IntegrationItem
+                    src="/graphic/integrations/p6.png"
+                    title="Zapier"
+                  connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    connected={false}
+                    src="/graphic/integrations/p7.png"
+                    title="Slack"
+                  connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    connected={false}
+                    src="/graphic/integrations/p8.png"
+                    title="WooCommerce"
+                    connectClick={showToastAlert}
+                  connect={true}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+
+<IntegrationItem
+                    src="/graphic/integrations/p9.png"
+                    title="TxtCart"
+                    connectClick={showToastAlert}
+                  connect={true}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    connected={false}
+                    src="/graphic/integrations/p2.png"
+                    title="Appstack"
+                    connectClick={showToastAlert}
+                  connect={true}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                  <IntegrationItem
+                    src="/graphic/integrations/p9.png"
+                    title="TxtCart"
+                  connect={true}
+                    connectClick={showToastAlert}
+                    sub="Lorem ipsum dolor sit amet consectetur. Facilisi turpis neque aenean magna platea purus."
+                  />
+                </>
+              )}
+             
+            </div>
+          </div> */}
         </div>
       </div>
+    </div>
+    }
+     
     </>
   );
 };
