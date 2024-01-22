@@ -567,17 +567,17 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
             <CircularProgressBar
               mr="0"
               title="Performence"
-              percentage={performanceData.accessibility}
+              percentage={coreVitalsData?.performance}
             />
             <CircularProgressBar
               mr="0"
               title="Accessibility"
-              percentage={performanceData?.accessibility}
+              percentage={coreVitalsData?.accessibility}
             />
             <CircularProgressBar
               mr="0"
               title="Best Practices"
-              percentage={performanceData?.best_practices}
+              percentage={coreVitalsData?.best_practices}
             />
             <CircularProgressBar title="SEO" percentage={performanceData?.seo} />
           </div>
@@ -593,7 +593,6 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
                 First Contentful Paint
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-                {coreVitalsData?.first_contentful_paint}
                 {performanceData?.first_contentful_paint}
               </p>
             </div>
@@ -605,7 +604,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
                 Speed Index
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-              {coreVitalsData?.speed_index}
+              {performanceData?.speed_index}
               </p>
             </div>
           </div>
@@ -618,7 +617,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
                 Total Blocking Time
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-              {coreVitalsData?.total_blocking_time}
+              {performanceData?.total_blocking_time}
               </p>
             </div>
             <div className="w-[150px]">
@@ -629,7 +628,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
                 Largest Contentful Paint
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-              {coreVitalsData?.largest_contentful_paint}
+              {performanceData?.largest_contentful_paint}
               </p>
             </div>
           </div>
