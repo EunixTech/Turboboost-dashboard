@@ -184,7 +184,7 @@ const App = () => {
       }
     };
     fetchImageOptimizationData();
-    checkAuth();
+    // checkAuth();
  
   }, []);
 
