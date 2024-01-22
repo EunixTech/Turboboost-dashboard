@@ -726,10 +726,6 @@ const Dashboard = () => {
         const coreVitualsDataObj = pageSpeedInsightData?.performance;
          const performaceDataObj = pageSpeedInsightData?.core_vitals;
 
-         console.log("pageSpeedInsightData",pageSpeedInsightData)
-         console.log("coreVitualsDataObj",coreVitualsDataObj)
-         console.log("performaceDataObj",performaceDataObj)
-
       updateCoreVitalsData(coreVitualsDataObj);
       updatePerformanceData(performaceDataObj);
 
@@ -794,13 +790,12 @@ const Dashboard = () => {
   );
 
   const handleCriticalCSS = async () => {
-    toogleLoadingAPI(true)
+    toast.dismiss();
     let endPoint = "";
     if (!criticalCSSToggleValue) endPoint = "api/shopify/critical-css-optimization";
     else endPoint = "api/shopify/restore-critical-css-optimization";
     const data = await featureAPIHandling(endPoint);
     if(data.status === 200){
-      toogleLoadingAPI(false)
       dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
       return toast.success(data.message);
     }  else return toast.error(data?.message)
@@ -821,13 +816,13 @@ const Dashboard = () => {
     );
   };
   const handlelazyLoading = async () => {
-    toogleLoadingAPI(true)
+    toast.dismiss();
     let endPoint = "";
     if (!lazyLoadingToggleValue) endPoint = "api/shopify/adding-image-lazy-loading";
     else endPoint = "api/shopify/restore-adding-image-lazy-loading";
     const data = await featureAPIHandling(endPoint);
     if(data.status === 200){
-      toogleLoadingAPI(false)
+      
       dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
       return toast.success(data.message);
     }  else return toast.error(data?.message)
@@ -837,7 +832,7 @@ const Dashboard = () => {
   const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization) ;
 
   const handleImageOptimization = async() =>{
-   
+    toast.dismiss();
     try {
      
     let endPoint = "";
@@ -846,11 +841,12 @@ const Dashboard = () => {
 
     toggleLoader(true);
       const res = await GetAxiosConfig(endPoint);
-      toggleLoader(false);
+    
       const resData = res?.data;
       if(resData?.status === 200){
       dispatch(setToggle({ key: "imageOptimization", value: !imageOptimizationValue }));
       fetchImageOptimizationData();
+      toggleLoader(false);
         return toast.success(resData?.message);
       } else {
         toggleLoader(false);
@@ -866,45 +862,35 @@ const Dashboard = () => {
     }
   }
 
+  const minifyHTMLToggleValue = useSelector((state) => state.toggles?.minifyHTML);
+  const handleMinifyHTML = async () => {
+    let endPoint = "";
+    if (!minifyHTMLToggleValue) endPoint = "api/shopify/minify-html";
+    else endPoint = "api/shopify/restore-minify-html";
+    const data = await featureAPIHandling(endPoint);
+    if (data.status === 200) {
+      dispatch(setToggle({ key: "minifyHTML", value: !minifyHTMLToggleValue }));
+      return toast.success(data.message);
+    } else return toast.error(data?.message)
+
+
+  }
+
   const handlePurgeAll = async() =>{
     toggleLoader(true);
+ 
+    if(!imageOptimizationValue){
+      handleImageOptimization();
+    }    
+    if(!lazyLoadingToggleValue){
+      handlelazyLoading();
+    }    
+    if(!minifyHTMLToggleValue){
+      minifyHTMLToggleValue();
+    }    
   
-    let endPoint = "";
-    if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
-    else endPoint = "api/shopify/restore-image-optimization";
-   
-    try {
-      if(!imageOptimizationValue){
 
-        const res = await GetAxiosConfig(endPoint);
-        
-        const resData = res?.data;
-        if(resData?.status === 200){
-        dispatch(setToggle({ key: "imageOptimization", value: true }));
-        toggleLoader(false);
-        fetchImageOptimizationData();
-          return toast.success(resData?.message);
-        } else if(resData.status === 403){
-     
-          localStorage.removeItem('authToken');
-          window.location.replace('/login-shopify');
-  
-      }else{
-        toogleLoadingAPI(false);
-        return toast.error("Please try again");
-      }
-      }
-     
-   
-    } catch (error) {
-      console.error("Error fetching user profile data:", error);
-      toggleLoader(false);
-      if (error?.response?.status === 401) {
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
-      }
-    
-    }
+
   }
 
 
@@ -1515,11 +1501,11 @@ const Dashboard = () => {
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
                 >
-                  Critical CSS
+                  Minify Html
                 </p>
                 <ToggleButton
-                  toggleValue={criticalCSSToggleValue}
-                  handlingToggle={handleCriticalCSS}
+                  toggleValue={minifyHTMLToggleValue}
+                  handlingToggle={handleMinifyHTML}
                 />
               </div>
 
