@@ -750,12 +750,12 @@ const Dashboard = () => {
 
   const fetchImageOptimizationData = async () => {
     try {
-      toogleLoadingAPI(true)
+      toogleLoading(true)
       const res = await GetAxiosConfig(`api/dashboard/fetch-image-optimization-data`);
       const resJSON = res?.data;
  
       if (resJSON.status === 200) {
-        toogleLoadingAPI(false)
+        toogleLoading(false)
         const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
@@ -925,7 +925,7 @@ const Dashboard = () => {
  
   }, [userToken1]);
 
-  return loadingAPI ? (
+  return (loadingAPI || loader) ? (
     <AnimatedLoader />
   ) : (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
