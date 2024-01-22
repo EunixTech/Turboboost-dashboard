@@ -202,7 +202,7 @@ const Integrations = ({ setShow }) => {
               />
               <IntegrationItem
                 connected={false}
-                src="/graphic/integrations/chargebacks.webp"
+                src="/graphic/integrations/chargebacks.jpg"
                 title="Chargeflow Dispute Chargebacks"
                 connectClick={showToastAlert}
                 connect={true}
@@ -210,7 +210,7 @@ const Integrations = ({ setShow }) => {
               />
                 <IntegrationItem
                 connected={false}
-                src="/graphic/integrations/appstlelogo.webp"
+                src="/graphic/integrations/appstlelogo.jpg"
                 title="Appstle℠ Subscriptions App"
                 connectClick={showToastAlert}
                 connect={true}
