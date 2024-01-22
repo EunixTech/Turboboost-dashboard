@@ -481,7 +481,7 @@ import { useNavigate } from "react-router-dom";
 import Tooltip from "../components/Tooltip";
 import axios from "axios";
 
-const GooglePageScore = () => {
+const GooglePageScore = ({coreVitalsData={}, performanceData={}}) => {
   const dark = useSelector((state) => state.home.dark);
   const [coreVitals, setVitsals] = useState(true);
 
@@ -565,19 +565,19 @@ const GooglePageScore = () => {
             <CircularProgressBar
               mr="0"
               title="Performence"
-              percentage={98}
+              percentage={performanceData?.performence}
             />
             <CircularProgressBar
               mr="0"
               title="Accessibility"
-              percentage={98}
+              percentage={performanceData?.accessibility}
             />
             <CircularProgressBar
               mr="0"
               title="Best Practices"
-              percentage={98}
+              percentage={performanceData?.best_practices}
             />
-            <CircularProgressBar title="SEO" percentage={98} />
+            <CircularProgressBar title="SEO" percentage={performanceData?.seo} />
           </div>
         </>
       ) : (
@@ -591,7 +591,7 @@ const GooglePageScore = () => {
                 First Contentful Paint
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-                0.5s
+                {coreVitalsData?.first_contentful_paint}
               </p>
             </div>
             <div className="w-[150px]">
@@ -602,7 +602,7 @@ const GooglePageScore = () => {
                 Speed Index
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-                1.3 s
+              {coreVitalsData?.speed_index}
               </p>
             </div>
           </div>
@@ -615,7 +615,7 @@ const GooglePageScore = () => {
                 Total Blocking Time
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-                0ms
+              {coreVitalsData?.total_blocking_time}
               </p>
             </div>
             <div className="w-[150px]">
@@ -626,7 +626,7 @@ const GooglePageScore = () => {
                 Largest Contentful Paint
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-                1.1s
+              {coreVitalsData?.largest_contentful_paint}
               </p>
             </div>
           </div>
@@ -727,10 +727,9 @@ const Dashboard = () => {
          console.log("pageSpeedInsightData",pageSpeedInsightData)
          console.log("coreVitualsDataObj",coreVitualsDataObj)
          console.log("performaceDataObj",performaceDataObj)
-      //   updateImageData(imageDataObj);
-      //   updateHandlerData(OptimizationHandlerData)
-      // updateCoreVitalsData(coreVitualsArr);
-      // updatePerformanceData(performanceArr);
+
+      updateCoreVitalsData(coreVitualsDataObj);
+      updatePerformanceData(performaceDataObj);
 
       } else if(resJSON.status === 403){
      
@@ -992,7 +991,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[25px] f2 desktop:text-[25px]  font-bold "
                 >
-                  {imageData?.totalImages}%
+                  {imageData?.totalImages}
                 </p>
                 {/* <div className=" flex bg-[#18df902e] px-[13px] py-[2px] rounded-[23px] ml-[10px]">
                   <img
@@ -1313,7 +1312,7 @@ const Dashboard = () => {
                 </>
               )}
             </div> */}
-            <GooglePageScore />
+            <GooglePageScore coreVitalsData={coreVitalsData} performanceData={performanceData} />
             <div
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
