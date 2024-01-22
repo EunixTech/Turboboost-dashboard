@@ -217,6 +217,7 @@ const HeaderItem = ({ color, title, sub, assets = false }) => {
       style={{
         borderColor: dark ? "#1F2329" : "#ebebeb",
         color: dark ? "#fff" : "#000",
+        height:"fit-content"
       }}
       className=" h-[70px] bg-[#e6e6e640]  px-[12px] py-[12px] rounded-[6px] border-[1px] border-[#ebebeb]"
     >
