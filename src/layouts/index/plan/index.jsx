@@ -104,7 +104,7 @@ const Plan = ({ cancel }) => {
     if(!userToken1){
       fetchingBillingDetails()
     }
-  }, [])
+  }, [userToken1])
 
   return (
 
