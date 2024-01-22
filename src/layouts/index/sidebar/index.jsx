@@ -444,10 +444,15 @@ const Sidebar = () => {
     "Growth": 200000,
     "Pro": 1000000
   }
+  const urlParams = new URLSearchParams(window.location.search);
+  const userToken1 = urlParams.get("userToken");
+
   useEffect(() => {
-    fetchPageViewData();
-    fetchingBillingDetails()
-  }, [])
+    if(!userToken1){
+      fetchPageViewData();
+      fetchingBillingDetails()
+    }
+  }, [userToken1])
 
   return (
     <>
