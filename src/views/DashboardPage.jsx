@@ -567,7 +567,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
             <CircularProgressBar
               mr="0"
               title="Performence"
-              percentage={accessibility}
+              percentage={performanceData.accessibility}
             />
             <CircularProgressBar
               mr="0"
@@ -594,6 +594,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
                 {coreVitalsData?.first_contentful_paint}
+                {performanceData?.first_contentful_paint}
               </p>
             </div>
             <div className="w-[150px]">
