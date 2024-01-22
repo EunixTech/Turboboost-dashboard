@@ -50,7 +50,7 @@ const OnboardingBillings = () => {
     try {
 
       toggleLoader(true)
-      localStorage.removeItem("authToken");
+      // localStorage.removeItem("authToken");
       axios.defaults.withCredentials = true;
 
       const resJson = await axios.get(
