@@ -1317,7 +1317,7 @@ const Dashboard = () => {
                 </>
               )}
             </div> */}
-            {(Object.keys(coreVitalsData).length && Object.keys(performanceData).length) &&  <GooglePageScore coreVitalsData={coreVitalsData} performanceData={performanceData} />}
+             <GooglePageScore coreVitalsData={coreVitalsData} performanceData={performanceData} />
            
             <div
               style={{
