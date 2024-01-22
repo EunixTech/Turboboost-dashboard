@@ -178,7 +178,7 @@ useEffect(() => {
 											: `$ ${item?.annuallyPrice}`}
 										<span className="text-[14px] font-medium text-[#696e7e89]">
 											{" "}
-											/month
+											/{selected === 0 ? "month": "year" }
 										</span>
 									</div>
 									<p
