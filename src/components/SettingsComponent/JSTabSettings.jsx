@@ -22,8 +22,8 @@ const JSTabSettings = () => {
 
   const handleDelayScript = async () => {
     let endPoint = "";
-    if (!delayScriptsValue) endPoint = "api/shopify/minify-javascript-code";
-    else endPoint = "api/shopify/eliminate-render-blocking-resources";
+    if (!delayScriptsValue) endPoint = "api/shopify/delay-js-resources";
+    else endPoint = "api/shopify/restore-delay-js-resource";
     const data = await featureAPIHandling(endPoint);
     if(data.status === 200){
       dispatch(setToggle({ key: "delayScripts", value: !delayScriptsValue }));
