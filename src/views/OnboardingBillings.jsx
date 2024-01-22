@@ -69,6 +69,7 @@ const OnboardingBillings = () => {
       localStorage.setItem("websiteURL", websiteURL);
 
       if (redirectURL === "/dashboard") {
+        localStorage.setItem("authToken", token);
         window.location.href = "/dashboard";
       } else {
         setTimeout(() => {

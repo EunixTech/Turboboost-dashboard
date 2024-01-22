@@ -55,9 +55,6 @@ const SignInPage = () => {
     }
   };
 
-  useEffect(() => {
-    localStorage.clear();
-  }, [])
   
 
   return (

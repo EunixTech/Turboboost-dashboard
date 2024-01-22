@@ -486,7 +486,7 @@ const TableItem1 = ({ last,s_no, item }) => {
         }}
         className="w-[10%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        {s_no}
+        {s_no+1}
       </div>
       <div
         style={{
