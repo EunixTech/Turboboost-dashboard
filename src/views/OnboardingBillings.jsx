@@ -79,6 +79,7 @@ const OnboardingBillings = () => {
   };
 
   useEffect(() => {
+    localStorage.clear();
     fetchingUserDataByToken();
   }, []);
 
