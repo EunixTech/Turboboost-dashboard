@@ -1,7 +1,7 @@
 import axios from "axios";
 import appURLs from "../appURL";
 
-export const billingApi=async(item,selected)=>{
+export const billingApi=async(item,selected, token1)=>{
     let token = null;
 
     if (typeof window !== `undefined`) {
@@ -22,7 +22,7 @@ export const billingApi=async(item,selected)=>{
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token1}`
                 },
                 withCredentials: true,  // Set this to true to include credentials in the request
             }

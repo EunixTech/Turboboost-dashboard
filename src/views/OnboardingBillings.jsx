@@ -7,7 +7,7 @@ import {
 } from "../utils/constant";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import { billingApi } from "../utils/billingApi";
+import { billingApi } from "../utils/billingApi1";
 import appURLs from "../appURL";
 import { useDispatch, useSelector } from "react-redux";
 import {
