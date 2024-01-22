@@ -150,10 +150,7 @@ const App = () => {
   };
 
   useEffect(() => {
-        const hasApiBeenCalled = localStorage.getItem('apiCalled');
-    if(localStorage.getItem('authToken') && !hasApiBeenCalled){
-      fetchImageOptimizationData();
-     }
+   
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
@@ -186,7 +183,7 @@ const App = () => {
         window.location.replace('/dashboard');
       }
     };
-
+    fetchImageOptimizationData();
     checkAuth();
  
   }, []);
