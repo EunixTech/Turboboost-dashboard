@@ -35,7 +35,7 @@ const OnboardingBillings = () => {
       let response = await billingApi(item, selected, token1);
       console.log(response.data);
       if (response?.data?.confirmationUrl) {
-        localStorage.setItem("authToken", token);
+        localStorage.setItem("authToken", token1);
         console.log(response?.data?.confirmationUrl);
         window.location.replace(response?.data?.confirmationUrl);
       }
