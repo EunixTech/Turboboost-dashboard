@@ -26,14 +26,16 @@ const OnboardingBillings = () => {
   const [currentPlan, setCurrentPlan] = useState("");
   const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
+  const [token1, updateToken] = useState("");
   const [loader, toggleLoader] = useState(true);
   const dark = useSelector((state) => state.home.dark);
 
   const handleBilling = async (item) => {
     try {
-      let response = await billingApi(item, selected);
+      let response = await billingApi(item, selected, token1);
       console.log(response.data);
       if (response?.data?.confirmationUrl) {
+        localStorage.setItem("authToken", token);
         console.log(response?.data?.confirmationUrl);
         window.location.replace(response?.data?.confirmationUrl);
       }
@@ -50,6 +52,7 @@ const OnboardingBillings = () => {
     try {
 
       toggleLoader(true)
+       localStorage.clear();
       localStorage.removeItem("authToken");
       axios.defaults.withCredentials = true;
 
@@ -61,8 +64,8 @@ const OnboardingBillings = () => {
       const redirectURL = res?.redirectURI;
       const token = res?.token;
       const websiteURL = res?.userData?.app_token?.shopify?.shop;
-
-      localStorage.setItem("authToken", token);
+      updateToken(token)
+      
       localStorage.setItem("websiteURL", websiteURL);
 
       if (redirectURL === "/dashboard") {
@@ -79,7 +82,6 @@ const OnboardingBillings = () => {
   };
 
   useEffect(() => {
-    localStorage.clear();
     fetchingUserDataByToken();
   }, []);
 
