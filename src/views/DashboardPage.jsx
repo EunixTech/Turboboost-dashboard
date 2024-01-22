@@ -796,12 +796,15 @@ const Dashboard = () => {
   const handleCriticalCSS = async () => {
     toogleLoadingAPI(true)
     let endPoint = "";
-    if (!criticalCSSToggleValue)
-      endPoint = "api/shopify/minify-javascript-code";
-    else endPoint = "api/shopify/minify-javascript-code";
-    await featureAPIHandling(endPoint);
-    toogleLoadingAPI(false)
-    dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
+    if (!criticalCSSToggleValue) endPoint = "api/shopify/critical-css-optimization";
+    else endPoint = "api/shopify/restore-critical-css-optimization";
+    const data = await featureAPIHandling(endPoint);
+    if(data.status === 200){
+      toogleLoadingAPI(false)
+      dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
+      return toast.success(data.message);
+    }  else return toast.error(data?.message)
+  ;
   };
 
   const handleImageSizeAdaption = async () => {
@@ -820,12 +823,15 @@ const Dashboard = () => {
   const handlelazyLoading = async () => {
     toogleLoadingAPI(true)
     let endPoint = "";
-    if (!lazyLoadingToggleValue)
-      endPoint = "api/shopify/minify-javascript-code";
-    else endPoint = "api/shopify/minify-javascript-code";
-    await featureAPIHandling(endPoint);
-    toogleLoadingAPI(false)
-    dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
+    if (!lazyLoadingToggleValue) endPoint = "api/shopify/adding-image-lazy-loading";
+    else endPoint = "api/shopify/restore-adding-image-lazy-loading";
+    const data = await featureAPIHandling(endPoint);
+    if(data.status === 200){
+      toogleLoadingAPI(false)
+      dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
+      return toast.success(data.message);
+    }  else return toast.error(data?.message)
+
   };
 
   const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization) ;

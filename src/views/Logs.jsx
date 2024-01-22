@@ -425,7 +425,7 @@ const TableHeader1 = ({ change }) => {
           alignItems:"center",
           justifyContent:"center"
         }}
-        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[10%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         S.No
       </div>
@@ -484,7 +484,7 @@ const TableItem1 = ({ last,s_no, item }) => {
           alignItems:"center",
           justifyContent:"center"
         }}
-        className="w-[30%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[10%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
         {s_no}
       </div>

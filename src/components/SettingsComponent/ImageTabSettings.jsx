@@ -5,7 +5,7 @@ import OptimizationModeCard from "../OptimizationModeCard";
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { featureAPIHandling } from "../../utils/featureAPIHandling";
-
+import toast from "react-hot-toast";
 const ImageTabSettings = () => {
     const dark = useSelector((state) => state.home.dark);
     const dispatch = useDispatch();
@@ -15,17 +15,25 @@ const ImageTabSettings = () => {
 
     const handleImageSizeAdaption = async() =>{
       let endPoint = "";
-      if (!lazyLoadingToggleValue) endPoint = "api/shopify/minify-javascript-code";
-      else endPoint = "api/shopify/minify-javascript-code";
-      await featureAPIHandling(endPoint);
-      dispatch(setToggle({ key: "imageSizeAdaption", value: !imageSizeAdaptionToggleValue }));
+      if (!lazyLoadingToggleValue) endPoint = "api/shopify/adaptive-image-size-optimization";
+      else endPoint = "/restore-adaptive-image-size-optimization";
+      const data = await featureAPIHandling(endPoint);
+      if(data.status === 200){
+        dispatch(setToggle({ key: "imageSizeAdaption", value: !imageSizeAdaptionToggleValue }));
+        return toast.success(data.message);
+      }  else return toast.error(data?.message)
+
     }
       const handlelazyLoading = async() =>{
       let endPoint = "";
-      if (!lazyLoadingToggleValue) endPoint = "api/shopify/minify-javascript-code";
-      else endPoint = "api/shopify/minify-javascript-code";
-      await featureAPIHandling(endPoint);
-      dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
+      if (!lazyLoadingToggleValue) endPoint = "api/shopify/adding-image-lazy-loading";
+      else endPoint = "api/shopify/restore-adding-image-lazy-loading";
+      const data = await featureAPIHandling(endPoint);
+      if(data.status === 200){
+        dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
+        return toast.success(data.message);
+      }  else return toast.error(data?.message)
+
     }
     
   return (
