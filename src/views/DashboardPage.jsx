@@ -878,19 +878,27 @@ const Dashboard = () => {
 
   const handlePurgeAll = async() =>{
     toggleLoader(true);
- 
-    if(!imageOptimizationValue){
+    if(imageOptimizationValue && lazyLoadingToggleValue && minifyHTMLToggleValue){
       handleImageOptimization();
-    }    
-    if(!lazyLoadingToggleValue){
       handlelazyLoading();
-    }    
-    if(!minifyHTMLToggleValue){
       minifyHTMLToggleValue();
-    }    
+    } else if(imageOptimizationValue && lazyLoadingToggleValue){
+      handleImageOptimization();
+      handlelazyLoading();
+    } else if(imageOptimizationValue && minifyHTMLToggleValue){
+      handleImageOptimization();
+      minifyHTMLToggleValue();
+    } else if(lazyLoadingToggleValue && minifyHTMLToggleValue){
+      handlelazyLoading();
+      minifyHTMLToggleValue();
+    } else if(imageOptimizationValue){
+      handleImageOptimization();
+    } else if(lazyLoadingToggleValue){
+      handlelazyLoading();
+    } else if(minifyHTMLToggleValue){
+      minifyHTMLToggleValue();
+    }
   
-
-
   }
 
 
@@ -1442,6 +1450,7 @@ const Dashboard = () => {
             </div>
 
             <div
+            style={{height:"fit-content"}}
               className={`${
                 dark ? "divWrapperDarkMode" : "divWrapper"
               }  relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  py-[14px] border-[#EBEBEB] rounded-[8px]`}
