@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import { useSelector } from "react-redux";
