@@ -189,6 +189,7 @@ const Plan = ({ cancel }) => {
               <div
                 style={{
                   borderColor: dark ? "#1F2329" : "#ebebeb",
+                  height:"515px"
                 }}
                 className="w-[30%] cursor-pointer overflow-hidden   rounded-[5px] relative border-[1px]  px-[17px] py-[12px]"
               >
