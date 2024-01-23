@@ -72,6 +72,7 @@ const TableHeader = () => {
         className="w-[50%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
        
       >
+        
         Site Name
       </div>
       <div
