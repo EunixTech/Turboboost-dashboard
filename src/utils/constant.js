@@ -203,7 +203,7 @@ export const ComparePlans = [
     //     growth: true,
     //     pro: true,
     // },
-   
+
     // {
     //     title: "Advanced Caching Machanism",
     //     free: true,
@@ -348,7 +348,7 @@ export const ComparePlans = [
     // },
 ];
 
-export const planChangeText = (item,currentPlan) => {
+export const planChangeText = (item, currentPlan) => {
     let itemPlan = item.name;
     let buttenText = "";
 
@@ -366,7 +366,7 @@ export const planChangeText = (item,currentPlan) => {
             if (itemPlan == "Pro") {
                 buttenText = "Upgrade to Pro";
             }
-    break;
+            break;
         case "Starter":
             if (itemPlan === "Basic") {
                 buttenText = "Downgrade to Basic";
@@ -380,7 +380,7 @@ export const planChangeText = (item,currentPlan) => {
             if (itemPlan == "Pro") {
                 buttenText = "Upgrade to Pro";
             }
-    break;
+            break;
         case "Growth":
             if (itemPlan === "Basic") {
                 buttenText = "Downgrade to Basic";
@@ -394,7 +394,7 @@ export const planChangeText = (item,currentPlan) => {
             if (itemPlan == "Pro") {
                 buttenText = "Upgrade to Pro";
             }
-    break;
+            break;
         case "Pro":
             if (itemPlan === "Basic") {
                 buttenText = "Downgrade to Basic";
@@ -408,20 +408,63 @@ export const planChangeText = (item,currentPlan) => {
             if (itemPlan == "Pro") {
                 buttenText = "Current Plan";
             }
-            case "Pro1":
-                if (itemPlan === "Basic") {
-                    buttenText = "Downgrade to Basic";
-                }
-                if (itemPlan == "Starter") {
-                    buttenText = "Downgrade to Starter";
-                }
-                if (itemPlan == "Growth") {
-                    buttenText = "Downgrade to Growth";
-                }
-                if (itemPlan == "Pro") {
-                    buttenText = "Downgrade to Growth";
-                }
-    break;
+            break;
+        case "Pro1" && "Basic":
+            if (itemPlan === "Basic") {
+                buttenText = "Upgrade to Annual Plan";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Upgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+            break;
+        case "Pro1" && "Starter":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Upgrade to Annual Plan";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+            break;
+        case "Pro1" && "Growth":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Downgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Annual Plan";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+            break;
+        case "Pro1" && "Pro":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Downgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Downgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Annual Plan";
+            }
+            break;
         default:
             buttenText = "";
             break;
