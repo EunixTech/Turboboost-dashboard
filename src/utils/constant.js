@@ -408,6 +408,19 @@ export const planChangeText = (item,currentPlan) => {
             if (itemPlan == "Pro") {
                 buttenText = "Current Plan";
             }
+            case "Pro1":
+                if (itemPlan === "Basic") {
+                    buttenText = "Downgrade to Basic";
+                }
+                if (itemPlan == "Starter") {
+                    buttenText = "Downgrade to Starter";
+                }
+                if (itemPlan == "Growth") {
+                    buttenText = "Downgrade to Growth";
+                }
+                if (itemPlan == "Pro") {
+                    buttenText = "Downgrade to Growth";
+                }
     break;
         default:
             buttenText = "";
