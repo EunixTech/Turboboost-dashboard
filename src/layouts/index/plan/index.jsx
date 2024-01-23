@@ -62,7 +62,12 @@ const Plan = ({ cancel }) => {
   const selectingPlan = (item, index) => {
     setPlan(index)
     updateItem(item)
-    updateCurrentPlan("")
+    // updateCurrentPlan("")
+  }
+
+  const handlePlanIntervalSetting = (type) => {
+    selectingPlan(type);
+    
   }
 
 
@@ -161,7 +166,7 @@ const Plan = ({ cancel }) => {
             <div className="flex w-[200px] shrink-0 laptop:mt-[0] mobile:mt-[5px] h-[38px] bg-[#ffffff25]  rounded-[4px] px-[3px] py-[3px]">
               <div
                 onClick={() => {
-                  setSelected(0);
+                  handlePlanIntervalSetting(0);
                 }}
                 style={{
                   backgroundColor: selected === 0 ? "#18df903f" : "",
@@ -173,7 +178,7 @@ const Plan = ({ cancel }) => {
               </div>
               <div
                 onClick={() => {
-                  setSelected(1);
+                  handlePlanIntervalSetting(1);
                 }}
                 style={{
                   backgroundColor: selected === 1 ? "#18df903f" : "",
