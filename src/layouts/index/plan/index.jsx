@@ -54,7 +54,7 @@ const Plan = ({ cancel }) => {
       }
       
   
-      if(currentPlan === planMap[plan] && selectedInteral == dataObj[selected]) return toast.error("Please change plan");
+      if(currentPlan === planMap[plan] && selectedInteral == currentPlan) return toast.error("Please change plan");
       if (itemData && !Object.keys(itemData).length) return toast.error("Please change plan");
       let response = await billingApi(itemData, selected);
 
@@ -81,7 +81,7 @@ const Plan = ({ cancel }) => {
     if(dataObj[type] == selectedInteral){
       updateCurrentPlan(currentPlan1)
     } else {
-      updateCurrentPlan("hgfh")
+      updateCurrentPlan("notCurent")
     }
     setSelected(type);
   }
