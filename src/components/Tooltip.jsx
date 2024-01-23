@@ -12,6 +12,7 @@ const Tooltip = ({ text = ' ' }) => {
             onMouseOver={() => {updateIsActive(true)}}
             onMouseLeave={() => { updateIsActive(false);}}
             className="relative"
+            style={{height:"fit-content"}}
         >
             {isActive && (
 
