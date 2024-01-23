@@ -444,6 +444,13 @@ const Sidebar = () => {
     "Growth": "200,000",
     "Pro": "1,000,000"
   }
+
+  const planPageViewData1 = {
+    "Basic": 5000,
+    "Starter":50000,
+    "Growth": 200000,
+    "Pro": 1000000
+  }
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");
 
@@ -509,7 +516,7 @@ const Sidebar = () => {
               <div
                 className="bg-[#38F8AC] h-[100%]"
                 style={{
-                  width: `${30}%`,
+                  width: `${currentPlan?.plan ? (PageViewCount/planPageViewData1[currentPlan?.plan])*100 : 1}%`,
                 }}
               ></div>
             </div>
