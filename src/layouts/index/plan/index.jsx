@@ -29,6 +29,7 @@ const CurrentPlan = () => {
 const Plan = ({ cancel }) => {
 
   const [selected, setSelected] = useState(0);
+  const [selectedInteral, setSelectedInterval] = useState(" ");
   const [loader, toggleLoader] = useState(false);
   const [plan, setPlan] = useState(2);
   const [currentPlan, updateCurrentPlan] = useState("Starter");
@@ -66,7 +67,7 @@ const Plan = ({ cancel }) => {
   }
 
   const handlePlanIntervalSetting = (type) => {
-    selectingPlan(type);
+    setSelected(type);
     
   }
 
@@ -83,6 +84,7 @@ const Plan = ({ cancel }) => {
         toggleLoader(false)
         if (Number(res?.status) === 200) {
           const planName = res?.data?.plan;
+           const billingCycle = res?.data?.billingCycle;
           const planMap = {
             "Free": 0,
             "Starter": 1,
@@ -90,7 +92,10 @@ const Plan = ({ cancel }) => {
             "Pro": 3
           };
           setPlan(planMap[planName] || 0);
-
+          if(billingCycle === "ANNUAL"){
+            setSelected(1)
+          }
+          setSelectedInterval(billingCycle)
           updateCurrentPlan(planName)
         }
 
