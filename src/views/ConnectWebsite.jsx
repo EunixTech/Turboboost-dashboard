@@ -69,7 +69,7 @@ const TableHeader = () => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[30%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[50%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
        
       >
         Site Name
@@ -78,7 +78,7 @@ const TableHeader = () => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[40%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center  px-[15px]"
+        className="w-[50%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center  px-[15px]"
       >
         Site URL
       </div>
@@ -183,7 +183,7 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[40%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center justify-center px-[15px]"
+        className="w-[50%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
        
       >
         {name}
@@ -192,7 +192,7 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[40%] overflow-hidden pr-[10px] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[50%] overflow-hidden pr-[10px] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
         https://{site_url}
       </div>
