@@ -118,6 +118,7 @@ const Plan = ({ cancel }) => {
         style={{
           backgroundColor: dark ? "#111317" : "#fff",
           borderColor: dark ? "#1F2329" : "#ebebeb",
+          minHeight:"700px"
         }}
         className="mobile:w-[100%] custom-h scroll-hidden laptop:w-[900px] overflow-y-auto flex px-[15px] flex-col pt-[15px] rounded-[13px] bg-[#fff] relative border-[1px] border-[#ebebeb] "
       >
