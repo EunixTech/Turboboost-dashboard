@@ -98,7 +98,7 @@ const handlePlanIntervalSetting = (type) => {
     if(dataObj[type] == plan?.billingCycle){
       updateCurrentPlan(plan?.plan)
     } else {
-      updateCurrentPlan("Pro1")
+      updateCurrentPlan(`Annual${plan?.plan}`)
     }
     setSelected(type);
   }
