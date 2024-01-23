@@ -9,7 +9,7 @@ export default function AnimatedLoader() {
     <div
     style={{
       backgroundColor: dark ? "#090917" : "#fff",
-      width:"800px"
+      width:"100vh"
     }}
     className="w-[100%] h-[100vh] bg-transparent flex items-center justify-center"
   >
