@@ -98,7 +98,8 @@ const handlePlanIntervalSetting = (type) => {
     if(dataObj[type] == plan?.billingCycle){
       updateCurrentPlan(plan?.plan)
     } else {
-      updateCurrentPlan(`Annual${plan?.plan}`)
+		const varuableToUse = `${type === 1?"Annual":"Monthly"}${plan?.plan}`
+      updateCurrentPlan(varuableToUse)
     }
     setSelected(type);
   }
