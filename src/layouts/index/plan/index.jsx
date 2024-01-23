@@ -33,6 +33,7 @@ const Plan = ({ cancel }) => {
   const [loader, toggleLoader] = useState(false);
   const [plan, setPlan] = useState(2);
   const [currentPlan, updateCurrentPlan] = useState("Starter");
+  const [currentPlan1, updateCurrentPlan1] = useState("Starter");
   const [itemData, updateItem] = useState({});
   const dark = useSelector((state) => state.home.dark);
   const w = useWidth();
@@ -67,8 +68,16 @@ const Plan = ({ cancel }) => {
   }
 
   const handlePlanIntervalSetting = (type) => {
+    const dataObj = {
+      1:"ANNUAL",
+      0:"EVERY_30_DAYS"
+    }
+    if(dataObj[type] == selectedInteral){
+      updateCurrentPlan(currentPlan1)
+    } else {
+      updateCurrentPlan("hgfh")
+    }
     setSelected(type);
-    
   }
 
 
@@ -94,9 +103,12 @@ const Plan = ({ cancel }) => {
           setPlan(planMap[planName] || 0);
           if(billingCycle === "ANNUAL"){
             setSelected(1)
+          } else {
+            setSelected(0)
           }
           setSelectedInterval(billingCycle)
           updateCurrentPlan(planName)
+          updateCurrentPlan1(planName)
         }
 
       })
