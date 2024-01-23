@@ -69,7 +69,7 @@ const TableHeader = () => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[40%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center justify-center px-[15px]"
+        className="w-[30%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
        
       >
         Site Name
@@ -78,7 +78,7 @@ const TableHeader = () => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[40%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center justify-center px-[15px]"
+        className="w-[40%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center  px-[15px]"
       >
         Site URL
       </div>
@@ -102,7 +102,7 @@ const TableHeader = () => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[40%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center justify-center px-[15px]"
+        className="w-[20%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
         Status
       </div>

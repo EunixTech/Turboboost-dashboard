@@ -426,7 +426,7 @@ export const planChangeText = (item, currentPlan) => {
 
         case "AnnualBasic":
             if (itemPlan === "Basic") {
-                buttenText = "Upgrade to Monthly";
+                buttenText = "Upgrade to Annual";
             }
             if (itemPlan == "Starter") {
                 buttenText = "Upgrade to Starter";
