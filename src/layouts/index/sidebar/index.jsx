@@ -516,7 +516,7 @@ const Sidebar = () => {
               <div
                 className="bg-[#38F8AC] h-[100%]"
                 style={{
-                  width: `${(currentPlan?.plan && planPageViewData1[currentPlan?.plan]) ? (PageViewCount/planPageViewData1[currentPlan?.plan])*100 : 1}%`,
+                  width: `${(currentPlan?.plan && planPageViewData1[currentPlan?.plan]) ? (PageViewCount/planPageViewData1[currentPlan?.plan])*100 : 0}%`,
                 }}
               ></div>
             </div>

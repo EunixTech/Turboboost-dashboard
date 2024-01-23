@@ -62,6 +62,7 @@ const Plan = ({ cancel }) => {
   const selectingPlan = (item, index) => {
     setPlan(index)
     updateItem(item)
+    updateCurrentPlan("")
   }
 
 
