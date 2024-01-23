@@ -20,6 +20,9 @@ const Billing = () => {
   const [selected, setSelected] = useState(0);
   const dark = useSelector((state) => state.home.dark);
   const [loader, toggleLoader] = useState(false);
+  const [plan, updatePlan] = useState({});
+
+
   const dispatch = useDispatch();
   useEffect(() => {
 	localStorage.removeItem('apiCalled')
@@ -64,6 +67,13 @@ const Billing = () => {
             if (Number(res?.status) === 200) {
 			
               const planName = res?.data?.plan;
+			  const billingCycle = res?.data?.billingCycle;
+			  if(billingCycle === "ANNUAL"){
+				setSelected(1)
+			  } else {
+				setSelected(0)
+			  }
+			  updatePlan(res?.data)
               updateCurrentPlan(planName)
 			  toggleLoader(false)
             } else {
@@ -79,6 +89,20 @@ const Billing = () => {
             }, 1000);
         });
 }
+
+const handlePlanIntervalSetting = (type) => {
+    const dataObj = {
+      1:"ANNUAL",
+      0:"EVERY_30_DAYS"
+    }
+    if(dataObj[type] == plan?.billingCycle){
+      updateCurrentPlan(plan?.plan)
+    } else {
+      updateCurrentPlan("hgfh")
+    }
+    setSelected(type);
+  }
+
 useEffect(() => {
   fetchingBillingDetails()
 }, [])
@@ -115,7 +139,7 @@ useEffect(() => {
 						>
 							<div
 								onClick={() => {
-									setSelected(0);
+									handlePlanIntervalSetting(0);
 								}}
 								style={{
 									backgroundColor: selected === 0 ? "#18df903f" : "",
@@ -127,7 +151,7 @@ useEffect(() => {
 							</div>
 							<div
 								onClick={() => {
-									setSelected(1);
+									handlePlanIntervalSetting(1);
 								}}
 								style={{
 									backgroundColor: selected === 1 ? "#18df903f" : "",

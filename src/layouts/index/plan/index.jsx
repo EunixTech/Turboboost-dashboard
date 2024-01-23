@@ -47,8 +47,14 @@ const Plan = ({ cancel }) => {
         2:"Growth",
         3: "Pro"
       };
+
+      const dataObj = {
+        1:"ANNUAL",
+        0:"EVERY_30_DAYS"
+      }
+      
   
-      if(currentPlan === planMap[plan]) return toast.error("Please change plan");
+      if(currentPlan === planMap[plan] && selectedInteral == dataObj[selected]) return toast.error("Please change plan");
       if (itemData && !Object.keys(itemData).length) return toast.error("Please change plan");
       let response = await billingApi(itemData, selected);
 
