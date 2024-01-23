@@ -409,62 +409,23 @@ export const planChangeText = (item, currentPlan) => {
                 buttenText = "Current Plan";
             }
             break;
-        case "Pro1" && "Basic":
+        case "Pro1":
             if (itemPlan === "Basic") {
-                buttenText = "Upgrade to Annual Plan";
+                buttenText = "Select";
             }
             if (itemPlan == "Starter") {
-                buttenText = "Upgrade to Starter";
+                buttenText = "Select";
             }
             if (itemPlan == "Growth") {
-                buttenText = "Upgrade to Growth";
+                buttenText = "Select";
             }
             if (itemPlan == "Pro") {
-                buttenText = "Upgrade to Pro";
+                buttenText = "Select";
             }
             break;
-        case "Pro1" && "Starter":
-            if (itemPlan === "Basic") {
-                buttenText = "Downgrade to Basic";
-            }
-            if (itemPlan == "Starter") {
-                buttenText = "Upgrade to Annual Plan";
-            }
-            if (itemPlan == "Growth") {
-                buttenText = "Upgrade to Growth";
-            }
-            if (itemPlan == "Pro") {
-                buttenText = "Upgrade to Pro";
-            }
-            break;
-        case "Pro1" && "Growth":
-            if (itemPlan === "Basic") {
-                buttenText = "Downgrade to Basic";
-            }
-            if (itemPlan == "Starter") {
-                buttenText = "Downgrade to Starter";
-            }
-            if (itemPlan == "Growth") {
-                buttenText = "Upgrade to Annual Plan";
-            }
-            if (itemPlan == "Pro") {
-                buttenText = "Upgrade to Pro";
-            }
-            break;
-        case "Pro1" && "Pro":
-            if (itemPlan === "Basic") {
-                buttenText = "Downgrade to Basic";
-            }
-            if (itemPlan == "Starter") {
-                buttenText = "Downgrade to Starter";
-            }
-            if (itemPlan == "Growth") {
-                buttenText = "Downgrade to Growth";
-            }
-            if (itemPlan == "Pro") {
-                buttenText = "Upgrade to Annual Plan";
-            }
-            break;
+     
+       
+      
         default:
             buttenText = "";
             break;
