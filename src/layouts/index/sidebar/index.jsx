@@ -439,10 +439,10 @@ const Sidebar = () => {
       });
   }
   const planPageViewData = {
-    "Basic": 5000,
-    "Starter":50000,
-    "Growth": 200000,
-    "Pro": 1000000
+    "Basic": "5000",
+    "Starter":"50,000",
+    "Growth": "200,000",
+    "Pro": "1,000,000"
   }
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");

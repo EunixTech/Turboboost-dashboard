@@ -230,7 +230,7 @@ const OnboardingBillings = () => {
                     dark ? "#fff" : "#000"
                   }] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
                 >
-                  Start Free Trail
+                  Start Free Trial
                 </div>
               </div>
               <div className="w-[100%]  px-[17px] mt-[15px] pt-[15px] border-t-[1px] border-[#ebebeb]">
