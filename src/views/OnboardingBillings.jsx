@@ -68,14 +68,14 @@ const OnboardingBillings = () => {
       
       localStorage.setItem("websiteURL", websiteURL);
 
-      if (redirectURL === "/dashboard") {
-        localStorage.setItem("authToken", token);
-        window.location.href = "/dashboard";
-      } else {
-        setTimeout(() => {
-          toggleLoader(false)
-        }, 2000);
-      }
+      // if (redirectURL === "/dashboard") {
+      //   localStorage.setItem("authToken", token);
+      //   window.location.href = "/dashboard";
+      // } else {
+      //   setTimeout(() => {
+      //     toggleLoader(false)
+      //   }, 2000);
+      // }
     } catch (error) {
       toggleLoader(false)
       console.log(error);
