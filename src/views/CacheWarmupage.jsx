@@ -289,31 +289,6 @@ const CacheWarmup = ({ setShow }) => {
     }
   }
 
-  // const fetchOptimizationHandlerData = async() =>{
-  //   toggleLoader(true);
-  //  try{
-  //     const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
-  //     console.log("**********res**************",res)
-  //     // toggleLoader(false);
-  //     // const resData = res?.data;
-  //     // console.log("resDataresDataresDataresDataHandler",resData)
-  //     // if(resData?.status === 200){
-
-  //     //   return toast.success(resData?.message);
-  //     // } else {
-  //     //   toggleLoader(false);
-  //     //   return toast.error("Please try again");
-  //     // }
-  //   } catch (error) {
-  //     toggleLoader(false);
-  //     if (error?.response?.status === 401) {
-  //       localStorage.removeItem('authToken');
-  //       window.location.replace('/login-shopify');
-  //     } 
-  //     console.error("Error fetching user profile data:", error);
-  //   }
-  // }
-
 
   useEffect(() => {
     const fetchData = async () => {

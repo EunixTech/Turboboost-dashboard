@@ -910,18 +910,19 @@ const Dashboard = () => {
   const userToken1 = urlParams.get("userToken");
 
  
-  useEffect(() => {
-    // const loggedIn = localStorage.getItem("loggedIn");
-    // if(loggedIn){
-    //   navigate("/login-shopify");
-    // }
-    
-    if(!userToken1){
-      fetchPageSpeedInsight();
-      // googleSpeedAPI();
-      fetchImageOptimizationData();
+  const fetchData = async () => {
+    if (!userToken1) {
+      await fetchPageSpeedInsight();
+      if(!imageOptimizationValue && !Boolean(localStorage.getItem('imageOptimizationAPI'))){
+        await handleImageOptimization();
+        localStorage.setItem('imageOptimizationAPI', true);
+      }
+      await fetchImageOptimizationData();
     }
- 
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [userToken1]);
 
   return (loadingAPI || loader) ? (
