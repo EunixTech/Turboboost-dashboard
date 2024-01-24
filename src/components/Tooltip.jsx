@@ -14,7 +14,7 @@ const Tooltip = ({ text = ' ' }) => {
             className="relative"
           
         >
-            {true && (
+            {isActive && (
 
                 <div style={{height:"fit-content"}} className="absolute shrink-0 w-[150px] left-[-62.1px] z-50 bottom-[13px]">
                     <Suspense fallback={null}>
