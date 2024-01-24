@@ -316,8 +316,15 @@ const CacheWarmup = ({ setShow }) => {
 
 
   useEffect(() => {
-    fetchPageOptimizationData();
-    // fetchOptimizationHandlerData();
+    const fetchData = async () => {
+      if(!assetsOptimizationValue && !Boolean(localStorage.getItem('pageOptimizationAPI'))){
+        await handleOptimizePage();
+        localStorage.setItem('pageOptimizationAPI', true);
+      }
+      fetchPageOptimizationData();
+    };
+    fetchData();
+
   }, [])
   return (
     <>
