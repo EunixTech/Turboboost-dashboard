@@ -288,7 +288,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         Date/Time
       </div>
@@ -296,7 +296,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         Event
       </div>
@@ -304,7 +304,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         URL
       </div>
@@ -312,7 +312,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[18.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[18.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         Last Optimized
       </div>
@@ -320,7 +320,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[14%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[14%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         Details
       </div>
@@ -580,20 +580,14 @@ const TableHeader3 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
         }}
-        className="w-[30%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[20%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         Date
       </div>
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
@@ -602,9 +596,6 @@ const TableHeader3 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
@@ -613,9 +604,6 @@ const TableHeader3 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
         }}
         className="w-[20%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
@@ -639,20 +627,14 @@ const TableItem3 = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
         }}
-        className="w-[30%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[20%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
         { item?.connected_at && moment(item.connected_at).format('MMMM Do, HH:mm:ss z YYYY')}
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#000",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
@@ -661,9 +643,6 @@ const TableItem3 = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
         }}
         className="w-[30%] text-[14px] px-[15px]  cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
@@ -673,9 +652,6 @@ const TableItem3 = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
         }}
         className="w-[20%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
