@@ -753,7 +753,7 @@ const CacheStatus = () => {
 
 
   useEffect(() => {
-    if(!assetsOptimizationValue && !localStorage.getItem('assetsOptimizationAPI')){
+    if(!assetsOptimizationValue || !localStorage.getItem('assetsOptimizationAPI')){
       handleOptimizeAssets();
       localStorage.setItem('assetsOptimizationAPI', 'true');
     }
