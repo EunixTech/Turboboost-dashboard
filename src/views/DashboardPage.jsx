@@ -1063,7 +1063,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
-                   {imageData?.lastPurge !== null ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
+                   {imageData?.lastPurge ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
                 </p>
               </div>: ``
 
