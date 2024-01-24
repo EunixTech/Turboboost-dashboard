@@ -34,8 +34,8 @@ export default function App({imageData}) {
     {
       label: "# of Votes",
       data: [imageData?.totalImages, imageData?.totalOptimizeImage, imageData?.totalOriginImage],
-      backgroundColor: [ "#38F8AC70","#FF465c70", "#FFCB6570"],
-      borderColor: ["#FF465c", "#FFCB65", "#38F8AC"],
+      backgroundColor: [ "#38F8AC70", , "#FFCB6570", "#FF465c70"],
+      borderColor:[ "#38F8AC70", , "#FFCB6570", "#FF465c70"],
       borderWidth: 1,
     },
   ],
