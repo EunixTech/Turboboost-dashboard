@@ -213,7 +213,7 @@ const TableItem1 = ({ last, item }) => {
         }}
         className="w-[40%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
-        {item?.optimized_at ? new Date(item.optimized_at).toLocaleString('en-US', { month: 'numeric', day: '2-digit', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) : ''}
+        {item?.optimized_at ? formatDate(item?.optimized_at): ''}
       </div>
       <div
         style={{
@@ -289,6 +289,17 @@ const CacheWarmup = ({ setShow }) => {
     }
   }
 
+  const formatDate = (dateObj) => {
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    const year = dateObj.getFullYear();
+    const hour = dateObj.getHours().toString().padStart(2, '0');
+    const minute = dateObj.getMinutes().toString().padStart(2, '0');
+    const period = (dateObj.getHours() < 12) ? 'AM' : 'PM';
+
+    const formattedDate = `${month}/${day}/${year} at ${hour}:${minute} ${period}`;
+    return formattedDate;
+}
 
   useEffect(() => {
     const fetchData = async () => {

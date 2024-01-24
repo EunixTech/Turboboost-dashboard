@@ -566,7 +566,6 @@ p.annualText {
 }
 .justify-around {
   display: flex;
-  flex-wrap: wrap;  
 }
 input.PhoneInputInput {
   /* border: 0; */

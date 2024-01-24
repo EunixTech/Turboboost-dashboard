@@ -609,7 +609,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
               </p>
             </div>
           </div>
-          <div className="flex mt-[5%] justify-around ">
+          <div style={{flexWrap:"nowrap"}} className="flex mt-[5%] justify-around ">
             <div className="w-[150px]">
               <p
                 style={{ color: dark ? "#fff" : "#000" }}
@@ -1312,11 +1312,13 @@ const Dashboard = () => {
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex items-center">
-                      <img
+                    
+
+<img
                         src={
                           dark
-                            ? "/graphic/dashboard/elli2-d.svg"
-                            : "/graphic/dashboard/elli2.svg"
+                            ? "/graphic/dashboard/elli3-d.svg"
+                            : "/graphic/dashboard/elli9.svg"
                         }
                         className="w-[10px] h-[10px]"
                         alt=""
@@ -1337,11 +1339,11 @@ const Dashboard = () => {
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex items-center">
-                      <img
+                    <img
                         src={
                           dark
-                            ? "/graphic/dashboard/elli3-d.svg"
-                            : "/graphic/dashboard/elli9.svg"
+                            ? "/graphic/dashboard/elli2-d.svg"
+                            : "/graphic/dashboard/elli2.svg"
                         }
                         className="w-[10px] h-[10px]"
                         alt=""
