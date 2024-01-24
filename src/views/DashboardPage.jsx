@@ -1246,7 +1246,7 @@ const Dashboard = () => {
           </div>
 
           <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:grid  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px]">
-            <GooglePageScore />
+            <GooglePageScore coreVitalsData={coreVitalsData} performanceData={performanceData} />
             <div
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
@@ -1282,25 +1282,8 @@ const Dashboard = () => {
                 )}
               </div>
               <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
-                {/* <div className="h-[100%] w-[110px] flex items-center justify-center relative mr-[10px]">
-                  <img
-                    src={
-                      dark
-                        ? "/graphic/dashboard/circle-d.svg"
-                        : "/graphic/dashboard/circle.svg"
-                    }
-                    className="h-[100%] w-[100%] left-0 top-0  absolute z-10"
-                    alt=""
-                  />
-                  <p
-                    style={{ color: dark ? "#fff" : "#000" }}
-                    className=" font-medium f2"
-                  >
-                    335
-                  </p>
-                </div> */}
-                {/* <DemoPie /> */}
-                <CustomDonutChart />
+             
+              <CustomDonutChart imageData={imageData} />
                 <div className="max-w-[250px] w-[50%] ml-auto">
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex  items-center">
