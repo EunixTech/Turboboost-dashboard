@@ -959,7 +959,10 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    const delayFetchData = setTimeout(() => {
+      fetchData();
+    }, 2000);
+    return () => clearTimeout(delayFetchData);
   }, [userToken1]);
 
   return (loadingAPI || loader) ? (
