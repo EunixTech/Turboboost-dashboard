@@ -68,14 +68,14 @@ const OnboardingBillings = () => {
       
       localStorage.setItem("websiteURL", websiteURL);
 
-      // if (redirectURL === "/dashboard") {
-      //   localStorage.setItem("authToken", token);
-      //   window.location.href = "/dashboard";
-      // } else {
-      //   setTimeout(() => {
-      //     toggleLoader(false)
-      //   }, 2000);
-      // }
+      if (redirectURL === "/dashboard") {
+        localStorage.setItem("authToken", token);
+        window.location.href = "/dashboard";
+      } else {
+        setTimeout(() => {
+          toggleLoader(false)
+        }, 2000);
+      }
     } catch (error) {
       toggleLoader(false)
       console.log(error);
@@ -225,10 +225,11 @@ const OnboardingBillings = () => {
                   }}
                   style={{
                     borderColor: dark ? "#1F2329" : "#ebebeb",
+                   
                   }}
                   className={`w-[100%] h-[38px] text-[${
                     dark ? "#fff" : "#000"
-                  }] hover:bg-[#38F8AC] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
+                  }] bg-[#38F8AC] hover:bg-[#fff] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
                 >
                   Start Free Trial
                 </div>

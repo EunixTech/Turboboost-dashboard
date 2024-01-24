@@ -467,7 +467,19 @@ const TableHeader1 = ({ change }) => {
 const TableItem1 = ({ last,s_no, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
+  const formatDate = (dateString) => {
+    const dateObj = new Date(dateString);
+ 
+ const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+ const day = dateObj.getDate().toString().padStart(2, '0');
+ const year = dateObj.getFullYear();
+ const hour = dateObj.getHours().toString().padStart(2, '0');
+ const minute = dateObj.getMinutes().toString().padStart(2, '0');
+ const period = (dateObj.getHours() < 12) ? 'AM' : 'PM';
 
+ const formattedDate = `${month}/${day}/${year} at ${hour}:${minute} ${period}`;
+ return formattedDate;
+}
   return (
     <div
       style={{
@@ -508,7 +520,7 @@ const TableItem1 = ({ last,s_no, item }) => {
         }}
         className="w-[30.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-       {new Date(item?.viewed_at).toLocaleString()}
+       {item?.viewed_at && formatDate(item?.viewed_at)}
       </div>
     
     </div>
