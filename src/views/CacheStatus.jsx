@@ -806,7 +806,9 @@ const CacheStatus = () => {
                 </h1>
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                   <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
-                  <div className="w-[27%] h-[100%] mr-[2px] rounded-[10px] bg-[#FFCB65]" />
+                  <div style={{
+                  width: `${(assetsData?.totalAssets && assetsData?.totalOptimizeAssets) ? (assetsData?.totalAssets/assetsData?.totalOptimizeAssets)*100 : 0}%`,
+                }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#FFCB65]" />
                   <div className="w-[33%] h-[100%] rounded-[10px] bg-[#FF465C]" />
                 </div>
                 <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
