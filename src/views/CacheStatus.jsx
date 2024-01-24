@@ -753,7 +753,7 @@ const CacheStatus = () => {
 
 
   useEffect(async() => {
-    if(!assetsOptimizationValue || !Boolean(localStorage.getItem('assetsOptimizationAPI'))){
+    if(!assetsOptimizationValue && !Boolean(localStorage.getItem('assetsOptimizationAPI'))){
      await handleOptimizeAssets();
       localStorage.setItem('assetsOptimizationAPI', true);
     }
