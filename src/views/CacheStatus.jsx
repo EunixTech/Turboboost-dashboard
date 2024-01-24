@@ -810,10 +810,10 @@ const CacheStatus = () => {
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                   <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
                   <div style={{
-                  width: `${(assetsData?.totalAssets && assetsData?.totalOptimizeAssets) ? (assetsData?.totalAssets/assetsData?.totalOptimizeAssets)*100 : 0}%`,
+                  width: `${(assetsData?.totalAssets && assetsData?.totalOptimizeAssets) ? (assetsData?.totalOptimizeAssets/assetsData?.totalAssets)*100 : 0}%`,
                 }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#FFCB65]" />
                   <div style={{
-                  width: `${(assetsData?.totalAssets &&  assetsData?.notOptimizedAssets) ? (assetsData?.totalAssets/ assetsData?.notOptimizedAssets)*100 : 0}%`,
+                  width: `${(assetsData?.totalAssets &&  assetsData?.notOptimizedAssets) ? (assetsData?.notOptimizedAssets/ assetsData?.totalAssets)*100 : 0}%`,
                 }} className="h-[100%] rounded-[10px] bg-[#FF465C]" />
                 </div>
                 <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
@@ -850,9 +850,15 @@ const CacheStatus = () => {
                   {kbToMb(assetsData && assetsData?.totalOptimizedSize)} MB
                 </h1>
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
-                  <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
-                  <div className="w-[35%] h-[100%] mr-[2px] rounded-[10px] bg-[#766695]" />
-                  <div className="w-[25%] h-[100%] mr-[2px] rounded-[10px] bg-[#9963FE]" />
+                  <div style={{
+                  width: `${(assetsData?.totalOptimizedSize &&  assetsData?.liquidAssetSize) ? ( assetsData?.liquidAssetSize/ assetsData?.totalOptimizedSize)*100 : 0}%`,
+                }}  className=" h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
+                  <div style={{
+                  width: `${(assetsData?.totalOptimizedSize && assetsData?.jsAssetSize) ? (assetsData?.jsAssetSize/ assetsData?.totalOptimizedSize)*100 : 0}%`,
+                }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#766695]" />
+                  <div style={{
+                  width: `${(assetsData?.totalOptimizedSize &&  assetsData?.cssAssetSize) ? (assetsData?.cssAssetSize/ assetsData?.totalOptimizedSize)*100 : 0}%`,
+                }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#9963FE]" />
                   {/* <div className="w-[18%] h-[100%] mr-[2px] rounded-[10px] bg-[#CCB0FF]" />
                 <div className="w-[10%] h-[100%] bg-[#E9DEFC]" /> */}
                 </div>
