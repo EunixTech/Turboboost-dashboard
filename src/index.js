@@ -166,7 +166,7 @@ const App = () => {
       app_id: "eh6xj4vw",
       email: "manmohankumar023@hmail.com", // the email for your user
       user_id: "asd123", // a UUID for your user
-      user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
+      user_hash: "6729f802942742b4f8c6ea81dc9725df8c5f8d6f49a632d3f96ff023a60b01b3" // an Identity Verification user hash for your user
       };
 
     const checkAuth = () => {
