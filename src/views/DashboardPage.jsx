@@ -492,7 +492,8 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
       style={{
         backgroundColor: dark ? "#111317" : "#fff",
         borderColor: dark ? "#1F2329" : "#ebebeb",
-        height: "fit-content"
+        height: "fit-content",
+        minHeight:"227px"
       }}
       className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[25px] pb-[55px] pt-[10px] border-[#EBEBEB]  rounded-[8px]"
     >
@@ -1208,131 +1209,22 @@ const Dashboard = () => {
               
             </div>
           </div>
-          <div style={{height:"fit-content"}} className="w-[100%] mt-[24px] mobile:px-[10px] desktop:flex  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px] flex h-[250px] mobile-cols">
-            {/* <div
-              style={{
-                backgroundColor: dark ? "#111317" : "#fff",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
-              }}
-              className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[15px] py-[14px] border-[#EBEBEB]  rounded-[8px] flex flex-wrap justify-between w-[450px]"
-            >
-              <div className="w-full flex flex-wrap justify-between ">
-                <p
-                  style={{ color: dark ? "#fff" : "#0A0A18" }}
-                  className="text-[17px] f2 translate-y-[0px] font-semibold tracking-wide "
-                >
-                  Google Page Score
-                </p>
-                <div
-                  style={{
-                    backgroundColor: dark ? "#111317" : "#fff",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                  }}
-                  className="w-[180px] cursor-pointer  overflow-hidden border-[1px] h-[30px] flex rounded-[7px] items-center justify-center"
-                >
-                  <div
-                    onClick={() => {
-                      setVitsals(true);
-                    }}
-                    style={{
-                      ...(coreVitals
-                        ? {
-                            backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                            borderColor: dark ? "#1F2329" : "#ebebeb",
-                            color: dark ? "#fff" : "#000",
-                          }
-                        : {
-                            backgroundColor: dark ? "#111317" : "#fff",
-                            color: dark ? "#fff" : "#000",
-                            borderColor: dark ? "#1F2329" : "#ebebeb",
-                          }),
-                    }}
-                    className="w-[50%] h-[100%]  flex items-center justify-center bg-[#ebebeb8b] border-r-[1px] "
-                  >
-                    <p className="text-[12px] f2  font-medium">Core Vitals</p>
-                  </div>
-                  <div
-                    onClick={() => {
-                      setVitsals(false);
-                    }}
-                    style={{
-                      ...(!coreVitals
-                        ? {
-                            backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                            borderColor: dark ? "#1F2329" : "#ebebeb",
-                            color: dark ? "#fff" : "#000",
-                          }
-                        : {
-                            backgroundColor: dark ? "#111317" : "#fff",
-                            color: dark ? "#fff" : "#000",
-                          }),
-                    }}
-                    className="w-[50%] h-[100%] flex items-center justify-center bg-[#fff]"
-                  >
-                    <p className="text-[12px]  font-medium f2">Performance</p>
-                  </div>
-                </div>
-              </div>
-              {!coreVitals ? (
-                <>
-                  {loading ? (
-                    <div
-                      style={{ display: "flex" }}
-                      className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 spinner-wrapper gap-x-4 gap-y-8 mt-4 flex justify-center"
-                    >
-                      <CircularProgressLoader />
-                    </div>
-                  ) : (
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4 flex justify-center">
-                      {performanceData?.length &&
-                        performanceData.map((item, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center justify-center"
-                          >
-                            <CircularProgressBar
-                              margin={item?.margin}
-                              title={item?.name}
-                              percentage={item?.value}
-                            />
-                          </div>
-                        ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <>
-                  {loading ? (
-                    <div
-                      style={{ display: "flex" }}
-                      className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 spinner-wrapper gap-x-4 gap-y-8 mt-4 flex justify-center"
-                    >
-                      <CircularProgressLoader />
-                    </div>
-                  ) : (
-                    <div className="flex items-center  justify-around h-[140px]">
-                      <CoreVitalsReportCard coreVitualData={coreVitalsData} />
-                    </div>
-                  )}
-                </>
-              )}
-            </div> */}
-             <GooglePageScore coreVitalsData={coreVitalsData} performanceData={performanceData} />
-           
+
+          <div className="w-[100%] mt-[24px] mobile:px-[10px] desktop:grid  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px]">
+            <GooglePageScore />
             <div
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
                 borderColor: dark ? "#1F2329" : "#ebebeb",
-                paddingBottom:"60px"
               }}
-              className=" h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px] w-[400px]"
+              className=" h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px]"
             >
               <div className="w-[100%]  flex items-center justify-between">
                 <p
-                  style={{ color: dark ? "#fff" : "#0A0A18" }}
-                  className="text-[17px] f2 translate-y-[0px] font-semibold tracking-wide"
+                  style={{ color: dark ? "#fff" : "#000" }}
+                  className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
                 >
-                  Image Optimizations
+                  Total Cache Status
                 </p>
                 {dark ? (
                   <div
@@ -1373,6 +1265,198 @@ const Dashboard = () => {
                   </p>
                 </div> */}
                 {/* <DemoPie /> */}
+                <CustomDonutChart />
+                <div className="max-w-[250px] w-[50%] ml-auto">
+                  <div className="flex items-center mb-[4px] justify-between">
+                    <div className="flex  items-center">
+                      <img
+                        src={
+                          dark
+                            ? "/graphic/dashboard/elli1-d.svg"
+                            : "/graphic/dashboard/elli1.svg"
+                        }
+                        className="w-[10px] h-[10px]"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#fff" : "#000" }}
+                        className="text-[13px] f2 font-medium ml-[5px]"
+                      >
+                        Optimized URLs
+                      </p>
+                    </div>
+                    <div
+                      style={{ color: dark ? "#fff" : "#000" }}
+                      className="text-[14px] f2 font-bold translate-y-[-2px]"
+                    >
+                      244
+                    </div>
+                  </div>
+                  <div className="flex items-center mb-[4px] justify-between">
+                    <div className="flex items-center">
+                      <img
+                        src={
+                          dark
+                            ? "/graphic/dashboard/elli2-d.svg"
+                            : "/graphic/dashboard/elli2.svg"
+                        }
+                        className="w-[10px] h-[10px]"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#fff" : "#000" }}
+                        className="text-[13px] f2 font-medium ml-[5px]"
+                      >
+                        Pending Optimizations
+                      </p>
+                    </div>
+                    <div
+                      style={{ color: dark ? "#fff" : "#000" }}
+                      className="text-[14px] f2 font-bold translate-y-[-2px]"
+                    >
+                      72
+                    </div>
+                  </div>
+                  <div className="flex items-center mb-[4px] justify-between">
+                    <div className="flex items-center">
+                      <img
+                        src={
+                          dark
+                            ? "/graphic/dashboard/elli3-d.svg"
+                            : "/graphic/dashboard/elli9.svg"
+                        }
+                        className="w-[10px] h-[10px]"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#fff" : "#000" }}
+                        className="text-[13px] f2 font-medium ml-[5px]"
+                      >
+                        Not Optimized URLs
+                      </p>
+                    </div>
+                    <div
+                      style={{ color: dark ? "#fff" : "#000" }}
+                      className="text-[14px] font-bold translate-y-[-2px]"
+                    >
+                      19
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                backgroundColor: dark ? "#111317" : "#fff",
+                borderColor: dark ? "#1F2329" : "#ebebeb",
+              }}
+              className=" relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  py-[14px] border-[#EBEBEB] rounded-[8px]"
+            >
+              <div className="w-[100%] px-[15px] mb-[10px] flex items-center justify-between">
+                <p
+                  style={{ color: dark ? "#fff" : "#000" }}
+                  className="text-[15px] f2 translate-y-[0px] font-medium tracking-wide"
+                >
+                  Quick Actions
+                </p>
+
+                {dark ? (
+                  <div
+                    style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}
+                    onClick={() => {
+                      router("/settings");
+                    }}
+                    className="text-[#0a0a187e] f2 text-[#ffffff74] hover:bg-[#ffffff30] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
+                  >
+                    All Settings
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}
+                    onClick={() => {
+                      router("/settings");
+                    }}
+                    className="text-[#0a0a187e] f2 text-[#0a0a187e] hover:bg-[#e1e1e1] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
+                  >
+                    All Settings
+                  </div>
+                )}
+              </div>
+              <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
+                <p
+                  style={{ color: dark ? "#fff" : "#000" }}
+                  className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+                >
+                  Cache Warmup
+                </p>
+                <Toggle />
+              </div>
+              <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
+                <p
+                  style={{ color: dark ? "#fff" : "#000" }}
+                  className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+                >
+                  Image Optimization
+                </p>
+                <Toggle />
+              </div>
+              <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
+                <p
+                  style={{ color: dark ? "#fff" : "#000" }}
+                  className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
+                >
+                  Safe Mode
+                </p>
+                <Toggle />
+              </div>
+              <Button />
+            </div>
+          </div>
+          {/* <div style={{height:"fit-content"}} className="w-[100%] mt-[24px] mobile:px-[10px] desktop:flex  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px] flex h-[250px] mobile-cols">
+ 
+             <GooglePageScore coreVitalsData={coreVitalsData} performanceData={performanceData} />
+           
+            <div
+              style={{
+                backgroundColor: dark ? "#111317" : "#fff",
+                borderColor: dark ? "#1F2329" : "#ebebeb",
+                paddingBottom:"30px"
+              }}
+              className=" h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px] w-[400px]"
+            >
+              <div className="w-[100%]  flex items-center justify-between">
+                <p
+                  style={{ color: dark ? "#fff" : "#0A0A18" }}
+                  className="text-[17px] f2 translate-y-[0px] font-semibold tracking-wide"
+                >
+                  Image Optimizations
+                </p>
+                {dark ? (
+                  <div
+                    style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}
+                    className="text-[#0a0a187e] text-[#ffffff74] f2 hover:bg-[#ffffff30] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
+                  >
+                    View Details
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}
+                    className="text-[#0a0a187e] translate-x-[7px] text-[#0a0a187e] f2 hover:bg-[#e1e1e1] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
+                  >
+                    View Details
+                  </div>
+                )}
+              </div>
+              <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
+          
                 <CustomDonutChart imageData={imageData} />
                 <div className="max-w-[250px] w-[50%] ml-auto">
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1523,14 +1607,9 @@ const Dashboard = () => {
                 />
               </div>
 
-              {/* {quickActionDataArr?.length &&
-                                quickActionDataArr.map((action, index) => (
-                                    <QuickActionCard key={index} text={action} />
-                                ))} */}
-
               <HoverGreenButton handlePurgeAll={handlePurgeAll} btnText="Purge all cache " />
             </div>
-          </div>
+          </div> */}
           <div className="w-[100%] h-[50px]"></div>
         </div>
       </div>
