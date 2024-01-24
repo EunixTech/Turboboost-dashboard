@@ -317,7 +317,7 @@ const CacheWarmup = ({ setShow }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if(!assetsOptimizationValue && !Boolean(localStorage.getItem('pageOptimizationAPI'))){
+      if(!pageOptimizationValue && !Boolean(localStorage.getItem('pageOptimizationAPI'))){
         await handleOptimizePage();
         localStorage.setItem('pageOptimizationAPI', true);
       }
