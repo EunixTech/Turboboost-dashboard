@@ -190,6 +190,8 @@ const TableItem1 = ({ last, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const formatDate = (dateObj) => {
+       const dateObj = new Date(dateString);
+    
     const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
     const day = dateObj.getDate().toString().padStart(2, '0');
     const year = dateObj.getFullYear();
@@ -223,7 +225,7 @@ const TableItem1 = ({ last, item }) => {
         }}
         className="w-[40%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
-        {item?.optimized_at ? formatDate(item?.optimized_at): ''}
+        {item?.optimized_at && formatDate(item?.optimized_at)}
       </div>
       <div
         style={{

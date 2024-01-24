@@ -564,7 +564,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
           >
             Performance
           </p>
-          <div className="flex items-center gap-[30px] justify-around h-[140px]">
+          <div className="flex items-center gap-[10px] justify-around h-[140px]">
             <CircularProgressBar
               mr="0"
               title="Performence"
