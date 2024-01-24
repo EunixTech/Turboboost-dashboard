@@ -88,7 +88,7 @@ const OnboardingBillings = () => {
 
   if(loader){
 
-   return <AnimatedLoader /> 
+   return <div></div> 
   
   }
 
