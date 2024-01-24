@@ -1300,14 +1300,14 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Optimized URLs
+                        Total No Images
                       </p>
                     </div>
                     <div
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                      244
+                       {imageData?.totalImages}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1325,14 +1325,14 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Pending Optimizations
+                       No of Image Optimize
                       </p>
                     </div>
                     <div
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                      72
+                      {imageData?.totalOptimizeImage}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
@@ -1350,14 +1350,14 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Not Optimized URLs
+                          Pending Optimizations
                       </p>
                     </div>
                     <div
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] font-bold translate-y-[-2px]"
                     >
-                      19
+                      {imageData?.totalOriginImage}
                     </div>
                   </div>
                 </div>
@@ -1375,7 +1375,7 @@ const Dashboard = () => {
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[15px] f2 translate-y-[0px] font-medium tracking-wide"
                 >
-                  Quick Actions
+                   Quick Links
                 </p>
 
                 {dark ? (
@@ -1409,9 +1409,12 @@ const Dashboard = () => {
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
                 >
-                  Cache Warmup
+                  Lazy Loading
                 </p>
-                <Toggle />
+                <ToggleButton
+                  toggleValue={lazyLoadingToggleValue}
+                  handlingToggle={handlelazyLoading}
+                />
               </div>
               <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
                 <p
@@ -1420,18 +1423,24 @@ const Dashboard = () => {
                 >
                   Image Optimization
                 </p>
-                <Toggle />
+                <ToggleButton
+                  toggleValue={imageOptimizationValue}
+                  handlingToggle={handleImageOptimization}
+                />
               </div>
               <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
                 <p
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
                 >
-                  Safe Mode
+                  Minify Html
                 </p>
-                <Toggle />
+                <ToggleButton
+                  toggleValue={minifyHTMLToggleValue}
+                  handlingToggle={handleMinifyHTML}
+                />
               </div>
-              <Button />
+              <HoverGreenButton handlePurgeAll={handlePurgeAll} btnText="Purge all cache " />
             </div>
           </div>
           {/* <div style={{height:"fit-content"}} className="w-[100%] mt-[24px] mobile:px-[10px] desktop:flex  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px] flex h-[250px] mobile-cols">
