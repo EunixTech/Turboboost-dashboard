@@ -189,7 +189,7 @@ const Status = ({ i }) => {
 const TableItem1 = ({ last, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
-  const formatDate = (dateObj) => {
+  const formatDate = (dateString) => {
        const dateObj = new Date(dateString);
     
     const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
