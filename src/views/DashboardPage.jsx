@@ -585,7 +585,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
         </>
       ) : (
         <div style={{marginBottom:"-40px"}} className="w-[100%] mt-[20px]">
-          <div className="flex  justify-around ">
+          <div style={{flexWrap:"nowrap"}} className="flex  justify-around ">
             <div className="w-[150px]">
               <p
                 style={{ color: dark ? "#fff" : "#000" }}
