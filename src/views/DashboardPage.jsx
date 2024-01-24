@@ -802,6 +802,7 @@ const Dashboard = () => {
        
       } else if(resJSON.status === 403){
      
+        
           localStorage.removeItem('authToken');
           window.location.replace('/login-shopify');
   
