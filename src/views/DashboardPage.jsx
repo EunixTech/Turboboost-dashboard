@@ -987,7 +987,7 @@ const Dashboard = () => {
                 >
                   Total Images
                 </p>
-                <Tooltip text="This indicates the percentage of image optimization achieved by TurboBoost." />
+                <Tooltip text="This indicates the percentage of image optimization achieved" />
               </div>
               <div className="flex mt-[6px] items-center">
                 <p
@@ -1049,7 +1049,7 @@ const Dashboard = () => {
                 >
                   No of Images Optimized
                 </p>
-                <Tooltip text="This indicates the number of image optimization achieved by TurboBoost." />
+                <Tooltip text="This indicates the number of image optimization achieved" />
               </div>
               <div className="flex mt-[6px] items-center">
                 <p
@@ -1138,7 +1138,7 @@ const Dashboard = () => {
                 >
                   Last Purge
                 </p>
-                <Tooltip text="This information reflects the last time optimization was performed by TurboBoost." />
+                <Tooltip text="This information reflects the last time optimization was performed" />
               </div>
               <div className="flex mt-[6px] items-center">
                 <p

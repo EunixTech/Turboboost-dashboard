@@ -213,7 +213,7 @@ const TableItem1 = ({ last, item }) => {
         }}
         className="w-[40%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
-        {item?.optimized_at ? new Date(item.optimized_at).toLocaleString() : ''}
+        {item?.optimized_at ? new Date(item.optimized_at).toLocaleString('en-US', { month: 'numeric', day: '2-digit', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) : ''}
       </div>
       <div
         style={{
