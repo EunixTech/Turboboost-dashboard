@@ -1046,7 +1046,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#0a0a187e] f2 text-[16px] tracking-wide font-bold"
                 >
-                  # Images Optimized
+                  No of Images Optimized
                 </p>
                 <Tooltip text="This indicates the number of image optimization achieved by TurboBoost." />
               </div>

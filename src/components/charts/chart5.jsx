@@ -28,7 +28,7 @@ const options = {
 };
 
 export default function App({imageData}) {
-  const totalImage =  0,  
+  let totalImage =  0,  
     pendingImages = 0,
     optimizeImage = 0;
 
