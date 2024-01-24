@@ -796,13 +796,11 @@ const Dashboard = () => {
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
         updateHandlerData(OptimizationHandlerData);
-        setTimeout(() => {
           toogleLoading(false)
-        }, 1000);
-       
+
       } else if(resJSON.status === 403){
      
-        
+
           localStorage.removeItem('authToken');
           window.location.replace('/login-shopify');
   
@@ -969,7 +967,7 @@ const Dashboard = () => {
     return () => clearTimeout(delayFetchData);
   }, [userToken1]);
 
-  return (loadingAPI || loader) ? (
+  return (loadingAPI || loader || loading) ? (
     <AnimatedLoader />
   ) : (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
