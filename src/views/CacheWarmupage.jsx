@@ -287,7 +287,7 @@ const CacheWarmup = ({ setShow }) => {
       if(resData?.status === 200){
       dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
       fetchPageOptimizationData();
-        return toast.success(resData?.message);
+        // return toast.success(resData?.message);
       } else {
         return toast.error("Please try again");
       }

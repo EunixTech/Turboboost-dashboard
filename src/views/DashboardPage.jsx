@@ -757,11 +757,11 @@ const Dashboard = () => {
       const resJSON = res?.data;
  
       if (resJSON.status === 200) {
-        toogleLoadingAPI(false)
+      
         const pageSpeedInsightData = resJSON?.data?.updated;
         const coreVitualsDataObj = pageSpeedInsightData?.performance;
          const performaceDataObj = pageSpeedInsightData?.core_vitals;
-
+         toogleLoadingAPI(false)
       updateCoreVitalsData(coreVitualsDataObj);
       updatePerformanceData(performaceDataObj);
    
@@ -791,11 +791,12 @@ const Dashboard = () => {
       const resJSON = res?.data;
  
       if (resJSON.status === 200) {
-        toogleLoading(false)
+        
         const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
-        updateHandlerData(OptimizationHandlerData)
+        updateHandlerData(OptimizationHandlerData);
+        toogleLoading(false)
       } else if(resJSON.status === 403){
      
           localStorage.removeItem('authToken');
