@@ -796,7 +796,10 @@ const Dashboard = () => {
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
         updateHandlerData(OptimizationHandlerData);
-        toogleLoading(false)
+        setTimeout(() => {
+          toogleLoading(false)
+        }, 1000);
+       
       } else if(resJSON.status === 403){
      
           localStorage.removeItem('authToken');
