@@ -752,12 +752,15 @@ const CacheStatus = () => {
   }
 
 
-  useEffect(async() => {
-    if(!assetsOptimizationValue && !Boolean(localStorage.getItem('assetsOptimizationAPI'))){
-     await handleOptimizeAssets();
-      localStorage.setItem('assetsOptimizationAPI', true);
-    }
-    fetchAssetsOptimizationData();
+  useEffect(() => {
+    const fetchData = async () => {
+      if(!assetsOptimizationValue && !Boolean(localStorage.getItem('assetsOptimizationAPI'))){
+        await handleOptimizeAssets();
+        localStorage.setItem('assetsOptimizationAPI', true);
+      }
+      fetchAssetsOptimizationData();
+    };
+    fetchData();
   }, [])
 
 
