@@ -963,7 +963,7 @@ const Dashboard = () => {
   useEffect(() => {
     const delayFetchData = setTimeout(() => {
       fetchData();
-    }, 2000);
+    }, 3000);
     return () => clearTimeout(delayFetchData);
   }, [userToken1]);
 
