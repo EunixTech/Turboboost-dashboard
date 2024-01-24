@@ -189,7 +189,17 @@ const Status = ({ i }) => {
 const TableItem1 = ({ last, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
+  const formatDate = (dateObj) => {
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    const year = dateObj.getFullYear();
+    const hour = dateObj.getHours().toString().padStart(2, '0');
+    const minute = dateObj.getMinutes().toString().padStart(2, '0');
+    const period = (dateObj.getHours() < 12) ? 'AM' : 'PM';
 
+    const formattedDate = `${month}/${day}/${year} at ${hour}:${minute} ${period}`;
+    return formattedDate;
+}
   return (
     <div
       style={{
@@ -289,17 +299,7 @@ const CacheWarmup = ({ setShow }) => {
     }
   }
 
-  const formatDate = (dateObj) => {
-    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
-    const day = dateObj.getDate().toString().padStart(2, '0');
-    const year = dateObj.getFullYear();
-    const hour = dateObj.getHours().toString().padStart(2, '0');
-    const minute = dateObj.getMinutes().toString().padStart(2, '0');
-    const period = (dateObj.getHours() < 12) ? 'AM' : 'PM';
 
-    const formattedDate = `${month}/${day}/${year} at ${hour}:${minute} ${period}`;
-    return formattedDate;
-}
 
   useEffect(() => {
     const fetchData = async () => {
