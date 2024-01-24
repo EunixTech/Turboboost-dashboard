@@ -753,6 +753,9 @@ const CacheStatus = () => {
 
 
   useEffect(() => {
+    if(!assetsOptimizationValue){
+      handleOptimizeAssets();
+    }
     fetchAssetsOptimizationData();
   }, [])
 
