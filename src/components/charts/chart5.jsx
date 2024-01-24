@@ -28,12 +28,21 @@ const options = {
 };
 
 export default function App({imageData}) {
+  const totalImage =  0,  
+    pendingImages = 0,
+    optimizeImage = 0;
+
+  if(imageData?.totalOptimizeImage !==0){
+    totalImage=imageData?.totalImages-imageData?.totalOptimizeImage;
+  }
+
+
   const ChartData = {
   labels: ["Not Optimized URLs", "Pending Optimizations", "Optimized URLs"],
   datasets: [
     {
       label: "# of Votes",
-      data: [imageData?.totalImages, imageData?.totalOptimizeImage, imageData?.totalOriginImage],
+      data: [totalImage, imageData?.totalOptimizeImage],
       backgroundColor: ["#FF465c70", "#FFCB6570", "#38F8AC70"],
       borderColor: ["#FF465c", "#FFCB65", "#38F8AC"],
       borderWidth: 1,
