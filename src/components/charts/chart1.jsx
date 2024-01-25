@@ -72,12 +72,12 @@ const DemoLine = () => {
     yField: "gdp",
     xAxis: {
       tickLine: { length: 0 },
-      range: [1, 30], // Adjust the range to be from 1 to 30
+      range: [0, 1],
       label: {
-        formatter: (text) => `${parseInt(text)}`, // Remove +1 as the range is already from 1 to 30
+        formatter: (text) => `${parseInt(text) + 1}`, // Add 1 to the x-axis label
       },
-      tickCount: data.length,
-      nice: true,
+      tickCount: data.length, // Ensure there's a tick for each data point
+      nice: true, //
     },
     seriesField: "name",
     isStack: false,
@@ -104,8 +104,6 @@ const DemoLine = () => {
           },
         },
       },
-      range: [1, 100], // Set the y-axis range from 1 to 100
-      tickInterval: 25, // Set the tick interval to 25
     },
     areaStyle: (e) => {
       console.log(e, 141132534242);
