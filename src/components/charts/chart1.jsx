@@ -104,6 +104,8 @@ const DemoLine = () => {
           },
         },
       },
+      range: [1, 100], // Set the y-axis range from 1 to 100
+      tickInterval: 25, // Set the tick interval to 25
     },
     areaStyle: (e) => {
       console.log(e, 141132534242);
