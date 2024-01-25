@@ -42,7 +42,11 @@ export const GetAxiosConfig = async (URL="") => {
             withCredentials: true,  // Set this to true to include credentials in the request
         }
     );
-    return response;
+    console.log("response.status response.status ",response.status )
+   
+
+        return response;
+ 
 }
 
 export const PatchAxiosConfig = async (URL="", data) => {
@@ -64,6 +68,7 @@ export const PatchAxiosConfig = async (URL="", data) => {
             withCredentials: true,  // Set this to true to include credentials in the request
         }
     );
+    console.log("response.status response.status ",response.status )
     return response;
 
 }

@@ -181,7 +181,7 @@ const Integrations = () => {
           }}
         />
       )}
-      {!vidLoad ? (
+      {!true ? (
         <div
           style={{
             backgroundColor: dark ? "#090917" : "#fff",

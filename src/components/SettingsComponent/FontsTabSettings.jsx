@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { featureAPIHandling } from '../../utils/featureAPIHandling';
+import toast from "react-hot-toast";
+
 const FontsTabSettings = () => {
   const dark = useSelector((state) => state.home.dark);
 
@@ -16,18 +18,29 @@ const FontsTabSettings = () => {
 
   const handleFontRenderBehavior = async() =>{
     let endPoint = "";
-    if (!fontRenderBehaviorToggleValue) endPoint = "api/shopify/minify-javascript-code";
-    else endPoint = "api/shopify/minify-javascript-code";
-    await featureAPIHandling(endPoint);
-    dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
+    if (!fontRenderBehaviorToggleValue) endPoint = "api/shopify/adding-font-swap-properties";
+    else endPoint = "api/shopify/restore-adding-font-swap-properties";
+    const data = await featureAPIHandling(endPoint);
+      if(data.status === 200){
+        dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
+        return toast.success(data.message);
+      }  else return toast.error(data?.message)
+    
+   
+
   }
 
   const handleFontLoading = async() =>{
     let endPoint = "";
-    if (!fontLoadingToggleValue) endPoint = "/api/shopify/minify-javascript-code";
-    else endPoint = "/api/shopify/minify-javascript-code";
-    await featureAPIHandling(endPoint);
-    dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
+    if (!fontLoadingToggleValue) endPoint = "api/shopify/font-loading-optimization";
+    else endPoint = "api/shopify/restore-font-loading-optimization";
+    const data = await featureAPIHandling(endPoint);
+    if(data.status === 200){
+      dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
+      return toast.success(data.message);
+    }  else return toast.error(data?.message)
+  
+    
   }
  
   return (

@@ -12,7 +12,6 @@ import dateFormatter from "../utils/dateFormatter";
 import moment from 'moment';
 import toast from "react-hot-toast";
 import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
-import TimeDifferenceFromCurrent from "../utils/timeCalculator.js";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -289,7 +288,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         Date/Time
       </div>
@@ -297,7 +296,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         Event
       </div>
@@ -305,7 +304,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[22.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         URL
       </div>
@@ -313,7 +312,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[18.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[18.5%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         Last Optimized
       </div>
@@ -321,7 +320,7 @@ const TableHeader2 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[14%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[14%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%]"
       >
         Details
       </div>
@@ -387,7 +386,7 @@ const TableItem2 = ({ last, change, selected }) => {
   );
 };
 
-const Table1 = ({ setSelected1 }) => {
+const Table1 = ({ pageViewDataArr }) => {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const [selected, setSelected] = useState([]);
@@ -401,8 +400,8 @@ const Table1 = ({ setSelected1 }) => {
     >
       <div className="mobile:w-[1200px] laptop:w-[100%]">
         <TableHeader1 />
-        {arr.map((item, i) => {
-          return <TableItem1 key={i} last={i === arr.length - 1} />;
+        {pageViewDataArr.map((item, i) => {
+          return <TableItem1 key={i} s_no={i} item ={item} last={i === arr.length - 1} />;
         })}
       </div>
     </div>
@@ -422,18 +421,24 @@ const TableHeader1 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[10%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
-        Date/Time
+        S.No
       </div>
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
-        Pageviews
+        Store
       </div>
       {/* <div
         style={{
@@ -446,51 +451,35 @@ const TableHeader1 = ({ change }) => {
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[30.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
-        Images (MiB)
+        View At
       </div>
-      <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-        CSS (MiB)
-      </div>
-      <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-        JS (MiB)
-      </div>
-      <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-        Fonts (MiB)
-      </div>
-      <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-        Others (MiB)
-      </div>
+      
     </div>
   );
 };
 
-const TableItem1 = ({ last, change, selected }) => {
+const TableItem1 = ({ last,s_no, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
+  const formatDate = (dateString) => {
+    const dateObj = new Date(dateString);
+ 
+ const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+ const day = dateObj.getDate().toString().padStart(2, '0');
+ const year = dateObj.getFullYear();
+ const hour = dateObj.getHours().toString().padStart(2, '0');
+ const minute = dateObj.getMinutes().toString().padStart(2, '0');
+ const period = (dateObj.getHours() < 12) ? 'AM' : 'PM';
 
+ const formattedDate = `${month}/${day}/${year} at ${hour}:${minute} ${period}`;
+ return formattedDate;
+}
   return (
     <div
       style={{
@@ -503,67 +492,37 @@ const TableItem1 = ({ last, change, selected }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[10%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        2023-05-25
+        {s_no+1}
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        142
+        {item?.location}
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center"
         }}
-        className="w-[12.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        107.97 MiB
+       {item?.viewed_at && formatDate(item?.viewed_at)}
       </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        107.97 MiB
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        0 MiB
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px]   leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        0 MiB
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        0 MiB
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[12.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
-      >
-        0 MiB
-      </div>
+    
     </div>
   );
 };
@@ -601,7 +560,7 @@ const Table3 = ({ connectedWebsiteData }) => {
       className="w-[100%] border-t-[1px]  border-[#ebebeb] mt-[10px]"
     >
       <TableHeader3 />
-      {connectedWebsiteData.length && connectedWebsiteData.map((item, i) => {
+      {connectedWebsiteData?.length && connectedWebsiteData.map((item, i) => {
         return <TableItem3 key={i} last={i === arr.length - 1} item = {item}/>;
       })}
     </div>
@@ -622,7 +581,7 @@ const TableHeader3 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[30%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[20%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         Date
       </div>
@@ -646,7 +605,7 @@ const TableHeader3 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[10%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[20%] text-[14px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         Version
       </div>
@@ -669,7 +628,7 @@ const TableItem3 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[30%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[20%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
         { item?.connected_at && moment(item.connected_at).format('MMMM Do, HH:mm:ss z YYYY')}
       </div>
@@ -694,7 +653,7 @@ const TableItem3 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[10%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[20%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
          { item?.app_version }
         
@@ -899,8 +858,6 @@ const CacheStatus = () => {
 
   const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
 
-  const appURL = appURLs();
-
   const fetchConnectedWebsiteData = async () => {
 
     try {
@@ -912,10 +869,15 @@ const CacheStatus = () => {
         toggleLoader(false)
         const dataArr = resData?.conectedWebsite;
         updateConnectedWebsiteData(dataArr);
-      } else {
-         toggleLoader(false)
-        return toast.error(resData?.message)
-      }
+      } else if(resData.status === 403){
+     
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+    }else{
+      toggleLoader(false);
+      return toast.error("Please try again");
+    }
 
     } catch (error) {
       toggleLoader(false)
@@ -929,16 +891,19 @@ const CacheStatus = () => {
       const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
       const resJSON = res?.data;
 
-      console.log("resJSONresJSONPagevView",resJSON)
- 
       if (resJSON.status === 200) {
         toggleLoader(false)
         const pageViews = resJSON?.pageViewsArr;
         updatePageViewData(pageViews);
-      } else {
-        toggleLoader(false);
-        return toast.error("Please try again");
-      }
+      } else if(resJSON.status === 403){
+     
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+    }else{
+      toggleLoader(false);
+      return toast.error("Please try again");
+    }
     } catch (error) {
       toggleLoader(false);
       console.error("Error fetching user profile data:", error);
@@ -947,8 +912,8 @@ const CacheStatus = () => {
 
 
 
-  useEffect(async() => {
-    fetchPageViewData();
+  useEffect(() => {
+      fetchPageViewData();
     fetchConnectedWebsiteData();
   }, [])
 
@@ -1023,7 +988,7 @@ const CacheStatus = () => {
                         </h1>
                       </div>
                     </div> */}
-                    <InputDate />
+                    {/* <InputDate /> */}
                   </div>
                   {/* <img
                     src={
@@ -1033,7 +998,7 @@ const CacheStatus = () => {
                     }
                     alt=""
                   /> */}
-                   {(pageViewData && pageViewData?.length) ? <Chart2 pageViewArr={pageViewData?.length ? pageViewData?.length: []} /> : ""}
+                    <Chart2 />
 
 
                 </div>
@@ -1263,15 +1228,16 @@ const CacheStatus = () => {
                     }}
                     className="text-[14px] font-bold tracking-wide text-[#0a0a1877]"
                   >
-                    6055 Pageviews
+                    {pageViewData?.length} Page View{pageViewData?.length > 1 ? 's' : ''}
                   </p>
                 </div>
                 {/* <div className="laptop:w-[170px]  mobile:w-[100%] hover:bg-[#2FE49C] cursor-pointer mobile:mb-[10px] laptop:mb-0 h-[38px] bg-[#38F8AC] rounded-[3px] flex items-center justify-center text-[14px] font-bold tracking-wide">
                 Download Log (.csv)
               </div> */}
-                <Button />
+                {/* <Button /> */}
               </div>
-              <Table1 />
+              
+              <Table1 pageViewDataArr={pageViewData} />
             </div>
           )}
           {current === 1 && (

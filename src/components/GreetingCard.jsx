@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from "react-redux";
-
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
 export default function GreetingCard() {
     const [time, setTime] = useState(new Date());
     const [greeting, setGreeting] = useState('');
-
+    const [userName, updateUserName] = useState('');
     const dark = useSelector((state) => state.home.dark);
 
     const updateGreeting = useCallback(() => {
@@ -35,7 +35,34 @@ export default function GreetingCard() {
         return () => { clearInterval(timerID)};
     }, [updateGreeting]);
 
+    useEffect(() => {
+        const fetchProfileData = async () => {
+       
+          try {
+            const res = await GetAxiosConfig(`user/user-profile`);
+
+            const resJSON = await res.data;
+    
+            if (resJSON?.status === 200) {
+              const user = resJSON?.acccount;
+    
+                const full_name = user?.user_info?.first_name;
+                updateUserName(full_name);
+           
+            }
+          } catch (error) {
+            if (error?.response?.status === 401) {
+              localStorage.removeItem('authToken');
+              window.location.replace('/login-shopify');
+            }
+            console.error("Error fetching user profile data:", error);
+          }
+        };
+    
+        fetchProfileData();
+      }, []);
+
     return (
-           <h1 className={`${dark ? "headingDarkMode" : "heading"} text-[18px] f2 font-medium`} > {greeting}, {localStorage.getItem('shopifyDashboardUserName') || ""}! </h1>
+           <h1 className={`${dark ? "headingDarkMode" : "heading"} text-[18px] f2 font-medium`} > {greeting}, {userName || "User Name"}! </h1>
     )
 }

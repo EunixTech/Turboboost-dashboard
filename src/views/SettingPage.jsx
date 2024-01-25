@@ -76,15 +76,6 @@ const SettingPage = ({ registrationData }) => {
     }
   };
 
-  const handleLeavePage = () => {
-    if (unsavedChanges) {
-      const userConfirmed = window.confirm("You have unsaved changes. Do you really want to leave?");
-      if (!userConfirmed) {
-        return;
-      }
-    }
-    window.history.back();
-  };
 
 
 
@@ -116,11 +107,11 @@ const SettingPage = ({ registrationData }) => {
                 }}
               />
             )}
-            <SaveButton
+            {/* <SaveButton
               btnText="Save Settings"
               onClick={handleSaveSettings}
               style={{ margin: isMobile ? "-20px 0  0 0" : 0 }}
-            />
+            /> */}
           </div>
           {deviceWith > 1000 && (
             <Navigator

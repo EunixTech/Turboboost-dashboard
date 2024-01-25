@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
   domain: Yup.string()
-    .matches(/^(http|https):\/\/[^\s$.?#].[^\s]*$/, "Invalid domain name format")
+    .matches(/^(http|https)?:\/\/(www\.)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?|[\w-]+\.myshopify\.com$/, "Invalid domain name format")
     .required("Domain name is required"),
 });
 
@@ -54,6 +54,8 @@ const SignInPage = () => {
       console.error("Error fetching user profile data:", error);
     }
   };
+
+  
 
   return (
     <div className="w-[100%] h-[100vh] flex items-center justify-center">

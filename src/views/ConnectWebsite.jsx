@@ -69,19 +69,21 @@ const TableHeader = () => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[12%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[50%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+       
       >
+        
         Site Name
       </div>
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[23%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[50%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center  px-[15px]"
       >
         Site URL
       </div>
-      <div
+      {/* <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
@@ -96,23 +98,23 @@ const TableHeader = () => {
         className="w-[17%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
         Site Secret
-      </div>
+      </div> */}
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[15%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[20%] font-medium text-[#0a0a187b] text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
         Status
       </div>
-      <div
+      {/* <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
         className="w-[13%] font-medium text-[#0a0a187b] justify-center text-[12px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
         Actions
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -182,7 +184,8 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[12%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[50%] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+       
       >
         {name}
       </div>
@@ -190,12 +193,12 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[23%] overflow-hidden pr-[10px] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
+        className="w-[50%] overflow-hidden pr-[10px] font-medium text-[#000] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]"
       >
         https://{site_url}
       </div>
       {/* Site ID */}
-      <div
+      {/* <div
         style={{
           color: dark ? "#fff" : "#000",
         }}
@@ -234,10 +237,10 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
             Copy
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Site Secret */}
-      <div
+      {/* <div
         style={{
           color: dark ? "#fff" : "#000",
         }}
@@ -276,26 +279,26 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
             Copy
           </p>
         </div>
-      </div>
+      </div> */}
 
-      <div className="w-[15%] font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
+      <div className="w-[20%] font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
         <Status i={1} />
       </div>
-      <div className="w-[13%] flex  items-center justify-center font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
+      {/* <div className="w-[13%] flex  items-center justify-center font-medium text-[#0a0a187b] text-[14px] translate-y-[1.5px] h-[100%] flex items-center px-[15px]">
         <img
           src="/graphic/status/trash.svg"
           className="w-[15px] hover:opacity-70 cursor-pointer h-[15px]"
           alt=""
           onClick={handleTrashIconClick}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
 
 const Table = ({ websites, deleteWebsite, dark }) => (
   <div className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool">
-    <div className="mobile:w-[900px]  laptop:min-w-[900px] laptop:w-[100%]">
+    <div className="mobile:w-[500px]  laptop:min-w-[500px] laptop:w-[100%]">
       <TableHeader dark={dark} />
       {websites.length && websites.map((website, i) => (
         <TableItem
@@ -308,161 +311,6 @@ const Table = ({ websites, deleteWebsite, dark }) => (
     </div>
   </div>
 );
-const BrowseConnectors = ({ cancel }) => {
-  const dark = useSelector((state) => state.home.dark);
-  const containerRef = useRef(null);
-
-    // Event handler to close the component when clicking outside
-    const handleOutsideClick = (event) => {
-      if (containerRef.current && !containerRef.current.contains(event.target)) {
-        // Click occurred outside the component, so close it
-        cancel();
-      }
-    };
-     // Add event listener when the component mounts
-  useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, []);
-  return (
-    <div className="w-[100%] h-[100vh] fixed z-50 left-0 laptop:px-[0] mobile:px-[10px] bg-[#00000074] flex items-center justify-center py-[50px]">
-      <div
-       ref={containerRef}
-        style={{
-          borderColor: dark ? "#1F2329" : "#ebebeb",
-          backgroundColor: dark ? "#111317" : "#fff",
-        }}
-        className="laptop:w-[1095px] max-h-[1000px] mobile:w-[100%] flex flex-col h-[100%] rounded-[13px] bg-[#fff] relative border-[1px] border-[#ebebeb] mobile:px-[10px] laptop:px-[30px]"
-      >
-        <div className="flex items-center shrink-0 justify-between mt-[25px]">
-          <h1
-            style={{
-              color: dark ? "#fff" : "#000",
-            }}
-            className="text-[24px]  font-bold "
-          >
-            Website Connectors
-          </h1>
-          <img
-            onClick={() => {
-              cancel();
-            }}
-            src="/graphic/connect-website/cross.svg"
-            className="cursor-pointer w-[15px]"
-            alt=""
-          />
-        </div>
-        <div className="w-[100%] h-[100%] pt-[20px] overflow-y-auto scroll-hidden">
-          <p
-            style={{
-              color: dark ? "#fff" : "#000",
-            }}
-            className="text-[16px] font-bold "
-          >
-            Install an extension
-          </p>
-          <div className="flex justify-between items-center mt-[3px] mb-[15px]">
-            <p
-              style={{
-                color: dark ? "#ffffff74" : "#0a0a187e",
-              }}
-              className="text-[14px] text-[#0a0a1878] font-bold "
-            >
-              Suitable if you are running any of the following platforms
-            </p>
-            <div className="flex items-center justify-center">
-              <p
-                style={{
-                  color: dark ? "#fff" : "#000",
-                }}
-                className="text-[13px] text-[#000] tracking-wide font-bold "
-              >
-                Level:
-              </p>
-              <div className="bg-[#38f8ab3a] text-[#0FE38F] font-bold px-[12.5px] translate-y-[-1px] rounded-[12px] ml-[4px] py-[1px] text-[11px]">
-                Easy
-              </div>
-            </div>
-          </div>
-          <Connector
-            sub="The All-In-One Speed Optimization Plugin"
-            title="TurboBoost for WordPress"
-            connect={<Connector1 />}
-          />
-          <Connector
-            sub="Official TurboBoost plugin for OpenCart"
-            title="TurboBoost for OpenCart"
-            connect={<Connector2 />}
-          />
-          <Connector
-            sub="Official TurboBoost plugin for WooCommerce"
-            title="TurboBoost for WooCommerce"
-            connect={<Connector3 />}
-          />
-          <Connector
-            sub="Official TurboBoost plugin for Magento"
-            title="TurboBoost for Magento"
-            connect={<Connector4 />}
-          />
-          <Connector
-            sub="Official TurboBoost app for Shopify"
-            title="TurboBoost for Shopify"
-            connect={<Connector5 />}
-          />
-          <Connector
-            sub="Official TurboBoost plugin for BigCommerce"
-            title="TurboBoost for BigCommerce"
-            connect={<Connector6 />}
-          />
-          <div className="w-[100%] mt-[20px]">
-            <p
-              style={{
-                color: dark ? "#fff" : "#000",
-              }}
-              className="text-[12px] font-bold "
-            >
-              Integrate an SDK
-            </p>
-            <div className="flex justify-between items-center mt-[3px] mb-[15px]">
-              <p
-                style={{
-                  color: dark ? "#ffffff74" : "#0a0a187e",
-                }}
-                className="text-[14px] text-[#0a0a1878] font-bold "
-              >
-                Suitable for custom platforms that run in any of the following
-                programming languages
-              </p>
-              <div className="flex items-center justify-center">
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[13px] text-[#000] tracking-wide font-bold "
-                >
-                  Level:
-                </p>
-                <div className="bg-[#ffcc6542] text-[#FFCB65] font-bold px-[12.5px] translate-y-[-1px] rounded-[12px] ml-[4px] py-[1px] text-[11px]">
-                  Medium
-                </div>
-              </div>
-            </div>
-            <Connector
-              sub="Integrate TurboBoost into your PHP based website"
-              title="TurboBoost PHP SDK (Limited Support)"
-              connect={<Connector7 />}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const Connector1 = () => {
   return (
     <div className="h-[99px] w-[99px] shrink-0 bg-[#433E3E] flex items-center justify-center">
@@ -540,6 +388,38 @@ const Connector7 = () => {
     </div>
   );
 };
+
+const ButtonAdd = ({ onClick }) => {
+  const dark = useSelector((state) => state.home.dark);
+  const handlingToast = () =>{
+    toast.dismiss();
+    // return toast.warning("Commign Soon");
+  }
+  return (
+    <div
+      onClick={handlingToast}
+      className={`w-[110px] ${!dark ? "bg-[#ebebeb] " : "bg-[#1c1f26]"}
+        
+        h-[40px]   cursor-pointer rounded-[4px] ${
+          dark ? "border-[#1F2329]" : "border-[#ebebeb] "
+        } flex items-center justify-center`}
+    >
+      <p
+        className={`text-[${
+          false ? "#fff" : "#000"
+        }]   f2 text-[14px]  border-[1px]  ${
+          dark ? "border-[##808080]" : "border-[##808080]"
+        } 
+        ${
+          dark ? "bg-[##808080]" : "bg-[##808080]"
+        } rounded-[4px] active:translate-y-[0px] hover:bg-[##808080]  active:border-[1px] translate-y-[-1px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+      >
+        Coming Soon
+      </p>
+    </div>
+  );
+};
+
 const Connector = ({ title, sub, connect }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -567,11 +447,151 @@ const Connector = ({ title, sub, connect }) => {
             {sub}
           </p>
         </div>
-        <Button />
+        {/* <div className="w-[80px] h-[32px] hover:bg-[#2FE49C] bg-[#38F8AC] text-[#000] font-bold rounded-[3px] flex items-center justify-center text-[11px] cursor-pointer">
+          Connect
+        </div> */}
+        <ButtonAdd />
       </div>
     </div>
   );
 };
+
+const BrowseConnectors = ({ cancel }) => {
+  const dark = useSelector((state) => state.home.dark);
+  return (
+    <div className="w-[100%] h-[100vh] fixed z-50 left-0 laptop:px-[0] mobile:px-[10px] bg-[#00000074] flex items-center justify-center py-[50px]">
+      <div
+        style={{
+          borderColor: dark ? "#1F2329" : "#ebebeb",
+          backgroundColor: dark ? "#111317" : "#fff",
+        }}
+        className="laptop:w-[1095px] max-h-[1000px] mobile:w-[100%] flex flex-col h-[100%] rounded-[13px] bg-[#fff] relative border-[1px] border-[#ebebeb] mobile:px-[10px] laptop:px-[30px]"
+      >
+        <div className="flex items-center shrink-0 justify-between mt-[25px]">
+          <h1
+            style={{
+              color: dark ? "#fff" : "#000",
+            }}
+            className="text-[24px]  font-bold "
+          >
+            Website Connectors
+          </h1>
+          <img
+            onClick={() => {
+              cancel();
+            }}
+            src="/graphic/connect-website/cross.svg"
+            className="cursor-pointer w-[15px]"
+            alt=""
+          />
+        </div>
+        <div className="w-[100%] h-[100%] pt-[20px] overflow-y-auto scroll-hidden">
+          <p
+            style={{
+              color: dark ? "#fff" : "#000",
+            }}
+            className="text-[16px] font-bold "
+          >
+            Install an extension
+          </p>
+          <div className="flex justify-between items-center mt-[3px] mb-[15px]">
+            <p
+              style={{
+                color: dark ? "#ffffff74" : "#0a0a187e",
+              }}
+              className="text-[14px] text-[#0a0a1878] font-bold "
+            >
+              Suitable if you are running any of the following platforms
+            </p>
+            <div className="flex items-center justify-center">
+              <p
+                style={{
+                  color: dark ? "#fff" : "#000",
+                }}
+                className="text-[13px] text-[#000] tracking-wide font-bold "
+              >
+                Level:
+              </p>
+              <div className="bg-[#38f8ab3a] text-[#0FE38F] font-bold px-[12.5px] translate-y-[-1px] rounded-[12px] ml-[4px] py-[1px] text-[11px]">
+                Easy
+              </div>
+            </div>
+          </div>
+          <Connector
+            sub="The All-In-One Speed Optimization Plugin"
+            title="TurboBoost for WordPress"
+            connect={<Connector1 />}
+          />
+          <Connector
+            sub="Official TurboBoost plugin for OpenCart"
+            title="TurboBoost for OpenCart"
+            connect={<Connector2 />}
+          />
+          <Connector
+            sub="Official TurboBoost plugin for WooCommerce"
+            title="TurboBoost for WooCommerce"
+            connect={<Connector3 />}
+          />
+          <Connector
+            sub="Official TurboBoost plugin for Magento"
+            title="TurboBoost for Magento"
+            connect={<Connector4 />}
+          />
+          {/* <Connector
+            sub="Official TurboBoost app for Shopify"
+            title="TurboBoost for Shopify"
+            connect={<Connector5 />}
+          /> */}
+          <Connector
+            sub="Official TurboBoost plugin for BigCommerce"
+            title="TurboBoost for BigCommerce"
+            connect={<Connector6 />}
+          />
+          <div className="w-[100%] mt-[20px]">
+            <p
+              style={{
+                color: dark ? "#fff" : "#000",
+              }}
+              className="text-[12px] font-bold "
+            >
+              Integrate an SDK
+            </p>
+            <div className="flex justify-between items-center mt-[3px] mb-[15px]">
+              <p
+                style={{
+                  color: dark ? "#ffffff74" : "#0a0a187e",
+                }}
+                className="text-[14px] text-[#0a0a1878] font-bold "
+              >
+                Suitable for custom platforms that run in any of the following
+                programming languages
+              </p>
+              <div className="flex items-center justify-center">
+                <p
+                  style={{
+                    color: dark ? "#fff" : "#000",
+                  }}
+                  className="text-[13px] text-[#000] tracking-wide font-bold "
+                >
+                  Level:
+                </p>
+                <div className="bg-[#ffcc6542] text-[#FFCB65] font-bold px-[12.5px] translate-y-[-1px] rounded-[12px] ml-[4px] py-[1px] text-[11px]">
+                  Medium
+                </div>
+              </div>
+            </div>
+            <Connector
+              sub="Integrate TurboBoost into your PHP based website"
+              title="TurboBoost PHP SDK (Limited Support)"
+              connect={<Connector7 />}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 const ConnectWebsite = () => {
   const dark = useSelector((state) => state.home.dark);
@@ -590,57 +610,71 @@ const ConnectWebsite = () => {
         
         const resJSON = res?.data;
 
+        console.log("resJSONresresresresres", res)
+        console.log("resJSONresresresresres", resJSON)
+
         if(resJSON.status === 200){
           const dataArr = resJSON?.conectedWebsite;
           updateConnectedWebsiteData(dataArr)
           toggleLoader(false)
-        } else {
-          toggleLoader(false)
-          return toast.error("Please try again")
-        }
+        } else if(resJSON.status === 403){
+     
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+  
+      }else{
+        toggleLoader(false);
+        return toast.error("Please try again");
+      }
       
       } catch (error) {
         toggleLoader(false)
+        if (error?.response?.status === 401) {
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+        }
         console.error("Error fetching user profile data:", error);
       }
   };
+
+
 
   useEffect(() => {
     fetchConnectedWebsiteData();
   }, [])
   
 
-  // Load data from localStorage when the component mounts
-  useEffect(() => {
-    const storedData = localStorage.getItem("websites");
-    if (storedData) {
-      setWebsites(JSON.parse(storedData));
-    }
-  }, []);
+  // // Load data from localStorage when the component mounts
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem("websites");
+  //   if (storedData) {
+  //     setWebsites(JSON.parse(storedData));
+  //   }
+  // }, []);
 
-  // Save data to localStorage whenever the websites state changes
-  useEffect(() => {
-    localStorage.setItem("websites", JSON.stringify(websites));
-  }, [websites]);
+  // // Save data to localStorage whenever the websites state changes
+  // useEffect(() => {
+  //   localStorage.setItem("websites", JSON.stringify(websites));
+  // }, [websites]);
 
-  const addWebsiteToList = (website) => {
-    setWebsites((prevWebsites) => [...prevWebsites, website]);
-    console.log("add data", website);
-  };
+  // const addWebsiteToList = (website) => {
+  //   setWebsites((prevWebsites) => [...prevWebsites, website]);
+  //   console.log("add data", website);
+  // };
 
-  const deleteWebsite = (index) => {
-    setWebsites((prevWebsites) => prevWebsites.filter((_, i) => i !== index));
-  };
-  const validationSchema = Yup.object().shape({
-    url: Yup.string()
-      .url('Invalid URL format')
-      .required('Website URL is required'),
-    name: Yup.string().required('Website Name is required'),
-  });
+  // const deleteWebsite = (index) => {
+  //   setWebsites((prevWebsites) => prevWebsites.filter((_, i) => i !== index));
+  // };
+  // const validationSchema = Yup.object().shape({
+  //   url: Yup.string()
+  //     .url('Invalid URL format')
+  //     .required('Website URL is required'),
+  //   name: Yup.string().required('Website Name is required'),
+  // });
 
   const handleSubmitForm = () =>{
     toast.dismiss();
-    return toast.success("Comming soon");
+    return toast.success("Coming soon");
   }
 
   return (
@@ -686,11 +720,11 @@ const ConnectWebsite = () => {
                     }}
                     className="text-[#0a0a187e] f2 text-[14px] font-medium"
                   >
-                    {websites.length} Connection
-                    {websites.length !== 1 ? "s" : ""}
+                    {connectedWebsiteData.length} Connection
+                    {connectedWebsiteData.length !== 1 ? "s" : ""}
                   </p>
                 </div>
-                <Table websites={connectedWebsiteData} deleteWebsite={deleteWebsite} />
+                <Table websites={connectedWebsiteData}  />
               </div>
               <div className="mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[26%]">
                 <div
@@ -796,7 +830,7 @@ const ConnectWebsite = () => {
                     )}
                   </Formik>
                 </div>
-                <div
+                {/* <div
                   style={{
                     backgroundColor: dark ? "#111317" : "#fff",
                     borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -827,7 +861,7 @@ const ConnectWebsite = () => {
                       setShow(true);
                     }}
                   />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -866,11 +900,11 @@ const ConnectWebsite = () => {
                     }}
                     className="text-[#0a0a187e] f2 text-[14px] font-medium"
                   >
-                    {websites.length} Connection
-                    {websites.length !== 1 ? "s" : ""}
+                    {connectedWebsiteData.length} Connection
+                    {connectedWebsiteData.length !== 1 ? "s" : ""}
                   </p>
                 </div>
-                <Table websites={connectedWebsiteData} deleteWebsite={deleteWebsite} />
+                <Table websites={connectedWebsiteData}  />
               </div>
               <div className="mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[26%]">
                 <div

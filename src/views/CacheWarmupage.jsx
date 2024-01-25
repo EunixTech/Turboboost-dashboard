@@ -117,7 +117,7 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[40.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center justify-center"
       >
         Name
       </div>
@@ -125,7 +125,7 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[30.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[40%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center justify-center"
       >
         Optimized At
       </div>
@@ -141,18 +141,18 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[20.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center justify-center"
       >
         Status
       </div>
-      <div
+      {/* <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
         className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
 
-      </div>
+      </div> */}
 
     </div>
   );
@@ -189,7 +189,19 @@ const Status = ({ i }) => {
 const TableItem1 = ({ last, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
+  const formatDate = (dateString) => {
+       const dateObj = new Date(dateString);
+    
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    const year = dateObj.getFullYear();
+    const hour = dateObj.getHours().toString().padStart(2, '0');
+    const minute = dateObj.getMinutes().toString().padStart(2, '0');
+    const period = (dateObj.getHours() < 12) ? 'AM' : 'PM';
 
+    const formattedDate = `${month}/${day}/${year} at ${hour}:${minute} ${period}`;
+    return formattedDate;
+}
   return (
     <div
       style={{
@@ -203,7 +215,7 @@ const TableItem1 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[40.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
         {item?.title}
       </div>
@@ -211,15 +223,15 @@ const TableItem1 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[30.5%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[40%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
-        {item?.optimized_at ? new Date(item.optimized_at).toLocaleString() : ''}
+        {item?.optimized_at && formatDate(item?.optimized_at)}
       </div>
       <div
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[20.5%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+        className="w-[30%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
         <Status i= {item?.is_optimized === true ? 1 : 2} />
       </div>
@@ -252,6 +264,10 @@ const CacheWarmup = ({ setShow }) => {
         return toast.error("Please try again");
       }
     } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
       toggleLoader(false);
       console.error("Error fetching user profile data:", error);
     }
@@ -271,18 +287,32 @@ const CacheWarmup = ({ setShow }) => {
       if(resData?.status === 200){
       dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
       fetchPageOptimizationData();
-        return toast.success(resData?.message);
+        // return toast.success(resData?.message);
       } else {
         return toast.error("Please try again");
       }
     } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
       toggleLoader(false);
       console.error("Error fetching user profile data:", error);
     }
   }
 
+
+
   useEffect(() => {
-    fetchPageOptimizationData();
+    const fetchData = async () => {
+      if(!pageOptimizationValue && !Boolean(localStorage.getItem('pageOptimizationAPI'))){
+        await handleOptimizePage();
+        localStorage.setItem('pageOptimizationAPI', true);
+      }
+      fetchPageOptimizationData();
+    };
+    fetchData();
+
   }, [])
   return (
     <>
@@ -449,8 +479,10 @@ const CacheWarmup = ({ setShow }) => {
                   <div
                     style={{
                       borderColor: dark ? "#1F2329" : "#ebebeb",
+                      display:"block"
                     }}
-                    className="w-[100%] laptop:flex justify-between border-t-[1px] px-[15px] border-[#ebebeb] mt-[8px]"
+                    className="w-[100%] laptop:flex justify-between border-t-[1px] px-[15px] border-[#ebebeb] mt-[8px] block"
+                   
                   >
                     {/* <div className="laptop:w-[49%] mobile:w-[100%] pt-[13px] flex flex-col justify-between">
                       <div>
@@ -521,6 +553,14 @@ const CacheWarmup = ({ setShow }) => {
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
                     </div>  */}
+                     <p
+                        style={{
+                          color: dark ? "#ffffff74" : "#0a0a187e",
+                        }}
+                        className="text-[14px] mt-[4px] tracking-wide  text-[#0a0a186f]"
+                      >
+                        {pageOptimizationData?.pages?.length ? `${pageOptimizationData?.pages?.length} Pages`:''} 
+                      </p>
                     {(pageOptimizationData?.pages && pageOptimizationData?.pages?.length) ? <Table1 tableData = {pageOptimizationData?.pages} /> : ""}
 
                   </div>

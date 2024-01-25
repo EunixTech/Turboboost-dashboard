@@ -3,22 +3,66 @@ import ReactDOM from "react-dom";
 // import { Line } from "@ant-design/plots";
 import { Area } from "@ant-design/plots";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { GetAxiosConfig,PostAxiosConfig } from "../../utils/axiosConfig.js";
 
-const DemoLine = ({pageViewData}) => {
-  const [data, setData] = useState([
-    { name: "Page Views", year: 0, gdp: 100 },
-    { name: "Page Views", year: 1, gdp: 200 },
+const DemoLine = () => {
+  const [loadingAPI, toogleLoadingAPI] = useState(true);
+  const [pageViewData, updatePageViewData] = useState([]);
+  const [data, setData] = useState([]);
+
+  const fetchPageViewData = async () => {
+    try {
+      toogleLoadingAPI(true)
+      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
+      const resJSON = res?.data;
+
+      console.log("resJSONresJSONPagevView",resJSON)
+ 
+      if (resJSON.status === 200) {
+        toogleLoadingAPI(false)
+        const pageViews = resJSON?.pageViewsArr;
+        
+        // console.log("pageViews",pageViews)
+        // const updatedData = pageViews.map((item, i) => {
+        //   return { name: "Page Views", month: i, gdp: 1 };
+        // });
+        setData([{ name: "Page Views", year: 1, gdp: pageViews?.length },]);
+        // updatePageViewData(pageViews);
+      } else {
+        toogleLoadingAPI(false);
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      toogleLoadingAPI(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  };
+
+  // [
+  //   { name: "Page Views", year: 0, gdp: 100 },
+  //   { name: "Page Views", year: 1, gdp: 200 },
     
-  ]);
+  // ]
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchPageViewData();
+    };
+    fetchData();
+  }, []);
+
 
  
-  useEffect(() => {
-    // Fixing the code
-    const updatedData = pageViewData.map((item) => {
-      return { name: "Page Views", year: item.year, gdp: item.gdp };
-    });
-    setData(updatedData);
-  }, [pageViewData])
+  // useEffect(() => {
+  //   // Fixing the code
+  //   if(pageViewData?.length){
+  //   const updatedData = pageViewData.map((item) => {
+  //     return { name: "Page Views", year: item.year, gdp: item.gdp };
+  //   });
+  //   setData(updatedData);
+  // }
+  // }, [pageViewData])
   
   
   const dark = useSelector((state) => state.home.dark);

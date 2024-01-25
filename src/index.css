@@ -406,6 +406,7 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSe
   border: 1px solid #ebebeb;
   border-radius: 4px;
   padding: 6px;
+background-color: white;
 }
 input.PhoneInputInput {
   font-size: 13px;
@@ -565,7 +566,6 @@ p.annualText {
 }
 .justify-around {
   display: flex;
-  flex-wrap: wrap;  
 }
 input.PhoneInputInput {
   /* border: 0; */

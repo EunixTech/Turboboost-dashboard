@@ -22,18 +22,27 @@ const JSTabSettings = () => {
 
   const handleDelayScript = async () => {
     let endPoint = "";
-    if (!delayScriptsValue) endPoint = "/api/shopify/eliminate-render-blocking-resources";
-    else endPoint = "/api/shopify/eliminate-render-blocking-resources";
-    await featureAPIHandling(endPoint);
-    dispatch(setToggle({ key: "delayScripts", value: !delayScriptsValue }));
+    if (!delayScriptsValue) endPoint = "api/shopify/delay-js-resources";
+    else endPoint = "api/shopify/restore-delay-js-resources";
+    const data = await featureAPIHandling(endPoint);
+    if(data.status === 200){
+      dispatch(setToggle({ key: "delayScripts", value: !delayScriptsValue }));
+      return toast.success(data.message);
+    }  else return toast.error(data?.message)
+  
   }
 
   const handleMinifyJSFileFunc = async () => {
     let endPoint = "";
     if (!minifyJSFile) endPoint = "api/shopify/minify-javascript-code";
     else endPoint = "api/shopify/minify-javascript-code";
-    await featureAPIHandling(endPoint);
-    dispatch(setToggle({ key: "minifyJSFile", value: !minifyJSFile }));
+    const data = await featureAPIHandling(endPoint);
+    if(data.status === 200){
+      dispatch(setToggle({ key: "minifyJSFile", value: !minifyJSFile }));
+      return toast.success(data.message);
+    }  else return toast.error(data?.message)
+  
+  
   }
 
   return (
