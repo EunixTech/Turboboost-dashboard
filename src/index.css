@@ -334,7 +334,8 @@ body::-webkit-scrollbar-thumb {
   /* max-height: 50vw; */
   border-radius: 10px;
   /* margin-top: 52px; */
-  max-width: 60vw;
+  max-width: 1000px;
+  /* margin-left: 100px; */
   /* width: 100vw; */
   display: flex;
   justify-content: center;
@@ -555,7 +556,7 @@ form input {
 p.annualText {
   color: #38f8ac;
   /* font-family: Inter; */
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
