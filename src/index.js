@@ -145,6 +145,7 @@ const App = () => {
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : true);
     
+    
     // if (!localStorage.getItem("authToken")) {
     //   navigate("/auth/signIn");
     // } else {
