@@ -1290,31 +1290,6 @@ const Dashboard = () => {
                 <CustomDonutChart imageData={imageData} />
                 <div className="max-w-[250px] w-[50%] ml-auto">
                   <div className="flex items-center mb-[4px] justify-between">
-                    <div className="flex  items-center">
-                      <img
-                        src={
-                          dark
-                            ? "/graphic/dashboard/elli1-d.svg"
-                            : "/graphic/dashboard/elli1.svg"
-                        }
-                        className="w-[10px] h-[10px]"
-                        alt=""
-                      />
-                      <p
-                        style={{ color: dark ? "#fff" : "#000" }}
-                        className="text-[13px] f2 font-medium ml-[5px]"
-                      >
-                        Not/error'd
-                      </p>
-                    </div>
-                    <div
-                      style={{ color: dark ? "#fff" : "#000" }}
-                      className="text-[14px] f2 font-bold translate-y-[-2px]"
-                    >
-                      {imageData?.totalImages}
-                    </div>
-                  </div>
-                  <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex items-center">
 
                     <img
@@ -1364,6 +1339,31 @@ const Dashboard = () => {
                       className="text-[14px] font-bold translate-y-[-2px]"
                     >
                       {imageData?.totalOriginImage}
+                    </div>
+                  </div>
+                  <div className="flex items-center mb-[4px] justify-between">
+                    <div className="flex  items-center">
+                      <img
+                        src={
+                          dark
+                            ? "/graphic/dashboard/elli1-d.svg"
+                            : "/graphic/dashboard/elli1.svg"
+                        }
+                        className="w-[10px] h-[10px]"
+                        alt=""
+                      />
+                      <p
+                        style={{ color: dark ? "#fff" : "#000" }}
+                        className="text-[13px] f2 font-medium ml-[5px]"
+                      >
+                        Not/error'd
+                      </p>
+                    </div>
+                    <div
+                      style={{ color: dark ? "#fff" : "#000" }}
+                      className="text-[14px] f2 font-bold translate-y-[-2px]"
+                    >
+                      {imageData?.totalImages}
                     </div>
                   </div>
                 </div>

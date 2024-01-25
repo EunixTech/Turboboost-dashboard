@@ -33,7 +33,7 @@ export default function App({imageData}) {
   datasets: [
     {
       label: "# of Votes",
-      data: [imageData?.totalImages, imageData?.totalOptimizeImage, imageData?.totalImages-imageData?.totalOptimizeImage],
+      data: [0, imageData?.totalOptimizeImage, imageData?.totalImages-imageData?.totalOptimizeImage],
       backgroundColor: [ "#FF465c70", "#38F8AC70", "#FFCB6570"],
       borderColor:[ "#38F8AC70", "#FF465c70" , "#FFCB6570"],
       borderWidth: 1,
