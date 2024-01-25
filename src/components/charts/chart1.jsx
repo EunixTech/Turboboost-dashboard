@@ -27,7 +27,7 @@ const DemoLine = () => {
         // const updatedData = pageViews.map((item, i) => {
         //   return { name: "Page Views", month: i, gdp: 1 };
         // });
-        setData([{ name: "Page Views", year: 1, gdp: pageViews?.length },]);
+        setData([{ name: "Page Views", month: 1, gdp: pageViews?.length },]);
         // updatePageViewData(pageViews);
       } else {
         toogleLoadingAPI(false);
