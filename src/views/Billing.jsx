@@ -176,7 +176,7 @@ useEffect(() => {
 									}}
 									className=" bg-[#fff] border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px]"
 								>
-									<div className="flex w-[100%] items-center px-[17px]">
+									<div style={{paddingLeft:"0px"}} className="flex w-[100%] items-center px-[17px]">
 					
 									<h1
 										style={{
