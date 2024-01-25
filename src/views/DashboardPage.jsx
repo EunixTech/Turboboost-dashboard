@@ -27,7 +27,7 @@ import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
 import TitleManager from "../components/TitleManager";
 import toast from "react-hot-toast";
-import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
+import { GetAxiosConfig, PostAxiosConfig } from "../utils/axiosConfig.js";
 import TimeDifferenceFromCurrent from "../utils/timeCalculator.js";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 // const DashboardPage = () => {
@@ -481,9 +481,9 @@ import { useNavigate } from "react-router-dom";
 import Tooltip from "../components/Tooltip";
 import axios from "axios";
 
-const GooglePageScore = ({coreVitalsData, performanceData}) => {
-    console.log("GooglePageScore",coreVitalsData)
-        console.log("GooglePageScore",performanceData)
+const GooglePageScore = ({ coreVitalsData, performanceData }) => {
+  console.log("GooglePageScore", coreVitalsData)
+  console.log("GooglePageScore", performanceData)
   const dark = useSelector((state) => state.home.dark);
   const [coreVitals, setVitsals] = useState(true);
 
@@ -493,7 +493,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
         backgroundColor: dark ? "#111317" : "#fff",
         borderColor: dark ? "#1F2329" : "#ebebeb",
         height: "fit-content",
-        minHeight:"227px"
+        minHeight: "227px"
       }}
       className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[25px] pb-[55px] pt-[10px] border-[#EBEBEB]  rounded-[8px]"
     >
@@ -518,15 +518,15 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
             style={{
               ...(coreVitals
                 ? {
-                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                    color: dark ? "#fff" : "#000",
-                  }
+                  backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                  borderColor: dark ? "#1F2329" : "#ebebeb",
+                  color: dark ? "#fff" : "#000",
+                }
                 : {
-                    backgroundColor: dark ? "#111317" : "#fff",
-                    color: dark ? "#fff" : "#000",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                  }),
+                  backgroundColor: dark ? "#111317" : "#fff",
+                  color: dark ? "#fff" : "#000",
+                  borderColor: dark ? "#1F2329" : "#ebebeb",
+                }),
             }}
             className="w-[50%] h-[100%]  flex items-center justify-center bg-[#ebebeb8b] border-r-[1px] "
           >
@@ -539,14 +539,14 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
             style={{
               ...(!coreVitals
                 ? {
-                    backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
-                    borderColor: dark ? "#1F2329" : "#ebebeb",
-                    color: dark ? "#fff" : "#000",
-                  }
+                  backgroundColor: dark ? "#272b3379" : "#ebebeb8b",
+                  borderColor: dark ? "#1F2329" : "#ebebeb",
+                  color: dark ? "#fff" : "#000",
+                }
                 : {
-                    backgroundColor: dark ? "#111317" : "#fff",
-                    color: dark ? "#fff" : "#000",
-                  }),
+                  backgroundColor: dark ? "#111317" : "#fff",
+                  color: dark ? "#fff" : "#000",
+                }),
             }}
             className="w-[50%] h-[100%] flex items-center justify-center bg-[#fff]"
           >
@@ -584,8 +584,8 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
           </div>
         </>
       ) : (
-        <div style={{marginBottom:"-40px"}} className="w-[100%] mt-[20px]">
-          <div style={{flexWrap:"nowrap"}} className="flex  justify-around ">
+        <div style={{ marginBottom: "-40px" }} className="w-[100%] mt-[20px]">
+          <div style={{ flexWrap: "nowrap" }} className="flex  justify-around ">
             <div className="w-[150px]">
               <p
                 style={{ color: dark ? "#fff" : "#000" }}
@@ -605,11 +605,11 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
                 Speed Index
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-              {performanceData?.speed_index}
+                {performanceData?.speed_index}
               </p>
             </div>
           </div>
-          <div style={{flexWrap:"nowrap"}} className="flex mt-[5%] justify-around ">
+          <div style={{ flexWrap: "nowrap" }} className="flex mt-[5%] justify-around ">
             <div className="w-[150px]">
               <p
                 style={{ color: dark ? "#fff" : "#000" }}
@@ -618,7 +618,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
                 Total Blocking Time
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-              {performanceData?.total_blocking_time}
+                {performanceData?.total_blocking_time}
               </p>
             </div>
             <div className="w-[150px]">
@@ -629,7 +629,7 @@ const GooglePageScore = ({coreVitalsData, performanceData}) => {
                 Largest Contentful Paint
               </p>
               <p className="text-[#0CD16A] f2 text-[24px] font-medium leading-[28px]">
-              {performanceData?.largest_contentful_paint}
+                {performanceData?.largest_contentful_paint}
               </p>
             </div>
           </div>
@@ -651,18 +651,14 @@ const Button = () => {
       <div
         className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
-        h-[32px] ${dark?"hover:bg-[#1F2329]":"hover:bg-[#f3f3f3]"}  cursor-pointer rounded-[4px] ${
-          dark ? "border-[#1F2329]" : "border-[#38F8AC] "
-        } flex items-center justify-center`}
+        h-[32px] ${dark ? "hover:bg-[#1F2329]" : "hover:bg-[#f3f3f3]"}  cursor-pointer rounded-[4px] ${dark ? "border-[#1F2329]" : "border-[#38F8AC] "
+          } flex items-center justify-center`}
       >
         <p
-          className={`text-[${
-            dark ? "#fff" : "#000"
-          }]   f2 text-[12px]  border-[1px] hover:border-[#38F8AC] ${
-            dark ? "border-[#38F8AC]" : "border-[#38F8AC]"
-          } ${
-            dark ? "bg-[#111317]" : "bg-[#fff]"
-          } rounded-[4px] hover:bg-[#38f8ac] hover:text-white active:translate-y-[0px] active:border-0 active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+          className={`text-[${dark ? "#fff" : "#000"
+            }]   f2 text-[12px]  border-[1px] hover:border-[#38F8AC] ${dark ? "border-[#38F8AC]" : "border-[#38F8AC]"
+            } ${dark ? "bg-[#111317]" : "bg-[#fff]"
+            } rounded-[4px] hover:bg-[#38f8ac] hover:text-white active:translate-y-[0px] active:border-0 active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
         >
           Purge all cache
         </p>
@@ -749,28 +745,28 @@ const Dashboard = () => {
 
 
 
-  
+
   const fetchPageSpeedInsight = async () => {
     try {
       toogleLoadingAPI(true)
       const res = await GetAxiosConfig(`api/dashboard/page-speed-insight-data`);
       const resJSON = res?.data;
- 
+
       if (resJSON.status === 200) {
-      
+
         const pageSpeedInsightData = resJSON?.data?.updated;
         const coreVitualsDataObj = pageSpeedInsightData?.performance;
-         const performaceDataObj = pageSpeedInsightData?.core_vitals;
-         toogleLoadingAPI(false)
-      updateCoreVitalsData(coreVitualsDataObj);
-      updatePerformanceData(performaceDataObj);
-   
-      } else if(resJSON.status === 403){
-     
-          localStorage.removeItem('authToken');
-          window.location.replace('/login-shopify');
-  
-      }else{
+        const performaceDataObj = pageSpeedInsightData?.core_vitals;
+        toogleLoadingAPI(false)
+        updateCoreVitalsData(coreVitualsDataObj);
+        updatePerformanceData(performaceDataObj);
+
+      } else if (resJSON.status === 403) {
+
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+      } else {
         toogleLoadingAPI(false);
         // return toast.error("Please try again");
       }
@@ -779,7 +775,7 @@ const Dashboard = () => {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
-      } 
+      }
       console.error("Error fetching user profile data:", error);
     }
   };
@@ -789,22 +785,22 @@ const Dashboard = () => {
       toogleLoading(true)
       const res = await GetAxiosConfig(`api/dashboard/fetch-image-optimization-data`);
       const resJSON = res?.data;
- 
+
       if (resJSON.status === 200) {
-        
+
         const OptimizationHandlerData = resJSON?.OptimizationHandlerDataToSend;
         const imageDataObj = resJSON?.dataObj;
         updateImageData(imageDataObj);
         updateHandlerData(OptimizationHandlerData);
-          toogleLoading(false)
+        toogleLoading(false)
 
-      } else if(resJSON.status === 403){
-     
+      } else if (resJSON.status === 403) {
 
-          localStorage.removeItem('authToken');
-          window.location.replace('/login-shopify');
-  
-      }else{
+
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+      } else {
         // toogleLoadingAPI(false);
         // return toast.error("Please try again");
       }
@@ -813,7 +809,7 @@ const Dashboard = () => {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
-      } 
+      }
       console.error("Error fetching user profile data:", error);
     }
   };
@@ -834,13 +830,13 @@ const Dashboard = () => {
     if (!criticalCSSToggleValue) endPoint = "api/shopify/critical-css-optimization";
     else endPoint = "api/shopify/restore-critical-css-optimization";
     const data = await featureAPIHandling(endPoint);
-    if(data.status === 200){
+    if (data.status === 200) {
       dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
       return toast.success(data.message);
-    }  
-    
+    }
+
     // else return toast.error(data?.message)
-  ;
+    ;
   };
 
   const handleImageSizeAdaption = async () => {
@@ -862,34 +858,34 @@ const Dashboard = () => {
     if (!lazyLoadingToggleValue) endPoint = "api/shopify/adding-image-lazy-loading";
     else endPoint = "api/shopify/restore-adding-image-lazy-loading";
     const data = await featureAPIHandling(endPoint);
-    if(data.status === 200){
-      
+    if (data.status === 200) {
+
       dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
       return toast.success(data.message);
-    }  
-    
+    }
+
     // else return toast.error(data?.message)
 
   };
 
-  const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization) ;
+  const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization);
 
-  const handleImageOptimization = async() =>{
+  const handleImageOptimization = async () => {
     toast.dismiss();
     try {
-     
-    let endPoint = "";
-    if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
-    else endPoint = "api/shopify/restore-image-optimization";
 
-    toggleLoader(true);
+      let endPoint = "";
+      if (!imageOptimizationValue) endPoint = "api/shopify/image-optimization";
+      else endPoint = "api/shopify/restore-image-optimization";
+
+      toggleLoader(true);
       const res = await GetAxiosConfig(endPoint);
-    
+
       const resData = res?.data;
-      if(resData?.status === 200){
-      dispatch(setToggle({ key: "imageOptimization", value: !imageOptimizationValue }));
-      fetchImageOptimizationData();
-      toggleLoader(false);
+      if (resData?.status === 200) {
+        dispatch(setToggle({ key: "imageOptimization", value: !imageOptimizationValue }));
+        fetchImageOptimizationData();
+        toggleLoader(false);
         return toast.success(resData?.message);
       } else {
         toggleLoader(false);
@@ -900,7 +896,7 @@ const Dashboard = () => {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
-      } 
+      }
       console.error("Error fetching user profile data:", error);
     }
   }
@@ -919,26 +915,26 @@ const Dashboard = () => {
 
   }
 
-  const handlePurgeAll = async() =>{
+  const handlePurgeAll = async () => {
 
-    if(!imageOptimizationValue && !lazyLoadingToggleValue && !minifyHTMLToggleValue){
+    if (!imageOptimizationValue && !lazyLoadingToggleValue && !minifyHTMLToggleValue) {
       handleImageOptimization();
       handlelazyLoading();
       handleMinifyHTML();
-    } else if(!imageOptimizationValue && !lazyLoadingToggleValue){
+    } else if (!imageOptimizationValue && !lazyLoadingToggleValue) {
       handleImageOptimization();
       handlelazyLoading();
-    } else if(!imageOptimizationValue && !minifyHTMLToggleValue){
+    } else if (!imageOptimizationValue && !minifyHTMLToggleValue) {
       handleImageOptimization();
       handleMinifyHTML();
-    } else if(!lazyLoadingToggleValue && !minifyHTMLToggleValue){
+    } else if (!lazyLoadingToggleValue && !minifyHTMLToggleValue) {
       handlelazyLoading();
       handleMinifyHTML();
-    } else if(!imageOptimizationValue){
+    } else if (!imageOptimizationValue) {
       handleImageOptimization();
-    } else if(!lazyLoadingToggleValue){
+    } else if (!lazyLoadingToggleValue) {
       handlelazyLoading();
-    } else if(!minifyHTMLToggleValue){
+    } else if (!minifyHTMLToggleValue) {
       handleMinifyHTML();
     }
 
@@ -948,11 +944,11 @@ const Dashboard = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");
 
- 
+
   const fetchData = async () => {
     if (!userToken1) {
       await fetchPageSpeedInsight();
-      if(!imageOptimizationValue && !Boolean(localStorage.getItem('imageOptimizationAPI'))){
+      if (!imageOptimizationValue && !Boolean(localStorage.getItem('imageOptimizationAPI'))) {
         await handleImageOptimization();
         localStorage.setItem('imageOptimizationAPI', true);
       }
@@ -992,23 +988,23 @@ const Dashboard = () => {
             {w > 1000 && (
               <div className="flex items-center justify-center">
                 {
-                  false ?  <img
-                  src="/graphic/warmup/elli.svg"
-                  className="mr-[3px] w-[14px]"
-                  alt=""
-                />:
-                <div className="w-[18px] translate-y-[0px] h-[18px] justify-center items-center flex rounded-[50%] bg-[#38f8ab3a]">
-                <div className="w-[10px] h-[10px] rounded-[50%] bg-[#38F8AC]"></div>
-              </div>
+                  false ? <img
+                    src="/graphic/warmup/elli.svg"
+                    className="mr-[3px] w-[14px]"
+                    alt=""
+                  /> :
+                    <div className="w-[18px] translate-y-[0px] h-[18px] justify-center items-center flex rounded-[50%] bg-[#38f8ab3a]">
+                      <div className="w-[10px] h-[10px] rounded-[50%] bg-[#38F8AC]"></div>
+                    </div>
                 }
-               
+
                 <h1
                   style={{ color: dark ? "#fff" : "#000" }}
                   className=" ml-[10px] f2 laptop:text-[16px] desktop:text-[18px] font-medium"
                 >
                   TurboBoost Service Status
                 </h1>
-                
+
               </div>
             )}
           </div>
@@ -1053,27 +1049,27 @@ const Dashboard = () => {
               </div>
               {
                 imageData?.lastPurge ?
-                <div className="flex">
-                <p
-                  style={{
-                    color: dark ? "#ffffff74" : "#0a0a187e",
-                  }}
-                  className=" mr-[2px] f2 text-[14px] tracking-wide font-bold"
-                >
-                  last purge:
-                </p>
-                <p
-                  style={{
-                    color: dark ? "#fff" : "#000",
-                  }}
-                  className="text-[#000] f2 text-[14px] tracking-wide font-bold"
-                >
-                   {(imageData && imageData?.astPurge) ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
-                </p>
-              </div>: ``
+                  <div className="flex">
+                    <p
+                      style={{
+                        color: dark ? "#ffffff74" : "#0a0a187e",
+                      }}
+                      className=" mr-[2px] f2 text-[14px] tracking-wide font-bold"
+                    >
+                      last purge:
+                    </p>
+                    <p
+                      style={{
+                        color: dark ? "#fff" : "#000",
+                      }}
+                      className="text-[#000] f2 text-[14px] tracking-wide font-bold"
+                    >
+                      {(imageData && imageData?.astPurge) ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
+                    </p>
+                  </div> : ``
 
               }
-              
+
             </div>
             <div
               style={{
@@ -1217,7 +1213,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
-                 
+
                   {handlerData?.previousPurge ? new Date(handlerData?.previousPurge).toLocaleDateString("en-US") : ""}
 
                 </p>
@@ -1246,8 +1242,8 @@ const Dashboard = () => {
               >
                 This Month
               </p>
-              <Chart1 className="custom-chart" />  
-              
+              <Chart1 className="custom-chart" />
+
             </div>
           </div>
 
@@ -1288,8 +1284,8 @@ const Dashboard = () => {
                 )}
               </div>
               <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
-             
-              <CustomDonutChart imageData={imageData} />
+
+                <CustomDonutChart imageData={imageData} />
                 <div className="max-w-[250px] w-[50%] ml-auto">
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex  items-center">
@@ -1313,14 +1309,14 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                       {imageData?.totalImages}
+                      {imageData?.totalImages}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex items-center">
-                    
 
-<img
+
+                      <img
                         src={
                           dark
                             ? "/graphic/dashboard/elli3-d.svg"
@@ -1333,7 +1329,7 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                       No of Image Optimize
+                        No of Image Optimize
                       </p>
                     </div>
                     <div
@@ -1345,7 +1341,7 @@ const Dashboard = () => {
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex items-center">
-                    <img
+                      <img
                         src={
                           dark
                             ? "/graphic/dashboard/elli2-d.svg"
@@ -1358,7 +1354,7 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                          Pending Optimizations
+                        Pending Optimizations
                       </p>
                     </div>
                     <div
@@ -1383,7 +1379,7 @@ const Dashboard = () => {
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[15px] f2 translate-y-[0px] font-medium tracking-wide"
                 >
-                   Quick Links
+                  Quick Links
                 </p>
 
                 {dark ? (
