@@ -1317,16 +1317,16 @@ const Dashboard = () => {
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex items-center">
 
-
-                      <img
+                    <img
                         src={
                           dark
-                            ? "/graphic/dashboard/elli3-d.svg"
-                            : "/graphic/dashboard/elli9.svg"
+                            ? "/graphic/dashboard/elli1-d.svg"
+                            : "/graphic/dashboard/elli1.svg"
                         }
                         className="w-[10px] h-[10px]"
                         alt=""
                       />
+                   
                       <p
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
