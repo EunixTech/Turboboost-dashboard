@@ -68,7 +68,7 @@ const DemoLine = () => {
   const dark = useSelector((state) => state.home.dark);
   const config = {
     data,
-    xField: "year",
+    xField: "month",
     yField: "gdp",
     xAxis: {
       tickLine: { length: 0 },
