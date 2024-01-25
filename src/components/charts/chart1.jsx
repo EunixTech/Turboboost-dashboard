@@ -72,7 +72,7 @@ const DemoLine = () => {
     yField: "gdp",
     xAxis: {
       tickLine: { length: 0 },
-      range: [0, 1],
+      range: [1, 30], // Updated x-axis range
       label: {
         formatter: (text) => `${parseInt(text) + 25}`, // Add 1 to the x-axis label
       },
