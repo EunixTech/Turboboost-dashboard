@@ -962,7 +962,7 @@ const Dashboard = () => {
       fetchData();
     }, 3000);
     return () => clearTimeout(delayFetchData);
-
+    
   }, [userToken1]);
 
   return (loadingAPI || loader || loading) ? (
@@ -1291,15 +1291,20 @@ const Dashboard = () => {
                 <div className="max-w-[250px] w-[50%] ml-auto">
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex  items-center">
-                      <div
-                        className="w-[8px] h-[8px] rounded-[50%]"
-                        style={{ backgroundColor: "#391F87" }}
-                      ></div>
+                      <img
+                        src={
+                          dark
+                            ? "/graphic/dashboard/elli1-d.svg"
+                            : "/graphic/dashboard/elli1.svg"
+                        }
+                        className="w-[10px] h-[10px]"
+                        alt=""
+                      />
                       <p
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Total No Images
+                        Not/error'd
                       </p>
                     </div>
                     <div
@@ -1312,7 +1317,7 @@ const Dashboard = () => {
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex items-center">
 
-                      <img
+                    <img
                         src={
                           dark
                             ? "/graphic/dashboard/elli1-d.svg"
@@ -1321,7 +1326,7 @@ const Dashboard = () => {
                         className="w-[10px] h-[10px]"
                         alt=""
                       />
-
+                   
                       <p
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
