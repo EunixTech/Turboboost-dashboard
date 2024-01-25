@@ -68,15 +68,15 @@ const DemoLine = () => {
   const dark = useSelector((state) => state.home.dark);
   const config = {
     data,
-    xField: "month",
+    xField: "year",
     yField: "gdp",
     xAxis: {
       tickLine: { length: 0 },
-      range: [1, 30],  // Updated the range to start from 1 and end at 30
+      range: [0, 1],
       label: {
-        formatter: (text) => `${parseInt(text) * 25}`, // Adjust x-axis label to show values in increments of 25
+        formatter: (text) => `${parseInt(text) + 25}`, // Add 1 to the x-axis label
       },
-      tickCount: 4, // Ensure there are 4 ticks for the specified range
+      tickCount: data.length, // Ensure there's a tick for each data point
       nice: true, //
     },
     seriesField: "name",
@@ -94,9 +94,8 @@ const DemoLine = () => {
       },
     },
     yAxis: {
-      range: [1, 100], // Adjusted the range to start from 1 and end at 100
       label: {
-        formatter: (text) => (parseInt(text) * 25), // Adjusted the label to show values in increments of 25
+        formatter: (text) => (text === '0' ? ' ' : text), // Hide "0" by setting its label to a space
       },
       grid: {
         line: {
