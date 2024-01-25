@@ -151,8 +151,7 @@ const Plan = ({ cancel }) => {
         }}
         className="mobile:w-[100%] custom-h scroll-hidden laptop:w-[900px] overflow-y-auto flex px-[15px] flex-col pt-[15px] rounded-[13px] bg-[#fff] relative border-[1px] border-[#ebebeb] "
       >
-        {loader ? <AnimatedLoader /> : <>
-          <div className="flex  items-center shrink-0 justify-between ">
+         <div className="flex  items-center shrink-0 justify-between ">
             <h1
               style={{
                 color: dark ? "#fff" : "#000",
@@ -1004,8 +1003,10 @@ const Plan = ({ cancel }) => {
             </div>
 
           </div>
-        </>
-        }
+        {/* {loader ? <AnimatedLoader /> : <>
+         
+        </> */}
+        
       </div>
 
 

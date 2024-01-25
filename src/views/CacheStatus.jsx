@@ -814,13 +814,13 @@ const CacheStatus = () => {
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                   <div style={{
                   width: `${(assetsData?.totalOptimizeAssets) && assetsData?.totalOptimizeAssets == 0?"100%" : "0%"}%`,
-                }} className="h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
+                }} className="h-[100%] mr-[2px] rounded-[10px]  bg-[#FF465C]]" />
                   <div style={{
                   width: `${(assetsData?.totalAssets && assetsData?.totalOptimizeAssets) ? (assetsData?.totalOptimizeAssets/assetsData?.totalAssets)*100 : 0}%`,
-                }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#FFCB65]" />
+                }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
                   <div style={{
                   width: `${(assetsData?.totalAssets &&  assetsData?.notOptimizedAssets) ? (assetsData?.notOptimizedAssets/ assetsData?.totalAssets)*100 : 0}%`,
-                }} className="h-[100%] rounded-[10px] bg-[#FF465C]" />
+                }} className="h-[100%] rounded-[10px] bg-[#FFCB65]" />
                 </div>
                 <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
                   <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#38F8AC" />

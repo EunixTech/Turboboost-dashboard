@@ -426,7 +426,7 @@ export const planChangeText = (item, currentPlan) => {
 
         case "AnnualBasic":
             if (itemPlan === "Basic") {
-                buttenText = "Upgrade to Annual";
+                buttenText = "Save with Annual";
             }
             if (itemPlan == "Starter") {
                 buttenText = "Upgrade to Starter";
@@ -443,7 +443,7 @@ export const planChangeText = (item, currentPlan) => {
                 buttenText = "Downgrade to Basic";
             }
             if (itemPlan == "Starter") {
-                buttenText = "Upgrade to Annual";
+                buttenText = "Save with Annual";
             }
             if (itemPlan == "Growth") {
                 buttenText = "Upgrade to Growth";
@@ -460,7 +460,7 @@ export const planChangeText = (item, currentPlan) => {
                 buttenText = "Downgrade to Starter";
             }
             if (itemPlan == "Growth") {
-                buttenText = "Upgrade to Annual";
+                buttenText = "Save with Annual";
             }
             if (itemPlan == "Pro") {
                 buttenText = "Upgrade to Pro";
@@ -477,7 +477,7 @@ export const planChangeText = (item, currentPlan) => {
                 buttenText = "Downgrade to Growth";
             }
             if (itemPlan == "Pro") {
-                buttenText = "Upgrade to Annual";
+                buttenText = "Save with Annual";
             }
             break;
 

@@ -1263,9 +1263,9 @@ const Dashboard = () => {
                   style={{ color: dark ? "#fff" : "#000" }}
                   className="text-[15px] f2 translate-y-[0px] font-semibold tracking-wide"
                 >
-                  Total Cache Status
+                  Total Image Optimization
                 </p>
-                {dark ? (
+                {/* {dark ? (
                   <div
                     style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",
@@ -1283,7 +1283,7 @@ const Dashboard = () => {
                   >
                     View Details
                   </div>
-                )}
+                )} */}
               </div>
               <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
 
