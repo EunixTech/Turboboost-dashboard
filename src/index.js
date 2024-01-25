@@ -143,7 +143,7 @@ const App = () => {
    
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
-    setShowOnboardingModal(userToken ? true : true);
+    setShowOnboardingModal(userToken ? true : false);
     
 
     // if (!localStorage.getItem("authToken")) {
