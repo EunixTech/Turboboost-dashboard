@@ -944,14 +944,13 @@ const Dashboard = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");
 
-
   const fetchData = async () => {
     if (!userToken1) {
-      await fetchPageSpeedInsight();
-      if (!imageOptimizationValue && !Boolean(localStorage.getItem('imageOptimizationAPI'))) {
+      if (!imageOptimizationValue && !Boolean(localStorage.getItem('imageOptimizationAPII'))) {
         await handleImageOptimization();
-        localStorage.setItem('imageOptimizationAPI', true);
+        localStorage.setItem('imageOptimizationAPII', true);
       }
+      await fetchPageSpeedInsight();
       await fetchImageOptimizationData();
     }
   };
