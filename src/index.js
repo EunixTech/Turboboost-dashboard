@@ -163,7 +163,7 @@ const App = () => {
 
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
-      app_id: "kexq96ty",
+      app_id: "lfmlyd1r",
       email: "manmohankumar023@hmail.com", // the email for your user
       user_id: "65b10b132fea19be3faabfd2", // a UUID for your user
       user_hash: "6729f802942742b4f8c6ea81dc9725df8c5f8d6f49a632d3f96ff023a60b01b3" // an Identity Verification user hash for your user
@@ -177,13 +177,13 @@ const App = () => {
     // };
 
 
-    window.Intercom("boot", {
-      api_base: "https://api-iam.intercom.io",
-      app_id: "kexq96ty",
-      email: "manmohankumar023@hmail.com", // the email for your user
-      user_id: "65b23832043343d4c91215ff", // a UUID for your user
-      user_hash: "c855a5427a3daf66a20c06e3a38172c80feeccf91b0c16a10c6ee2a314352359" // an Identity Verification user hash for your user
-    });
+    // window.Intercom("boot", {
+    //   api_base: "https://api-iam.intercom.io",
+    //   app_id: "kexq96ty",
+    //   email: "manmohankumar023@hmail.com", // the email for your user
+    //   user_id: "65b23832043343d4c91215ff", // a UUID for your user
+    //   user_hash: "c855a5427a3daf66a20c06e3a38172c80feeccf91b0c16a10c6ee2a314352359" // an Identity Verification user hash for your user
+    // });
 
   
     const checkAuth = () => {
