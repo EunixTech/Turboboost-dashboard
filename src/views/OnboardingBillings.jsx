@@ -107,7 +107,7 @@ const OnboardingBillings = () => {
       <div
         style={{
           backgroundColor: dark ? "#fff" : "#000",
-          height: "680px",
+          height: "695px",
           width: "900px",
           // overflowY: "auto",
         }}
@@ -187,8 +187,26 @@ const OnboardingBillings = () => {
                     }}
                     className="text-[15px]  px-[17px] font-bold tracking-wide"
                   >
-                    {item?.name}
-                    
+
+                    {item?.name !== "Starter" ? item?.name :
+                      <>
+                        <div style={{display:"flex"}}>
+                          {item?.name}
+                          <div className="text-[#000] bg-[#0FE38F] px-[14px] py-[6.5px] leading-[8px] rounded-[20px] ml-[9px] translate-y-[-1px] text-[12px]  tracking-wide font-medium flex items-center justify-center">
+                           <span style={{
+                            color:"#18113C",
+                            fontSize:"11px",
+                            fontWeight:"600",
+                            marginRight:"5px"
+                           }}>Recommended for you</span>
+                           <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.4 4.2H6.6V3H5.4V4.2ZM5.4 9H6.6V5.4H5.4V9ZM5.994 12C2.682 12 0 9.312 0 6C0 2.688 2.682 0 5.994 0C9.312 0 12 2.688 12 6C12 9.312 9.312 12 5.994 12ZM6 1.2C3.348 1.2 1.2 3.348 1.2 6C1.2 8.652 3.348 10.8 6 10.8C8.652 10.8 10.8 8.652 10.8 6C10.8 3.348 8.652 1.2 6 1.2Z" fill="#18113C"/>
+</svg>
+
+                          </div>
+                        </div>
+                      </>}
+
                   </h1>
 
                   <p
@@ -210,7 +228,7 @@ const OnboardingBillings = () => {
                       : `$ ${item?.annuallyPrice}`}
                     <span className="text-[10px] font-medium text-[#696e7e89]">
                       {" "}
-                      /month
+                      /{selected === 0 ? "month" : "year"}
                     </span>
                   </div>
                   <p
@@ -231,21 +249,35 @@ const OnboardingBillings = () => {
                     <span className="font-bold">{item?.CDN_bandWidth}</span> CDN
               bandwidth/mo
                   </p> */}
-                  <div className="w-[100%] px-[17px] mt-[8px]">
-                    <div
-                      onClick={() => {
-                        handleBilling(item);
-                      }}
-                      style={{
-                        borderColor: dark ? "#ebebeb" : "#ebebeb",
-                      }}
-                      className={`w-[100%] h-[35px] text-[${
-                        dark ? "#fff" : "#000"
-                      }]  hover:bg-[#fff] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#fff] text-[12px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
-                    >
-                      Start Free Trial
+
+                  {item?.name === "Basic" ?
+                    <div className="w-[100%] px-[17px] mt-[8px]">
+                      <div
+                        onClick={() => {
+                          handleBilling(item);
+                        }}
+
+                        className={`w-[100%] h-[35px] text-[${dark ? "#fff" : "#000"
+                          }] bg-[#fff] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#38F8AC] text-[12px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
+                      >
+                        Get Started Free
+                      </div>
                     </div>
-                  </div>
+                    :
+                    <div className="w-[100%] px-[17px] mt-[8px]">
+                      <div
+                        onClick={() => {
+                          handleBilling(item);
+                        }}
+
+                        className={`w-[100%] h-[35px] text-[${dark ? "#fff" : "#000"
+                          }] bg-[#38F8AC] hover:bg-[#fff] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#ebebeb] text-[12px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
+                      >
+                        Start Free Trial
+                      </div>
+                    </div>
+                  }
+
                   <div className="w-[100%]  px-[17px] mt-[8px] pt-[8px] border-t-[1px] border-[#ebebeb]">
                     <p
                       style={{
