@@ -95,7 +95,7 @@ const DemoLine = () => {
     },
     yAxis: {
       label: {
-        formatter: (text) => (text === '0' ? ' ' : text), // Hide "0" by setting its label to a space
+        formatter: (text) =>  `${parseInt(text) + 25}`, // Hide "0" by setting its label to a space
       },
       grid: {
         line: {
