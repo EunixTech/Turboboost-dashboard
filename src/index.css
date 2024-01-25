@@ -334,7 +334,8 @@ body::-webkit-scrollbar-thumb {
   /* max-height: 50vw; */
   border-radius: 10px;
   /* margin-top: 52px; */
-  max-width: 60vw;
+  max-width: 1000px;
+  /* margin-left: 100px; */
   /* width: 100vw; */
   display: flex;
   justify-content: center;
@@ -555,7 +556,7 @@ form input {
 p.annualText {
   color: #38f8ac;
   /* font-family: Inter; */
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -582,6 +583,12 @@ input.PhoneInputInput {
 }
 input.PhoneInputInput {
   margin: 0;
+}
+.w-full.grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-x-4.gap-y-8.mt-4.flex.justify-center {
+  display: flex;
+  justify-content: center;
+  line-height: normal;
+  align-items: self-start;
 }
 @media only screen and (max-width: 599px) {
   .MuiBox-root,

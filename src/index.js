@@ -143,7 +143,21 @@ const App = () => {
    
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
-    setShowOnboardingModal(userToken ? true : false);
+    setShowOnboardingModal(userToken ? true : true);
+    
+    // if (!localStorage.getItem("authToken")) {
+    //   navigate("/auth/signIn");
+    // } else {
+    //   setShowOnboardingModal(!!userToken);
+    // }
+
+    // window.intercomSettings = {
+    //   api_base: "https://api-iam.intercom.io",
+    //   app_id: "eh6xj4vw",
+    //   email: "manmohankumar023@hmail.com", // the email for your user
+    //   user_id: "65b10b132fea19be3faabfd2", // a UUID for your user
+    //   user_hash: "6729f802942742b4f8c6ea81dc9725df8c5f8d6f49a632d3f96ff023a60b01b3" // an Identity Verification user hash for your user
+    //   };
 
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
@@ -159,13 +173,13 @@ const App = () => {
       const authToken = localStorage.getItem('authToken');
       const isLoginRoute = window.location.pathname === '/login-shopify';
 
-      if (!authToken && !isLoginRoute && !userToken1) {
-        // Redirect to login page if authToken is not available and not on the login route
-        window.location.replace('/login-shopify');
-      } else if (authToken && isLoginRoute) {
-        // Redirect to dashboard page if authToken is available and on the login route
-        window.location.replace('/dashboard');
-      }
+      // if (!authToken && !isLoginRoute && !userToken1) {
+      //   // Redirect to login page if authToken is not available and not on the login route
+      //   window.location.replace('/login-shopify');
+      // } else if (authToken && isLoginRoute) {
+      //   // Redirect to dashboard page if authToken is available and on the login route
+      //   window.location.replace('/dashboard');
+      // }
     };
     fetchImageOptimizationData();
     checkAuth();

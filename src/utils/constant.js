@@ -1,6 +1,6 @@
 export const planMockData = [
     {
-        name: "Basic",
+        name: "Starter",
         desc: "Try out TurboBoost on a limited plan",
         monthlyPrice: 0,
         annuallyPrice: 0,
@@ -22,7 +22,7 @@ export const planMockData = [
         ],
     },
     {
-        name: "Starter",
+        name: "Growth",
         desc: "For very small businesses",
         monthlyPrice: 15,
         annuallyPrice: 150,
@@ -43,12 +43,12 @@ export const planMockData = [
             // "Cache Warmup",
             "Lazy Load hidden images",
             // "Combine CSS & JS",
-            "Fast and easy setup",
-            "Expert Support"
+            // "Fast and easy setup",
+            // "Expert Support"
         ],
     },
     {
-        name: "Growth",
+        name: "Pro",
         desc: "Our most popular plan for growing brands",
         monthlyPrice: 40,
         annuallyPrice: 400,
@@ -72,11 +72,11 @@ export const planMockData = [
             // "Combine CSS & JS",
             // "Optimize Ads",
             // "iFrame lazy loading",
-            "Remove unused CSS",
-            "Adaptive Image Sizing",
+            // "Remove unused CSS",
+            // "Adaptive Image Sizing",
             // "Generated sitemap",
-            "Fast and easy setup",
-            "24/7 Support"
+            // "Fast and easy setup",
+            // "24/7 Support"
         ],
     },
     {
