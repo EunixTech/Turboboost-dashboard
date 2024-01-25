@@ -107,7 +107,7 @@ const OnboardingBillings = () => {
       <div
         style={{
           backgroundColor: dark ? "#fff" : "#000",
-          height: "630px",
+          height: "680px",
           width: "900px",
           // overflowY: "auto",
         }}
@@ -169,7 +169,7 @@ const OnboardingBillings = () => {
           <p className="annualText">2 months free!</p>
 
           <div className="w-[100%] mt-[15px] gap-[20px] grid laptop:grid-cols-3">
-            {planOnboardData.slice(0, 3).map((item, index) => {
+            {planMockData.slice(0, 3).map((item, index) => {
               return (
                 <div
                   key={index}
@@ -217,12 +217,12 @@ const OnboardingBillings = () => {
                     style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",
                     }}
-                    className="text-[10px]  px-[17px] mt-[10px] text-[#0a0a187a]  tracking-wide"
+                    className="text-[12px]  px-[17px] mt-[10px] text-[#0a0a187a]  tracking-wide"
                   >
                     <span className="font-bold">{item?.pageViews}</span> page
                     views/mo
                   </p>
-                  <p
+                  {/* <p
                     style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",
                     }}
@@ -230,7 +230,7 @@ const OnboardingBillings = () => {
                   >
                     <span className="font-bold">{item?.CDN_bandWidth}</span> CDN
               bandwidth/mo
-                  </p>
+                  </p> */}
                   <div className="w-[100%] px-[17px] mt-[8px]">
                     <div
                       onClick={() => {
