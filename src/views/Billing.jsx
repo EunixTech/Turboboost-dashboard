@@ -176,6 +176,9 @@ useEffect(() => {
 									}}
 									className=" bg-[#fff] border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px]"
 								>
+									<div style={{paddingLeft:"0px"}} className="flex w-[100%] items-center px-[17px]">
+					
+
 									<h1
 										style={{
 											color: dark ? "#fff" : "#000",
@@ -184,6 +187,12 @@ useEffect(() => {
 									>
 										{item?.name}
 									</h1>
+									{item?.name === "Growth" ? 									<div className="text-[#0FE38F] bg-[#000] px-[14px] py-[6.5px] leading-[8px] rounded-[20px] ml-[9px] translate-y-[-1px] text-[12px]  tracking-wide font-medium flex items-center justify-center">
+                  Most Popular
+                </div>:``}
+				
+				
+									 </div>
 									<p
 										style={{
 											color: dark ? "#ffffff74" : "#0a0a187e",
