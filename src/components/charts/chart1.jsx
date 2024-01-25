@@ -72,11 +72,11 @@ const DemoLine = () => {
     yField: "gdp",
     xAxis: {
       tickLine: { length: 0 },
-      range: [1000,1],
+      range: [1, 30],  // Updated the range to start from 1 and end at 30
       label: {
-        formatter: (text) => `${parseInt(text) + 1}`, // Add 1 to the x-axis label
+        formatter: (text) => `${parseInt(text) * 25}`, // Adjust x-axis label to show values in increments of 25
       },
-      tickCount: data.length, // Ensure there's a tick for each data point
+      tickCount: 4, // Ensure there are 4 ticks for the specified range
       nice: true, //
     },
     seriesField: "name",
@@ -94,9 +94,9 @@ const DemoLine = () => {
       },
     },
     yAxis: {
-      range: [1, 31],
+      range: [1, 100], // Adjusted the range to start from 1 and end at 100
       label: {
-        formatter: (text) => (text === '0' ? ' ' : text), // Hide "0" by setting its label to a space
+        formatter: (text) => (parseInt(text) * 25), // Adjusted the label to show values in increments of 25
       },
       grid: {
         line: {
