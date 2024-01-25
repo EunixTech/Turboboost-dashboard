@@ -133,19 +133,9 @@ const App = () => {
         dispatch(setToggle({ key: "pageOptimization", value: dataObj?.page_optimization?.value }));
         dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization?.value }));
         localStorage.setItem('apiCalled', 'true');
-      } else if(resJSON.status === 403){
-
-      }else{
-        // toogleLoadingAPI(false);
-        // return toast.error("Please try again");
-      }
+      } 
     } catch (error) {
-      // toogleLoadingAPI(false);
-      // if (error?.response?.status === 401) {
-      //   localStorage.removeItem('authToken');
-      //   window.location.replace('/login-shopify');
-      // } 
-      // console.error("Error fetching user profile data:", error);
+      console.error("Error fetching user profile data:", error);
     }
   };
 
@@ -154,12 +144,6 @@ const App = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
-    
-    // if (!localStorage.getItem("authToken")) {
-    //   navigate("/auth/signIn");
-    // } else {
-    //   setShowOnboardingModal(!!userToken);
-    // }
 
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
@@ -168,23 +152,6 @@ const App = () => {
       user_id: "65b10b132fea19be3faabfd2", // a UUID for your user
       user_hash: "6729f802942742b4f8c6ea81dc9725df8c5f8d6f49a632d3f96ff023a60b01b3" // an Identity Verification user hash for your user
       };
-
-    // window.intercomSettings = {
-    //   api_base: "https://api-iam.intercom.io",
-    //   app_id: "eh6xj4vw",
-    //   user_id: "65b10b132fea19be3faabfd2", // a UUID for your user
-    //   user_hash: "6729f802942742b4f8c6ea81dc9725df8c5f8d6f49a632d3f96ff023a60b01b3" // an Identity Verification user hash for your user
-    // };
-
-
-    // window.Intercom("boot", {
-    //   api_base: "https://api-iam.intercom.io",
-    //   app_id: "kexq96ty",
-    //   email: "manmohankumar023@hmail.com", // the email for your user
-    //   user_id: "65b23832043343d4c91215ff", // a UUID for your user
-    //   user_hash: "c855a5427a3daf66a20c06e3a38172c80feeccf91b0c16a10c6ee2a314352359" // an Identity Verification user hash for your user
-    // });
-
   
     const checkAuth = () => {
       const urlParams = new URLSearchParams(window.location.search);
