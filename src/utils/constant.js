@@ -1,6 +1,6 @@
 export const planMockData = [
     {
-        name: "Starter",
+        name: "Basic",
         desc: "Try out TurboBoost on a limited plan",
         monthlyPrice: 0,
         annuallyPrice: 0,
@@ -22,7 +22,7 @@ export const planMockData = [
         ],
     },
     {
-        name: "Growth",
+        name: "Starter",
         desc: "For very small businesses",
         monthlyPrice: 15,
         annuallyPrice: 150,
@@ -43,12 +43,12 @@ export const planMockData = [
             // "Cache Warmup",
             "Lazy Load hidden images",
             // "Combine CSS & JS",
-            // "Fast and easy setup",
-            // "Expert Support"
+            "Fast and easy setup",
+            "Expert Support"
         ],
     },
     {
-        name: "Pro",
+        name: "Growth",
         desc: "Our most popular plan for growing brands",
         monthlyPrice: 40,
         annuallyPrice: 400,
@@ -72,11 +72,11 @@ export const planMockData = [
             // "Combine CSS & JS",
             // "Optimize Ads",
             // "iFrame lazy loading",
-            // "Remove unused CSS",
-            // "Adaptive Image Sizing",
+            "Remove unused CSS",
+            "Adaptive Image Sizing",
             // "Generated sitemap",
-            // "Fast and easy setup",
-            // "24/7 Support"
+            "Fast and easy setup",
+            "24/7 Support"
         ],
     },
     {
@@ -426,7 +426,7 @@ export const planChangeText = (item, currentPlan) => {
 
         case "AnnualBasic":
             if (itemPlan === "Basic") {
-                buttenText = "Save with Annual";
+                buttenText = "Upgrade to Annual";
             }
             if (itemPlan == "Starter") {
                 buttenText = "Upgrade to Starter";
@@ -443,7 +443,7 @@ export const planChangeText = (item, currentPlan) => {
                 buttenText = "Downgrade to Basic";
             }
             if (itemPlan == "Starter") {
-                buttenText = "Save with Annual";
+                buttenText = "Upgrade to Annual";
             }
             if (itemPlan == "Growth") {
                 buttenText = "Upgrade to Growth";
@@ -460,7 +460,7 @@ export const planChangeText = (item, currentPlan) => {
                 buttenText = "Downgrade to Starter";
             }
             if (itemPlan == "Growth") {
-                buttenText = "Save with Annual";
+                buttenText = "Upgrade to Annual";
             }
             if (itemPlan == "Pro") {
                 buttenText = "Upgrade to Pro";
@@ -477,7 +477,7 @@ export const planChangeText = (item, currentPlan) => {
                 buttenText = "Downgrade to Growth";
             }
             if (itemPlan == "Pro") {
-                buttenText = "Save with Annual";
+                buttenText = "Upgrade to Annual";
             }
             break;
 

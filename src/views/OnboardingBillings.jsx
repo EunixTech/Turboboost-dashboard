@@ -50,9 +50,8 @@ const OnboardingBillings = () => {
 
   const fetchingUserDataByToken = async () => {
     try {
-
-      toggleLoader(true)
-       localStorage.clear();
+      toggleLoader(true);
+      localStorage.clear();
       localStorage.removeItem("authToken");
       axios.defaults.withCredentials = true;
 
@@ -64,8 +63,8 @@ const OnboardingBillings = () => {
       const redirectURL = res?.redirectURI;
       const token = res?.token;
       const websiteURL = res?.userData?.app_token?.shopify?.shop;
-      updateToken(token)
-      
+      updateToken(token);
+
       localStorage.setItem("websiteURL", websiteURL);
 
       if (redirectURL === "/dashboard") {
@@ -73,11 +72,11 @@ const OnboardingBillings = () => {
         window.location.href = "/dashboard";
       } else {
         setTimeout(() => {
-          toggleLoader(false)
+          toggleLoader(false);
         }, 2000);
       }
     } catch (error) {
-      toggleLoader(false)
+      toggleLoader(false);
       console.log(error);
     }
   };
@@ -86,202 +85,206 @@ const OnboardingBillings = () => {
     fetchingUserDataByToken();
   }, []);
 
-  if(loader){
-
-   return <div></div> 
-  
+  if (loader) {
+    return <div></div>;
   }
+  const buttonStyle = {
+    // Add your button styling properties here
+    // For example:
+    marginLeft: '10px', // Adjust the margin as needed
+    padding: '8px 16px',
+    backgroundColor: '#007bff',
+    color: '#fff',
+    border: 'none',
+    cursor: 'pointer',
+  };
 
   return (
-   
     <div className=" flex flex-col">
-    <TitleManager title="Onboarding" conicalURL="onboarding" />
-    <div className="w-full max-w-screen-xl"></div>
+      <TitleManager title="Onboarding" conicalURL="onboarding" />
+      <div className="w-full max-w-screen-xl"></div>
 
-  <div
-  style={{
-    backgroundColor: dark ? "#fff" : "#000",
-    height: '600px',
-    width: "900px",
-    // overflowY: "auto",
-
-  }}
-  className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center billing-modal-background bg-[#FAFAFC] mobile:px-[20px] rounded-md relative ml-[50px]"
->
-  <div className="w-full mx-auto" >
-    <h1
-      style={{
-        color: dark ? "#fff" : "#fff",
-      }}
-      className="text-[15px] font-bold tracking-wide text-center pt-[20px]"
-    >
-      Select A Plan{" "}
-    </h1>
-    <h1 className="text-[12px] font-medium text-[#696e7ea8] tracking-wide text-center mt-[2px]">
-      A faster website is just a click away!{" "}
-    </h1>
-    <div className="w-[100%] mt-[5px] flex items-center justify-center">
       <div
-        style={
-          {
-            // backgroundColor: dark ? "#12122B" : "#12122B",
-            // borderColor: dark ? "#1F2329" : "#ebebeb",
-          }
-        }
-        className="flex w-[200px] h-[40px]  border-[1px]   rounded-[4px] px-[3px] py-[3px]"
+        style={{
+          backgroundColor: dark ? "#fff" : "#000",
+          height: "630px",
+          width: "900px",
+          // overflowY: "auto",
+        }}
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center billing-modal-background bg-[#FAFAFC] mobile:px-[20px] rounded-md relative ml-[50px]"
       >
-        <div
-          onClick={() => {
-            setSelected(0);
-          }}
-          style={{
-            // backgroundColor: selected === 0 ? "#18df903f" : "",
-            color: selected === 0 ? "#0FE38F" : "#85858C",
-          }}
-          className="w-[50%] cursor-pointer h-[100%] rounded-[4px] text-[12px] font-medium flex items-center justify-center tracking-wide"
-        >
-          Monthly
-        </div>
-        <div
-          onClick={() => {
-            setSelected(1);
-          }}
-          style={{
-            backgroundColor: selected === 1 ? "#18df903f" : "",
-            color: selected === 1 ? "#0FE38F" : "#85858C",
-          }}
-          className="w-[50%] cursor-pointer h-[100%] rounded-[4px] text-[12px] font-medium flex items-center justify-center tracking-wide"
-        >
-          Annually
-        </div>
-      </div>
-      <img
-        src="/AnualArrow.svg"
-        className="ml-[1px] annualArrow"
-        alt=""
-      />
-    </div>
-    <p className="annualText">2 months free!</p>
-    
-    <div className="w-[100%] mt-[15px] gap-[20px] grid laptop:grid-cols-3">
-      {planMockData.slice(0, 3).map((item, index) => {
-        return (
-          <div
-            key={index}
+        <div className="w-full mx-auto">
+          <h1
             style={{
-              backgroundColor: dark ? "#111317" : "#fff",
-              borderColor: dark ? "#1F2329" : "#ebebeb",
-              width: "280px",
-              height: 'auto',
+              color: dark ? "#fff" : "#fff",
             }}
-            className="bg-[#fff]  border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px]"
+            className="text-[15px] font-bold tracking-wide text-center pt-[20px]"
           >
-            <h1
-              style={{
-                color: dark ? "#fff" : "#000",
-              }}
-              className="text-[15px]  px-[17px] font-bold tracking-wide"
-            >
-              {item?.name}
-            </h1>
-            <p
-              style={{
-                color: dark ? "#ffffff74" : "#0a0a187e",
-              }}
-              className="text-[12px] h-[30px] px-[17px] text-[#0a0a187a] font-medium tracking-wide"
-            >
-              {item?.desc}
-            </p>
+            Select A Plan{" "}
+          </h1>
+          <h1 className="text-[12px] font-medium text-[#696e7ea8] tracking-wide text-center mt-[2px]">
+            A faster website is just a click away!{" "}
+          </h1>
+          <div className="w-[100%] mt-[5px] flex items-center justify-center">
             <div
-              style={{
-                color: dark ? "#fff" : "#000",
-              }}
-              className="w-[100%] leading-[15px] px-[17px] relative mt-[10px] shrink-0 text-[20px] font-bold "
+              style={
+                {
+                  // backgroundColor: dark ? "#12122B" : "#12122B",
+                  // borderColor: dark ? "#1F2329" : "#ebebeb",
+                }
+              }
+              className="flex w-[200px] h-[40px]  border-[1px]   rounded-[4px] px-[3px] py-[3px]"
             >
-              {selected === 0
-                ? `$ ${item?.monthlyPrice}`
-                : `$ ${item?.annuallyPrice}`}
-              <span className="text-[10px] font-medium text-[#696e7e89]">
-                {" "}
-                /month
-              </span>
-            </div>
-            <p
-              style={{
-                color: dark ? "#ffffff74" : "#0a0a187e",
-              }}
-              className="text-[12px]  px-[17px] mt-[10px] text-[#0a0a187a]  tracking-wide"
-            >
-              <span className="font-bold">{item?.pageViews}</span> page
-              views/mo
-            </p>
-            <p
-              style={{
-                color: dark ? "#ffffff74" : "#0a0a187e",
-              }}
-              className="text-[12px]  px-[17px] text-[#0a0a187a]  tracking-wide"
-            >
-              {/* <span className="font-bold">{item?.CDN_bandWidth}</span> CDN
-              bandwidth/mo */}
-            </p>
-            <div className="w-[100%] px-[17px] mt-[8px]">
               <div
                 onClick={() => {
-                  handleBilling(item);
+                  setSelected(0);
                 }}
                 style={{
-                  borderColor: dark ?  "#ebebeb": "#ebebeb",
-                 
+                  // backgroundColor: selected === 0 ? "#18df903f" : "",
+                  color: selected === 0 ? "#0FE38F" : "#85858C",
                 }}
-                className={`w-[100%] h-[35px] text-[${
-                  dark ? "#fff" : "#000"
-                }]  hover:bg-[#fff] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#fff] text-[14px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
+                className="w-[50%] cursor-pointer h-[100%] rounded-[4px] text-[12px] font-medium flex items-center justify-center tracking-wide"
               >
-                Start Free Trial
+                Monthly
+              </div>
+              <div
+                onClick={() => {
+                  setSelected(1);
+                }}
+                style={{
+                  backgroundColor: selected === 1 ? "#18df903f" : "",
+                  color: selected === 1 ? "#0FE38F" : "#85858C",
+                }}
+                className="w-[50%] cursor-pointer h-[100%] rounded-[4px] text-[12px] font-medium flex items-center justify-center tracking-wide"
+              >
+                Annually
               </div>
             </div>
-            <div className="w-[100%]  px-[17px] mt-[8px] pt-[8px] border-t-[1px] border-[#ebebeb]">
-              <p
-                style={{
-                  color: dark ? "#fff" : "#000",
-                }}
-                className="text-[12px] font-bold tracking-wide"
-              >
-                {item?.name} Plan Includes
-              </p>
-              {item?.includes?.map((includesItems, includesIndex) => {
-                return (
-                  <div
-                    className="w-[100%] mt-[8px] flex justify-between"
-                    key={includesIndex}
+            <img
+              src="/AnualArrow.svg"
+              className="ml-[1px] annualArrow"
+              alt=""
+            />
+          </div>
+          <p className="annualText">2 months free!</p>
+
+          <div className="w-[100%] mt-[15px] gap-[20px] grid laptop:grid-cols-3">
+            {planOnboardData.slice(0, 3).map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  style={{
+                    backgroundColor: dark ? "#111317" : "#fff",
+                    borderColor: dark ? "#1F2329" : "#ebebeb",
+                    width: "280px",
+                    height: "auto",
+                  }}
+                  className="bg-[#fff]  border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px]"
+                >
+                  <h1
+                    style={{
+                      color: dark ? "#fff" : "#000",
+                    }}
+                    className="text-[15px]  px-[17px] font-bold tracking-wide"
                   >
-                    <img
-                      src="/graphic/status/check.svg"
-                      className="w-[13px] mr-[10px] shrink-0"
-                      alt=""
-                    />
+                    {item?.name}
+                    
+                  </h1>
+
+                  <p
+                    style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}
+                    className="text-[12px] h-[30px] px-[17px] text-[#0a0a187a] font-medium tracking-wide"
+                  >
+                    {item?.desc}
+                  </p>
+                  <div
+                    style={{
+                      color: dark ? "#fff" : "#000",
+                    }}
+                    className="w-[100%] leading-[15px] px-[17px] relative mt-[10px] shrink-0 text-[20px] font-bold "
+                  >
+                    {selected === 0
+                      ? `$ ${item?.monthlyPrice}`
+                      : `$ ${item?.annuallyPrice}`}
+                    <span className="text-[10px] font-medium text-[#696e7e89]">
+                      {" "}
+                      /month
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}
+                    className="text-[10px]  px-[17px] mt-[10px] text-[#0a0a187a]  tracking-wide"
+                  >
+                    <span className="font-bold">{item?.pageViews}</span> page
+                    views/mo
+                  </p>
+                  <p
+                    style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}
+                    className="text-[10px]  px-[17px] text-[#0a0a187a]  tracking-wide"
+                  >
+                    <span className="font-bold">{item?.CDN_bandWidth}</span> CDN
+              bandwidth/mo
+                  </p>
+                  <div className="w-[100%] px-[17px] mt-[8px]">
+                    <div
+                      onClick={() => {
+                        handleBilling(item);
+                      }}
+                      style={{
+                        borderColor: dark ? "#ebebeb" : "#ebebeb",
+                      }}
+                      className={`w-[100%] h-[35px] text-[${
+                        dark ? "#fff" : "#000"
+                      }]  hover:bg-[#fff] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#fff] text-[12px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
+                    >
+                      Start Free Trial
+                    </div>
+                  </div>
+                  <div className="w-[100%]  px-[17px] mt-[8px] pt-[8px] border-t-[1px] border-[#ebebeb]">
                     <p
                       style={{
-                        color: dark ? "#ffffff74" : "#0a0a187e",
+                        color: dark ? "#fff" : "#000",
                       }}
-                      className="text-[10px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                      className="text-[12px] font-bold tracking-wide"
                     >
-                      {includesItems}
+                      {item?.name} Plan Includes
                     </p>
+                    {item?.includes?.map((includesItems, includesIndex) => {
+                      return (
+                        <div
+                          className="w-[100%] mt-[8px] flex justify-between"
+                          key={includesIndex}
+                        >
+                          <img
+                            src="/graphic/status/check.svg"
+                            className="w-[13px] mr-[10px] shrink-0"
+                            alt=""
+                          />
+                          <p
+                            style={{
+                              color: dark ? "#ffffff74" : "#0a0a187e",
+                            }}
+                            className="text-[10px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                          >
+                            {includesItems}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-   
-  </div>
-   
   );
 };
 
