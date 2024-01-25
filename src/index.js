@@ -163,7 +163,7 @@ const App = () => {
 
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
-      app_id: "lfmlyd1r",
+      app_id: "vr8qka5j",
       email: "manmohankumar023@hmail.com", // the email for your user
       user_id: "65b10b132fea19be3faabfd2", // a UUID for your user
       user_hash: "6729f802942742b4f8c6ea81dc9725df8c5f8d6f49a632d3f96ff023a60b01b3" // an Identity Verification user hash for your user
