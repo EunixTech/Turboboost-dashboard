@@ -957,10 +957,20 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+
+    window.Intercom("boot", {
+      api_base: "https://api-iam.intercom.io",
+      app_id: "eh6xj4vw",
+      email: "manmohankumar023@hmail.com", // the email for your user
+      user_id: "65b23832043343d4c91215ff", // a UUID for your user
+      user_hash: "c855a5427a3daf66a20c06e3a38172c80feeccf91b0c16a10c6ee2a314352359" // an Identity Verification user hash for your user
+    });
+    
     const delayFetchData = setTimeout(() => {
       fetchData();
     }, 3000);
     return () => clearTimeout(delayFetchData);
+    
   }, [userToken1]);
 
   return (loadingAPI || loader || loading) ? (
