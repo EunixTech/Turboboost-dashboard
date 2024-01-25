@@ -68,13 +68,13 @@ const DemoLine = () => {
   const dark = useSelector((state) => state.home.dark);
   const config = {
     data,
-    xField: "year",
+    xField: "month",
     yField: "gdp",
     xAxis: {
       tickLine: { length: 0 },
-      range: [1, 1000],
+      range: [1000,1],
       label: {
-        formatter: (text) => `${parseInt(text) + 25}`, // Add 1 to the x-axis label
+        formatter: (text) => `${parseInt(text) + 1}`, // Add 1 to the x-axis label
       },
       tickCount: data.length, // Ensure there's a tick for each data point
       nice: true, //
@@ -94,7 +94,7 @@ const DemoLine = () => {
       },
     },
     yAxis: {
-      range: [1, 30],
+      range: [1, 31],
       label: {
         formatter: (text) => (text === '0' ? ' ' : text), // Hide "0" by setting its label to a space
       },
