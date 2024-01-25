@@ -1343,11 +1343,11 @@ const Dashboard = () => {
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex  items-center">
-                      <img
+                    <img
                         src={
                           dark
-                            ? "/graphic/dashboard/elli1-d.svg"
-                            : "/graphic/dashboard/elli1.svg"
+                            ? "/graphic/dashboard/elli3-d.svg"
+                            : "/graphic/dashboard/elli9.svg"
                         }
                         className="w-[10px] h-[10px]"
                         alt=""
@@ -1363,7 +1363,7 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] f2 font-bold translate-y-[-2px]"
                     >
-                      {imageData?.totalImages}
+                      0
                     </div>
                   </div>
                 </div>

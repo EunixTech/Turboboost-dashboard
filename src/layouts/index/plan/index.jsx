@@ -158,7 +158,7 @@ const Plan = ({ cancel }) => {
               }}
               className="text-[20px] font-bold "
             >
-              Choose Your Plan {currentPlan}
+              Choose Your Plan
             </h1>
             <img
               onClick={() => {
