@@ -72,9 +72,9 @@ const DemoLine = () => {
     yField: "gdp",
     xAxis: {
       tickLine: { length: 0 },
-      range: [0, 1],
+      range: [1, 1000],
       label: {
-        formatter: (text) => `${parseInt(text) + 1}`, // Add 1 to the x-axis label
+        formatter: (text) => `${parseInt(text) + 25}`, // Add 1 to the x-axis label
       },
       tickCount: data.length, // Ensure there's a tick for each data point
       nice: true, //
@@ -94,6 +94,7 @@ const DemoLine = () => {
       },
     },
     yAxis: {
+      range: [1, 30],
       label: {
         formatter: (text) => (text === '0' ? ' ' : text), // Hide "0" by setting its label to a space
       },
