@@ -886,7 +886,7 @@ const Dashboard = () => {
         dispatch(setToggle({ key: "imageOptimization", value: !imageOptimizationValue }));
         fetchImageOptimizationData();
         toggleLoader(false);
-        return toast.success(resData?.message);
+        // return toast.success(resData?.message);
       } else {
         toggleLoader(false);
         // return toast.error("Please try again");
