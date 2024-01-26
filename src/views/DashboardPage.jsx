@@ -1337,7 +1337,7 @@ const Dashboard = () => {
                       style={{ color: dark ? "#fff" : "#000" }}
                       className="text-[14px] font-bold translate-y-[-2px]"
                     >
-                       {imageData?.totalOptimizeImage-imageData?.totalImages}
+                       {imageData?.totalImages-imageData?.totalOptimizeImage}
                     </div>
                   </div>
                   <div className="flex items-center mb-[4px] justify-between">
