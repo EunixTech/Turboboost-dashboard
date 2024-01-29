@@ -34,9 +34,10 @@ const OnboardingBillings = () => {
     try {
       let response = await billingApi(item, selected, token1);
       console.log(response.data);
+      localStorage.clear();
       if (response?.data?.confirmationUrl) {
         localStorage.setItem("authToken", token1);
-        console.log(response?.data?.confirmationUrl);
+        // console.log(response?.data?.confirmationUrl);
         window.location.replace(response?.data?.confirmationUrl);
       }
     } catch (e) {
@@ -244,11 +245,11 @@ const OnboardingBillings = () => {
                     style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",
                     }}
-                    className="text-[10px]  px-[17px] text-[#0a0a187a]  tracking-wide"
+                    className="text-[12px]  px-[17px] mt-[10px] text-[#0a0a187a]  tracking-wide"
                   >
                    $15 per 5,000 additional page
                   </p>
-
+   
                   {item?.name === "Basic" ?
                     <div className="w-[100%] px-[17px] mt-[8px]">
                       <div
