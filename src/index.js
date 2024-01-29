@@ -174,13 +174,13 @@ const App = () => {
       const authToken = localStorage.getItem('authToken');
       const isLoginRoute = window.location.pathname === '/login-shopify';
 
-      // if (!authToken && !isLoginRoute && !userToken1) {
-      //   // Redirect to login page if authToken is not available and not on the login route
-      //   window.location.replace('/login-shopify');
-      // } else if (authToken && isLoginRoute) {
-      //   // Redirect to dashboard page if authToken is available and on the login route
-      //   window.location.replace('/dashboard');
-      // }
+      if (!authToken && !isLoginRoute && !userToken1) {
+        // Redirect to login page if authToken is not available and not on the login route
+        window.location.replace('/login-shopify');
+      } else if (authToken && isLoginRoute) {
+        // Redirect to dashboard page if authToken is available and on the login route
+        window.location.replace('/dashboard');
+      }
     };
     fetchImageOptimizationData();
     checkAuth();
