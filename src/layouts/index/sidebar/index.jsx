@@ -503,12 +503,7 @@ const Sidebar = () => {
             {currentPlan?.plan}
           </p>
           <div>
-          <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
-              <p className="text-[12px] f2 text-white tracking-wide">
-              $15 per 5,000 additional page
-              </p>
-           
-            </div>
+            
             <div className="w-[100%] h-[20px] flex mb-[5px] mt-[7px] justify-between items-center">
               <p className="text-[12px] f2 text-white tracking-wide">
                 Page Views/mo
