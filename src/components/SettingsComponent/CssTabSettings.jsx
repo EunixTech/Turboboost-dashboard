@@ -37,7 +37,6 @@ const CssTabSettings = () => {
         return toast.success(data.message);
       }  else return toast.error(data?.message)
     
-   
     }
 
     

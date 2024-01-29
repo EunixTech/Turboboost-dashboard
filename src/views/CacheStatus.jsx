@@ -742,13 +742,13 @@ const CacheStatus = () => {
     try {
       toggleLoader(true);
       const res = await GetAxiosConfig(endPoint);
-      toggleLoader(false);
 
       const resData = res?.data;
 
       if (resData?.status === 200) {
         dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
         fetchAssetsOptimizationData();
+        toggleLoader(false);
         // return toast.success(resData?.message);
       } else {
         return toast.error("Please try again");
