@@ -101,6 +101,40 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
 
         h-[40px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
+      {
+        assetsOptimizationValue ?
+          <p onClick={handleOptimizeAssets}
+            style={{
+              backgroundColor: check ? "#F87238" : "#FF465C",
+            }}
+            className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
+              } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+          >
+
+            <div className="translate-y-[1px]">
+              Disable Assets Optimization
+            </div>
+
+
+
+
+          </p>
+          : <p
+            onClick={handleOptimizeAssets}
+            style={{
+              backgroundColor: check ? "#F87238" : "#FF465C",
+            }}
+            className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
+              } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+          >
+
+            <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
+              Purge All Assets
+            </div>
+
+
+          </p>
+      }
       <p
         style={{
           backgroundColor: check ? "#F87238" : "#FF465C",
@@ -217,7 +251,7 @@ const HeaderItem = ({ color, title, sub, assets = false }) => {
       style={{
         borderColor: dark ? "#1F2329" : "#ebebeb",
         color: dark ? "#fff" : "#000",
-        height:"fit-content"
+        height: "fit-content"
       }}
       className=" h-[70px] bg-[#e6e6e640]  px-[12px] py-[12px] rounded-[6px] border-[1px] border-[#ebebeb]"
     >
@@ -443,9 +477,9 @@ const TableHeader = ({ change }) => {
         <div
           style={{
             color: dark ? "#fff" : "#0a0a1876",
-            display:"flex",
-            alignItems:"center",
-            justifyContent:"center"
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
           }}
           className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
         >
@@ -463,9 +497,9 @@ const TableHeader = ({ change }) => {
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
         }}
         className="w-[50%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
@@ -474,9 +508,9 @@ const TableHeader = ({ change }) => {
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
         }}
         className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
@@ -485,9 +519,9 @@ const TableHeader = ({ change }) => {
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
         }}
         className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
@@ -497,9 +531,9 @@ const TableHeader = ({ change }) => {
       <div
         style={{
           color: dark ? "#fff" : "#0a0a1876",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
         }}
         className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
@@ -561,9 +595,9 @@ const TableItem = ({ last, item }) => {
         <div
           style={{
             color: dark ? "#fff" : "#000",
-            display:"flex",
-            alignItems:"center",
-            justifyContent:"center"
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
           }}
           className="w-[60%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
         >
@@ -573,9 +607,9 @@ const TableItem = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
         }}
         className="w-[50%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
       >
@@ -584,9 +618,9 @@ const TableItem = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
         }}
         className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
@@ -595,21 +629,21 @@ const TableItem = ({ last, item }) => {
       <div
         style={{
           color: dark ? "#fff" : "#000",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
         }}
         className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.after}
       </div>
-    
-      <div   style={{
-          color: dark ? "#fff" : "#000",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center"
-        }} className="w-[30%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
+
+      <div style={{
+        color: dark ? "#fff" : "#000",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }} className="w-[30%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <Status i={item?.is_optimized ? 1 : 2} />
       </div>
       {/* <div className="w-[9%]  text-[10px] tracking-wide px-[10px] cursor-pointer text-[#0a0a1876] font-bold  flex h-[100%] items-center">
@@ -700,15 +734,15 @@ const CacheStatus = () => {
       if (resData?.status === 200) {
         const assetsDataObj = resData?.assets;
         updateAssetsData(assetsDataObj)
-      } else if(resData.status === 403){
-     
+      } else if (resData.status === 403) {
+
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
-    }else{
-      toggleLoader(false);
-      return toast.error("Please try again");
-    }
+      } else {
+        toggleLoader(false);
+        return toast.error("Please try again");
+      }
     } catch (error) {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
@@ -747,14 +781,14 @@ const CacheStatus = () => {
       console.error("Error fetching user profile data:", error);
     }
   }
-  const kbToMb=(kb)=> {
+  const kbToMb = (kb) => {
     return Math.ceil(kb / 1024 * 100) / 100;
   }
 
 
   useEffect(() => {
     const fetchData = async () => {
-      if(!assetsOptimizationValue && !Boolean(localStorage.getItem('assetsOptimizationAPI'))){
+      if (!assetsOptimizationValue && !Boolean(localStorage.getItem('assetsOptimizationAPI'))) {
         await handleOptimizeAssets();
         localStorage.setItem('assetsOptimizationAPI', true);
       }
@@ -813,14 +847,14 @@ const CacheStatus = () => {
                 </h1>
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                   <div style={{
-                  width: `${(assetsData?.totalOptimizeAssets) && assetsData?.totalOptimizeAssets == 0?"100%" : "0%"}%`,
-                }} className="h-[100%] mr-[2px] rounded-[10px]  bg-[#FF465C]" />
+                    width: `${(assetsData?.totalOptimizeAssets) && assetsData?.totalOptimizeAssets == 0 ? "100%" : "0%"}%`,
+                  }} className="h-[100%] mr-[2px] rounded-[10px]  bg-[#FF465C]" />
                   <div style={{
-                  width: `${(assetsData?.totalAssets && assetsData?.totalOptimizeAssets) ? (assetsData?.totalOptimizeAssets/assetsData?.totalAssets)*100 : 0}%`,
-                }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
+                    width: `${(assetsData?.totalAssets && assetsData?.totalOptimizeAssets) ? (assetsData?.totalOptimizeAssets / assetsData?.totalAssets) * 100 : 0}%`,
+                  }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
                   <div style={{
-                  width: `${(assetsData?.totalAssets &&  assetsData?.notOptimizedAssets) ? (assetsData?.notOptimizedAssets/ assetsData?.totalAssets)*100 : 0}%`,
-                }} className="h-[100%] rounded-[10px] bg-[#FFCB65]" />
+                    width: `${(assetsData?.totalAssets && assetsData?.notOptimizedAssets) ? (assetsData?.notOptimizedAssets / assetsData?.totalAssets) * 100 : 0}%`,
+                  }} className="h-[100%] rounded-[10px] bg-[#FFCB65]" />
                 </div>
                 <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
                   <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#e303fc" />
@@ -857,14 +891,14 @@ const CacheStatus = () => {
                 </h1>
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                   <div style={{
-                  width: `${(assetsData?.totalOptimizedSize &&  assetsData?.liquidAssetSize) ? ( assetsData?.liquidAssetSize/ assetsData?.totalOptimizedSize)*100 : 0}%`,
-                }}  className=" h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
+                    width: `${(assetsData?.totalOptimizedSize && assetsData?.liquidAssetSize) ? (assetsData?.liquidAssetSize / assetsData?.totalOptimizedSize) * 100 : 0}%`,
+                  }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
                   <div style={{
-                  width: `${(assetsData?.totalOptimizedSize && assetsData?.jsAssetSize) ? (assetsData?.jsAssetSize/ assetsData?.totalOptimizedSize)*100 : 0}%`,
-                }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#766695]" />
+                    width: `${(assetsData?.totalOptimizedSize && assetsData?.jsAssetSize) ? (assetsData?.jsAssetSize / assetsData?.totalOptimizedSize) * 100 : 0}%`,
+                  }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#766695]" />
                   <div style={{
-                  width: `${(assetsData?.totalOptimizedSize &&  assetsData?.cssAssetSize) ? (assetsData?.cssAssetSize/ assetsData?.totalOptimizedSize)*100 : 0}%`,
-                }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#9963FE]" />
+                    width: `${(assetsData?.totalOptimizedSize && assetsData?.cssAssetSize) ? (assetsData?.cssAssetSize / assetsData?.totalOptimizedSize) * 100 : 0}%`,
+                  }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#9963FE]" />
                   {/* <div className="w-[18%] h-[100%] mr-[2px] rounded-[10px] bg-[#CCB0FF]" />
                 <div className="w-[10%] h-[100%] bg-[#E9DEFC]" /> */}
                 </div>
@@ -889,7 +923,7 @@ const CacheStatus = () => {
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
                 borderColor: dark ? "#1F2329" : "#ebebeb",
-                paddingBottom:"14px",
+                paddingBottom: "14px",
               }}
               className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0]  mb-[30px]  pt-[14px]   bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
             >
