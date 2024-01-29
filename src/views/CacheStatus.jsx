@@ -135,26 +135,7 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
 
           </p>
       }
-      <p
-        style={{
-          backgroundColor: check ? "#F87238" : "#FF465C",
-        }}
-        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
-          } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-      >
-        {
-          assetsOptimizationValue ?
-            <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
-              Disable Assets Optimization
-            </div>
-            :
-            <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
-              Purge All Assets
-            </div>
-        }
-
-
-      </p>
+    
     </div>
   );
 };
