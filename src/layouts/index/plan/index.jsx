@@ -743,7 +743,7 @@ const Plan = ({ cancel }) => {
                         style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                         className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                       >
-                        200,000 page views per month
+                        1,000,000 page views per month
                       </p>
                     </div>
                     <div className="w-[100%] mt-[10px] flex justify-between">
