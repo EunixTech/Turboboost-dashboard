@@ -708,13 +708,12 @@ const CacheStatus = () => {
     try {
       toggleLoader(true);
       const res = await GetAxiosConfig(`api/dashboard/fetch-assets-optimization-data`);
-      toggleLoader(false);
-
       const resData = res?.data;
-      console.log("resData", resData)
       if (resData?.status === 200) {
         const assetsDataObj = resData?.assets;
         updateAssetsData(assetsDataObj)
+        toggleLoader(false);
+
       } else if (resData.status === 403) {
 
         localStorage.removeItem('authToken');
@@ -749,7 +748,6 @@ const CacheStatus = () => {
         dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
         fetchAssetsOptimizationData();
         toggleLoader(false);
-        // return toast.success(resData?.message);
       } else {
         return toast.error("Please try again");
       }
