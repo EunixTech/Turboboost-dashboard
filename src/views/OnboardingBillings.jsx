@@ -108,7 +108,7 @@ const OnboardingBillings = () => {
       <div
         style={{
           backgroundColor: dark ? "#fff" : "#000",
-          height: "695px",
+          height: "730px",
           width: "900px",
           // overflowY: "auto",
         }}
