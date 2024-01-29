@@ -747,7 +747,7 @@ const CacheStatus = () => {
       if (resData?.status === 200) {
         dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
         fetchAssetsOptimizationData();
-        toggleLoader(false);
+        // toggleLoader(false);
       } else {
         return toast.error("Please try again");
       }
