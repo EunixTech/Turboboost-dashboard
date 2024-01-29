@@ -15,7 +15,7 @@ const ImageTabSettings = () => {
 
     const handleImageSizeAdaption = async() =>{
       let endPoint = "";
-      if (!lazyLoadingToggleValue) endPoint = "api/shopify/adaptive-image-size-optimization";
+      if (!imageSizeAdaptionToggleValue) endPoint = "api/shopify/adaptive-image-size-optimization";
       else endPoint = "api/shopify/restore-adaptive-image-size-optimization";
       const data = await featureAPIHandling(endPoint);
       if(data.status === 200){
