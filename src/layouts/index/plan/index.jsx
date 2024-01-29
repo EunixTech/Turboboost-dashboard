@@ -969,6 +969,12 @@ const Plan = ({ cancel }) => {
                     >
                       {item?.pageViews} page views/month
                     </h1>
+                    <h1
+                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
+                      className="text-[14px] text-[#696e7e89] font-medium "
+                    >
+                     $15 per 5,000 additional page
+                    </h1>
                   </div>
                   <div
                     style={{
