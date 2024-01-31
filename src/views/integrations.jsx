@@ -3,6 +3,8 @@ import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import axios from "axios"
+
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 const Button = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -179,6 +181,31 @@ const Integrations = ({ setShow }) => {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
+
+
+  const handleApiCall = async () => {
+    try {
+      // setLoading(true);
+
+      const response = await axios.post('https://backend.turbo-boost.io/v1/api/dashboard/page-speed-insight-data', {
+        // your request data
+      }, {
+        onUploadProgress: (progressEvent) => {
+          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          console.log("percentCompleted***********",percentCompleted)
+          // setProgress(percentCompleted);
+        },
+      });
+
+      // Process the API response as needed
+      console.log('API Response:', response.data);
+    } catch (error) {
+      console.error('API Error:', error);
+    } finally {
+      // setLoading(false);
+      // setProgress(0); // Reset progress after API call completion
+    }
+  };
   return (
     <>
     {
@@ -197,6 +224,7 @@ const Integrations = ({ setShow }) => {
               }}
               className="text-[20px] font-bold tracking-wide "
             >
+              onClick={handleApiCall}
               Featured Apps
             </h1>
           </div>
