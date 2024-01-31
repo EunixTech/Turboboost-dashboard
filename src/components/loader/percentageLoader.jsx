@@ -8,15 +8,15 @@ export default function PercentageLoader({percentage1 = 0}) {
   const [vidLoad, setVidLoad] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const [percentage, setPercentage] = useState(0);
-
   useEffect(() => {
     setTimeout(() => {
       if (percentage < 100) {
         setPercentage(percentage + 1);
+      } else if (percentage1 === 100 && percentage < 199) {
+        setPercentage(percentage + 1);
       }
     }, 50);
-  }, [percentage]);
-
+  }, [percentage, percentage1]);
   return (
     <div
       style={{
@@ -34,7 +34,7 @@ export default function PercentageLoader({percentage1 = 0}) {
             textColor: '#0a0a187e',
             trailColor: '#d6d6d6',
             backgroundColor: '#3e98c7',
-          })} className="progressbar-div" value={percentage1} text={`${percentage1}%`} />
+          })} className="progressbar-div" value={percentage} text={`${percentage}%`} />
         </div>
         <p class="text-[#0a0a187e] mt-[5px] f2 text-[15px] font-medium">Please wait; we are optimizing your website.</p>
       </div>
