@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-export default function PercentageLoader({percentage = 0}) {
+export default function PercentageLoader({percentage1 = 0}) {
   const [vidLoad, setVidLoad] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const [percentage, setPercentage] = useState(0);

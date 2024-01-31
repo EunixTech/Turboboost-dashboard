@@ -47,8 +47,6 @@ export const GetAxiosConfig = async (URL="") => {
             },
           }
     );
-    console.log("response.status response.status ",response.status )
-   
 
         return response;
  
