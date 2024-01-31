@@ -421,7 +421,9 @@ const Dashboard = () => {
 
   return (loadingAPI || loader || loading) ? 
     (() => {
-      if (!dashboardOptimizationValue)  {
+      if (!userToken1)  {
+        return ""
+      } else if (!dashboardOptimizationValue)  {
         return (
           <PercentageLoader percentage1={d} />
         )
