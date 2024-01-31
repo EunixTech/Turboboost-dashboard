@@ -293,6 +293,8 @@ const Dashboard = () => {
         const pageSpeedInsightData = resJSON?.data?.updated;
         const coreVitualsDataObj = pageSpeedInsightData?.performance;
         const performaceDataObj = pageSpeedInsightData?.core_vitals;
+        dispatch(setToggle({ key: "dashboardOptimization", value: true }));
+        
         toogleLoadingAPI(false)
         updateCoreVitalsData(coreVitualsDataObj);
         updatePerformanceData(performaceDataObj);
