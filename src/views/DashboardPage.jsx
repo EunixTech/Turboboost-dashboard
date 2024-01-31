@@ -315,7 +315,7 @@ const Dashboard = () => {
   };
 
   const lazyLoadingToggleValue = useSelector((state) => state.toggles?.lazyLoading);
-  const dashboardOptimizationValue = useSelector((state) => state.toggles?.dashboardOptimization);
+  const dashboardOptimizationValue = useSelector((state) => state.toggles?.dashboardOptimization) || true;
   const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization);
 
   const handlelazyLoading = async () => {
@@ -421,7 +421,7 @@ const Dashboard = () => {
 
   return (loadingAPI || loader || loading) ? 
     (() => {
-      if (dashboardOptimizationValue)  {
+      if (dashboardOptimizationValue && !userToken1)  {
         return (
           < AnimatedLoader/>
         )
