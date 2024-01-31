@@ -420,7 +420,7 @@ const Dashboard = () => {
   }, [userToken1]);
 
   return (loadingAPI || loader || loading) ? (
-    (!(dashboardOptimizationValue && !userToken1) || !dashboardOptimizationValue) ? <PercentageLoader percentage1={d} /> :< AnimatedLoader/>
+    (!(dashboardOptimizationValue && userToken1) || !dashboardOptimizationValue) ? <PercentageLoader percentage1={d} /> :< AnimatedLoader/>
   ) : (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Dashboard" conicalURL="dashboard" />
