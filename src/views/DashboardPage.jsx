@@ -350,16 +350,13 @@ const Dashboard = () => {
     }
   };
 
-  const criticalCSSToggleValue = useSelector(
-    (state) => state.toggles?.criticalCSS
-  );
-  const imageSizeAdaptionToggleValue = useSelector(
-    (state) => state.toggles?.imageSizeAdaption
-  );
   const lazyLoadingToggleValue = useSelector(
     (state) => state.toggles?.lazyLoading
   );
 
+  const dashboardOptimizationValue = useSelector(
+    (state) => state.toggles?.dashboardOptimization
+  );
 
   const handlelazyLoading = async () => {
     toast.dismiss();
@@ -502,7 +499,8 @@ const Dashboard = () => {
   }, [userToken1]);
 
   return (loadingAPI || loader || loading) ? (
-    <PercentageLoader percentage1={d} />
+    !dashboardOptimizationValue ? <PercentageLoader percentage1={d} /> :< AnimatedLoader/>
+    
   ) : (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Dashboard" conicalURL="dashboard" />

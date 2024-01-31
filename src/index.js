@@ -2,48 +2,34 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
-import { store, persistor } from "./services/store";
+import { store } from "./services/store";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import DashboardPageRoute from "./views/DashboardPage.jsx";
-// import DashboardPageRoute from "./routes/DashboardPag.jsx";
 import SignInRoute from "./routes/SignInRoute";
 import ConnectStore from "./views/ShopifyAuth.jsx";
-import SignUp from "./routes/SignUpRoute";
-import ResetPasswordRoute from "./routes/ResetPasswordRoute";
-// import ConnectWebsite from "./routes/connect-website.jsx";
 import ConnectWebsite from "./views/ConnectWebsite.jsx";
-// import CacheWarmup from "./routes/cache-warmup";
 import CacheWarmup from "./views/CacheWarmupage.jsx";
 
-// import CacheStatus from "./routes/cache-status";
 import CacheStatus from "./views/CacheStatus.jsx";
-
-import Home from "./views/home.jsx";
-
 import Logs from "./views/Logs.jsx";
-// import Logs from "./routes/logs.jsx";
 
-// import Integrations from "./routes/integrations";
 import Integrations from "./views/integrations.jsx";
 
 import Billing from "./views/Billing.jsx";
 import Settings from "./views/SettingPage.jsx";
-// import Affiliate from "./routes/affiliate";
 import Affiliate from "./views/Affiliate.jsx";
-import ForgotPassword from "./routes/ForgotPassword";
 import ShopifyAdmin from "./views/ShopifyAdmin.jsx";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { PersistGate } from "redux-persist/integration/react";
 import NewOnboard from "./routes/newOnboarding.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./views/404.jsx";
-import { GetAxiosConfig,PostAxiosConfig } from "./utils/axiosConfig.js";
+import { GetAxiosConfig } from "./utils/axiosConfig.js";
 import { setToggle } from "./slice/statusToggleSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 const router = [
   {
     path: "/",
@@ -132,6 +118,8 @@ const App = () => {
         dispatch(setToggle({ key: "assetsOptimization", value: dataObj?.assets_optimization?.value }));
         dispatch(setToggle({ key: "pageOptimization", value: dataObj?.page_optimization?.value }));
         dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization?.value }));
+        dispatch(setToggle({ key: "dashboardOptimization", value: dataObj?.dashboard_optimization }));
+        
         localStorage.setItem('apiCalled', 'true');
       } 
     } catch (error) {

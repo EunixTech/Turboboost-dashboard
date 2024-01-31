@@ -36,7 +36,7 @@ export default function PercentageLoader({percentage1 = 0}) {
             backgroundColor: '#3e98c7',
           })} className="progressbar-div" value={percentage} text={`${percentage}%`} />
         </div>
-        <p class="text-[#0a0a187e] mt-[5px] f2 text-[15px] font-medium">Please wait; we are optimizing your website.</p>
+        <p class="text-[#0a0a187e] mt-[5px] f2 text-[15px] font-medium">Please wait while we optimize your store.</p>
       </div>
     </div>
   )
