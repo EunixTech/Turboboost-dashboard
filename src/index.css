@@ -590,6 +590,9 @@ input.PhoneInputInput {
   line-height: normal;
   align-items: self-start;
 }
+.mobile-container {
+  display: none; /* Hide for larger screens */
+}
 @media only screen and (max-width: 599px) {
   .MuiBox-root,
   .billing-modal-background {
@@ -602,4 +605,14 @@ input.PhoneInputInput {
     width: 100%;
     margin-bottom: 10px;
 }
+}
+/* Media query for screens smaller than 600px (adjust as needed) */
+@media (max-width: 600px) {
+  .max-w-screen-xl {
+    display: none; /* Hide for smaller screens */
+  }
+  .mobile-container {
+    display: block; /* Show for smaller screens */
+    overflow: scroll;
+  }
 }
