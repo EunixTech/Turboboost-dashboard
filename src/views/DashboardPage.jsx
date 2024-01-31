@@ -1,7 +1,6 @@
 
 import HoverGreenButton from "../components/button/HoverGreenButton";
 import CircularProgressBar from "../components/CircularProgressBar";
-import CoreVitalsReportCard from "../components/CoreVitalsReportCard";
 import GreetingCard from "../components/GreetingCard";
 
 import ToggleButton from "../components/ToggleButton";
@@ -11,27 +10,22 @@ import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
 import TitleManager from "../components/TitleManager";
 import toast from "react-hot-toast";
-import { GetAxiosConfig, PostAxiosConfig } from "../utils/axiosConfig.js";
+import { GetAxiosConfig } from "../utils/axiosConfig.js";
 import TimeDifferenceFromCurrent from "../utils/timeCalculator.js";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
-
 
 import React, { Suspense, useState, useEffect } from "react";
 import PercentageLoader from "../components/loader/percentageLoader.jsx";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
-import { setDark } from "../services/home";
 import Chart1 from "../components/charts/chart1";
-import DemoPie from "../components/charts/donut";
-import MultiLineChart from "../components/charts/chart5";
 import CustomDonutChart from "../components/charts/chart5";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "../components/Tooltip";
 import axios from "axios";
 
 const GooglePageScore = ({ coreVitalsData, performanceData }) => {
-  console.log("GooglePageScore", coreVitalsData)
-  console.log("GooglePageScore", performanceData)
+
   const dark = useSelector((state) => state.home.dark);
   const [coreVitals, setVitsals] = useState(true);
 
@@ -221,17 +215,12 @@ const Dashboard = () => {
   const [loader, toggleLoader] = useState(false);
   const [coreVitalsData, updateCoreVitalsData] = useState({});
   const [performanceData, updatePerformanceData] = useState({});
-  const [coreVitals, setVitsals] = useState(true);
   const [loading, toogleLoading] = useState(true);
   const [loadingAPI, toogleLoadingAPI] = useState(true);
-  const [handlerDataObj, UpdateHandlerDataObj] = useState(true);
   const w = useWidth();
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
   const router = useNavigate();
-
-  const fetchConfig = getFetchConfig();
-  const appURL = appURLs();
 
   // const googleSpeedAPI = async (storeName = "") => {
   //   console.log(storeName);

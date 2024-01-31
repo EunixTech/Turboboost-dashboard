@@ -140,6 +140,10 @@ const App = () => {
   };
 
   useEffect(() => {
+    fetchImageOptimizationData();
+  }, [setToggle])
+  
+  useEffect(() => {
    
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
@@ -167,7 +171,6 @@ const App = () => {
         window.location.replace('/dashboard');
       }
     };
-    fetchImageOptimizationData();
     checkAuth();
  
   }, []);
