@@ -10,9 +10,9 @@ export default function PercentageLoader({percentage1 = 0}) {
   const [percentage, setPercentage] = useState(0);
   useEffect(() => {
     setTimeout(() => {
-      if (percentage < 100) {
-        setPercentage(percentage + 1);
-      } else if (percentage1 === 100 && percentage < 199) {
+      if (percentage1 === 100) {
+        setPercentage(100);
+      } else if ( percentage < 99) {
         setPercentage(percentage + 1);
       }
     }, 50);
