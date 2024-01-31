@@ -11,13 +11,11 @@ export default function PercentageLoader({percentage1 = 0}) {
 
   useEffect(() => {
     setTimeout(() => {
-      if (percentage1 === 100) {
-        setPercentage(100);
-      } else if (percentage < 99) {
+      if (percentage < 100) {
         setPercentage(percentage + 1);
       }
     }, 50);
-  }, [percentage, percentage1]);
+  }, [percentage]);
 
   return (
     <div
