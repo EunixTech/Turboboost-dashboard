@@ -315,7 +315,7 @@ const Dashboard = () => {
   };
 
   const lazyLoadingToggleValue = useSelector((state) => state.toggles?.lazyLoading);
-  const dashboardOptimizationValue = useSelector((state) => state.toggles?.dashboardOptimization) || true;
+  const dashboardOptimizationValue = useSelector((state) => state.toggles?.dashboardOptimization);
   const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization);
 
   const handlelazyLoading = async () => {

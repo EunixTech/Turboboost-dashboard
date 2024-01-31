@@ -18,7 +18,7 @@ const initialState = {
   criticalCSS: false,
   removeUnsedCSS: false,
 
-  dashboardOptimization: false,
+  dashboardOptimization: true,
 };
 
 const statusToggleSlice = createSlice({
