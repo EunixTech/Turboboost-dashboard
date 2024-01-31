@@ -1,7 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import useWidth from "../hooks/useWidth";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
 
 import HoverGreenButton from "../components/button/HoverGreenButton";
 import CircularProgressBar from "../components/CircularProgressBar";
@@ -468,8 +464,7 @@ import AnimatedLoader from "../components/loader/AnimatedLoader";
 // export default DashboardPage;
 
 import React, { Suspense, useState, useEffect } from "react";
-import HomeLayout from "../layouts/index/index";
-import Toggle from "../utils/toggle";
+import PercentageLoader from "../components/loader/percentageLoader.jsx";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { setDark } from "../services/home";
@@ -666,8 +661,6 @@ const Button = () => {
     </div>
   );
 };
-
-
 
 const Dashboard = () => {
   const [imageData, updateImageData] = useState({});
@@ -965,7 +958,7 @@ const Dashboard = () => {
   }, [userToken1]);
 
   return (loadingAPI || loader || loading) ? (
-    <AnimatedLoader />
+    <PercentageLoader />
   ) : (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Dashboard" conicalURL="dashboard" />
