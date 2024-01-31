@@ -440,8 +440,7 @@ const Dashboard = () => {
         )
       }
     })()
-    // (!(dashboardOptimizationValue && !userToken1) || !dashboardOptimizationValue) ? <PercentageLoader percentage1={d} /> :< AnimatedLoader/>
-  
+
    : (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Dashboard" conicalURL="dashboard" />
@@ -541,7 +540,7 @@ const Dashboard = () => {
                       }}
                       className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                     >
-                      {(imageData && imageData?.astPurge) ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
+                      {(imageData && imageData?.lastPurge) ? new Date(imageData?.lastPurge).toLocaleDateString("en-US") : ""}
                     </p>
                   </div> : ``
 
