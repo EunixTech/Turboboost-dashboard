@@ -5,14 +5,18 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 export default function PercentageLoader({percentage1 = 0}) {
-  const [vidLoad, setVidLoad] = useState(false);
+
   const dark = useSelector((state) => state.home.dark);
   const [percentage, setPercentage] = useState(0);
+
+  const generateRandomNumber = () => {
+    return Math.floor(Math.random() * 11) + 90;
+  }
   useEffect(() => {
     setTimeout(() => {
       if (percentage1 === 100) {
         setPercentage(100);
-      } else if ( percentage < 99) {
+      } else if ( percentage < generateRandomNumber()) {
         setPercentage(percentage + 1);
       }
     }, 50);

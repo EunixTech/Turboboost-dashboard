@@ -421,7 +421,7 @@ const Dashboard = () => {
   }, [userToken1]);
 
   return (loadingAPI || loader || loading) ? (
-    !dashboardOptimizationValue ? <PercentageLoader percentage1={d} /> :< AnimatedLoader/>
+    !(dashboardOptimizationValue && userToken1) ? <PercentageLoader percentage1={d} /> :< AnimatedLoader/>
     
   ) : (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
