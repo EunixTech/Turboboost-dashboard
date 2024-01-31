@@ -421,21 +421,20 @@ const Dashboard = () => {
 
   return (loadingAPI || loader || loading) ? 
     (() => {
-      if (dashboardOptimizationValue)  {
-        setTimeout(() => {
-          return (
-            < AnimatedLoader/>
-          )
-        }, 500);
+      if (!dashboardOptimizationValue)  {
+        return (
+          <PercentageLoader percentage1={d} />
+        )
+      } else if (dashboardOptimizationValue) {
+        return (
+          < AnimatedLoader/>
+        )
       } else if (!dashboardOptimizationValue && !userToken1) {
         return (
           <PercentageLoader percentage1={d} />
         )
-      } else if (!dashboardOptimizationValue) {
-        return (
-          <PercentageLoader percentage1={d} />
-        )
-      } else if (!userToken1)  {
+      } 
+      else if (!userToken1)  {
         return (
           < AnimatedLoader/>
         )
