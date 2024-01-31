@@ -476,6 +476,32 @@ const Dashboard = () => {
   }
 
 
+  const handleApiCall = async () => {
+    try {
+      // setLoading(true);
+
+      const response = await axios.post('https://backend.turbo-boost.io/v1/api/dashboard/page-speed-insight-data', {
+        // your request data
+      }, {
+        onUploadProgress: (progressEvent) => {
+          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          console.log("percentCompleted***********",percentCompleted)
+          // setProgress(percentCompleted);
+        },
+      });
+
+      // Process the API response as needed
+      console.log('API Response:', response.data);
+    } catch (error) {
+      console.error('API Error:', error);
+    } finally {
+      // setLoading(false);
+      // setProgress(0); // Reset progress after API call completion
+    }
+  };
+
+
+
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");
 
@@ -485,6 +511,7 @@ const Dashboard = () => {
         await handleImageOptimization();
         localStorage.setItem('imageOptimizationAPII', true);
       }
+      await handleApiCall();
       await fetchPageSpeedInsight();
       await fetchImageOptimizationData();
     }
@@ -493,6 +520,7 @@ const Dashboard = () => {
   useEffect(() => {
 
     const delayFetchData = setTimeout(() => {
+
       fetchData();
     }, 3000);
     return () => clearTimeout(delayFetchData);
