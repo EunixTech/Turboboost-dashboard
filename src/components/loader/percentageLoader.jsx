@@ -7,15 +7,17 @@ import 'react-circular-progressbar/dist/styles.css';
 export default function PercentageLoader({percentage1 = 0}) {
   const [vidLoad, setVidLoad] = useState(false);
   const dark = useSelector((state) => state.home.dark);
-  const [percentage, setPercentage] = useState(percentage1);
+  const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
     setTimeout(() => {
-      if (percentage < 100) {
+      if (percentage1 === 100) {
+        setPercentage(100);
+      } else if (percentage < 99) {
         setPercentage(percentage + 1);
       }
     }, 50);
-  }, [percentage]);
+  }, [percentage, percentage1]);
 
   return (
     <div
