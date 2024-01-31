@@ -101,6 +101,8 @@ const App = () => {
       const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
       const resJSON = res?.data;
 
+      console.log("resJSONresJSONresJSON",resJSON)
+
       if (resJSON.status === 200) {
        
         const dataObj = resJSON?.optimizationHandlers?.dataArr;
@@ -119,8 +121,7 @@ const App = () => {
         dispatch(setToggle({ key: "pageOptimization", value: dataObj?.page_optimization?.value }));
         dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization?.value }));
         dispatch(setToggle({ key: "dashboardOptimization", value: dataObj?.dashboard_optimization }));
-        
-        localStorage.setItem('apiCalled', 'true');
+
       } 
     } catch (error) {
       console.error("Error fetching user profile data:", error);
@@ -129,7 +130,7 @@ const App = () => {
 
   useEffect(() => {
     fetchImageOptimizationData();
-  }, [setToggle])
+  }, [])
   
   useEffect(() => {
    
