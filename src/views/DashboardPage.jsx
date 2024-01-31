@@ -217,6 +217,7 @@ const Dashboard = () => {
   const [performanceData, updatePerformanceData] = useState({});
   const [loading, toogleLoading] = useState(true);
   const [loadingAPI, toogleLoadingAPI] = useState(true);
+  const [d, dd] = useState(0);
   const w = useWidth();
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
@@ -359,34 +360,7 @@ const Dashboard = () => {
     (state) => state.toggles?.lazyLoading
   );
 
-  const handleCriticalCSS = async () => {
-    toast.dismiss();
-    let endPoint = "";
-    if (!criticalCSSToggleValue) endPoint = "api/shopify/critical-css-optimization";
-    else endPoint = "api/shopify/restore-critical-css-optimization";
-    const data = await featureAPIHandling(endPoint);
-    if (data.status === 200) {
-      dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
-      return toast.success(data.message);
-    }
 
-    // else return toast.error(data?.message)
-    ;
-  };
-
-  const handleImageSizeAdaption = async () => {
-    let endPoint = "";
-    if (!lazyLoadingToggleValue)
-      endPoint = "api/shopify/minify-javascript-code";
-    else endPoint = "api/shopify/minify-javascript-code";
-    await featureAPIHandling(endPoint);
-    dispatch(
-      setToggle({
-        key: "imageSizeAdaption",
-        value: !imageSizeAdaptionToggleValue,
-      })
-    );
-  };
   const handlelazyLoading = async () => {
     toast.dismiss();
     let endPoint = "";
@@ -486,7 +460,7 @@ const Dashboard = () => {
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           console.log("percentCompleted***********",percentCompleted)
-          // setProgress(percentCompleted);
+          dd(percentCompleted);
         },
       });
 
@@ -528,7 +502,7 @@ const Dashboard = () => {
   }, [userToken1]);
 
   return (loadingAPI || loader || loading) ? (
-    <PercentageLoader />
+    <PercentageLoader percentage1={d} />
   ) : (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Dashboard" conicalURL="dashboard" />
