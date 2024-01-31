@@ -302,8 +302,6 @@ const Dashboard = () => {
         toogleLoading(false)
 
       } else if (resJSON.status === 403) {
-
-
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
@@ -415,14 +413,14 @@ const Dashboard = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");
 
-  const fetchData = async () => {
+  const fetchData = () => {
     if (!userToken1) {
       if (!imageOptimizationValue && !Boolean(localStorage.getItem('imageOptimizationAPII'))) {
-        await handleImageOptimization();
+        handleImageOptimization();
         localStorage.setItem('imageOptimizationAPII', true);
       }
-      await fetchPageSpeedInsight();
-      await fetchImageOptimizationData();
+      fetchPageSpeedInsight();
+      fetchImageOptimizationData();
     }
   };
 
