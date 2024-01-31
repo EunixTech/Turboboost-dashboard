@@ -219,12 +219,13 @@ const Integrations = ({ setShow }) => {
         <div className="w-[100%] max-w-[1920px] min-h-[100vh]">
           <div className="w-[100%] pt-[30px]">
             <h1
+               onClick={handleApiCall}
               style={{
                 color: dark ? "#fff" : "#000",
               }}
               className="text-[20px] font-bold tracking-wide "
             >
-              onClick={handleApiCall}
+           
               Featured Apps
             </h1>
           </div>
