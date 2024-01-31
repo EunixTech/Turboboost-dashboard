@@ -40,13 +40,7 @@ export const GetAxiosConfig = async (URL="") => {
                 'Authorization': `Bearer ${token}`
             },
             withCredentials: true,  // Set this to true to include credentials in the request
-        }, {
-            onUploadProgress: (progressEvent) => {
-                console.log("djhasgjdhgasjhdgashjgda",progressEvent)
-              const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-              console.log("***percentCompleted****",percentCompleted);
-            },
-          }
+        }
     );
 
         return response;

@@ -2,19 +2,16 @@
 import HoverGreenButton from "../components/button/HoverGreenButton";
 import CircularProgressBar from "../components/CircularProgressBar";
 import GreetingCard from "../components/GreetingCard";
-
 import ToggleButton from "../components/ToggleButton";
 import { featureAPIHandling } from "../utils/featureAPIHandling";
 import { setToggle } from "../slice/statusToggleSlice";
-import getFetchConfig from "../utils/getFetchConfig";
-import appURLs from "../appURL";
 import TitleManager from "../components/TitleManager";
 import toast from "react-hot-toast";
 import { GetAxiosConfig } from "../utils/axiosConfig.js";
 import TimeDifferenceFromCurrent from "../utils/timeCalculator.js";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 
-import React, { Suspense, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PercentageLoader from "../components/loader/percentageLoader.jsx";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +19,6 @@ import Chart1 from "../components/charts/chart1";
 import CustomDonutChart from "../components/charts/chart5";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "../components/Tooltip";
-import axios from "axios";
 
 const GooglePageScore = ({ coreVitalsData, performanceData }) => {
 
@@ -181,33 +177,6 @@ const GooglePageScore = ({ coreVitalsData, performanceData }) => {
   );
 };
 
-const Button = () => {
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      style={{
-        borderColor: dark ? "#1F2329" : "#ebebeb",
-      }}
-      className="w-[100%]  mt-[10px] h-[50px] px-[15px] flex items-center justify-center  border-t-[1px] left-0"
-    >
-      <div
-        className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
-
-        h-[32px] ${dark ? "hover:bg-[#1F2329]" : "hover:bg-[#f3f3f3]"}  cursor-pointer rounded-[4px] ${dark ? "border-[#1F2329]" : "border-[#38F8AC] "
-          } flex items-center justify-center`}
-      >
-        <p
-          className={`text-[${dark ? "#fff" : "#000"
-            }]   f2 text-[12px]  border-[1px] hover:border-[#38F8AC] ${dark ? "border-[#38F8AC]" : "border-[#38F8AC]"
-            } ${dark ? "bg-[#111317]" : "bg-[#fff]"
-            } rounded-[4px] hover:bg-[#38f8ac] hover:text-white active:translate-y-[0px] active:border-0 active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-        >
-          Purge all cache
-        </p>
-      </div>
-    </div>
-  );
-};
 
 const Dashboard = () => {
   const [imageData, updateImageData] = useState({});
@@ -294,7 +263,7 @@ const Dashboard = () => {
         const coreVitualsDataObj = pageSpeedInsightData?.performance;
         const performaceDataObj = pageSpeedInsightData?.core_vitals;
         dispatch(setToggle({ key: "dashboardOptimization", value: true }));
-        
+        dd(100)
         toogleLoadingAPI(false)
         updateCoreVitalsData(coreVitualsDataObj);
         updatePerformanceData(performaceDataObj);
@@ -338,10 +307,7 @@ const Dashboard = () => {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
-      } else {
-        // toogleLoadingAPI(false);
-        // return toast.error("Please try again");
-      }
+      } 
     } catch (error) {
       // toogleLoadingAPI(false);
       if (error?.response?.status === 401) {
@@ -371,8 +337,6 @@ const Dashboard = () => {
       dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
       return toast.success(data.message);
     }
-
-    // else return toast.error(data?.message)
 
   };
 
@@ -448,33 +412,6 @@ const Dashboard = () => {
 
   }
 
-
-  const handleApiCall = async () => {
-    try {
-      // setLoading(true);
-
-      const response = await axios.post('https://backend.turbo-boost.io/v1/api/dashboard/page-speed-insight-data', {
-        // your request data
-      }, {
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          console.log("percentCompleted***********",percentCompleted)
-          dd(percentCompleted);
-        },
-      });
-
-      // Process the API response as needed
-      console.log('API Response:', response.data);
-    } catch (error) {
-      console.error('API Error:', error);
-    } finally {
-      // setLoading(false);
-      // setProgress(0); // Reset progress after API call completion
-    }
-  };
-
-
-
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");
 
@@ -484,7 +421,6 @@ const Dashboard = () => {
         await handleImageOptimization();
         localStorage.setItem('imageOptimizationAPII', true);
       }
-      await handleApiCall();
       await fetchPageSpeedInsight();
       await fetchImageOptimizationData();
     }
