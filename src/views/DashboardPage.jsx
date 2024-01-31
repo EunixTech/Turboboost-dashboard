@@ -256,14 +256,13 @@ const Dashboard = () => {
       toogleLoadingAPI(true)
       const res = await GetAxiosConfig(`api/dashboard/page-speed-insight-data`);
       const resJSON = res?.data;
-
+      dd(100)
       if (resJSON.status === 200) {
 
         const pageSpeedInsightData = resJSON?.data?.updated;
         const coreVitualsDataObj = pageSpeedInsightData?.performance;
         const performaceDataObj = pageSpeedInsightData?.core_vitals;
         dispatch(setToggle({ key: "dashboardOptimization", value: true }));
-        dd(100)
         toogleLoadingAPI(false)
         updateCoreVitalsData(coreVitualsDataObj);
         updatePerformanceData(performaceDataObj);
