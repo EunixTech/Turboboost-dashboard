@@ -181,11 +181,11 @@ const GooglePageScore = ({ coreVitalsData, performanceData }) => {
 const Dashboard = () => {
   const [imageData, updateImageData] = useState({});
   const [handlerData, updateHandlerData] = useState({});
-  const [loader, toggleLoader] = useState(false);
   const [coreVitalsData, updateCoreVitalsData] = useState({});
   const [performanceData, updatePerformanceData] = useState({});
   const [loading, toogleLoading] = useState(true);
   const [loadingAPI, toogleLoadingAPI] = useState(true);
+  const [loader, toggleLoader] = useState(false);
   const [d, dd] = useState(0);
   const w = useWidth();
   const dispatch = useDispatch();
@@ -300,7 +300,6 @@ const Dashboard = () => {
         updateImageData(imageDataObj);
         updateHandlerData(OptimizationHandlerData);
         toogleLoading(false)
-
       } else if (resJSON.status === 403) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
@@ -316,13 +315,9 @@ const Dashboard = () => {
     }
   };
 
-  const lazyLoadingToggleValue = useSelector(
-    (state) => state.toggles?.lazyLoading
-  );
-
-  const dashboardOptimizationValue = useSelector(
-    (state) => state.toggles?.dashboardOptimization
-  );
+  const lazyLoadingToggleValue = useSelector((state) => state.toggles?.lazyLoading);
+  const dashboardOptimizationValue = useSelector((state) => state.toggles?.dashboardOptimization);
+  const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization);
 
   const handlelazyLoading = async () => {
     toast.dismiss();
@@ -331,14 +326,11 @@ const Dashboard = () => {
     else endPoint = "api/shopify/restore-adding-image-lazy-loading";
     const data = await featureAPIHandling(endPoint);
     if (data.status === 200) {
-
       dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
       return toast.success(data.message);
     }
 
   };
-
-  const imageOptimizationValue = useSelector((state) => state.toggles?.imageOptimization);
 
   const handleImageOptimization = async () => {
     toast.dismiss();
@@ -425,13 +417,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-
-    const delayFetchData = setTimeout(() => {
-
-      fetchData();
-    }, 3000);
-    return () => clearTimeout(delayFetchData);
-    
+    fetchData();
   }, [userToken1]);
 
   return (loadingAPI || loader || loading) ? (
