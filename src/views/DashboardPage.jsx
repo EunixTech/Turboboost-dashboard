@@ -419,10 +419,25 @@ const Dashboard = () => {
     fetchData();
   }, [userToken1]);
 
-  return (loadingAPI || loader || loading) ? (
-   
-    (!(dashboardOptimizationValue && !userToken1) || !dashboardOptimizationValue) ? <PercentageLoader percentage1={d} /> :< AnimatedLoader/>
-  ) : (
+  return (loadingAPI || loader || loading) ? 
+    (() => {
+      if (!(dashboardOptimizationValue && !userToken1)) {
+        return (
+          <PercentageLoader percentage1={d} />
+        )
+      } else if (!dashboardOptimizationValue) {
+        return (
+          <PercentageLoader percentage1={d} />
+        )
+      } else {
+        return (
+          < AnimatedLoader/>
+        )
+      }
+    })()
+    // (!(dashboardOptimizationValue && !userToken1) || !dashboardOptimizationValue) ? <PercentageLoader percentage1={d} /> :< AnimatedLoader/>
+  
+   : (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Dashboard" conicalURL="dashboard" />
 
