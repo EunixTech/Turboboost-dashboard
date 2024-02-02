@@ -6,7 +6,6 @@ const ToggleButton = ({ toggleValue, handlingToggle = {}, toggleKey = "defaultKe
 
   const dark = useSelector((state) => state.home.dark);
 
-
   return (
     <div
       style={{

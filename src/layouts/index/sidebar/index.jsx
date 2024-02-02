@@ -310,7 +310,7 @@ const Button = ({ onClick }) => {
     >
       <p
         className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-          } rounded-[4px] hover:bg-[#2fe49c] active:translate-y-[0px] font-bold active:border-0 translate-y-[-3px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide `}
+          } rounded-[4px] hover:bg-[#2fe49c] font-bold active:border-0 translate-y-[-3px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide `}
       >
         Upgrade Plan
       </p>
