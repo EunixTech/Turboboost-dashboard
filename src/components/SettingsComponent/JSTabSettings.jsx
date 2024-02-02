@@ -5,10 +5,6 @@ import InputFields from "../InputFields";
 import OptimizationModeCard from "../OptimizationModeCard";
 import toast from "react-hot-toast";
 
-// import getFetchConfig from '../../utils/getFetchConfig';
-// import standardFetchHandlers from '../../utils/standardFetchHandlers';
-// import handleFetchErrors from '../../utils/handleFetchErrors';
-// import appURLs from '../../appURL';
 import { featureAPIHandling } from "../../utils/featureAPIHandling";
 import { setToggle } from "../../slice/statusToggleSlice";
 

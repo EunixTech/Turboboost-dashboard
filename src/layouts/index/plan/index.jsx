@@ -341,19 +341,7 @@ const Plan = ({ cancel }) => {
                         Image Lazy Loading
                       </p>
                     </div>
-                    {/* <div className="w-[100%] mt-[10px] flex justify-between">
-                    <img
-                      src="/graphic/status/check.svg"
-                      className="w-[13px] mr-[10px] shrink-0"
-                      alt=""
-                    />
-                    <p
-                      style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                      className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
-                    >
-                      100 GB CDN bandwidth/mo
-                    </p>
-                  </div> */}
+                  
                     <div className="w-[100%] mt-[10px] flex justify-between">
                       <img
                         src="/graphic/status/check.svg"
@@ -815,19 +803,6 @@ const Plan = ({ cancel }) => {
                       </p>
                     </div>
 
-                    {/* <div className="w-[100%] mt-[10px] flex justify-between">
-                  <img
-                    src="/graphic/status/check.svg"
-                    className="w-[13px] mr-[10px] shrink-0"
-                    alt=""
-                  />
-                  <p
-                    style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
-                    className="text-[14px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
-                  >
-                    100 GB CDN bandwidth/mo
-                  </p>
-                </div> */}
                     <div className="w-[100%] mt-[10px] flex justify-between">
                       <img
                         src="/graphic/status/check.svg"
@@ -982,7 +957,7 @@ const Plan = ({ cancel }) => {
                     }}
                     className="w-[150px] ml-[10px] relative shrink-0 text-[30px] font-bold "
                   >
-                    {selected === 0 ? `$${item?.monthlyPrice}` : `$${(item?.monthlyPrice / 12).toFixed(1)}`}
+                    {selected === 0 ? `$${item?.monthlyPrice}` : `$${(item?.annuallyPrice / 12).toFixed(1)}`}
                     <span className="text-[14px] font-medium text-[#696e7e89]">
                       /month
                     </span>
