@@ -674,7 +674,8 @@ const ConnectWebsite = () => {
 
   const handleSubmitForm = () =>{
     toast.dismiss();
-    return toast.success("Coming soon");
+    retrun
+    // return toast.success("Coming soon");
   }
 
   return (
