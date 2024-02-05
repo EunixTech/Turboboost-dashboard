@@ -23,8 +23,6 @@ const OnboardingBillings = () => {
   const dispatch = useDispatch(),
     appURL = appURLs();
 
-  const [currentPlan, setCurrentPlan] = useState("");
-  const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
   const [token1, updateToken] = useState("");
   const [loader, toggleLoader] = useState(true);
@@ -89,16 +87,6 @@ const OnboardingBillings = () => {
   if (loader) {
     return <div></div>;
   }
-  const buttonStyle = {
-    // Add your button styling properties here
-    // For example:
-    marginLeft: "10px", // Adjust the margin as needed
-    padding: "8px 16px",
-    backgroundColor: "#007bff",
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-  };
 
   return (
     <div className=" flex flex-col">
@@ -108,8 +96,9 @@ const OnboardingBillings = () => {
       <div
         style={{
           backgroundColor: dark ? "#fff" : "#000",
-          height: "695px",
-          // width: "900px",
+          height: "800px",
+          paddingLeft:"40px",
+          paddingRight:"40px"
         }}
         className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center billing-modal-background bg-[#FAFAFC] mobile:px-[20px] rounded-md relative w-full md:w-900 md:ml-50"
         >
@@ -140,7 +129,7 @@ const OnboardingBillings = () => {
                   setSelected(0);
                 }}
                 style={{
-                  // backgroundColor: selected === 0 ? "#18df903f" : "",
+                  backgroundColor: selected === 0 ? "#18df903f" : "",
                   color: selected === 0 ? "#0FE38F" : "#85858C",
                 }}
                 className="w-[50%] cursor-pointer h-[100%] rounded-[4px] text-[12px] font-medium flex items-center justify-center tracking-wide"
@@ -185,7 +174,7 @@ const OnboardingBillings = () => {
                     style={{
                       color: dark ? "#fff" : "#000",
                     }}
-                    className="text-[15px]  px-[17px] font-bold tracking-wide"
+                    className="text-[17px]  px-[17px] font-bold tracking-wide"
                   >
                     {item?.name !== "Starter" ? (
                       item?.name
@@ -314,7 +303,7 @@ const OnboardingBillings = () => {
                             style={{
                               color: dark ? "#ffffff74" : "#0a0a187e",
                             }}
-                            className="text-[10px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
+                            className="text-[13px] w-[100%] text-[#696e7e89] tracking-wide font-medium "
                           >
                             {includesItems}
                           </p>

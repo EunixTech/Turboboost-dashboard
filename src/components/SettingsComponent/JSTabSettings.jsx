@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FeatureCard from "../FeatureCard";
-import InputFields from "../InputFields";
-import OptimizationModeCard from "../OptimizationModeCard";
+
 import toast from "react-hot-toast";
 
 import { featureAPIHandling } from "../../utils/featureAPIHandling";
@@ -50,7 +49,7 @@ const JSTabSettings = () => {
               backgroundColor: dark ? "#111317" : "#fff",
               borderColor: dark ? "#1F2329" : "#ebebeb",
             }}
-            className=" bg-[#fff] border-[1px] border-[#EBEBEB] mt-[10px] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
+            className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
           >
 
             <FeatureCard

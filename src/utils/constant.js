@@ -9,7 +9,7 @@ export const planMockData = [
         includes: [
             "5,000 page views per month",
             // "1.00 GB CDN bandwidth per month",
-            "Optimized by TurboBoost Badge",
+            // "Optimized by TurboBoost Badge",
             "All-in-one performance optimization",
             "Image Lazy Loading",
             "Assest Optimization",
@@ -57,7 +57,7 @@ export const planMockData = [
         includes: [
             "200,000 page views per month",
             // "100 GB CDN bandwidth per month",
-            "Optimized by TurboBoost Badge",
+            // "Optimized by TurboBoost Badge",
             // "Built-in global CDN",
             "Image Optimization",
             // "Advanced Caching Mechanism",
@@ -89,7 +89,7 @@ export const planMockData = [
         includes: [
             "200,000 page views per month",
             // "100 GB CDN bandwidth per month",
-            "Optimized by TurboBoost Badge",
+            // "Optimized by TurboBoost Badge",
             // "Built-in global CDN",
             "Image Optimization",
             // "Advanced Caching Mechanism",
@@ -189,13 +189,13 @@ export const planOnboardData = [
 ];
 
 export const ComparePlans = [
-    {
-        title: "Optimized by TurboBoost Badge",
-        free: true,
-        starter: false,
-        growth: false,
-        pro: false,
-    },
+    // {
+    //     title: "Optimized by TurboBoost Badge",
+    //     free: true,
+    //     starter: false,
+    //     growth: false,
+    //     pro: false,
+    // },
     // {
     //     title: "Built-in Global CDN",
     //     free: true,
@@ -255,6 +255,13 @@ export const ComparePlans = [
         pro: true,
     },
     {
+        title: "Lazy Load Hidden Images",
+        free: true,
+        starter: true,
+        growth: true,
+        pro: true,
+    },
+    {
         title: "24/7 Support",
         free: false,
         starter: true,
@@ -282,13 +289,7 @@ export const ComparePlans = [
     //     growth: true,
     //     pro: true,
     // },
-    {
-        title: "Lazy Load Hidden Images",
-        free: false,
-        starter: true,
-        growth: true,
-        pro: true,
-    },
+
     // {
     //     title: "Combine CSS & JS",
     //     free: false,

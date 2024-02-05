@@ -101,8 +101,6 @@ const App = () => {
       const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
       const resJSON = res?.data;
 
-      console.log("resJSONresJSONresJSON",resJSON)
-
       if (resJSON.status === 200) {
        
         const dataObj = resJSON?.optimizationHandlers?.dataArr;

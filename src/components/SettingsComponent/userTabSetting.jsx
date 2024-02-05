@@ -22,8 +22,8 @@ const Item1 = ({ last, title, sub, h, featured }) => {
   const w = useWidth();
   const dark = useSelector((state) => state.home.dark);
 
-  const handlingToggle = () =>{
-    
+  const handlingToggle = () => {
+
   }
   return (
     <div
@@ -63,7 +63,7 @@ const Item1 = ({ last, title, sub, h, featured }) => {
         </h1>
       </div>
       <div className="shrink-0 ml-[10px]">
-        <ToggleButton toggleValue={true} handlingToggle={handlingToggle}  toggleKey="someKey" />
+        <ToggleButton toggleValue={true} handlingToggle={handlingToggle} toggleKey="someKey" />
       </div>
     </div>
   );
@@ -133,8 +133,9 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     "Brazil",
     "India",
   ];
-  const businessTypeData = ["Small", "Large"];
- 
+
+  const businessTypeData = ["Solopreneur", "Dropshipper", "SMB", "Large","Enterprise" ];
+
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       toggoleLoading(true);
@@ -383,7 +384,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
     //   </Formik>
 
     <>
-     <Formik
+      <Formik
         initialValues={{
           first_name: userData?.first_name || "",
           last_name: userData?.last_name || "",
@@ -401,131 +402,55 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
               backgroundColor: dark ? "#111317" : "#fff",
               borderColor: dark ? "#1F2329" : "#ebebeb",
             }}
-            className="border-[1px] border-[#EBEBEB] rounded-[8px] grid mt-[10px] laptop:grid-cols-2 gap-x-[15px] gap-y-[10px] p-4 mb-5"
+            className="border-[1px] border-[#EBEBEB] rounded-[8px] laptop:grid-cols-2 gap-x-[15px] gap-y-[10px] p-4 mb-5"
           >
-            <Field name="first_name">
-              {({ field }) => (
-                <div className="w-[100%]">
-                  <FormikInput
-                    inputLabel="First Name"
-                    inputName="first_name"
-                    inputType="text"
-                    field={field}
-                    form={Form}
-                  />
-                  {isSubmitting && (
-                    <ErrorMessage
-                      name="first_name"
-                      component="div"
-                      className="text-red-500"
-                    />
-                  )}
-                </div>
-              )}
-            </Field>
-
-            <Field name="last_name">
-              {({ field }) => (
-                <div className="w-[100%]">
-                  <FormikInput
-                    inputLabel="Last Name"
-                    inputName="last_name"
-                    inputType="text"
-                    field={field}
-                    form={Form}
-                  />
-                  {isSubmitting && (
-                    <ErrorMessage
-                      name="last_name"
-                      component="div"
-                      className="text-red-500"
-                    />
-                  )}
-                </div>
-              )}
-            </Field>
-
-            <FormikSelectInput
-              label="Country"
-              name="country"
-              defaultValue={userData?.country || ""}
+            <h1
+              style={{
+                color: dark ? "#fff" : "#000",
+              }}
+              className="text-[20px] mb-[10px] font-bold tracking-wide "
             >
-              <option value="" disabled>
-                Select Country
-              </option>
-              {countriesData.map((country) => (
-                <option key={country} value={country}>
-                  {country}
-                </option>
-              ))}
-            </FormikSelectInput>
-            {isSubmitting && (
-              <ErrorMessage
-                name="country"
-                component="div"
-                className="text-red-500"
-              />
-            )}
-
-            <Field name="phone_number">
-              {({ field, form }) => (
-                <div className="w-[100%]">
-                  <PhoneInput
-                    placeholder="Enter phone number"
-                    value={phoneNumberValue}
-                    onChange={(formattedValue) => {
-                      setPhoneNumberValue(formattedValue);
-                      form.setFieldValue("phone_number", formattedValue);
-                    }}
-                  />
-                  {form.touched.phone_number && form.errors.phone_number && (
-                    <ErrorMessage
-                      name="phone_number"
-                      component="div"
-                      className="text-red-500"
-                    />
-                  )}
-                </div>
-              )}
-            </Field>
-
-            <FormikSelectInput
-              label="Business"
-              name="business_type"
-              defaultValue={userData?.business_type || ""}
-            >
-              <option value="" disabled>
-                Select Business
-              </option>
-              {businessTypeData.map((business) => (
-                <option key={business} value={business}>
-                  {business}
-                </option>
-              ))}
-            </FormikSelectInput>
-            {isSubmitting && (
-              <ErrorMessage
-                name="business_type"
-                component="div"
-                className="text-red-500"
-              />
-            )}
-
-            <div className="flex justify-between items-end h-[]">
-              <Field name="email_address">
+              Details
+            </h1>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "15px"
+            }}>
+              <Field name="first_name">
                 {({ field }) => (
-                  <div className="w-[100%] mr-[10px]">
+                  <>
                     <FormikInput
-                      inputLabel="Email"
-                      inputName="email_address"
-                      inputType="email"
+                      inputLabel="First Name"
+                      inputName="first_name"
+                      inputType="text"
                       field={field}
                       form={Form}
-
                     />
                     {isSubmitting && (
                       <ErrorMessage
-                        name="email_address"
+                        name="first_name"
+                        component="div"
+                        className="text-red-500"
+                      />
+                    )}
+                  </>
+                )}
+              </Field>
+
+              <Field name="last_name">
+                {({ field }) => (
+                  <div className="w-[100%]">
+                    <FormikInput
+                      inputLabel="Last Name"
+                      inputName="last_name"
+                      inputType="text"
+                      field={field}
+                      form={Form}
+                    />
+                    {isSubmitting && (
+                      <ErrorMessage
+                        name="last_name"
                         component="div"
                         className="text-red-500"
                       />
@@ -534,25 +459,122 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                 )}
               </Field>
 
-              <div style={{ marginBottom: "10px" }} className="w-[35%]">
-                <button
-                  type="button"
-                  onClick={handleOpenChangeEmailModal}
-                  className="variant-txt-color"
-                >
-                  Change Email
-                </button>
-              </div>
-              <ChangeEmail
-                isOpen={isChangeEmailModalOpen}
-                onClose={handleCloseChangeEmailModal}
-              />
-            </div>
+              <FormikSelectInput
+                label="Country"
+                name="country"
+                defaultValue={userData?.country || ""}
+              >
+                <option value="" disabled>
+                  Select Country
+                </option>
+                {countriesData.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </FormikSelectInput>
+              {isSubmitting && (
+                <ErrorMessage
+                  name="country"
+                  component="div"
+                  className="text-red-500"
+                />
+              )}
 
-            <div className="w-[35%]">
-              <button type="submit" className="variant-txt-color">
-                Submit
-              </button>
+              <Field name="phone_number">
+
+                {({ field, form }) => (
+                  <div className="w-[100%]">
+                    
+                    <label style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }} htmlFor="Phone Number                    " className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]">
+                      Phone Number
+                    </label>
+                    <PhoneInput
+                      placeholder="Enter phone number"
+                      value={phoneNumberValue}
+                      onChange={(formattedValue) => {
+                        setPhoneNumberValue(formattedValue);
+                        form.setFieldValue("phone_number", formattedValue);
+                      }}
+                    />
+
+                    {form.touched.phone_number && form.errors.phone_number && (
+                      <ErrorMessage
+                        name="phone_number"
+                        component="div"
+                        className="text-red-500"
+                      />
+                    )}
+                  </div>
+                )}
+              </Field>
+
+              <FormikSelectInput
+                label="Business"
+                name="business_type"
+                defaultValue={userData?.business_type || ""}
+              >
+                <option value="" disabled>
+                  Select Business
+                </option>
+                {businessTypeData.map((business) => (
+                  <option key={business} value={business}>
+                    {business}
+                  </option>
+                ))}
+              </FormikSelectInput>
+              {isSubmitting && (
+                <ErrorMessage
+                  name="business_type"
+                  component="div"
+                  className="text-red-500"
+                />
+              )}
+
+              <div className="flex justify-between items-end h-[]">
+                <Field name="email_address">
+                  {({ field }) => (
+                    <div className="w-[100%] mr-[10px]">
+                      <FormikInput
+                        inputLabel="Email"
+                        inputName="email_address"
+                        inputType="email"
+                        field={field}
+                        form={Form}
+
+                      />
+                      {isSubmitting && (
+                        <ErrorMessage
+                          name="email_address"
+                          component="div"
+                          className="text-red-500"
+                        />
+                      )}
+                    </div>
+                  )}
+                </Field>
+
+                <div
+                  onClick={handleOpenChangeEmailModal}
+                  className={` w-[150px] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
+
+        h-[38px] mt-[20px] ml-[10px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
+                >
+                  <p
+                    className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : "bg-[#000]"
+                      } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+                  >
+                    Change Email
+                  </p>
+                </div>
+                <ChangeEmail
+                  isOpen={isChangeEmailModalOpen}
+                  onClose={handleCloseChangeEmailModal}
+                />
+              </div>
+
             </div>
           </div>
 
@@ -560,38 +582,38 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
         </Form>
       </Formik>
 
-    <div
-      style={{
-        backgroundColor: dark ? "#111317" : "#fff",
-        borderColor: dark ? "#1F2329" : "#ebebeb",
-      }}
-      className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
-    >
-      <h1
+      <div
         style={{
-          color: dark ? "#fff" : "#000",
+          backgroundColor: dark ? "#111317" : "#fff",
+          borderColor: dark ? "#1F2329" : "#ebebeb",
         }}
-        className="text-[20px] px-[15px] mb-[12px]  font-bold tracking-wide "
+        className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
       >
-        E-mail Notification Preferences
-      </h1>
-      <Item1
-        title="Essential emails"
-        sub="Important emails about your TurboBoost account billing, resource usage
+        <h1
+          style={{
+            color: dark ? "#fff" : "#000",
+          }}
+          className="text-[20px] px-[15px] mb-[12px]  font-bold tracking-wide "
+        >
+          E-mail Notification Preferences
+        </h1>
+        <Item1
+          title="Essential emails"
+          sub="Important emails about your TurboBoost account billing, resource usage
 and other account activity related events. These notifications are
 always on because they are directly related to us delivering the
 TurboBoost service to you."
-      />
-      <Item1
-        title="New features, tips and tricks articles, and company news"
-        sub="Our newsletters, surveys, and other helpful content."
-      />
-      <Item1
-        title="Promotions and special offers"
-        sub="Our seasonal offers and exclusive upgrade deals."
-      />
-    </div>
-  </>
+        />
+        <Item1
+          title="New features, tips and tricks articles, and company news"
+          sub="Our newsletters, surveys, and other helpful content."
+        />
+        <Item1
+          title="Promotions and special offers"
+          sub="Our seasonal offers and exclusive upgrade deals."
+        />
+      </div>
+    </>
 
   );
 };

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Toggle from "../../../utils/toggle";
 import { setDark } from "../../../services/home";
 import { useNavigate } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
+
 const Item = ({ src, title, onClick }) => {
   return (
     <div

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import FeatureCard from '../FeatureCard';
 import InputFields from '../InputFields';
-import OptimizationModeCard from '../OptimizationModeCard';
 import 'react-toastify/dist/ReactToastify.css';
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,86 +14,88 @@ const FontsTabSettings = () => {
 
   const fontRenderBehaviorToggleValue = useSelector((state) => state.toggles?.fontRenderBehavior);
   const fontLoadingToggleValue = useSelector((state) => state.toggles?.fontLoading);
+  const planName = useSelector((state) => state.toggles?.planName);
 
-  const handleFontRenderBehavior = async() =>{
+  const handleFontRenderBehavior = async () => {
     let endPoint = "";
     if (!fontRenderBehaviorToggleValue) endPoint = "api/shopify/adding-font-swap-properties";
     else endPoint = "api/shopify/restore-adding-font-swap-properties";
     const data = await featureAPIHandling(endPoint);
-      if(data.status === 200){
-        dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
-        return toast.success(data.message);
-      }  else return toast.error(data?.message)
-    
-   
+    if (data.status === 200) {
+      dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
+      return toast.success(data.message);
+    } else return toast.error(data?.message)
+
+
 
   }
 
-  const handleFontLoading = async() =>{
+  const handleFontLoading = async () => {
     let endPoint = "";
     if (!fontLoadingToggleValue) endPoint = "api/shopify/font-loading-optimization";
     else endPoint = "api/shopify/restore-font-loading-optimization";
     const data = await featureAPIHandling(endPoint);
-    if(data.status === 200){
+    if (data.status === 200) {
       dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
       return toast.success(data.message);
-    }  else return toast.error(data?.message)
-  
-    
+    } else return toast.error(data?.message)
+
+
   }
- 
+
   return (
     <>
-    <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
-      <div className="w-[100%] ">
-        <div
-          style={{
-            backgroundColor: dark ? "#111317" : "#fff",
-            borderColor: dark ? "#1F2329" : "#ebebeb",
-          }}
-          className=" bg-[#fff] mt-[10px] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
-        >
-          <FeatureCard
-            handlingToggle={handleFontRenderBehavior}
-            toggleValue= {fontRenderBehaviorToggleValue}
-            last={true}
-            title="Override Font Rendering Behavior"
-            isSubSectionExist={true}
-            p="10px 15px 20px 15px"
-            subSectionTitile={"Additional Options"}
-            description="Use this option to set a desired value for the CSS front-display rule"
+      <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
+        <div className="w-[100%] ">
+          <div
+            style={{
+              backgroundColor: dark ? "#111317" : "#fff",
+              borderColor: dark ? "#1F2329" : "#ebebeb",
+            }}
+            className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
           >
-            <div className="w-[100%] py-[10px]">
-              <InputFields
-                labelText="Font-display Value"
-                list={["Swap"]}
-                type="dropdown"
-              />
+            <FeatureCard
+              handlingToggle={handleFontRenderBehavior}
+              getFeature = {planName === "Basic" || planName === "Starter" ? true : false}
+              toggleValue={fontRenderBehaviorToggleValue}
+              last={true}
+              title="Override Font Rendering Behavior"
+              isSubSectionExist={true}
+              p="10px 15px 20px 15px"
+              subSectionTitile={"Additional Options"}
+              description="Use this option to set a desired value for the CSS front-display rule"
+            >
+              <div className="w-[100%] py-[10px]">
+                <InputFields
+                  labelText="Font-display Value"
+                  list={["Swap"]}
+                  type="dropdown"
+                />
 
-              <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
-                The selected value will be applied to all @font-face
-                definitions
+                <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
+                  The selected value will be applied to all @font-face
+                  definitions
+                </div>
               </div>
-            </div>
-          </FeatureCard>
-          <FeatureCard
-                         handlingToggle={handleFontLoading}
-                         toggleValue= {fontLoadingToggleValue}
-            title="Font Loading"
-            isSubSectionExist={true}
-            p="10px 15px 20px 15px"
-            subSectionTitile={"Additional Options"}
-            description="Use this option to configure the method of loading fonts on your pages"
-          >
-            <div className="w-[100%] py-[10px]">
-              <InputFields
-                labelText="Loading Strategy"
-                list={["Onload"]}
-                type="dropdown"
-              />
-            </div>
-          </FeatureCard>
-          {/* <FeatureCard
+            </FeatureCard>
+            <FeatureCard
+              handlingToggle={handleFontLoading}
+              toggleValue={fontLoadingToggleValue}
+              title="Font Loading"
+              isSubSectionExist={true}
+              p="10px 15px 20px 15px"
+              subSectionTitile={"Additional Options"}
+              description="Use this option to configure the method of loading fonts on your pages"
+            >
+              <div className="w-[100%] py-[10px]">
+                <InputFields
+                  labelText="Loading Strategy"
+                  list={["Onload"]}
+                  type="dropdown"
+                />
+              </div>
+            </FeatureCard>
+            {/* <FeatureCard
             featured={true}
             title="Font Subsetting (Remove Unused Glyphs)"
             description="When this option is enabled, TurboBoost will optimize fonts by removing symbols(glyphs), when are not used anywhere. This can dramatically reduce the size of these fonts. Learn more"
@@ -105,10 +106,10 @@ const FontsTabSettings = () => {
             description="When this option is enabled, TurboBoost will optimize fonts by upgrading their compression to WOFF2 format. This can reduce the size of these fonts by up to 50%."
             h={"100px"}
           /> */}
+          </div>
         </div>
-      </div>
 
-      {/* <OptimizationModeCard /> */}
+        {/* <OptimizationModeCard /> */}
         {/* {unsavedChanges && (
         <div className="confirmation-popup">
           <div>Save changes before leaving?</div>
@@ -116,8 +117,8 @@ const FontsTabSettings = () => {
           <button onClick={handleCancelChanges}>No</button>
         </div>
       )} */}
-    </div>
-  </>
+      </div>
+    </>
   );
 }
 

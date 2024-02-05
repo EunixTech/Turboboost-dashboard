@@ -33,7 +33,7 @@ const HtmlTabSettings = () => {
             backgroundColor: dark ? "#111317" : "#fff",
             borderColor: dark ? "#1F2329" : "#ebebeb",
           }}
-          className=" bg-[#fff] mt-[10px] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
+          className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
         >
           <FeatureCard
             handlingToggle={handleMinifyHTML}

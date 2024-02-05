@@ -1,41 +1,41 @@
 import React from "react";
 import FeatureCard from "../FeatureCard";
-import InputFields from "../InputFields";
-import OptimizationModeCard from "../OptimizationModeCard";
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { featureAPIHandling } from "../../utils/featureAPIHandling";
 import toast from "react-hot-toast";
+
 const ImageTabSettings = () => {
-    const dark = useSelector((state) => state.home.dark);
-    const dispatch = useDispatch();
+  const dark = useSelector((state) => state.home.dark);
+  const dispatch = useDispatch();
 
-    const imageSizeAdaptionToggleValue = useSelector((state) => state.toggles?.imageSizeAdaption);
-    const lazyLoadingToggleValue = useSelector((state) => state.toggles?.lazyLoading);
+  const imageSizeAdaptionToggleValue = useSelector((state) => state.toggles?.imageSizeAdaption);
+  const lazyLoadingToggleValue = useSelector((state) => state.toggles?.lazyLoading);
+  const planName = useSelector((state) => state.toggles?.planName);
 
-    const handleImageSizeAdaption = async() =>{
-      let endPoint = "";
-      if (!imageSizeAdaptionToggleValue) endPoint = "api/shopify/adaptive-image-size-optimization";
-      else endPoint = "api/shopify/restore-adaptive-image-size-optimization";
-      const data = await featureAPIHandling(endPoint);
-      if(data.status === 200){
-        dispatch(setToggle({ key: "imageSizeAdaption", value: !imageSizeAdaptionToggleValue }));
-        return toast.success(data.message);
-      }  else return toast.error(data?.message)
+  const handleImageSizeAdaption = async () => {
+    let endPoint = "";
+    if (!imageSizeAdaptionToggleValue) endPoint = "api/shopify/adaptive-image-size-optimization";
+    else endPoint = "api/shopify/restore-adaptive-image-size-optimization";
+    const data = await featureAPIHandling(endPoint);
+    if (data.status === 200) {
+      dispatch(setToggle({ key: "imageSizeAdaption", value: !imageSizeAdaptionToggleValue }));
+      return toast.success(data.message);
+    } else return toast.error(data?.message)
 
-    }
-      const handlelazyLoading = async() =>{
-      let endPoint = "";
-      if (!lazyLoadingToggleValue) endPoint = "api/shopify/adding-image-lazy-loading";
-      else endPoint = "api/shopify/restore-adding-image-lazy-loading";
-      const data = await featureAPIHandling(endPoint);
-      if(data.status === 200){
-        dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
-        return toast.success(data.message);
-      }  else return toast.error(data?.message)
+  }
+  const handlelazyLoading = async () => {
+    let endPoint = "";
+    if (!lazyLoadingToggleValue) endPoint = "api/shopify/adding-image-lazy-loading";
+    else endPoint = "api/shopify/restore-adding-image-lazy-loading";
+    const data = await featureAPIHandling(endPoint);
+    if (data.status === 200) {
+      dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
+      return toast.success(data.message);
+    } else return toast.error(data?.message)
 
-    }
-    
+  }
+
   return (
     <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
       <div className="w-[100%] ">
@@ -44,11 +44,11 @@ const ImageTabSettings = () => {
             backgroundColor: dark ? "#111317" : "#fff",
             borderColor: dark ? "#1F2329" : "#ebebeb",
           }}
-          className=" bg-[#fff] mt-[10px] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
+          className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
         >
           <FeatureCard
-                                   handlingToggle={handlelazyLoading}
-                                   toggleValue= {lazyLoadingToggleValue}
+            handlingToggle={handlelazyLoading}
+            toggleValue={lazyLoadingToggleValue}
 
             last={true}
             title="Automatic Image Lazy Loading"
@@ -68,22 +68,17 @@ const ImageTabSettings = () => {
           </FeatureCard>
 
           <FeatureCard
-                         handlingToggle={handleImageSizeAdaption}
-                         toggleValue= {imageSizeAdaptionToggleValue}
+            handlingToggle={handleImageSizeAdaption}
+            toggleValue={imageSizeAdaptionToggleValue}
             title="Adaptive Image Sizing"
             description="Image files are resized to match their container dimensions, reducing image file size. learn more"
             h={"80px"}
+            getFeature = {planName === "Basic" || planName === "Starter" ? true : false}
           />
-     
-          {/* <FeatureCard
-            title="Additional Images"
-            description="Specify any custom DOM element attributes that contain image URLs to have TurboBoost optimize them as well."
-            h={"80px"}
-          /> */}
+
         </div>
       </div>
 
-      {/* <OptimizationModeCard /> */}
     </div>
   );
 };

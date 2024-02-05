@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ToggleButton from "./ToggleButton";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { useSelector,useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
+import { setUpgradePopUpShow } from "../services/home";
 
 export default function FeatureCard({
   last,
@@ -13,19 +13,17 @@ export default function FeatureCard({
   subSectionTitile = " ",
   children,
   handlingToggle,
-  toggleValue
+  toggleValue,
+  getFeature = false
 }) {
+  const dispatch = useDispatch();
+
   const [dropped, setDropped] = useState(false);
   const dark = useSelector((state) => state.home.dark);
 
-  const handleToggleClick = () => {
-    setDropped(!dropped);
-    const switchStatus = dropped ? "off" : "on";
-    toast.success(`Switch turned ${switchStatus} for ${title}`);
-  };
-
-
   return (
+    <>
+
     <div
       className="w-[100%] px-[15px]   border-t-[1px]"
       style={{
@@ -41,12 +39,28 @@ export default function FeatureCard({
         }}
       >
         <div className="w-[100%]">
+       
           <h1
-            style={{ color: dark ? "#fff" : "#000" }}
-            className="text-[16px] font-bold tracking-wide "
-          >
-            {title}
-          </h1>
+          style={{
+            marginBottom: true && "4px",
+
+            color: dark ? "#fff" : "#000",
+          }}
+          className="text-[16px] font-bold tracking-wide flex items-center"
+        >
+          {title}{" "}
+          {getFeature && (
+            <div
+              onClick={() => {
+                dispatch(setUpgradePopUpShow(true));
+              }}
+              className="bg-[#754ffe33] cursor-pointer text-[#754FFE] ml-[10px] font-medium tracking-wide h-[22px] rounded-[3px] flex items-center text-[11px] px-[10px] py-[7px] "
+            >
+              <img src="/ss.svg" className="w-[11px] mr-[4px] " alt="" />
+              <span>Get Feature</span>
+            </div>
+          )}
+        </h1>
 
           <h1
             style={{
@@ -104,5 +118,6 @@ export default function FeatureCard({
         <div className="w-[100%]">{children}</div>
       )}
     </div>
+    </>
   );
 }

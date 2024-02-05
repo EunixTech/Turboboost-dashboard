@@ -14,7 +14,8 @@ const CssTabSettings = () => {
 
     const criticalCSSToggleValue = useSelector((state) => state.toggles?.criticalCSS);
     const removeUnsedCSSToggleValue = useSelector((state) => state.toggles?.removeUnsedCSS);
-    
+    const planName = useSelector((state) => state.toggles?.planName);
+
     const handleCriticalCSS = async() =>{
       let endPoint = "";
       if (!criticalCSSToggleValue) endPoint = "api/shopify/critical-css-optimization";
@@ -49,9 +50,10 @@ const CssTabSettings = () => {
               backgroundColor: dark ? "#111317" : "#fff",
               borderColor: dark ? "#1F2329" : "#ebebeb",
             }}
-            className=" bg-[#fff] mt-[10px] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
+            className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
           >
             <FeatureCard
+               getFeature = {planName === "Basic" ? true : false}
                handlingToggle={handleCriticalCSS}
                toggleValue= {criticalCSSToggleValue}
               last={true}
@@ -88,6 +90,7 @@ const CssTabSettings = () => {
             </FeatureCard>
 
             <FeatureCard
+                        getFeature = {planName === "Basic" || planName === "Starter" ? true : false}
                handlingToggle={handleRemoveUnsedCSS}
                toggleValue= {removeUnsedCSSToggleValue}
               title="Remove Unused CSS"

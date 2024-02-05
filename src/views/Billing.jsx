@@ -34,17 +34,13 @@ const Billing = () => {
 			dispatch(setPlan(storedPlanName)); // Use the correct action: setPlan
 		}
 
-		if (storedStoreName) {
-			// Use the appropriate action if needed
-			// dispatch(setStoreName(storedStoreName)); // This action is not defined in your billingSlice.js
-		}
 	}, [dispatch]);
 
 
 	const handleBilling = async (item) => {
 		try {
 			let response = await billingApi(item, selected);
-			console.log(response.data);
+
 			if (response?.data?.confirmationUrl) {
 				console.log(response?.data?.confirmationUrl);
 				window.location.replace(response?.data?.confirmationUrl);
@@ -224,14 +220,14 @@ const Billing = () => {
 											<span className="font-bold">{item?.pageViews}</span> page
 											views/mo
 										</p>
-										
+
 										<p
 											style={{
 												color: dark ? "#ffffff74" : "#0a0a187e",
 											}}
 											className="text-[14px]  px-[17px] text-[#0a0a187a]  tracking-wide"
 										>
-											 $15 per 5,000 additional page
+											$15 per 5,000 additional page
 										</p>
 										<div className="w-[100%] px-[17px] mt-[15px]">
 											{currentPlan == item?.name ? (
@@ -330,13 +326,7 @@ const Table1 = ({ setSelected1 }) => {
 					growth="200,000"
 					pro="1,000,000"
 				/>
-				{/* <TableItem1
-					title="CND Bandiwth Per Month"
-					free="1GB"
-					starter="25GB"
-					growth="100GB"
-					pro="500GB"
-				/> */}
+
 				{ComparePlans.map((item, i) => {
 					return (
 						<TableItem2
