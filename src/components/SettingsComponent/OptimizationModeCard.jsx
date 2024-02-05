@@ -137,7 +137,7 @@ export default function OptimizationModeCard() {
                     }}
                     className="text-[14px] mt-[5px] tracking-wide text-[#0a0a186f]"
                 >
-                    Changing the mode, the level of optimization is updated
+                    Changing the mode, the level of optimization is updated and your cache is purged
                 </p>
                 <InputDropdown1
                     label=""

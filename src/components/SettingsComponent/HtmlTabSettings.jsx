@@ -25,6 +25,10 @@ const HtmlTabSettings = () => {
 
   }
 
+  const dd = () => {
+
+  }
+
   return (
     <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
       <div className="w-[100%] ">
@@ -43,16 +47,16 @@ const HtmlTabSettings = () => {
             title="Minify HTML"
             description="When enabled TurboBoost will minify the HTML by removing extra whitespace."
           />
-          {/* <FeatureCard
-                           handlingToggle={handleCombineJsFeature}
-                           toggleValue= {criticalCSSToggleValue}
-                    h="70px"
-                    title="Keep HTML comments"
-                    description="When enabled TurboBoost will not remove the HTML comments from the final cache files."
-                  /> */}
+          <FeatureCard
+            handlingToggle={dd}
+            toggleValue={true}
+            h="70px"
+            title="Keep HTML comments"
+            description="When enabled TurboBoost will not remove the HTML comments from the final cache files."
+          />
         </div>
       </div>
-      {/* <OptimizationModeCard /> */}
+    
     </div>
   );
 }

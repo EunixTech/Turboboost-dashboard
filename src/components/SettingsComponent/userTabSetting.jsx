@@ -412,7 +412,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
             >
               Details
             </h1>
-            <div style={{
+            <div className="user_tab_card" style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
               gap: "15px"
@@ -488,10 +488,11 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                     
                     <label style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",
-                    }} htmlFor="Phone Number                    " className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]">
+                    }} htmlFor="Phone Number " className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]">
                       Phone Number
                     </label>
                     <PhoneInput
+                    className={dark ? "dark_color": "white_color"}
                       placeholder="Enter phone number"
                       value={phoneNumberValue}
                       onChange={(formattedValue) => {
@@ -533,7 +534,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                 />
               )}
 
-              <div className="flex justify-between items-end h-[]">
+              <div className="flex justify-between items-end mb-[10px]">
                 <Field name="email_address">
                   {({ field }) => (
                     <div className="w-[100%] mr-[10px]">
@@ -560,7 +561,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                   onClick={handleOpenChangeEmailModal}
                   className={` w-[150px] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
-        h-[38px] mt-[20px] ml-[10px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
+        h-[38px] mt-[20px] mb-[-4px] ml-[10px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
                 >
                   <p
                     className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : "bg-[#000]"

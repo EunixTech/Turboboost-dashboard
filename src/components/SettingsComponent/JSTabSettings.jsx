@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FeatureCard from "../FeatureCard";
-
+import InputFields from "../InputFields";
 import toast from "react-hot-toast";
 
 import { featureAPIHandling } from "../../utils/featureAPIHandling";
@@ -59,7 +59,7 @@ const JSTabSettings = () => {
               title="Minify javascript code"
               description="Use a single file for all JavaScript code. This reduces the number of network requests and makes rendering more efficient"
             />
-            {/* <FeatureCard
+            <FeatureCard
             title="Configure resource loading strategy"
             isSubSectionExist={true}
             p="10px 15px 20px 15px"
@@ -106,25 +106,25 @@ const JSTabSettings = () => {
                 render-blocking.
               </div>
             </div>
-          </FeatureCard> */}
+          </FeatureCard>
             <FeatureCard
               handlingToggle={handleDelayScript}
               toggleValue={delayScriptsValue}
               title="Delayed Scripts"
               description="Specify scripts that you would like to be loaded with a delay."
             />
-            {/* <FeatureCard
+            <FeatureCard
             title="Optimize Ads"
             description="Ads will not block the initial page render"
-          /> */}
-            {/* <FeatureCard
+          />
+            <FeatureCard
             title="Minify JSON for Linking Data"
             description="When enabled TurboBoost will minify the JSON-LD elements in the HTML document."
-          /> */}
-            {/* <FeatureCard
+          />
+            <FeatureCard
             title="Do not optimize OptinMonster scripts"
             description="OptinMonster scripts and scripts using the OptinMonster events will be automatically excluded from optimization"
-          /> */}
+          />
           </div>
         </div>
       </div>

@@ -17,6 +17,9 @@ import ImageTabSettings from "../components/SettingsComponent/ImageTabSettings";
 import HtmlTabSettings from "../components/SettingsComponent/HtmlTabSettings";
 import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
 import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
+import GeneralTabSetting from "../components/SettingsComponent/GeneralTabSetting";
+import CachingTabSetting from "../components/SettingsComponent/CachingTabSetting";
+import IntegrationsTabSettings from "../components/SettingsComponent/IntegrationsTabSettings";
 import OptimizationModeCard from "../components/SettingsComponent/OptimizationModeCard";
 
 const SettingPage = () => {
@@ -56,7 +59,7 @@ const SettingPage = () => {
       } else if (resJSON.status === 403) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
-      } 
+      }
     } catch (error) {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
@@ -68,14 +71,14 @@ const SettingPage = () => {
   useEffect(() => {
     fetchingPlanName();
   }, [])
-  
+
 
 
   const handleUserSettingsChange = (newData) => {
     setUserSettings(newData);
   };
 
-  const handleSaveSettings = async () => {};
+  const handleSaveSettings = async () => { };
 
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
@@ -125,13 +128,16 @@ const SettingPage = () => {
               <ToastContainer />
             </>
           )}
-          {activeTab >= 1 && activeTab <= 5 && (
+          {activeTab >= 1 && activeTab <= 8 && (
             <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
-              {activeTab === 1 && <FontsTabSettings />}
-              {activeTab === 2 && <ImageTabSettings />}
-              {activeTab === 3 && <HtmlTabSettings />}
-              {activeTab === 4 && <CssTabSettings />}
-              {activeTab === 5 && <JSTabSettings />}
+              {activeTab === 1 && <GeneralTabSetting />}
+              {activeTab === 2 && <CachingTabSetting />}
+              {activeTab === 3 && <FontsTabSettings />}
+              {activeTab === 4 && <ImageTabSettings />}
+              {activeTab === 5 && <HtmlTabSettings />}
+              {activeTab === 6 && <CssTabSettings />}
+              {activeTab === 7 && <JSTabSettings />}
+              {activeTab === 8 && <IntegrationsTabSettings />}
               <OptimizationModeCard />
             </div>
           )}

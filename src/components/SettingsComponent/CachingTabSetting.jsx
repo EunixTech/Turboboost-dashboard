@@ -122,7 +122,7 @@ const CachingTabSetting = () => {
                 </div>
               </div>
 
-              <OptimizationModeCard />
+       
             </div>
   );
 }

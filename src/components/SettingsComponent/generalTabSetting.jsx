@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import FeatureCard from "../FeatureCard";
 import ExcludedResources from "../ExcludedResources";
 import SaveButton from "./saveButton";
-import OptimizationModeCard from "../OptimizationModeCard";
 import { addExclude, deleteExclude } from "../../slice/excludeSlice";
 const GeneralTabSetting = () => {
   const dark = useSelector((state) => state.home.dark);
@@ -122,7 +121,6 @@ const GeneralTabSetting = () => {
         </div>
       </div>
 
-      {/* <OptimizationModeCard /> */}
     </div>
   );
 };

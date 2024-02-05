@@ -839,7 +839,7 @@ const CacheStatus = () => {
                   <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#e303fc" />
                   <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#38F8AC" />
                   <HeaderItem
-                    title="Not Optimized Assets"
+                    title="Pending Assets"
                     sub={assetsData && assetsData?.notOptimizedAssets}
                     color="#FFCB65"
                   />
