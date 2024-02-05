@@ -4,6 +4,7 @@ import FeatureCard from "../FeatureCard";
 import ExcludedResources from "../ExcludedResources";
 import SaveButton from "./saveButton";
 import { addExclude, deleteExclude } from "../../slice/excludeSlice";
+
 const GeneralTabSetting1 = () => {
   const dark = useSelector((state) => state.home.dark);
   const excludes = useSelector((state) => state.excludes); // Assuming you have a reducer for excludes

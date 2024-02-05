@@ -17,8 +17,7 @@ import ImageTabSettings from "../components/SettingsComponent/ImageTabSettings";
 import HtmlTabSettings from "../components/SettingsComponent/HtmlTabSettings";
 import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
 import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
-// import GeneralTabSetting from "../components/SettingsComponent/GeneralTabSetting";
-import GeneralTabSetting1 from "../components/SettingsComponent/GeneralTabSetting";
+import GeneralTabSetting1 from "../components/SettingsComponent/GeneralTabSetting1";
 import CachingTabSetting from "../components/SettingsComponent/CachingTabSetting";
 import IntegrationsTabSettings from "../components/SettingsComponent/IntegrationsTabSettings";
 import OptimizationModeCard from "../components/SettingsComponent/OptimizationModeCard";
@@ -72,9 +71,6 @@ const SettingPage = () => {
   useEffect(() => {
     fetchingPlanName();
   }, [])
-
-  console.log("**************", activeTab)
-
 
 
   const handleUserSettingsChange = (newData) => {
