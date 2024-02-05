@@ -500,6 +500,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                         form.setFieldValue("phone_number", formattedValue);
                       }}
                     />
+                    
 
                     {form.touched.phone_number && form.errors.phone_number && (
                       <ErrorMessage
