@@ -30,9 +30,9 @@ const Prompt = () => {
   const router = useNavigate();
 
   const openShopHandler = () => {
-    console.log("wrokingdjg")
+
     const websiteURL = localStorage.getItem("websiteURL") || "";
-    console.log("wrokingdjg", websiteURL)
+
     if (websiteURL) {
       window.open(`https://${websiteURL}`, '_blank');
     }
@@ -320,11 +320,6 @@ const Navbar = () => {
                   </svg>
               }
 
-              {/* <img
-                src={dark ? "/graphic/navbar/down-d.svg" : "/down.svg"}
-                className="cursor-pointer w-[12px] mx-[5px] mr-[20px] translate-y-[2px]"
-                alt=""
-              /> */}
             </div>
             {open && <Prompt />}
           </div>

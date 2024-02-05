@@ -100,7 +100,7 @@ const Button = ({ onClick }) => {
   
   
 
-export default function SidebarCard() {
+export default function SidebarCard({cancel}) {
     const [show, setShow] = useState(false);
     const [PageViewCount, updatePageViewCount] = useState(0);
     const dark = useSelector((state) => state.home.dark);

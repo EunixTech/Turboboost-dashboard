@@ -17,7 +17,8 @@ import ImageTabSettings from "../components/SettingsComponent/ImageTabSettings";
 import HtmlTabSettings from "../components/SettingsComponent/HtmlTabSettings";
 import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
 import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
-import GeneralTabSetting from "../components/SettingsComponent/GeneralTabSetting";
+// import GeneralTabSetting from "../components/SettingsComponent/GeneralTabSetting";
+import GeneralTabSetting1 from "../components/SettingsComponent/GeneralTabSetting";
 import CachingTabSetting from "../components/SettingsComponent/CachingTabSetting";
 import IntegrationsTabSettings from "../components/SettingsComponent/IntegrationsTabSettings";
 import OptimizationModeCard from "../components/SettingsComponent/OptimizationModeCard";
@@ -72,6 +73,8 @@ const SettingPage = () => {
     fetchingPlanName();
   }, [])
 
+  console.log("**************", activeTab)
+
 
 
   const handleUserSettingsChange = (newData) => {
@@ -101,9 +104,8 @@ const SettingPage = () => {
           <div className="w-[100%] mobile:my-[20px] laptop:my-0 h-[34px] flex justify-end items-center">
             {deviceWith < 1000 && (
               <MobileViewNavigator
-                onChangeHandler={(e) => {
-                  updateActiveTab(e);
-                }}
+              activeTab={activeTab}
+              updateActiveTab={updateActiveTab}
               />
             )}
             <SaveButton
@@ -130,7 +132,7 @@ const SettingPage = () => {
           )}
           {activeTab >= 1 && activeTab <= 8 && (
             <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
-              {activeTab === 1 && <GeneralTabSetting />}
+              {activeTab === 1 && <GeneralTabSetting1 />}
               {activeTab === 2 && <CachingTabSetting />}
               {activeTab === 3 && <FontsTabSettings />}
               {activeTab === 4 && <ImageTabSettings />}

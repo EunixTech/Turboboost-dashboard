@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { navigationbarArr } from "../static/navigationbarArr";
 
-export default function MobileViewNavigator({ containerWidth ="", onChangeHandler =() =>{} }) {
+export default function MobileViewNavigator({ activeTab, updateActiveTab  }) {
 
-    const [activeTab, updateActiveTab] = useState(0);
+    // const [activeTab, updateActiveTab] = useState(0);
     const [hover, updateHover] = useState(false);
     const [selectedTab, updateSelectedTab] = useState(false);
 
@@ -20,8 +20,12 @@ export default function MobileViewNavigator({ containerWidth ="", onChangeHandle
 
     const dark = useSelector((state) => state.home.dark);
 
+    const dd = (i) =>{
+        console.log("ahsdhgafdgh", i)
+    }
+
     return (
-        <div className="h-[100%] w-[100%]" style={{ width: containerWidth }}>
+        <div className="h-[100%] w-[100%]" >
 
             <div className="w-[100%] relative border-[1px]  border-[#ebebeb]  text-[12px] font-medium  h-[34px]">
                 <div
@@ -45,7 +49,7 @@ export default function MobileViewNavigator({ containerWidth ="", onChangeHandle
 
                         {navigationbarArr.map((item, i) => {
                             return (
-                                <div
+                                <div onClick={()=>dd(i)}
                                     onMouseOver={() => { updateHover(true)}}
                                     onMouseLeave={() => {updateHover(false)}}
                                     key={i}
@@ -53,14 +57,13 @@ export default function MobileViewNavigator({ containerWidth ="", onChangeHandle
                                         backgroundColor: i === activeTab ? "#222" : "#fff",
                                         color: i === activeTab ? "#fff" : "#000",
                                     }}
-                                    onClick={() => {
-                                        onChangeHandler(i);
-                                        updateSelectedTab(false);
-                                        updateActiveTab(i);
-                                    }}
+                                 
                                     className="w-[100%] rounded-[2px] h-[27px] mb-[3px] flex items-center justify-center text-[11px] cursor-pointer"
                                 >
+                                    <p >
                                     {item}
+                                    </p>
+                                  
                                 </div>
                             );
 
