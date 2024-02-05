@@ -298,7 +298,7 @@ const TableItem = ({ name, site_url, site_id, site_secret, status, onDelete }) =
 
 const Table = ({ websites, deleteWebsite, dark }) => (
   <div className="w-[100%] mt-[15px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool">
-    <div className="mobile:w-[500px]  laptop:min-w-[500px] laptop:w-[100%]">
+    <div className="laptop:min-w-[500px] laptop:w-[100%]">
       <TableHeader dark={dark} />
       {websites.length && websites.map((website, i) => (
         <TableItem
@@ -674,7 +674,7 @@ const ConnectWebsite = () => {
 
   const handleSubmitForm = () =>{
     toast.dismiss();
-    retrun
+    return
     // return toast.success("Coming soon");
   }
 
