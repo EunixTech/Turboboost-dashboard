@@ -1,7 +1,6 @@
 
-import React, { Suspense, useState } from 'react';
+import React from 'react';
 import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
 import { styled, ThemeProvider } from '@mui/system';
@@ -24,9 +23,6 @@ const NewOnboardModal = styled(Modal)(({ theme }) => ({
 
 
 const NewOnboard = () => {
-  const auth = useSelector((state) => state.home.auth);
-  const [vidLoad, setVidLoad] = useState(auth);
-  const dark = localStorage.getItem("dark");
 
   return (
     <ThemeProvider theme={theme}>
@@ -37,14 +33,8 @@ const NewOnboard = () => {
           timeout: 500,
         }}
       >
-        <Box
-          style={{
-            // backgroundColor: 'black',            // You can add more specific margin values if needed
-          }}>
-
-
+        <Box>
           <OnboardingBillings />
-
         </Box>
 
       </NewOnboardModal>

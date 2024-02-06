@@ -334,7 +334,8 @@ body::-webkit-scrollbar-thumb {
   /* max-height: 50vw; */
   border-radius: 10px;
   /* margin-top: 52px; */
-  max-width: 60vw;
+  max-width: 1000px;
+  /* margin-left: 100px; */
   /* width: 100vw; */
   display: flex;
   justify-content: center;
@@ -406,6 +407,7 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSe
   border: 1px solid #ebebeb;
   border-radius: 4px;
   padding: 6px;
+background-color: white;
 }
 input.PhoneInputInput {
   font-size: 13px;
@@ -483,19 +485,16 @@ input.PhoneInputInput {
   color: #393939;
 }
 form input {
-  max-width: 550px;
   width: 100%;
   height: 57px;
   background: #ffffff;
   border: 1px solid #d0d0d0;
   border-radius: 4px;
-  /* font-family: Karla; */
   font-size: 20px;
   color: #b7b7b7;
   padding: 0 25px;
   transition: all 0.3s ease-in-out 0s;
-  margin: auto;
-  margin-bottom: 30px;
+
 }
 .connect-button {
   width: 206px;
@@ -554,7 +553,7 @@ form input {
 p.annualText {
   color: #38f8ac;
   /* font-family: Inter; */
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -565,7 +564,6 @@ p.annualText {
 }
 .justify-around {
   display: flex;
-  flex-wrap: wrap;  
 }
 input.PhoneInputInput {
   /* border: 0; */
@@ -583,6 +581,15 @@ input.PhoneInputInput {
 input.PhoneInputInput {
   margin: 0;
 }
+.w-full.grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-x-4.gap-y-8.mt-4.flex.justify-center {
+  display: flex;
+  justify-content: center;
+  line-height: normal;
+  align-items: self-start;
+}
+.mobile-container {
+  display: none; /* Hide for larger screens */
+}
 @media only screen and (max-width: 599px) {
   .MuiBox-root,
   .billing-modal-background {
@@ -595,4 +602,41 @@ input.PhoneInputInput {
     width: 100%;
     margin-bottom: 10px;
 }
+}
+/* Media query for screens smaller than 600px (adjust as needed) */
+@media (max-width: 600px) {
+  .max-w-screen-xl {
+    display: none; /* Hide for smaller screens */
+  }
+  .mobile-container {
+    display: block; /* Show for smaller screens */
+    overflow: scroll;
+  }
+}
+
+
+.progressbar-div{
+  color: red;
+}
+
+
+
+/* userTab */
+.PhoneInput{
+  margin-top: 0px !important;
+}
+
+.dark_color{
+  color: #ffffff74;
+    background-color: #0a0a187e !important;
+}
+
+.white_color{
+  color: #0a0a187e;
+  background-color: #ffffff74 !important;
+}
+@media only screen and (max-width: 700px) {
+  .user_tab_card{
+    grid-template-columns: 1fr !important;
+  }
 }

@@ -29,13 +29,13 @@ const options = {
 
 export default function App({imageData}) {
   const ChartData = {
-  labels: ["Not Optimized URLs", "Pending Optimizations", "Optimized URLs"],
+  labels: ["not/error'd", "No of Image Optimize", "Pending Optimizations"],
   datasets: [
     {
       label: "# of Votes",
-      data: [imageData?.totalImages, imageData?.totalOptimizeImage, imageData?.totalOriginImage],
-      backgroundColor: ["#FF465c70", "#FFCB6570", "#38F8AC70"],
-      borderColor: ["#FF465c", "#FFCB65", "#38F8AC"],
+      data: [0, imageData?.totalOptimizeImage, imageData?.totalImages-imageData?.totalOptimizeImage],
+      backgroundColor: [ "#FF465c70", "#38F8AC70", "#FFCB6570"],
+      borderColor:[ "#FF465c70", "#38F8AC70" , "#FFCB6570"],
       borderWidth: 1,
     },
   ],

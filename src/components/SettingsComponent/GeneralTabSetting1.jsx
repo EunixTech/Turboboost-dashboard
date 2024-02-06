@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import FeatureCard from "../FeatureCard";
 import ExcludedResources from "../ExcludedResources";
 import SaveButton from "./saveButton";
-import OptimizationModeCard from "../OptimizationModeCard";
 import { addExclude, deleteExclude } from "../../slice/excludeSlice";
-const GeneralTabSetting = () => {
+
+const GeneralTabSetting1 = () => {
   const dark = useSelector((state) => state.home.dark);
   const excludes = useSelector((state) => state.excludes); // Assuming you have a reducer for excludes
   const dispatch = useDispatch();
@@ -77,7 +77,7 @@ const GeneralTabSetting = () => {
             />
           </div>
         </div>
-
+{/* 
         <div
           style={{
             backgroundColor: dark ? "#111317" : "#fff",
@@ -119,12 +119,11 @@ const GeneralTabSetting = () => {
               https://txtcartapp.com/?nitroWebhook-confirm&token=68cf19c4369df90q9wnjFSDg39
             </div>
           </FeatureCard>
-        </div>
+        </div> */}
       </div>
 
-      {/* <OptimizationModeCard /> */}
     </div>
   );
 };
 
-export default GeneralTabSetting;
+export default GeneralTabSetting1;

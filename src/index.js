@@ -2,50 +2,37 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
-import { store, persistor } from "./services/store";
+import { store } from "./services/store";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import DashboardPageRoute from "./views/DashboardPage.jsx";
-// import DashboardPageRoute from "./routes/DashboardPag.jsx";
 import SignInRoute from "./routes/SignInRoute";
 import ConnectStore from "./views/ShopifyAuth.jsx";
-import SignUp from "./routes/SignUpRoute";
-import ResetPasswordRoute from "./routes/ResetPasswordRoute";
-// import ConnectWebsite from "./routes/connect-website.jsx";
 import ConnectWebsite from "./views/ConnectWebsite.jsx";
-// import CacheWarmup from "./routes/cache-warmup";
 import CacheWarmup from "./views/CacheWarmupage.jsx";
 
-// import CacheStatus from "./routes/cache-status";
 import CacheStatus from "./views/CacheStatus.jsx";
-
-import Home from "./views/home.jsx";
-
 import Logs from "./views/Logs.jsx";
-// import Logs from "./routes/logs.jsx";
 
-// import Integrations from "./routes/integrations";
 import Integrations from "./views/integrations.jsx";
 
 import Billing from "./views/Billing.jsx";
 import Settings from "./views/SettingPage.jsx";
-// import Affiliate from "./routes/affiliate";
 import Affiliate from "./views/Affiliate.jsx";
-import ForgotPassword from "./routes/ForgotPassword";
 import ShopifyAdmin from "./views/ShopifyAdmin.jsx";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { PersistGate } from "redux-persist/integration/react";
 import NewOnboard from "./routes/newOnboarding.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./views/404.jsx";
-import { GetAxiosConfig,PostAxiosConfig } from "./utils/axiosConfig.js";
+import { GetAxiosConfig } from "./utils/axiosConfig.js";
 import { setToggle } from "./slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NitroPack from "./views/NitroPack.jsx";
 import ConnectSiteNitro from "./views/ConnectSiteNitro.jsx";
+import { useDispatch } from "react-redux";
 const router = [
   {
     path: "/",
@@ -143,43 +130,32 @@ const App = () => {
         dispatch(setToggle({ key: "assetsOptimization", value: dataObj?.assets_optimization?.value }));
         dispatch(setToggle({ key: "pageOptimization", value: dataObj?.page_optimization?.value }));
         dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization?.value }));
-        localStorage.setItem('apiCalled', 'true');
-      } else if(resJSON.status === 403){
+        dispatch(setToggle({ key: "dashboardOptimization", value: dataObj?.dashboard_optimization }));
 
-      }else{
-        // toogleLoadingAPI(false);
-        // return toast.error("Please try again");
-      }
+      } 
     } catch (error) {
-      // toogleLoadingAPI(false);
-      // if (error?.response?.status === 401) {
-      //   localStorage.removeItem('authToken');
-      //   window.location.replace('/login-shopify');
-      // } 
-      // console.error("Error fetching user profile data:", error);
+      console.error("Error fetching user profile data:", error);
     }
   };
 
+  useEffect(() => {
+    fetchImageOptimizationData();
+  }, [])
+  
   useEffect(() => {
    
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
     
-    // if (!localStorage.getItem("authToken")) {
-    //   navigate("/auth/signIn");
-    // } else {
-    //   setShowOnboardingModal(!!userToken);
-    // }
-
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
-      app_id: "pz01qpvl",
+      app_id: "vr8qka5j",
       email: "manmohankumar023@hmail.com", // the email for your user
-      user_id: "asd123", // a UUID for your user
-      user_hash: "017721e6fe54a639abdc8a5be4aac63d3c9d484fd5927ce7e0013dcc3ea1bc2c" // an Identity Verification user hash for your user
+      user_id: "65b10b132fea19be3faabfd2", // a UUID for your user
+      user_hash: "6729f802942742b4f8c6ea81dc9725df8c5f8d6f49a632d3f96ff023a60b01b3" // an Identity Verification user hash for your user
       };
-
+  
     const checkAuth = () => {
       const urlParams = new URLSearchParams(window.location.search);
     const userToken1 = urlParams.get("userToken");
@@ -196,7 +172,6 @@ const App = () => {
         window.location.replace('/dashboard');
       }
     };
-    fetchImageOptimizationData();
     checkAuth();
  
   }, []);

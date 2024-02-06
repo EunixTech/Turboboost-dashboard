@@ -17,14 +17,13 @@ const Toggle = ({ value, setValue }) => {
       }}
       className="w-[45px] cursor-pointer duration-100 bg-[#38F8AC] relative h-[25px] flex items-center rounded-[23px]"
     >
-      <img
-        style={{
+       <svg  style={{
           position: "absolute",
           left: (value ? !value : !toggle) ? "24px" : "3.5px",
-        }}
-        src="/graphic/dashboard/toggle.svg"
-        className="w-[19px] shrink-0 duration-100 h-[18.5px]"
-      />
+        }} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="18" height="18" rx="9" fill="white" />
+      </svg>
+
     </div>
   );
 };

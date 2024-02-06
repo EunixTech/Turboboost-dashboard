@@ -9,7 +9,7 @@ export const planMockData = [
         includes: [
             "5,000 page views per month",
             // "1.00 GB CDN bandwidth per month",
-            "Optimized by TurboBoost Badge",
+            // "Optimized by TurboBoost Badge",
             "All-in-one performance optimization",
             "Image Lazy Loading",
             "Assest Optimization",
@@ -57,7 +57,7 @@ export const planMockData = [
         includes: [
             "200,000 page views per month",
             // "100 GB CDN bandwidth per month",
-            "Optimized by TurboBoost Badge",
+            // "Optimized by TurboBoost Badge",
             // "Built-in global CDN",
             "Image Optimization",
             // "Advanced Caching Mechanism",
@@ -89,7 +89,7 @@ export const planMockData = [
         includes: [
             "200,000 page views per month",
             // "100 GB CDN bandwidth per month",
-            "Optimized by TurboBoost Badge",
+            // "Optimized by TurboBoost Badge",
             // "Built-in global CDN",
             "Image Optimization",
             // "Advanced Caching Mechanism",
@@ -189,13 +189,13 @@ export const planOnboardData = [
 ];
 
 export const ComparePlans = [
-    {
-        title: "Optimized by TurboBoost Badge",
-        free: true,
-        starter: false,
-        growth: false,
-        pro: false,
-    },
+    // {
+    //     title: "Optimized by TurboBoost Badge",
+    //     free: true,
+    //     starter: false,
+    //     growth: false,
+    //     pro: false,
+    // },
     // {
     //     title: "Built-in Global CDN",
     //     free: true,
@@ -203,7 +203,7 @@ export const ComparePlans = [
     //     growth: true,
     //     pro: true,
     // },
-   
+
     // {
     //     title: "Advanced Caching Machanism",
     //     free: true,
@@ -255,6 +255,13 @@ export const ComparePlans = [
         pro: true,
     },
     {
+        title: "Lazy Load Hidden Images",
+        free: true,
+        starter: true,
+        growth: true,
+        pro: true,
+    },
+    {
         title: "24/7 Support",
         free: false,
         starter: true,
@@ -282,13 +289,7 @@ export const ComparePlans = [
     //     growth: true,
     //     pro: true,
     // },
-    {
-        title: "Lazy Load Hidden Images",
-        free: false,
-        starter: true,
-        growth: true,
-        pro: true,
-    },
+
     // {
     //     title: "Combine CSS & JS",
     //     free: false,
@@ -348,7 +349,7 @@ export const ComparePlans = [
     // },
 ];
 
-export const planChangeText = (item,currentPlan) => {
+export const planChangeText = (item, currentPlan) => {
     let itemPlan = item.name;
     let buttenText = "";
 
@@ -366,7 +367,7 @@ export const planChangeText = (item,currentPlan) => {
             if (itemPlan == "Pro") {
                 buttenText = "Upgrade to Pro";
             }
-    break;
+            break;
         case "Starter":
             if (itemPlan === "Basic") {
                 buttenText = "Downgrade to Basic";
@@ -380,7 +381,7 @@ export const planChangeText = (item,currentPlan) => {
             if (itemPlan == "Pro") {
                 buttenText = "Upgrade to Pro";
             }
-    break;
+            break;
         case "Growth":
             if (itemPlan === "Basic") {
                 buttenText = "Downgrade to Basic";
@@ -394,7 +395,7 @@ export const planChangeText = (item,currentPlan) => {
             if (itemPlan == "Pro") {
                 buttenText = "Upgrade to Pro";
             }
-    break;
+            break;
         case "Pro":
             if (itemPlan === "Basic") {
                 buttenText = "Downgrade to Basic";
@@ -408,7 +409,137 @@ export const planChangeText = (item,currentPlan) => {
             if (itemPlan == "Pro") {
                 buttenText = "Current Plan";
             }
-    break;
+            break;
+        case "Pro1":
+            if (itemPlan === "Basic") {
+                buttenText = "Select";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Select";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Select";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Select";
+            }
+            break;
+
+        case "AnnualBasic":
+            if (itemPlan === "Basic") {
+                buttenText = "Upgrade to Annual";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Upgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+            break;
+        case "AnnualStarter":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Upgrade to Annual";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+            break;
+        case "AnnualGrowth":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Downgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Annual";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+            break;
+        case "AnnualPro":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Downgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Downgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Annual";
+            }
+            break;
+
+        case "MonthlyBasic":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Monthly";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Upgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+            break;
+        case "MonthlyStarter":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Downgrade to Monthly";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Upgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+            break;
+        case "MonthlyGrowth":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Downgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Downgrade to Monthly";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Upgrade to Pro";
+            }
+            break;
+        case "MonthlyPro":
+            if (itemPlan === "Basic") {
+                buttenText = "Downgrade to Basic";
+            }
+            if (itemPlan == "Starter") {
+                buttenText = "Downgrade to Starter";
+            }
+            if (itemPlan == "Growth") {
+                buttenText = "Downgrade to Growth";
+            }
+            if (itemPlan == "Pro") {
+                buttenText = "Downgrade to Monthly";
+            }
+            break;
+
+
         default:
             buttenText = "";
             break;

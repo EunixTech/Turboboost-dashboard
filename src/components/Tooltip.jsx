@@ -12,6 +12,7 @@ const Tooltip = ({ text = ' ' }) => {
             onMouseOver={() => {updateIsActive(true)}}
             onMouseLeave={() => { updateIsActive(false);}}
             className="relative"
+          
         >
             {isActive && (
 
@@ -20,7 +21,7 @@ const Tooltip = ({ text = ' ' }) => {
                         <img
                             onLoad={handleImageLoad}
                             src="/hover.svg"
-                            className="z-0 w-[145px] h-[88px]"
+                            className="z-0 w-[145px]"
                             alt="svg icon"
                         />
                         {showImaage && (

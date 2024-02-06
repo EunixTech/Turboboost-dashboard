@@ -189,7 +189,19 @@ const Status = ({ i }) => {
 const TableItem1 = ({ last, item }) => {
   const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
+  const formatDate = (dateString) => {
+       const dateObj = new Date(dateString);
+    
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    const year = dateObj.getFullYear();
+    const hour = dateObj.getHours().toString().padStart(2, '0');
+    const minute = dateObj.getMinutes().toString().padStart(2, '0');
+    const period = (dateObj.getHours() < 12) ? 'AM' : 'PM';
 
+    const formattedDate = `${month}/${day}/${year} at ${hour}:${minute} ${period}`;
+    return formattedDate;
+}
   return (
     <div
       style={{
@@ -213,7 +225,7 @@ const TableItem1 = ({ last, item }) => {
         }}
         className="w-[40%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
       >
-        {item?.optimized_at ? new Date(item.optimized_at).toLocaleString() : ''}
+        {item?.optimized_at && formatDate(item?.optimized_at)}
       </div>
       <div
         style={{
@@ -275,7 +287,7 @@ const CacheWarmup = ({ setShow }) => {
       if(resData?.status === 200){
       dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
       fetchPageOptimizationData();
-        return toast.success(resData?.message);
+        // return toast.success(resData?.message);
       } else {
         return toast.error("Please try again");
       }
@@ -289,35 +301,18 @@ const CacheWarmup = ({ setShow }) => {
     }
   }
 
-  // const fetchOptimizationHandlerData = async() =>{
-  //   toggleLoader(true);
-  //  try{
-  //     const res = await GetAxiosConfig(`api/dashboard/fetch-optimization-handler-data`);
-  //     console.log("**********res**************",res)
-  //     // toggleLoader(false);
-  //     // const resData = res?.data;
-  //     // console.log("resDataresDataresDataresDataHandler",resData)
-  //     // if(resData?.status === 200){
-
-  //     //   return toast.success(resData?.message);
-  //     // } else {
-  //     //   toggleLoader(false);
-  //     //   return toast.error("Please try again");
-  //     // }
-  //   } catch (error) {
-  //     toggleLoader(false);
-  //     if (error?.response?.status === 401) {
-  //       localStorage.removeItem('authToken');
-  //       window.location.replace('/login-shopify');
-  //     } 
-  //     console.error("Error fetching user profile data:", error);
-  //   }
-  // }
 
 
   useEffect(() => {
-    fetchPageOptimizationData();
-    // fetchOptimizationHandlerData();
+    const fetchData = async () => {
+      if(!pageOptimizationValue && !Boolean(localStorage.getItem('pageOptimizationAPI'))){
+        await handleOptimizePage();
+        localStorage.setItem('pageOptimizationAPI', true);
+      }
+      fetchPageOptimizationData();
+    };
+    fetchData();
+
   }, [])
   return (
     <>

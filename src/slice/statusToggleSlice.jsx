@@ -17,6 +17,10 @@ const initialState = {
   imageOptimization: false,
   criticalCSS: false,
   removeUnsedCSS: false,
+
+  dashboardOptimization: false,
+
+  PlanName: "Pro"
 };
 
 const statusToggleSlice = createSlice({

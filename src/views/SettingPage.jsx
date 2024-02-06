@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import { useMediaQuery } from "react-responsive";
+import { useSelector, useDispatch } from "react-redux";
+
+import TitleManager from "../components/TitleManager";
 import useWidth from "../hooks/useWidth";
-import { useSelector } from "react-redux";
 import SaveButton from "../components/button/SaveButton";
 import Navigator from "../components/Navigator";
+import { GetAxiosConfig } from "../utils/axiosConfig";
+import { setToggle } from "../slice/statusToggleSlice";
+
 import MobileViewNavigator from "../components/MobileViewNavigator";
 import UserTabSettings from "../components/SettingsComponent/userTabSetting";
 import FontsTabSettings from "../components/SettingsComponent/FontsTabSettings";
@@ -10,80 +17,71 @@ import ImageTabSettings from "../components/SettingsComponent/ImageTabSettings";
 import HtmlTabSettings from "../components/SettingsComponent/HtmlTabSettings";
 import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
 import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
-import { toast, ToastContainer } from "react-toastify";
-import { useMediaQuery } from "react-responsive";
-import TitleManager from "../components/TitleManager";
+import GeneralTabSetting1 from "../components/SettingsComponent/GeneralTabSetting1";
+import CachingTabSetting from "../components/SettingsComponent/CachingTabSetting";
+import IntegrationsTabSettings from "../components/SettingsComponent/IntegrationsTabSettings";
+import OptimizationModeCard from "../components/SettingsComponent/OptimizationModeCard";
 
-const SettingPage = ({ registrationData }) => {
-  const [unsavedChanges, setUnsavedChanges] = useState(false);
+const SettingPage = () => {
+  // const [unsavedChanges, setUnsavedChanges] = useState(false);
   const [activeTab, updateActiveTab] = useState(0);
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
-  const [userDetail, updateUserDetail] =  useState()
   const [userSettings, setUserSettings] = useState({
-   });
+  });
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (unsavedChanges) {
-        const message = "You have unsaved changes. Are you sure you want to leave?";
-        event.returnValue = message; 
-        return message; 
-      }
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (unsavedChanges) {
+  //       const message = "You have unsaved changes. Are you sure you want to leave?";
+  //       event.returnValue = message;
+  //       return message;
+  //     }
+  //   };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [unsavedChanges]);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [unsavedChanges]);
 
-  const handleUserSettingsChange = (newData) => {
-    setUserSettings(newData);
-    setUnsavedChanges(true);
-  };
-
-  const handleSaveSettings = async () => {
+  const fetchingPlanName = async () => {
     try {
-      const response = await fetch(
+      const res = await GetAxiosConfig(`user/current-plan-detail`);
+      const resJSON = res?.data;
 
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userSettings),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || "Failed to update user information"
-        );
+      if (resJSON.status === 200) {
+        const planName = resJSON?.data?.plan;
+        dispatch(setToggle({ key: "planName", value: planName }));
+      } else if (resJSON.status === 403) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
       }
-
-      const updatedUserData = await response.json();
-      
-      toast.success("Settings updated successfully!");
-      handleUserSettingsChange(updatedUserData);
-      setUnsavedChanges(false); // Reset unsaved changes after successful save
     } catch (error) {
-      console.error("Error updating user information:", error.message);
-      toast.error("Failed to update settings");
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
     }
   };
 
+  useEffect(() => {
+    fetchingPlanName();
+  }, [])
 
 
+  const handleUserSettingsChange = (newData) => {
+    setUserSettings(newData);
+  };
 
-
+  const handleSaveSettings = async () => { };
 
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
-       <TitleManager title="Settings" conicalURL="settings" />
+      <TitleManager title="Settings" conicalURL="settings" />
       <div className="w-[100%] h-[50px] shrink-0"></div>
 
       <div
@@ -102,16 +100,15 @@ const SettingPage = ({ registrationData }) => {
           <div className="w-[100%] mobile:my-[20px] laptop:my-0 h-[34px] flex justify-end items-center">
             {deviceWith < 1000 && (
               <MobileViewNavigator
-                onChangeHandler={(e) => {
-                  updateActiveTab(e);
-                }}
+              activeTab={activeTab}
+              updateActiveTab={updateActiveTab}
               />
             )}
-            {/* <SaveButton
+            <SaveButton
               btnText="Save Settings"
               onClick={handleSaveSettings}
               style={{ margin: isMobile ? "-20px 0  0 0" : 0 }}
-            /> */}
+            />
           </div>
           {deviceWith > 1000 && (
             <Navigator
@@ -129,11 +126,17 @@ const SettingPage = ({ registrationData }) => {
               <ToastContainer />
             </>
           )}
-          {activeTab === 1 && <FontsTabSettings />}
-          {activeTab === 2 && <ImageTabSettings />}
-          {activeTab === 3 && <HtmlTabSettings />}
-          {activeTab === 4 && <CssTabSettings />}
-          {activeTab === 5 && <JSTabSettings />}
+          {activeTab >= 1 && activeTab <= 6 && (
+            <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
+              {/* {activeTab === 1 && <GeneralTabSetting1 />} */}
+              {activeTab === 1 && <FontsTabSettings />}
+              {activeTab === 2 && <ImageTabSettings />}
+              {activeTab === 3 && <HtmlTabSettings />}
+              {activeTab === 4 && <CssTabSettings />}
+              {activeTab === 5 && <JSTabSettings />}
+              <OptimizationModeCard />
+            </div>
+          )}
         </div>
       </div>
     </div>

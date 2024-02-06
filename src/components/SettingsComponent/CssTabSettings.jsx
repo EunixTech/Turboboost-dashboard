@@ -2,7 +2,6 @@ import React from "react";
 
 import FeatureCard from "../FeatureCard";
 import InputFields from "../InputFields";
-import OptimizationModeCard from "../OptimizationModeCard";
 import { setToggle } from "../../slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { featureAPIHandling } from "../../utils/featureAPIHandling";
@@ -14,7 +13,8 @@ const CssTabSettings = () => {
 
     const criticalCSSToggleValue = useSelector((state) => state.toggles?.criticalCSS);
     const removeUnsedCSSToggleValue = useSelector((state) => state.toggles?.removeUnsedCSS);
-    
+    const planName = useSelector((state) => state.toggles?.planName);
+
     const handleCriticalCSS = async() =>{
       let endPoint = "";
       if (!criticalCSSToggleValue) endPoint = "api/shopify/critical-css-optimization";
@@ -37,9 +37,10 @@ const CssTabSettings = () => {
         return toast.success(data.message);
       }  else return toast.error(data?.message)
     
-   
     }
 
+    const handleCombineJsFeature = () =>{
+    }
     
   return (
     <>
@@ -50,19 +51,20 @@ const CssTabSettings = () => {
               backgroundColor: dark ? "#111317" : "#fff",
               borderColor: dark ? "#1F2329" : "#ebebeb",
             }}
-            className=" bg-[#fff] mt-[10px] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
+            className=" bg-[#fff] border-[1px] border-[#EBEBEB] pt-[10px]  mb-[30px] rounded-[8px] w-[100%] mt-[0px]"
           >
             <FeatureCard
+               getFeature = {planName === "Basic" ? true : false}
                handlingToggle={handleCriticalCSS}
                toggleValue= {criticalCSSToggleValue}
               last={true}
               title="Optimize CSS Delivery"
-              // isSubSectionExist={true}
+              isSubSectionExist={true}
               p="10px 15px 20px 15px"
-              // subSectionTitile={"Additional Options"}
+              subSectionTitile={"Additional Options"}
               description="Create critical CSS as well as rework your website CSS for optimal delivery"
             >
-              {/* <div className="w-[100%] py-[10px]">
+              <div className="w-[100%] py-[10px]">
                 <InputFields
                   labelText="Remove @font-face rules from the critical CSS"
                   list={["Disabled"]}
@@ -85,19 +87,20 @@ const CssTabSettings = () => {
                   type="textarea"
                   inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                 />
-              </div> */}
+              </div>
             </FeatureCard>
 
             <FeatureCard
+                        getFeature = {planName === "Basic" || planName === "Starter" ? true : false}
                handlingToggle={handleRemoveUnsedCSS}
                toggleValue= {removeUnsedCSSToggleValue}
               title="Remove Unused CSS"
-              // isSubSectionExist={true}
+              isSubSectionExist={true}
               p="10px 15px 20px 15px"
-              // subSectionTitile={"Additional Options"}
+              subSectionTitile={"Additional Options"}
               description="Unused CSS rules are removed from optimized CSS files for faster page rendering."
             >
-              {/* <div className="w-[100%] py-[10px]">
+              <div className="w-[100%] py-[10px]">
                 <InputFields
                   labelText="Debupe Based on Critical CSS"
                   list={["Disabled"]}
@@ -135,10 +138,10 @@ const CssTabSettings = () => {
                   type="textarea"
                   inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
                 />
-              </div> */}
+              </div>
             </FeatureCard>
-
-            {/* <FeatureCard
+{/* 
+            <FeatureCard
               title="Combine CSS into one resource"
               isSubSectionExist={true}
               p="10px 15px 20px 15px"
@@ -158,17 +161,17 @@ const CssTabSettings = () => {
                   best results.
                 </div>
               </div>
-            </FeatureCard> */}
-{/* 
+            </FeatureCard>  */}
+
             <FeatureCard
                handlingToggle={handleCombineJsFeature}
               toggleValue= {criticalCSSToggleValue}
               title="Custom CSS"
               description="Specify custom CSS rules which will be applied to the optimized pages."
-            /> */}
+            />
           </div>
         </div>
-        {/* <OptimizationModeCard /> */}
+       
       </div>
     </>
   );
