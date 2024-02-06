@@ -183,7 +183,7 @@ const Billing = () => {
 											>
 												{item?.name}
 											</h1>
-											{item?.name === "Growth" ? <div className="text-[#0FE38F] bg-[#000] px-[14px] py-[6.5px] leading-[8px] rounded-[20px] ml-[9px] translate-y-[-1px] text-[12px]  tracking-wide font-medium flex items-center justify-center">
+											{item?.name === "Growth" ? <div className="text-[#0FE38F] bg-[#000] px-[14px] py-[6.5px] leading-[8px] rounded-[20px] translate-y-[-1px] text-[12px]  tracking-wide font-medium flex items-center justify-center">
 												Most Popular
 											</div> : ``}
 
@@ -204,8 +204,8 @@ const Billing = () => {
 											className="w-[100%] leading-[32px] px-[17px] relative mt-[10px] shrink-0 text-[32px] font-bold "
 										>
 											{selected === 0
-												? `$ ${item?.monthlyPrice}`
-												: `$ ${item?.annuallyPrice}`}
+												? `$${item?.monthlyPrice}`
+												: `$${item?.annuallyPrice}`}
 											<span className="text-[14px] font-medium text-[#696e7e89]">
 												{" "}
 												/{selected === 0 ? "month" : "year"}

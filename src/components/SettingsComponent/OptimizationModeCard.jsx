@@ -142,6 +142,7 @@ export default function OptimizationModeCard() {
                 <InputDropdown1
                     label=""
                     list={[
+                        "Custom",
                         "Strong",
                         "Medium",
                         "Standard",

@@ -140,7 +140,7 @@ const CssTabSettings = () => {
                 />
               </div>
             </FeatureCard>
-
+{/* 
             <FeatureCard
               title="Combine CSS into one resource"
               isSubSectionExist={true}
@@ -161,7 +161,7 @@ const CssTabSettings = () => {
                   best results.
                 </div>
               </div>
-            </FeatureCard> 
+            </FeatureCard>  */}
 
             <FeatureCard
                handlingToggle={handleCombineJsFeature}

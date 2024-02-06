@@ -77,7 +77,7 @@ const GeneralTabSetting1 = () => {
             />
           </div>
         </div>
-
+{/* 
         <div
           style={{
             backgroundColor: dark ? "#111317" : "#fff",
@@ -119,7 +119,7 @@ const GeneralTabSetting1 = () => {
               https://txtcartapp.com/?nitroWebhook-confirm&token=68cf19c4369df90q9wnjFSDg39
             </div>
           </FeatureCard>
-        </div>
+        </div> */}
       </div>
 
     </div>

@@ -13,18 +13,18 @@ const JSTabSettings = () => {
 
   const minifyJSFile = useSelector((state) => state.toggles?.minifyJSFile),
     delayScriptsValue = useSelector((state) => state.toggles?.delayScripts);
-   
+
 
   const handleDelayScript = async () => {
     let endPoint = "";
     if (!delayScriptsValue) endPoint = "api/shopify/delay-js-resources";
     else endPoint = "api/shopify/restore-delay-js-resources";
     const data = await featureAPIHandling(endPoint);
-    if(data.status === 200){
+    if (data.status === 200) {
       dispatch(setToggle({ key: "delayScripts", value: !delayScriptsValue }));
       return toast.success(data.message);
-    }  else return toast.error(data?.message)
-  
+    } else return toast.error(data?.message)
+
   }
 
   const handleMinifyJSFileFunc = async () => {
@@ -32,12 +32,12 @@ const JSTabSettings = () => {
     if (!minifyJSFile) endPoint = "api/shopify/minify-javascript-code";
     else endPoint = "api/shopify/minify-javascript-code";
     const data = await featureAPIHandling(endPoint);
-    if(data.status === 200){
+    if (data.status === 200) {
       dispatch(setToggle({ key: "minifyJSFile", value: !minifyJSFile }));
       return toast.success(data.message);
-    }  else return toast.error(data?.message)
-  
-  
+    } else return toast.error(data?.message)
+
+
   }
 
   return (
@@ -59,72 +59,72 @@ const JSTabSettings = () => {
               title="Minify javascript code"
               description="Use a single file for all JavaScript code. This reduces the number of network requests and makes rendering more efficient"
             />
-            <FeatureCard
-            title="Configure resource loading strategy"
-            isSubSectionExist={true}
-            p="10px 15px 20px 15px"
-            subSectionTitile={"Additional Options"}
-            description="Rework and reposition blocking resource files in the above-the-fold portion of your page"
-          >
-            <div className="w-[100%] py-[10px]">
-              <InputFields
-                labelText="Use Resource Loader Script"
-                list={["Disabled"]}
-                type="dropdown"
-              />
-              <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
-                Using a resource loader script gives us control over
-                the CSS asd JS loading sequence, which often improves
-                the score. However, it may not be compatible with all
-                sites, especially ones that have JS errors or scripts
-                that use document.write().
-              </div>
+            {/* <FeatureCard
+              title="Configure resource loading strategy"
+              isSubSectionExist={true}
+              p="10px 15px 20px 15px"
+              subSectionTitile={"Additional Options"}
+              description="Rework and reposition blocking resource files in the above-the-fold portion of your page"
+            >
+              <div className="w-[100%] py-[10px]">
+                <InputFields
+                  labelText="Use Resource Loader Script"
+                  list={["Disabled"]}
+                  type="dropdown"
+                />
+                <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
+                  Using a resource loader script gives us control over
+                  the CSS asd JS loading sequence, which often improves
+                  the score. However, it may not be compatible with all
+                  sites, especially ones that have JS errors or scripts
+                  that use document.write().
+                </div>
 
-              <InputFields
-                labelText="Delay loading of non-critical resources until user interaction is detected"
-                list={["Disabled"]}
-                type="dropdown"
-              />
+                <InputFields
+                  labelText="Delay loading of non-critical resources until user interaction is detected"
+                  list={["Disabled"]}
+                  type="dropdown"
+                />
 
-              <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
-                When this option is enabled, only critical resources
-                for rendering above-the-fold parts of pages will be
-                loaded. The rest of the resources will be loaded when
-                user interaction with the site is detected. This
-                option can improve score drastically.
-              </div>
+                <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
+                  When this option is enabled, only critical resources
+                  for rendering above-the-fold parts of pages will be
+                  loaded. The rest of the resources will be loaded when
+                  user interaction with the site is detected. This
+                  option can improve score drastically.
+                </div>
 
-              <InputFields
-                labelText="Resource loading strategy"
-                type="text"
-              />
-              <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
-                Loading scripts first usually gives better performance
-                and snappier feeling site, however it may not work in
-                all cases. Loading styles first is the safer option,
-                but you may still get some styles reported as
-                render-blocking.
+                <InputFields
+                  labelText="Resource loading strategy"
+                  type="text"
+                />
+                <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
+                  Loading scripts first usually gives better performance
+                  and snappier feeling site, however it may not work in
+                  all cases. Loading styles first is the safer option,
+                  but you may still get some styles reported as
+                  render-blocking.
+                </div>
               </div>
-            </div>
-          </FeatureCard>
+            </FeatureCard> */}
             <FeatureCard
               handlingToggle={handleDelayScript}
               toggleValue={delayScriptsValue}
               title="Delayed Scripts"
               description="Specify scripts that you would like to be loaded with a delay."
             />
+            {/* <FeatureCard
+              title="Optimize Ads"
+              description="Ads will not block the initial page render"
+            />
             <FeatureCard
-            title="Optimize Ads"
-            description="Ads will not block the initial page render"
-          />
+              title="Minify JSON for Linking Data"
+              description="When enabled TurboBoost will minify the JSON-LD elements in the HTML document."
+            />
             <FeatureCard
-            title="Minify JSON for Linking Data"
-            description="When enabled TurboBoost will minify the JSON-LD elements in the HTML document."
-          />
-            <FeatureCard
-            title="Do not optimize OptinMonster scripts"
-            description="OptinMonster scripts and scripts using the OptinMonster events will be automatically excluded from optimization"
-          />
+              title="Do not optimize OptinMonster scripts"
+              description="OptinMonster scripts and scripts using the OptinMonster events will be automatically excluded from optimization"
+            /> */}
           </div>
         </div>
       </div>

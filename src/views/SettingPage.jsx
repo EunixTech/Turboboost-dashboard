@@ -126,16 +126,14 @@ const SettingPage = () => {
               <ToastContainer />
             </>
           )}
-          {activeTab >= 1 && activeTab <= 8 && (
+          {activeTab >= 1 && activeTab <= 6 && (
             <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
-              {activeTab === 1 && <GeneralTabSetting1 />}
-              {activeTab === 2 && <CachingTabSetting />}
-              {activeTab === 3 && <FontsTabSettings />}
-              {activeTab === 4 && <ImageTabSettings />}
-              {activeTab === 5 && <HtmlTabSettings />}
-              {activeTab === 6 && <CssTabSettings />}
-              {activeTab === 7 && <JSTabSettings />}
-              {activeTab === 8 && <IntegrationsTabSettings />}
+              {/* {activeTab === 1 && <GeneralTabSetting1 />} */}
+              {activeTab === 1 && <FontsTabSettings />}
+              {activeTab === 2 && <ImageTabSettings />}
+              {activeTab === 3 && <HtmlTabSettings />}
+              {activeTab === 4 && <CssTabSettings />}
+              {activeTab === 5 && <JSTabSettings />}
               <OptimizationModeCard />
             </div>
           )}

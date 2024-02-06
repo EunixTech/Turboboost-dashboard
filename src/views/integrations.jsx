@@ -63,7 +63,7 @@ const Integrations = () => {
                   }
 
                 </div>
-                <div className="w-[100%] pt-[30px]">
+                <div className="w-[100%] pt-[30px] pb-[30px]">
                   <h1
                     style={{
                       color: dark ? "#fff" : "#000",

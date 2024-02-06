@@ -2,19 +2,19 @@ export const IntegrationsArr = [
     {
         name: "Shopify",
         isConnected: true,
-        desc:"Your tech stack's important metrics, all in one place",
+        desc:"Get ecommerce software with tools to manage every part of your business",
         logo:"/graphic/integrations/p4.png"
     },
     {
         name: "Wordpress",
         isConnected: false,
-        desc:"Open source software you can use to easily create a beautiful website, blog and more",
+        desc:"Open source software you can use to easily create a beautiful website",
         logo:"/graphic/integrations/wordpress_logo.png"
     },
     {
         name: "Appstack",
         isConnected: false,
-        desc:"Get more than ecommerce software with tools to manage every part of your business",
+        desc:"Your tech stack's important metrics, all in one place",
         logo:"/graphic/integrations/p2.png"
     }
 ];
