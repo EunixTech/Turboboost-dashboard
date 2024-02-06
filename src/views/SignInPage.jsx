@@ -44,6 +44,8 @@ const SignInPage = () => {
       const resJSON = authResponse?.data;
       const redirectURL = resJSON.redirectURI;
 
+      console.log("redirectURL****", redirectURL)
+
       if (resJSON.status === 200) {
         window.location.href = redirectURL;
       } else {

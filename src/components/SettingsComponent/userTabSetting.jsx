@@ -481,7 +481,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                 />
               )}
 
-              <Field name="phone_number">
+              <Field className={dark ? "dark_color": "white_color"} name="phone_number">
 
                 {({ field, form }) => (
                   <div className="w-[100%]">
@@ -492,7 +492,9 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                       Phone Number
                     </label>
                     <PhoneInput
-                    className={dark ? "dark_color": "white_color"}
+                        style={{
+                          backgroundColor: dark ? "#ffffff74" : "#0a0a187e",
+                        }}
                       placeholder="Enter phone number"
                       value={phoneNumberValue}
                       onChange={(formattedValue) => {
@@ -500,7 +502,7 @@ const UserTabSettings = ({ onUpdate, onSubmit, registrationData }) => {
                         form.setFieldValue("phone_number", formattedValue);
                       }}
                     />
-                    
+
 
                     {form.touched.phone_number && form.errors.phone_number && (
                       <ErrorMessage

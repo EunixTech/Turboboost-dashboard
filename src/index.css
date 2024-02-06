@@ -627,11 +627,13 @@ input.PhoneInputInput {
 }
 
 .dark_color{
-    color: "#ffffff74" !important;
+  color: #ffffff74;
+    background-color: #0a0a187e !important;
 }
 
 .white_color{
-  color: "#0a0a187e" !important;
+  color: #0a0a187e;
+  background-color: #ffffff74 !important;
 }
 @media only screen and (max-width: 700px) {
   .user_tab_card{
