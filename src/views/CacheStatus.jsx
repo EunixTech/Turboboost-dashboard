@@ -948,7 +948,7 @@ const CacheStatus = () => {
                   <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
                 </div>
               </div>
-              {/* <Filter /> */}
+              <Filter />
               {(assetsData?.assetFileArr && assetsData?.assetFileArr?.length) ? <Table assetsData={assetsData?.assetFileArr} setSelected1={setSelected} /> : ""}
 
 

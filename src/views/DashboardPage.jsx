@@ -31,9 +31,9 @@ const GooglePageScore = ({ coreVitalsData, performanceData }) => {
         backgroundColor: dark ? "#111317" : "#fff",
         borderColor: dark ? "#1F2329" : "#ebebeb",
         height: "fit-content",
-        minHeight: "227px"
+        minHeight: "210px"
       }}
-      className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[25px] pb-[55px] pt-[10px] border-[#EBEBEB]  rounded-[8px]"
+      className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[25px] pt-[10px] border-[#EBEBEB]  rounded-[8px]"
     >
       <div className="w-[100%]  flex items-center justify-between">
         <p
@@ -102,7 +102,7 @@ const GooglePageScore = ({ coreVitalsData, performanceData }) => {
           >
             Performance
           </p>
-          <div className="flex items-center gap-[10px] justify-around h-[140px]">
+          <div className="flex items-center gap-[10px] justify-around h-[126px]">
             <CircularProgressBar
               mr="0"
               title="Performence"
@@ -761,7 +761,7 @@ const Dashboard = () => {
                   </div>
                 )} */}
               </div>
-              <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
+              <div className="w-[100%] justify-center items-center flex h-[130px] mt-[20px]">
 
                 <CustomDonutChart imageData={imageData} />
                 <div className="max-w-[250px] w-[50%] ml-auto">
@@ -850,7 +850,7 @@ const Dashboard = () => {
                 backgroundColor: dark ? "#111317" : "#fff",
                 borderColor: dark ? "#1F2329" : "#ebebeb",
               }}
-              className=" relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  py-[14px] border-[#EBEBEB] rounded-[8px]"
+              className=" relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  pt-[14px] pb-[6px] border-[#EBEBEB] rounded-[8px]"
             >
               <div className="w-[100%] px-[15px] mb-[10px] flex items-center justify-between">
                 <p
