@@ -5,7 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 export default function InputFields({
     inputClass = "w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]",
     type,
-    onChangeHandler = () => { },
+    onChangeHandler = () => {},
     value,
     inputName,
     wrapperClass = "h-[100%]",
@@ -32,7 +32,6 @@ export default function InputFields({
         return () => { document.removeEventListener("pointerdown", onpointerdown, false) };
     });
 
-
     // password field
     const [showPassword, updateShowPassword] = useState(false);
     const [showConfirmPassword, updateShowConfirmPassword] = useState(false);
@@ -40,9 +39,7 @@ export default function InputFields({
     const toggleShowPassword = (passwordType = "") => {
         if(passwordType === "password") updateShowPassword(!showPassword);
         else if(passwordType === "confirm_password") updateShowConfirmPassword(!showConfirmPassword)
-        
     };
-
 
     return (
 
@@ -52,7 +49,6 @@ export default function InputFields({
                 className={labelClass}
             >
                 {labelText}
-
             </p>
             {
                 (() => {
@@ -110,7 +106,7 @@ export default function InputFields({
 
                                                 key={i}
                                                 style={{
-                                                    backgroundColor: i === valueIndex ? dark ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
+                                                    backgroundColor: i === 2 ? dark ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
                                                 }}
                                                 onClick={() => {
                                                     updateValueIndex(i)
@@ -201,7 +197,7 @@ export default function InputFields({
                                     {showPassword ? <FaEye /> : <FaEyeSlash />}
                                 </button>
                             </div>
-                            {/* {passwordsMatchError && ( <p className="text-red-600 text-md">{passwordsMatchError}</p> )} */}
+                          
                         </div>
                     }
 

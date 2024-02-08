@@ -8,9 +8,9 @@ const FormikSelectInput = ({ label, ...props }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div className="w-[100%]">
-      <label  style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }} htmlFor={props.id || props.name} className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]">
+      <label style={{
+        color: dark ? "#ffffff74" : "#0a0a187e",
+      }} htmlFor={props.id || props.name} className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]">
         {label}
       </label>
       <select

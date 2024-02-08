@@ -20,7 +20,8 @@ const initialState = {
 
   dashboardOptimization: false,
 
-  PlanName: "Pro"
+  PlanName: "Pro",
+  optimizationMode: 1
 };
 
 const statusToggleSlice = createSlice({

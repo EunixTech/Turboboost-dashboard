@@ -114,11 +114,11 @@ const App = () => {
         dispatch(setToggle({ key: "fontRenderBehavior", value: dataObj?.font_swap_optimization?.value }));
         dispatch(setToggle({ key: "criticalCSS", value: dataObj?.critical_css?.value }));
         dispatch(setToggle({ key: "removeUnsedCSS", value: dataObj?.unused_css_code?.value }));
-  
         dispatch(setToggle({ key: "assetsOptimization", value: dataObj?.assets_optimization?.value }));
         dispatch(setToggle({ key: "pageOptimization", value: dataObj?.page_optimization?.value }));
         dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization?.value }));
         dispatch(setToggle({ key: "dashboardOptimization", value: dataObj?.dashboard_optimization }));
+        dispatch(setToggle({ key: "optimizationMode", value: dataObj?.optimization_mode }));
 
       } 
     } catch (error) {
@@ -161,18 +161,6 @@ const App = () => {
     checkAuth();
  
   }, []);
-
-
-  // useEffect(() => {
-  //   const hasApiBeenCalled = localStorage.getItem('apiCalled');
-  //   if (!hasApiBeenCalled) {
-  //     // Make the API call here
-  //     // ...
-  //     // Set the flag in local storage to indicate that the API call has been made
-  //     localStorage.setItem('apiCalled', 'true');
-  //   }
-  // }, []);
-  
 
   return (
     <>
