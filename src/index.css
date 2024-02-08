@@ -590,6 +590,26 @@ input.PhoneInputInput {
 .mobile-container {
   display: none; /* Hide for larger screens */
 }
+.otp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.otp-input-container {
+  display: flex;
+}
+
+.otp-input {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+
 @media only screen and (max-width: 599px) {
   .MuiBox-root,
   .billing-modal-background {

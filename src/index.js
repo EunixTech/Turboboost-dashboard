@@ -32,6 +32,7 @@ import { setToggle } from "./slice/statusToggleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NitroPack from "./views/NitroPack.jsx";
 import ConnectSiteNitro from "./views/ConnectSiteNitro.jsx";
+import NitroOtp from "./views/NitroOtp.jsx";
 // import { useDispatch } from "react-redux";
 const router = [
   {
@@ -86,14 +87,14 @@ const router = [
     path: "/connect-to-store",
     element: <ConnectStore />,
   },
-  {
-    path: "/nitro-pack",
-    element: <NitroPack />,
-  },
-  {
-    path: "/connect-site",
-    element: <ConnectSiteNitro />,
-  },
+  // {
+  //   path: "/nitro-pack",
+  //   element: <NitroPack />,
+  // },
+  // {
+  //   path: "/connect-site",
+  //   element: <ConnectSiteNitro />,
+  // },
   
 
 ];
@@ -162,11 +163,14 @@ const App = () => {
       const authToken = localStorage.getItem('authToken');
       const isLoginRoute = window.location.pathname === '/login-shopify';
       const isNitroPackRoute = window.location.pathname === '/nitro-pack';
-      const isConnectSiteNitro = window.location.pathname === '/connect-site'
+      const isConnectSiteNitro = window.location.pathname === '/connect-site';
+      const isNitroOtp = window.location.pathname === '/nitro-otp';
 
-      if (!authToken && !isLoginRoute && !userToken1 && !isNitroPackRoute && !isConnectSiteNitro) {
+      if (!authToken && !isLoginRoute && !userToken1 && !isNitroPackRoute && !isConnectSiteNitro && !isNitroOtp) {
         // Redirect to login page if authToken is not available and not on the login route
         window.location.replace('/login-shopify');
+        // window.location.replace('/nitro-pack');
+        // window.location.replace('/nitro-otp');
       } else if (authToken && isLoginRoute) {
         // Redirect to dashboard page if authToken is available and on the login route
         window.location.replace('/dashboard');
@@ -216,6 +220,7 @@ const App = () => {
         <Route path={"/login-shopify"} element={<SignInRoute />} />
         <Route path={"/nitro-pack"} element={<NitroPack />} />
         <Route path={"/connect-site"} element={<ConnectSiteNitro />} />
+        <Route path={"/nitro-otp"} element={<NitroOtp />} />
 
         {/* <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />

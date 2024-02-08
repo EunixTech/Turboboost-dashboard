@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 import FormikInput from "../components/forms/FormikInput";
 import GoogleLoginButton from "../components/button/GoogleLogin";
 import TitleManager from "../components/TitleManager";
@@ -19,6 +20,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const NitroPack = () => {
+  const navigate = useNavigate(); 
+
   const fetchConfig = getFetchConfig();
   const appURL = appURLs();
 
@@ -47,6 +50,10 @@ const NitroPack = () => {
     }
   };
 
+  const handleContinueClick = () => {
+    navigate("/connect-site"); 
+  };
+
   return (
     <div className="flex items-center justify-center h-screen m-[10px]">
       <div className="w-full max-w-md">
@@ -59,7 +66,11 @@ const NitroPack = () => {
         >
           {() => (
             <Form>
-              <img src="/logo-b.png" className="w-[150px]" alt="" />
+              <div className="flex justify-center">
+                {" "}
+                {/* Center the image horizontally */}
+                <img src="/logo-b.png" className="w-[150px]" alt="" />
+              </div>
 
               <h1 className="text-[60px] mt-4 font-bold text-center hidden md:block">
                 Let's start with your email
@@ -82,7 +93,8 @@ const NitroPack = () => {
                 />
 
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={handleContinueClick}
                   className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
                 >
                   <span className="translate-y-[1.5px] text-[16px]">

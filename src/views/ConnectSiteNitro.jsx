@@ -54,7 +54,7 @@ const ConnectSiteNitro = () => {
 
   return (
     <div className="flex items-center justify-center h-screen m-[10px]">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-lg">
         <Formik
           initialValues={{
             siteURL: "",
@@ -67,7 +67,11 @@ const ConnectSiteNitro = () => {
         >
           {() => (
             <Form>
-              <img src="/logo-b.png" className="w-[150px]" alt="" />
+              <div className="flex justify-center">
+                {" "}
+                {/* Center the image horizontally */}
+                <img src="/logo-b.png" className="w-[150px]" alt="" />
+              </div>
 
               <div className="mt-6">
                 <FormikInput
@@ -164,11 +168,11 @@ const ConnectSiteNitro = () => {
                         <Field
                           type="radio"
                           name="subscription"
-                          value="business"
+                          value="free"
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
                         />
                         <div>
-                          <p className="font-semibold text-lg">Business $0/mo</p>
+                          <p className="font-semibold text-lg">Free $0/mo</p>
                           <p className="text-sm text-gray-600">
                             Standard features, 5k shared page views.
                           </p>
@@ -183,11 +187,11 @@ const ConnectSiteNitro = () => {
                         <Field
                           type="radio"
                           name="subscription"
-                          value="scale"
+                          value="free"
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
                         />
                         <div>
-                          <p className="font-semibold text-lg">Scale $0/mo</p>
+                          <p className="font-semibold text-lg">Free $0/mo</p>
                           <p className="text-sm text-gray-600">
                             Standard features, 5k shared page views.
                           </p>
@@ -202,11 +206,11 @@ const ConnectSiteNitro = () => {
                         <Field
                           type="radio"
                           name="subscription"
-                          value="growth"
+                          value="free"
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
                         />
                         <div>
-                          <p className="font-semibold text-lg">Growth $0/mo</p>
+                          <p className="font-semibold text-lg">Free $0/mo</p>
                           <p className="text-sm text-gray-600">
                             Standard features, 5k shared page views.
                           </p>
@@ -218,6 +222,49 @@ const ConnectSiteNitro = () => {
                     </div>
                   </>
                 ) : (
+                  <>
+                    <div className="bg-gray-100 rounded-md p-4 mt-4">
+                      <label className="flex items-center">
+                        <Field
+                          type="radio"
+                          name="subscription"
+                          value="free"
+                          className="mr-2 h-4 w-4 border-gray-300 rounded"
+                        />
+                        <div>
+                          <p className="font-semibold text-lg">Free $0/mo</p>
+                          <p className="text-sm text-gray-600">
+                            Standard features, 5k shared page views.
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            Great for starters, comes with a badge on your site.
+                          </p>
+                        </div>
+                      </label>
+                    </div>
+                    <div className="bg-gray-100 rounded-md p-4 mt-4">
+                      <label className="flex items-center">
+                        <Field
+                          type="radio"
+                          name="subscription"
+                          value="free"
+                          className="mr-2 h-4 w-4 border-gray-300 rounded"
+                        />
+                        <div>
+                          <p className="font-semibold text-lg">Free $0/mo</p>
+                          <p className="text-sm text-gray-600">
+                            Standard features, 5k shared page views.
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            Great for starters, comes with a badge on your site.
+                          </p>
+                        </div>
+                      </label>
+                    </div>
+                  </>
+                )}
+
+                {!showAllPlans && (
                   <button
                     type="button"
                     onClick={() => setShowAllPlans(true)}
@@ -226,16 +273,14 @@ const ConnectSiteNitro = () => {
                     See more plans
                   </button>
                 )}
-              </div>
 
-              <button
-                type="submit"
-                className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
-              >
-                <span className="translate-y-[1.5px] text-[16px]">
-                  Add
-                </span>
-              </button>
+                <button
+                  type="submit"
+                  className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
+                >
+                  <span className="translate-y-[1.5px] text-[16px]">Add</span>
+                </button>
+              </div>
             </Form>
           )}
         </Formik>
