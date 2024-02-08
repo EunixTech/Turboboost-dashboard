@@ -1,21 +1,22 @@
-import React, { useEffect, useState, useRef } from "react";
-import HomeLayout from "../layouts/index/index";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from 'yup';
-import TitleManager from "../components/TitleManager";
-import axios from "axios"
-import appURLs from "../appURL";
 import { toast } from "react-toastify";
-import AnimatedLoader from "../components/loader/AnimatedLoader";
-import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
-const Button = () => {
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
+import TitleManager from "../components/TitleManager";
+import AnimatedLoader from "../components/loader/AnimatedLoader";
+
+import { GetAxiosConfig } from "../utils/axiosConfig.js";
+
+const Button = () => {
   const dark = useSelector((state) => state.home.dark);
- 
-  
+  const handleCommingSoonMsg = () =>{
+    toast.dismiss();
+    return   toast.info("Coming Soon");
+  }
   return (
     <div
+    onClick={handleCommingSoonMsg}
       className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
@@ -405,6 +406,9 @@ const ButtonAdd = ({ onClick }) => {
         } flex items-center justify-center`}
     >
       <p
+       style={{
+        color: dark ? "#fff" : "#000",
+      }}
         className={`text-[${
           false ? "#fff" : "#000"
         }]   f2 text-[14px]  border-[1px]  ${
@@ -595,12 +599,9 @@ const BrowseConnectors = ({ cancel }) => {
 
 const ConnectWebsite = () => {
   const dark = useSelector((state) => state.home.dark);
-  const [websites, setWebsites] = useState([]);
   const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
   const [loader, toggleLoader] = useState(false)
   const [show, setShow] = useState(false);
-
-    const appURL = appURLs();
 
   const fetchConnectedWebsiteData = async () => {
  
@@ -609,9 +610,6 @@ const ConnectWebsite = () => {
         const res = await GetAxiosConfig(`api/dashboard/fetch-connected-website-data`);
         
         const resJSON = res?.data;
-
-        console.log("resJSONresresresresres", res)
-        console.log("resJSONresresresresres", resJSON)
 
         if(resJSON.status === 200){
           const dataArr = resJSON?.conectedWebsite;
@@ -633,7 +631,6 @@ const ConnectWebsite = () => {
           localStorage.removeItem('authToken');
           window.location.replace('/login-shopify');
         }
-        console.error("Error fetching user profile data:", error);
       }
   };
 
@@ -643,40 +640,6 @@ const ConnectWebsite = () => {
     fetchConnectedWebsiteData();
   }, [])
   
-
-  // // Load data from localStorage when the component mounts
-  // useEffect(() => {
-  //   const storedData = localStorage.getItem("websites");
-  //   if (storedData) {
-  //     setWebsites(JSON.parse(storedData));
-  //   }
-  // }, []);
-
-  // // Save data to localStorage whenever the websites state changes
-  // useEffect(() => {
-  //   localStorage.setItem("websites", JSON.stringify(websites));
-  // }, [websites]);
-
-  // const addWebsiteToList = (website) => {
-  //   setWebsites((prevWebsites) => [...prevWebsites, website]);
-  //   console.log("add data", website);
-  // };
-
-  // const deleteWebsite = (index) => {
-  //   setWebsites((prevWebsites) => prevWebsites.filter((_, i) => i !== index));
-  // };
-  // const validationSchema = Yup.object().shape({
-  //   url: Yup.string()
-  //     .url('Invalid URL format')
-  //     .required('Website URL is required'),
-  //   name: Yup.string().required('Website Name is required'),
-  // });
-
-  const handleSubmitForm = () =>{
-    toast.dismiss();
-    return
-    // return toast.success("Coming soon");
-  }
 
   return (
     <>
@@ -818,15 +781,7 @@ const ConnectWebsite = () => {
                             className="text-red-500 text-xs mt-1"
                           />
                         </div>
-                        <button
-                          onClick = {handleSubmitForm}
-                          type="submit"
-                          className={`w-[100%] h-[40px] cursor-pointer mt-[18px] hover:bg-[#2FE49C] rounded-[3px] flex items-center justify-center bg-[#38F8AC] ${
-                            dark ? "text-white" : "text-black"
-                          }`}
-                        >
-                          Add New Website
-                        </button>
+                        <Button />
                       </Form>
                     )}
                   </Formik>
@@ -998,15 +953,7 @@ const ConnectWebsite = () => {
                             className="text-red-500 text-xs mt-1"
                           />
                         </div>
-                        <button
-                          onClick = {handleSubmitForm}
-                          type="submit"
-                          className={`w-[100%] h-[40px] cursor-pointer mt-[18px] hover:bg-[#2FE49C] rounded-[3px] flex items-center justify-center bg-[#38F8AC] ${
-                            dark ? "text-white" : "text-black"
-                          }`}
-                        >
-                          Add New Website
-                        </button>
+                       
                       </Form>
                     )}
                   </Formik>

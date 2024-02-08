@@ -1,28 +1,28 @@
-import React from 'react'
-import { useSelector,useDispatch } from "react-redux";
-import InputFields from '../InputFields';
+import React from 'react';
+import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from "react-redux";
+
 import optModeDropdownArr from '../../utils/optModeDropDownArr';
-import {  PostAxiosConfig } from "../../utils/axiosConfig.js";
-import {toast} from 'react-toastify';
+import { PostAxiosConfig } from "../../utils/axiosConfig.js";
 import { setToggle } from "../../slice/statusToggleSlice";
+import InputFields from '../InputFields';
+
 export default function OptimizationModeCard() {
     const dark = useSelector((state) => state.home.dark);
     const optimizationModeValue = useSelector((state) => state.toggles?.optimizationMode);
     const dispatch = useDispatch();
 
-    const handleChangeMode = async(index) =>{
+    const handleChangeMode = async (index) => {
         toast.dismiss();
-        const mode = index+1;
-        const res = await PostAxiosConfig(`api/shopify/optimization/toggle-optimization-mode`, {
-            mode
-          })
-          const resData =  res.data;
+        const mode = index + 1;
+        const res = await PostAxiosConfig(`api/shopify/optimization/toggle-optimization-mode`, { mode })
+        const resData = res.data;
 
-          if (resData.status === 200) {
+        if (resData.status === 200) {
             dispatch(setToggle({ key: "optimizationMode", value: mode }));
             return toast.success(`Optimization mode changed to ${optModeDropdownArr[index]}.`);
-          } else return toast.error(resData?.message)
-      
+        } else return toast.error(resData?.message)
+
     }
 
     return (
@@ -55,7 +55,7 @@ export default function OptimizationModeCard() {
                                 className="mr-[3px] w-[14px]"
                                 alt=""
                             />
-                           { optModeDropdownArr[optimizationModeValue ? optimizationModeValue-1 : 1 ]}
+                            {optModeDropdownArr[optimizationModeValue ? optimizationModeValue - 1 : 1]}
                         </>
                     </div>
                 </div>
@@ -67,11 +67,11 @@ export default function OptimizationModeCard() {
                 >
                     Changing the mode, the level of optimization is updated and your cache is purged
                 </p>
- 
+
                 <InputFields
                     list={optModeDropdownArr}
                     type="dropdown"
-                    defaultValue = {optimizationModeValue}
+                    defaultValue={optimizationModeValue}
                     onChangeHandler={handleChangeMode}
                 />
             </div>
