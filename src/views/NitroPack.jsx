@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
       /^(http|https)?:\/\/(www\.)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?|[\w-]+\.myshopify\.com$/,
       "Invalid domain name format"
     )
-    .required("Domain name is required"),
+    .required("email is required"),
 });
 
 const NitroPack = () => {
@@ -82,7 +82,7 @@ const NitroPack = () => {
                 Please use your <strong>work email</strong>.
               </p>
               <p className="text-[16px] text-center">
-                If you already have a NitroPack account, use that email.
+                If you already have a Turboboost account, use that email.
               </p>
 
               <div className="mt-6">
