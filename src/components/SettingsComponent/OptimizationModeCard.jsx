@@ -1,11 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from "react-redux";
-import FormikSelectInput from "./FormikSelectInput";
+import React from 'react';
+import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from "react-redux";
+
+import optModeDropdownArr from '../../utils/optModeDropDownArr';
+import { PostAxiosConfig } from "../../utils/axiosConfig.js";
+import { setToggle } from "../../slice/statusToggleSlice";
 import InputFields from '../InputFields';
 
 export default function OptimizationModeCard() {
     const dark = useSelector((state) => state.home.dark);
-    const criticalCSSToggleValue = useSelector((state) => state.toggles?.criticalCSS);
+    const optimizationModeValue = useSelector((state) => state.toggles?.optimizationMode);
+    const dispatch = useDispatch();
+
+    const handleChangeMode = async (index) => {
+        toast.dismiss();
+        const mode = index + 1;
+        const res = await PostAxiosConfig(`api/shopify/optimization/toggle-optimization-mode`, { mode })
+        const resData = res.data;
+
+        if (resData.status === 200) {
+            dispatch(setToggle({ key: "optimizationMode", value: mode }));
+            return toast.success(`Optimization mode changed to ${optModeDropdownArr[index]}.`);
+        } else return toast.error(resData?.message)
+
+    }
+
     return (
         <div className="w-[320px] shrink-0 ml-[15px]">
             <div
@@ -36,7 +55,7 @@ export default function OptimizationModeCard() {
                                 className="mr-[3px] w-[14px]"
                                 alt=""
                             />
-                            Custom
+                            {optModeDropdownArr[optimizationModeValue ? optimizationModeValue - 1 : 1]}
                         </>
                     </div>
                 </div>
@@ -48,10 +67,12 @@ export default function OptimizationModeCard() {
                 >
                     Changing the mode, the level of optimization is updated and your cache is purged
                 </p>
+
                 <InputFields
-                    list={[" Customs", "Ludacris", "Strong", "Medium", "Standard"]}
-                    labelText="Country"
+                    list={optModeDropdownArr}
                     type="dropdown"
+                    defaultValue={optimizationModeValue}
+                    onChangeHandler={handleChangeMode}
                 />
             </div>
         </div>

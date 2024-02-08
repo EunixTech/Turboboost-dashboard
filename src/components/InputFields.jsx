@@ -14,13 +14,14 @@ export default function InputFields({
     labelText,
     list = [],
     dropDownListClass = "w-[100%]  h-[34px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer",
-    dropDownClass = "h-[38px]"
+    dropDownClass = "h-[38px]",
+    defaultValue = 1,
 
 }) {
 
     const dark = useSelector((state) => state.home.dark);
     const [checkboxStatus, updateCheckboxStatus] = useState(false);
-    const [valueIndex, updateValueIndex] = useState(0);
+    const [valueIndex, updateValueIndex] = useState(defaultValue);
 
     const [hover, setHover] = useState(false),
         [isDropdownOpen, updateIsDropdownOpen] = useState(false);
@@ -40,6 +41,7 @@ export default function InputFields({
         if(passwordType === "password") updateShowPassword(!showPassword);
         else if(passwordType === "confirm_password") updateShowConfirmPassword(!showConfirmPassword)
     };
+
 
     return (
 
@@ -81,7 +83,7 @@ export default function InputFields({
                                     style={{ color: dark ? "#fff" : "#000" }}
                                     className="text-[12px] font-bold tracking-wide  text-[#000]"
                                 >
-                                    {list[valueIndex]}
+                                    {list[valueIndex-1]}
                                 </p>
 
                                 <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
@@ -101,22 +103,27 @@ export default function InputFields({
                                 >
 
                                     {list.map((item, i) => {
+                                        
                                         return (
-                                            <div
+                                            
+                                                i+1 !== valueIndex &&   <div
 
                                                 key={i}
                                                 style={{
-                                                    backgroundColor: i === 2 ? dark ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
+                                                    backgroundColor: i === valueIndex ? dark ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
                                                 }}
                                                 onClick={() => {
-                                                    updateValueIndex(i)
+                                                    updateValueIndex(i+1)
                                                     updateIsDropdownOpen(false)
+                                                    onChangeHandler(i)
                                                 }}
                                                 className={dropDownListClass}
                                             >
                                                 {item}
                                             </div>
 
+                                            
+                                         
                                         );
 
                                     })}
