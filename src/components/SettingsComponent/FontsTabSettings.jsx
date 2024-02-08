@@ -26,8 +26,6 @@ const FontsTabSettings = () => {
       return toast.success(data.message);
     } else return toast.error(data?.message)
 
-
-
   }
 
   const handleFontLoading = async () => {
@@ -95,28 +93,10 @@ const FontsTabSettings = () => {
                 />
               </div>
             </FeatureCard>
-            {/* <FeatureCard
-            featured={true}
-            title="Font Subsetting (Remove Unused Glyphs)"
-            description="When this option is enabled, TurboBoost will optimize fonts by removing symbols(glyphs), when are not used anywhere. This can dramatically reduce the size of these fonts. Learn more"
-            h={"100px"}
-          />
-          <FeatureCard
-            title="Enable Font Compression Upgrade"
-            description="When this option is enabled, TurboBoost will optimize fonts by upgrading their compression to WOFF2 format. This can reduce the size of these fonts by up to 50%."
-            h={"100px"}
-          /> */}
+        
           </div>
         </div>
 
-        {/* <OptimizationModeCard /> */}
-        {/* {unsavedChanges && (
-        <div className="confirmation-popup">
-          <div>Save changes before leaving?</div>
-          <button onClick={handleSaveChanges}>Yes</button>
-          <button onClick={handleCancelChanges}>No</button>
-        </div>
-      )} */}
       </div>
     </>
   );
