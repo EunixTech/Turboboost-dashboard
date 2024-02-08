@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { useNavigate } from "react-router-dom";
 const validationSchema = Yup.object().shape({
   otp: Yup.string()
     .matches(/^\d{6}$/, "OTP must be a 6-digit number")
@@ -12,26 +12,28 @@ const validationSchema = Yup.object().shape({
 
 const OTPComponent = ({ handleSuccess }) => {
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (values) => {
-    try {
-      setSubmitting(true);
-      // Simulate API call to verify OTP (replace with your actual API call)
-      const response = await axios.post("/api/verify-otp", {
-        otp: values.otp,
-      });
-      // Assuming your API returns success status
-      if (response.data.success) {
-        handleSuccess();
-      } else {
-        toast.error("Invalid OTP. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error verifying OTP:", error);
-      toast.error("An error occurred. Please try again later.");
-    } finally {
-      setSubmitting(false);
-    }
+    navigate("/connect-site"); 
+    // try {
+    //   setSubmitting(true);
+    //   // Simulate API call to verify OTP (replace with your actual API call)
+    //   const response = await axios.post("/api/verify-otp", {
+    //     otp: values.otp,
+    //   });
+    //   // Assuming your API returns success status
+    //   if (response.data.success) {
+    //     handleSuccess();
+    //   } else {
+    //     toast.error("Invalid OTP. Please try again.");
+    //   }
+    // } catch (error) {
+    //   console.error("Error verifying OTP:", error);
+    //   toast.error("An error occurred. Please try again later.");
+    // } finally {
+    //   setSubmitting(false);
+    // }
   };
 
   return (
@@ -46,7 +48,7 @@ const OTPComponent = ({ handleSuccess }) => {
       <p className="mb-[10px]">We've sent a 6-digit code to email. Please check your email inbox.</p>
       <Formik
         initialValues={{ otp: "" }}
-        validationSchema={validationSchema}
+        // validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (

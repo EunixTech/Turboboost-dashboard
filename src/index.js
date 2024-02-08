@@ -188,7 +188,7 @@ const App = () => {
         // location.pathname === "/auth/signUp" ||
         // location.pathname === "/auth/forgot-password" ||
         // location.pathname === "/auth/reset-password" ||
-        location.pathname === "/login-shopify"
+        location.pathname === "/login-shopify" ||  location.pathname === "/nitro-pack" ||  location.pathname === "/connect-site" ||  location.pathname === "/verifiy-email-otp"
       ) && (
         <HomeLayout>
           <Routes>
@@ -208,7 +208,7 @@ const App = () => {
         <Route path={"/login-shopify"} element={<SignInRoute />} />
         <Route path={"/nitro-pack"} element={<NitroPack />} />
         <Route path={"/connect-site"} element={<ConnectSiteNitro />} />
-        <Route path={"/nitro-otp"} element={<NitroOtp />} />
+        <Route path={"/verifiy-email-otp"} element={<NitroOtp />} />
 
         {/* <Route path={"/auth/signUp"} element={<SignUp />} />
         <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />

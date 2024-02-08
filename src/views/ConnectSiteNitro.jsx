@@ -25,31 +25,31 @@ const ConnectSiteNitro = () => {
   const [showAllPlans, setShowAllPlans] = useState(false);
 
   const handleFormSubmit = async (values) => {
-    try {
-      const authResponse = await axios.post(
-        `${appURL}/api/shopify/shopify-auth`,
-        {
-          site_url: values.siteURL,
-          site_name: values.siteName,
-          site_platform: values.sitePlatform,
-          subscription: values.subscription,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+    // try {
+    //   const authResponse = await axios.post(
+    //     `${appURL}/api/shopify/shopify-auth`,
+    //     {
+    //       site_url: values.siteURL,
+    //       site_name: values.siteName,
+    //       site_platform: values.sitePlatform,
+    //       subscription: values.subscription,
+    //     },
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   );
 
-      const resJSON = authResponse?.data;
-      const redirectURL = resJSON.redirectURI;
+    //   const resJSON = authResponse?.data;
+    //   const redirectURL = resJSON.redirectURI;
 
-      if (resJSON.status === 200) {
-        window.location.href = redirectURL;
-      } else {
-        return toast.error(resJSON.message);
-      }
-    } catch (error) {
-      console.error("Error fetching user profile data:", error);
-    }
+    //   if (resJSON.status === 200) {
+    //     window.location.href = redirectURL;
+    //   } else {
+    //     return toast.error(resJSON.message);
+    //   }
+    // } catch (error) {
+    //   console.error("Error fetching user profile data:", error);
+    // }
   };
 
   return (
