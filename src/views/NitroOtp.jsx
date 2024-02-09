@@ -1,72 +1,55 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import OtpInput from "react-otp-input";
+
 const validationSchema = Yup.object().shape({
   otp: Yup.string()
     .matches(/^\d{6}$/, "OTP must be a 6-digit number")
     .required("OTP is required"),
 });
 
-const OTPComponent = ({ handleSuccess }) => {
+const OTPComponent = () => {
   const [submitting, setSubmitting] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const [otp, setOtp] = useState("");
+  console.log("iski maa ka bhodsa============>", otp);
 
   const handleSubmit = async (values) => {
-    navigate("/connect-site"); 
-    // try {
-    //   setSubmitting(true);
-    //   // Simulate API call to verify OTP (replace with your actual API call)
-    //   const response = await axios.post("/api/verify-otp", {
-    //     otp: values.otp,
-    //   });
-    //   // Assuming your API returns success status
-    //   if (response.data.success) {
-    //     handleSuccess();
-    //   } else {
-    //     toast.error("Invalid OTP. Please try again.");
-    //   }
-    // } catch (error) {
-    //   console.error("Error verifying OTP:", error);
-    //   toast.error("An error occurred. Please try again later.");
-    // } finally {
-    //   setSubmitting(false);
-    // }
+    // You can handle form submission here
+    navigate("/connect-site");
   };
 
   return (
     <div className="otp-container">
-        <div className="flex justify-center">
-                {" "}
-                {/* Center the image horizontally */}
-                <img src="/logo-b.png" className="w-[150px]" alt="" />
-              </div>
+      <div className="flex justify-center">
+        {/* Center the image horizontally */}
+        <img src="/logo-b.png" className="w-[150px]" alt="" />
+      </div>
 
-      <h3 className="mt-[10px]">Check your email for a code</h3>
-      <p className="mb-[10px]">We've sent a 6-digit code to email. Please check your email inbox.</p>
+      <h3 className="mt-[10px] flex p-[10px]">Check your email for a code  We've sent a 6-digit code to email. Please check your email inbox.</h3>
+      <p className="mb-[10px]">
+       
+      </p>
       <Formik
         initialValues={{ otp: "" }}
-        // validationSchema={validationSchema}
+        validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
           <Form>
             <div className="otp-input-container">
-              {[...Array(6)].map((_, index) => (
-                <Field
-                  key={index}
-                  type="text"
-                  name={`otp[${index}]`}
-                  maxLength={1}
-                  className="otp-input"
-                  disabled={isSubmitting}
-                />
-              ))}
+              <OtpInput
+                value={otp} // Use state variable otp instead of the string "otp"
+                onChange={setOtp}
+                numInputs={6}
+                renderSeparator={<span>-</span>}
+                renderInput={(props) => <input {...props} />}
+              />
             </div>
             <ErrorMessage name="otp" component="div" />
-              <p className="flex justify-center">Re-send code</p>
+            <p className="flex justify-center">Re-send code</p>
             <button
               type="submit"
               disabled={isSubmitting || submitting}
