@@ -6,11 +6,13 @@ import optModeDropdownArr from '../../utils/optModeDropDownArr';
 import { PostAxiosConfig } from "../../utils/axiosConfig.js";
 import { setToggle } from "../../slice/statusToggleSlice";
 import InputFields from '../InputFields';
+import useWidth from "../../hooks/useWidth";
 
 export default function OptimizationModeCard() {
     const dark = useSelector((state) => state.home.dark);
     const optimizationModeValue = useSelector((state) => state.toggles?.optimizationMode);
     const dispatch = useDispatch();
+    const deviceWith = useWidth();
 
     const handleChangeMode = async (index) => {
         toast.dismiss();
@@ -26,13 +28,16 @@ export default function OptimizationModeCard() {
     }
 
     return (
-        <div className="w-[320px] shrink-0 ml-[15px]">
+        <div style = {{
+            width: deviceWith < 1000 ? "100%" : "",
+            marginLeft: deviceWith < 1000 ? "" : "20px"
+        }} className={`w-[320px] shrink-0`}>
             <div
                 style={{
                     backgroundColor: dark ? "#111317" : "#fff",
                     borderColor: dark ? "#1F2329" : "#ebebeb",
                 }}
-                className=" bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
+                className="pb-[25px] bg-[#fff] pb-[12px] px-[15px] border-[1px] border-[#EBEBEB] pt-[12px] mb-[30px] rounded-[8px] w-[100%]"
             >
                 <div className="w-[100%] flex justify-between">
                     <h1

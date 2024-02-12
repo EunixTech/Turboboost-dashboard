@@ -20,17 +20,22 @@ export default function MobileViewNavigator({ activeTab, updateActiveTab  }) {
 
     const dark = useSelector((state) => state.home.dark);
 
-    const dd = (i) =>{
-        console.log("ahsdhgafdgh", i)
+    const onChangeHandler = (i) =>{
+        updateSelectedTab(false);
+        updateActiveTab(i)
     }
 
     return (
         <div className="h-[100%] w-[100%]" >
 
-            <div className="w-[100%] relative border-[1px]  border-[#ebebeb]  text-[12px] font-medium  h-[34px]">
+            <div style={{
+                        backgroundColor: dark ? "#111317" : "#fff",
+                        borderColor: dark ? "#1F2329" : "#ebebeb",
+                        borderRadius: "5px"
+                      }} className="w-[100%] relative border-[1px]  border-[#ebebeb]  text-[12px] font-medium  h-[40px]">
                 <div
                     onClick={() => { updateSelectedTab(true);}}
-                    className="w-[100%] cursor-pointer px-[10px] h-[34px] flex justify-between items-center"
+                    className="w-[100%] cursor-pointer px-[10px] h-[40px] flex justify-between items-center"
                 >
                     <p
                         style={{
@@ -45,17 +50,24 @@ export default function MobileViewNavigator({ activeTab, updateActiveTab  }) {
                 </div>
                 {selectedTab && (
 
-                    <div className="w-[100%] min-h-[10px] rounded-[2px] px-[5px] py-[5px] border-[1px] border-[#ebebeb] absolute z-50 top-[40px] bg-[#fff]">
+                    <div  style={{
+                        backgroundColor: dark ? "#111317" : "#fff",
+                        borderColor: dark ? "#1F2329" : "#ebebeb",
+                      }}    className="w-[100%] min-h-[10px] rounded-[2px] px-[5px] py-[5px] border-[1px] border-[#ebebeb] absolute z-50 top-[40px] bg-[#fff]">
 
                         {navigationbarArr.map((item, i) => {
                             return (
-                                <div onClick={()=>dd(i)}
+                                <div 
                                     onMouseOver={() => { updateHover(true)}}
                                     onMouseLeave={() => {updateHover(false)}}
                                     key={i}
+                                    onClick={() => {
+                                        onChangeHandler(i)
+                                    }}
+        
                                     style={{
-                                        backgroundColor: i === activeTab ? "#222" : "#fff",
-                                        color: i === activeTab ? "#fff" : "#000",
+                                        backgroundColor: i === activeTab  ? dark ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
+                                        color:  i === activeTab ? dark ? "#fff" : "#000" : dark ? "#fff" : "#000",
                                     }}
                                  
                                     className="w-[100%] rounded-[2px] h-[27px] mb-[3px] flex items-center justify-center text-[11px] cursor-pointer"

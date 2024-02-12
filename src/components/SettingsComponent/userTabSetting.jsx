@@ -14,7 +14,7 @@ import FormikInput from "../forms/FormikInput";
 import FormikSelectInput from "./FormikSelectInput";
 import ChangeEmail from "./ChangeEmail";
 
-const UserTabSettings = () => {
+const UserTabSettings = ({update}) => {
 
   const [phoneNumberValue, setPhoneNumberValue] = useState();
 
@@ -41,7 +41,7 @@ const UserTabSettings = () => {
     country: Yup.string().required("Country is required"),
     phone_number: Yup.string()
       .transform((value, originalValue) => {
-        // Remove non-numeric characters from the input value
+
         return originalValue.replace(/[^\d]/g, "");
       })
       .test("valid-phone-number", "Invalid phone number", function (value) {
@@ -349,7 +349,7 @@ const UserTabSettings = () => {
                 <div className="flex justify-between items-end mb-[10px]">
                   <Field name="email_address">
                     {({ field }) => (
-                      <div className="w-[100%] mr-[10px]">
+                      <div className="w-[100%]">
                         <FormikInput
                           inputLabel="Email"
                           inputName="email_address"

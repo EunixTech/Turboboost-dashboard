@@ -31,17 +31,18 @@ const Button = ({ onClick }) => {
     );
   };
   
-  const Item = ({ title, src, route }) => {
+  const Item = ({ title, src, route, cancel = () =>{} }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const currentPath = location.pathname;
-
+    const dispatch = useDispatch();
     const selected = currentPath === route;
  
     const [hover, setHover] = useState(false);
     const btn = useRef();
     return (
       <div
+
         style={{
           backgroundColor: (hover ? true : selected) ? "#ffffff20" : "",
         }}
@@ -71,7 +72,7 @@ const Button = ({ onClick }) => {
           }
   
           btn.appendChild(circle);
-  
+          cancel();
           navigate(route);
         }}
         className="w-[100%] cursor-pointer overflow-hidden relative sidebar-anim  rounded-[4px] mb-[15px] flex items-center  h-[40px]"
@@ -178,18 +179,19 @@ export default function SidebarCard({cancel}) {
     return (
         <>
             <div className="w-[100%] mt-[20px]">
-                <Item title={"Dashboard"} route="/dashboard" src="/icon1.svg" />
+                <Item title={"Dashboard"} route="/dashboard" src="/icon1.svg" cancel={cancel} />
                 <Item
                     title={"Connect Website"}
                     route="/connect-website"
                     src="/icon2.svg"
+                    cancel={cancel}
                 />
-                <Item title={"Page Optimization"} route="/page-optimization" src="/icon3.svg" />
-                <Item title={"Assets Status"} route="/assets-status" src="/icon4.svg" />
-                <Item title={"Logs"} route="/logs" src="/icon5.svg" />
-                <Item title={"Integrations"} route="/integrations" src="/icon6.svg" />
-                <Item title={"Billing"} route="/billing" src="/icon7.svg" />
-                <Item title={"Settings"} route="/settings" src="/icon8.svg" />
+                <Item title={"Page Optimization"} route="/page-optimization" src="/icon3.svg" cancel={cancel} />
+                <Item title={"Assets Status"} route="/assets-status" src="/icon4.svg" cancel={cancel} />
+                <Item title={"Logs"} route="/logs" src="/icon5.svg" cancel={cancel} />
+                <Item title={"Integrations"} route="/integrations" src="/icon6.svg" cancel={cancel} />
+                <Item title={"Billing"} route="/billing" src="/icon7.svg" cancel={cancel} />
+                <Item title={"Settings"} route="/settings" src="/icon8.svg" cancel={cancel} />
             </div>
             <div
                 style={{

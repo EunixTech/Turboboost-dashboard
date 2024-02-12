@@ -74,10 +74,12 @@ const SettingPage = () => {
 
 
   const handleUserSettingsChange = (newData) => {
-    setUserSettings(newData);
+    localStorage.setItem("cjshgcjh", true)
   };
 
-  const handleSaveSettings = async () => { };
+  const handleSaveSettings = async () => {
+    console.log("")
+  };
 
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
@@ -97,11 +99,11 @@ const SettingPage = () => {
               Settings
             </h1>
           </div>
-          <div className="w-[100%] mobile:my-[20px] laptop:my-0 h-[34px] flex justify-end items-center">
+          <div className="w-[100%] mobile:my-[20px] laptop:my-0 h-[34px] flex justify-end gap-[10px] items-center">
             {deviceWith < 1000 && (
               <MobileViewNavigator
-              activeTab={activeTab}
-              updateActiveTab={updateActiveTab}
+                activeTab={activeTab}
+                updateActiveTab={updateActiveTab}
               />
             )}
             <SaveButton

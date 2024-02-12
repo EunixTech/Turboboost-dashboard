@@ -100,7 +100,7 @@ const Sidebar = ({ transition, cancel }) => {
             />
           </div>
 
-          <SidebarCard />
+          <SidebarCard cancel={cancel} />
 
         </div>
       </Tween>

@@ -1,79 +1,12 @@
-// import React, { useEffect, useState } from "react";
-// import x from "../layouts/index/index";
-// import { useSelector } from "react-redux";
-// import HeaderItem from "../components/HeaderItem";
-// import InputDropdown from "../components/InputDropdown";
-// import InputText from "../components/InputText";
-// import Button from "../components/button/Button";
-// import Status from "../components/Status";
-// import TableItem from "../components/TableItem";
-// import CheckBox from "../components/CheckBox";
-// import TableHeader from "../components/TableHeader";
-// import Table from "../components/Table";
-// import CacheStatus from "../components/CacheStatus";
-// import Button2 from "../components/button/Button2";
-// import Filter from "../components/Filter";
-// import TitleManager from "../components/TitleManager";
-// export default function CacheStatusPage() {
-//   return (
-//     <>
-//       <TitleManager title="Cache Status" conicalURL="cache-status" />
-
-//       <Button2 />
-//       <HeaderItem />
-//       <InputText />
-//       <InputDropdown />
-
-//       <Filter />
-//       <CheckBox />
-
-//       <TableHeader />
-
-//       <Status />
-//       <TableItem />
-//       <Table />
-//       <CacheStatus />
-//     </>
-//   )
-// }
 
 
 import React, { useEffect, useState } from "react";
-import HomeLayout from "../layouts/index/index";
 import TitleManager from "../components/TitleManager.jsx";
-import axios from "axios";
-import appURLs from "../appURL";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
-import { GetAxiosConfig, PostAxiosConfig } from "../utils/axiosConfig.js";
+import { GetAxiosConfig } from "../utils/axiosConfig.js";
 import { setToggle } from "../slice/statusToggleSlice";
-// const Button = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         // onClick();
-//       }}
-//       className={`w-[48%] ${!dark ? "bg-[#ebebeb] " : "bg-[#204c3a]"}
-//         h-[34px]   cursor-pointer rounded-[4px] border-[1px] ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb] "
-//         } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           false ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[1.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         Clear
-//       </p>
-//     </div>
-//   );
-// };
 
 const Button = () => {
   const dark = useSelector((state) => state.home.dark);
@@ -139,72 +72,6 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
     </div>
   );
 };
-
-// const Button2 = ({ onClick, check }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         // onClick();
-//       }}
-//       className={`laptop:w-[150px]  mobile:w-[100%] ${
-//         !dark ? "bg-[#ebebeb] " : "bg-[#204c3a]"
-//       }
-//         h-[40px]   cursor-pointer rounded-[4px] border-[1px] ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb] "
-//         } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         style={{
-//           backgroundColor: check ? "#F87238" : "#FF465C",
-//         }}
-//         className={`text-[${
-//           true ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[2.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         <img
-//           src="/graphic/status/del.svg"
-//           className="w-[12px] ml-[6px] mr-[6px] translate-y-[0px]"
-//           alt=""
-//         />{" "}
-//         <div className="translate-y-[1px]">
-//           {check ? "Purge Selected" : "Purge All Cache"}
-//         </div>
-//       </p>
-//     </div>
-//   );
-// };
-
-// const Button1 = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         // onClick();
-//       }}
-//       className={`w-[48%] ${!dark ? "bg-[#ebebeb] " : "bg-[#1c1f26]"}
-//       h-[34px]   cursor-pointer rounded-[4px] border-[1px] ${
-//         dark ? "border-[#1F2329]" : "border-[#ebebeb] "
-//       } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           true ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#1F2329]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#000]" : "bg-[#000]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[1.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         Apply
-//       </p>
-//     </div>
-//   );
-// };
 
 const Button1 = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
