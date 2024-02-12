@@ -38,10 +38,8 @@ const ConnectSiteNitro = () => {
     //       withCredentials: true,
     //     }
     //   );
-
     //   const resJSON = authResponse?.data;
     //   const redirectURL = resJSON.redirectURI;
-
     //   if (resJSON.status === 200) {
     //     window.location.href = redirectURL;
     //   } else {
@@ -79,21 +77,11 @@ const ConnectSiteNitro = () => {
                   inputName="siteURL"
                   inputType="text"
                 />
-                <ErrorMessage
-                  name="siteURL"
-                  component="div"
-                  className="text-red-500 text-sm"
-                />
 
                 <FormikInput
                   inputLabel="Site Name"
                   inputName="siteName"
                   inputType="text"
-                />
-                <ErrorMessage
-                  name="siteName"
-                  component="div"
-                  className="text-red-500 text-sm"
                 />
 
                 <label
@@ -124,18 +112,8 @@ const ConnectSiteNitro = () => {
                 <label className="block text-sm font-medium text-gray-700 mt-4">
                   Choose a speed optimization subscription
                 </label>
-                <div className="flex items-center mt-2">
-                  <div>
-                    <p>Compare features</p>
-                  </div>
-                  <div className="flex items-center ml-2 mr-2">
-                    <label htmlFor="monthly">Monthly</label>
-                    <switch></switch>
-                  </div>
-                  <div className="flex items-center">
-                    <label htmlFor="yearly">Yearly (Save 17%)</label>
-                  </div>
-                </div>
+
+                {/* Show only one error message for subscription */}
                 <ErrorMessage
                   name="subscription"
                   component="div"
@@ -172,12 +150,14 @@ const ConnectSiteNitro = () => {
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
                         />
                         <div>
-                          <p className="font-semibold text-lg">Free $0/mo</p>
+                          <p className="font-semibold text-lg">
+                            Business <span>$21/mo</span> $0/mo
+                          </p>
                           <p className="text-sm text-gray-600">
-                            Standard features, 5k shared page views.
+                            Standard features, 50k page views.
                           </p>
                           <p className="text-xs text-gray-500">
-                            Great for starters, comes with a badge on your site.
+                            kickstart your page speed and core Web vitals.
                           </p>
                         </div>
                       </label>
@@ -210,12 +190,14 @@ const ConnectSiteNitro = () => {
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
                         />
                         <div>
-                          <p className="font-semibold text-lg">Free $0/mo</p>
+                          <p className="font-semibold text-lg">
+                            Business <span>$21/mo</span> $0/mo
+                          </p>
                           <p className="text-sm text-gray-600">
-                            Standard features, 5k shared page views.
+                            Standard features, 50k page views.
                           </p>
                           <p className="text-xs text-gray-500">
-                            Great for starters, comes with a badge on your site.
+                            kickstart your page speed and core Web vitals.
                           </p>
                         </div>
                       </label>
@@ -232,12 +214,16 @@ const ConnectSiteNitro = () => {
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
                         />
                         <div>
-                          <p className="font-semibold text-lg">Free $0/mo</p>
+                          <p className="font-semibold text-lg">
+                            Scale <span>$176 /mo</span> $146.67/mo
+                          </p>
                           <p className="text-sm text-gray-600">
-                            Standard features, 5k shared page views.
+                            Font Subsetting, Adaptive image Sizing and 1M page
+                            views.
                           </p>
                           <p className="text-xs text-gray-500">
-                            Great for starters, comes with a badge on your site.
+                            Gives you better Core Web Vitals and cheaper page
+                            views.
                           </p>
                         </div>
                       </label>
@@ -251,12 +237,12 @@ const ConnectSiteNitro = () => {
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
                         />
                         <div>
-                          <p className="font-semibold text-lg">Free $0/mo</p>
+                          <p className="font-semibold text-lg">Growth <span>$51/mo</span>  $0/mo</p>
                           <p className="text-sm text-gray-600">
-                            Standard features, 5k shared page views.
+                            Adaptive image sizing and 200k page views.
                           </p>
                           <p className="text-xs text-gray-500">
-                            Great for starters, comes with a badge on your site.
+                            Gives you advanced speed and  optimization for growing sites.
                           </p>
                         </div>
                       </label>
@@ -279,14 +265,16 @@ const ConnectSiteNitro = () => {
                   className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
                 >
                   <span className="translate-y-[1.5px] text-[16px]">Add</span>
-                </button>
+                </button>    
+                <p className="flex justify-center">You are logged in as email </p>
+                  <p className="flex justify-center">Switch account</p>
               </div>
             </Form>
           )}
         </Formik>
       </div>
     </div>
-  );
+  );  
 };
 
 export default ConnectSiteNitro;
