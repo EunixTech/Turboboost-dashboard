@@ -4,9 +4,10 @@ import { parsePhoneNumberFromString } from "libphonenumber-js";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-phone-number-input/style.css";
+// import "react-phone-number-input/style.css";
 
-import PhoneInput from "react-phone-number-input";
+// import PhoneInput from "react-phone-number-input";
+import PhoneInputField from "../Input/PhoneInput.jsx";
 import { GetAxiosConfig, PatchAxiosConfig, PostAxiosConfig } from "../../utils/axiosConfig.js";
 import AnimatedLoader from "../loader/AnimatedLoader.jsx";
 import FeatureCard from "../FeatureCard.jsx";
@@ -302,7 +303,7 @@ const UserTabSettings = ({update}) => {
                       }} htmlFor="Phone Number " className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]">
                         Phone Number
                       </label>
-                      <PhoneInput
+                      {/* <PhoneInput
                         style={{
                           backgroundColor: dark ? "#ffffff74" : "#0a0a187e",
                         }}
@@ -312,7 +313,8 @@ const UserTabSettings = ({update}) => {
                           setPhoneNumberValue(formattedValue);
                           form.setFieldValue("phone_number", formattedValue);
                         }}
-                      />
+                      /> */}
+                      <PhoneInputField value={phoneNumberValue} setPhoneNumberValue={setPhoneNumberValue} form={form}  />
                       {form.touched.phone_number && form.errors.phone_number && (
                         <ErrorMessage
                           name="phone_number"

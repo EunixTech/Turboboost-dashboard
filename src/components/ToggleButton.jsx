@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 
-const ToggleButton = ({ toggleValue, handlingToggle = {}, toggleKey = "defaultKey", onSaveToggleState }) => {
+const ToggleButton = ({ toggleValue, handlingToggle = {}}) => {
 
   const dark = useSelector((state) => state.home.dark);
 
@@ -16,7 +16,7 @@ const ToggleButton = ({ toggleValue, handlingToggle = {}, toggleKey = "defaultKe
     >
       <svg  style={{
           position: "absolute",
-          left: !toggleValue ? "24px" : "3.5px",
+          left: toggleValue ? "24px" : "3.5px",
         }} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="18" height="18" rx="9" fill="white" />
       </svg>

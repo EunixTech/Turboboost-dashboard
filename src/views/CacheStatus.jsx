@@ -8,10 +8,12 @@ import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
 import { GetAxiosConfig } from "../utils/axiosConfig.js";
 import { setToggle } from "../slice/statusToggleSlice";
 
-const Button = () => {
+const Button = ({ clearFilterHandler }) => {
   const dark = useSelector((state) => state.home.dark);
+
+
   return (
-    <div
+    <div onClick={clearFilterHandler}
       className={`w-[48%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
         h-[34px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
@@ -68,16 +70,16 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
 
           </p>
       }
-    
+
     </div>
   );
 };
 
-const Button1 = ({ onClick }) => {
+const Button1 = ({ handlingApplyFilter }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
-      onClick={() => { }}
+      onClick={handlingApplyFilter}
       className={`w-[48%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
         h-[34px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
@@ -148,8 +150,8 @@ const InputText = ({ label }) => {
   );
 };
 
-const InputDropdown = ({ label, list }) => {
-  const [curr, setCurr] = useState(0);
+const InputDropdown = ({ label, list, clearFilter }) => {
+  const [curr, setCurr] = useState(clearFilter);
   const [hover, setHover] = useState(false);
   const [clicked, setClicked] = useState(false);
 
@@ -165,6 +167,12 @@ const InputDropdown = ({ label, list }) => {
     };
   });
   const dark = useSelector((state) => state.home.dark);
+
+  useEffect(() => {
+    setCurr(0)
+  }, [clearFilter])
+
+
 
   return (
     <div className="mobile:w-[100%] laptop:w-[19.5%] h-[100%]">
@@ -233,7 +241,9 @@ const InputDropdown = ({ label, list }) => {
                           : "#fff",
                   }}
                   onClick={() => {
+                    localStorage.setItem(label, item)
                     setCurr(i);
+                    setClicked(false)
                   }}
                   className="w-[100%] h-[34px]  flex items-center justify-center text-[11px] cursor-pointer"
                 >
@@ -248,38 +258,45 @@ const InputDropdown = ({ label, list }) => {
   );
 };
 
-const Filter = () => {
-  const dark = useSelector((state) => state.home.dark);
+const Filter = ({ handlingApplyFilter }) => {
+
+  const [clearFilter, updateClearFilter] = useState(0)
+  const clearFilterHandler = () => {
+    localStorage.removeItem("Search By");
+    localStorage.removeItem("Assets Type");
+    localStorage.removeItem("Status");
+    localStorage.removeItem("Results Per Page");
+    updateClearFilter(clearFilter + 1)
+  }
   return (
     <div className="w-[100%] px-[15px] flex mobile:flex-col laptop:flex-row mt-[18px] justify-between items-end">
       <div className="flex mobile:flex-col laptop:flex-row justify-between items-center w-[100%]">
         <InputText label="Search In Results" />
         <InputDropdown
+          clearFilter={clearFilter}
           label="Search By"
-          list={["URL", "All Devices", "All Statuses", "20"]}
+          list={["URL", "Assets Type", "Assets Name"]}
         />
         <InputDropdown
-          label="Device Type"
-          list={["All Devices", "All Statuses", "20", "URL"]}
+          clearFilter={clearFilter}
+          label="Assets Type"
+          list={["Application/Javascript", "Application/x-liquid", "Text/Css"]}
         />
         <InputDropdown
+          clearFilter={clearFilter}
           label="Status"
-          list={["All Statuses", "20", "URL", "All Devices"]}
+          list={["Optimized", "Pending", "All Statuses"]}
         />
         <InputDropdown
+          clearFilter={clearFilter}
           label="Results Per Page"
-          list={["20", "URL", "All Devices", "All Statuses"]}
+          list={["20", "All Assest Type", "All Statuses"]}
         />
       </div>
       <div className="flex items-center mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[200px] justify-between shrink-0 ml-[10px]">
-        {/* <div className="w-[48%] h-[34px] text-[11px] cursor-pointer rounded-[3px]  text-[#fff] hover:bg-[#333345] bg-[#191B21] flex items-center justify-center text-[#000] font-bold">
-          Clear
-        </div>
-        <div className="w-[48%] h-[34px] text-[11px] cursor-pointer rounded-[3px] hover:bg-[#2FE49C] bg-[#38F8AC] flex items-center justify-center text-[#000] font-bold">
-          Apply
-        </div> */}
-        <Button />
-        <Button1 />
+
+        <Button clearFilterHandler={clearFilterHandler} />
+        <Button1 handlingApplyFilter={handlingApplyFilter} />
       </div>
     </div>
   );
@@ -585,7 +602,7 @@ const CacheStatus = () => {
 
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
-
+        toggleLoader(false);
       } else {
         toggleLoader(false);
         return toast.error("Please try again");
@@ -594,6 +611,7 @@ const CacheStatus = () => {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
+        toggleLoader(false);
       }
       toggleLoader(false);
       console.error("Error fetching user profile data:", error);
@@ -616,6 +634,7 @@ const CacheStatus = () => {
         fetchAssetsOptimizationData();
         // toggleLoader(false);
       } else {
+        toggleLoader(false);
         return toast.error("Please try again");
       }
     } catch (error) {
@@ -642,6 +661,20 @@ const CacheStatus = () => {
     };
     fetchData();
   }, [])
+
+  const handlingApplyFilter = () => {
+    const searchByFilter = localStorage.getItem("Search By");
+    const assetsTypeFilter = localStorage.getItem("Assets Type");
+    const statusByFilter = localStorage.getItem("Status");
+    const resultsPerPageByFilter = localStorage.getItem("Results Per Page");
+
+    if(assetsTypeFilter){
+     const filterData =  assetsData.filter((data)=>data?.file_type === assetsTypeFilter.toLocaleLowerCase());
+     updateAssetsData(filterData)
+    }
+
+  }
+
 
 
   return (
@@ -815,7 +848,7 @@ const CacheStatus = () => {
                   <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
                 </div>
               </div>
-              <Filter />
+              <Filter handlingApplyFilter={handlingApplyFilter} />
               {(assetsData?.assetFileArr && assetsData?.assetFileArr?.length) ? <Table assetsData={assetsData?.assetFileArr} setSelected1={setSelected} /> : ""}
 
 

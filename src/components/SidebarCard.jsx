@@ -32,8 +32,9 @@ const Button = ({ onClick }) => {
   };
   
   const Item = ({ title, src, route, cancel = () =>{} }) => {
-    const location = useLocation();
+   
     const navigate = useNavigate();
+    const location = useLocation();
     const currentPath = location.pathname;
     const dispatch = useDispatch();
     const selected = currentPath === route;
@@ -105,6 +106,8 @@ export default function SidebarCard({cancel}) {
     const [show, setShow] = useState(false);
     const [PageViewCount, updatePageViewCount] = useState(0);
     const dark = useSelector((state) => state.home.dark);
+    const location = useLocation();
+    const currentPath = location.pathname;
     const dispatch = useDispatch();
     const [currentPlan, updateCurrentPlan] = useState({})
   
@@ -179,7 +182,7 @@ export default function SidebarCard({cancel}) {
     return (
         <>
             <div className="w-[100%] mt-[20px]">
-                <Item title={"Dashboard"} route="/dashboard" src="/icon1.svg" cancel={cancel} />
+                <Item title={"Dashboard"} route={ currentPath === "/dashboard" ? "/dashboard" : "/"} src="/icon1.svg" cancel={cancel} />
                 <Item
                     title={"Connect Website"}
                     route="/connect-website"
