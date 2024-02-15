@@ -4,9 +4,8 @@ import { parsePhoneNumberFromString } from "libphonenumber-js";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-// import "react-phone-number-input/style.css";
+import useWidth from "../../hooks/useWidth";
 
-// import PhoneInput from "react-phone-number-input";
 import PhoneInputField from "../Input/PhoneInput.jsx";
 import { GetAxiosConfig, PatchAxiosConfig, PostAxiosConfig } from "../../utils/axiosConfig.js";
 import AnimatedLoader from "../loader/AnimatedLoader.jsx";
@@ -15,8 +14,8 @@ import FormikInput from "../forms/FormikInput";
 import FormikSelectInput from "./FormikSelectInput";
 import ChangeEmail from "./ChangeEmail";
 
-const UserTabSettings = ({update}) => {
-
+const UserTabSettings = ({ update }) => {
+  const deviceWith = useWidth();
   const [phoneNumberValue, setPhoneNumberValue] = useState();
 
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
@@ -89,8 +88,9 @@ const UserTabSettings = ({update}) => {
       const res = await PatchAxiosConfig(`user/update-account`, values)
 
       const resJSON = await res.data;
-
+      await fetchProfileData();
       if (resJSON?.status === 200) {
+    
         toggoleLoading(false);
         return toast.success(resJSON.message);
 
@@ -117,16 +117,16 @@ const UserTabSettings = ({update}) => {
 
       if (resJSON?.status === 200) {
         const user = resJSON?.acccount;
-        console.log("user,user", user)
-
+  
         const dataObj = {
           first_name: user?.user_info?.first_name,
           last_name: user?.user_info?.last_name,
           email_address: user?.user_info?.email_address,
           country: user?.user_basic_info?.country,
           phone_number: user?.user_info?.phone_number || "",
-          business_type: user?.user_basic_info?.business_type || "",
+          business_type: user?.user_basic_info?.bussiness_type || "",
         };
+ 
         updateEmailPreferences(user?.email_preferences)
         updateUserData(dataObj);
         setPhoneNumberValue(user?.user_info?.phone_number || "");
@@ -142,13 +142,11 @@ const UserTabSettings = ({update}) => {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
       }
-      console.error("Error fetching user profile data:", error);
     }
   };
 
 
   useEffect(() => {
-   
     fetchProfileData();
   }, []);
 
@@ -159,7 +157,7 @@ const UserTabSettings = ({update}) => {
         "essential": emailPreferences?.essential ? 2 : 1
       }
     })
-    const resData =  res.data;
+    const resData = res.data;
 
     if (resData.status === 200) {
       fetchProfileData();
@@ -173,7 +171,7 @@ const UserTabSettings = ({update}) => {
         "promotions_offers": emailPreferences?.promotions_offers ? 2 : 1
       }
     })
-    const resData =  res.data;
+    const resData = res.data;
 
     if (resData.status === 200) {
       fetchProfileData();
@@ -186,7 +184,7 @@ const UserTabSettings = ({update}) => {
         "features_articles_company": emailPreferences?.features_articles_company ? 2 : 1
       }
     })
-    const resData =  res.data;
+    const resData = res.data;
 
     if (resData.status === 200) {
       fetchProfileData();
@@ -213,6 +211,7 @@ const UserTabSettings = ({update}) => {
               style={{
                 backgroundColor: dark ? "#111317" : "#fff",
                 borderColor: dark ? "#1F2329" : "#ebebeb",
+                position: "relative"
               }}
               className="border-[1px] border-[#EBEBEB] rounded-[8px] laptop:grid-cols-2 gap-x-[15px] gap-y-[10px] p-4 mb-5"
             >
@@ -314,7 +313,7 @@ const UserTabSettings = ({update}) => {
                           form.setFieldValue("phone_number", formattedValue);
                         }}
                       /> */}
-                      <PhoneInputField value={phoneNumberValue} setPhoneNumberValue={setPhoneNumberValue} form={form}  />
+                      <PhoneInputField value={phoneNumberValue} setPhoneNumberValue={setPhoneNumberValue} form={form} />
                       {form.touched.phone_number && form.errors.phone_number && (
                         <ErrorMessage
                           name="phone_number"
@@ -383,12 +382,29 @@ const UserTabSettings = ({update}) => {
                     </p>
                   </div>
                   <ChangeEmail
+                  fetchProfileData={fetchProfileData}
                     isOpen={isChangeEmailModalOpen}
                     onClose={handleCloseChangeEmailModal}
                   />
                 </div>
 
               </div>
+              <div id="form-submit-btn"
+
+                className={` ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
+w-[130px]
+h-[37px] ${deviceWith < 1000 ? "mt-[24px] w-[95px]" : "mt-[20px]"}   cursor-pointer rounded-[4px]  flex items-center justify-center`}
+              >
+                <button
+                  type="submit"
+                  className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+                    } rounded-[4px] active:translate-y-[0px] active:border-0 hover:bg-[#2fe49c] translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-bold `}
+                >
+                  Save Settings
+
+                </button>
+              </div>
+
             </div>
 
           </Form>

@@ -39,9 +39,6 @@ const CssTabSettings = () => {
     
     }
 
-    const handleCombineJsFeature = () =>{
-    }
-    
   return (
     <>
       <div className="flex w-[100%] mobile:flex-col laptop:flex-row justify-between">
@@ -59,18 +56,18 @@ const CssTabSettings = () => {
                toggleValue= {criticalCSSToggleValue}
               last={true}
               title="Optimize CSS Delivery"
-              isSubSectionExist={true}
+              isSubSectionExist={false}
               p="10px 15px 20px 15px"
               subSectionTitile={"Additional Options"}
               description="Create critical CSS as well as rework your website CSS for optimal delivery"
             >
               <div className="w-[100%] py-[10px]">
-                <InputFields
+                {/* <InputFields
                   labelText="Remove @font-face rules from the critical CSS"
                   list={["Disabled"]}
                   type="dropdown"
-                />
-                <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
+                /> */}
+                {/* <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                   Enabling this will remove the @font-face rules from the
                   critical CSS, which will delay font loading and help improve
                   the first meaningful paint.
@@ -86,7 +83,7 @@ const CssTabSettings = () => {
                   labelText="Specify CSS selector to force include CSS for matching elemnts"
                   type="textarea"
                   inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
-                />
+                /> */}
               </div>
             </FeatureCard>
 
@@ -95,13 +92,13 @@ const CssTabSettings = () => {
                handlingToggle={handleRemoveUnsedCSS}
                toggleValue= {removeUnsedCSSToggleValue}
               title="Remove Unused CSS"
-              isSubSectionExist={true}
+              isSubSectionExist={false}
               p="10px 15px 20px 15px"
               subSectionTitile={"Additional Options"}
               description="Unused CSS rules are removed from optimized CSS files for faster page rendering."
             >
               <div className="w-[100%] py-[10px]">
-                <InputFields
+                {/* <InputFields
                   labelText="Debupe Based on Critical CSS"
                   list={["Disabled"]}
                   type="dropdown"
@@ -121,8 +118,8 @@ const CssTabSettings = () => {
                   labelText="Inline the final CSS"
                   list={["Disabled"]}
                   type="dropdown"
-                />
-                <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
+                /> */}
+                {/* <div className="w-[100%] mb-[10px] text-[10px] italic text-[#85858C] mt-[5px] ">
                   Remove duplicate rules from the final CSS files for rules that
                   are present in the critical CSS
                 </div>
@@ -137,7 +134,7 @@ const CssTabSettings = () => {
                   labelText="Specify CSS selector to force exclude CSS for matching elemnts"
                   type="textarea"
                   inputClass="w-[100%] border-[1px] py-[10px] outline-none  rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[120px]"
-                />
+                /> */}
               </div>
             </FeatureCard>
 {/* 
@@ -162,13 +159,13 @@ const CssTabSettings = () => {
                 </div>
               </div>
             </FeatureCard>  */}
-
+{/* 
             <FeatureCard
                handlingToggle={handleCombineJsFeature}
               toggleValue= {criticalCSSToggleValue}
               title="Custom CSS"
               description="Specify custom CSS rules which will be applied to the optimized pages."
-            />
+            /> */}
           </div>
         </div>
        

@@ -29,11 +29,11 @@ import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./views/404.jsx";
 import { GetAxiosConfig } from "./utils/axiosConfig.js";
 import { setToggle } from "./slice/statusToggleSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import NitroPack from "./views/NitroPack.jsx";
 import ConnectSiteNitro from "./views/ConnectSiteNitro.jsx";
 import NitroOtp from "./views/NitroOtp.jsx";
-// import { useDispatch } from "react-redux";
+
 const router = [
   {
     path: "/",
@@ -87,16 +87,7 @@ const router = [
     path: "/connect-to-store",
     element: <ConnectStore />,
   },
-  // {
-  //   path: "/nitro-pack",
-  //   element: <NitroPack />,
-  // },
-  // {
-  //   path: "/connect-site",
-  //   element: <ConnectSiteNitro />,
-  // },
   
-
 ];
 
 
@@ -132,6 +123,8 @@ const App = () => {
         dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization?.value }));
         dispatch(setToggle({ key: "dashboardOptimization", value: dataObj?.dashboard_optimization }));
         dispatch(setToggle({ key: "optimizationMode", value: dataObj?.optimization_mode }));
+        dispatch(setToggle({ key: "keepHTMLComment", value: dataObj?. keep_html_comment }));
+
 
       } 
     } catch (error) {
@@ -147,7 +140,7 @@ const App = () => {
    
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
-    setShowOnboardingModal(userToken ? true : false);
+    setShowOnboardingModal(userToken ? true : true);
     
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",

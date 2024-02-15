@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import { Modal, Typography, Button, TextField } from "@mui/material";
-import SaveButton from "../button/SaveButton";
+import { Modal, Typography, TextField } from "@mui/material";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { toast } from "react-toastify";
-import standardFetchHandlers from '../../utils/standardFetchHandlers';
-import handleFetchErrors from '../../utils/handleFetchErrors';
-import PhoneInput from "react-phone-number-input";
-import getFetchConfig from "../../utils/getFetchConfig";
-import appURLs from "../../appURL";
+import { useSelector } from "react-redux";
+
 import { isValidEmailAddress } from "../../utils/verification";
-import { GetAxiosConfig, PostAxiosConfig } from "../../utils/axiosConfig.js";
-const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
-  const fetchConfig = getFetchConfig(),
-    appURL = appURLs();
+import { PostAxiosConfig } from "../../utils/axiosConfig.js";
+import { style } from "d3";
+const ChangeEmail = ({ isOpen, onClose, fetchProfileData }) => {
 
   const [otpSent, setOtpSent] = useState(false);
   const [enteredValue, setEnteredValue] = useState("");
   const [otp, setOtp] = useState("");
+  const dark = useSelector((state) => state.home.dark);
 
   const handleInputChange = (event) => {
     setEnteredValue(event.target.value);
@@ -35,8 +31,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
 
       if (resJSON?.status === 200) {
         setOtpSent(true);
-        // setEnteredValue(""); // Reset the input box
-     
+
         return toast.success(resJSON.message);
         
       }else {
@@ -50,31 +45,6 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
       }
     }
 
-  
-      // fetch(`${appURL}/user/sending-otp`, {
-      //   ...fetchConfig,
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     email_address: enteredValue
-      //   })
-      // })
-      //   .then(handleFetchErrors)
-      //   .then((resJson) => {
-      //     if (resJson.status === 200) {
-      //       setOtpSent(true);
-      //       // setEnteredValue(""); // Reset the input box
-      //       return toast.success(resJson?.message);
-      //     }
-      //     else return toast.error(resJson?.message);
-
-      //   })
-      //   .catch((err) => {
-      //     return toast.error("Something went wrong");
-      //   })
-
-    // } catch (error) {
-    //   return toast.error("Something went wrong");
-    // }
   };
 
   const handleSubmit = async (event) => {
@@ -103,8 +73,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
         onClose();
         setOtp("")
         setOtpSent(false);
-        // setEnteredValue(""); // Reset the input box
-        window.location.reload();
+        fetchProfileData();
         return toast.success(resJSON.message);
         
       }else {
@@ -118,70 +87,6 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
       }
     }
 
-      // fetch(`${appURL}/user/update-emailaddress`, {
-      //   ...fetchConfig,
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     email_address: enteredValue,
-      //     OTPCode: otp,
-      //   })
-      // })
-      //   .then(handleFetchErrors)
-      //   .then((resJson) => {
-      //     if (resJson.status === 200) {
-      //       toast.success(resJson?.message);
-      //       onClose();
-      //       setOtp("")
-      //       setOtpSent(false);
-      //       return
-      //     }
-      //     else return toast.error(resJson?.message);
-
-      //   })
-      //   .catch((err) => {
-      //     return toast.error("Something went wrong");
-      //   })
-
-
-      // console.log("Email address to be updated:", enteredValue);
-      // const token = localStorage.getItem("accessToken");
-      // if (otp.length !== 4) {
-      //   toast.error("Please enter a valid 4-digit OTP");
-      //   return;
-      // }
-
-      // if (!otp) {
-      //   toast.error("Please enter the OTP");
-      //   return;
-      // }
-      // const updateResponse = await fetch(
-      //   "http://localhost:8000/v1/user/update-emailaddress",
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //     body: JSON.stringify({
-      //       email_address: enteredValue,
-      //       OTPCode: otp,
-      //     }),
-      //   }
-      // );
-
-      // if (!updateResponse.ok) {
-      //   const errorData = await updateResponse.json();
-      //   throw new Error(errorData.message || "Failed to update email address");
-      // }
-
-      // console.log("Email address updated successfully:", enteredValue);
-
-      // onClose();
-      // toast.success("Email address updated successfully");
-    // } catch (error) {
-    //   console.error("Error updating email address:", error.message);
-    //   toast.error("Failed to update email address");
-    // }
   };
 
   const handleClose = () => {
@@ -211,7 +116,9 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
             borderRadius: "5px",
             boxShadow: 24,
             p: 4,
+            backgroundColor: dark ? "#111317" : "#fff",
           }}
+       
           className="modal-style"
         >
           <div className="modal-close-btn">
@@ -219,14 +126,23 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2fe49c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </p>
           </div>
-          <Typography
+          {/* <Typography
             variant="h6"
             component="h2"
             className="custom-class"
-            style={{ margin: "5px", color: "rgb(47 58 69 / 1) !important", fontSize: "1rem"}}
+       
+            style={{ margin: "5px", color: dark ? "#fff" : "#000", fontSize: "1rem"}}
           >
             {!otpSent ? "Enter your new email address" : "Enter the OTP"}
-          </Typography>
+          </Typography> */}
+            <h1
+                style={{
+                  color: dark ? "#fff" : "#000",
+                }}
+                className="text-[15px] mb-[5px] font-bold tracking-wide "
+              >
+                            {!otpSent ? "Enter your new email address" : "Enter the OTP"}
+              </h1>
           <form>
             {!otpSent ? (
               <TextField
@@ -240,6 +156,7 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
                     height:"40px",
                     border: "2px solid #2fe49c",
                     outline: "none",
+                    color: dark ? "#fff" : "#000",
                   },
                   className: "custom-textfield" // adding class
                 }}
@@ -251,13 +168,15 @@ const ChangeEmail = ({ isOpen, onClose, wrapperClasses }) => {
                 autoFocus
                 numInputs={6} // Specify the number of OTP digits
                 inputStyle={{
-                  border: "2px solid #2fe49c",
+                  border: dark ? "2px solid #fff" : "2px solid #2fe49c",
                   borderRadius: "5px",
-                  outline: "none",
+                  outline: dark ? "2px solid #fff" : "2px solid #2fe49c",
                   marginRight: "5px",
-                  fontSize:"1.2rem"
+                  fontSize:"1.2rem",
+                  color: dark ? "red" : "red",
                 }}
-                className="custom-textfield" // adding class
+                
+                // className="custom-textfield" // adding class
               />
             )}
             {!otpSent ? (

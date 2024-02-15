@@ -3,8 +3,10 @@
 import { styled, useTheme } from "@mui/material";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-;
+import { useSelector, useDispatch } from "react-redux";
+
 export default function PhoneInputField({ value, setPhoneNumberValue, form}) {
+	 const dark = useSelector((state) => state.home.dark);
 	const theme = useTheme();
 	return (
 		<StyledPhoneInput
@@ -22,17 +24,17 @@ const StyledPhoneInput = styled(PhoneInput)(({ theme }) => ({
 	"& .react-international-phone-input": {
 		width: "100%",
 		backgroundColor: "transparent !important",
-		color: theme.palette?.pageHeading,
-		border: `1px solid rgb(235, 235, 235) !important`,
+		color: !useSelector((state) => state.home.dark) ? theme.palette?.pageHeading : "rgb(255, 255, 255)",
+		marginTop:"8px"
 	},
 	"& .react-international-phone-country-selector-button": {
 		backgroundColor: "transparent !important",
-		border: `1px solid rgb(235, 235, 235) !important`,
+		color: !useSelector((state) => state.home.dark) ? theme.palette?.pageHeading : "rgb(255, 255, 255)",
+		marginTop:"8px"
 	},
 	"& .react-international-phone-country-selector-dropdown": {
 		backgroundColor: theme.palette?.card?.background,
 		color: theme.palette?.pageHeading,
-		border: `1px solid rgb(235, 235, 235) !important`,
 	},
 	"& .react-international-phone-country-selector-dropdown__list-item:hover": {
 		backgroundColor: theme.palette?.card?.background,

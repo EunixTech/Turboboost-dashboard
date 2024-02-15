@@ -106,11 +106,15 @@ const SettingPage = () => {
                 updateActiveTab={updateActiveTab}
               />
             )}
-            <SaveButton
+            {
+              activeTab !== 0 &&
+               <SaveButton
               btnText="Save Settings"
               onClick={handleSaveSettings}
               style={{ margin: isMobile ? "-20px 0  0 0" : 0 }}
             />
+            }
+           
           </div>
           {deviceWith > 1000 && (
             <Navigator

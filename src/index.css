@@ -660,3 +660,12 @@ input.PhoneInputInput {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* user Tab */
+#form-submit-btn{
+  position: absolute;
+  top: -78px;
+  right: 0%;
+}
+

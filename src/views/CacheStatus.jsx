@@ -11,7 +11,6 @@ import { setToggle } from "../slice/statusToggleSlice";
 const Button = ({ clearFilterHandler }) => {
   const dark = useSelector((state) => state.home.dark);
 
-
   return (
     <div onClick={clearFilterHandler}
       className={`w-[48%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
@@ -38,22 +37,23 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
     >
       {
         assetsOptimizationValue ?
-          <p onClick={handleOptimizeAssets}
-            style={{
-              backgroundColor: check ? "#F87238" : "#FF465C",
-            }}
-            className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
-              } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-          >
+          <></>
+          // <p onClick={handleOptimizeAssets}
+          //   style={{
+          //     backgroundColor: check ? "#F87238" : "#FF465C",
+          //   }}
+          //   className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
+          //     } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+          // >
 
-            <div className="translate-y-[1px]">
-              Disable Assets Optimization
-            </div>
+          //   <div className="translate-y-[1px]">
+          //     Disable Assets Optimization
+          //   </div>
 
 
 
 
-          </p>
+          // </p>
           : <p
             onClick={handleOptimizeAssets}
             style={{
@@ -66,7 +66,6 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
             <div onClick={handleOptimizeAssets} className="translate-y-[1px]">
               Purge All Assets
             </div>
-
 
           </p>
       }
@@ -258,39 +257,61 @@ const InputDropdown = ({ label, list, clearFilter }) => {
   );
 };
 
-const Filter = ({ handlingApplyFilter }) => {
-
+const Filter = ({ handlingApplyFilter, updateAssetsArr, assetsData, updateSearchBy }) => {
+  const dark = useSelector((state) => state.home.dark);
   const [clearFilter, updateClearFilter] = useState(0)
   const clearFilterHandler = () => {
     localStorage.removeItem("Search By");
     localStorage.removeItem("Assets Type");
     localStorage.removeItem("Status");
     localStorage.removeItem("Results Per Page");
-    updateClearFilter(clearFilter + 1)
+    updateClearFilter(clearFilter + 1);
+    updateAssetsArr(assetsData?.assetFileArr)
   }
   return (
     <div className="w-[100%] px-[15px] flex mobile:flex-col laptop:flex-row mt-[18px] justify-between items-end">
       <div className="flex mobile:flex-col laptop:flex-row justify-between items-center w-[100%]">
-        <InputText label="Search In Results" />
+
+        <div className="mobile:w-[100%] laptop:w-[19.5%] h-[100%]">
+          <p
+            style={{
+              color: dark ? "#ffffff74" : "#0a0a187e",
+            }}
+            className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
+          >
+            Search In Results
+          </p>
+          <input
+            style={{
+              color: dark ? "#fff" : "#000",
+              borderColor: dark ? "#1F2329" : "#ebebeb",
+            }}
+            type="text"
+
+            onChange={(e) => updateSearchBy(e.target.value)}
+            name="searchBy"
+            className="w-[100%] border-[1px] outline-none bg-transparent border-[#ebebeb] rounded-[4px] px-[10px] text-[12px] font-medium mt-[4px] h-[34px]"
+          />
+        </div>
         <InputDropdown
           clearFilter={clearFilter}
           label="Search By"
-          list={["URL", "Assets Type", "Assets Name"]}
+          list={["All", "Assets Type", "Assets Name"]}
         />
         <InputDropdown
           clearFilter={clearFilter}
           label="Assets Type"
-          list={["Application/Javascript", "Application/x-liquid", "Text/Css"]}
+          list={["All", "Application/Javascript", "Application/x-liquid", "Text/Css"]}
         />
         <InputDropdown
           clearFilter={clearFilter}
           label="Status"
-          list={["Optimized", "Pending", "All Statuses"]}
+          list={["All", "Optimized", "Pending"]}
         />
         <InputDropdown
           clearFilter={clearFilter}
           label="Results Per Page"
-          list={["20", "All Assest Type", "All Statuses"]}
+          list={["All", 20, 40, 60, 80]}
         />
       </div>
       <div className="flex items-center mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[200px] justify-between shrink-0 ml-[10px]">
@@ -338,80 +359,45 @@ const TableHeader = ({ change }) => {
       }}
       className="w-[100%] flex h-[25px] border-b-[1px] border-[#ebebeb]"
     >
+      <div className="w-[11%] ml-[10px]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+      >
+        S.No
+      </div>
       <div className="w-[60%]  px-[10px] items-center flex h-[100%] ">
         <div
-          style={{
-            color: dark ? "#fff" : "#0a0a1876",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
+
           className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
         >
           Name
         </div>
       </div>
-      {/* <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-        }}
-        className="w-[27%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
-      >
-        Name
-      </div> */}
+
       <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
+
         className="w-[50%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Asset Type
       </div>
       <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
+
         className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Original Size
       </div>
       <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
+
         className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Optimize Size
       </div>
 
       <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
+
         className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Status
       </div>
-      {/* <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-        }}
-        className="w-[9%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
-      >
-        Actions
-      </div> */}
+
     </div>
   );
 };
@@ -444,8 +430,8 @@ const Status = ({ i }) => {
   );
 };
 
-const TableItem = ({ last, item }) => {
-  const [check, setCheck] = useState(false);
+const TableItem = ({ last, item, s_no }) => {
+
   const dark = useSelector((state) => state.home.dark);
 
   return (
@@ -456,68 +442,42 @@ const TableItem = ({ last, item }) => {
       }}
       className="w-[100%] flex h-[70px] border-b-[1px] border-[#ebebeb]"
     >
+      <div
+        className="w-[10%] ml-[20px]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
+      >
+        {s_no + 1}
+      </div>
       <div className="w-[60%]  px-[10px] items-center flex h-[100%] ">
         <div
-          style={{
-            color: dark ? "#fff" : "#000",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
+
           className="w-[60%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
         >
           {item?.name}
         </div>
       </div>
       <div
-        style={{
-          color: dark ? "#fff" : "#000",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
+
         className="w-[50%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
       >
         {item?.file_type}
       </div>
       <div
-        style={{
-          color: dark ? "#fff" : "#000",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
+
         className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.before}
       </div>
       <div
-        style={{
-          color: dark ? "#fff" : "#000",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
+
         className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.after}
       </div>
 
-      <div style={{
-        color: dark ? "#fff" : "#000",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }} className="w-[30%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
+      <div className="w-[30%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <Status i={item?.is_optimized ? 1 : 2} />
       </div>
-      {/* <div className="w-[9%]  text-[10px] tracking-wide px-[10px] cursor-pointer text-[#0a0a1876] font-bold  flex h-[100%] items-center">
-        <img
-          src="/graphic/status/trash.svg"
-          className="w-[15px] h-[15px]"
-          alt=""
-        />
-      </div> */}
+
     </div>
   );
 };
@@ -555,6 +515,7 @@ const Table = ({ assetsDataArr, assetsData, setSelected1 }) => {
         {assetsData.map((item, i) => {
           return (
             <TableItem
+              s_no={i}
               key={i}
               selected={selected.includes(i)}
               change={() => {
@@ -581,7 +542,9 @@ const CacheStatus = () => {
   const [selected, setSelected] = useState([]);
   const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
+  const [assetsArr, updateAssetsArr] = useState([]);
   const [assetsData, updateAssetsData] = useState({});
+  const [searchBy, updateSearchBy] = useState("");
   const dispatch = useDispatch();
 
   const assetsOptimizationValue = useSelector((state) => state.toggles?.assetsOptimization);
@@ -596,6 +559,7 @@ const CacheStatus = () => {
       if (resData?.status === 200) {
         const assetsDataObj = resData?.assets;
         updateAssetsData(assetsDataObj)
+        updateAssetsArr(assetsDataObj?.assetFileArr)
         toggleLoader(false);
 
       } else if (resData.status === 403) {
@@ -660,6 +624,10 @@ const CacheStatus = () => {
       fetchAssetsOptimizationData();
     };
     fetchData();
+    localStorage.removeItem("Search By");
+    localStorage.removeItem("Assets Type");
+    localStorage.removeItem("Status");
+    localStorage.removeItem("Results Per Page");
   }, [])
 
   const handlingApplyFilter = () => {
@@ -668,13 +636,63 @@ const CacheStatus = () => {
     const statusByFilter = localStorage.getItem("Status");
     const resultsPerPageByFilter = localStorage.getItem("Results Per Page");
 
-    if(assetsTypeFilter){
-     const filterData =  assetsData.filter((data)=>data?.file_type === assetsTypeFilter.toLocaleLowerCase());
-     updateAssetsData(filterData)
+    if (searchBy) {
+      if (resultsPerPageByFilter === "All") {
+        console.log("asdjgasdasdasd")
+        if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Type").toLocaleLowerCase()) {
+          console.log("asdjgasdasdasd1")
+          const filterData = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
+          updateAssetsArr(filterData);
+        } else if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Name").toLocaleLowerCase()) {
+          console.log("asdjgasdasdasd2")
+          const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()));
+          updateAssetsArr(filterData);
+        } else {
+          console.log("asdjgasdasdqweasd")
+          const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()) || data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
+          updateAssetsArr(filterData);
+        }
+      } else {
+        if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Type").toLocaleLowerCase()) {
+          console.log("asdjgasdasdasd1")
+          const filterData = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
+          updateAssetsArr(filterData.slice(0, resultsPerPageByFilter));
+        } else if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Name").toLocaleLowerCase()) {
+          console.log("asdjgasdasdasd2")
+          const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()));
+          updateAssetsArr(filterData.slice(0, resultsPerPageByFilter));
+        } else {
+          console.log("asdjgasdasdqweasd")
+          const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()) || data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
+          updateAssetsArr(filterData.slice(0, resultsPerPageByFilter));
+        }
+      }
+    } else {
+      updateAssetsArr(assetsArr.slice(0, resultsPerPageByFilter));
+    }
+
+    if (statusByFilter) {
+
+      if (statusByFilter === "Pending") {
+        return updateAssetsArr([])
+      } else {
+        return updateAssetsArr(assetsData.assetFileArr)
+      }
+
+    } else if (assetsTypeFilter) {
+
+      if (assetsTypeFilter === "All") {
+        return updateAssetsArr(assetsData.assetFileArr)
+      } else {
+
+        const filterData = assetsData.assetFileArr.filter((data) => data?.file_type === assetsTypeFilter.toLocaleLowerCase());
+
+        updateAssetsArr(filterData)
+      }
+
     }
 
   }
-
 
 
   return (
@@ -736,13 +754,13 @@ const CacheStatus = () => {
                   }} className="h-[100%] rounded-[10px] bg-[#FFCB65]" />
                 </div>
                 <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
-                  <HeaderItem title="Total Assets" sub={assetsData && assetsData?.totalAssets} color="#e303fc" />
                   <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#38F8AC" />
                   <HeaderItem
                     title="Pending Assets"
                     sub={assetsData && assetsData?.notOptimizedAssets}
                     color="#FFCB65"
                   />
+                  <HeaderItem title="Not/error'd" sub={0} color="#FF465C" />
                 </div>
               </div>
               <div
@@ -848,8 +866,8 @@ const CacheStatus = () => {
                   <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
                 </div>
               </div>
-              <Filter handlingApplyFilter={handlingApplyFilter} />
-              {(assetsData?.assetFileArr && assetsData?.assetFileArr?.length) ? <Table assetsData={assetsData?.assetFileArr} setSelected1={setSelected} /> : ""}
+              <Filter updateSearchBy={updateSearchBy} updateAssetsArr={updateAssetsArr} assetsData={assetsData} handlingApplyFilter={handlingApplyFilter} />
+              {assetsArr?.length ? <Table assetsData={assetsArr} setSelected1={setSelected} /> : ""}
 
 
             </div>

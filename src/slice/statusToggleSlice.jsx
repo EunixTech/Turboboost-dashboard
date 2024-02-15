@@ -17,6 +17,7 @@ const initialState = {
   imageOptimization: false,
   criticalCSS: false,
   removeUnsedCSS: false,
+  keepHTMLComment: false,
 
   dashboardOptimization: false,
 

@@ -3,6 +3,7 @@ import ToggleButton from "./ToggleButton";
 import { useSelector,useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { setUpgradePopUpShow } from "../services/home";
+import ToggleButton2 from "./ToggleButton2";
 
 export default function FeatureCard({
   last,
@@ -78,7 +79,11 @@ export default function FeatureCard({
           </h1>
         </div>
         <div className="shrink-0">
-        <ToggleButton toggleValue={toggleValue} handlingToggle={handlingToggle}  toggleKey="someKey" />
+          {
+            getFeature ? <ToggleButton2 /> :
+            <ToggleButton toggleValue={toggleValue} handlingToggle={handlingToggle}  toggleKey="someKey" />
+          }
+
 
         </div>
       </div>

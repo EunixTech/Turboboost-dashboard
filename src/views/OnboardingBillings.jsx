@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   ComparePlans,
   planMockData,
-  planChangeText,
-  planOnboardData,
 } from "../utils/constant";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
 import { billingApi } from "../utils/billingApi1";
 import appURLs from "../appURL";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUserDataStart,
-  getUserDataSuccess,
-  getUserDataFailure,
-} from "../slice/redirectUserSlice";
-import { setToggle } from "../slice/statusToggleSlice";
+
 import TitleManager from "../components/TitleManager";
-import AnimatedLoader from "../components/loader/AnimatedLoader1";
 
 const OnboardingBillings = () => {
-  const dispatch = useDispatch(),
-    appURL = appURLs();
+  const  appURL = appURLs();
 
   const [selected, setSelected] = useState(0);
   const [token1, updateToken] = useState("");
@@ -31,7 +22,7 @@ const OnboardingBillings = () => {
   const handleBilling = async (item) => {
     try {
       let response = await billingApi(item, selected, token1);
-      console.log(response.data);
+
       localStorage.clear();
       if (response?.data?.confirmationUrl) {
         localStorage.setItem("authToken", token1);
@@ -76,7 +67,6 @@ const OnboardingBillings = () => {
       }
     } catch (error) {
       toggleLoader(false);
-      console.log(error);
     }
   };
 
@@ -107,7 +97,7 @@ const OnboardingBillings = () => {
             style={{
               color: dark ? "#fff" : "#fff",
             }}
-            className="text-[15px] font-bold tracking-wide text-center pt-[20px]"
+            className="text-[23px] font-bold tracking-wide text-center pt-[20px]"
           >
             Select A Plan{" "}
           </h1>
@@ -116,12 +106,7 @@ const OnboardingBillings = () => {
           </h1>
           <div className="w-[100%] mt-[5px] flex items-center justify-center">
             <div
-              style={
-                {
-                  // backgroundColor: dark ? "#12122B" : "#12122B",
-                  // borderColor: dark ? "#1F2329" : "#ebebeb",
-                }
-              }
+             
               className="flex w-[200px] h-[40px]  border-[1px]   rounded-[4px] px-[3px] py-[3px]"
             >
               <div
@@ -182,11 +167,11 @@ const OnboardingBillings = () => {
                       <>
                         <div style={{ display: "flex" }}>
                           {item?.name}
-                          <div className="text-[#000] bg-[#0FE38F] px-[14px] py-[6.5px] leading-[8px] rounded-[20px] ml-[9px] translate-y-[-1px] text-[12px]  tracking-wide font-medium flex items-center justify-center">
+                          <div className="text-[#000] bg-[#0FE38F] px-[12px] py-[2px] leading-[8px] rounded-[20px] ml-[9px] translate-y-[-1px] text-[10px]  tracking-wide font-medium flex items-center justify-center h-[22px]">
                             <span
                               style={{
-                                color: "#18113C",
-                                fontSize: "11px",
+                                color: "#18113",
+                                fontSize: "10px",
                                 fontWeight: "600",
                                 marginRight: "5px",
                               }}
@@ -194,8 +179,8 @@ const OnboardingBillings = () => {
                               Recommended for you
                             </span>
                             <svg
-                              width="14"
-                              height="14"
+                              width="12"
+                              height="12"
                               viewBox="0 0 12 12"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
@@ -535,181 +520,5 @@ const OnboardingBillings = () => {
   );
 };
 
-const Table1 = ({ setSelected1 }) => {
-  return (
-    <div className="w-[100%] border-[#ebebeb] mt-[0px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool">
-      <div className="mobile:w-[500px] laptop:w-[100%]">
-        <TableHeader1 />
-        <TableItem1
-          title="CND Bandiwth Per Month"
-          free="1GB"
-          starter="25GB"
-          growth="100GB"
-        />
-        {ComparePlans.map((item, i) => {
-          return (
-            <TableItem2
-              key={i}
-              title={item.title}
-              Free={item.starter}
-              starter={item.starter}
-              growth={item.growth}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-const TableHeader1 = ({ change }) => {
-  const [check, setCheck] = useState(false);
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      style={{ borderColor: dark ? "#1F2329" : "#ebebeb" }}
-      className="w-[100%] px-[10px] flex h-[30px] border-b-[1px] border-[#ebebeb]"
-    >
-      <div className="w-[30%] text-[16px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"></div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[33%] text-[16px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
-      >
-        Starter
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[33%] text-[16px] px-[15px]  cursor-pointer leading-[14px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
-      >
-        Starter
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[33%] text-[16px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
-      >
-        Growth
-      </div>
-    </div>
-  );
-};
-
-const TableItem1 = ({ last, free, starter, growth, title, pro }) => {
-  const [check, setCheck] = useState(false);
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      style={{
-        borderColor: dark ? "#1F2329" : "#ebebeb",
-      }}
-      className="w-[100%] flex px-[10px] h-[45px] border-b-[1px] border-[#ebebeb]"
-    >
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[33.33%] text-[16px] px-[15px] text-[#000]  cursor-pointer leading-[14px] tracking-wide  font-bold flex h-[100%] items-center"
-      >
-        {title}
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-        }}
-        className="w-[33.33%] text-[14px] px-[15px] text-[#0a0a1876]  cursor-pointer leading-[14px] tracking-wide  font-bold flex h-[100%] items-center"
-      >
-        {starter}
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-        }}
-        className="w-[33.33%] text-[14px] px-[15px] text-[#0a0a1876]   cursor-pointer leading-[14px] tracking-wide  font-bold flex h-[100%] items-center"
-      >
-        {growth}
-      </div>
-      <div
-        style={{
-          color: dark ? "#fff" : "#0a0a1876",
-        }}
-        className="w-[18%] text-[14px] px-[15px] text-[#0a0a1876]  cursor-pointer leading-[14px] tracking-wide  font-bold flex h-[100%] items-center"
-      >
-        {pro}
-      </div>
-    </div>
-  );
-};
-const TableItem2 = ({ last, free, starter, growth, title }) => {
-  const [check, setCheck] = useState(false);
-  const dark = useSelector((state) => state.home.dark);
-  const clr = dark ? "#1F2329" : "#ebebeb";
-  return (
-    <div
-      style={{
-        borderColor: dark ? "#1F2329" : "#ebebeb",
-      }}
-      className="w-[100%] flex px-[10px] h-[45px] border-b-[1px] "
-    >
-      <div
-        style={{
-          color: dark ? "#fff" : "#000",
-        }}
-        className="w-[30%] text-[16px] px-[15px] text-[#000]  cursor-pointer leading-[14px] tracking-wide  font-bold flex h-[100%] items-center"
-      >
-        {title}
-      </div>
-      <div className="w-[18%] text-[14px] px-[15px] text-[#0a0a1876]  cursor-pointer leading-[14px] tracking-wide  font-bold flex h-[100%] items-center">
-        {free ? (
-          <img
-            src="/graphic/bill/check.svg"
-            className="w-[15px] ml-[1px]"
-            alt=""
-          />
-        ) : (
-          <img
-            src="/graphic/bill/cross.svg"
-            className="w-[12px] ml-[1px]"
-            alt=""
-          />
-        )}
-      </div>
-      <div className="w-[18%] text-[11px] px-[15px] text-[#0a0a1876]   cursor-pointer leading-[14px] tracking-wide  font-bold flex h-[100%] items-center">
-        {starter ? (
-          <img
-            src="/graphic/bill/check.svg"
-            className="w-[15px] ml-[1px]"
-            alt=""
-          />
-        ) : (
-          <img
-            src="/graphic/bill/cross.svg"
-            className="w-[12px] ml-[1px]"
-            alt=""
-          />
-        )}
-      </div>
-      <div className="w-[18%] text-[11px] px-[15px] text-[#0a0a1876]  cursor-pointer leading-[14px] tracking-wide  font-bold flex h-[100%] items-center">
-        {growth ? (
-          <img
-            src="/graphic/bill/check.svg"
-            className="w-[15px] ml-[1px]"
-            alt=""
-          />
-        ) : (
-          <img
-            src="/graphic/bill/cross.svg"
-            className="w-[12px] ml-[1px]"
-            alt=""
-          />
-        )}
-      </div>
-    </div>
-  );
-};
 
 export default OnboardingBillings;
