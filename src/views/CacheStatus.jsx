@@ -27,7 +27,7 @@ const Button = ({ clearFilterHandler }) => {
   );
 };
 
-const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets }) => {
+const Button2 = ({ check, assetsOptimizationValue, handleOptimizeAssets }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -37,23 +37,19 @@ const Button2 = ({ onClick, check, assetsOptimizationValue, handleOptimizeAssets
     >
       {
         assetsOptimizationValue ?
-          <></>
-          // <p onClick={handleOptimizeAssets}
-          //   style={{
-          //     backgroundColor: check ? "#F87238" : "#FF465C",
-          //   }}
-          //   className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
-          //     } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-          // >
+        
+          <p onClick={handleOptimizeAssets}
+            style={{
+              backgroundColor: check ? "#F87238" : "#FF465C",
+            }}
+            className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
+              } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+          >
 
-          //   <div className="translate-y-[1px]">
-          //     Disable Assets Optimization
-          //   </div>
-
-
-
-
-          // </p>
+            <div className="translate-y-[1px]">
+            Revert Purge Assets
+            </div>
+          </p>
           : <p
             onClick={handleOptimizeAssets}
             style={{
@@ -125,29 +121,6 @@ const HeaderItem = ({ color, title, sub, assets = false }) => {
   );
 };
 
-const InputText = ({ label }) => {
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div className="mobile:w-[100%] laptop:w-[19.5%] h-[100%]">
-      <p
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
-      >
-        {label}
-      </p>
-      <input
-        style={{
-          color: dark ? "#fff" : "#000",
-          borderColor: dark ? "#1F2329" : "#ebebeb",
-        }}
-        type="text"
-        className="w-[100%] border-[1px] outline-none bg-transparent border-[#ebebeb] rounded-[4px] px-[10px] text-[12px] font-medium mt-[4px] h-[34px]"
-      />
-    </div>
-  );
-};
 
 const InputDropdown = ({ label, list, clearFilter }) => {
   const [curr, setCurr] = useState(clearFilter);
@@ -174,7 +147,7 @@ const InputDropdown = ({ label, list, clearFilter }) => {
 
 
   return (
-    <div className="mobile:w-[100%] laptop:w-[19.5%] h-[100%]">
+    <div className="mobile:w-[100%] h-[100%]">
       <p
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
@@ -270,9 +243,9 @@ const Filter = ({ handlingApplyFilter, updateAssetsArr, assetsData, updateSearch
   }
   return (
     <div className="w-[100%] px-[15px] flex mobile:flex-col laptop:flex-row mt-[18px] justify-between items-end">
-      <div className="flex mobile:flex-col laptop:flex-row justify-between items-center w-[100%]">
+      <div className="flex mobile:flex-col laptop:flex-row justify-between items-center w-[100%] gap-[10px]">
 
-        <div className="mobile:w-[100%] laptop:w-[19.5%] h-[100%]">
+        <div className="mobile:w-[100%] h-[100%]">
           <p
             style={{
               color: dark ? "#ffffff74" : "#0a0a187e",
@@ -303,11 +276,7 @@ const Filter = ({ handlingApplyFilter, updateAssetsArr, assetsData, updateSearch
           label="Assets Type"
           list={["All", "Application/Javascript", "Application/x-liquid", "Text/Css"]}
         />
-        <InputDropdown
-          clearFilter={clearFilter}
-          label="Status"
-          list={["All", "Optimized", "Pending"]}
-        />
+     
         <InputDropdown
           clearFilter={clearFilter}
           label="Results Per Page"
@@ -323,32 +292,7 @@ const Filter = ({ handlingApplyFilter, updateAssetsArr, assetsData, updateSearch
   );
 };
 
-const CheckBox = ({ change, check, setCheck }) => {
-  return (
-    <div
-      style={{
-        backgroundColor: check && "#38f8ab34",
-        borderColor: check ? "#38F8AC" : "#959494",
-      }}
-      onClick={() => {
-        setCheck(!check);
-        change();
-      }}
-      className="w-[14px] h-[14px] border-[1px] border-[#959494] rounded-[2px] cursor-pointer flex items-center justify-center"
-    >
-      {check && (
-        <img
-          alt=""
-          src="/graphic/status/check.svg"
-          className="w-[8px] h-[8px]"
-        />
-      )}
-    </div>
-  );
-};
-
-const TableHeader = ({ change }) => {
-  const [check, setCheck] = useState(false);
+const TableHeader = () => {
 
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -430,7 +374,7 @@ const Status = ({ i }) => {
   );
 };
 
-const TableItem = ({ last, item, s_no }) => {
+const TableItem = ({ item, s_no }) => {
 
   const dark = useSelector((state) => state.home.dark);
 
@@ -628,7 +572,7 @@ const CacheStatus = () => {
     localStorage.removeItem("Assets Type");
     localStorage.removeItem("Status");
     localStorage.removeItem("Results Per Page");
-  }, [])
+  },[])
 
   const handlingApplyFilter = () => {
     const searchByFilter = localStorage.getItem("Search By");
@@ -744,7 +688,7 @@ const CacheStatus = () => {
                 </h1>
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                   <div style={{
-                    width: `${(assetsData?.totalOptimizeAssets) && assetsData?.totalOptimizeAssets == 0 ? "100%" : "0%"}%`,
+                    width: `${(assetsData?.totalOptimizeAssets) && assetsData?.totalOptimizeAssets === 0 ? "100%" : "0%"}%`,
                   }} className="h-[100%] mr-[2px] rounded-[10px]  bg-[#FF465C]" />
                   <div style={{
                     width: `${(assetsData?.totalAssets && assetsData?.totalOptimizeAssets) ? (assetsData?.totalOptimizeAssets / assetsData?.totalAssets) * 100 : 0}%`,

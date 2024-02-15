@@ -4,7 +4,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { store } from "./services/store";
 import { Toaster } from "react-hot-toast";
-import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import DashboardPageRoute from "./views/DashboardPage.jsx";
 import SignInRoute from "./routes/SignInRoute";
 import ConnectStore from "./views/ShopifyAuth.jsx";
@@ -36,7 +36,7 @@ import NitroOtp from "./views/NitroOtp.jsx";
 const router = [
   {
     path: "/",
-    element:  <DashboardPageRoute />,
+    element: <DashboardPageRoute />,
   },
   {
     path: "/dashboard",
@@ -86,12 +86,12 @@ const router = [
     path: "/connect-to-store",
     element: <ConnectStore />,
   },
-  
+
 ];
 
 
 const App = () => {
- 
+
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -104,7 +104,7 @@ const App = () => {
       const resJSON = res?.data;
 
       if (resJSON.status === 200) {
-       
+
         const dataObj = resJSON?.optimizationHandlers?.dataArr;
 
         dispatch(setToggle({ key: "delayScripts", value: dataObj?.delay_js_resources?.value }));
@@ -121,10 +121,10 @@ const App = () => {
         dispatch(setToggle({ key: "imageOptimization", value: dataObj?.image_optimization?.value }));
         dispatch(setToggle({ key: "dashboardOptimization", value: dataObj?.dashboard_optimization }));
         dispatch(setToggle({ key: "optimizationMode", value: dataObj?.optimization_mode }));
-        dispatch(setToggle({ key: "keepHTMLComment", value: dataObj?. keep_html_comment }));
+        dispatch(setToggle({ key: "keepHTMLComment", value: dataObj?.keep_html_comment }));
 
 
-      } 
+      }
     } catch (error) {
       console.error("Error fetching user profile data:", error);
     }
@@ -133,24 +133,25 @@ const App = () => {
   useEffect(() => {
     fetchImageOptimizationData();
   }, [])
-  
+
   useEffect(() => {
-   
+
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
-    
+
+    // rU551POwDuDjGytdHWdQqiD4MsykOfNvbf0x0rFd
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
       app_id: "vr8qka5j",
       email: "manmohankumar023@hmail.com", // the email for your user
-      user_id: "65b10b132fea19be3faabfd2", // a UUID for your user
-      user_hash: "6729f802942742b4f8c6ea81dc9725df8c5f8d6f49a632d3f96ff023a60b01b3" // an Identity Verification user hash for your user
-      };
-  
+      user_id: "65cc86a2d454e8c9c83f2d6e", // a UUID for your user
+      user_hash: "65cc7a6d881b39eee9da4daac3768f18979528af0cdffda64ddb0a465b00fde4" // an Identity Verification user hash for your user
+    };
+
     const checkAuth = () => {
       const urlParams = new URLSearchParams(window.location.search);
-    const userToken1 = urlParams.get("userToken");
+      const userToken1 = urlParams.get("userToken");
       const authToken = localStorage.getItem('authToken');
       const isLoginRoute = window.location.pathname === '/login-shopify';
       const isNitroPackRoute = window.location.pathname === '/nitro-pack';
@@ -164,27 +165,27 @@ const App = () => {
       }
     };
     checkAuth();
- 
+
   }, []);
 
   return (
     <>
-    {showOnboardingModal && <NewOnboard />}
+      {showOnboardingModal && <NewOnboard />}
       {!(
 
-        location.pathname === "/login-shopify" ||  location.pathname === "/nitro-pack" ||  location.pathname === "/connect-site" ||  location.pathname === "/verifiy-email-otp"
+        location.pathname === "/login-shopify" || location.pathname === "/nitro-pack" || location.pathname === "/connect-site" || location.pathname === "/verifiy-email-otp"
       ) && (
-        <HomeLayout>
-          <Routes>
-            {router.map((item, i) => {
-              return <Route key={i} path={item.path} element={item.element} />;
-            })}
-               <Route path="*" element={<NotFound />} />
+          <HomeLayout>
+            <Routes>
+              {router.map((item, i) => {
+                return <Route key={i} path={item.path} element={item.element} />;
+              })}
+              <Route path="*" element={<NotFound />} />
 
-          </Routes>
-          
-        </HomeLayout>
-      )}
+            </Routes>
+
+          </HomeLayout>
+        )}
       <Routes>
 
         <Route path={"/login-shopify"} element={<SignInRoute />} />
@@ -205,10 +206,10 @@ const App = () => {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-        <Toaster position="top-right" reverseOrder={false} />
-      </BrowserRouter>
-    </Provider>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+      <Toaster position="top-right" reverseOrder={false} />
+    </BrowserRouter>
+  </Provider>
 );

@@ -514,16 +514,7 @@ const Dashboard = () => {
                 >
                   {imageData?.totalImages}
                 </p>
-                {/* <div className=" flex bg-[#18df902e] px-[13px] py-[2px] rounded-[23px] ml-[10px]">
-                  <img
-                    src="/graphic/dashboard/trend.svg"
-                    className="mr-[5px] translate-y-[1px] w-[14px]"
-                    alt=""
-                  />
-                  <p className="text-[#18DF90] f2 text-[13px] font-bold tracking-wide ">
-                    3%
-                  </p>
-                </div> */}
+               
               </div>
               {
                 imageData?.lastPurge ?
@@ -605,19 +596,7 @@ const Dashboard = () => {
                 >
                   0%
                 </p>
-                {/* <div className=" flex bg-[#18df902e] f2 px-[13px] py-[3px] rounded-[23px] ml-[10px]">
-                  <img
-                    src="/graphic/dashboard/trend.svg"
-                    style={{
-                      transform: "rotateZ(180deg) rotateY(180deg)",
-                    }}
-                    className="mr-[5px] translate-y-[1px] w-[14px]"
-                    alt=""
-                  />
-                  <p className="text-[#18DF90] f2 text-[13px] font-medium tracking-wide ">
-                    3%
-                  </p>
-                </div> */}
+               
               </div>
               <div className="flex">
                 <p
@@ -665,16 +644,7 @@ const Dashboard = () => {
                 >
                   {TimeDifferenceFromCurrent(handlerData?.lastPurge)}
                 </p>
-                {/* <div className=" flex bg-[#ff004c2d] px-[13px] py-[3px] rounded-[23px] ml-[10px]">
-                  <img
-                    src="/graphic/dashboard/trend-red-down.svg"
-                    className="mr-[5px] translate-y-[1px] w-[14px]"
-                    alt=""
-                  />
-                  <p className="text-[#ff004c] f2 text-[13px] font-medium tracking-wide ">
-                    3%
-                  </p>
-                </div> */}
+               
               </div>
               <div className="flex">
                 <p
@@ -741,25 +711,7 @@ const Dashboard = () => {
                 >
                   Total Image Optimization
                 </p>
-                {/* {dark ? (
-                  <div
-                    style={{
-                      color: dark ? "#ffffff74" : "#0a0a187e",
-                    }}
-                    className="text-[#0a0a187e] text-[#ffffff74] f2 hover:bg-[#ffffff30] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
-                  >
-                    View Details
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      color: dark ? "#ffffff74" : "#0a0a187e",
-                    }}
-                    className="text-[#0a0a187e] translate-x-[7px] text-[#0a0a187e] f2 hover:bg-[#e1e1e1] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
-                  >
-                    View Details
-                  </div>
-                )} */}
+           
               </div>
               <div className="w-[100%] justify-center items-center flex h-[130px] mt-[20px]">
 
@@ -922,203 +874,10 @@ const Dashboard = () => {
                   handlingToggle={handleMinifyHTML}
                 />
               </div>
-              <HoverGreenButton handlePurgeAll={handlePurgeAll} btnText="Purge all cache " />
+              <HoverGreenButton handlePurgeAll={handlePurgeAll} btnText="Purge All" />
             </div>
           </div>
-          {/* <div style={{height:"fit-content"}} className="w-[100%] mt-[24px] mobile:px-[10px] desktop:flex  desktop:grid-cols-3 laptop:grid-cols-2 gap-x-[24px] gap-y-[10px] flex h-[250px] mobile-cols">
- 
-             <GooglePageScore coreVitalsData={coreVitalsData} performanceData={performanceData} />
-           
-            <div
-              style={{
-                backgroundColor: dark ? "#111317" : "#fff",
-                borderColor: dark ? "#1F2329" : "#ebebeb",
-                paddingBottom:"30px"
-              }}
-              className=" h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px] w-[400px]"
-            >
-              <div className="w-[100%]  flex items-center justify-between">
-                <p
-                  style={{ color: dark ? "#fff" : "#0A0A18" }}
-                  className="text-[17px] f2 translate-y-[0px] font-semibold tracking-wide"
-                >
-                  Image Optimizations
-                </p>
-                {dark ? (
-                  <div
-                    style={{
-                      color: dark ? "#ffffff74" : "#0a0a187e",
-                    }}
-                    className="text-[#0a0a187e] text-[#ffffff74] f2 hover:bg-[#ffffff30] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
-                  >
-                    View Details
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      color: dark ? "#ffffff74" : "#0a0a187e",
-                    }}
-                    className="text-[#0a0a187e] translate-x-[7px] text-[#0a0a187e] f2 hover:bg-[#e1e1e1] px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium "
-                  >
-                    View Details
-                  </div>
-                )}
-              </div>
-              <div className="w-[100%] justify-center items-center flex h-[130px] mt-[25px]">
-          
-                <CustomDonutChart imageData={imageData} />
-                <div className="max-w-[250px] w-[50%] ml-auto">
-                  <div className="flex items-center mb-[4px] justify-between">
-                    <div className="flex  items-center">
-                      <img
-                        src={
-                          dark
-                            ? "/graphic/dashboard/elli1-d.svg"
-                            : "/graphic/dashboard/elli1.svg"
-                        }
-                        className="w-[10px] h-[10px]"
-                        alt=""
-                      />
-                      <p
-                        style={{ color: dark ? "#fff" : "#000" }}
-                        className="text-[13px] f2 font-medium ml-[5px]"
-                      >
-                        Total No Images
-                      </p>
-                    </div>
-                    <div
-                      style={{ color: dark ? "#fff" : "#000" }}
-                      className="text-[14px] f2 font-bold translate-y-[-2px]"
-                    >
-                      {imageData?.totalImages}
-                    </div>
-                  </div>
-                  <div className="flex items-center mb-[4px] justify-between">
-                    <div className="flex items-center">
-                      <img
-                        src={
-                          dark
-                            ? "/graphic/dashboard/elli2-d.svg"
-                            : "/graphic/dashboard/elli2.svg"
-                        }
-                        className="w-[10px] h-[10px]"
-                        alt=""
-                      />
-                      <p
-                        style={{ color: dark ? "#fff" : "#000" }}
-                        className="text-[13px] f2 font-medium ml-[5px]"
-                      >
-                        No of Image Optimize
-                      </p>
-                    </div>
-                    <div
-                      style={{ color: dark ? "#fff" : "#000" }}
-                      className="text-[14px] f2 font-bold translate-y-[-2px]"
-                    >
-                      {imageData?.totalOptimizeImage}
-                    </div>
-                  </div>
-                  <div className="flex items-center mb-[4px] justify-between">
-                    <div className="flex items-center">
-                      <img
-                        src={
-                          dark
-                            ? "/graphic/dashboard/elli3-d.svg"
-                            : "/graphic/dashboard/elli9.svg"
-                        }
-                        className="w-[10px] h-[10px]"
-                        alt=""
-                      />
-                      <p
-                        style={{ color: dark ? "#fff" : "#000" }}
-                        className="text-[13px] f2 font-medium ml-[5px]"
-                      >
-                        Pending Optimizations
-                      </p>
-                    </div>
-                    <div
-                      style={{ color: dark ? "#fff" : "#000" }}
-                      className="text-[14px] font-bold translate-y-[-2px]"
-                    >
-                      {imageData?.totalOriginImage}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-            style={{height:"fit-content"}}
-              className={`${
-                dark ? "divWrapperDarkMode" : "divWrapper"
-              }  relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  py-[14px] border-[#EBEBEB] rounded-[8px]`}
-            >
-              <div className="w-[100%] px-[15px] mb-[10px] flex items-center justify-between">
-                <p
-                  style={{ color: dark ? "#fff" : "#0A0A18" }}
-                  className="text-[17px] f2 translate-y-[0px] font-semibold tracking-wide"
-                >
-                  Quick Links
-                </p>
-
-                <div
-                  onClick={() => {
-                    router("/settings");
-                  }}
-                  className={`${
-                    dark ? "subHeadingDarkMode" : "subHeading"
-                  } text-[#0a0a187e] f2 ${
-                    dark
-                      ? "text-[#ffffff74]  hover:bg-[#ffffff30]"
-                      : "text-[#0a0a187e] hover:bg-[#e1e1e1]"
-                  }  px-[7px] py-[2px] rounded-sm cursor-pointer text-[13px] translate-y-[1px] font-medium`}
-                >
-                  All Settings
-                </div>
-              </div>
-
-              <div className="flex px-[15px] w-[100%] items-center mt-[20px] justify-between">
-                <p
-                  style={{ color: dark ? "#fff" : "#000" }}
-                  className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
-                >
-                  Lazy Loading
-                </p>
-                <ToggleButton
-                  toggleValue={lazyLoadingToggleValue}
-                  handlingToggle={handlelazyLoading}
-                />
-              </div>
-
-              <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
-                <p
-                  style={{ color: dark ? "#fff" : "#000" }}
-                  className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
-                >
-                  Image Optimization
-                </p>
-                <ToggleButton
-                  toggleValue={imageOptimizationValue}
-                  handlingToggle={handleImageOptimization}
-                />
-              </div>
-
-              <div className="flex px-[15px] w-[100%] items-center mt-[9px] justify-between">
-                <p
-                  style={{ color: dark ? "#fff" : "#000" }}
-                  className="text-[14px] f2 translate-y-[0px] font-medium tracking-wide"
-                >
-                  Minify Html
-                </p>
-                <ToggleButton
-                  toggleValue={minifyHTMLToggleValue}
-                  handlingToggle={handleMinifyHTML}
-                />
-              </div>
-
-              <HoverGreenButton handlePurgeAll={handlePurgeAll} btnText="Purge all cache " />
-            </div>
-          </div> */}
+  
           <div className="w-[100%] h-[50px]"></div>
         </div>
       </div>
