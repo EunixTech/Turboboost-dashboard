@@ -238,7 +238,7 @@ const TableItem3 = ({ last, item }) => {
         }}
         className="w-[30%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        { item?.event_type === 1 ? "Install" :"updated"} Plugin
+        { item?.event_type === 1 ? "Installed" :"updated"} Plugin
       </div>
       <div
         style={{
