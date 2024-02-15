@@ -425,7 +425,7 @@ const InputDate = ({ updateCurrMonth}) => {
       </div>
       <div style={{
         cursor:"pointer"
-      }} className="w-[30px] shrink-0 h-[30px] bg-[#0A0A18] flex rounded-[3px] items-center justify-center">
+      }} onClick={()=>updateCurrMonth(1)} className="w-[30px] shrink-0 h-[30px] bg-[#0A0A18] flex rounded-[3px] items-center justify-center">
         <img src="/graphic/logs/refresh.svg" className="w-[15px]" alt="" />
       </div>
     </div>
