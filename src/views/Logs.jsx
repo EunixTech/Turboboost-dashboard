@@ -320,7 +320,7 @@ const Navigator = ({ current, setCurrent }) => {
   );
 };
 
-const InputDate = ({ updateCurrMonth}) => {
+const InputDate = ({ currMonth,updateCurrMonth}) => {
   const [curr, setCurr] = useState(1);
   const [hover, setHover] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -376,7 +376,7 @@ const InputDate = ({ updateCurrMonth}) => {
             }}
             className="text-[12px] font-bold tracking-wide  text-[#000]"
           >
-            {list[curr]}
+            {list[currMonth]}
           </p>
           <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
         </div>
@@ -542,7 +542,7 @@ const CacheStatus = () => {
                       Pageviews
                     </h1>
                  
-                    <InputDate updateCurrMonth={updateCurrMonth} />
+                    <InputDate currMonth={currMonth} updateCurrMonth={updateCurrMonth} />
                   </div>
               
                     <Chart1 currMonth={currMonth} />

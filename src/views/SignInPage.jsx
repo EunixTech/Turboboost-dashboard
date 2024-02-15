@@ -1,17 +1,13 @@
-import React, { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import useWidth from "../hooks/useWidth";
-import { useSelector } from "react-redux";
 import axios from "axios"; // Import axios
-import GoogleLoginButton from "../components/button/GoogleLogin";
 
 import FormikInput from "../components/forms/FormikInput";
 import SideBanner from "../components/SideBanner";
 import TitleManager from "../components/TitleManager";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-import getFetchConfig from "../utils/getFetchConfig";
 import appURLs from "../appURL";
 import toast from "react-hot-toast";
 
@@ -24,7 +20,6 @@ const validationSchema = Yup.object().shape({
 const SignInPage = () => {
   const screenWidth = useWidth();
   const [authType, toggleAuthType] = useState("login");
-  const fetchConfig = getFetchConfig();
   const appURL = appURLs();
 
   const handleFormSubmit = async (values, { setSubmitting }) => {
@@ -101,7 +96,6 @@ const SignInPage = () => {
             )}
           </Formik>
 
-          {/* <GoogleLoginButton /> */}
 
           {
             authType === "login" ?
