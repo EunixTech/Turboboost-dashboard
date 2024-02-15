@@ -30,7 +30,6 @@ const Billing = () => {
 		const storedStoreName = localStorage.getItem("storeName");
 
 		if (storedPlanName) {
-			//   setCurrentPlan(storedPlanName);
 			dispatch(setPlan(storedPlanName)); // Use the correct action: setPlan
 		}
 
@@ -183,7 +182,7 @@ const Billing = () => {
 											>
 												{item?.name}
 											</h1>
-											{item?.name === "Growth" ? <div className="text-[#0FE38F] bg-[#000] px-[14px] py-[6.5px] leading-[8px] rounded-[20px] translate-y-[-1px] text-[12px]  tracking-wide font-medium flex items-center justify-center">
+											{item?.name === "Growth" ? <div className="text-[#0FE38F] bg-[#000] px-[12px] py-[6.5px] leading-[8px] rounded-[20px] translate-y-[-1px] text-[12px]  tracking-wide font-medium flex items-center justify-center">
 												Most Popular
 											</div> : ``}
 

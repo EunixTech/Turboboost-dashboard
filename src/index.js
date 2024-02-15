@@ -22,7 +22,6 @@ import Affiliate from "./views/Affiliate.jsx";
 import ShopifyAdmin from "./views/ShopifyAdmin.jsx";
 import Store from "./routes/store";
 import HomeLayout from "./layouts/index";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import NewOnboard from "./routes/newOnboarding.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -94,7 +93,6 @@ const router = [
 const App = () => {
  
   const location = useLocation();
-  const navigate = useNavigate(); 
   const dispatch = useDispatch();
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
@@ -140,7 +138,7 @@ const App = () => {
    
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
-    setShowOnboardingModal(userToken ? true : true);
+    setShowOnboardingModal(userToken ? true : false);
     
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
@@ -160,12 +158,8 @@ const App = () => {
       const isNitroOtp = window.location.pathname === '/nitro-otp';
 
       if (!authToken && !isLoginRoute && !userToken1 && !isNitroPackRoute && !isConnectSiteNitro && !isNitroOtp) {
-        // Redirect to login page if authToken is not available and not on the login route
         window.location.replace('/login-shopify');
-        // window.location.replace('/nitro-pack');
-        // window.location.replace('/nitro-otp');
       } else if (authToken && isLoginRoute) {
-        // Redirect to dashboard page if authToken is available and on the login route
         window.location.replace('/dashboard');
       }
     };
@@ -177,10 +171,7 @@ const App = () => {
     <>
     {showOnboardingModal && <NewOnboard />}
       {!(
-        // location.pathname === "/auth/signIn" ||
-        // location.pathname === "/auth/signUp" ||
-        // location.pathname === "/auth/forgot-password" ||
-        // location.pathname === "/auth/reset-password" ||
+
         location.pathname === "/login-shopify" ||  location.pathname === "/nitro-pack" ||  location.pathname === "/connect-site" ||  location.pathname === "/verifiy-email-otp"
       ) && (
         <HomeLayout>
@@ -189,25 +180,18 @@ const App = () => {
               return <Route key={i} path={item.path} element={item.element} />;
             })}
                <Route path="*" element={<NotFound />} />
-            {/* Include the connect-to-store route here */}
-            {/* <Route path="/connect-to-store" element={<ConnectStore />} /> */}
+
           </Routes>
           
         </HomeLayout>
       )}
       <Routes>
-        {/* Include the connect-to-store route here as well */}
-        {/* <Route path="/connect-to-store" element={<ConnectStore />} />  */}
+
         <Route path={"/login-shopify"} element={<SignInRoute />} />
         <Route path={"/nitro-pack"} element={<NitroPack />} />
         <Route path={"/connect-site"} element={<ConnectSiteNitro />} />
         <Route path={"/verifiy-email-otp"} element={<NitroOtp />} />
 
-        {/* <Route path={"/auth/signUp"} element={<SignUp />} />
-        <Route path={"/auth/forgot-password"} element={<ForgotPassword />} />
-        <Route path={"/auth/reset-password"} element={<ResetPasswordRoute />} /> */}
-        {/* Add the 404 Not Found route without any layout */}
-        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
 
       <ToastContainer
@@ -221,12 +205,10 @@ const App = () => {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <GoogleOAuthProvider clientId="648805285797-kgc785jg9ffbt9u8t73leb6o9pcs59oh.apps.googleusercontent.com">
     <Provider store={store}>
       <BrowserRouter>
         <App />
         <Toaster position="top-right" reverseOrder={false} />
       </BrowserRouter>
     </Provider>
-  </GoogleOAuthProvider>
 );
