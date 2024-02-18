@@ -89,6 +89,7 @@ const DemoLine = () => {
       position: "top-right",
       itemName: {
         style: {
+          marginTop:"-80px",
           fontWeight: "500",
           fill: dark ? "#fff" : "#000", // Change the font color
         },
@@ -98,6 +99,9 @@ const DemoLine = () => {
       },
     },
     yAxis: {
+      tickLine: { length: 0 },
+      range: [0, 1],
+       nice: true, //
       label: {
         formatter: (text) => `${parseInt(text) }`,
       },

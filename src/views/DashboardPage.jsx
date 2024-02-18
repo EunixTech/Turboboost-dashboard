@@ -31,7 +31,8 @@ const GooglePageScore = ({ coreVitalsData, performanceData }) => {
         backgroundColor: dark ? "#111317" : "#fff",
         borderColor: dark ? "#1F2329" : "#ebebeb",
         height: "fit-content",
-        minHeight: "210px"
+        paddingTop:"20px",
+        minHeight: "225px"
       }}
       className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[25px] pt-[10px] border-[#EBEBEB]  rounded-[8px]"
     >
@@ -702,7 +703,7 @@ const Dashboard = () => {
                 backgroundColor: dark ? "#111317" : "#fff",
                 borderColor: dark ? "#1F2329" : "#ebebeb",
               }}
-              className=" h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px]"
+              className=" h-[100%] mobile:mb-[10px] laptop:mb-[0]  bg-[#fff] border-[1px] px-[15px] py-[14px] border-[#EBEBEB] rounded-[8px] pt-[20px]"
             >
               <div className="w-[100%]  flex items-center justify-between">
                 <p
@@ -734,7 +735,7 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        No of Image Optimize
+                        Optimized images
                       </p>
                     </div>
                     <div
@@ -759,7 +760,7 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Pending Optimizations
+                        Pending image optimization
                       </p>
                     </div>
                     <div
@@ -784,7 +785,7 @@ const Dashboard = () => {
                         style={{ color: dark ? "#fff" : "#000" }}
                         className="text-[13px] f2 font-medium ml-[5px]"
                       >
-                        Not/error'd
+                        Images not optimized
                       </p>
                     </div>
                     <div
@@ -802,7 +803,7 @@ const Dashboard = () => {
                 backgroundColor: dark ? "#111317" : "#fff",
                 borderColor: dark ? "#1F2329" : "#ebebeb",
               }}
-              className=" relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  pt-[14px] pb-[6px] border-[#EBEBEB] rounded-[8px]"
+              className=" relative mobile:mb-[10px] laptop:mb-[0]   bg-[#fff] border-[1px]  pt-[14px] pb-[6px] border-[#EBEBEB] rounded-[8px] pt-[20px]"
             >
               <div className="w-[100%] px-[15px] mb-[10px] flex items-center justify-between">
                 <p

@@ -6,7 +6,7 @@ export default function HoverGreenButton({ btnText = " " , handlePurgeAll }) {
 
     return (
         <div onClick={handlePurgeAll} style={{ borderColor: dark ? "#1F2329" : "#ebebeb" }}
-            className="w-[100%]  mt-[10px] h-[50px] px-[15px] flex items-center justify-center  border-t-[1px] left-0"
+            className="w-[100%]  mt-[10px] h-[50px] px-[15px] flex items-center justify-center  border-t-[1px] left-0 pt-[20px]"
         >
 
             <div className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"} h-[32px] ${dark ? "hover:bg-[#1F2329]" : "hover:bg-[#f3f3f3]"}  cursor-pointer rounded-[4px] ${dark ? "border-[#1F2329]" : "border-[#38F8AC] "} flex items-center justify-center`}

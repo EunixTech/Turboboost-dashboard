@@ -83,6 +83,7 @@ const SignInPage = () => {
                     inputLabel="Enter your Shopify domain"
                     inputName="domain"
                     inputType="text"
+                    themeMode = {true}
                   />
 
                   <button
