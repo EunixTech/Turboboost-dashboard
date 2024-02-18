@@ -23,7 +23,7 @@ const Item = ({ src, title, onClick }) => {
   );
 };
 
-const Prompt = () => {
+const Prompt = ({setOpen}) => {
   const w = useWidth();
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
@@ -50,6 +50,7 @@ const Prompt = () => {
       <div className="w-[100%] px-[20px] py-[10px]">
         <Item
           onClick={() => {
+            setOpen(false)
             router("/settings");
           }}
           src={
@@ -66,6 +67,7 @@ const Prompt = () => {
         />
         <Item
           onClick={() => {
+            setOpen(false)
             router("/billing");
           }}
           src={<svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,6 +79,7 @@ const Prompt = () => {
         />
         <Item
           onClick={() => {
+            setOpen(false)
             window.open("https://admin.shopify.com", "_blank");
           }}
           new={true}
@@ -112,6 +115,7 @@ const Prompt = () => {
 
         <Item
           onClick={() => {
+            setOpen(false)
             router("/affiliate");
           }}
           src={<svg width="22" height="22" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -321,7 +325,7 @@ const Navbar = () => {
               }
 
             </div>
-            {open && <Prompt />}
+            {open && <Prompt setOpen={setOpen} />}
           </div>
         </div>
       </div>

@@ -8,54 +8,54 @@ import AnimatedLoader from "../components/loader/AnimatedLoader";
 
 import { GetAxiosConfig } from "../utils/axiosConfig.js";
 
-const Button = () => {
-  const dark = useSelector((state) => state.home.dark);
-  const handleCommingSoonMsg = () =>{
-    toast.dismiss();
-    return   toast.info("Coming Soon");
-  }
-  return (
-    <div
-    onClick={handleCommingSoonMsg}
-      className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
+// const Button = () => {
+//   const dark = useSelector((state) => state.home.dark);
+//   const handleCommingSoonMsg = () =>{
+//     toast.dismiss();
+//     return   toast.info("Coming Soon");
+//   }
+//   return (
+//     <div
+//     onClick={handleCommingSoonMsg}
+//       className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
-        h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
-    >
-      <p
-        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-        } rounded-[4px] hover:bg-[#2fe49c] active:translate-y-[0px] font-bold active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide `}
-      >
-        Add New Website
-      </p>
-    </div>
-  );
-};
-
-
+//         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
+//     >
+//       <p
+//         className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
+//           dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+//         } rounded-[4px] hover:bg-[#2fe49c] active:translate-y-[0px] font-bold active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide `}
+//       >
+//         Add New Website
+//       </p>
+//     </div>
+//   );
+// };
 
 
-const Button1 = ({ onClick }) => {
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      onClick={() => {
-        onClick();
-      }}
-      className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
-        h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
-    >
-      <p
-        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#000]" : "bg-[#000]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[-3px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-      >
-        Browse Connectors
-      </p>
-    </div>
-  );
-};
+
+// const Button1 = ({ onClick }) => {
+//   const dark = useSelector((state) => state.home.dark);
+//   return (
+//     <div
+//       onClick={() => {
+//         onClick();
+//       }}
+//       className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
+
+//         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
+//     >
+//       <p
+//         className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
+//           dark ? "bg-[#000]" : "bg-[#000]"
+//         } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[-3px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+//       >
+//         Browse Connectors
+//       </p>
+//     </div>
+//   );
+// };
 
 const TableHeader = () => {
   const dark = useSelector((state) => state.home.dark);
@@ -669,13 +669,13 @@ const ConnectWebsite = () => {
                 Connect Website
               </h1>
             </div>
-            <div className="w-[100%] mt-[18px] laptop:flex justify-between">
+            <div className="w-[100%] mt-[18px]">
               <div
                 style={{
                   backgroundColor: dark ? "#111317" : "#fff",
                   borderColor: dark ? "#1F2329" : "#ebebeb",
                 }}
-                className="laptop:w-[73%] mobile:w-[100%] pb-[5px] pt-[14px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
+                className="mobile:w-[100%] pb-[15px] pt-[14px] bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
               >
                 <div className="flex px-[15px] justify-between items-center">
                   <p
@@ -690,7 +690,7 @@ const ConnectWebsite = () => {
                 </div>
                 <Table websites={connectedWebsiteData}  />
               </div>
-              <div className="mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[26%]">
+              {/* <div className="mobile:w-[100%] mobile:mt-[10px] laptop:mt-[0px] laptop:w-[26%]">
                 <div
                   style={{
                     backgroundColor: dark ? "#111317" : "#fff",
@@ -818,13 +818,13 @@ const ConnectWebsite = () => {
                     }}
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </div>
     }
-      <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+      {/* <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Connect Website" conicalURL="connect-website" />
  
         <div className="w-[100%] h-[50px] shrink-0"></div>
@@ -994,7 +994,7 @@ const ConnectWebsite = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

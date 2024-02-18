@@ -103,8 +103,8 @@ const Table1 = ({ tableData }) => {
   );
 };
 
-const TableHeader1 = ({ change }) => {
-  const [check, setCheck] = useState(false);
+const TableHeader1 = () => {
+
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -117,7 +117,7 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center justify-center"
+        className="w-[45%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         Name
       </div>
@@ -125,34 +125,19 @@ const TableHeader1 = ({ change }) => {
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[40%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center justify-center"
+        className="w-[40%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         Optimized At
       </div>
-      {/* <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[10px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-        CDN Bandwidth (MiB)
-      </div> */}
+
       <div
         style={{
           color: dark ? "#ffffff74" : "#0a0a187e",
         }}
-        className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center justify-center"
+        className="w-[30%] pl-[25px] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
         Status
       </div>
-      {/* <div
-        style={{
-          color: dark ? "#ffffff74" : "#0a0a187e",
-        }}
-        className="w-[12.5%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
-      >
-
-      </div> */}
 
     </div>
   );
@@ -215,7 +200,7 @@ const TableItem1 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[30%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
+        className="w-[45%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
         {item?.title}
       </div>
@@ -223,7 +208,7 @@ const TableItem1 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[40%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
+        className="w-[40%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
         {item?.optimized_at && formatDate(item?.optimized_at)}
       </div>
@@ -231,7 +216,7 @@ const TableItem1 = ({ last, item }) => {
         style={{
           color: dark ? "#fff" : "#000",
         }}
-        className="w-[30%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center justify-center"
+        className="w-[30%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
         <Status i= {item?.is_optimized === true ? 1 : 2} />
       </div>
@@ -447,7 +432,7 @@ const CacheWarmup = ({ setShow }) => {
                     backgroundColor: dark ? "#111317" : "#fff",
                     borderColor: dark ? "#1F2329" : "#ebebeb",
                   }}
-                  className="laptop:w-[66%] mobile:w-[100%]   py-[14px]  bg-[#fff] border-[1px]  rounded-[8px]"
+                  className="laptop:w-[66%] mobile:w-[100%] mb-[30px]   py-[14px]  bg-[#fff] border-[1px]  rounded-[8px]"
                 >
                   <h1
                     style={{

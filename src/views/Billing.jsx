@@ -316,7 +316,7 @@ const Billing = () => {
 const Table1 = ({ setSelected1 }) => {
 	return (
 		<div className="w-[100%] border-[#ebebeb] mt-[0px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool">
-			<div className="mobile:w-[500px] laptop:w-[100%]">
+			<div className="mobile:w-[700px] laptop:w-[100%]">
 				<TableHeader1 />
 				<TableItem1
 					title="Page Views Per Month"

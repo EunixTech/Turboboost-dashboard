@@ -36,7 +36,7 @@ const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue
            style={{
           borderColor: dark ? "#1F2329" : "#ebebeb",
           color: dark ? "#fff" : "#000",
-          backgroundColor: dark ? "#111317" : "#fff",
+          // backgroundColor: dark ? "#111317" : "#fff",
         }}
           className="w-[100%] border-[1px] outline-none rounded-[4px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px] mb-[-5px]"
         />
