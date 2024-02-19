@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import * as Yup from "yup";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import useWidth from "../../hooks/useWidth";
 
@@ -13,14 +13,12 @@ import FeatureCard from "../FeatureCard.jsx";
 import FormikInput from "../forms/FormikInput";
 import FormikSelectInput from "./FormikSelectInput";
 import ChangeEmail from "./ChangeEmail";
-import { setToggle } from "../../slice/statusToggleSlice.jsx";
 
-const UserTabSettings = ({ toggleSettingPageLoader }) => {
+const UserTabSettings = ({ updateTest }) => {
   const deviceWith = useWidth();
   const [phoneNumberValue, setPhoneNumberValue] = useState();
-  const dispatch = useDispatch();
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
-  const [loading, toggoleLoading] = useState(false);
+  const [loading, toggoleLoading] = useState(true);
   const [emailPreferences, updateEmailPreferences] = useState({});
   const [userData, updateUserData] = useState({
     first_name: "",
@@ -110,16 +108,16 @@ const UserTabSettings = ({ toggleSettingPageLoader }) => {
   };
 
   const fetchProfileData = async () => {
-    toggoleLoading(true)
-    toggleSettingPageLoader(true)
+  
     try {
+      toggoleLoading(true)
       const res = await GetAxiosConfig(`user/user-profile`)
 
       const resJSON = await res.data;
 
       if (resJSON?.status === 200) {
         const user = resJSON?.acccount;
-  
+    
         const dataObj = {
           first_name: user?.user_info?.first_name,
           last_name: user?.user_info?.last_name,
@@ -133,28 +131,22 @@ const UserTabSettings = ({ toggleSettingPageLoader }) => {
         updateUserData(dataObj);
         setPhoneNumberValue(user?.user_info?.phone_number || "");
         toggoleLoading(false)
-        toggleSettingPageLoader(false)
       } else if (resJSON.status === 403) {
 
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
         toggoleLoading(false)
-        toggleSettingPageLoader(false)
       }
     } catch (error) {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
         toggoleLoading(false)
-        toggleSettingPageLoader(false)
       }
     }
   };
 
 
-  useEffect(() => {
-    fetchProfileData();
-  }, []);
 
   const toggleEssentialEmailPreferences = async () => {
     toggoleLoading(true);
@@ -166,7 +158,7 @@ const UserTabSettings = ({ toggleSettingPageLoader }) => {
     const resData = res.data;
 
     if (resData.status === 200) {
-      fetchProfileData();
+      // fetchProfileData();
     } else return toast.error(resData?.message)
 
   }
@@ -180,7 +172,7 @@ const UserTabSettings = ({ toggleSettingPageLoader }) => {
     const resData = res.data;
 
     if (resData.status === 200) {
-      fetchProfileData();
+      // fetchProfileData();
     } else return toast.error(resData?.message);
   }
   const togglefeaturesPreferences = async () => {
@@ -193,12 +185,16 @@ const UserTabSettings = ({ toggleSettingPageLoader }) => {
     const resData = res.data;
 
     if (resData.status === 200) {
-      fetchProfileData();
+      // fetchProfileData();
     } else return toast.error(resData?.message);
   }
 
+  useEffect(() => {
+    fetchProfileData();
+  }, []);
+
   return (
-    loading ?  "" :
+    loading ?  " " :
       <>
         <Formik
           initialValues={{

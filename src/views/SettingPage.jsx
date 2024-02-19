@@ -17,77 +17,60 @@ import ImageTabSettings from "../components/SettingsComponent/ImageTabSettings";
 import HtmlTabSettings from "../components/SettingsComponent/HtmlTabSettings";
 import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
 import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
-// import GeneralTabSetting1 from "../components/SettingsComponent/GeneralTabSetting1";
-// import CachingTabSetting from "../components/SettingsComponent/CachingTabSetting";
-// import IntegrationsTabSettings from "../components/SettingsComponent/IntegrationsTabSettings";
+
 import OptimizationModeCard from "../components/SettingsComponent/OptimizationModeCard";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
 
 const SettingPage = () => {
 
-
   const [activeTab, updateActiveTab] = useState(0);
+  const [test, updateTest] = useState(true)
+  // const [test, updateTest] = useState(false);
+
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
-  const [userSettings, setUserSettings] = useState({
-  });
+
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const dispatch = useDispatch();
 
-    const [settingPageLoader, toggleSettingPageLoader] = useState(false);
+  // const fetchingPlanName = async () => {
+  //   try {
+  //     const res = await GetAxiosConfig(`user/current-plan-detail`);
+  //     const resJSON = res?.data;
+
+  //     if (resJSON.status === 200) {
+  //       const planName = resJSON?.data?.plan;
+  //       dispatch(setToggle({ key: "planName", value: planName }));
+  //     } else if (resJSON.status === 403) {
+  //       localStorage.removeItem('authToken');
+  //       window.location.replace('/login-shopify');
+  //     }
+  //   } catch (error) {
+  //     if (error?.response?.status === 401) {
+  //       localStorage.removeItem('authToken');
+  //       window.location.replace('/login-shopify');
+  //     }
+  //   }
+  // };
 
   // useEffect(() => {
-  //   const handleBeforeUnload = (event) => {
-  //     if (unsavedChanges) {
-  //       const message = "You have unsaved changes. Are you sure you want to leave?";
-  //       event.returnValue = message;
-  //       return message;
-  //     }
-  //   };
+  //   fetchingPlanName();
+  // }, [])
 
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
+  // console.log()
 
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, [unsavedChanges]);
-
-  const fetchingPlanName = async () => {
-    try {
-      const res = await GetAxiosConfig(`user/current-plan-detail`);
-      const resJSON = res?.data;
-
-      if (resJSON.status === 200) {
-        const planName = resJSON?.data?.plan;
-        dispatch(setToggle({ key: "planName", value: planName }));
-      } else if (resJSON.status === 403) {
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
-      }
-    } catch (error) {
-      if (error?.response?.status === 401) {
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
-      }
-    }
-  };
 
   useEffect(() => {
-    fetchingPlanName();
-  }, [])
+    const timer = setTimeout(() => {
+      updateTest(false);
+    }, 1000);
 
-
-  const handleUserSettingsChange = (newData) => {
-    localStorage.setItem("cjshgcjh", true)
-  };
-
-  const handleSaveSettings = async () => {
-    console.log("")
-  };
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     
-    settingPageLoader ? <AnimatedLoader /> :
+    test ? <AnimatedLoader /> :
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Settings" conicalURL="settings" />
       <div className="w-[100%] h-[50px] shrink-0"></div>
@@ -116,7 +99,6 @@ const SettingPage = () => {
               activeTab !== 0 &&
                <SaveButton
               btnText="Save Settings"
-              onClick={handleSaveSettings}
               style={{ margin: isMobile ? "-20px 0  0 0" : 0 }}
             />
             }
@@ -131,9 +113,7 @@ const SettingPage = () => {
           {activeTab === 0 && (
             <>
               <UserTabSettings
-              toggleSettingPageLoader={toggleSettingPageLoader}
-                userProfile={userSettings}
-                onUpdate={handleUserSettingsChange}
+                // updateTest={updateTest}
               />
 
               <ToastContainer />

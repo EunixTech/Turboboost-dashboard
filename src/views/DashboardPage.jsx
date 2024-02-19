@@ -664,7 +664,6 @@ const Dashboard = () => {
                   }}
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
-
                   {handlerData?.previousPurge ? new Date(handlerData?.previousPurge).toLocaleDateString("en-US") : ""}
 
                 </p>
@@ -688,12 +687,13 @@ const Dashboard = () => {
               <p
                 style={{
                   color: dark ? "#ffffff74" : "#0a0a187e",
+                  marginBottom: "-15px"
                 }}
                 className="text-[#0a0a187e] f2 laptop:text-[14px] desktop:text-[14px] font-medium tracking-wide"
               >
                 This Month
               </p>
-              <Chart1 className="custom-chart" />
+              <Chart1 className="custom-chart cga" />
 
             </div>
           </div>
