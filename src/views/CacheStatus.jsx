@@ -50,7 +50,7 @@ const Button2 = ({ check, assetsOptimizationValue, handleOptimizeAssets }) => {
           >
 
             <div className="translate-y-[1px]">
-              Revert Purge Assets
+              Re Optimize
             </div>
           </p>
           : <p
@@ -279,6 +279,11 @@ const Filter = ({ handlingApplyFilter, updateAssetsArr, assetsData, updateSearch
           label="Assets Type"
           list={["All", "Application/Javascript", "Application/x-liquid", "Text/Css"]}
         />
+        <InputDropdown
+          clearFilter={clearFilter}
+          label="Status"
+          list={["All", "Pending", "Optimized"]}
+        />
 
         <InputDropdown
           clearFilter={clearFilter}
@@ -306,13 +311,17 @@ const TableHeader = () => {
       }}
       className="w-[100%] flex h-[25px] border-b-[1px] border-[#ebebeb]"
     >
-      <div className="w-[11%] ml-[10px]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
+      <div style={{
+        color: dark ? "#fff" : "#000",
+      }} className="w-[11%] ml-[10px]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         S.No
       </div>
       <div className="w-[60%]  px-[10px] items-center flex h-[100%] ">
         <div
-
+          style={{
+            color: dark ? "#fff" : "#000",
+          }}
           className="w-[30%] text-[12px] tracking-wide text-[#0a0a1876] font-bold flex h-[100%] items-center"
         >
           Name
@@ -320,26 +329,34 @@ const TableHeader = () => {
       </div>
 
       <div
-
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
         className="w-[50%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Asset Type
       </div>
       <div
-
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
         className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Original Size
       </div>
       <div
-
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
         className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Optimize Size
       </div>
 
       <div
-
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
         className="w-[30%]  text-[12px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center"
       >
         Status
@@ -390,38 +407,51 @@ const TableItem = ({ item, s_no }) => {
       className="w-[100%] flex h-[70px] border-b-[1px] border-[#ebebeb]"
     >
       <div
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
         className="w-[10%] ml-[20px]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {s_no + 1}
       </div>
       <div className="w-[60%]  px-[10px] items-center flex h-[100%] ">
         <div
-
+          style={{
+            color: dark ? "#fff" : "#000",
+          }}
           className="w-[60%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
         >
           {item?.name}
         </div>
       </div>
       <div
-
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
         className="w-[50%] pr-[10px] text-[14px] hover:underline cursor-pointer leading-[16px] tracking-wide text-[#000] font-bold flex h-[100%] items-center"
       >
         {item?.file_type}
       </div>
       <div
-
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
         className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.before}
       </div>
       <div
-
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
         className="w-[30%]  text-[14px] tracking-wide text-[#000] font-bold  flex h-[100%] items-center"
       >
         {item?.file_size?.after}
       </div>
 
-      <div className="w-[30%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
+      <div style={{
+        color: dark ? "#fff" : "#000",
+      }} className="w-[30%]  text-[10px] tracking-wide text-[#0a0a1876] font-bold  flex h-[100%] items-center">
         <Status i={item?.is_optimized ? 1 : 2} />
       </div>
 
@@ -543,7 +573,7 @@ const CacheStatus = () => {
       if (resData?.status === 200) {
         dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
         fetchAssetsOptimizationData();
-        // toggleLoader(false);
+  
       } else {
         toggleLoader(false);
         return toast.error("Please try again");
@@ -589,11 +619,11 @@ const CacheStatus = () => {
       if (resultsPerPageByFilter === "All") {
 
         if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Type").toLocaleLowerCase()) {
-          console.log("asdjgasdasdasd1")
+
           const filterData = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
           updateArr = filterData
         } else if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Name").toLocaleLowerCase()) {
-          console.log("asdjgasdasdasd2")
+
           const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()));
           updateArr = filterData
         } else {
@@ -601,39 +631,53 @@ const CacheStatus = () => {
           updateArr = filterData
         }
       } else {
+        if (assetsTypeFilter) {
+          if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Type").toLocaleLowerCase()) {
+            const filterData = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy.toLowerCase()) && data?.file_type === assetsTypeFilter?.toLocaleLowerCase());
+            updateArr = filterData
+          } else if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Name").toLocaleLowerCase()) {
+            const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()) && data?.file_type === assetsTypeFilter?.toLocaleLowerCase());
+            updateArr = filterData
+          } else {
 
-        if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Type").toLocaleLowerCase()) {
-          const filterData = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
-          updateArr = filterData
-        } else if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Name").toLocaleLowerCase()) {
-          const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()));
-          updateArr = filterData
+            const filterData = assetsData.assetFileArr.filter((data) => (data?.name.toLowerCase().includes(searchBy.toLowerCase()) && data?.file_type.toLowerCase().includes(searchBy.toLowerCase())) || data?.file_type === assetsTypeFilter?.toLocaleLowerCase());
+
+            updateArr = filterData
+          }
         } else {
 
-          const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()) || data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
+          if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Type").toLocaleLowerCase()) {
+            const filterData = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
+            updateArr = filterData
+          } else if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Name").toLocaleLowerCase()) {
+            const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()));
+            updateArr = filterData
+          } else {
 
-          updateArr = filterData
+            const filterData = assetsData.assetFileArr.filter((data) => (data?.name.toLowerCase().includes(searchBy.toLowerCase()) && data?.file_type.toLowerCase().includes(searchBy.toLowerCase())));
+
+            updateArr = filterData
+          }
         }
+
+
       }
     } else {
+
       if (assetsTypeFilter) {
-        console.log("workigngngqw")
+
         if (assetsTypeFilter === "All") {
           updateArr = assetsData.assetFileArr
         } else {
-          console.log("workigngngqw")
-          console.log("workigngngqw", assetsTypeFilter)
           const filterData = assetsData.assetFileArr.filter((data) => data?.file_type === assetsTypeFilter.toLocaleLowerCase());
-          console.log("filterData", filterData)
           updateArr = filterData
         }
 
       }
-      // updateAssetsArr(assetsData.assetFileArr.slice(0, resultsPerPageByFilter))
 
     }
 
-    if(resultsPerPageByFilter){
+    if (resultsPerPageByFilter) {
       updateAssetsArr(updateArr.slice(0, resultsPerPageByFilter))
 
     } else {
@@ -641,6 +685,10 @@ const CacheStatus = () => {
 
     }
 
+  }
+
+  const handleReOptimization = () =>{
+    fetchAssetsOptimizationData();
   }
 
   return (
@@ -704,11 +752,11 @@ const CacheStatus = () => {
                 <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
                   <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#38F8AC" />
                   <HeaderItem
-                    title="Pending Assets"
+                    title="Pending Assets Optimization"
                     sub={assetsData && assetsData?.notOptimizedAssets}
                     color="#FFCB65"
                   />
-                  <HeaderItem title="Not/error'd" sub={0} color="#FF465C" />
+                  <HeaderItem title="Assets not optimized" sub={0} color="#FF465C" />
                 </div>
               </div>
               <div
@@ -740,7 +788,7 @@ const CacheStatus = () => {
                   }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
                   <div style={{
                     width: `${(assetsData?.totalOptimizedSize && assetsData?.jsAssetSize) ? (assetsData?.jsAssetSize / assetsData?.totalOptimizedSize) * 100 : 0}%`,
-                  }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#766695]" />
+                  }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#02e7f7]" />
                   <div style={{
                     width: `${(assetsData?.totalOptimizedSize && assetsData?.cssAssetSize) ? (assetsData?.cssAssetSize / assetsData?.totalOptimizedSize) * 100 : 0}%`,
                   }} className=" h-[100%] mr-[2px] rounded-[10px] bg-[#9963FE]" />
@@ -749,7 +797,7 @@ const CacheStatus = () => {
                 </div>
                 <div className="w-[100%] mobile:grid-cols-2 grid laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
                   <HeaderItem title="HTML Assets" sub={kbToMb(assetsData && assetsData?.liquidAssetSize)} assets={true} color="#391F87" />
-                  <HeaderItem title="JS Assets" sub={kbToMb(assetsData && assetsData?.jsAssetSize)} assets={true} color="#766695" />
+                  <HeaderItem title="JS Assets" sub={kbToMb(assetsData && assetsData?.jsAssetSize)} assets={true} color="#02e7f7" />
                   <HeaderItem title="CSS Assets" sub={kbToMb(assetsData && assetsData?.cssAssetSize)} assets={true} color="#9963FE" />
                   {/* <HeaderItem
                   title="Fonts Cache"

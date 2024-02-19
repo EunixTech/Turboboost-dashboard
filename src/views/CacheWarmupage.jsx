@@ -352,7 +352,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      Total No. Pages
+                      Total Pages
                     </p>
                     <Tooltip text="This statement serves to indicate the count of pages" />
                   </div>
@@ -381,7 +381,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      No of Optimized pages
+                      Number of Pages Optimized
                     </p>
                     <Tooltip text="This indicates the number of pages optimized by TurboBoost." />
                   </div>
@@ -410,7 +410,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      Pending pages
+                      Pages Pending Optimisation
                     </p>
                     <Tooltip text="This indicates the number of pages pending optimization." />
                   </div>

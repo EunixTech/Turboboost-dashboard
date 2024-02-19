@@ -17,13 +17,15 @@ import ImageTabSettings from "../components/SettingsComponent/ImageTabSettings";
 import HtmlTabSettings from "../components/SettingsComponent/HtmlTabSettings";
 import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
 import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
-import GeneralTabSetting1 from "../components/SettingsComponent/GeneralTabSetting1";
-import CachingTabSetting from "../components/SettingsComponent/CachingTabSetting";
-import IntegrationsTabSettings from "../components/SettingsComponent/IntegrationsTabSettings";
+// import GeneralTabSetting1 from "../components/SettingsComponent/GeneralTabSetting1";
+// import CachingTabSetting from "../components/SettingsComponent/CachingTabSetting";
+// import IntegrationsTabSettings from "../components/SettingsComponent/IntegrationsTabSettings";
 import OptimizationModeCard from "../components/SettingsComponent/OptimizationModeCard";
+import AnimatedLoader from "../components/loader/AnimatedLoader";
 
 const SettingPage = () => {
-  // const [unsavedChanges, setUnsavedChanges] = useState(false);
+
+
   const [activeTab, updateActiveTab] = useState(0);
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
@@ -31,6 +33,8 @@ const SettingPage = () => {
   });
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const dispatch = useDispatch();
+
+    const [settingPageLoader, toggleSettingPageLoader] = useState(false);
 
   // useEffect(() => {
   //   const handleBeforeUnload = (event) => {
@@ -82,7 +86,9 @@ const SettingPage = () => {
   };
 
   return (
-    <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+    
+    settingPageLoader ? <AnimatedLoader /> :
+      <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Settings" conicalURL="settings" />
       <div className="w-[100%] h-[50px] shrink-0"></div>
 
@@ -125,6 +131,7 @@ const SettingPage = () => {
           {activeTab === 0 && (
             <>
               <UserTabSettings
+              toggleSettingPageLoader={toggleSettingPageLoader}
                 userProfile={userSettings}
                 onUpdate={handleUserSettingsChange}
               />
@@ -146,6 +153,7 @@ const SettingPage = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

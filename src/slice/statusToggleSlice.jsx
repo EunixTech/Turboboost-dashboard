@@ -20,9 +20,9 @@ const initialState = {
   keepHTMLComment: false,
 
   dashboardOptimization: false,
-
   PlanName: "Pro",
-  optimizationMode: 1
+  optimizationMode: 1,
+
 };
 
 const statusToggleSlice = createSlice({

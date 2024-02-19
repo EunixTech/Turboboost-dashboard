@@ -33,9 +33,9 @@ const Plan = ({ cancel }) => {
   const [selected, setSelected] = useState(0);
   const [selectedInteral, setSelectedInterval] = useState(" ");
   const [loader, toggleLoader] = useState(false);
-  const [plan, setPlan] = useState(2);
-  const [currentPlan, updateCurrentPlan] = useState("Starter");
-  const [currentPlan1, updateCurrentPlan1] = useState("Starter");
+  const [plan, setPlan] = useState(10);
+  const [currentPlan, updateCurrentPlan] = useState("");
+  const [currentPlan1, updateCurrentPlan1] = useState("");
   const [itemData, updateItem] = useState({});
   const dark = useSelector((state) => state.home.dark);
   const w = useWidth();
@@ -898,7 +898,7 @@ const Plan = ({ cancel }) => {
                 className="w-[100%] cursor-pointer overflow-hidden h-[110px] mb-[10px] rounded-[5px] border-[1.5px] relative px-[17px] flex items-center justify-between"
               >
                 {
-                  item?.name == currentPlan && <CurrentPlan />
+                  item?.name === currentPlan && <CurrentPlan />
                 }
 
                 <div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import * as Yup from "yup";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import useWidth from "../../hooks/useWidth";
 
@@ -13,11 +13,12 @@ import FeatureCard from "../FeatureCard.jsx";
 import FormikInput from "../forms/FormikInput";
 import FormikSelectInput from "./FormikSelectInput";
 import ChangeEmail from "./ChangeEmail";
+import { setToggle } from "../../slice/statusToggleSlice.jsx";
 
-const UserTabSettings = ({ update }) => {
+const UserTabSettings = ({ toggleSettingPageLoader }) => {
   const deviceWith = useWidth();
   const [phoneNumberValue, setPhoneNumberValue] = useState();
-
+  const dispatch = useDispatch();
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
   const [loading, toggoleLoading] = useState(false);
   const [emailPreferences, updateEmailPreferences] = useState({});
@@ -109,7 +110,8 @@ const UserTabSettings = ({ update }) => {
   };
 
   const fetchProfileData = async () => {
-    toggoleLoading(true);
+    toggoleLoading(true)
+    toggleSettingPageLoader(true)
     try {
       const res = await GetAxiosConfig(`user/user-profile`)
 
@@ -130,17 +132,21 @@ const UserTabSettings = ({ update }) => {
         updateEmailPreferences(user?.email_preferences)
         updateUserData(dataObj);
         setPhoneNumberValue(user?.user_info?.phone_number || "");
-        toggoleLoading(false);
+        toggoleLoading(false)
+        toggleSettingPageLoader(false)
       } else if (resJSON.status === 403) {
 
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
-
+        toggoleLoading(false)
+        toggleSettingPageLoader(false)
       }
     } catch (error) {
       if (error?.response?.status === 401) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
+        toggoleLoading(false)
+        toggleSettingPageLoader(false)
       }
     }
   };
@@ -192,7 +198,7 @@ const UserTabSettings = ({ update }) => {
   }
 
   return (
-    loading ? <AnimatedLoader /> :
+    loading ?  "" :
       <>
         <Formik
           initialValues={{
