@@ -8,12 +8,13 @@ import axios from "axios";
 import { billingApi } from "../utils/billingApi1";
 import appURLs from "../appURL";
 import { useDispatch, useSelector } from "react-redux";
+import { setToggle } from "../slice/statusToggleSlice";
 
 import TitleManager from "../components/TitleManager";
 
 const OnboardingBillings = () => {
   const  appURL = appURLs();
-
+  const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);
   const [token1, updateToken] = useState("");
   const [loader, toggleLoader] = useState(true);
@@ -55,7 +56,7 @@ const OnboardingBillings = () => {
       const websiteURL = res?.userData?.app_token?.shopify?.shop;
       updateToken(token);
 
-      localStorage.setItem("websiteURL", websiteURL);
+      dispatch(setToggle({ key: "websiteURL", value: websiteURL }));
 
       if (redirectURL === "/dashboard") {
         localStorage.setItem("authToken", token);

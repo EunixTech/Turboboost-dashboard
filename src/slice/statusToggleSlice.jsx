@@ -20,7 +20,7 @@ const initialState = {
   keepHTMLComment: false,
 
   backgroundToggle: true,
-
+  websiteURL:"",
   dashboardOptimization: false,
   PlanName: "Pro",
   optimizationMode: 1,
