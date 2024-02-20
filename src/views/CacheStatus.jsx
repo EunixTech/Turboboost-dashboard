@@ -30,7 +30,7 @@ const Button = ({ updateSearchBy, clearFilterHandler }) => {
   );
 };
 
-const Button2 = ({ check, assetsOptimizationValue, handleOptimizeAssets }) => {
+const Button2 = ({ fetchAssetsOptimizationData, check, assetsOptimizationValue, handleOptimizeAssets }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -41,7 +41,7 @@ const Button2 = ({ check, assetsOptimizationValue, handleOptimizeAssets }) => {
       {
         assetsOptimizationValue ?
 
-          <p onClick={handleOptimizeAssets}
+          <p onClick={fetchAssetsOptimizationData}
             style={{
               backgroundColor: check ? "#F87238" : "#FF465C",
             }}
@@ -650,41 +650,87 @@ const CacheStatus = () => {
     let updateArr;
 
     console.log("filterKeys", filterKeys)
+
     if (searchByType !== "All" || AssetsType !== "All" || Status !== "All" || resultPerPage !== "All" || searchBy) {
-      let dataa1;
-      if (searchBy) {
-        if (searchByType === "All") {
-          dataa1 = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy?.toLowerCase()) || data?.file_type.toLowerCase().includes(searchBy?.toLowerCase()));
-        } else if (searchByType === "Assets Type") {
-          dataa1 = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy?.toLowerCase()));
-        } else if (searchByType === "Assets Name") {
-          dataa1 = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy?.toLowerCase()));
+      if(searchBy && searchByType === "All"){
+        let dataa1
+         dataa1 = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy?.toLowerCase()) || data?.file_type.toLowerCase().includes(searchBy?.toLowerCase()));
+         if(AssetsType && AssetsType !== "All"){
+          const filterData = dataa1.filter((data) => data?.file_type?.toLowerCase() === AssetsType?.toLowerCase());
+          updateArr = filterData
+         } else {
+          updateArr = dataa1
+         }
+       
+      
+      } else if(searchBy && searchByType === "Assets Type"){
+
+        let dataa1
+        dataa1 = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy?.toLowerCase()));
+        if(AssetsType && AssetsType !== "All"){
+         const filterData = dataa1.filter((data) => data?.file_type?.toLowerCase() === AssetsType?.toLowerCase());
+         updateArr = filterData
+        } else {
+         updateArr = dataa1
+        }
+
+      } else if(searchBy && searchByType === "Assets Name"){
+
+        let dataa1
+        dataa1 = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy?.toLowerCase()));
+        if(AssetsType && AssetsType !== "All"){
+         const filterData = dataa1.filter((data) => data?.file_type?.toLowerCase() === AssetsType?.toLowerCase());
+         updateArr = filterData
+        } else {
+         updateArr = dataa1
+        }
+
+      } else {
+        if(AssetsType && AssetsType !== "All"){
+          const filterData = assetsData.assetFileArr.filter((data) => data?.file_type?.toLowerCase() === AssetsType?.toLowerCase());
+          updateArr = filterData
+         } else {
+          updateArr = assetsData.assetFileArr;
+         }
+      }
+   
+
+
+    } else if(searchByType === "All" || AssetsType === "All" || Status === "All" || resultPerPage === "All" || !searchBy) {
+      console.log("PendingPendingPending1")
+      if(AssetsType && AssetsType !== "All"){
+        const filterData = assetsData.assetFileArr.filter((data) => data?.file_type?.toLowerCase() === AssetsType?.toLowerCase());
+        updateArr = filterData
+       } else {
+        updateArr = assetsData.assetFileArr;
+       }
+    }
+
+    if(updateArr?.length){
+      if(Status && Status == "Pending"){
+        const datt = updateArr.filter((data) => data?.is_optimized === false);
+        if(resultPerPage && resultPerPage !== "All"){
+          updateAssetsArr(datt.slice(0,resultPerPage))
+        } else {
+          updateAssetsArr(datt)
+        }
+       
+      } else {
+        const datt = updateArr.filter((data) => data?.is_optimized === true);
+        if(resultPerPage && resultPerPage !== "All"){
+          updateAssetsArr(datt.slice(0,resultPerPage))
+        } else {
+          updateAssetsArr(datt)
         }
       }
-
-      if (AssetsType && AssetsType !== "All") {
-        const filterData = dataa1.filter((data) => data?.file_type?.toLowerCase() === AssetsType?.toLowerCase());
-        updateArr = filterData;
-      } else {
-        updateArr = dataa1;
-      }
-    } else if (searchByType === "All" || AssetsType === "All" || Status === "All" || resultPerPage === "All" || !searchBy) {
-      if (AssetsType && AssetsType !== "All") {
-        const filterData = assetsData.assetFileArr.filter((data) => data?.file_type?.toLowerCase() === AssetsType?.toLowerCase());
-        updateArr = filterData;
-      } else {
-        updateArr = assetsData.assetFileArr;
-      }
-    }
-
-    if (updateArr?.length) {
-      const datt = Status === "Pending" ? updateArr.filter((data) => !data?.is_optimized) : updateArr.filter((data) => data?.is_optimized);
-      const slicedData = resultPerPage && resultPerPage !== "All" ? datt.slice(0, resultPerPage) : datt;
-      updateAssetsArr(slicedData);
     } else {
-      const slicedData = resultPerPage && resultPerPage !== "All" ? updateArr.slice(0, resultPerPage) : updateArr;
-      updateAssetsArr(slicedData);
+      if(resultPerPage && resultPerPage !== "All"){
+        updateAssetsArr(updateArr.slice(0,resultPerPage))
+      } else {
+        updateAssetsArr(updateArr)
+      }
     }
+
   }
 
   const handleReOptimization = () => {
@@ -737,7 +783,7 @@ const CacheStatus = () => {
                   }}
                   className="text-[30px] mt-[10px] font-bold tracking-wide "
                 >
-                  {assetsData && assetsData?.totalAssets}
+                 {assetsData && assetsData?.totalOptimizeAssets}
                 </h1>
                 <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                   <div style={{
@@ -754,7 +800,7 @@ const CacheStatus = () => {
                   <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#38F8AC" />
                   <HeaderItem
                     title="Pending Assets Optimization"
-                    sub={assetsData && assetsData?.notOptimizedAssets}
+                    sub={0}
                     color="#FFCB65"
                   />
                   <HeaderItem title="Assets not optimized" sub={0} color="#FF465C" />
@@ -860,7 +906,7 @@ const CacheStatus = () => {
                   />
                   {selected.length > 0 ? "Purge Selected" : "Purge All Cache"}
                 </div> */}
-                  <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
+                  <Button2 assetsOptimizationValue={assetsOptimizationValue} fetchAssetsOptimizationData={fetchAssetsOptimizationData} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
                 </div>
               </div>
               <Filter handleFilter={handleFilter} searchBy={searchBy} updateSearchBy={updateSearchBy} updateAssetsArr={updateAssetsArr} assetsData={assetsData} handlingApplyFilter={handlingApplyFilter} />
