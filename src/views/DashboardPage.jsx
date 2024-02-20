@@ -193,64 +193,6 @@ const Dashboard = () => {
   const dark = useSelector((state) => state.home.dark);
   const router = useNavigate();
 
-  // const googleSpeedAPI = async (storeName = "") => {
-  //   console.log(storeName);
-  //   try {
-  //     toogleLoading(true);
-  //     const response = await axios.get(
-  //       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://spokeherd.com/&category=best-practices&category=seo&category=performance&category=accessibility`
-  //     );
-
-  //     toogleLoading(false);
-  //     const data = response.data;
-  //     const lighthouseData = data.lighthouseResult;
-
-  //     const metrics = {
-  //       "First Contentful Paint":
-  //         lighthouseData.audits["first-contentful-paint"].displayValue,
-  //       "Speed Index": lighthouseData.audits["speed-index"].displayValue,
-  //       "Total Blocking Time":
-  //         lighthouseData.audits["total-blocking-time"].displayValue,
-  //       "Largest Contentful Paint":
-  //         lighthouseData.audits["largest-contentful-paint"].displayValue,
-  //       Performance: lighthouseData.categories.performance.score * 100,
-  //       Accessibility: lighthouseData.categories.accessibility.score * 100,
-  //       "Best Practices":
-  //         lighthouseData.categories["best-practices"].score * 100,
-  //       SEO: lighthouseData.categories.seo.score * 100,
-  //     };
-
-  //     const performanceArr = Object.keys(metrics)
-  //       .filter((key) =>
-  //         ["Performance", "Accessibility", "Best Practices", "SEO"].includes(
-  //           key
-  //         )
-  //       )
-  //       .map((key) => ({
-  //         name: key,
-  //         value: Math.round(metrics[key] * 10) / 10,
-  //       }));
-
-  //     const coreVitualsArr = Object.keys(metrics)
-  //       .filter((key) =>
-  //         [
-  //           "First Contentful Paint",
-  //           "Speed Index",
-  //           "Total Blocking Time",
-  //           "Largest Contentful Paint",
-  //         ].includes(key)
-  //       )
-  //       .map((key) => ({ name: key, value: metrics[key] }));
-
-  //     updateCoreVitalsData(coreVitualsArr);
-  //     updatePerformanceData(performanceArr);
-  //   } catch (e) {
-  //     toogleLoading(false);
-  //   }
-  // };
-
-
-
 
   const fetchPageSpeedInsight = async () => {
     try {
@@ -300,8 +242,6 @@ const Dashboard = () => {
         updateImageData(imageDataObj);
         updateHandlerData(OptimizationHandlerData);
         toogleLoading(false)
-         toogleLoadingAPI(false)
-         dd(100)
       } else if (resJSON.status === 403) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
@@ -350,6 +290,8 @@ const Dashboard = () => {
         dispatch(setToggle({ key: "imageOptimization", value: !imageOptimizationValue }));
         fetchImageOptimizationData();
         toggleLoader(false);
+        toogleLoadingAPI(false)
+        dd(100)
         // return toast.success(resData?.message);
       } else {
         toggleLoader(false);
@@ -407,14 +349,14 @@ const Dashboard = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");
 
-  const fetchData = () => {
+  const fetchData = async() => {
     if (!userToken1) {
       if (!imageOptimizationValue && !Boolean(localStorage.getItem('imageOptimizationAPII'))) {
-        handleImageOptimization();
+        await handleImageOptimization();
         localStorage.setItem('imageOptimizationAPII', true);
       }
-      fetchPageSpeedInsight();
-      fetchImageOptimizationData();
+      await fetchImageOptimizationData();
+      await fetchPageSpeedInsight();
     }
   };
 
