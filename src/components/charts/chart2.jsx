@@ -53,6 +53,40 @@ const DemoLine = ({currMonth}) => {
             { name: "Page Views", year: 28, },
         
           ]);
+        } else if(currMonth === 1) {
+          setData([
+            { name: "Page Views", year: 0},
+            { name: "Page Views", year: 1 },
+            { name: "Page Views", year: 2, },
+            { name: "Page Views", year: 3, },
+            { name: "Page Views", year: 4, },
+            { name: "Page Views", year: 5, },
+            { name: "Page Views", year: 6, },
+            { name: "Page Views", year: 7, },
+            { name: "Page Views", year: 8, },
+            { name: "Page Views", year: 9, },
+            { name: "Page Views", year: 10, },
+            { name: "Page Views", year: 11, },
+            { name: "Page Views", year: 12, },
+            { name: "Page Views", year: 13, },
+            { name: "Page Views", year: 14, },
+            { name: "Page Views", year: 15, },
+            { name: "Page Views", year: 16, },
+            { name: "Page Views", year: 17, },
+            { name: "Page Views", year: 18, },
+            { name: "Page Views", year: 19, },
+            { name: "Page Views", year: 20, },
+            { name: "Page Views", year: 21, },
+            { name: "Page Views", year: 22, },
+            { name: "Page Views", year: 23, },
+            { name: "Page Views", year: 24, },
+            { name: "Page Views", year: 25, },
+            { name: "Page Views", year: 26, },
+            { name: "Page Views", year: 27, },
+            { name: "Page Views", year: 28, },
+            { name: "Page Views", year: 29, },
+            { name: "Page Views", year: 30, },
+          ]);
         } else {
           setData([
             { name: "Page Views", year: 0},
