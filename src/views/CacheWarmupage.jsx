@@ -546,7 +546,16 @@ const CacheWarmup = ({ setShow }) => {
                       >
                         {pageOptimizationData?.pages?.length ? `${pageOptimizationData?.pages?.length} Pages`:''} 
                       </p>
-                    {(pageOptimizationData?.pages && pageOptimizationData?.pages?.length) ? <Table1 tableData = {pageOptimizationData?.pages} /> : ""}
+                    {(pageOptimizationData?.pages && pageOptimizationData?.pages?.length) ? <Table1 tableData = {pageOptimizationData?.pages} /> :    <div style={{
+                display:"flex",
+                justifyContent:"center",
+                alignItems:"center",
+                height:"300px"
+              }}>
+              <h1  style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}>Nothing show</h1>
+              </div>}
 
                   </div>
                 </div>
