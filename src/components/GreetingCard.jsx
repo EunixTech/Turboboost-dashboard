@@ -47,9 +47,19 @@ export default function GreetingCard() {
               const user = resJSON?.acccount;
     
                 const full_name = user?.user_info?.first_name;
+                const email_address = user?.user_info?.email_address;
+                
                 updateUserName(full_name);
                 const websiteURL = user?.app_token?.shopify?.shop;
-                localStorage.setItem("currentUser",full_name)
+                
+                window.Intercom("boot", {
+                  api_base: "https://api-iam.intercom.io",
+                  app_id: "vr8qka5j",
+                  name:full_name,
+                  email: email_address, // the email for your user
+                  user_id: "65cc86a2d454e8c9c83f2d6e", // a UUID for your user
+                  user_hash: "65cc7a6d881b39eee9da4daac3768f18979528af0cdffda64ddb0a465b00fde4" // an Identity Verification user hash for your user
+                });
                 dispatch(setToggle({ key: "websiteURL", value: websiteURL }));
 
             }
