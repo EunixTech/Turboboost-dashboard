@@ -184,7 +184,7 @@ const Dashboard = () => {
   const [handlerData, updateHandlerData] = useState({});
   const [coreVitalsData, updateCoreVitalsData] = useState({});
   const [performanceData, updatePerformanceData] = useState({});
-  const [loading, toogleLoading] = useState(true);
+  const [loading, toogleLoading] = useState(false);
   const [loadingAPI, toogleLoadingAPI] = useState(true);
   const [loader, toggleLoader] = useState(false);
   const [d, dd] = useState(0);
@@ -290,12 +290,9 @@ const Dashboard = () => {
         dispatch(setToggle({ key: "imageOptimization", value: !imageOptimizationValue }));
         fetchImageOptimizationData();
         toggleLoader(false);
-        toogleLoadingAPI(false)
-        dd(100)
-        // return toast.success(resData?.message);
+
       } else {
         toggleLoader(false);
-        // return toast.error("Please try again");
       }
     } catch (error) {
       toggleLoader(false);
@@ -357,6 +354,8 @@ const Dashboard = () => {
       }
       fetchImageOptimizationData();
       fetchPageSpeedInsight();
+      toogleLoadingAPI(false)
+      dd(100)
     }
   };
 

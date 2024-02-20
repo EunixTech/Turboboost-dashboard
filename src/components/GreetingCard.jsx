@@ -48,6 +48,7 @@ export default function GreetingCard() {
     
                 const full_name = user?.user_info?.first_name;
                 updateUserName(full_name);
+                localStorage.setItem("currentUser",full_name)
            
             }
           } catch (error) {
