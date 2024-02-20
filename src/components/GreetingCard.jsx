@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { setToggle } from "../slice/statusToggleSlice";
 
-import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
+import { GetAxiosConfig } from "../utils/axiosConfig.js";
 export default function GreetingCard() {
    const dispatch = useDispatch();
     const [time, setTime] = useState(new Date());

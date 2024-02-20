@@ -54,7 +54,7 @@ const UserTabSettings = ({ updateTest }) => {
               `+${value}`,
               country
             );
-            
+
             return phoneNumber ? phoneNumber.isValid() : false;
           } catch (error) {
             console.error("Error parsing phone number:", error);
@@ -88,6 +88,7 @@ const UserTabSettings = ({ updateTest }) => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       toggoleLoading(true);
+      dispatch(setToggle({ key: "backgroundToggle", value: true }));
       const res = await PatchAxiosConfig(`user/update-account`, values)
 
       const resJSON = await res.data;
