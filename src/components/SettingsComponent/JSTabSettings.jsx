@@ -22,7 +22,7 @@ const JSTabSettings = () => {
     const data = await featureAPIHandling(endPoint);
     if (data.status === 200) {
       dispatch(setToggle({ key: "delayScripts", value: !delayScriptsValue }));
-      return toast.success(data.message);
+      // return toast.success(data.message);
     } else return toast.error(data?.message)
 
   }
@@ -34,7 +34,7 @@ const JSTabSettings = () => {
     const data = await featureAPIHandling(endPoint);
     if (data.status === 200) {
       dispatch(setToggle({ key: "minifyJSFile", value: !minifyJSFile }));
-      return toast.success(data.message);
+      // return toast.success(data.message);
     } else return toast.error(data?.message)
 
 

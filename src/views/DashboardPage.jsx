@@ -269,7 +269,7 @@ const Dashboard = () => {
     const data = await featureAPIHandling(endPoint);
     if (data.status === 200) {
       dispatch(setToggle({ key: "lazyLoading", value: !lazyLoadingToggleValue }));
-      return toast.success(data.message);
+      // return toast.success(data.message);
     }
 
   };
@@ -312,7 +312,7 @@ const Dashboard = () => {
     const data = await featureAPIHandling(endPoint);
     if (data.status === 200) {
       dispatch(setToggle({ key: "minifyHTML", value: !minifyHTMLToggleValue }));
-      return toast.success(data.message);
+      // return toast.success(data.message);
     } else return toast.error(data?.message)
 
 

@@ -19,13 +19,11 @@ import CssTabSettings from "../components/SettingsComponent/CssTabSettings";
 import JSTabSettings from "../components/SettingsComponent/JSTabSettings";
 
 import OptimizationModeCard from "../components/SettingsComponent/OptimizationModeCard";
-import AnimatedLoader from "../components/loader/AnimatedLoader";
 
 const SettingPage = () => {
 
   const [activeTab, updateActiveTab] = useState(0);
-  const [test, updateTest] = useState(true)
-  // const [test, updateTest] = useState(false);
+  const [test, updateTest] = useState(false)
 
   const deviceWith = useWidth();
   const dark = useSelector((state) => state.home.dark);
@@ -33,31 +31,35 @@ const SettingPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const dispatch = useDispatch();
 
-  // const fetchingPlanName = async () => {
-  //   try {
-  //     const res = await GetAxiosConfig(`user/current-plan-detail`);
-  //     const resJSON = res?.data;
+  const backgroundToggle = useSelector((state) => state.toggles?.backgroundToggle);
+  console.log("backgroundTogglebackgroundToggle", backgroundToggle)
 
-  //     if (resJSON.status === 200) {
-  //       const planName = resJSON?.data?.plan;
-  //       dispatch(setToggle({ key: "planName", value: planName }));
-  //     } else if (resJSON.status === 403) {
-  //       localStorage.removeItem('authToken');
-  //       window.location.replace('/login-shopify');
-  //     }
-  //   } catch (error) {
-  //     if (error?.response?.status === 401) {
-  //       localStorage.removeItem('authToken');
-  //       window.location.replace('/login-shopify');
-  //     }
-  //   }
-  // };
 
-  // useEffect(() => {
-  //   fetchingPlanName();
-  // }, [])
+  const fetchingPlanName = async () => {
+    try {
+      const res = await GetAxiosConfig(`user/current-plan-detail`);
+      const resJSON = res?.data;
 
-  // console.log()
+      if (resJSON.status === 200) {
+        const planName = resJSON?.data?.plan;
+        dispatch(setToggle({ key: "planName", value: planName }));
+      } else if (resJSON.status === 403) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchingPlanName();
+  }, [])
+
+  console.log()
 
 
   useEffect(() => {
@@ -70,13 +72,12 @@ const SettingPage = () => {
 
   return (
     
-    test ? <AnimatedLoader /> :
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <TitleManager title="Settings" conicalURL="settings" />
       <div className="w-[100%] h-[50px] shrink-0"></div>
 
       <div
-        style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
+        style={{ backgroundColor: dark ? backgroundToggle ?  "#090917": "#09090b"  : backgroundToggle ?  "#fff": "#FAFAFC" }}
         className="w-[100%] h-[100%] flex flex-col items-center overflow-y-auto scroll-bar-cool111 bg-[#FAFAFC] pb-[40px] mobile:px-[10px] laptop:px-[80px]"
       >
         <div className="w-[100%] max-w-[1920px] min-h-[100vh]">
@@ -113,7 +114,6 @@ const SettingPage = () => {
           {activeTab === 0 && (
             <>
               <UserTabSettings
-                // updateTest={updateTest}
               />
 
               <ToastContainer />

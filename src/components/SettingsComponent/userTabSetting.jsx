@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import * as Yup from "yup";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import useWidth from "../../hooks/useWidth";
 
@@ -14,8 +14,12 @@ import FormikInput from "../forms/FormikInput";
 import FormikSelectInput from "./FormikSelectInput";
 import ChangeEmail from "./ChangeEmail";
 
+import { setToggle } from "../../slice/statusToggleSlice";
 const UserTabSettings = ({ updateTest }) => {
   const deviceWith = useWidth();
+
+  const dispatch = useDispatch();
+
   const [phoneNumberValue, setPhoneNumberValue] = useState();
   const [isChangeEmailModalOpen, setChangeEmailModalOpen] = useState(false);
   const [loading, toggoleLoading] = useState(true);
@@ -111,6 +115,7 @@ const UserTabSettings = ({ updateTest }) => {
   
     try {
       toggoleLoading(true)
+      dispatch(setToggle({ key: "backgroundToggle", value: true }));
       const res = await GetAxiosConfig(`user/user-profile`)
 
       const resJSON = await res.data;
@@ -131,6 +136,7 @@ const UserTabSettings = ({ updateTest }) => {
         updateUserData(dataObj);
         setPhoneNumberValue(user?.user_info?.phone_number || "");
         toggoleLoading(false)
+        dispatch(setToggle({ key: "backgroundToggle", value: false }));
       } else if (resJSON.status === 403) {
 
         localStorage.removeItem('authToken');
@@ -194,7 +200,7 @@ const UserTabSettings = ({ updateTest }) => {
   }, []);
 
   return (
-    loading ?  " " :
+    loading ?  <AnimatedLoader /> :
       <>
         <Formik
           initialValues={{

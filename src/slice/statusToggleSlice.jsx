@@ -19,6 +19,8 @@ const initialState = {
   removeUnsedCSS: false,
   keepHTMLComment: false,
 
+  backgroundToggle: true,
+
   dashboardOptimization: false,
   PlanName: "Pro",
   optimizationMode: 1,

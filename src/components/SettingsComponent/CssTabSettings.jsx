@@ -22,7 +22,7 @@ const CssTabSettings = () => {
       const data = await featureAPIHandling(endPoint);
       if(data.status === 200){
         dispatch(setToggle({ key: "criticalCSS", value: !criticalCSSToggleValue }));
-        return toast.success(data.message);
+        // return toast.success(data.message);
       }  else return toast.error(data?.message)
     
      
@@ -34,7 +34,7 @@ const CssTabSettings = () => {
       const data = await featureAPIHandling(endPoint);
       if(data.status === 200){
         dispatch(setToggle({ key: "removeUnsedCSS", value: !removeUnsedCSSToggleValue }));
-        return toast.success(data.message);
+        // return toast.success(data.message);
       }  else return toast.error(data?.message)
     
     }

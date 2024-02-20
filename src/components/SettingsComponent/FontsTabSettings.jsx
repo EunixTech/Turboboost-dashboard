@@ -23,7 +23,7 @@ const FontsTabSettings = () => {
     const data = await featureAPIHandling(endPoint);
     if (data.status === 200) {
       dispatch(setToggle({ key: "fontRenderBehavior", value: !fontRenderBehaviorToggleValue }));
-      return toast.success(data.message);
+      // return toast.success(data.message);
     } else return toast.error(data?.message)
 
   }
@@ -35,7 +35,7 @@ const FontsTabSettings = () => {
     const data = await featureAPIHandling(endPoint);
     if (data.status === 200) {
       dispatch(setToggle({ key: "fontLoading", value: !fontLoadingToggleValue }));
-      return toast.success(data.message);
+      // return toast.success(data.message);
     } else return toast.error(data?.message)
 
 

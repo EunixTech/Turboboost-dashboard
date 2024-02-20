@@ -30,11 +30,17 @@ const CurrentPlan = () => {
 
 const Plan = ({ cancel }) => {
 
+  const planMap1 = {
+    "Free": 0,
+     "Starter":1,
+      "Growth":2,
+    "Pro":3
+   };
   const [selected, setSelected] = useState(0);
   const [selectedInteral, setSelectedInterval] = useState(" ");
   const [loader, toggleLoader] = useState(false);
-  const [plan, setPlan] = useState(10);
-  const [currentPlan, updateCurrentPlan] = useState("");
+  const [plan, setPlan] = useState(planMap1[useSelector((state) => state.toggles?.planName)]);
+  const [currentPlan, updateCurrentPlan] = useState(useSelector((state) => state.toggles?.planName));
   const [currentPlan1, updateCurrentPlan1] = useState("");
   const [itemData, updateItem] = useState({});
   const dark = useSelector((state) => state.home.dark);
@@ -49,7 +55,6 @@ const Plan = ({ cancel }) => {
         2: "Growth",
         3: "Pro"
       };
-
       const dataObj = {
         1: "ANNUAL",
         0: "EVERY_30_DAYS"
@@ -132,7 +137,6 @@ const Plan = ({ cancel }) => {
       fetchingBillingDetails()
     }
   }, [userToken1])
-
 
   return (
 
