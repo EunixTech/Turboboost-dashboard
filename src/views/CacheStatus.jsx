@@ -125,7 +125,7 @@ const HeaderItem = ({ color, title, sub, assets = false }) => {
 };
 
 
-const InputDropdown = ({ label, list, clearFilter }) => {
+const InputDropdown = ({ handleFilter = { handleFilter }, label, list, clearFilter }) => {
   const [curr, setCurr] = useState(clearFilter);
   const [hover, setHover] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -217,6 +217,7 @@ const InputDropdown = ({ label, list, clearFilter }) => {
                   }}
                   onClick={() => {
                     localStorage.setItem(label, item)
+                    handleFilter(label, item)
                     setCurr(i);
                     setClicked(false)
                   }}
@@ -233,14 +234,12 @@ const InputDropdown = ({ label, list, clearFilter }) => {
   );
 };
 
-const Filter = ({ handlingApplyFilter, updateAssetsArr, assetsData, updateSearchBy, searchBy }) => {
+const Filter = ({ handleFilter = { handleFilter }, handlingApplyFilter, updateAssetsArr, assetsData, updateSearchBy, searchBy }) => {
   const dark = useSelector((state) => state.home.dark);
   const [clearFilter, updateClearFilter] = useState(0)
+
   const clearFilterHandler = () => {
-    localStorage.removeItem("Search By");
-    localStorage.removeItem("Assets Type");
-    localStorage.removeItem("Status");
-    localStorage.removeItem("Results Per Page");
+
     updateClearFilter(clearFilter + 1);
     updateAssetsArr(assetsData?.assetFileArr)
   }
@@ -270,22 +269,26 @@ const Filter = ({ handlingApplyFilter, updateAssetsArr, assetsData, updateSearch
           />
         </div>
         <InputDropdown
+          handleFilter={handleFilter}
           clearFilter={clearFilter}
           label="Search By"
           list={["All", "Assets Type", "Assets Name"]}
         />
         <InputDropdown
+          handleFilter={handleFilter}
           clearFilter={clearFilter}
           label="Assets Type"
           list={["All", "Application/Javascript", "Application/x-liquid", "Text/Css"]}
         />
         <InputDropdown
+          handleFilter={handleFilter}
           clearFilter={clearFilter}
           label="Status"
           list={["All", "Pending", "Optimized"]}
         />
 
         <InputDropdown
+          handleFilter={handleFilter}
           clearFilter={clearFilter}
           label="Results Per Page"
           list={["All", 20, 40, 60, 80]}
@@ -521,11 +524,16 @@ const CacheStatus = () => {
   const dark = useSelector((state) => state.home.dark);
   const [assetsArr, updateAssetsArr] = useState([]);
   const [assetsData, updateAssetsData] = useState({});
+  const [filterKeys, updateFilterKeys] = useState({
+    searchByType: "All",
+    AssetsType: "All",
+    Status: "All",
+    resultPerPage: "All"
+  })
   const [searchBy, updateSearchBy] = useState("");
   const dispatch = useDispatch();
 
   const assetsOptimizationValue = useSelector((state) => state.toggles?.assetsOptimization);
-
 
   const fetchAssetsOptimizationData = async () => {
 
@@ -573,7 +581,7 @@ const CacheStatus = () => {
       if (resData?.status === 200) {
         dispatch(setToggle({ key: "assetsOptimization", value: !assetsOptimizationValue }));
         fetchAssetsOptimizationData();
-  
+
       } else {
         toggleLoader(false);
         return toast.error("Please try again");
@@ -591,6 +599,34 @@ const CacheStatus = () => {
     return Math.ceil(kb / 1024 * 100) / 100;
   }
 
+  const handleFilter = (label, value) => {
+    console.log("working")
+    const updateFilter = (key, value) => {
+      updateFilterKeys((prev) => ({
+        ...prev,
+        [key]: value
+      }));
+    }
+
+    switch (label) {
+      case "Search By":
+        updateFilter("searchByType", value);
+        break;
+      case "Assets Type":
+        updateFilter("AssetsType", value);
+        break;
+      case "Status":
+        updateFilter("Status", value);
+        break;
+      case "Results Per Page":
+        updateFilter("resultPerPage", value);
+        break;
+      default:
+        break;
+    }
+
+  }
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -601,95 +637,60 @@ const CacheStatus = () => {
       fetchAssetsOptimizationData();
     };
     fetchData();
-    localStorage.removeItem("Search By");
-    localStorage.removeItem("Assets Type");
-    localStorage.removeItem("Status");
-    localStorage.removeItem("Results Per Page");
+
   }, [])
 
   const handlingApplyFilter = () => {
-    const searchByFilter = localStorage.getItem("Search By");
-    const assetsTypeFilter = localStorage.getItem("Assets Type");
-    const statusByFilter = localStorage.getItem("Status");
-    const resultsPerPageByFilter = localStorage.getItem("Results Per Page");
+ 
+    const { 
+      searchByType,
+      AssetsType,
+      Status,
+      resultPerPage } = filterKeys
     let updateArr;
 
-    if (searchBy) {
-
-      if (resultsPerPageByFilter === "All") {
-
-        if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Type").toLocaleLowerCase()) {
-
-          const filterData = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
-          updateArr = filterData
-        } else if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Name").toLocaleLowerCase()) {
-
-          const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()));
-          updateArr = filterData
-        } else {
-          const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()) || data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
-          updateArr = filterData
+    console.log("filterKeys", filterKeys)
+    if (searchByType !== "All" || AssetsType !== "All" || Status !== "All" || resultPerPage !== "All" || searchBy) {
+      let dataa1;
+      if (searchBy) {
+        if (searchByType === "All") {
+          dataa1 = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy?.toLowerCase()) || data?.file_type.toLowerCase().includes(searchBy?.toLowerCase()));
+        } else if (searchByType === "Assets Type") {
+          dataa1 = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy?.toLowerCase()));
+        } else if (searchByType === "Assets Name") {
+          dataa1 = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy?.toLowerCase()));
         }
+      }
+
+      if (AssetsType && AssetsType !== "All") {
+        const filterData = dataa1.filter((data) => data?.file_type?.toLowerCase() === AssetsType?.toLowerCase());
+        updateArr = filterData;
       } else {
-        if (assetsTypeFilter) {
-          if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Type").toLocaleLowerCase()) {
-            const filterData = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy.toLowerCase()) && data?.file_type === assetsTypeFilter?.toLocaleLowerCase());
-            updateArr = filterData
-          } else if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Name").toLocaleLowerCase()) {
-            const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()) && data?.file_type === assetsTypeFilter?.toLocaleLowerCase());
-            updateArr = filterData
-          } else {
-
-            const filterData = assetsData.assetFileArr.filter((data) => (data?.name.toLowerCase().includes(searchBy.toLowerCase()) && data?.file_type.toLowerCase().includes(searchBy.toLowerCase())) || data?.file_type === assetsTypeFilter?.toLocaleLowerCase());
-
-            updateArr = filterData
-          }
-        } else {
-
-          if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Type").toLocaleLowerCase()) {
-            const filterData = assetsData.assetFileArr.filter((data) => data?.file_type.toLowerCase().includes(searchBy.toLowerCase()));
-            updateArr = filterData
-          } else if (searchByFilter && searchByFilter.toLocaleLowerCase() === ("Assets Name").toLocaleLowerCase()) {
-            const filterData = assetsData.assetFileArr.filter((data) => data?.name.toLowerCase().includes(searchBy.toLowerCase()));
-            updateArr = filterData
-          } else {
-
-            const filterData = assetsData.assetFileArr.filter((data) => (data?.name.toLowerCase().includes(searchBy.toLowerCase()) && data?.file_type.toLowerCase().includes(searchBy.toLowerCase())));
-
-            updateArr = filterData
-          }
-        }
-
-
+        updateArr = dataa1;
       }
-    } else {
-
-      if (assetsTypeFilter) {
-
-        if (assetsTypeFilter === "All") {
-          updateArr = assetsData.assetFileArr
-        } else {
-          const filterData = assetsData.assetFileArr.filter((data) => data?.file_type === assetsTypeFilter.toLocaleLowerCase());
-          updateArr = filterData
-        }
-
+    } else if (searchByType === "All" || AssetsType === "All" || Status === "All" || resultPerPage === "All" || !searchBy) {
+      if (AssetsType && AssetsType !== "All") {
+        const filterData = assetsData.assetFileArr.filter((data) => data?.file_type?.toLowerCase() === AssetsType?.toLowerCase());
+        updateArr = filterData;
+      } else {
+        updateArr = assetsData.assetFileArr;
       }
-
     }
 
-    if (resultsPerPageByFilter) {
-      updateAssetsArr(updateArr.slice(0, resultsPerPageByFilter))
-
+    if (updateArr?.length) {
+      const datt = Status === "Pending" ? updateArr.filter((data) => !data?.is_optimized) : updateArr.filter((data) => data?.is_optimized);
+      const slicedData = resultPerPage && resultPerPage !== "All" ? datt.slice(0, resultPerPage) : datt;
+      updateAssetsArr(slicedData);
     } else {
-      updateAssetsArr(updateArr)
-
+      const slicedData = resultPerPage && resultPerPage !== "All" ? updateArr.slice(0, resultPerPage) : updateArr;
+      updateAssetsArr(slicedData);
     }
-
   }
 
-  const handleReOptimization = () =>{
+  const handleReOptimization = () => {
     fetchAssetsOptimizationData();
   }
+
 
   return (
     loader ?
@@ -862,7 +863,7 @@ const CacheStatus = () => {
                   <Button2 assetsOptimizationValue={assetsOptimizationValue} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
                 </div>
               </div>
-              <Filter searchBy={searchBy} updateSearchBy={updateSearchBy} updateAssetsArr={updateAssetsArr} assetsData={assetsData} handlingApplyFilter={handlingApplyFilter} />
+              <Filter handleFilter={handleFilter} searchBy={searchBy} updateSearchBy={updateSearchBy} updateAssetsArr={updateAssetsArr} assetsData={assetsData} handlingApplyFilter={handlingApplyFilter} />
               {assetsArr?.length ? <Table assetsData={assetsArr} setSelected1={setSelected} /> : ""}
 
 
