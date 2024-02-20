@@ -910,7 +910,7 @@ const CacheStatus = () => {
                 </div>
               </div>
               <Filter handleFilter={handleFilter} searchBy={searchBy} updateSearchBy={updateSearchBy} updateAssetsArr={updateAssetsArr} assetsData={assetsData} handlingApplyFilter={handlingApplyFilter} />
-              {assetsArr?.length ? <Table assetsData={assetsArr} setSelected1={setSelected} /> : ""}
+              {assetsArr?.length ? <Table assetsData={assetsArr} setSelected1={setSelected} /> : "Nothing show"}
 
 
             </div>
