@@ -550,7 +550,7 @@ const CacheWarmup = ({ setShow }) => {
                 display:"flex",
                 justifyContent:"center",
                 alignItems:"center",
-                height:"300px"
+                height:"200px"
               }}>
               <h1  style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",

@@ -33,7 +33,7 @@ export default function PercentageLoader({percentage1 = 0}) {
           <CircularProgressbar styles={buildStyles({
             strokeLinecap: 'butt',
             textSize: '20px',
-            pathTransitionDuration: 0.5,
+            pathTransitionDuration: 1,
             pathColor: `#38F8AC`,
             textColor: '#0a0a187e',
             trailColor: '#d6d6d6',
