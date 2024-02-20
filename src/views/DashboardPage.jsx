@@ -354,8 +354,10 @@ const Dashboard = () => {
       }
       await fetchImageOptimizationData();
       await fetchPageSpeedInsight();
-      toogleLoadingAPI(false)
       dd(100)
+      setTimeout(() => {
+        toogleLoadingAPI(false);
+      }, 1000);
     }
   };
 
