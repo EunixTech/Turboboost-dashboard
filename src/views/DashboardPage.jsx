@@ -346,14 +346,14 @@ const Dashboard = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userToken1 = urlParams.get("userToken");
 
-  const fetchData = () => {
+  const fetchData = async() => {
     if (!userToken1) {
       if (!imageOptimizationValue && !Boolean(localStorage.getItem('imageOptimizationAPII'))) {
-        handleImageOptimization();
+        await handleImageOptimization();
         localStorage.setItem('imageOptimizationAPII', true);
       }
-      fetchImageOptimizationData();
-      fetchPageSpeedInsight();
+      await fetchImageOptimizationData();
+      await fetchPageSpeedInsight();
       toogleLoadingAPI(false)
       dd(100)
     }
