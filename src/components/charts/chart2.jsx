@@ -53,7 +53,7 @@ const DemoLine = ({currMonth}) => {
             { name: "Page Views", year: 28, },
         
           ]);
-        } else if(currMonth === 1) {
+        } else if(currMonth === 2) {
           setData([
             { name: "Page Views", year: 0},
             { name: "Page Views", year: 1 },
