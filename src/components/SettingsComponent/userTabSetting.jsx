@@ -44,7 +44,6 @@ const UserTabSettings = ({ updateTest }) => {
     country: Yup.string().required("Country is required"),
     phone_number: Yup.string()
       .transform((value, originalValue) => {
-
         return originalValue.replace(/[^\d]/g, "");
       })
       .test("valid-phone-number", "Invalid phone number", function (value) {
@@ -55,6 +54,7 @@ const UserTabSettings = ({ updateTest }) => {
               `+${value}`,
               country
             );
+            
             return phoneNumber ? phoneNumber.isValid() : false;
           } catch (error) {
             console.error("Error parsing phone number:", error);
