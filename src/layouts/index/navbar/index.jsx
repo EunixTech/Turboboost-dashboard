@@ -31,6 +31,7 @@ const Prompt = ({setOpen}) => {
   const websiteURL = useSelector((state) => state.toggles?.websiteURL);
 
   const openShopHandler = () => {
+    console.log("working")
     console.log("websiteURL",websiteURL)
     if (websiteURL) {
       window.open(`https://${websiteURL}`, '_blank');
