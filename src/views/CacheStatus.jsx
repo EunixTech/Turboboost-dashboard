@@ -44,14 +44,12 @@ const Button2 = ({ fetchAssetsOptimizationData, check, assetsOptimizationValue, 
           <p onClick={fetchAssetsOptimizationData}
             style={{
               backgroundColor: check ? "#F87238" : "#FF465C",
+              padding:"0 17px 0 17px"
             }}
             className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : assetsOptimizationValue ? "bg-[#38F8AC]" : "bg-[#000]"
               } rounded-[4px] hover:opacity-80 active:translate-y-[0px] pl-[6px] pr-[12px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
           >
-
-            <div className="translate-y-[1px]">
               Re Optimize
-            </div>
           </p>
           : <p
             onClick={handleOptimizeAssets}
@@ -799,11 +797,11 @@ const CacheStatus = () => {
                 <div className="w-[100%] grid mobile:grid-cols-2 laptop:grid-cols-3 mt-[10px] gap-x-[10px] gap-y-[7px]">
                   <HeaderItem title="Optimized Assets" sub={assetsData && assetsData?.totalOptimizeAssets} color="#38F8AC" />
                   <HeaderItem
-                    title="Pending Assets Optimization"
+                    title="Assets Pending Optimization"
                     sub={0}
                     color="#FFCB65"
                   />
-                  <HeaderItem title="Assets not optimized" sub={0} color="#FF465C" />
+                  <HeaderItem title="Non Optimized Assets" sub={0} color="#FF465C" />
                 </div>
               </div>
               <div
