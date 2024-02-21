@@ -52,7 +52,7 @@ const ConnectSiteNitro = () => {
 
   return (
     <div className="flex items-center justify-center h-screen m-[10px]">
-      <div className="w-full max-w-lg">
+      <div className="w-full max-w-lg h-[80vh] overflow-y-scroll">
         <Formik
           initialValues={{
             siteURL: "",
