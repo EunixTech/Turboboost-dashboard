@@ -24,7 +24,7 @@ const OTPComponent = () => {
   return (
     <div className="otp-container">
       <div className="flex justify-center">
-        {/* Center the image horizontally */}
+     
         <img src="/logo-b.png" className="w-[150px]" alt="" />
       </div>
 
