@@ -498,7 +498,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#0a0a187e] f2 text-[16px] tracking-wide font-bold"
                 >
-                  No of Images Optimized
+                  Images Optimized
                 </p>
                 <Tooltip text="This indicates the number of image optimization achieved" />
               </div>
@@ -575,7 +575,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#0a0a187e] f2 text-[16px] tracking-wide font-bold"
                 >
-                  Last Purge
+                   Last Optimization
                 </p>
                 <Tooltip text="This information reflects the last time optimization was performed" />
               </div>
@@ -597,7 +597,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#0a0a187e] f2 mr-[2px] text-[14px] tracking-wide font-bold"
                 >
-                  previous purge:
+                 previous optimization***:
                 </p>
                 <p
                   style={{
@@ -606,8 +606,8 @@ const Dashboard = () => {
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
                   {handlerData?.previousPurge ? new Date(handlerData?.previousPurge).toLocaleDateString("en-US") : ""}
-
                 </p>
+
               </div>
             </div>
           </div>

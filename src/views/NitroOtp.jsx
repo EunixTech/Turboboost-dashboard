@@ -17,18 +17,18 @@ const OTPComponent = () => {
   console.log("iski maa ka bhodsa============>", otp);
 
   const handleSubmit = async (values) => {
-    // You can handle form submission here
+
     navigate("/connect-site");
   };
 
   return (
     <div className="otp-container">
       <div className="flex justify-center">
-        {/* Center the image horizontally */}
+     
         <img src="/logo-b.png" className="w-[150px]" alt="" />
       </div>
 
-      <h3 className="mt-[10px] flex p-[10px]">Check your email for a code  We've sent a 6-digit code to email. Please check your email inbox.</h3>
+      <h3 className="mt-[10px] flex p-[10px]">Check your email for a code  We've sent a 6-digit code to email. Please check your askjdhjasd kashdkahsemail inbox.</h3>
       <p className="mb-[10px]">
        
       </p>

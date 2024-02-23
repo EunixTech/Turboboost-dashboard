@@ -52,7 +52,7 @@ export default function IntegerationIteamCard({
                         style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
                         className="w-[100px] rounded-[3px] text-[14px] hover:bg-[#FF465C] text-[#FF465C] hover:text-[#fff]  cursor-pointer font-medium h-[38px] border-[1px] border-[#ebebeb] flex items-center justify-center"
                     >
-                        Connected
+                        Disconnect
                     </div>
 
                 )}

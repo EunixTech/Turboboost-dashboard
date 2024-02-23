@@ -22,32 +22,9 @@ const validationSchema = Yup.object().shape({
 const NitroPack = () => {
   const navigate = useNavigate(); 
 
-  const fetchConfig = getFetchConfig();
-  const appURL = appURLs();
 
   const handleFormSubmit = async (values) => {
-    // try {
-    //   const authResponse = await axios.post(
-    //     `${appURL}/api/shopify/shopify-auth`,
-    //     {
-    //       shop_name: values.domain,
-    //     },
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   );
 
-    //   const resJSON = authResponse?.data;
-    //   const redirectURL = resJSON.redirectURI;
-
-    //   if (resJSON.status === 200) {
-    //     window.location.href = redirectURL;
-    //   } else {
-    //     return toast.error(resJSON.message);
-    //   }
-    // } catch (error) {
-    //   console.error("Error fetching user profile data:", error);
-    // }
   };
 
   const handleContinueClick = () => {

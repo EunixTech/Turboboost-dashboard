@@ -101,6 +101,7 @@ const OnboardingBillings = () => {
             className="text-[23px] font-bold tracking-wide text-center pt-[20px]"
           >
             Select A Plan{" "}
+
           </h1>
           <h1 className="text-[12px] font-medium text-[#696e7ea8] tracking-wide text-center mt-[2px]">
             A faster website is just a click away!{" "}
