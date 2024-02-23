@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import HomeLayout from "../layouts/index";
 import { useSelector } from "react-redux";
-
+import TitleManager from "../components/TitleManager";
 const Table = ({ setSelected1 }) => {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -9,6 +9,9 @@ const Table = ({ setSelected1 }) => {
   const dark = useSelector((state) => state.home.dark);
 
   return (
+    <>
+     <TitleManager title="Affiliate" conicalURL="affiliate" />
+ 
     <div
       style={{
         borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -22,6 +25,7 @@ const Table = ({ setSelected1 }) => {
         })}
       </div>
     </div>
+       </>
   );
 };
 

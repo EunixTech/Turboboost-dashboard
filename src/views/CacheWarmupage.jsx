@@ -1,53 +1,32 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpgradePopUpShow } from "../services/home";
+import TitleManager from "../components/TitleManager";
+import axios from "axios";
+import appURLs from "../appURL";
+import Tooltip from "../components/Tooltip"
+import toast from "react-hot-toast";
+import AnimatedLoader from "../components/loader/AnimatedLoader";
+import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
+import { setToggle } from "../slice/statusToggleSlice";
+import ToggleButton from "../components/ToggleButton.jsx";
 
-// const Button = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         // onClick();
-//       }}
-//       className={`w-[100%] ${!dark ? "bg-[#ebebeb] " : "bg-[#204c3a]"}
-//         h-[40px]   cursor-pointer rounded-[4px] border-[1px] ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb] "
-//         } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           false ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#204c3a]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[2.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         <img
-//           src="/graphic/warmup/play.svg"
-//           className="w-[8px] mr-[5px] translate-y-[0px]"
-//           alt=""
-//         />{" "}
-//         Start Optimizations
-//       </p>
-//     </div>
-//   );
-// };
-
-const Button = () => {
+const Button = ({pageOptimizationValue, handleOptimizePage}) => {
   const dark = useSelector((state) => state.home.dark);
   return (
-    <div
+    <div onClick={handleOptimizePage}
       className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
 
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
-      <p
-        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+
+      {
+        !pageOptimizationValue ?
+        <p
+        className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+          } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         <img
           src="/graphic/warmup/play.svg"
@@ -55,42 +34,24 @@ const Button = () => {
           alt=""
         />{" "}
         Start Optimizations
-      </p>
+      </p>:
+       <p
+       className={`text-[${false ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#38F8AC]" : "bg-[#38F8AC]"
+         } rounded-[4px] active:translate-y-[0px] hover:bg-[#2fe49c] active:border-0  translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+     >
+       <img
+         src="/graphic/warmup/play.svg"
+         className="w-[8px] mr-[5px] translate-y-[0px]"
+         alt=""
+       />{" "}
+       Disable Optimizations
+     </p>
+      }
+     
     </div>
   );
 };
 
-// const Button1 = ({ onClick }) => {
-//   const dark = useSelector((state) => state.home.dark);
-//   return (
-//     <div
-//       onClick={() => {
-//         onClick();
-//       }}
-//       className={`w-[100%] ${!dark ? "bg-[#ebebeb] " : "bg-[#1c1f26]"}
-//       h-[40px]   cursor-pointer rounded-[4px] border-[1px] ${
-//         dark ? "border-[#1F2329]" : "border-[#ebebeb] "
-//       } flex items-center justify-center mt-[20px]`}
-//     >
-//       <p
-//         className={`text-[${
-//           true ? "#fff" : "#000"
-//         }]   f2 text-[12px]  border-[1px]  ${
-//           dark ? "border-[#1F2329]" : "border-[#ebebeb]"
-//         } ${
-//           dark ? "bg-[#000]" : "bg-[#000]"
-//         } rounded-[4px] active:translate-y-[0px] hover:font-bold active:border-0 translate-y-[-2px] translate-x-[2.5px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-//       >
-//         <img
-//           src="/graphic/warmup/plus.svg"
-//           className="w-[8px] mr-[5px] translate-y-[0px]"
-//           alt=""
-//         />{" "}
-//         Get HTML Sitemap
-//       </p>
-//     </div>
-//   );
-// };
 
 const Button1 = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -104,9 +65,8 @@ const Button1 = ({ onClick }) => {
         h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
     >
       <p
-        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${
-          dark ? "bg-[#000]" : "bg-[#000]"
-        } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
+        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : "bg-[#000]"
+          } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
       >
         <img
           src="/graphic/warmup/plus.svg"
@@ -119,57 +79,235 @@ const Button1 = ({ onClick }) => {
   );
 };
 
-const HoverDetail = () => {
-  const [hover, setHover] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false); // Track whether the image has loaded
 
-  const handleImageLoad = () => {
-    console.log(true);
-    setImageLoaded(true); // Set imageLoaded to true when the image is loaded
-  };
+const Table1 = ({ tableData }) => {
+  const arr = [1, 2, 3];
+  const {title, is_optimized,optimized_at} =  tableData;
+
+  const [selected, setSelected] = useState([]);
+  const dark = useSelector((state) => state.home.dark);
   return (
     <div
-      onMouseOver={() => {
-        setHover(true);
+      style={{
+        borderColor: dark ? "#1F2329" : "#ebebeb",
       }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
-      className="relative "
+      className="w-[100%] border-t-[1px]  border-[#ebebeb] mt-[10px] mobile:pb-[10px] laptop:pb-[0] overflow-x-auto overflow-y-hidden scroll-x-cool"
     >
-      {hover && (
-        <div className="absolute shrink-0  w-[150px] left-[-62.1px]  z-50 bottom-[13px]">
-          <Suspense fallback={null}>
-            <img
-              onLoad={handleImageLoad}
-              src="/hover.svg"
-              className="z-0 w-[145px] h-[88px]"
-              alt=""
-            />
-            {imageLoaded && (
-              <div className="w-[100%] h-[100%] px-[10px] py-[14px] font-medium text-[12px] leading-[16px] top-0 left-0 absolute z-10">
-                Lorem ipsum dolor sit amet consectetur. Volutpat in justo amet.
-              </div>
-            )}
-          </Suspense>
-        </div>
-      )}
-      <img
-        className="w-[20px] cursor-pointer"
-        src="/graphic/dashboard/info.svg"
-        alt=""
-      />
+      <div className="mobile:w-[1200px] laptop:w-[100%]">
+        <TableHeader1 />
+        {tableData.map((item, i) => {
+          return <TableItem1 key={i} last={i === arr.length - 1} item={item} />;
+        })}
+      </div>
+    </div>
+  );
+};
+
+const TableHeader1 = () => {
+
+  const dark = useSelector((state) => state.home.dark);
+  return (
+    <div
+      style={{
+        borderColor: dark ? "#1F2329" : "#ebebeb",
+      }}
+      className="w-[100%] px-[10px] flex h-[28px] border-b-[1px] border-[#ebebeb]"
+    >
+      <div
+        style={{
+          color: dark ? "#ffffff74" : "#0a0a187e",
+        }}
+        className="w-[45%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+      >
+        Name
+      </div>
+      <div
+        style={{
+          color: dark ? "#ffffff74" : "#0a0a187e",
+        }}
+        className="w-[40%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+      >
+        Optimized At
+      </div>
+
+      <div
+        style={{
+          color: dark ? "#ffffff74" : "#0a0a187e",
+        }}
+        className="w-[30%] pl-[25px] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
+      >
+        Status
+      </div>
+
+    </div>
+  );
+};
+
+const Status = ({ i }) => {
+  return (
+    <div
+      className="h-[22px] flex items-center px-[9.5px] justify-between rounded-[23px] "
+      style={{
+        backgroundColor:
+          i === 1 ? "#38f8ab31" : i === 2 ? "#ffcc6538" : "#ff465c38",
+      }}
+    >
+      <div
+        className="w-[6px] h-[6px] shrink-0 rounded-[50%]"
+        style={{
+          backgroundColor:
+            i === 1 ? "#0FE38F" : i === 2 ? "#FFCB65" : "#FF465C",
+        }}
+      ></div>
+      <p
+        className="text-[11px] tracking-wide ml-[5px]"
+        style={{
+          color: i === 1 ? "#0FE38F" : i === 2 ? "#FFCB65" : "#FF465C",
+        }}
+      >
+        {i === 1 ? "Optimized" : i === 2 ? "Incomplete" : "Disconnected"}
+      </p>
+    </div>
+  );
+};
+
+const TableItem1 = ({ last, item }) => {
+  const [check, setCheck] = useState(false);
+  const dark = useSelector((state) => state.home.dark);
+  const formatDate = (dateString) => {
+       const dateObj = new Date(dateString);
+    
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    const year = dateObj.getFullYear();
+    const hour = dateObj.getHours().toString().padStart(2, '0');
+    const minute = dateObj.getMinutes().toString().padStart(2, '0');
+    const period = (dateObj.getHours() < 12) ? 'AM' : 'PM';
+
+    const formattedDate = `${month}/${day}/${year} at ${hour}:${minute} ${period}`;
+    return formattedDate;
+}
+  return (
+    <div
+      style={{
+        border: last && "0px !important",
+
+        borderColor: dark ? "#1F2329" : "#ebebeb",
+      }}
+      className="w-[100%] flex px-[10px] h-[45px] border-b-[1px] border-[#ebebeb]"
+    >
+      <div
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
+        className="w-[45%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+      >
+        {item?.title}
+      </div>
+      <div
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
+        className="w-[40%] text-[14px] px-[15px] leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+      >
+        {item?.optimized_at && formatDate(item?.optimized_at)}
+      </div>
+      <div
+        style={{
+          color: dark ? "#fff" : "#000",
+        }}
+        className="w-[30%] text-[14px] px-[15px]  leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
+      >
+        <Status i= {item?.is_optimized === true ? 1 : 2} />
+      </div>
+
     </div>
   );
 };
 
 const CacheWarmup = ({ setShow }) => {
   const [enabled, setEnabled] = useState(false);
+  const [pageOptimizationData, updatePageOptimizationData] = useState({});
   const dark = useSelector((state) => state.home.dark);
+   const [loader, toggleLoader] = useState(false);
   const dispatch = useDispatch();
+  const appURL = appURLs();
+  const pageOptimizationValue = useSelector((state) => state.toggles?.pageOptimization);
+
+  const fetchPageOptimizationData = async () => {
+
+    try {
+      toggleLoader(true);
+      const res = await GetAxiosConfig(`api/dashboard/fetch-page-optimization-data`);
+      toggleLoader(false);
+
+      const resData = res?.data;
+      if(resData?.status === 200){
+        const pageDataObj = resData?.pageData;
+        updatePageOptimizationData(pageDataObj)
+      } else {
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
+
+  };
+
+  const handleOptimizePage = async() =>{
+    let endPoint = "";
+    if (!pageOptimizationValue) endPoint = "api/shopify/removed-page-unused-code";
+    else endPoint = "api/shopify/restore-page-optimization";
+   
+    try {
+      toggleLoader(true);
+      const res = await GetAxiosConfig(endPoint);
+      toggleLoader(false);
+      const resData = res?.data;
+      if(resData?.status === 200){
+      dispatch(setToggle({ key: "pageOptimization", value: !pageOptimizationValue }));
+      fetchPageOptimizationData();
+        // return toast.success(resData?.message);
+      } else {
+        return toast.error("Please try again");
+      }
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
+      toggleLoader(false);
+      console.error("Error fetching user profile data:", error);
+    }
+  }
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if(!pageOptimizationValue && !Boolean(localStorage.getItem('pageOptimizationAPI'))){
+        await handleOptimizePage();
+        localStorage.setItem('pageOptimizationAPI', true);
+      }
+      fetchPageOptimizationData();
+    };
+    fetchData();
+
+  }, [])
   return (
     <>
+    {
+      loader ?
+      <AnimatedLoader /> :
+  
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
+        <TitleManager title="pages-optimization" conicalURL="pages-optimization" />
+
         <div className="w-[100%] h-[50px] shrink-0"></div>
         <div
           style={{ backgroundColor: dark ? "#09090b" : "#FAFAFC" }}
@@ -184,7 +322,7 @@ const CacheWarmup = ({ setShow }) => {
                   }}
                   className="text-[24px] font-bold tracking-wide "
                 >
-                  Cache Warmup
+                  Page Optimization
                 </h1>
                 {/* {enabled && (
                   <div className="w-[120px] h-[34px] text-[#fff] cursor-pointer mt-[18px] rounded-[3px] flex items-center justify-center bg-[#000]">
@@ -214,9 +352,9 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      Estimated Time Saved
+                      Total Pages
                     </p>
-                    <HoverDetail />
+                    <Tooltip text="This statement serves to indicate the count of pages" />
                   </div>
                   <div className="flex mt-[6px] items-center">
                     <p
@@ -225,7 +363,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      8 hours
+                      {pageOptimizationData && pageOptimizationData?.totalPage}
                     </p>
                   </div>
                 </div>
@@ -243,9 +381,9 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      Estimated Costs Saved
+                      Number of Pages Optimized
                     </p>
-                    <HoverDetail />
+                    <Tooltip text="This indicates the number of pages optimized by TurboBoost." />
                   </div>
                   <div className="flex mt-[6px] items-center">
                     <p
@@ -254,7 +392,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      320$
+                      {pageOptimizationData && pageOptimizationData?.optimizedPageCount}
                     </p>
                   </div>
                 </div>
@@ -272,9 +410,9 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      No. of Pages
+                      Pages Pending Optimisation
                     </p>
-                    <HoverDetail />
+                    <Tooltip text="This indicates the number of pages pending optimization." />
                   </div>
                   <div className="flex mt-[6px] items-center">
                     <p
@@ -283,7 +421,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      72
+                      {pageOptimizationData && pageOptimizationData?.notOptimizedPage}
                     </p>
                   </div>
                 </div>
@@ -294,7 +432,7 @@ const CacheWarmup = ({ setShow }) => {
                     backgroundColor: dark ? "#111317" : "#fff",
                     borderColor: dark ? "#1F2329" : "#ebebeb",
                   }}
-                  className="laptop:w-[66%] mobile:w-[100%]   py-[14px]  bg-[#fff] border-[1px]  rounded-[8px]"
+                  className="laptop:w-[66%] mobile:w-[100%] mb-[30px]   py-[14px]  bg-[#fff] border-[1px]  rounded-[8px]"
                 >
                   <h1
                     style={{
@@ -302,7 +440,7 @@ const CacheWarmup = ({ setShow }) => {
                     }}
                     className="text-[20px] px-[15px] font-bold tracking-wide "
                   >
-                    Cache Warmup Status
+                    Page Optimization Status
                   </h1>
                   <div className="flex px-[15px] justify-between mt-[4px] items-center">
                     <p
@@ -311,22 +449,27 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[14px] tracking-wide font-medium text-[#0a0a186f]"
                     >
-                      Automatically re-optimizes purged/invalidated pages.
+                      When TurboBoost is enabled, it will minify the HTML by removing extra whitespace.
                     </p>
-                    <Toggle
+                    {/* <Toggle
                       value={!enabled}
                       setValue={(e) => {
                         setEnabled(!enabled);
                       }}
-                    />
+                    /> */}
+
+                    <ToggleButton toggleValue={pageOptimizationValue} handlingToggle={handleOptimizePage}  toggleKey="someKey" />
+
                   </div>
                   <div
                     style={{
                       borderColor: dark ? "#1F2329" : "#ebebeb",
+                      display:"block"
                     }}
-                    className="w-[100%] laptop:flex justify-between border-t-[1px] px-[15px] border-[#ebebeb] mt-[8px]"
+                    className="w-[100%] laptop:flex justify-between border-t-[1px] px-[15px] border-[#ebebeb] mt-[8px] block"
+                   
                   >
-                    <div className="laptop:w-[49%] mobile:w-[100%] pt-[13px] flex flex-col justify-between">
+                    {/* <div className="laptop:w-[49%] mobile:w-[100%] pt-[13px] flex flex-col justify-between">
                       <div>
                         <h1
                           style={{
@@ -375,7 +518,7 @@ const CacheWarmup = ({ setShow }) => {
                           />
                           <span>Get Feature</span>
                         </div> */}
-                      </h1>
+                    {/* </h1>
                       <p
                         style={{
                           color: dark ? "#ffffff74" : "#0a0a187e",
@@ -394,7 +537,26 @@ const CacheWarmup = ({ setShow }) => {
                         className="w-[100%] mt-[4px] h-[34px] rounded-[4px] border-[1px] bg-transparent
                          border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
                       />
-                    </div>
+                    </div>  */}
+                     <p
+                        style={{
+                          color: dark ? "#ffffff74" : "#0a0a187e",
+                        }}
+                        className="text-[14px] mt-[4px] tracking-wide  text-[#0a0a186f]"
+                      >
+                        {pageOptimizationData?.pages?.length ? `${pageOptimizationData?.pages?.length} Pages`:''} 
+                      </p>
+                    {(pageOptimizationData?.pages && pageOptimizationData?.pages?.length) ? <Table1 tableData = {pageOptimizationData?.pages} /> :    <div style={{
+                display:"flex",
+                justifyContent:"center",
+                alignItems:"center",
+                height:"200px"
+              }}>
+              <h1  style={{
+                      color: dark ? "#ffffff74" : "#0a0a187e",
+                    }}>Nothing show</h1>
+              </div>}
+
                   </div>
                 </div>
                 <div className="laptop:w-[32%] mobile:mt-[10px] laptop:mt-[0]  mobile:w-[100%] ">
@@ -412,7 +574,7 @@ const CacheWarmup = ({ setShow }) => {
                         }}
                         className="text-[20px] font-bold tracking-wide "
                       >
-                        Cache Warmup Details
+                        Page Optimization Details
                       </h1>
                       <div
                         style={{
@@ -420,7 +582,7 @@ const CacheWarmup = ({ setShow }) => {
                         }}
                         className="flex text-[14px] font-medium items-center"
                       >
-                        {enabled ? (
+                        {pageOptimizationValue ? (
                           <>
                             <img
                               src="/graphic/warmup/elli1.svg"
@@ -452,9 +614,9 @@ const CacheWarmup = ({ setShow }) => {
                       Start Optimizations
                     </h1>
                   </div> */}
-                    <Button />
+                    <Button pageOptimizationValue={pageOptimizationValue} handleOptimizePage = {handleOptimizePage} />
                   </div>
-                  <div
+                  {/* <div
                     style={{
                       color: dark ? "#fff" : "#000",
                       borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -462,7 +624,7 @@ const CacheWarmup = ({ setShow }) => {
                     }}
                     className="w-[100%] mt-[10px]  px-[15px] py-[14px]  bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
                   >
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                       <h1 className="text-[20px] font-bold tracking-wide ">
                         Generate Sitemap
                       </h1>
@@ -478,8 +640,8 @@ const CacheWarmup = ({ setShow }) => {
                           alt=""
                         />
                         <span>Get Feature</span>
-                      </div>
-                      {/* <div className="bg-[#000] ml-[5px] font-medium tracking-wide h-[24px] rounded-[3px] flex items-center text-[13px] px-[10px] py-[4px] text-[#fff]">
+                      </div> */}
+                  {/* <div className="bg-[#000] ml-[5px] font-medium tracking-wide h-[24px] rounded-[3px] flex items-center text-[13px] px-[10px] py-[4px] text-[#fff]">
                           <img
                             src="/graphic/warmup/lock.svg"
                             className="w-[10px] mr-[4px] "
@@ -487,8 +649,8 @@ const CacheWarmup = ({ setShow }) => {
                           />
                           <span className="translate-y-[1px]">Pro</span>
                         </div> */}
-                    </div>
-                    {/* <div
+                  {/* </div> */}
+                  {/* <div
                     onClick={() => {
                       setShow(true);
                     }}
@@ -503,18 +665,19 @@ const CacheWarmup = ({ setShow }) => {
                       Get HTML Sitemap
                     </h1>
                   </div> */}
-                    <Button1
+                  {/* <Button1
                       onClick={() => {
                         setShow(true);
                       }}
                     />
-                  </div>
+                  </div>  */}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+}
     </>
   );
 };

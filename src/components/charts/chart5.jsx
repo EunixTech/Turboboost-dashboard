@@ -27,7 +27,19 @@ const options = {
   },
 };
 
-export default function App() {
+export default function App({imageData}) {
+  const ChartData = {
+  labels: ["not/error'd", "No of Image Optimize", "Pending Optimizations"],
+  datasets: [
+    {
+      label: "# of Votes",
+      data: [0, imageData?.totalOptimizeImage, imageData?.totalImages-imageData?.totalOptimizeImage],
+      backgroundColor: [ "#FF465c70", "#38F8AC70", "#FFCB6570"],
+      borderColor:[ "#FF465c70", "#38F8AC70" , "#FFCB6570"],
+      borderWidth: 1,
+    },
+  ],
+};
   const dark = useSelector((state) => state.home.dark);
   return (
     <div className="relative w-[140px] w-[140px] large:ml-[10%]">
@@ -37,10 +49,10 @@ export default function App() {
         }}
         className="absolute w-[140px] text-[22px] font-semibold h-[140px] flex items-center justify-center"
       >
-        335
+        {imageData?.totalImages}
       </div>
       <div className=" w-[140px] w-[140px]">
-        <Doughnut data={data} options={options} />
+        <Doughnut data={ChartData} options={options} />
       </div>
     </div>
   );

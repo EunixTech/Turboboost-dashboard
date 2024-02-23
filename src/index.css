@@ -6,7 +6,13 @@
 .inter {
   font-family: "Roboto", sans-serif;
 }
-
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -118,38 +124,51 @@ span.ripple {
   }
 }
 
-.svg-copy{
-  filter: invert(3%) sepia(30%) saturate(3139%) hue-rotate(220deg) brightness(92%) contrast(98%) !important;
+.svg-copy {
+  filter: invert(3%) sepia(30%) saturate(3139%) hue-rotate(220deg)
+    brightness(92%) contrast(98%) !important;
 }
 /* /* darkmode css / */
-.divWrapperDarkMode{
-    background-color: #111317;
-    border-color: #1F2329;
-    color:#fff ;
+.divWrapperDarkMode {
+  background-color: #111317;
+  border-color: #1f2329;
+  color: #fff;
 }
 
-.backgroundDarkMode{ background-color: #09090b}
-.headingDarkMode{ color: #fff}
-.subHeadingDarkMode{ color: #ffffff74}
-.borderColorDarkMode { border-color:#1F2329 ;}
+.backgroundDarkMode {
+  background-color: #09090b;
+}
+.headingDarkMode {
+  color: #fff;
+}
+.subHeadingDarkMode {
+  color: #ffffff74;
+}
+.borderColorDarkMode {
+  border-color: #1f2329;
+}
 
-
-
-
-/*  whiteMode */ 
-.divWrapper{
+/*  whiteMode */
+.divWrapper {
   background-color: #fff;
   border-color: #ebebeb;
   color: #000;
+  width: 250px;
 }
-.background{ background-color: #FAFAFC}
-.borderColor { border-color:#ebebeb ;}
-.heading{ color: #000}
-.subHeading{ color: #0a0a187e}
-
+.background {
+  background-color: #fafafc;
+}
+.borderColor {
+  border-color: #ebebeb;
+}
+.heading {
+  color: #000;
+}
+.subHeading {
+  color: #0a0a187e;
+}
 
 /* checkbox css */
-
 
 .check-box {
   width: 14px;
@@ -161,7 +180,8 @@ span.ripple {
 
 .checked {
   background-color: #38f8ab34;
-  border-color: #38F8AC;
+  /* border-color: #38F8AC; */
+  border-color: #38f8ac;
 }
 
 .check-icon {
@@ -169,7 +189,6 @@ span.ripple {
   height: 8px;
   display: flex;
 }
-
 
 /* Status css starts here */
 
@@ -201,15 +220,15 @@ span.ripple {
 }
 
 .status-green {
-  background-color: #0FE38F;
+  background-color: #0fe38f;
 }
 
 .status-yellow {
-  background-color: #FFCB65;
+  background-color: #ffcb65;
 }
 
 .status-red {
-  background-color: #FF465C;
+  background-color: #ff465c;
 }
 
 .status-text {
@@ -219,13 +238,432 @@ span.ripple {
 }
 
 .text-green {
-  color: #0FE38F;
+  color: #0fe38f;
 }
 
 .text-yellow {
-  color: #FFCB65;
+  color: #ffcb65;
 }
 
 .text-red {
-  color: #FF465C;
+  color: #ff465c;
 }
+
+/* formik input fiels css */
+.formikInputField {
+  height: 35px;
+  color: black;
+  font-size: 0.8rem;
+  background: white;
+}
+
+.formikInputField:focus {
+  background-color: white !important;
+}
+
+.formikInputField:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+.formikErrorText {
+  font-size: 0.8rem;
+  margin-left: 3px;
+}
+
+.formikInputLabel {
+  font-size: 0.8rem;
+}
+
+.modal-style {
+  background: white;
+  padding: 2rem;
+  border: none;
+  color: rgba(10, 10, 24, 0.494) !important;
+}
+
+.custom-class {
+  color: rgb(47 58 69 / 1) !important;
+  font-size: 1rem !important;
+}
+
+button.variant-btn {
+  background: #2fe49c;
+
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+button.variant-btn-color {
+  background: #2fe49c;
+
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.variant-txt-email {
+  background: #2fe49c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+/* Hide scrollbar on all elements */
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.MuiBox-root,
+.billing-modal-background {
+  /* height: calc(100vh - 40px) !important; Adjust the value (40px) as needed/ */
+  /* max-height: 50vw; */
+  border-radius: 10px;
+  /* margin-top: 52px; */
+  max-width: 1000px;
+  /* margin-left: 100px; */
+  /* width: 100vw; */
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.loader-background {
+  height: 100% !important;
+  border-radius: 10px;
+}
+.variant-txt {
+  background: #2fe49c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+  justify-content: center;
+}
+.variant-txt-color {
+  background: #2fe49c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.custom-textfieldt {
+  height: 0.3rem !important;
+  color: rgb(47 58 69 / 1) !important;
+  font-size: 0.7rem !important;
+  background-color: white !important;
+}
+p.notfound-txt {
+  color: #0a0a18;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 82px; /* 205% */
+  letter-spacing: -0.8px;
+  text-align: center;
+}
+button.return-btn {
+  width: 209px;
+  height: var(--10, 40px);
+  flex-shrink: 0;
+  /* display: flex;
+justify-content: center; */
+  border-radius: var(--rounded, 4px);
+  background: #38f8ac;
+}
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.css-1l9sosn-MuiButtonBase-root-MuiButton-root {
+  color: #38f8ac;
+  border: 2px solid #38f8ac;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
+  height: 5px !important;
+  background-color: white;
+}
+.PhoneInput {
+  display: flex;
+  align-items: center;
+  margin-top: 27px;
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+  padding: 6px;
+background-color: white;
+}
+input.PhoneInputInput {
+  font-size: 13px;
+  padding: 3px;
+  font-family: inherit;
+  outline: 0;
+}
+
+/* modal */
+.modal-close-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -16px;
+  margin-top: -16px;
+  cursor: pointer;
+}
+.formikInputLabel {
+  font-size: 0.8rem;
+}
+.main {
+  position: relative;
+  background-color: #f4f7fa;
+}
+.connect-store-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url(https://dashboard.txtcartapp.com/assets/images/login/background.svg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-position-x: center;
+  background-position-y: top;
+  background-size: 100%;
+  position: relative;
+}
+.main-wrapper {
+  margin: 80px auto 50px;
+  padding: 50px;
+  max-width: 800px;
+  width: 100%;
+  margin: 30px auto;
+  background: #fff;
+  border: 1px solid #dfdfdf;
+  border-bottom: 5px solid rgb(56, 248, 172);
+  box-shadow: -14px 28px 28px -29px #ccd8e3;
+  border-radius: 5px;
+  padding: 30px;
+  text-align: center;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 43px;
+}
+.content-wrapper .heading h2 {
+  /* font-family: Rubik; */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  letter-spacing: 0.2px;
+  color: #2b2b2b;
+  margin-bottom: 12px;
+}
+.turbo-boost-text {
+  color: rgb(56, 248, 172);
+  /* Add any additional styling properties as needed */
+}
+.content-wrapper .heading h4 {
+  margin-bottom: 50px;
+  /* font-family: Karla; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  color: #393939;
+}
+form input {
+  width: 100%;
+  height: 57px;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 20px;
+  color: #b7b7b7;
+  padding: 0 25px;
+}
+.connect-button {
+  width: 206px;
+  height: 44px;
+  border: 1px solid #35c946;
+  background: #35c946;
+  border-radius: 7px;
+  /* font-family: Rubik; */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 44px;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  margin: auto;
+  margin-bottom: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+.link-signup {
+  color: #35c946;
+}
+.shapes-verticals {
+  position: absolute;
+  /* z-index: -1; */
+  width: 100vw;
+  height: 100vh;
+}
+.shapes-verticals .vertical-1 {
+  top: 35%;
+  left: 15%;
+  position: relative;
+}
+.shapes-verticals .vertical-2 {
+  top: 35%;
+  right: 15%;
+  position: absolute;
+}
+.shapes-verticals .vertical-3 {
+  bottom: 30%;
+  left: 2%;
+  position: absolute;
+}
+.shapes-verticals .vertical-4 {
+  bottom: 30%;
+  right: 2%;
+  position: absolute;
+}
+.annualArrow {
+  display: flex;
+  height: 100%;
+  margin-bottom: -3rem;
+  margin-left: 0.1rem;
+  width: 19.585px;
+}
+p.annualText {
+  color: #38f8ac;
+  /* font-family: Inter; */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  margin-left: 5rem;
+  margin-top: 0.5rem;
+}
+.justify-around {
+  display: flex;
+}
+input.PhoneInputInput {
+  /* border: 0; */
+  height: 2.4rem;
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0;
+  border-color: #ebebeb;
+
+}
+.PhoneInput {
+  height: 2.4rem;
+  /* border: 1px solid; */
+}
+input.PhoneInputInput {
+  margin: 0;
+}
+.w-full.grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-x-4.gap-y-8.mt-4.flex.justify-center {
+  display: flex;
+  justify-content: center;
+  line-height: normal;
+  align-items: self-start;
+}
+.mobile-container {
+  display: none; /* Hide for larger screens */
+}
+.otp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.otp-input-container {
+  display: flex;
+}
+
+.otp-input {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+
+@media only screen and (max-width: 599px) {
+  .MuiBox-root,
+  .billing-modal-background {
+    max-width: 100% !important;
+  }
+  .mobile-cols {
+    display: block;
+  }
+  .mobile\:mb-\[10px\] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+}
+/* Media query for screens smaller than 600px (adjust as needed) */
+@media (max-width: 600px) {
+  .max-w-screen-xl {
+    display: none; /* Hide for smaller screens */
+  }
+  .mobile-container {
+    display: block; /* Show for smaller screens */
+    overflow: scroll;
+  }
+}
+
+
+.progressbar-div{
+  color: red;
+}
+
+
+
+/* userTab */
+.PhoneInput{
+  margin-top: 0px !important;
+}
+
+.dark_color{
+  color: #ffffff74;
+    background-color: #0a0a187e !important;
+}
+
+.white_color{
+  color: #0a0a187e;
+  background-color: #ffffff74 !important;
+}
+@media only screen and (max-width: 700px) {
+  .user_tab_card{
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* user Tab */
+#form-submit-btn{
+  position: absolute;
+  top: -78px;
+  right: 0%;
+}
+
