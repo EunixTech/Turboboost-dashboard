@@ -123,6 +123,8 @@ const TableItem1 = ({ last, s_no, item , lastPurge }) => {
     const formattedDate = `${month}/${day}/${year} at ${hour}:${minute} ${period}`;
     return formattedDate;
   }
+  
+  
   return (
     <div
       style={{
