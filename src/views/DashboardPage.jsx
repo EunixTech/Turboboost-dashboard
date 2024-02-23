@@ -606,10 +606,8 @@ const Dashboard = () => {
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
                   {handlerData?.previousPurge ? new Date(handlerData?.previousPurge).toLocaleDateString("en-US") : ""}
-
-
                 </p>
-                
+
               </div>
             </div>
           </div>
