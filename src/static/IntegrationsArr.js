@@ -24,7 +24,7 @@ export const FeaturedIntegrationArr = [
         name: "TxtCart",
         isConnected: false,
         desc:"Conversational SMS Marketing and Cart recovery with AI",
-        logo:"/graphic/integrations/p1.png"
+        logo:"/graphic/integrations/txtcart.jpg"
     },
     {
         name: "Chargeflow Dispute Chargebacks",
