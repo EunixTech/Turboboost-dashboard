@@ -107,6 +107,7 @@ const OnboardingBillings = () => {
           </h1>
           <div className="w-[100%] mt-[5px] flex items-center justify-center">
             <div
+            
              
               className="flex w-[200px] h-[40px]  border-[1px]   rounded-[4px] px-[3px] py-[3px]"
             >
