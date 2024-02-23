@@ -597,7 +597,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#0a0a187e] f2 mr-[2px] text-[14px] tracking-wide font-bold"
                 >
-                 previous optimization***:
+                 previous optimization:
                 </p>
                 <p
                   style={{
