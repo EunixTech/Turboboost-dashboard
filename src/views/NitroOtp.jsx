@@ -17,7 +17,7 @@ const OTPComponent = () => {
   console.log("iski maa ka bhodsa============>", otp);
 
   const handleSubmit = async (values) => {
-    // You can handle form submission here
+
     navigate("/connect-site");
   };
 
