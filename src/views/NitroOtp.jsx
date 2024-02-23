@@ -28,7 +28,7 @@ const OTPComponent = () => {
         <img src="/logo-b.png" className="w-[150px]" alt="" />
       </div>
 
-      <h3 className="mt-[10px] flex p-[10px]">Check your email for a code  We've sent a 6-digit code to email. Please check your email inbox.</h3>
+      <h3 className="mt-[10px] flex p-[10px]">Check your email for a code  We've sent a 6-digit code to email. Please check your askjdhjasd kashdkahsemail inbox.</h3>
       <p className="mb-[10px]">
        
       </p>
@@ -38,26 +38,26 @@ const OTPComponent = () => {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          // <Form>
-          //   <div className="otp-input-container">
-          //     <OtpInput
-          //       value={otp} // Use state variable otp instead of the string "otp"
-          //       onChange={setOtp}
-          //       numInputs={6}
-          //       renderSeparator={<span>-</span>}
-          //       renderInput={(props) => <input {...props} />}
-          //     />
-          //   </div>
-          //   <ErrorMessage name="otp" component="div" />
-          //   <p className="flex justify-center">Re-send code</p>
-          //   <button
-          //     type="submit"
-          //     disabled={isSubmitting || submitting}
-          //     className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
-          //   >
-          //     <span className="translate-y-[1.5px] text-[16px]">Submit</span>
-          //   </button>
-          // </Form>
+          <Form>
+            <div className="otp-input-container">
+              <OtpInput
+                value={otp} // Use state variable otp instead of the string "otp"
+                onChange={setOtp}
+                numInputs={6}
+                renderSeparator={<span>-</span>}
+                renderInput={(props) => <input {...props} />}
+              />
+            </div>
+            <ErrorMessage name="otp" component="div" />
+            <p className="flex justify-center">Re-send code</p>
+            <button
+              type="submit"
+              disabled={isSubmitting || submitting}
+              className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
+            >
+              <span className="translate-y-[1.5px] text-[16px]">Submit</span>
+            </button>
+          </Form>
         )}
       </Formik>
     </div>
