@@ -1,34 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
+import { useNavigate } from "react-router-dom";
 import FormikInput from "../components/forms/FormikInput";
 import GoogleLoginButton from "../components/button/GoogleLogin";
-import TitleManager from "../components/TitleManager";
 import axios from "axios";
-import appURLs from "../appURL";
-import getFetchConfig from "../utils/getFetchConfig";
 import toast from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
-  domain: Yup.string()
-    .matches(
-      /^(http|https)?:\/\/(www\.)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?|[\w-]+\.myshopify\.com$/,
-      "Invalid domain name format"
-    )
-    .required("email is required"),
+  email: Yup.string()
+    .email("Invalid email address format")
+    .required("Email is required"),
 });
 
 const NitroPack = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const [email, setEmail] = useState(""); // State to store the email
 
-
-  const handleFormSubmit = async (values) => {
-
+  const handleFormSubmit = async (enteredEmail) => {
+    // Call the loginWithEmail API here
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/v1/api/wordpress/auth/login-with-email",
+        {
+          email_address: enteredEmail,
+        }
+      );
+  
+      // Handle the response based on your requirement
+      console.log(response.data); // Log the response for now
+  
+      if (response.data.message === "No account exists with this email address") {
+        // Handle the case where no account exists
+        toast.error("No account exists with this email address.");
+        return;
+      }
+  
+      // If not, proceed as usual
+      navigate("/verifiy-email-otp");
+    } catch (error) {
+      console.error("Error calling loginWithEmail API:", error);
+      // Handle the error, show toast message, etc.
+      toast.error("Failed to login. Please try again later.");
+    }
   };
+  
 
-  const handleContinueClick = () => {
-    navigate("/verifiy-email-otp"); 
+  const handleContinueClick = (enteredEmail) => {
+    // Validate the email before proceeding
+    if (!enteredEmail || !Yup.string().email().isValidSync(enteredEmail)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    // Set the email state
+    setEmail(enteredEmail);
+    // Call the handleFormSubmit function to initiate the API call
+    handleFormSubmit(enteredEmail);
   };
 
   return (
@@ -36,16 +63,14 @@ const NitroPack = () => {
       <div className="w-full max-w-md">
         <Formik
           initialValues={{
-            domain: "",
+            email: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={handleFormSubmit}
+          onSubmit={() => {}} // No need to specify onSubmit here
         >
-          {() => (
+          {(formikProps) => (
             <Form>
               <div className="flex justify-center">
-                {" "}
-                {/* Center the image horizontally */}
                 <img src="/logo-b.png" className="w-[150px]" alt="" />
               </div>
 
@@ -65,13 +90,15 @@ const NitroPack = () => {
               <div className="mt-6">
                 <FormikInput
                   inputLabel="Enter your Email"
-                  inputName="domain"
+                  inputName="email"
                   inputType="email"
+                  value={formikProps.values.email}
+                  onChange={formikProps.handleChange}
                 />
 
                 <button
                   type="button"
-                  onClick={handleContinueClick}
+                  onClick={() => handleContinueClick(formikProps.values.email)}
                   className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
                 >
                   <span className="translate-y-[1.5px] text-[16px]">
@@ -96,5 +123,6 @@ const NitroPack = () => {
     </div>
   );
 };
+
 
 export default NitroPack;

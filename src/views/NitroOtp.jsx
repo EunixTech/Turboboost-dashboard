@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import OtpInput from "react-otp-input";
 
 const validationSchema = Yup.object().shape({
@@ -14,24 +15,36 @@ const OTPComponent = () => {
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
-  console.log("iski maa ka bhodsa============>", otp);
 
   const handleSubmit = async (values) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/v1/api/wordpress/auth/verify-otp",
+        { otp }
+      );
+      console.log(response.data); // Log the response for now
 
-    navigate("/connect-site");
+      if (response.data.message === "OTP verified successfully") {
+        navigate("/connect-site");
+      } else {
+        console.error("OTP verification failed:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+    }
   };
 
   return (
     <div className="otp-container">
       <div className="flex justify-center">
-     
         <img src="/logo-b.png" className="w-[150px]" alt="" />
       </div>
 
-      <h3 className="mt-[10px] flex p-[10px]">Check your email for a code  We've sent a 6-digit code to email. Please check your askjdhjasd kashdkahsemail inbox.</h3>
-      <p className="mb-[10px]">
-       
-      </p>
+      <h3 className="mt-[10px] flex p-[10px]">
+        Check your email for a code. We've sent a 6-digit code to your email.
+        Please check your inbox.
+      </h3>
+
       <Formik
         initialValues={{ otp: "" }}
         validationSchema={validationSchema}
@@ -41,15 +54,26 @@ const OTPComponent = () => {
           <Form>
             <div className="otp-input-container">
               <OtpInput
-                value={otp} // Use state variable otp instead of the string "otp"
+                value={otp}
                 onChange={setOtp}
                 numInputs={6}
-                renderSeparator={<span>-</span>}
-                renderInput={(props) => <input {...props} />}
+                isInputNum
+                inputStyle={{
+                  width: "3rem",
+                  height: "3rem",
+                  fontSize: "2rem",
+                  margin: "0 1rem",
+                  borderRadius: "4px",
+                  border: "1px solid #ced4da",
+                  textAlign: "center",
+                }}
               />
             </div>
             <ErrorMessage name="otp" component="div" />
-            <p className="flex justify-center">Re-send code</p>
+            <p className="flex justify-center">
+              {/* Conditional rendering of "Re-send code" message */}
+              {isSubmitting && <span>Re-send code</span>}
+            </p>
             <button
               type="submit"
               disabled={isSubmitting || submitting}
