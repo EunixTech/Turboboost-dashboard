@@ -727,6 +727,7 @@ const CacheStatus = () => {
                 }
                 
               </div>
+              
             )}
             {current === 1 && (
               <div
