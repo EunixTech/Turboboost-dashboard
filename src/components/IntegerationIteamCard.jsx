@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 
 export default function IntegerationIteamCard({
-    src,
-    title,
-    sub,
-    connected,
-    connect,
+    src = "",
+    title = "",
+    sub = "",
+    connect = false,
+    connectURL = ""
 }) {
     const dark = useSelector((state) => state.home.dark);
-    const [hover, setHover] = useState(false);
+
     return (
         <div
             style={{
@@ -25,12 +24,8 @@ export default function IntegerationIteamCard({
                 <img src={src} className="w-[50px] rounded-[7px]" alt="" />
                 {!connect ? (
                     <div
-                        onMouseOver={() => {
-                            setHover(true);
-                        }}
-                        onMouseLeave={() => {
-                            setHover(false);
-                        }}
+                        onClick={() => window.open(connectURL, "_blank")}
+
                         style={{
                             color: !connect ? (dark ? "#fff" : "#000") : "#FF465C",
                             borderColor: dark ? "#1F2329" : "#ebebeb",
@@ -43,12 +38,7 @@ export default function IntegerationIteamCard({
 
                 ) : (
                     <div
-                        onMouseOver={() => {
-                            setHover(true);
-                        }}
-                        onMouseLeave={() => {
-                            setHover(false);
-                        }}
+               
                         style={{ borderColor: dark ? "#1F2329" : "#ebebeb"}}
                         className="w-[100px] rounded-[3px] text-[14px] hover:bg-[#FF465C] text-[#FF465C] hover:text-[#fff]  cursor-pointer font-medium h-[38px] border-[1px] border-[#ebebeb] flex items-center justify-center"
                     >

@@ -127,7 +127,7 @@ const TableHeader1 = () => {
         }}
         className="w-[40%] text-[12px] tracking-wide text-[#0a0a1876] px-[15px] font-bold flex h-[100%] items-center"
       >
-        Optimized At
+        Optimized On
       </div>
 
       <div
@@ -410,7 +410,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[#0a0a187e] text-[16px] tracking-wide font-bold"
                     >
-                      Pages Pending Optimisation
+                      Pages Pending Optimization
                     </p>
                     <Tooltip text="This indicates the number of pages pending optimization." />
                   </div>

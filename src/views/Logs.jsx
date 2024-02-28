@@ -9,6 +9,7 @@ import moment from 'moment';
 import toast from "react-hot-toast";
 import { GetAxiosConfig } from "../utils/axiosConfig.js";
 import AnimatedLoader from "../components/loader/AnimatedLoader";
+import Pagination from "../components/pagination/Pagination.jsx";
 
 const Button = () => {
   const dark = useSelector((state) => state.home.dark);
@@ -272,7 +273,7 @@ const TableItem3 = ({ last, item }) => {
         }}
         className="w-[30%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        {item?.event_type === 1 ? "Installed" : "updated"} Plugin
+        {item?.event_type === 1 ? "Installed" : "Updated"}
       </div>
       <div
         style={{
@@ -289,7 +290,7 @@ const TableItem3 = ({ last, item }) => {
         }}
         className="w-[20%] text-[14px] px-[15px] cursor-pointer leading-[14px] tracking-wide text-[#000] font-semibold flex h-[100%] items-center"
       >
-        6.1.1
+        1.1.1
       </div>
     </div>
   );
@@ -468,6 +469,7 @@ const InputDate = ({ currMonth, updateCurrMonth }) => {
 const CacheStatus = () => {
   const [current, setCurrent] = useState(0);
   const [pageViewData, updatePageViewData] = useState([]);
+   const [totalPageView, updateTotalViewPage] = useState(0);
   const [loader, toggleLoader] = useState(false);
   const [currMonth, updateCurrMonth] = useState(1)
   const dark = useSelector((state) => state.home.dark);
@@ -513,9 +515,8 @@ const CacheStatus = () => {
       if (resJSON.status === 200) {
         toggleLoader(false)
         const pageViews = resJSON?.pageViewsArr;
-
-        console.log("pageViews",pageViews)
         updatePageViewData(pageViews);
+        updateTotalViewPage(pageViews?.length || 0)
         updateLastPurge(resJSON?.lastPurge);
       } else if (resJSON.status === 403) {
 
@@ -538,8 +539,6 @@ const CacheStatus = () => {
     fetchPageViewData();
     fetchConnectedWebsiteData();
   }, [])
-
-  console.log("lastPurge", lastPurge)
 
   return (
     loader ? <AnimatedLoader /> :
@@ -713,7 +712,7 @@ const CacheStatus = () => {
                       }}
                       className="text-[14px] font-bold tracking-wide text-[#0a0a1877]"
                     >
-                      {pageViewData?.length} Page View{pageViewData?.length > 1 ? 's' : ''}
+                      {totalPageView} Page View{totalPageView > 1 ? 's' : ''}
                     </p>
                   </div>
                   {/* <div className="laptop:w-[170px]  mobile:w-[100%] hover:bg-[#2FE49C] cursor-pointer mobile:mb-[10px] laptop:mb-0 h-[38px] bg-[#38F8AC] rounded-[3px] flex items-center justify-center text-[14px] font-bold tracking-wide">
@@ -723,6 +722,10 @@ const CacheStatus = () => {
                 </div>
 
                 <Table1 pageViewDataArr={pageViewData} lastPurge={lastPurge} />
+                {
+                  pageViewData?.length && <Pagination tableDataArr={pageViewData} updateTableDataArr={updatePageViewData} />
+                }
+                
               </div>
             )}
             {current === 1 && (

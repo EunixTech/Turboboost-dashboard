@@ -58,6 +58,7 @@ const Integrations = () => {
                         title={featuredIntegration?.name}
                         connect={featuredIntegration?.isConnected}
                         sub={featuredIntegration?.desc}
+                        connectURL={featuredIntegration?.connectURL}
                       />
                     })
                   }
@@ -143,6 +144,7 @@ const Integrations = () => {
                           title={featuredIntegration?.name}
                           connect={featuredIntegration?.isConnected}
                           sub={featuredIntegration?.desc}
+                          connectURL={featuredIntegration?.connectURL}
                         />
                       })
                     }
