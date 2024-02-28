@@ -723,7 +723,7 @@ const CacheStatus = () => {
 
                 <Table1 pageViewDataArr={pageViewData} lastPurge={lastPurge} />
                 {
-                  (totalPageView?.length && totalPageView >25) && <Pagination tableDataArr={pageViewData} updateTableDataArr={updatePageViewData} />
+                  (pageViewData?.length && totalPageView > 25) && <Pagination tableDataArr={pageViewData} updateTableDataArr={updatePageViewData} totalCount={totalPageView} />
                 }
                 
               </div>

@@ -4,14 +4,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 
-const Pagination = ({ tableDataArr = [], updateTableDataArr }) => {
+const Pagination = ({ tableDataArr = [], updateTableDataArr , totalCount}) => {
 
   const PageSize = 25; // Number of items to display per page
   const IntervalSize = 25; // Number of years per interval
   
   const [currentPage, setCurrentPage] = useState(1);
   const [totalIntervals, setTotalIntervals] = useState(1);
-  const [tabCount, updateTabCount] = useState(3);
+  const [tabCount, updateTabCount] = useState(2);
   const [data, updateData] = useState(tableDataArr);
 
   const dark = useSelector((state) => state.home.dark);
@@ -27,12 +27,6 @@ const Pagination = ({ tableDataArr = [], updateTableDataArr }) => {
   const nextPage = () => {
     const dd= totalIntervals-3
 
-    console.log("totalIntervals", totalIntervals)
-    console.log("tabCount", tabCount)
-
-    if (dd !==tabCount) {
-       updateTabCount(tabCount + 1)
-    }
     updateTableDataArr(currentPageData)
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   };
@@ -58,10 +52,29 @@ const Pagination = ({ tableDataArr = [], updateTableDataArr }) => {
     await setCurrentPage(tabNumber);
     await updateTableDataArr(data.slice(newStartIndex, newEndIndex + 1));
   
-    if (tabNumber >= 3 && changeType === 1 && totalIntervals - 3 !== tabNumber) {
+    if (tabNumber >= 3 && changeType === 1 && totalIntervals - 3 !== tabNumber && tabCount > 10) {
       await updateTabCount(tabNumber + 1);
     }
   };
+
+   useEffect(() => {
+    // Calculate tab count based on totalCount
+    let tabCountToBe = 1;
+    if (totalCount > 25) tabCountToBe = 2;
+    if (totalCount > 50) tabCountToBe = 3;
+    if (totalCount > 75) tabCountToBe = 4;
+    if (totalCount > 100) tabCountToBe = 5;
+    if (totalCount > 125) tabCountToBe = 6;
+    if (totalCount > 150) tabCountToBe = 7;
+    if (totalCount > 175) tabCountToBe = 8;
+      if (totalCount > 200) tabCountToBe = 9;
+         if (totalCount > 225) tabCountToBe = 10;
+           if (totalCount > 250) tabCountToBe = 3;
+    updateTabCount(tabCountToBe);
+
+    // Update data when tableDataArr changes
+    // setData(tableDataArr);
+  }, [tableDataArr, totalCount]);
   
 
   // const handleTabClick = async (tabNumber, changeType) => {
@@ -73,7 +86,7 @@ const Pagination = ({ tableDataArr = [], updateTableDataArr }) => {
   //   await updateTableDataArr(currentPageData)
   //   const dd= totalIntervals-3
 
-  //   if (tabNumber >= 3 && changeType === 1 && dd !==tabNumber) {
+  //   if (tabNumber >= 3 && changeType === 1 && dd !==tabNumber && totalCount > 225) {
   //     await updateTabCount(tabNumber + 1)
   //   }
   // };
@@ -102,32 +115,37 @@ const Pagination = ({ tableDataArr = [], updateTableDataArr }) => {
       );
     }
     // Dots
-    if (totalIntervals > tabCount) {
-      tabs.push(<div style={{
-        display: "flex",
-        justifyContent: "end",
-        padding: "10px",
-        color: dark ? "#fff" : "#000",
 
-      }} className='flex justify-center items-center'>
-        ...
-      </div>);
-    }
-    // Last three tabs
-    for (let i = totalIntervals - 2; i <= totalIntervals; i++) {
-      tabs.push(
-        <p
-          key={i}
-          style={{
+      if ( totalCount > 225) {
+        if (totalIntervals > tabCount) {
+          tabs.push(<div style={{
+            display: "flex",
+            justifyContent: "end",
+            padding: "10px",
             color: dark ? "#fff" : "#000",
-          }}
-          onClick={() => handleTabClick(i, 2)}
-          className={`border-[1px] text-[15px] border-[#EBEBEB] rounded-[3px] px-[15px] py-[8px] flex justify-center items-center cursor-pointer ${currentPage === i ? "bg-[#2fe49c]" : ""}`}
-        >
-          {i}
-        </p>
-      );
-    }
+    
+          }} className='flex justify-center items-center'>
+            ...
+          </div>);
+        }
+        for (let i = totalIntervals - 2; i <= totalIntervals; i++) {
+          tabs.push(
+            <p
+              key={i}
+              style={{
+                color: dark ? "#fff" : "#000",
+              }}
+              onClick={() => handleTabClick(i, 2)}
+              className={`border-[1px] text-[15px] border-[#EBEBEB] rounded-[3px] px-[15px] py-[8px] flex justify-center items-center cursor-pointer ${currentPage === i ? "bg-[#2fe49c]" : ""}`}
+            >
+              {i}
+            </p>
+          );
+        }
+      }
+    
+    // Last three tabs
+   
     return tabs;
   };
 
@@ -146,6 +164,7 @@ const Pagination = ({ tableDataArr = [], updateTableDataArr }) => {
       }} className='border-[1px] h-[40px] cursor-pointer text-[15px] border-[#EBEBEB] rounded-[3px] px-[15px] py-[8px] flex justify-center items-center' onClick={prevPage} disabled={currentPage === 1}>
         Previous
       </p>
+      
       <div className="tabs flex justify-center items-center">
         {renderTabs()}
       </div>

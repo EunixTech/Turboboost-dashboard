@@ -461,7 +461,7 @@ const TableItem = ({ item, s_no }) => {
   );
 };
 
-const Table = ({ assetsDataArr, assetsData, originalArr, updateAssetsArr, setSelected1 }) => {
+const Table = ({ assetsDataArr, assetsData, originalArr, updateAssetsArr, setSelected1, totalAssets }) => {
   const arr = [1, 2, 3, 4];
 
 
@@ -513,7 +513,7 @@ const Table = ({ assetsDataArr, assetsData, originalArr, updateAssetsArr, setSel
           );
         })}
       </div>
-      <Pagination tableDataArr={assetsData} updateTableDataArr={updateAssetsArr} />
+      <Pagination tableDataArr={assetsData} updateTableDataArr={updateAssetsArr} totalCount={totalAssets} />
     </div>
   );
 };
@@ -523,6 +523,7 @@ const CacheStatus = () => {
   const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const [assetsArr, updateAssetsArr] = useState([]);
+  const [totalAssets, updateTotalAssets] = useState(0);
   const [assetsData, updateAssetsData] = useState({});
   const [filterKeys, updateFilterKeys] = useState({
     searchByType: "All",
@@ -545,6 +546,7 @@ const CacheStatus = () => {
         const assetsDataObj = resData?.assets;
         updateAssetsData(assetsDataObj)
         updateAssetsArr(assetsDataObj?.assetFileArr)
+        updateTotalAssets(assetsDataObj?.assetFileArr?.length)
         toggleLoader(false);
 
       } else if (resData.status === 403) {
@@ -892,7 +894,7 @@ const CacheStatus = () => {
                 </div>
               </div>
               <Filter handleFilter={handleFilter} searchBy={searchBy} updateSearchBy={updateSearchBy} updateAssetsArr={updateAssetsArr} assetsData={assetsData} handlingApplyFilter={handlingApplyFilter} />
-              {assetsArr?.length ? <Table assetsData={assetsArr} originalArr ={assetsData} updateAssetsArr ={updateAssetsArr} setSelected1={setSelected} /> : <>
+              {assetsArr?.length ? <Table assetsData={assetsArr} originalArr ={assetsData} updateAssetsArr ={updateAssetsArr} setSelected1={setSelected} totalAssets={totalAssets} /> : <>
               <div style={{
                 display:"flex",
                 justifyContent:"center",
