@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux"; // Import useDispatch
+import { loginWithEmail } from "../slice/loginWithEmailSlice"; // Import your auth slice
 import FormikInput from "../components/forms/FormikInput";
 import GoogleLoginButton from "../components/button/GoogleLogin";
-import axios from "axios";
 import toast from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
@@ -15,28 +16,13 @@ const validationSchema = Yup.object().shape({
 
 const NitroPack = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState(""); // State to store the email
+  const dispatch = useDispatch(); // Get the dispatch function from Redux
 
   const handleFormSubmit = async (enteredEmail) => {
-    // Call the loginWithEmail API here
+    // Dispatch the loginWithEmail action
     try {
-      const response = await axios.post(
-        "http://localhost:8000/v1/api/wordpress/auth/login-with-email",
-        {
-          email_address: enteredEmail,
-        }
-      );
-  
-      // Handle the response based on your requirement
-      console.log(response.data); // Log the response for now
-  
-      if (response.data.message === "No account exists with this email address") {
-        // Handle the case where no account exists
-        toast.error("No account exists with this email address.");
-        return;
-      }
-  
-      // If not, proceed as usual
+      await dispatch(loginWithEmail(enteredEmail));
+      // If the action dispatch is successful, navigate to the desired page
       navigate("/verifiy-email-otp");
     } catch (error) {
       console.error("Error calling loginWithEmail API:", error);
@@ -44,7 +30,6 @@ const NitroPack = () => {
       toast.error("Failed to login. Please try again later.");
     }
   };
-  
 
   const handleContinueClick = (enteredEmail) => {
     // Validate the email before proceeding
@@ -52,8 +37,6 @@ const NitroPack = () => {
       toast.error("Please enter a valid email address.");
       return;
     }
-    // Set the email state
-    setEmail(enteredEmail);
     // Call the handleFormSubmit function to initiate the API call
     handleFormSubmit(enteredEmail);
   };
@@ -123,6 +106,5 @@ const NitroPack = () => {
     </div>
   );
 };
-
 
 export default NitroPack;

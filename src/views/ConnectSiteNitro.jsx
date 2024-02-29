@@ -4,9 +4,8 @@ import * as Yup from "yup";
 import FormikInput from "../components/forms/FormikInput";
 import GoogleLoginButton from "../components/button/GoogleLogin";
 import TitleManager from "../components/TitleManager";
-import axios from "axios";
-import appURLs from "../appURL";
-import getFetchConfig from "../utils/getFetchConfig";
+import { useDispatch } from "react-redux";
+import { connectSite } from "../slice/siteSlice";
 import toast from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
@@ -17,37 +16,21 @@ const validationSchema = Yup.object().shape({
   sitePlatform: Yup.string().required("Site Platform is required"),
   subscription: Yup.string().required("Subscription option is required"),
 });
-
 const ConnectSiteNitro = () => {
-  const fetchConfig = getFetchConfig();
-  const appURL = appURLs();
-
   const [showAllPlans, setShowAllPlans] = useState(false);
+  const dispatch = useDispatch();
 
   const handleFormSubmit = async (values) => {
-    // try {
-    //   const authResponse = await axios.post(
-    //     `${appURL}/api/shopify/shopify-auth`,
-    //     {
-    //       site_url: values.siteURL,
-    //       site_name: values.siteName,
-    //       site_platform: values.sitePlatform,
-    //       subscription: values.subscription,
-    //     },
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   const resJSON = authResponse?.data;
-    //   const redirectURL = resJSON.redirectURI;
-    //   if (resJSON.status === 200) {
-    //     window.location.href = redirectURL;
-    //   } else {
-    //     return toast.error(resJSON.message);
-    //   }
-    // } catch (error) {
-    //   console.error("Error fetching user profile data:", error);
-    // }
+    try {
+      const response = await dispatch(connectSite(values));
+      console.log(response.payload);
+      toast.success("Site connected successfully");
+      // Optionally, redirect the user to another page upon successful submission
+      // navigate("/success-page");
+    } catch (error) {
+      console.error("Error connecting site:", error);
+      toast.error("Failed to connect site");
+    }
   };
 
   return (

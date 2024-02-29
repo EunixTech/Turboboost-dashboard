@@ -1,36 +1,22 @@
 import React, { useState } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import OtpInput from "react-otp-input";
-
-const validationSchema = Yup.object().shape({
-  otp: Yup.string()
-    .matches(/^\d{6}$/, "OTP must be a 6-digit number")
-    .required("OTP is required"),
-});
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { verifyOTP } from "../slice/verifyOtpSlice";
 
 const OTPComponent = () => {
-  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [otp, setOtp] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/v1/api/wordpress/auth/verify-otp",
-        { otp }
-      );
-      console.log(response.data); // Log the response for now
-
-      if (response.data.message === "OTP verified successfully") {
-        navigate("/connect-site");
-      } else {
-        console.error("OTP verification failed:", response.data.message);
-      }
+      await dispatch(verifyOTP(otp));
+      navigate("/connect-site");
     } catch (error) {
-      console.error("Error verifying OTP:", error);
+      setError(error.response.data.message);
     }
   };
 
@@ -41,14 +27,13 @@ const OTPComponent = () => {
       </div>
 
       <h3 className="mt-[10px] flex p-[10px]">
-        Check your email for a code. We've sent a 6-digit code to your email.
-        Please check your inbox.
+        Check your email for a code We've sent a 6-digit code to email. Please
+        check your email inbox.
       </h3>
-
+      <p className="mb-[10px]">{error && <div>{error}</div>}</p>
       <Formik
         initialValues={{ otp: "" }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={() => handleSubmit()}
       >
         {({ isSubmitting }) => (
           <Form>
@@ -57,26 +42,17 @@ const OTPComponent = () => {
                 value={otp}
                 onChange={setOtp}
                 numInputs={6}
-                isInputNum
-                inputStyle={{
-                  width: "3rem",
-                  height: "3rem",
-                  fontSize: "2rem",
-                  margin: "0 1rem",
-                  borderRadius: "4px",
-                  border: "1px solid #ced4da",
-                  textAlign: "center",
-                }}
+                renderSeparator={<span>-</span>}
+                renderInput={(props) => (
+                  <input {...props} style={{ width: "4em", color: '#000' }} />
+                )}
               />
             </div>
             <ErrorMessage name="otp" component="div" />
-            <p className="flex justify-center">
-              {/* Conditional rendering of "Re-send code" message */}
-              {isSubmitting && <span>Re-send code</span>}
-            </p>
+            <p className="flex justify-center">Re-send code</p>
             <button
               type="submit"
-              disabled={isSubmitting || submitting}
+              disabled={isSubmitting}
               className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
             >
               <span className="translate-y-[1.5px] text-[16px]">Submit</span>
