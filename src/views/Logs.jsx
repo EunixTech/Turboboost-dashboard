@@ -355,14 +355,14 @@ const Navigator = ({ current, setCurrent }) => {
 };
 
 const InputDate = ({ currMonth, updateCurrMonth }) => {
-  const [curr, setCurr] = useState(1);
+  const [curr, setCurr] = useState(currMonth);
   const [hover, setHover] = useState(false);
   const [clicked, setClicked] = useState(false);
 
   const list = [
     "Jan",
     "Feb",
-    // "March",
+    "March",
     // "April",
     // "May",
     // "June",
@@ -459,7 +459,7 @@ const InputDate = ({ currMonth, updateCurrMonth }) => {
       </div>
       <div style={{
         cursor: "pointer"
-      }} onClick={() => updateCurrMonth(1)} className="w-[30px] shrink-0 h-[30px] bg-[#0A0A18] flex rounded-[3px] items-center justify-center">
+      }} onClick={() => updateCurrMonth(2)} className="w-[30px] shrink-0 h-[30px] bg-[#0A0A18] flex rounded-[3px] items-center justify-center">
         <img src="/graphic/logs/refresh.svg" className="w-[15px]" alt="" />
       </div>
     </div>
@@ -471,7 +471,7 @@ const CacheStatus = () => {
   const [pageViewData, updatePageViewData] = useState([]);
    const [totalPageView, updateTotalViewPage] = useState(0);
   const [loader, toggleLoader] = useState(false);
-  const [currMonth, updateCurrMonth] = useState(1)
+  const [currMonth, updateCurrMonth] = useState(2)
   const dark = useSelector((state) => state.home.dark);
 
   const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
