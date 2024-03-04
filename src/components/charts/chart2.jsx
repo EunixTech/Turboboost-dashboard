@@ -40,7 +40,6 @@ const DemoLine = ({ currMonth }) => {
     xField: "day",
     yField: "count",
     xAxis: {
-      min:1,
       tickLine: { length: 1 },
       range: [0, 1],
       label: {

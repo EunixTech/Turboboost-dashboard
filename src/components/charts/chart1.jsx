@@ -39,15 +39,14 @@ const DemoLine = () => {
     xField: "day",
     yField: "count",
     xAxis: {
-      min:1,
       tickLine: { length: 1 },
       range: [0, 1],
       label: {
-        formatter: (text) => `${parseInt(text)}`, // Add 1 to the x-axis label
+        formatter: (text) => `${parseInt(text)}`, // Remove +1 to the x-axis label
       },
-      tickCount: data.length+1, // Ensure there's a tick for each data point
+      tickCount: data.length, // Ensure there's a tick for each data point
       nice: true, //
-      width: "30px", // Add width for xAxis 80%
+      width: "80%", // Change width for xAxis to 80%
     },
     seriesField: "name",
     isStack: false,
@@ -93,6 +92,4 @@ const DemoLine = () => {
 };
 
 export default DemoLine;
-
-
 
