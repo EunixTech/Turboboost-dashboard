@@ -108,7 +108,6 @@ const App = () => {
       if (resJSON.status === 200) {
 
         const dataObj = resJSON?.optimizationHandlers?.dataArr;
-
         dispatch(setToggle({ key: "delayScripts", value: dataObj?.delay_js_resources?.value }));
         dispatch(setToggle({ key: "minifyJSFile", value: dataObj?.minify_js_code?.value }));
         dispatch(setToggle({ key: "lazyLoading", value: dataObj?.lazy_loading?.value }));
