@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import FormikInput from "../components/forms/FormikInput";
-import GoogleLoginButton from "../components/button/GoogleLogin";
-import TitleManager from "../components/TitleManager";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLocation } from "react-router-dom";
+import { PostAxiosConfig } from "../utils/axiosConfig";
+import appURLs from "../appURL";
 
 const validationSchema = Yup.object().shape({
   siteURL: Yup.string()
@@ -22,6 +22,8 @@ const ConnectSiteNitro = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
   const [websiteName, setWebsiteName] = useState("")
   const location = useLocation()
+
+  const appURL = appURLs();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -66,7 +68,7 @@ const ConnectSiteNitro = () => {
       const body = { siteURL, siteName, sitePlatform, plan }; // Update 'subscription' to 'plan'
       const headers = { "Content-Type": "application/json" };
 
-      const response = await fetch("http://localhost:8000/v1/api/wordpress/auth/create-checkout-session", {
+      const response = await fetch(`${appURL}/api/wordpress/auth/create-checkout-session`, {
         method: "POST",
         headers: {
           ...headers,
