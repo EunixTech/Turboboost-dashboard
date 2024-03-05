@@ -68,7 +68,10 @@ const ConnectSiteNitro = () => {
 
       const response = await fetch("http://localhost:8000/v1/api/wordpress/auth/create-checkout-session", {
         method: "POST",
-        headers: headers,
+        headers: {
+          ...headers,
+          credentials: "same-origin",
+        },
         body: JSON.stringify(body),
       });
 

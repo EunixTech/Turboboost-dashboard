@@ -9,7 +9,8 @@ export const loginWithEmail = createAsyncThunk(
     try {
       const response = await axios.post(
         'http://localhost:8000/v1/api/wordpress/auth/login-with-email',
-        { email_address: email }
+        { email_address: email },
+        { withCredentials: true }
       );
       return response.data;
     } catch (error) {
