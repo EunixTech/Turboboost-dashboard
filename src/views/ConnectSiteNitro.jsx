@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import FormikInput from "../components/forms/FormikInput";
 import GoogleLoginButton from "../components/button/GoogleLogin";
 import TitleManager from "../components/TitleManager";
 import { loadStripe } from "@stripe/stripe-js";
+import { useLocation } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   siteURL: Yup.string()
@@ -15,9 +16,24 @@ const validationSchema = Yup.object().shape({
   subscription: Yup.string().required("Subscription option is required"),
 });
 
+
 const ConnectSiteNitro = () => {
   const [showAllPlans, setShowAllPlans] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
+  const [websiteName, setWebsiteName] = useState("")
+  const location = useLocation()
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const url = searchParams.get("http://localhost/turbo-boost");
+    const name = searchParams.get("turboboost");
+    if (url && name) {
+      setWebsiteName(name);
+      // You can set other state variables here if needed
+    }
+  }, [location]);
+
+
   const getPrice = (selectedPlan) => {
     // Implement logic to get the price based on the selected plan
     // For example:
@@ -77,10 +93,10 @@ const ConnectSiteNitro = () => {
   return (
     <div className="flex items-center justify-center h-screen m-[10px]">
       <div className="w-full max-w-lg h-[80vh] overflow-y-scroll">
-        <Formik
+      <Formik
           initialValues={{
-            siteURL: "",
-            siteName: "",
+            siteURL: "https://dashboard.turbo-boost.io/", 
+            siteName: "Turboboost", // Prefill with obtained website name
             sitePlatform: "",
             subscription: "",
           }}
@@ -122,8 +138,6 @@ const ConnectSiteNitro = () => {
                     Select a platform
                   </option>
                   <option value="WordPress">WordPress</option>
-                  <option value="Shopify">Shopify</option>
-                  <option value="React">React</option>
                 </Field>
                 <ErrorMessage
                   name="sitePlatform"

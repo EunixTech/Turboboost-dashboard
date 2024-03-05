@@ -149,7 +149,7 @@ const App = () => {
       const isLoginRoute = window.location.pathname === '/login-shopify';
       const isNitroPackRoute = window.location.pathname === '/auth-integration';
       const isConnectSiteNitro = window.location.pathname === '/connector/website-connect';
-      const isNitroOtp = window.location.pathname === '/nitro-otp';
+      const isNitroOtp = window.location.pathname === '/auth/opt-verification';
 
       if (!authToken && !isLoginRoute && !userToken1 && !isNitroPackRoute && !isConnectSiteNitro && !isNitroOtp) {
         window.location.replace('/login-shopify');
