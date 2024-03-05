@@ -9,9 +9,10 @@ const Otpverification = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission with the code state
     console.log('Submitted code:', code);
   };
+
+
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
