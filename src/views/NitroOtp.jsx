@@ -4,6 +4,7 @@ import OtpInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { verifyOTP } from "../slice/verifyOtpSlice";
+import { toast } from "react-toastify"; // Import toast library
 
 const OTPComponent = () => {
   const navigate = useNavigate();
@@ -11,15 +12,18 @@ const OTPComponent = () => {
   const [otp, setOtp] = useState("");
   const [error, setError] = useState(null);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (values) => {
     try {
-      await dispatch(verifyOTP(otp));
+      const { email } = values; // Extract email from form values
+      await dispatch(verifyOTP({ email, otp })); // Send email and OTP to verifyOTP action
       navigate("/connect-site");
     } catch (error) {
       setError(error.response.data.message);
+      toast.error("Entered OTP is invalid"); // Show toast message for invalid OTP
+      setOtp("");
     }
   };
-
+  
   return (
     <div className="otp-container">
       <div className="flex justify-center">
@@ -32,8 +36,8 @@ const OTPComponent = () => {
       </h3>
       <p className="mb-[10px]">{error && <div>{error}</div>}</p>
       <Formik
-        initialValues={{ otp: "" }}
-        onSubmit={() => handleSubmit()}
+        initialValues={{ email: "", otp: "" }} // Add email field to initialValues
+        onSubmit={(values) => handleSubmit(values)} // Pass form values to handleSubmit
       >
         {({ isSubmitting }) => (
           <Form>
