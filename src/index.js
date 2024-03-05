@@ -33,6 +33,7 @@ import NitroPack from "./views/NitroPack.jsx";
 import ConnectSiteNitro from "./views/ConnectSiteNitro.jsx";
 import NitroOtp from "./views/NitroOtp.jsx";
 import { setDark } from "./services/home";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const router = [
   {
@@ -204,9 +205,11 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
+  <GoogleOAuthProvider  clientId={`ENTER_YOUR_CLIENTID`}> 
     <BrowserRouter>
       <App />
-      <Toaster position="top-right" reverseOrder={false} />
     </BrowserRouter>
-  </Provider>
+  </GoogleOAuthProvider>
+  <Toaster position="top-right" reverseOrder={false} />
+</Provider>
 );

@@ -4,10 +4,7 @@ import * as Yup from "yup";
 import FormikInput from "../components/forms/FormikInput";
 import GoogleLoginButton from "../components/button/GoogleLogin";
 import TitleManager from "../components/TitleManager";
-import axios from "axios";
-import appURLs from "../appURL";
-import getFetchConfig from "../utils/getFetchConfig";
-import toast from "react-hot-toast";
+import { loadStripe } from "@stripe/stripe-js";
 
 const validationSchema = Yup.object().shape({
   siteURL: Yup.string()
@@ -19,36 +16,63 @@ const validationSchema = Yup.object().shape({
 });
 
 const ConnectSiteNitro = () => {
-  const fetchConfig = getFetchConfig();
-  const appURL = appURLs();
-
   const [showAllPlans, setShowAllPlans] = useState(false);
-
-  const handleFormSubmit = async (values) => {
-    // try {
-    //   const authResponse = await axios.post(
-    //     `${appURL}/api/shopify/shopify-auth`,
-    //     {
-    //       site_url: values.siteURL,
-    //       site_name: values.siteName,
-    //       site_platform: values.sitePlatform,
-    //       subscription: values.subscription,
-    //     },
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   const resJSON = authResponse?.data;
-    //   const redirectURL = resJSON.redirectURI;
-    //   if (resJSON.status === 200) {
-    //     window.location.href = redirectURL;
-    //   } else {
-    //     return toast.error(resJSON.message);
-    //   }
-    // } catch (error) {
-    //   console.error("Error fetching user profile data:", error);
-    // }
+  const [selectedPlan, setSelectedPlan] = useState("");
+  const getPrice = (selectedPlan) => {
+    // Implement logic to get the price based on the selected plan
+    // For example:
+    switch (selectedPlan) {
+      case "free":
+        return 0;
+      case "scale":
+        return 2;
+      // Add more cases as needed
+      default:
+        return 0; // Default to 0 if plan is not recognized
+    }
   };
+
+  const makePayment = async (values) => {
+    console.log("Values object:", values); // Log the values object before stringification
+    const { siteURL, siteName, sitePlatform, subscription } = values;
+
+    // Map the selected plan to the appropriate object structure
+    const plan = [
+      {
+        plan: selectedPlan, // Use the selected plan
+        price: getPrice(selectedPlan), // Implement getPrice function to get the price of the plan
+      },
+    ];
+
+    const stripe = await loadStripe("pk_test_51OpD6QSJz8rbJBHZieagAHv6P9mHF2YYSKtNdsQDkpxnOFkNHzCzVLxeWWyqG2M0KzSogYIOOIdQBmXgHUlFOwI500eI4vY8u8");
+
+    try {
+      const body = { siteURL, siteName, sitePlatform, plan }; // Update 'subscription' to 'plan'
+      const headers = { "Content-Type": "application/json" };
+
+      const response = await fetch("http://localhost:8000/v1/api/wordpress/auth/create-checkout-session", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      });
+
+      const session = await response.json();
+      console.log("Session object:", session); // Log the session object
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        console.log(result.error);
+      }
+
+      console.log("Data to send:", body); // Log the body data after the request is sent
+    } catch (error) {
+      console.error("Error making payment:", error);
+    }
+  };
+
+
 
   return (
     <div className="flex items-center justify-center h-screen m-[10px]">
@@ -61,13 +85,11 @@ const ConnectSiteNitro = () => {
             subscription: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={handleFormSubmit}
+          // onSubmit={handleFormSubmit}
         >
           {() => (
             <Form>
               <div className="flex justify-center">
-                {" "}
-                {/* Center the image horizontally */}
                 <img src="/logo-b.png" className="w-[150px]" alt="" />
               </div>
 
@@ -113,7 +135,6 @@ const ConnectSiteNitro = () => {
                   Choose a speed optimization subscription
                 </label>
 
-                {/* Show only one error message for subscription */}
                 <ErrorMessage
                   name="subscription"
                   component="div"
@@ -129,6 +150,7 @@ const ConnectSiteNitro = () => {
                           name="subscription"
                           value="free"
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
+                          onClick={() => setSelectedPlan("free")}
                         />
                         <div>
                           <p className="font-semibold text-lg">Free $0/mo</p>
@@ -146,32 +168,12 @@ const ConnectSiteNitro = () => {
                         <Field
                           type="radio"
                           name="subscription"
-                          value="free"
+                          value="scale"
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
+                          onClick={() => setSelectedPlan("scale")}
                         />
                         <div>
-                          <p className="font-semibold text-lg">
-                            Business <span>$21/mo</span> $0/mo
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            Standard features, 50k page views.
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            kickstart your page speed and core Web vitals.
-                          </p>
-                        </div>
-                      </label>
-                    </div>
-                    <div className="bg-gray-100 rounded-md p-4 mt-4">
-                      <label className="flex items-center">
-                        <Field
-                          type="radio"
-                          name="subscription"
-                          value="free"
-                          className="mr-2 h-4 w-4 border-gray-300 rounded"
-                        />
-                        <div>
-                          <p className="font-semibold text-lg">Free $0/mo</p>
+                          <p className="font-semibold text-lg">Scale $2/mo</p>
                           <p className="text-sm text-gray-600">
                             Standard features, 5k shared page views.
                           </p>
@@ -186,18 +188,37 @@ const ConnectSiteNitro = () => {
                         <Field
                           type="radio"
                           name="subscription"
-                          value="free"
+                          value="grow"
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
+                          onClick={() => setSelectedPlan("grow")}
                         />
                         <div>
-                          <p className="font-semibold text-lg">
-                            Business <span>$21/mo</span> $0/mo
-                          </p>
+                          <p className="font-semibold text-lg">Grow $5/mo</p>
                           <p className="text-sm text-gray-600">
-                            Standard features, 50k page views.
+                            Standard features, 5k shared page views.
                           </p>
                           <p className="text-xs text-gray-500">
-                            kickstart your page speed and core Web vitals.
+                            Great for starters, comes with a badge on your site.
+                          </p>
+                        </div>
+                      </label>
+                    </div>
+                    <div className="bg-gray-100 rounded-md p-4 mt-4">
+                      <label className="flex items-center">
+                        <Field 
+                          type="radio"
+                          name="subscription"
+                          value="pro"
+                          className="mr-2 h-4 w-4 border-gray-300 rounded"
+                          onClick={() => setSelectedPlan("pro")}
+                        />
+                        <div>
+                          <p className="font-semibold text-lg">Pro $10/mo</p>
+                          <p className="text-sm text-gray-600">
+                            Standard features, 5k shared page views.
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            Great for starters, comes with a badge on your site.
                           </p>
                         </div>
                       </label>
@@ -212,18 +233,15 @@ const ConnectSiteNitro = () => {
                           name="subscription"
                           value="free"
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
+                          onClick={() => setSelectedPlan("free")}
                         />
                         <div>
-                          <p className="font-semibold text-lg">
-                            Scale <span>$176 /mo</span> $146.67/mo
-                          </p>
+                          <p className="font-semibold text-lg">Free $0/mo</p>
                           <p className="text-sm text-gray-600">
-                            Font Subsetting, Adaptive image Sizing and 1M page
-                            views.
+                            Standard features, 5k shared page views.
                           </p>
                           <p className="text-xs text-gray-500">
-                            Gives you better Core Web Vitals and cheaper page
-                            views.
+                            Great for starters, comes with a badge on your site.
                           </p>
                         </div>
                       </label>
@@ -233,16 +251,17 @@ const ConnectSiteNitro = () => {
                         <Field
                           type="radio"
                           name="subscription"
-                          value="free"
+                          value="scale"
                           className="mr-2 h-4 w-4 border-gray-300 rounded"
+                          onClick={() => setSelectedPlan("scale")}
                         />
                         <div>
-                          <p className="font-semibold text-lg">Growth <span>$51/mo</span>  $0/mo</p>
+                          <p className="font-semibold text-lg">Scale $2/mo</p>
                           <p className="text-sm text-gray-600">
-                            Adaptive image sizing and 200k page views.
+                            Standard features, 5k shared page views.
                           </p>
                           <p className="text-xs text-gray-500">
-                            Gives you advanced speed and  optimization for growing sites.
+                            Great for starters, comes with a badge on your site.
                           </p>
                         </div>
                       </label>
@@ -261,20 +280,22 @@ const ConnectSiteNitro = () => {
                 )}
 
                 <button
-                  type="submit"
+                  // type="submit"
+                  onClick={makePayment}
                   className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
                 >
-                  <span className="translate-y-[1.5px] text-[16px]">Add</span>
-                </button>    
-                <p className="flex justify-center">You are logged in as email </p>
-                  <p className="flex justify-center">Switch account</p>
+                  <span className="translate-y-[1.5px] text-[16px]">make payment</span>
+                </button>
+
+                <p className="flex justify-center">You are logged in as email</p>
+                <p className="flex justify-center">Switch account</p>
               </div>
             </Form>
           )}
         </Formik>
       </div>
     </div>
-  );  
+  );
 };
 
 export default ConnectSiteNitro;

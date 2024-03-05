@@ -1,34 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux"; // Import useDispatch
+import { loginWithEmail } from "../slice/loginWithEmailSlice"; // Import your auth slice
 import FormikInput from "../components/forms/FormikInput";
 import GoogleLoginButton from "../components/button/GoogleLogin";
-import TitleManager from "../components/TitleManager";
-import axios from "axios";
-import appURLs from "../appURL";
-import getFetchConfig from "../utils/getFetchConfig";
 import toast from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
-  domain: Yup.string()
-    .matches(
-      /^(http|https)?:\/\/(www\.)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?|[\w-]+\.myshopify\.com$/,
-      "Invalid domain name format"
-    )
-    .required("email is required"),
+  email: Yup.string()
+    .email("Invalid email address format")
+    .required("Email is required"),
 });
 
 const NitroPack = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const dispatch = useDispatch(); // Get the dispatch function from Redux
 
-
-  const handleFormSubmit = async (values) => {
-
+  const handleFormSubmit = async (enteredEmail) => {
+    // Dispatch the loginWithEmail action
+    try {
+      await dispatch(loginWithEmail(enteredEmail));
+      // If the action dispatch is successful, navigate to the desired page
+      navigate("/verifiy-email-otp");
+    } catch (error) {
+      console.error("Error calling loginWithEmail API:", error);
+      // Handle the error, show toast message, etc.
+      toast.error("Failed to login. Please try again later.");
+    }
   };
 
-  const handleContinueClick = () => {
-    navigate("/verifiy-email-otp"); 
+  const handleContinueClick = (enteredEmail) => {
+    // Validate the email before proceeding
+    if (!enteredEmail || !Yup.string().email().isValidSync(enteredEmail)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    // Call the handleFormSubmit function to initiate the API call
+    handleFormSubmit(enteredEmail);
   };
 
   return (
@@ -36,16 +46,14 @@ const NitroPack = () => {
       <div className="w-full max-w-md">
         <Formik
           initialValues={{
-            domain: "",
+            email: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={handleFormSubmit}
+          onSubmit={() => {}} // No need to specify onSubmit here
         >
-          {() => (
+          {(formikProps) => (
             <Form>
               <div className="flex justify-center">
-                {" "}
-                {/* Center the image horizontally */}
                 <img src="/logo-b.png" className="w-[150px]" alt="" />
               </div>
 
@@ -65,13 +73,15 @@ const NitroPack = () => {
               <div className="mt-6">
                 <FormikInput
                   inputLabel="Enter your Email"
-                  inputName="domain"
+                  inputName="email"
                   inputType="email"
+                  value={formikProps.values.email}
+                  onChange={formikProps.handleChange}
                 />
 
                 <button
                   type="button"
-                  onClick={handleContinueClick}
+                  onClick={() => handleContinueClick(formikProps.values.email)}
                   className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
                 >
                   <span className="translate-y-[1.5px] text-[16px]">
