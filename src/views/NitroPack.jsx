@@ -23,7 +23,7 @@ const NitroPack = () => {
     try {
       await dispatch(loginWithEmail(enteredEmail));
       // If the action dispatch is successful, navigate to the desired page
-      navigate("/verifiy-email-otp");
+      navigate("/auth/opt-verification");
     } catch (error) {
       console.error("Error calling loginWithEmail API:", error);
       // Handle the error, show toast message, etc.

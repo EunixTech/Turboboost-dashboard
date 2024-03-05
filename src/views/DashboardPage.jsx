@@ -34,7 +34,7 @@ const GooglePageScore = ({ coreVitalsData, performanceData }) => {
         paddingTop:"20px",
         minHeight: "225px"
       }}
-      className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[25px] pt-[10px] border-[#EBEBEB]  rounded-[8px]"
+      className=" h-[100%] bg-[#fff] mobile:mb-[10px] laptop:mb-[0] border-[1px] px-[10px] pt-[10px] border-[#EBEBEB]  rounded-[8px]"
     >
       <div className="w-[100%]  flex items-center justify-between">
         <p
@@ -447,7 +447,7 @@ const Dashboard = () => {
                 >
                   Total Images
                 </p>
-                <Tooltip text="This indicates the percentage of image optimization achieved" />
+                <Tooltip text="This indicates the number of product images." />
               </div>
               <div className="flex mt-[6px] items-center">
                 <p
@@ -460,7 +460,7 @@ const Dashboard = () => {
                 </p>
                
               </div>
-              {
+              {/* {
                 imageData?.lastPurge ?
                   <div className="flex">
                     <p
@@ -481,7 +481,7 @@ const Dashboard = () => {
                     </p>
                   </div> : ``
 
-              }
+              } */}
 
             </div>
             <div
@@ -577,7 +577,7 @@ const Dashboard = () => {
                 >
                    Last Optimization
                 </p>
-                <Tooltip text="This information reflects the last time optimization was performed" />
+                <Tooltip text="This reflects the last time optimization was performed" />
               </div>
               <div className="flex mt-[6px] items-center">
                 <p
@@ -597,7 +597,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#0a0a187e] f2 mr-[2px] text-[14px] tracking-wide font-bold"
                 >
-                 previous optimization:
+                 On: 
                 </p>
                 <p
                   style={{
@@ -660,7 +660,7 @@ const Dashboard = () => {
               <div className="w-[100%] justify-center items-center flex h-[130px] mt-[20px]">
 
                 <CustomDonutChart imageData={imageData} />
-                <div className="max-w-[250px] w-[50%] ml-auto">
+                <div className="max-w-[250px] w-[50%] ml-auto pl-[15px]">
                   <div className="flex items-center mb-[4px] justify-between">
                     <div className="flex items-center">
 

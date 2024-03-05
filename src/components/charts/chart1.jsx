@@ -33,19 +33,20 @@ const DemoLine = () => {
 
 
   const dark = useSelector((state) => state.home.dark);
-
+ 
   const config = {
     data,
     xField: "day",
     yField: "count",
     xAxis: {
-      tickLine: { length: 0 },
+      tickLine: { length: 1 },
       range: [0, 1],
       label: {
-        formatter: (text) => `${parseInt(text) + 1}`, // Add 1 to the x-axis label
+        formatter: (text) => `${parseInt(text)}`, // Remove +1 to the x-axis label
       },
       tickCount: data.length, // Ensure there's a tick for each data point
       nice: true, //
+      width: "80%", // Change width for xAxis to 80%
     },
     seriesField: "name",
     isStack: false,
@@ -82,15 +83,13 @@ const DemoLine = () => {
     console.log(e, 141132534242);
     return {
       fill: "l(270) 0:#ffffff50 0.5:#38F8AC80 1:#38F8AC",
+      width: "70%", // Add width 90%
     };
   },
     color: ["#38F8AC"],
   };
-
   return <Area {...config} />;
 };
 
 export default DemoLine;
-
-
 

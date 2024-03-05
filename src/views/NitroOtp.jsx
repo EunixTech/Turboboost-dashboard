@@ -16,7 +16,7 @@ const OTPComponent = () => {
     try {
       const { email } = values; // Extract email from form values
       await dispatch(verifyOTP({ email, otp })); // Send email and OTP to verifyOTP action
-      navigate("/connect-site");
+      navigate("/connector/website-connect");
     } catch (error) {
       setError(error.response.data.message);
       toast.error("Entered OTP is invalid");

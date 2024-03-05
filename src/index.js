@@ -138,10 +138,6 @@ const App = () => {
 
   useEffect(() => {
 
-    //     if(localStorage.getItem("dark")){
-    //   dispatch(setDark(true))
-    // }
-
 
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
@@ -152,8 +148,8 @@ const App = () => {
       const userToken1 = urlParams.get("userToken");
       const authToken = localStorage.getItem('authToken');
       const isLoginRoute = window.location.pathname === '/login-shopify';
-      const isNitroPackRoute = window.location.pathname === '/nitro-pack';
-      const isConnectSiteNitro = window.location.pathname === '/connect-site';
+      const isNitroPackRoute = window.location.pathname === '/auth-integration';
+      const isConnectSiteNitro = window.location.pathname === '/connector/website-connect';
       const isNitroOtp = window.location.pathname === '/nitro-otp';
 
       if (!authToken && !isLoginRoute && !userToken1 && !isNitroPackRoute && !isConnectSiteNitro && !isNitroOtp) {
@@ -171,7 +167,7 @@ const App = () => {
       {showOnboardingModal && <NewOnboard />}
       {!(
 
-        location.pathname === "/login-shopify" || location.pathname === "/nitro-pack" || location.pathname === "/connect-site" || location.pathname === "/verifiy-email-otp"
+        location.pathname === "/login-shopify" || location.pathname === "/auth-integration" || location.pathname === "/connector/website-connect" || location.pathname === "/auth/opt-verification"
       ) && (
           <HomeLayout>
             <Routes>
@@ -187,9 +183,9 @@ const App = () => {
       <Routes>
 
         <Route path={"/login-shopify"} element={<SignInRoute />} />
-        <Route path={"/nitro-pack"} element={<NitroPack />} />
-        <Route path={"/connect-site"} element={<ConnectSiteNitro />} />
-        <Route path={"/verifiy-email-otp"} element={<NitroOtp />} />
+        <Route path={"/auth-integration"} element={<NitroPack />} />
+        <Route path={"/connector/website-connect"} element={<ConnectSiteNitro />} />
+        <Route path={"/auth/opt-verification"} element={<NitroOtp />} />
 
       </Routes>
 

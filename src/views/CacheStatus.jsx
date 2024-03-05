@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
 import { GetAxiosConfig } from "../utils/axiosConfig.js";
 import { setToggle } from "../slice/statusToggleSlice";
+import Pagination from "../components/pagination/Pagination.jsx";
 
 const Button = ({ updateSearchBy, clearFilterHandler }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -460,7 +461,7 @@ const TableItem = ({ item, s_no }) => {
   );
 };
 
-const Table = ({ assetsDataArr, assetsData, setSelected1 }) => {
+const Table = ({ assetsDataArr, assetsData, originalArr, updateAssetsArr, setSelected1, totalAssets }) => {
   const arr = [1, 2, 3, 4];
 
 
@@ -512,6 +513,7 @@ const Table = ({ assetsDataArr, assetsData, setSelected1 }) => {
           );
         })}
       </div>
+      <Pagination tableDataArr={assetsData} updateTableDataArr={updateAssetsArr} totalCount={totalAssets} />
     </div>
   );
 };
@@ -521,12 +523,13 @@ const CacheStatus = () => {
   const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const [assetsArr, updateAssetsArr] = useState([]);
+  const [totalAssets, updateTotalAssets] = useState(0);
   const [assetsData, updateAssetsData] = useState({});
   const [filterKeys, updateFilterKeys] = useState({
     searchByType: "All",
     AssetsType: "All",
     Status: "All",
-    resultPerPage: "All"
+    resultPerPage: 25
   })
   const [searchBy, updateSearchBy] = useState("");
   const dispatch = useDispatch();
@@ -543,6 +546,7 @@ const CacheStatus = () => {
         const assetsDataObj = resData?.assets;
         updateAssetsData(assetsDataObj)
         updateAssetsArr(assetsDataObj?.assetFileArr)
+        updateTotalAssets(assetsDataObj?.assetFileArr?.length)
         toggleLoader(false);
 
       } else if (resData.status === 403) {
@@ -731,11 +735,6 @@ const CacheStatus = () => {
 
   }
 
-  const handleReOptimization = () => {
-    fetchAssetsOptimizationData();
-  }
-
-
   return (
     loader ?
       <AnimatedLoader /> :
@@ -890,25 +889,12 @@ const CacheStatus = () => {
                       1,357 Results
                     </p>
                   )}
-                  {/* <div
-                  style={{
-                    backgroundColor:
-                      selected.length > 0 ? "#F87238" : "#FF465C",
-                  }}
-                  className="h-[38px] rounded-[5px] flex items-center cursor-pointer text-[#fff] font-medium text-[12px] px-[14px] justify-center "
-                >
-                  <img
-                    src="/graphic/status/del.svg"
-                    className="w-[14px] mr-[4px]"
-                    alt=""
-                  />
-                  {selected.length > 0 ? "Purge Selected" : "Purge All Cache"}
-                </div> */}
+                  
                   <Button2 assetsOptimizationValue={assetsOptimizationValue} fetchAssetsOptimizationData={fetchAssetsOptimizationData} handleOptimizeAssets={handleOptimizeAssets} check={selected.length > 0} />
                 </div>
               </div>
               <Filter handleFilter={handleFilter} searchBy={searchBy} updateSearchBy={updateSearchBy} updateAssetsArr={updateAssetsArr} assetsData={assetsData} handlingApplyFilter={handlingApplyFilter} />
-              {assetsArr?.length ? <Table assetsData={assetsArr} setSelected1={setSelected} /> : <>
+              {assetsArr?.length ? <Table assetsData={assetsArr} originalArr ={assetsData} updateAssetsArr ={updateAssetsArr} setSelected1={setSelected} totalAssets={totalAssets} /> : <>
               <div style={{
                 display:"flex",
                 justifyContent:"center",
