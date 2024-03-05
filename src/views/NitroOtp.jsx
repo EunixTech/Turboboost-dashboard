@@ -19,7 +19,8 @@ const OTPComponent = () => {
       navigate("/connect-site");
     } catch (error) {
       setError(error.response.data.message);
-      toast.error("Entered OTP is invalid"); // Show toast message for invalid OTP
+      toast.error("Entered OTP is invalid");
+       // Show toast message for invalid OTP
       setOtp("");
     }
   };
