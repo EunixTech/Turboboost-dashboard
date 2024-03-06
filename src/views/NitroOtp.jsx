@@ -31,8 +31,8 @@ const OTPComponent = () => {
         <img src="/logo-b.png" className="w-[150px]" alt="" />
       </div>
 
-      <h3 className="mt-[10px] flex p-[10px]">
-        Check your email for a code We've sent a 6-digit code to email. Please
+      <h3 className="mt-[10px] flex p-[10px] text-center">
+        Check your email for a code We've sent a 6-digit code to email. <br /> Please
         check your email inbox.
       </h3>
       <p className="mb-[10px]">{error && <div>{error}</div>}</p>
@@ -54,7 +54,8 @@ const OTPComponent = () => {
               />
             </div>
             <ErrorMessage name="otp" component="div" />
-            <p className="flex justify-center">Re-send code</p>
+            <a href="#" className="flex justify-center text-[#38F8AC]">Re-send code</a>
+
             <button
               type="submit"
               disabled={isSubmitting}
