@@ -4,7 +4,7 @@ import React from "react";
 import { useField } from "formik";
 import { useSelector } from "react-redux";
 
-const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue, customClassName = "", themeMode = false }) => {
+const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue, customClassName = "", cFontSize ='16px', themeMode = false }) => {
   const [field, meta] = useField(inputName);
   const dark = useSelector((state) => state.home.dark);
   return (
@@ -17,7 +17,7 @@ const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue
       {inputType === "select" ? (
         <select
           {...field}
-          className="w-full border-[1px] border-[#EBEBEB] rounded-[4px] h-[38px] px-[12px] text-[13px] text-[#2F3A45] placeholder-[#969AA5] focus:outline-none focus:border-blue-500"
+          className="w-full border-[1px] border-[#EBEBEB] rounded-[4px] h-[38px] px-[12px] text-[13px] text-[#2F3A45] placeholder-[] focus:outline-none focus:border-blue-500"
         >
           <option value="" disabled>
             Select {inputLabel}
@@ -38,9 +38,10 @@ const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue
             borderColor: !themeMode ? (dark ? "#1F2329" : "#ebebeb") : "",
             color: dark ? "#fff" : "#000",
             backgroundColor: !themeMode ? (dark ? "#111317" : "#fff") : "#fff",
+            fontSize:{cFontSize}
           }}
          
-          className="w-[100%] border-[1px] outline-none rounded-[4px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px] mb-[-5px]"
+          className={`w-[100%] border-[1px] outline-none rounded-[4px] border-[#ebebeb] px-[10px] text-[${cFontSize}] font-medium mt-[7px] h-[38px] mb-[-5px]`}
         />
       )}
       {meta.touched && meta.error ? (

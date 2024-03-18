@@ -57,18 +57,18 @@ const NitroPack = () => {
                 <img src="/logo-b.png" className="w-[150px]" alt="" />
               </div>
 
-              <h1 className="text-[60px] mt-4 font-bold text-center hidden md:block">
+              <h1 className="text-[20px] mt-4 font-bold text-center hidden md:block">
                 Let's start with your email
               </h1>
-              <h1 className="text-[36px] mt-4 font-bold text-center md:hidden">
+              <h1 className="text-[24px] mt-4 font-bold text-center md:hidden">
                 Let's start with your email
               </h1>
-              <p className="text-[16px] text-center">
+              {/* <p className="text-[16px] text-center">
                 Please use your <strong>work email</strong>.
               </p>
               <p className="text-[16px] text-center">
                 If you already have a Turboboost account, use that email.
-              </p>
+              </p> */}
 
               <div className="mt-6">
                 <FormikInput
@@ -93,11 +93,11 @@ const NitroPack = () => {
                   <strong>OR</strong>
                 </p>
                 <GoogleLoginButton />
-                <p className="text-center mt-2">
+                {/* <p className="text-center mt-2">
                   By proceeding, you agree to the Terms of Use and the Privacy
                   Policy.
                 </p>
-                <p className="text-center mb-4">Contact us</p>
+                <p className="text-center mb-4">Contact us</p> */}
               </div>
             </Form>
           )}
