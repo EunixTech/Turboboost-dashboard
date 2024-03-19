@@ -903,7 +903,7 @@ const CacheStatus = () => {
               }}>
               <h1  style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",
-                    }}>Nothing show</h1>
+                    }}>Nothing to show yet - please optimize your store.</h1>
               </div>
               </>}
 
