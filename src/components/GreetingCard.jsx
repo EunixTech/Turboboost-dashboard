@@ -54,8 +54,9 @@ export default function GreetingCard() {
                 
                 updateUserName(full_name);
                 const websiteURL = user?.app_token?.shopify?.shop;
-                
-                window.Intercom("boot", {
+                console.log(resJSON?.hash)
+               if(resJSON?.hash){
+                 window.Intercom("boot", {
                   api_base: "https://api-iam.intercom.io",
                   app_id: "vr8qka5j",
                   name: full_name,
@@ -63,6 +64,7 @@ export default function GreetingCard() {
                   user_id: user?.id, // a UUID for your user
                   user_hash: resJSON?.hash // an Identity Verification user hash for your user
                 });
+               }
                 dispatch(setToggle({ key: "websiteURL", value: websiteURL }));
 
             }
