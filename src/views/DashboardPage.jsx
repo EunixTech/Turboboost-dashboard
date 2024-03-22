@@ -209,6 +209,10 @@ const Dashboard = () => {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
+      } else if (resJSON.status === 404) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
       } 
     } catch (error) {
       if (error?.response?.status === 401) {
@@ -240,7 +244,11 @@ const Dashboard = () => {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
-      } else {
+      }else if (resJSON.status === 404) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+      }  else {
         toogleLoadingAPI(false);
         // return toast.error("Please try again");
       }
@@ -268,6 +276,10 @@ const Dashboard = () => {
         updateHandlerData(OptimizationHandlerData);
         toogleLoading(false)
       } else if (resJSON.status === 403) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+      } else if (resJSON.status === 404) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
