@@ -533,6 +533,8 @@ const CacheStatus = () => {
         return toast.error("Please try again");
       }
     } catch (error) {
+      localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
       toggleLoader(false);
       console.error("Error fetching user profile data:", error);
     }

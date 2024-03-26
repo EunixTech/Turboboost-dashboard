@@ -126,16 +126,15 @@ export default function SidebarCard({cancel}) {
           window.location.replace('/login-shopify');
   
         }else if (resJSON.status === 404) {
-
+          console.log("workinghjsfgjhsdgjh32424*******")
           localStorage.removeItem('authToken');
           window.location.replace('/login-shopify');
-  
         }
       } catch (error) {
-        if (error?.response?.status === 401) {
+        
           localStorage.removeItem('authToken');
           window.location.replace('/login-shopify');
-        }
+        
         console.error("Error fetching user profile data:", error);
       }
     };
