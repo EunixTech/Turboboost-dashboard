@@ -582,7 +582,7 @@ const CacheStatus = () => {
                         Pageviews
                       </h1>
 
-                      <InputDate currMonth={currMonth} updateCurrMonth={updateCurrMonth} />
+                      {/* <InputDate currMonth={currMonth} updateCurrMonth={updateCurrMonth} /> */}
                     </div>
 
                     <Chart1 currMonth={currMonth} />
@@ -674,7 +674,7 @@ const CacheStatus = () => {
                       </h1>
                     </div>
                   </div> */}
-                    <InputDate />
+                    {/* <InputDate /> */}
                   </div>
                   {/* <img src="/graphic/logs/chart3.svg" alt="" /> */}
                   <Chart4 />
