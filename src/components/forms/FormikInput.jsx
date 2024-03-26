@@ -4,7 +4,7 @@ import React from "react";
 import { useField } from "formik";
 import { useSelector } from "react-redux";
 
-const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue, customClassName = "", cFontSize ='16px', themeMode = false }) => {
+const FormikInput = ({ inputLabel, inputName, inputType, optionsData, inputValue, customClassName = "", cFontSize ='12px', themeMode = false }) => {
   const [field, meta] = useField(inputName);
   const dark = useSelector((state) => state.home.dark);
   return (
