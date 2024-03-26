@@ -120,6 +120,16 @@ export default function SidebarCard({cancel}) {
         if (resJSON.status === 200) {
           const pageViews = resJSON?.pageViewsArr;
           updatePageViewCount(pageViews?.length)
+        }else if (resJSON.status === 403) {
+
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+  
+        }else if (resJSON.status === 404) {
+
+          localStorage.removeItem('authToken');
+          window.location.replace('/login-shopify');
+  
         }
       } catch (error) {
         if (error?.response?.status === 401) {

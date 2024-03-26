@@ -523,6 +523,11 @@ const CacheStatus = () => {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
+      } else if (resJSON.status === 404) {
+
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
       } else {
         toggleLoader(false);
         return toast.error("Please try again");
