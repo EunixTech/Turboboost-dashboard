@@ -597,7 +597,7 @@ const BrowseConnectors = ({ cancel }) => {
 };
 
 
-const ConnectWebsite = () => {
+const ConnectWebsite = () => { 
   const dark = useSelector((state) => state.home.dark);
   const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
   const [loader, toggleLoader] = useState(false)
@@ -615,6 +615,7 @@ const ConnectWebsite = () => {
           const dataArr = resJSON?.conectedWebsite;
           updateConnectedWebsiteData(dataArr)
           toggleLoader(false)
+          
         } else if(resJSON.status === 403){
      
           localStorage.removeItem('authToken');

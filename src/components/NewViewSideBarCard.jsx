@@ -191,13 +191,13 @@ export default function NewViewCard({cancel}) {
                 />
                 <Item
                     title={"Cache Warmup"}
-                    route="/connect-website"
+                    route="/cache-warmup"
                     src="/icon2.svg"       
                     cancel={cancel}
                 />
                 <Item
                     title={"Cache Status"}
-                    route="/assets-status"
+                    route="/cache-status"
                     src="/icon2.svg"       
                     cancel={cancel}
                 />

@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Toggle from "../../../utils/toggle";
 import { setDark } from "../../../services/home";
 import { useNavigate } from "react-router-dom";
+import { GetAxiosConfig } from "../../../utils/axiosConfig.js";
+import { toast } from "react-toastify";
 
 const Item = ({ src, title, onClick }) => {
   return (
@@ -278,7 +280,9 @@ const Navbar = ({ handleViewChange }) => {
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Websites Connected");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [loader, toggleLoader] = useState(false);
+  const [platform, setPlatform] = useState(""); 
   const handleOptionClick = (view, optionText) => {
     handleViewChange(view);
     setSelectedOption(optionText);
@@ -300,8 +304,60 @@ const Navbar = ({ handleViewChange }) => {
 
   const [sideOpen, setSideOpen] = useState(false);
   const [transition, setTransition] = useState(false);
+  const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
 
   const dark = useSelector((state) => state.home.dark);
+
+  const fetchConnectedWebsiteData = async () => {
+    try {
+      toggleLoader(true);
+      const res = await GetAxiosConfig(
+        `api/dashboard/fetch-connected-website-data`
+      );
+      const resJSON = res?.data;
+  
+      console.log("Response JSON:", resJSON); 
+  
+      if (resJSON.status === 200) {
+        const { conectedWebsite } = resJSON;
+        console.log("Connected Website:", conectedWebsite); 
+        updateConnectedWebsiteData(conectedWebsite);
+        toggleLoader(false);
+  
+      
+        const platformValue = conectedWebsite.length > 0 ? conectedWebsite[0].platform : ""; 
+        setPlatform(platformValue);
+  
+        if (platformValue === 1) {
+          setSelectedOption("Websites Connected");
+        } else if (platformValue === 2) {
+          setSelectedOption("Other Websites");
+        }
+  
+        return platformValue; 
+      } else if (resJSON.status === 403) {
+        localStorage.removeItem("authToken");
+        window.location.replace("/login-shopify");
+      } else {
+        toggleLoader(false);
+        toast.error("Please try again");
+      }
+    } catch (error) {
+      console.error("Fetch Error:", error); 
+      toggleLoader(false);
+      if (error?.response?.status === 401) {
+        localStorage.removeItem("authToken");
+        window.location.replace("/login-shopify");
+      }
+    }
+  };
+  
+  
+  
+
+  useEffect(() => {
+    fetchConnectedWebsiteData();
+  }, []);
 
   return (
     <>
@@ -342,231 +398,53 @@ const Navbar = ({ handleViewChange }) => {
         )}
         <div className="flex gap-[20px] items-center">
           {w > 1000 && (
-            <div className="relative">
-              <div
-                className="text-[#13DE8E] cursor-pointer tracking-wide text-[12px] font-medium px-[12px] bg-[#13de8d17] items-center rounded-[3px] h-[35px] flex"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                <span className="mr-[20px]">{selectedOption}</span>
-                <svg
-                  className={`w-4 h-4 fill-current text-gray-500 pointer-events-none ${
-                    isOpen ? "transform rotate-180" : ""
-                  }`}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 13L15 8l-1.5-1.5L10 10l-3.5-3.5L5 8l5 5z"
-                  />
-                </svg>
-              </div>
-              {isOpen && (
-                <ul className="absolute w-full py-1 mt-2 bg-white rounded-md shadow-lg">
-                  <li
-                    className="cursor-pointer hover:bg-gray-100 px-3 py-2 text-sm leading-5 text-gray-900 rounded-md"
-                    onClick={() =>
-                      handleOptionClick("SidebarCard", "Websites Connected")
-                    }
-                  >
-                    Websites Connected
-                  </li>
-                  <li
-                    className="cursor-pointer hover:bg-gray-100 px-3 py-2 text-sm leading-5 text-gray-900 rounded-md"
-                    onClick={() =>
-                      handleOptionClick("NewViewCard", "Other Websites")
-                    }
-                  >
-                    Other Websites
-                  </li>
-                </ul>
-              )}
-            </div>
+           <div className="relative">
+           <div className="text-[#13DE8E] cursor-pointer tracking-wide text-[12px] font-medium px-[12px] bg-[#13de8d17] items-center rounded-[3px] h-[35px] flex">
+             <span className="mr-[20px]">
+               {selectedOption || (platform === 1 ? "Websites Connected" : platform === 2 ? "Other Websites" : "")}
+             </span>
+           </div>
+         </div>
           )}
-
-          <a
-            href="https://turboboost.canny.io/admin"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {dark ? (
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M8.60442 20.3383C8.96988 19.9242 9.60182 19.8848 10.0159 20.2503C10.5453 20.7176 11.2385 21 12 21C12.7615 21 13.4546 20.7176 13.9841 20.2503C14.3981 19.8848 15.0301 19.9242 15.3955 20.3383C15.761 20.7523 15.7216 21.3843 15.3075 21.7497C14.4267 22.5272 13.2674 23 12 23C10.7326 23 9.57323 22.5272 8.69242 21.7497C8.27835 21.3843 8.23895 20.7523 8.60442 20.3383Z"
-                  fill="#DBDBDB"
-                  fill-opacity="0.35"
-                />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M7.05023 3.05025C8.36299 1.7375 10.1435 1 12 1C13.8565 1 15.637 1.7375 16.9497 3.05025C18.2625 4.36301 19 6.14349 19 8C19 10.9127 19.732 12.8439 20.4994 14.0771L20.5112 14.0962C20.8685 14.6704 21.151 15.1243 21.3414 15.4547C21.4368 15.6202 21.5237 15.7797 21.5881 15.9215C21.6202 15.9922 21.6562 16.079 21.6843 16.1733C21.7076 16.2515 21.752 16.4187 21.7353 16.6223C21.7241 16.7591 21.6962 16.9928 21.5621 17.2343C21.4279 17.4758 21.2442 17.623 21.134 17.7047C20.8837 17.8904 20.5963 17.9329 20.5003 17.947L20.4959 17.9477C20.3485 17.9695 20.1812 17.9804 20.0125 17.9869C19.6772 18 19.2131 18 18.6358 18H5.36413C4.78691 18 4.32276 18 3.98751 17.9869C3.81875 17.9804 3.65148 17.9695 3.50407 17.9477L3.49964 17.947C3.40371 17.9329 3.11628 17.8904 2.86599 17.7047C2.75575 17.623 2.57202 17.4758 2.43787 17.2343C2.30372 16.9928 2.27582 16.7591 2.26463 16.6223C2.24799 16.4187 2.29239 16.2515 2.31569 16.1733C2.34379 16.079 2.37973 15.9922 2.41186 15.9215C2.47622 15.7797 2.56315 15.6202 2.65857 15.4547C2.849 15.1243 3.13148 14.6703 3.4888 14.0961L3.5006 14.0771C4.26798 12.8439 4.99998 10.9127 4.99998 8C4.99998 6.14348 5.73748 4.36301 7.05023 3.05025Z"
-                  fill="#DBDBDB"
-                  fill-opacity="0.35"
-                />
-              </svg>
-            ) : (
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M8.60445 20.3383C8.96991 19.9242 9.60185 19.8848 10.0159 20.2503C10.5454 20.7176 11.2385 21 12 21C12.7615 21 13.4546 20.7176 13.9841 20.2503C14.3982 19.8848 15.0301 19.9242 15.3956 20.3383C15.761 20.7523 15.7216 21.3843 15.3076 21.7497C14.4268 22.5272 13.2674 23 12 23C10.7326 23 9.57327 22.5272 8.69245 21.7497C8.27838 21.3843 8.23898 20.7523 8.60445 20.3383Z"
-                  fill="#DBDBDB"
-                />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M7.05027 3.05025C8.36302 1.7375 10.1435 1 12 1C13.8565 1 15.637 1.7375 16.9498 3.05025C18.2625 4.36301 19 6.14349 19 8C19 10.9127 19.732 12.8439 20.4994 14.0771L20.5113 14.0962C20.8686 14.6704 21.151 15.1243 21.3414 15.4547C21.4368 15.6202 21.5238 15.7797 21.5881 15.9215C21.6203 15.9922 21.6562 16.079 21.6843 16.1733C21.7076 16.2515 21.752 16.4187 21.7354 16.6223C21.7242 16.7591 21.6963 16.9928 21.5621 17.2343C21.428 17.4758 21.2442 17.623 21.134 17.7047C20.8837 17.8904 20.5963 17.9329 20.5004 17.947L20.4959 17.9477C20.3485 17.9695 20.1812 17.9804 20.0125 17.9869C19.6772 18 19.2131 18 18.6359 18H5.36416C4.78694 18 4.3228 18 3.98754 17.9869C3.81878 17.9804 3.65151 17.9695 3.5041 17.9477L3.49967 17.947C3.40374 17.9329 3.11631 17.8904 2.86602 17.7047C2.75578 17.623 2.57205 17.4758 2.4379 17.2343C2.30375 16.9928 2.27585 16.7591 2.26467 16.6223C2.24802 16.4187 2.29242 16.2515 2.31572 16.1733C2.34382 16.079 2.37976 15.9922 2.41189 15.9215C2.47625 15.7797 2.56318 15.6202 2.6586 15.4547C2.84903 15.1243 3.13151 14.6703 3.48883 14.0961L3.50063 14.0771C4.26801 12.8439 5.00001 10.9127 5.00001 8C5.00001 6.14348 5.73751 4.36301 7.05027 3.05025Z"
-                  fill="#DBDBDB"
-                />
-              </svg>
-            )}
-          </a>
-          <a
-            href="http://help.turbo-boost.io"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {dark ? (
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 22 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0ZM9.90663 7.27123C10.3138 7.03191 10.7926 6.94443 11.2581 7.02428C11.7236 7.10413 12.1459 7.34615 12.45 7.70749C12.7542 8.06883 12.9207 8.52615 12.92 8.99847L12.92 8.99996C12.92 9.4691 12.5549 9.95818 11.8653 10.4179C11.5509 10.6275 11.2294 10.7889 10.9826 10.8986C10.8606 10.9529 10.7603 10.9929 10.6929 11.0186C10.663 11.03 10.6329 11.041 10.6027 11.0516C10.0794 11.2267 9.79678 11.7926 9.97131 12.3162C10.146 12.8401 10.7123 13.1233 11.2362 12.9486L11.4049 12.8876C11.5015 12.8508 11.6356 12.7971 11.7949 12.7263C12.1105 12.586 12.5391 12.3724 12.9747 12.082C13.7849 11.5419 14.9195 10.5312 14.92 9.00087C14.9213 8.05644 14.5883 7.14201 13.9801 6.41949C13.3717 5.69682 12.5273 5.21277 11.5962 5.05307C10.6652 4.89337 9.70767 5.06833 8.89327 5.54696C8.07886 6.02559 7.46013 6.77701 7.14666 7.66812C6.96339 8.18911 7.23716 8.76002 7.75815 8.9433C8.27914 9.12657 8.85006 8.85279 9.03333 8.33181C9.19006 7.88625 9.49943 7.51054 9.90663 7.27123ZM11 15C10.4477 15 9.99999 15.4477 9.99999 16C9.99999 16.5522 10.4477 17 11 17H11.01C11.5623 17 12.01 16.5522 12.01 16C12.01 15.4477 11.5623 15 11.01 15H11Z"
-                  fill="#DBDBDB"
-                  fill-opacity="0.35"
-                />
-              </svg>
-            ) : (
-              <svg
-                width="21"
-                height="21"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM10.9066 8.27123C11.3138 8.03191 11.7926 7.94443 12.2581 8.02428C12.7236 8.10413 13.1459 8.34615 13.45 8.70749C13.7542 9.06883 13.9207 9.52615 13.92 9.99847L13.92 9.99996C13.92 10.4691 13.5549 10.9582 12.8653 11.4179C12.5509 11.6275 12.2294 11.7889 11.9826 11.8986C11.8606 11.9529 11.7603 11.9929 11.6929 12.0186C11.663 12.03 11.6329 12.041 11.6027 12.0516C11.0794 12.2267 10.7968 12.7926 10.9713 13.3162C11.146 13.8401 11.7123 14.1233 12.2362 13.9486L12.4049 13.8876C12.5015 13.8508 12.6356 13.7971 12.7949 13.7263C13.1105 13.586 13.5391 13.3724 13.9747 13.082C14.7849 12.5419 15.9195 11.5312 15.92 10.0009C15.9213 9.05644 15.5883 8.14201 14.9801 7.41949C14.3717 6.69682 13.5273 6.21277 12.5962 6.05307C11.6652 5.89337 10.7077 6.06833 9.89327 6.54696C9.07886 7.02559 8.46013 7.77701 8.14666 8.66812C7.96339 9.18911 8.23716 9.76002 8.75815 9.9433C9.27914 10.1266 9.85006 9.85279 10.0333 9.33181C10.1901 8.88625 10.4994 8.51054 10.9066 8.27123ZM12 16C11.4477 16 11 16.4477 11 17C11 17.5522 11.4477 18 12 18H12.01C12.5623 18 13.01 17.5522 13.01 17C13.01 16.4477 12.5623 16 12.01 16H12Z"
-                  fill="#DBDBDB"
-                />
-              </svg>
-            )}
-          </a>
-          <div
-            onMouseOver={() => {
-              setHover(true);
+          <button
+            className="px-5 py-2 text-white bg-[#13DE8E] rounded-[5px] text-[14px] focus:outline-none"
+            onClick={() => {
+              handleViewChange("showModal");
+              setSelectedOption("Add New Website");
             }}
-            onMouseLeave={() => {
-              setHover(false);
-            }}
-            className="flex relative mx-[10px] mr-[30px]"
           >
-            <div
-              onClick={() => {
-                setOpen(!open);
-              }}
-              className="flex gap-[4px] items-center cursor-pointer ml-[-10px]"
-            >
-              {dark ? (
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 26 26"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M7.09091 10.0455C7.09091 6.78195 9.7365 4.13636 13 4.13636C16.2635 4.13636 18.9091 6.78195 18.9091 10.0455C18.9091 13.309 16.2635 15.9545 13 15.9545C9.7365 15.9545 7.09091 13.309 7.09091 10.0455Z"
-                    fill="#DBDBDB"
-                    fill-opacity="0.35"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13 0C5.8203 0 0 5.8203 0 13C0 20.1797 5.8203 26 13 26C20.1797 26 26 20.1797 26 13C26 5.8203 20.1797 0 13 0ZM2.36364 13C2.36364 7.1257 7.1257 2.36364 13 2.36364C18.8743 2.36364 23.6364 7.1257 23.6364 13C23.6364 15.6249 22.6855 18.0278 21.1094 19.8829C20.0267 18.568 18.3848 17.7273 16.5455 17.7273H9.4546C7.61525 17.7273 5.97338 18.568 4.89065 19.883C3.31453 18.0279 2.36364 15.625 2.36364 13Z"
-                    fill="#DBDBDB"
-                    fill-opacity="0.35"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 26 26"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M7.09091 10.0455C7.09091 6.78195 9.7365 4.13636 13 4.13636C16.2635 4.13636 18.9091 6.78195 18.9091 10.0455C18.9091 13.309 16.2635 15.9545 13 15.9545C9.7365 15.9545 7.09091 13.309 7.09091 10.0455Z"
-                    fill="#DBDBDB"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13 0C5.8203 0 0 5.8203 0 13C0 20.1797 5.8203 26 13 26C20.1797 26 26 20.1797 26 13C26 5.8203 20.1797 0 13 0ZM2.36364 13C2.36364 7.1257 7.1257 2.36364 13 2.36364C18.8743 2.36364 23.6364 7.1257 23.6364 13C23.6364 15.6249 22.6855 18.0278 21.1094 19.8829C20.0267 18.568 18.3848 17.7273 16.5455 17.7273H9.4546C7.61525 17.7273 5.97338 18.568 4.89065 19.883C3.31453 18.0279 2.36364 15.625 2.36364 13Z"
-                    fill="#DBDBDB"
-                  />
-                </svg>
-              )}
-
-              {dark ? (
-                <svg
-                  width="13"
-                  height="9"
-                  viewBox="0 0 12 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1.41 0L6 4.58L10.59 0L12 1.41L6 7.41L0 1.41L1.41 0Z"
-                    fill="#DBDBDB"
-                    fill-opacity="0.35"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  width="12"
-                  height="8"
-                  viewBox="0 0 12 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1.41 0L6 4.58L10.59 0L12 1.41L6 7.41L0 1.41L1.41 0Z"
-                    fill="#DBDBDB"
-                  />
-                </svg>
-              )}
-            </div>
-            {open && <Prompt setOpen={setOpen} />}
+            Add New Website
+          </button>
+          <div className="ml-[30px] relative">
+            <img
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={() => setOpen(!open)}
+              src={dark ? "/userDark.svg" : "/user.svg"}
+              className="w-[30px] cursor-pointer h-[30px] shrink-0"
+              alt=""
+            />
+            {open && (
+              <ul className="absolute right-[30px] py-2 mt-2 w-[200px] bg-white rounded-md shadow-lg">
+                <li className="cursor-pointer text-gray-800 hover:bg-gray-200 px-4 py-2 text-sm">
+                  My Profile
+                </li>
+                <li className="cursor-pointer text-gray-800 hover:bg-gray-200 px-4 py-2 text-sm">
+                  Settings
+                </li>
+                <li className="cursor-pointer text-gray-800 hover:bg-gray-200 px-4 py-2 text-sm">
+                  Logout
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>
+      {loader && (
+        <div className="absolute top-[50px] left-0 h-full w-full bg-[#fff] bg-opacity-60 z-50 flex items-center justify-center">
+          <loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
+        </div>
+      )}
     </>
   );
 };
