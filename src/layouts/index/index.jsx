@@ -14,7 +14,6 @@ const HomeLayout = ({ children, show }) => {
   };
 
   useEffect(() => {
-    // Fetch data and update selected view based on platform value
     const fetchDataAndSetView = async () => {
       try {
         const res = await GetAxiosConfig(`api/dashboard/fetch-connected-website-data`);
