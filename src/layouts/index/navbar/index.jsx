@@ -406,45 +406,56 @@ const Navbar = ({ handleViewChange }) => {
            </div>
          </div>
           )}
-          <button
-            className="px-5 py-2 text-white bg-[#13DE8E] rounded-[5px] text-[14px] focus:outline-none"
-            onClick={() => {
-              handleViewChange("showModal");
-              setSelectedOption("Add New Website");
+             <img
+            src={
+              dark ? "/graphic/navbar/bell-d.svg" : "/graphic/navbar/bell.svg"
+            }
+            className=" cursor-pointer w-[22px] ml-[22px] mx-[10px]"
+            alt=""
+          />
+          <img
+            src={
+              dark
+                ? "/graphic/navbar/help-circle-d.svg"
+                : "/graphic/navbar/help-circle.svg"
+            }
+            className="cursor-pointer w-[22px] mx-[10px]"
+            alt=""
+          />
+          <div
+            onMouseOver={() => {
+              setHover(true);
             }}
+            onMouseLeave={() => {
+              setHover(false);
+            }}
+            className="flex relative mx-[10px]"
           >
-            Add New Website
-          </button>
-          <div className="ml-[30px] relative">
-            <img
-              onMouseEnter={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}
-              onClick={() => setOpen(!open)}
-              src={dark ? "/userDark.svg" : "/user.svg"}
-              className="w-[30px] cursor-pointer h-[30px] shrink-0"
-              alt=""
-            />
-            {open && (
-              <ul className="absolute right-[30px] py-2 mt-2 w-[200px] bg-white rounded-md shadow-lg">
-                <li className="cursor-pointer text-gray-800 hover:bg-gray-200 px-4 py-2 text-sm">
-                  My Profile
-                </li>
-                <li className="cursor-pointer text-gray-800 hover:bg-gray-200 px-4 py-2 text-sm">
-                  Settings
-                </li>
-                <li className="cursor-pointer text-gray-800 hover:bg-gray-200 px-4 py-2 text-sm">
-                  Logout
-                </li>
-              </ul>
-            )}
+            <div
+              onClick={() => {
+                setOpen(!open);
+              }}
+              className="flex cursor-pointer"
+            >
+              <img
+                src={
+                  dark
+                    ? "/graphic/navbar/user-circle-d.svg"
+                    : "/graphic/navbar/user-circle.svg"
+                }
+                className="cursor-pointer w-[22px]"
+                alt=""
+              />
+              <img
+                src={dark ? "/graphic/navbar/down-d.svg" : "/down.svg"}
+                className="cursor-pointer w-[12px] mx-[5px] mr-[20px] translate-y-[2px]"
+                alt=""
+              />
+            </div>
+            {open && <Prompt />}
           </div>
         </div>
       </div>
-      {loader && (
-        <div className="absolute top-[50px] left-0 h-full w-full bg-[#fff] bg-opacity-60 z-50 flex items-center justify-center">
-          <loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
-        </div>
-      )}
     </>
   );
 };
