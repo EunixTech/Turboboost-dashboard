@@ -6,6 +6,7 @@ import { Power2 } from "gsap";
 import SidebarCard from "../../../components/SidebarCard";
 import { setUpgradePopUpShow } from "../../../services/home";
 import { useDispatch, useSelector } from "react-redux";
+import NewViewCard from "../../../components/NewViewSideBarCard";
 
 const Item = ({ title, src, route }) => {
   const location = useLocation();
@@ -101,6 +102,7 @@ const Sidebar = ({ transition, cancel }) => {
           </div>
 
           <SidebarCard cancel={cancel} />
+          <NewViewCard cancel={cancel} />
 
         </div>
       </Tween>
