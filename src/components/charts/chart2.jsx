@@ -43,7 +43,7 @@ const DemoLine = ({ currMonth }) => {
       tickLine: { length: 1 },
       range: [0, 1],
       label: {
-        formatter: (text) => `${parseInt(text)}`, // Add 1 to the x-axis label
+        formatter: (text) => `${(text)}`, // Add 1 to the x-axis label
       },
       tickCount: data.length+1, // Ensure there's a tick for each data point
       nice: true, //

@@ -106,7 +106,7 @@ const GooglePageScore = ({ coreVitalsData, performanceData }) => {
           <div className="flex items-center gap-[10px] justify-around h-[126px]">
             <CircularProgressBar
               mr="0"
-              title="Performence"
+              title="Performance"
               percentage={coreVitalsData?.performence}
             />
             <CircularProgressBar
@@ -184,6 +184,7 @@ const Dashboard = () => {
   const [handlerData, updateHandlerData] = useState({});
   const [coreVitalsData, updateCoreVitalsData] = useState({});
   const [performanceData, updatePerformanceData] = useState({});
+  const [bounceRateData, updateBounceRateData] = useState({});
   const [loading, toogleLoading] = useState(false);
   const [loadingAPI, toogleLoadingAPI] = useState(true);
   const [loader, toggleLoader] = useState(false);
@@ -193,6 +194,34 @@ const Dashboard = () => {
   const dark = useSelector((state) => state.home.dark);
   const router = useNavigate();
 
+  const fetchBounceRateData = async () => {
+    try {
+      toogleLoadingAPI(true)
+      const res = await GetAxiosConfig(`api/dashboard/calculating-bounce-rate`);
+      const resJSON = res?.data;
+      const dataObj = resJSON
+ 
+      updateBounceRateData(dataObj?.bounceRateDataObj)
+      if (resJSON.status === 200) {
+
+      } else if (resJSON.status === 403) {
+
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+      } else if (resJSON.status === 404) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+      } 
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+      }
+      console.error("Error fetching user profile data:", error);
+    }
+  };
 
   const fetchPageSpeedInsight = async () => {
     try {
@@ -215,7 +244,11 @@ const Dashboard = () => {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
-      } else {
+      }else if (resJSON.status === 404) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+      }  else {
         toogleLoadingAPI(false);
         // return toast.error("Please try again");
       }
@@ -243,6 +276,10 @@ const Dashboard = () => {
         updateHandlerData(OptimizationHandlerData);
         toogleLoading(false)
       } else if (resJSON.status === 403) {
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
+      } else if (resJSON.status === 404) {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
@@ -354,6 +391,7 @@ const Dashboard = () => {
       }
       await fetchImageOptimizationData();
       await fetchPageSpeedInsight();
+      await fetchBounceRateData()
       dd(100)
       toogleLoadingAPI(false);
     }
@@ -538,7 +576,7 @@ const Dashboard = () => {
                   }}
                   className="laptop:text-[20px] f2 desktop:text-[25px] font-bold "
                 >
-                  0%
+                  {bounceRateData?.totalBounceRate}%
                 </p>
                
               </div>
@@ -557,7 +595,7 @@ const Dashboard = () => {
                   }}
                   className="text-[#000] f2 text-[14px] tracking-wide font-bold"
                 >
-                  0%
+                  {bounceRateData?.lastWeekBounceRate}%
                 </p>
               </div>
             </div>

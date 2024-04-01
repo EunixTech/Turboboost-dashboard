@@ -42,7 +42,7 @@ const DemoLine = () => {
       tickLine: { length: 1 },
       range: [0, 1],
       label: {
-        formatter: (text) => `${parseInt(text)}`, // Remove +1 to the x-axis label
+        formatter: (text) => `${(text)}`, // Remove +1 to the x-axis label
       },
       tickCount: data.length, // Ensure there's a tick for each data point
       nice: true, //

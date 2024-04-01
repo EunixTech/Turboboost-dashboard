@@ -29,12 +29,13 @@ import NotFound from "./views/404.jsx";
 import { GetAxiosConfig } from "./utils/axiosConfig.js";
 import { setToggle } from "./slice/statusToggleSlice";
 import { useDispatch } from "react-redux";
-import NitroPack from "./views/NitroPack.jsx";
-import ConnectSiteNitro from "./views/ConnectSiteNitro.jsx";
-import NitroOtp from "./views/NitroOtp.jsx";
-import { setDark } from "./services/home";
+
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
+import PlatformAuthIntegration from "./views/connect-platform/PlatformAuthIntegration.jsx";
+import ConnectPlatfrom from "./views/connect-platform/ConnectPlatfrom.jsx";
+import VerifyOTP from "./views/connect-platform/VerifyOTP.jsx";
+import ConnectFAQ from "./views/connect-platform/ConnectFAQ.jsx";
 const router = [
   {
     path: "/",
@@ -145,7 +146,6 @@ const App = () => {
 
   useEffect(() => {
 
-
     const urlParams = new URLSearchParams(window.location.search);
     const userToken = urlParams.get("userToken");
     setShowOnboardingModal(userToken ? true : false);
@@ -157,16 +157,16 @@ const App = () => {
       const isLoginRoute = window.location.pathname === '/login-shopify';
       const isNitroPackRoute = window.location.pathname === '/auth-integration';
       const isConnectSiteNitro = window.location.pathname === '/connector/website-connect';
+      const isNitroAskQuestion = window.location.pathname === '/nitropack-auth-question';
       const isNitroOtp = window.location.pathname === '/auth/opt-verification';
 
-      if (!authToken && !isLoginRoute && !userToken1 && !isNitroPackRoute && !isConnectSiteNitro && !isNitroOtp) {
+      if (!authToken && !isLoginRoute && !userToken1 && !isNitroPackRoute && !isConnectSiteNitro && !isNitroOtp && isNitroAskQuestion) {
         window.location.replace('/login-shopify');
       } else if (authToken && isLoginRoute) {
         window.location.replace('/dashboard');
       }
     };
     checkAuth();
-
   }, []);
 
   return (
@@ -174,7 +174,7 @@ const App = () => {
       {showOnboardingModal && <NewOnboard />}
       {!(
 
-        location.pathname === "/login-shopify" || location.pathname === "/auth-integration" || location.pathname === "/connector/website-connect" || location.pathname === "/auth/opt-verification"
+        location.pathname === "/login-shopify" || location.pathname === "/auth-integration" || location.pathname === "/connector/website-connect" || location.pathname === "/auth/opt-verification" || location.pathname ==="/nitropack-auth-question" || location.pathname ==="/auth/genral-info"
       ) && (
           <HomeLayout>
             <Routes>
@@ -190,9 +190,10 @@ const App = () => {
       <Routes>
 
         <Route path={"/login-shopify"} element={<SignInRoute />} />
-        <Route path={"/auth-integration"} element={<NitroPack />} />
-        <Route path={"/connector/website-connect"} element={<ConnectSiteNitro />} />
-        <Route path={"/auth/opt-verification"} element={<NitroOtp />} />
+        <Route path={"/auth-integration"} element={<PlatformAuthIntegration />} />
+        <Route path={"/auth/opt-verification"} element={<VerifyOTP />} />
+        <Route path={"/auth/genral-info"} element={<ConnectFAQ />} />
+        <Route path={"/connector/website-connect"} element={<ConnectPlatfrom />} />
 
       </Routes>
 

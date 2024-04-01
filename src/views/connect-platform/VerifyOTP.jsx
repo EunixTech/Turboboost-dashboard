@@ -3,10 +3,10 @@ import { Formik, Form, ErrorMessage } from "formik";
 import OtpInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { verifyOTP } from "../slice/verifyOtpSlice";
+import { verifyOTP } from "../../slice/verifyOtpSlice";
 import { toast } from "react-toastify"; // Import toast library
 
-const OTPComponent = () => {
+const VerifyOTP = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [otp, setOtp] = useState("");
@@ -31,8 +31,8 @@ const OTPComponent = () => {
         <img src="/logo-b.png" className="w-[150px]" alt="" />
       </div>
 
-      <h3 className="mt-[10px] flex p-[10px]">
-        Check your email for a code We've sent a 6-digit code to email. Please
+      <h3 className="mt-[10px] flex p-[10px] text-center">
+        Check your email for a code We've sent a 6-digit code to email. <br /> Please
         check your email inbox.
       </h3>
       <p className="mb-[10px]">{error && <div>{error}</div>}</p>
@@ -54,7 +54,8 @@ const OTPComponent = () => {
               />
             </div>
             <ErrorMessage name="otp" component="div" />
-            <p className="flex justify-center">Re-send code</p>
+            <a href="#" className="flex justify-center text-[#38F8AC]">Re-send code</a>
+
             <button
               type="submit"
               disabled={isSubmitting}
@@ -69,4 +70,4 @@ const OTPComponent = () => {
   );
 };
 
-export default OTPComponent;
+export default VerifyOTP;

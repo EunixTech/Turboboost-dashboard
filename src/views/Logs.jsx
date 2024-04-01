@@ -523,11 +523,18 @@ const CacheStatus = () => {
         localStorage.removeItem('authToken');
         window.location.replace('/login-shopify');
 
+      } else if (resJSON.status === 404) {
+
+        localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
+
       } else {
         toggleLoader(false);
         return toast.error("Please try again");
       }
     } catch (error) {
+      localStorage.removeItem('authToken');
+        window.location.replace('/login-shopify');
       toggleLoader(false);
       console.error("Error fetching user profile data:", error);
     }
@@ -582,7 +589,7 @@ const CacheStatus = () => {
                         Pageviews
                       </h1>
 
-                      <InputDate currMonth={currMonth} updateCurrMonth={updateCurrMonth} />
+                      {/* <InputDate currMonth={currMonth} updateCurrMonth={updateCurrMonth} /> */}
                     </div>
 
                     <Chart1 currMonth={currMonth} />
@@ -674,7 +681,7 @@ const CacheStatus = () => {
                       </h1>
                     </div>
                   </div> */}
-                    <InputDate />
+                    {/* <InputDate /> */}
                   </div>
                   {/* <img src="/graphic/logs/chart3.svg" alt="" /> */}
                   <Chart4 />

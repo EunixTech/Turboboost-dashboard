@@ -606,7 +606,13 @@ input.PhoneInputInput {
   margin: 0 5px;
   text-align: center;
 }
-
+.site-platform{
+  color: #0a0a187a;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
 
 @media only screen and (max-width: 599px) {
   .MuiBox-root,
