@@ -282,7 +282,8 @@ const Navbar = ({ handleViewChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [loader, toggleLoader] = useState(false);
-  const [platform, setPlatform] = useState(""); 
+  const [platform, setPlatform] = useState("");
+  const [websiteDropdownOpen, setWebsiteDropdownOpen] = useState(false);
   const handleOptionClick = (view, optionText) => {
     handleViewChange(view);
     setSelectedOption(optionText);
@@ -315,26 +316,27 @@ const Navbar = ({ handleViewChange }) => {
         `api/dashboard/fetch-connected-website-data`
       );
       const resJSON = res?.data;
-  
-      console.log("Response JSON:", resJSON); 
-  
+      
+
+      console.log("Response JSON:", resJSON);
+
       if (resJSON.status === 200) {
         const { conectedWebsite } = resJSON;
-        console.log("Connected Website:", conectedWebsite); 
+        console.log("Connected Website:", conectedWebsite);
         updateConnectedWebsiteData(conectedWebsite);
         toggleLoader(false);
-  
-      
-        const platformValue = conectedWebsite.length > 0 ? conectedWebsite[0].platform : ""; 
+
+        const platformValue =
+          conectedWebsite.length > 0 ? conectedWebsite[0].platform : "";
         setPlatform(platformValue);
-  
+
         if (platformValue === 1) {
           setSelectedOption("Websites Connected");
         } else if (platformValue === 2) {
           setSelectedOption("Other Websites");
         }
-  
-        return platformValue; 
+
+        return platformValue;
       } else if (resJSON.status === 403) {
         localStorage.removeItem("authToken");
         window.location.replace("/login-shopify");
@@ -343,7 +345,7 @@ const Navbar = ({ handleViewChange }) => {
         toast.error("Please try again");
       }
     } catch (error) {
-      console.error("Fetch Error:", error); 
+      console.error("Fetch Error:", error);
       toggleLoader(false);
       if (error?.response?.status === 401) {
         localStorage.removeItem("authToken");
@@ -351,9 +353,6 @@ const Navbar = ({ handleViewChange }) => {
       }
     }
   };
-  
-  
-  
 
   useEffect(() => {
     fetchConnectedWebsiteData();
@@ -398,15 +397,37 @@ const Navbar = ({ handleViewChange }) => {
         )}
         <div className="flex gap-[20px] items-center">
           {w > 1000 && (
-           <div className="relative">
-           <div className="text-[#13DE8E] cursor-pointer tracking-wide text-[12px] font-medium px-[12px] bg-[#13de8d17] items-center rounded-[3px] h-[35px] flex">
-             <span className="mr-[20px]">
-               {selectedOption || (platform === 1 ? "Websites Connected" : platform === 2 ? "Other Websites" : "")}
-             </span>
-           </div>
-         </div>
+            <div className="relative">
+              <div
+                className="text-[#13DE8E] cursor-pointer tracking-wide text-[12px] font-medium px-[12px] bg-[#13de8d17] items-center rounded-[3px] h-[35px] flex"
+                onClick={() => setWebsiteDropdownOpen(!websiteDropdownOpen)}
+              >
+                <span className="mr-[20px]">
+                  {selectedOption ||
+                    (platform === 1
+                      ? "Websites Connected"
+                      : platform === 2
+                      ? "Other Websites"
+                      : "")}
+                </span>
+                {/* Dropdown menu */}
+                {websiteDropdownOpen && platform === 1 && (
+                  <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-200 shadow-lg rounded-md z-10">
+                    {connectedWebsiteData.map((website) => (
+                      <div
+                        key={website.id}
+                        className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                        onClick={() => setSelectedOption(website.name)}
+                      >
+                        {website.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           )}
-             <img
+          <img
             src={
               dark ? "/graphic/navbar/bell-d.svg" : "/graphic/navbar/bell.svg"
             }

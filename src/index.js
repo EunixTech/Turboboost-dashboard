@@ -57,6 +57,14 @@ const router = [
     element: <CacheStatus />,
   },
   {
+    path: "/cache-warmup",
+    element: <CacheWarmup />,
+  },
+  {
+    path: "/cache-status",
+    element: <CacheStatus />,
+  },
+  {
     path: "/logs",
     element: <Logs />,
   },
