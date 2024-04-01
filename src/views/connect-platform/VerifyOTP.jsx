@@ -3,10 +3,10 @@ import { Formik, Form, ErrorMessage } from "formik";
 import OtpInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { verifyOTP } from "../slice/verifyOtpSlice";
+import { verifyOTP } from "../../slice/verifyOtpSlice";
 import { toast } from "react-toastify"; // Import toast library
 
-const OTPComponent = () => {
+const VerifyOTP = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [otp, setOtp] = useState("");
@@ -70,4 +70,4 @@ const OTPComponent = () => {
   );
 };
 
-export default OTPComponent;
+export default VerifyOTP;

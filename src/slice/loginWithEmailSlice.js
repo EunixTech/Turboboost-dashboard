@@ -1,14 +1,14 @@
 // authSlice.js
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import appURLs from '../appURL';
 
-export const loginWithEmail = createAsyncThunk(
-  'auth/loginWithEmail',
+export const loginWithEmail = createAsyncThunk('auth/loginWithEmail',
   async (email, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        'http://localhost:8000/v1/api/wordpress/auth/login-with-email',
+      const appURL = appURLs();
+
+      const response = await axios.post(`${appURL}/v1/api/wordpress/auth/login-with-email`,
         { email_address: email },
         { withCredentials: true }
       );

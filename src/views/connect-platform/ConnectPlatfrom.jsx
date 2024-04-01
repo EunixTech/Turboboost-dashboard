@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import FormikInput from "../components/forms/FormikInput";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLocation } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import appURLs from "../appURL"
 
-// Initialize toast
-// toast.configure();
+import FormikInput from "../../components/forms/FormikInput";
+import appURLs from "../../appURL"
 
 const validationSchema = Yup.object().shape({
   siteURL: Yup.string()
@@ -20,26 +17,26 @@ const validationSchema = Yup.object().shape({
   subscription: Yup.string().required("Subscription option is required"),
 });
 
-const ConnectSiteNitro = () => {
+const ConnectPlatfrom = () => {
+  const appURL = appURLs();
+
   const [showAllPlans, setShowAllPlans] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
   const [websiteName, setWebsiteName] = useState("");
   const [loggedInUserEmail, setLoggedInUserEmail] = useState(""); // State to store logged-in user's email
   const location = useLocation();
 
-  const appURL = appURLs();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const url = searchParams.get("http://localhost/turbo-boost");
     const name = searchParams.get("turboboost");
-    if (url && name) {
-      setWebsiteName(name);
-      // You can set other state variables here if needed
-    }
+    if (url && name) { setWebsiteName(name)}
+
     const loggedInUserEmail = fetchLoggedInUserEmail();
     setLoggedInUserEmail(loggedInUserEmail);
   }, [location]);
+  
   const fetchLoggedInUserEmail = () => {
     // Simulated fetch logic, replace with actual logic to fetch user's email
     return "user@example.com";
@@ -59,8 +56,6 @@ const ConnectSiteNitro = () => {
     }
   };
   const getSubscriptionDetails = (subscription) => {
-    // Implement logic to extract standard features and page views from the subscription
-    // For demonstration, I'm returning static values
     return {
       standardFeatures: "Standard features",
       pageViews: "5k",
@@ -148,12 +143,6 @@ const ConnectSiteNitro = () => {
   // Call the makePayment function with the values object
   makePayment(values);
   
-  
-  
-
-// Function to extract standard features and page views from the subscription
-
-
 
   return (
     <div className="flex items-center justify-center h-screen m-[10px]">
@@ -381,7 +370,7 @@ const ConnectSiteNitro = () => {
                   <button
                     type="button"
                     onClick={makePayment}
-                    disabled={!isValid} // Disable the button if the form is not valid
+                    disabled={!isValid} 
                     className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
                   >
                     <span className="translate-y-[1.5px] text-[16px]">
@@ -389,10 +378,7 @@ const ConnectSiteNitro = () => {
                     </span>
                   </button>
                 )}
-                {/* <p className="flex justify-center">
-                You are logged in as {loggedInUserEmail}
-                </p> */}
-                {/* <p className="flex justify-center">Switch account</p> */}
+
               </div>
             </Form>
           )}
@@ -402,4 +388,4 @@ const ConnectSiteNitro = () => {
   );
 };
 
-export default ConnectSiteNitro;
+export default ConnectPlatfrom;

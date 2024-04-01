@@ -9,7 +9,7 @@ const validationSchema = Yup.object().shape({
   businessType: Yup.string().required('Business Type is required'),
 });
 
-const NitroAskQuestion = () => {
+const ConnectFAQ = () => {
   const handleSubmit = (values) => {
     console.log('Form values:', values);
   };
@@ -57,4 +57,4 @@ const NitroAskQuestion = () => {
   );
 };
 
-export default NitroAskQuestion;
+export default ConnectFAQ;
