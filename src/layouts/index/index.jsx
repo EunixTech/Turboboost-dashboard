@@ -40,7 +40,7 @@ const HomeLayout = ({ children, show }) => {
   return (
     <>
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col relative">
-        <Navbar handleViewChange={handleViewChange} />
+      <Navbar handleViewChange={handleViewChange} setSelectedView={setSelectedView} />
         <div className="w-[100%]  flex h-[100vh]">
           {w > 1000 && <Sidebar selectedView={selectedView} />} {/* Pass selected view as prop */}
           <div className="w-[100%] h-[100vh] overflow-hidden">{children}</div>
