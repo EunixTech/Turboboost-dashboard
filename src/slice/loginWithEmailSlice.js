@@ -4,20 +4,24 @@ import axios from 'axios';
 import appURLs from '../appURL';
 
 export const loginWithEmail = createAsyncThunk('auth/loginWithEmail',
+
   async (email, { rejectWithValue }) => {
     try {
-      const appURL = appURLs();
 
-      const response = await axios.post(`${appURL}/v1/api/wordpress/auth/login-with-email`,
-        { email_address: email },
+      const appURL = appURLs();
+      const response = await axios.post(`${appURL}/api/wordpress/auth/create-account`,
+        { emailAddress: email },
         { withCredentials: true }
       );
+
+      console.log("response",response)
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
   }
 );
+
 
 const authSlice = createSlice({
   name: 'auth',

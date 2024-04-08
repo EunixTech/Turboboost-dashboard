@@ -4,9 +4,10 @@ import * as Yup from "yup";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { planMockData, planDetail } from "../../utils/constant";
 import FormikInput from "../../components/forms/FormikInput";
-import appURLs from "../../appURL"
+import {PostAxiosConfig}  from "../../utils/axiosConfig";
+
 
 const validationSchema = Yup.object().shape({
   siteURL: Yup.string()
@@ -18,8 +19,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const ConnectPlatfrom = () => {
-  const appURL = appURLs();
-
+	const [selected, setSelected] = useState(0);
+  const [showPlanCount, updateShowPlanCount] = useState(2);
   const [showAllPlans, setShowAllPlans] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
   const [websiteName, setWebsiteName] = useState("");
@@ -31,118 +32,50 @@ const ConnectPlatfrom = () => {
     const searchParams = new URLSearchParams(location.search);
     const url = searchParams.get("http://localhost/turbo-boost");
     const name = searchParams.get("turboboost");
-    if (url && name) { setWebsiteName(name)}
+    if (url && name) { setWebsiteName(name) }
 
-    const loggedInUserEmail = fetchLoggedInUserEmail();
-    setLoggedInUserEmail(loggedInUserEmail);
   }, [location]);
-  
-  const fetchLoggedInUserEmail = () => {
-    // Simulated fetch logic, replace with actual logic to fetch user's email
-    return "user@example.com";
-  };
 
-  const getPrice = (selectedPlan) => {
-    // Implement logic to get the price based on the selected plan
-    // For example:
-    switch (selectedPlan) {
-      case "free":
-        return 0;
-      case "scale":
-        return 2;
-      // Add more cases as needed
-      default:
-        return 0; // Default to 0 if plan is not recognized
-    }
-  };
-  const getSubscriptionDetails = (subscription) => {
-    return {
-      standardFeatures: "Standard features",
-      pageViews: "5k",
+
+  const handleFormSubmit = async(value) => {
+  const {siteURL,siteName, subscription, sitePlatform } = value;
+  const planDataObj = planDetail[subscription];
+    
+    const stripe = await loadStripe("pk_test_51OpD6QSJz8rbJBHZieagAHv6P9mHF2YYSKtNdsQDkpxnOFkNHzCzVLxeWWyqG2M0KzSogYIOOIdQBmXgHUlFOwI500eI4vY8u8");
+
+    // Example usage of the makePayment function with a sample values object
+    const dataObj = {
+      Plan: [planDataObj],
+      siteURL: siteURL,
+      siteName: siteName,
+      sitePlatform: sitePlatform,
     };
-  };
 
-  const makePayment = async (values) => {
-    console.log("Values object:", values); // Log the values object before stringification
-  
-    // Check if all required fields are present
-    // if (!values.siteURL || !values.siteName || !values.sitePlatform || !values.subscription || !values.selectedPlan) {
-    //   console.error("Missing required fields in values object.");
-    //   return;
-    // }
-  
-    // Extract necessary values from the input object
-    const { siteURL, siteName, sitePlatform, subscription, selectedPlan } = values;
-  
-    // Call getSubscriptionDetails to get standardFeatures and pageViews
-    const { standardFeatures, pageViews } = getSubscriptionDetails(subscription);
-  
-    if (selectedPlan === "free") {
-      // Display toast message indicating plan added successfully
-      toast.success("Plan added successfully!");
-  
-      // You can add further logic here if needed for the "free" plan
-    } else {
-      // Map the selected plan to the appropriate object structure
-      const plan = [
-        {
-          plan: selectedPlan, // Use the selected plan
-          price: getPrice(selectedPlan), // Implement getPrice function to get the price of the plan
-        },
-      ];
-  
-      const stripe = await loadStripe("pk_test_51OpD6QSJz8rbJBHZieagAHv6P9mHF2YYSKtNdsQDkpxnOFkNHzCzVLxeWWyqG2M0KzSogYIOOIdQBmXgHUlFOwI500eI4vY8u8");
-  
-      try {
-        const body = {
-          siteURL,
-          siteName,
-          sitePlatform,
-          plan,
-          standardFeatures, // Include standardFeatures in the body
-          pageViews, // Include pageViews in the body
-        };
-  
-        const headers = { "Content-Type": "application/json" };
-  
-        const response = await fetch("http://localhost:8000/v1/api/wordpress/auth/create-checkout-session", {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify(body),
-        });
-  
-        const session = await response.json();
-        console.log("Session object:", session); // Log the session object
-        const result = await stripe.redirectToCheckout({
-          sessionId: session.id,
-        });
-  
-        if (result.error) {
-          console.log(result.error);
-        } else {
-          // Close the window upon successful payment
-          window.close();
-        }
-  
-        console.log("Data to send:", body); // Log the body data after the request is sent
-      } catch (error) {
-        console.error("Error making payment:", error);
-      }
-    }
-  };
-  
-  // Example usage of the makePayment function with a sample values object
-  const values = {
-    siteURL: "https://example.com",
-    siteName: "Example Site",
-    sitePlatform: "WordPress",
-    subscription: "premium", // Assuming this is the subscription type
-    selectedPlan: "premium_plan", // Assuming this is the selected plan
-  };
-  
-  // Call the makePayment function with the values object
-  makePayment(values);
-  
+    // console.log("sagdjhagsdjhags")
+    // const endPoint = "api/wordpress/auth/create-checkout-session";
+    // const data = await PostAxiosConfig(endPoint, dataObj);
+    // console.log("data*********",data)
+    // if (data.status === 200) {  
+    //   const session = await response.json();
+    //   const result = await stripe.redirectToCheckout({
+    //     sessionId: session.id,
+    //   });
+    // } else return toast.error(data?.message)
+
+    // Call the makePayment function with the values object
+    const headers = { "Content-Type": "application/json" };
+
+    const response = await fetch("http://localhost:8000/v1/api/wordpress/auth/create-checkout-session", {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(dataObj),
+    });
+
+         const session = await response.json();
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+  }
 
   return (
     <div className="flex items-center justify-center h-screen m-[10px]">
@@ -150,13 +83,13 @@ const ConnectPlatfrom = () => {
         <Formik
           initialValues={{
             siteURL: "https://dashboard.turbo-boost.io/",
-            siteName: "Turboboost", 
+            siteName: "Turboboost",
             sitePlatform: "",
             subscription: "",
           }}
           validationSchema={validationSchema}
           style={{ fontSize: "16px" }} // Set font size to 16px
-          // onSubmit={handleFormSubmit}
+          onSubmit={handleFormSubmit}
         >
           {({ isValid }) => (
             <Form>
@@ -169,7 +102,7 @@ const ConnectPlatfrom = () => {
                   inputLabel="Site URL"
                   inputName="siteURL"
                   inputType="text"
-                  
+
                 />
                 <div className="mt-4">
                   <FormikInput
@@ -211,144 +144,50 @@ const ConnectPlatfrom = () => {
                     className="text-red-500 text-sm"
                   />
 
-                  {showAllPlans ? (
-                    <>
-                      <div className="bg-gray-100 rounded-md p-4 mt-4">
-                        <label className="flex items-center">
-                          <Field
-                            type="radio"
-                            name="subscription"
-                            value="free"
-                            className="mr-2 h-4 w-4 border-gray-300 rounded"
-                            onClick={() => setSelectedPlan("free")}
-                          />
-                          <div>
-                            <p className="font-semibold text-lg">Free $0/mo</p>
-                            <p className="text-sm text-gray-600">
-                              Standard features, 5k shared page views.
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              Great for starters, comes with a badge on your
-                              site.
-                            </p>
-                          </div>
-                        </label>
-                      </div>
-                      <div className="bg-gray-100 rounded-md p-4 mt-4">
-                        <label className="flex items-center">
-                          <Field
-                            type="radio"
-                            name="subscription"
-                            value="scale"
-                            className="mr-2 h-4 w-4 border-gray-300 rounded"
-                            onClick={() => setSelectedPlan("scale")}
-                          />
-                          <div>
-                            <p className="font-semibold text-lg">Scale $2/mo</p>
-                            <p className="text-sm text-gray-600">
-                              Standard features, 10k shared page views.
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              Great for starters, comes with a badge on your
-                              site.
-                            </p>
-                          </div>
-                        </label>
-                      </div>
-                      <div className="bg-gray-100 rounded-md p-4 mt-4">
-                        <label className="flex items-center">
-                          <Field
-                            type="radio"
-                            name="subscription"
-                            value="grow"
-                            className="mr-2 h-4 w-4 border-gray-300 rounded"
-                            onClick={() => setSelectedPlan("grow")}
-                          />
-                          <div>
-                            <p className="font-semibold text-lg">Grow $5/mo</p>
-                            <p className="text-sm text-gray-600">
-                              Standard features, 15k shared page views.
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              Great for starters, comes with a badge on your
-                              site.
-                            </p>
-                          </div>
-                        </label>
-                      </div>
-                      <div className="bg-gray-100 rounded-md p-4 mt-4">
-                        <label className="flex items-center">
-                          <Field
-                            type="radio"
-                            name="subscription"
-                            value="pro"
-                            className="mr-2 h-4 w-4 border-gray-300 rounded"
-                            onClick={() => setSelectedPlan("pro")}
-                          />
-                          <div>
-                            <p className="font-semibold text-lg">Pro $10/mo</p>
-                            <p className="text-sm text-gray-600">
-                              Standard features, 20k shared page views.
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              Great for starters, comes with a badge on your
-                              site.
-                            </p>
-                          </div>
-                        </label>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="bg-gray-100 rounded-md p-4 mt-4">
-                        <label className="flex items-center">
-                          <Field
-                            type="radio"
-                            name="subscription"
-                            value="free"
-                            className="mr-2 h-4 w-4 border-gray-300 rounded"
-                            onClick={() => setSelectedPlan("free")}
-                          />
-                          <div>
-                            <p className="font-semibold text-lg">Free $0/mo</p>
-                            <p className="text-sm text-gray-600">
-                              Standard features, 5k shared page views.
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              Great for starters, comes with a badge on your
-                              site.
-                            </p>
-                          </div>
-                        </label>
-                      </div>
-                      <div className="bg-gray-100 rounded-md p-4 mt-4">
-                        <label className="flex items-center">
-                          <Field
-                            type="radio"
-                            name="subscription"
-                            value="scale"
-                            className="mr-2 h-4 w-4 border-gray-300 rounded"
-                            onClick={() => setSelectedPlan("scale")}
-                          />
-                          <div>
-                            <p className="font-semibold text-lg">Scale $2/mo</p>
-                            <p className="text-sm text-gray-600">
-                              Standard features, 10k shared page views.
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              Great for starters, comes with a badge on your
-                              site.
-                            </p>
-                          </div>
-                        </label>
-                      </div>
-                    </>
-                  )}
+                
+                {
+                    planMockData?.slice(0,showPlanCount).map((item, index) => {
+                      return  <div className="bg-gray-100 rounded-md p-4 mt-4">
+                      <label className="flex items-center">
+                        <Field
+                          type="radio"
+                          name="subscription"
+                          value={item?.name}
+                          className="mr-2 h-4 w-4 border-gray-300 rounded"
+                          onClick={() => setSelectedPlan(item?.name)}
+                        />
+                        <div>
+                          <p className="text-sm text-gray-600">	{item?.name} {selected === 0
+												? `$${item?.monthlyPrice}`
+												: `$${item?.annuallyPrice}`}
+											<span className="text-sm text-gray-600">
+												{" "}
+												/{selected === 0 ? "month" : "year"}
+											</span></p>
+                      <p
+											style={{
+												color: "#0a0a187e",
+											}}
+											className="text-sm text-gray-600"
+										>
+											<span className="text-sm text-gray-600">{item?.pageViews}</span> page
+											views/mo
+										</p>
 
+                          <p className="text-xs text-gray-500">
+                          {item?.desc}
+                            site.
+                          </p>
+                        </div>
+                      </label>
+                    </div>
+                    })
+      
+                  }
                   {!showAllPlans && (
                     <button
                       type="button"
-                      onClick={() => setShowAllPlans(true)}
+                      onClick={() => updateShowPlanCount(10)}
                       className="text-[#38F8AC] text-sm mt-2 underline cursor-pointer focus:outline-none"
                     >
                       See more plans
@@ -356,29 +195,12 @@ const ConnectPlatfrom = () => {
                   )}
                 </div>
 
-                {selectedPlan === "free" ? (
-                  <button
-                    type="button"
-                    onClick={makePayment}
-                    disabled={!isValid} // Disable the button if the form is not valid
-                    className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
-                  >
-                    <span className="translate-y-[1.5px] text-[16px]">Add</span>
-                  </button>
-                ) : (
-                  // Make Payment button
-                  <button
-                    type="button"
-                    onClick={makePayment}
-                    disabled={!isValid} 
-                    className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
-                  >
-                    <span className="translate-y-[1.5px] text-[16px]">
-                      Make Payment
-                    </span>
-                  </button>
-                )}
-
+                <button
+                  type="submit"
+                  className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
+                >
+                  <span className="translate-y-[1.5px] text-[16px]">{selectedPlan === "Basic" ? "Add": "Make Payment"}</span>
+                </button>
               </div>
             </Form>
           )}

@@ -1,16 +1,21 @@
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import appURLs from '../appURL';
 
 export const verifyOTP = createAsyncThunk(
   'auth/verifyOTP',
-  async (otp, { rejectWithValue }) => {
+  async (dataObj, { rejectWithValue }) => {
+
     try {
-      const response = await axios.post(
-        'http://localhost:8000/v1/api/wordpress/auth/verify-otp',
-        { otp }
-      );
-      return response.data;
+       const appURL = appURLs();
+       const token = localStorage.getItem('authToken');
+       const response = await axios.post(`${appURL}/api/wordpress/auth/verify-otp`, dataObj, {
+         headers: {
+           Authorization: `Bearer ${token}`
+         }
+       });
+       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
