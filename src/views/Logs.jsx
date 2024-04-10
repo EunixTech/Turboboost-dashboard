@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useWidth from "../hooks/useWidth";
 import { useSelector } from "react-redux";
-import Chart1 from "../components/charts/chart2";
+import Chart1 from "../components/charts/chart1";
 import Chart4 from "../components/charts/chart4";
 import TitleManager from "../components/TitleManager";
 
