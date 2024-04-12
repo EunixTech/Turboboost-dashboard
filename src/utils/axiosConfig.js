@@ -62,8 +62,8 @@ export const PatchAxiosConfig = async (URL="", data) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            },
-            withCredentials: true,  // Set this to true to include credentials in the request
+               },
+            withCredentials: true,
         }
     );
     console.log("response.status response.status ",response.status )
