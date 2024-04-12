@@ -12,8 +12,10 @@ export const verifyOTP = createAsyncThunk(
        const token = localStorage.getItem('authToken');
        const response = await axios.post(`${appURL}/api/wordpress/auth/verify-otp`, dataObj, {
          headers: {
-           Authorization: `Bearer ${token}`
-         }
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+         },
+         withCredentials: true,
        });
        return response.data;
     } catch (error) {
