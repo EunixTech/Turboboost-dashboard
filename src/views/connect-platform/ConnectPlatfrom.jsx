@@ -6,8 +6,7 @@ import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { planMockData, planDetail } from "../../utils/constant";
 import FormikInput from "../../components/forms/FormikInput";
-import {PostAxiosConfig}  from "../../utils/axiosConfig";
-
+import appURLs from '../../appURL';
 
 const validationSchema = Yup.object().shape({
   siteURL: Yup.string()
@@ -19,7 +18,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const ConnectPlatfrom = () => {
-	const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(0);
   const [showPlanCount, updateShowPlanCount] = useState(2);
   const [showAllPlans, setShowAllPlans] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
@@ -27,6 +26,7 @@ const ConnectPlatfrom = () => {
   const [loggedInUserEmail, setLoggedInUserEmail] = useState(""); // State to store logged-in user's email
   const location = useLocation();
 
+  const appURL = appURLs();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -37,10 +37,10 @@ const ConnectPlatfrom = () => {
   }, [location]);
 
 
-  const handleFormSubmit = async(value) => {
-  const {siteURL,siteName, subscription, sitePlatform } = value;
-  const planDataObj = planDetail[subscription];
-    
+  const handleFormSubmit = async (value) => {
+    const { siteURL, siteName, subscription, sitePlatform } = value;
+    const planDataObj = planDetail[subscription];
+
     const stripe = await loadStripe("pk_test_51OpD6QSJz8rbJBHZieagAHv6P9mHF2YYSKtNdsQDkpxnOFkNHzCzVLxeWWyqG2M0KzSogYIOOIdQBmXgHUlFOwI500eI4vY8u8");
 
     // Example usage of the makePayment function with a sample values object
@@ -65,16 +65,21 @@ const ConnectPlatfrom = () => {
     // Call the makePayment function with the values object
     const headers = { "Content-Type": "application/json" };
 
-    const response = await fetch("http://localhost:8000/v1/api/wordpress/auth/create-checkout-session", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(dataObj),
-    });
+    // const response = await fetch(`http://localhost:8000/v1/api/wordpress/auth/create-checkout-session`, {
+    //   method: "POST",
+    //   headers: headers,
+    //   body: JSON.stringify(dataObj),
+    // });
+    const appURL = appURLs();
+    const response = await axios.post(`${appURL}/api/wordpress/auth/create-checkout-session`,
+      dataObj,
+      { withCredentials: true }
+    );
 
-         const session = await response.json();
-      const result = await stripe.redirectToCheckout({
-        sessionId: session.id,
-      });
+    const session = await response.json();
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
   }
 
   return (
@@ -144,45 +149,45 @@ const ConnectPlatfrom = () => {
                     className="text-red-500 text-sm"
                   />
 
-                
-                {
-                    planMockData?.slice(0,showPlanCount).map((item, index) => {
-                      return  <div className="bg-gray-100 rounded-md p-4 mt-4">
-                      <label className="flex items-center">
-                        <Field
-                          type="radio"
-                          name="subscription"
-                          value={item?.name}
-                          className="mr-2 h-4 w-4 border-gray-300 rounded"
-                          onClick={() => setSelectedPlan(item?.name)}
-                        />
-                        <div>
-                          <p className="text-sm text-gray-600">	{item?.name} {selected === 0
-												? `$${item?.monthlyPrice}`
-												: `$${item?.annuallyPrice}`}
-											<span className="text-sm text-gray-600">
-												{" "}
-												/{selected === 0 ? "month" : "year"}
-											</span></p>
-                      <p
-											style={{
-												color: "#0a0a187e",
-											}}
-											className="text-sm text-gray-600"
-										>
-											<span className="text-sm text-gray-600">{item?.pageViews}</span> page
-											views/mo
-										</p>
 
-                          <p className="text-xs text-gray-500">
-                          {item?.desc}
-                            site.
-                          </p>
-                        </div>
-                      </label>
-                    </div>
+                  {
+                    planMockData?.slice(0, showPlanCount).map((item, index) => {
+                      return <div className="bg-gray-100 rounded-md p-4 mt-4">
+                        <label className="flex items-center">
+                          <Field
+                            type="radio"
+                            name="subscription"
+                            value={item?.name}
+                            className="mr-2 h-4 w-4 border-gray-300 rounded"
+                            onClick={() => setSelectedPlan(item?.name)}
+                          />
+                          <div>
+                            <p className="text-sm text-gray-600">	{item?.name} {selected === 0
+                              ? `$${item?.monthlyPrice}`
+                              : `$${item?.annuallyPrice}`}
+                              <span className="text-sm text-gray-600">
+                                {" "}
+                                /{selected === 0 ? "month" : "year"}
+                              </span></p>
+                            <p
+                              style={{
+                                color: "#0a0a187e",
+                              }}
+                              className="text-sm text-gray-600"
+                            >
+                              <span className="text-sm text-gray-600">{item?.pageViews}</span> page
+                              views/mo
+                            </p>
+
+                            <p className="text-xs text-gray-500">
+                              {item?.desc}
+                              site.
+                            </p>
+                          </div>
+                        </label>
+                      </div>
                     })
-      
+
                   }
                   {!showAllPlans && (
                     <button
@@ -199,7 +204,7 @@ const ConnectPlatfrom = () => {
                   type="submit"
                   className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
                 >
-                  <span className="translate-y-[1.5px] text-[16px]">{selectedPlan === "Basic" ? "Add": "Make Payment"}</span>
+                  <span className="translate-y-[1.5px] text-[16px]">{selectedPlan === "Basic" ? "Add" : "Make Payment"}</span>
                 </button>
               </div>
             </Form>

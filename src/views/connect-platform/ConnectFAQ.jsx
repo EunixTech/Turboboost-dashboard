@@ -17,10 +17,9 @@ const validationSchema = Yup.object().shape({
 const ConnectFAQ = () => {
   const navigate = useNavigate();
   const handleSubmit = async(values) => {
-    console.log("Form values:", values);
+
     let endPoint = "api/wordpress/auth/update-account";
     const data = await PostAxiosConfig(endPoint, values);
-    console.log("data*********",data)
     if (data.status === 200) {  
       navigate("/connector/website-connect");
     } else return toast.error(data?.message)
