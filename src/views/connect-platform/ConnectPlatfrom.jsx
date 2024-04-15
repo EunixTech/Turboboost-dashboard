@@ -18,6 +18,7 @@ const validationSchema = Yup.object().shape({
   subscription: Yup.string().required("Subscription option is required"),
 });
 
+
 const ConnectPlatfrom = () => {
   const [selected, setSelected] = useState(0);
   const [showPlanCount, updateShowPlanCount] = useState(2);
