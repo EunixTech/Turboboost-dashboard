@@ -73,11 +73,16 @@ const ConnectPlatfrom = () => {
     //   body: JSON.stringify(dataObj),
     // });
     const appURL = appURLs();
+    const token = localStorage.getItem("authToken");
     const response = await axios.post(`${appURL}/api/wordpress/auth/create-checkout-session`,
       dataObj,
-      { withCredentials: true }
+      { 
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
     );
-
     console.log("response",response)
 
     const session = await response.data;
@@ -153,7 +158,6 @@ const ConnectPlatfrom = () => {
                     component="div"
                     className="text-red-500 text-sm"
                   />
-
 
                   {
                     planMockData?.slice(0, showPlanCount).map((item, index) => {
