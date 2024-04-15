@@ -78,6 +78,8 @@ const ConnectPlatfrom = () => {
       { withCredentials: true }
     );
 
+    console.log("response",response)
+
     const session = await response.json();
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
