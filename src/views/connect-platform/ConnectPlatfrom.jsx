@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { planMockData, planDetail } from "../../utils/constant";
 import FormikInput from "../../components/forms/FormikInput";
 import appURLs from '../../appURL';
-import axio from "axios"
+import axios from "axios"
 
 const validationSchema = Yup.object().shape({
   siteURL: Yup.string()
