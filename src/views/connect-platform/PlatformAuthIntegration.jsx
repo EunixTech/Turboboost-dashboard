@@ -93,10 +93,10 @@ const PlatformAuthIntegration = () => {
                   </span>
                 </button>
 
-                <p className="text-center mt-4">
+                {/* <p className="text-center mt-4">
                   <strong>OR</strong>
                 </p>
-                <GoogleLoginButton />
+                <GoogleLoginButton /> */}
               </div>
             </Form>
           )}
