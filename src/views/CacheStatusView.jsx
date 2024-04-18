@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchDemoData } from "../slice/assetsCacheSlice";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -80,7 +81,7 @@ const Button2 = ({ onClick, check }) => {
 // const Button2 = ({ onClick, check }) => {
 //   const dark = useSelector((state) => state.home.dark);
 //   return (
-//     <div
+//     <div 
 //       onClick={() => {
 //         // onClick();
 //       }}
@@ -591,7 +592,44 @@ const Table = ({ setSelected1 }) => {
 
 const CacheStatus = () => {
   const [selected, setSelected] = useState([]);
+  const dispatch = useDispatch();
   const dark = useSelector((state) => state.home.dark);
+  const { data, loading, error } = useSelector((state) => state.api);
+  useEffect(() => {
+    dispatch(fetchDemoData());
+  }, [dispatch]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+  const initialDemoData = [
+    {
+      id: 1,
+      totalCacheStatus: 335,
+      totalCacheSize: "467.08 MB",
+      searchResults: "1,357",
+      cacheStatusDetails: [
+        { title: "Optimized URLs", sub: 246, color: "#38F8AC" },
+        { title: "Pending URLs", sub: 72, color: "#FFCB65" },
+        { title: "Not Optimized URLs", sub: 19, color: "#FF465C" },
+      ],
+      cacheSizeDetails: [
+        { title: "HTML Cache", sub: "114.79MB", color: "#391F87" },
+        { title: "JS Cache", sub: "21.54MB", color: "#766695" },
+        { title: "CSS Cache", sub: "67.67MB", color: "#9963FE" },
+        { title: "Fonts Cache", sub: "766.48kB", color: "#CCB0FF" },
+        { title: "Images Cache", sub: "262.46MB", color: "#E9DEFC" },
+      ],
+    },
+  ];
+  // const demoData = data.length > 0 ? data[0] : initialDemoData[0];
+  const demoData = data?.length > 0 ? data[0] : initialDemoData[0];
+
+
   return (
     <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
       <div className="w-[100%] h-[50px] shrink-0"></div>
@@ -633,7 +671,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide "
               >
-                335
+                {demoData.totalCacheStatus}
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[40%] h-[100%] mr-[2px] rounded-[10px] bg-[#38F8AC]" />
@@ -671,7 +709,7 @@ const CacheStatus = () => {
                 }}
                 className="text-[30px] mt-[10px] font-bold tracking-wide "
               >
-                467.08 MB
+                {demoData.totalCacheSize}
               </h1>
               <div className="w-[100%] h-[4px] mt-[8px] rounded-[10px] overflow-hidden flex">
                 <div className="w-[25%] h-[100%] mr-[2px] rounded-[10px] bg-[#391F87]" />
@@ -720,13 +758,14 @@ const CacheStatus = () => {
                   }}
                   className="text-[14px] font-bold tracking-wide  text-[#0a0a187a]"
                 >
-                  1,357 Results
+                  
+                  Results
                 </p>
               </div>
               <div className="flex items-center">
                 {selected.length > 0 && (
                   <p className="text-[12px] mr-[10px] font-bold tracking-wide  text-[#0a0a187a]">
-                    1,357 Results
+                    {demoData.searchResults}Results
                   </p>
                 )}
                 {/* <div

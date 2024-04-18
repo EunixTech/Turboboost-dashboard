@@ -19,6 +19,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import statusToggleReducer from '../slice/statusToggleSlice'
 import profileSliceReducer from '../slice/profileSlice'
+import cacheWarmupReducer from '../slice/warmUpCacheSlice'
 const persistConfig = {
   key: 'root', 
   storage, 
@@ -41,7 +42,9 @@ const rootReducer = combineReducers({
   loginGoogle: userLoginWithGoogleReducer, 
   excludes: excludesReducer, 
   billing: billingReducer,
-  profile: profileSliceReducer,  
+  profile: profileSliceReducer, 
+  cacheWarmup: cacheWarmupReducer,
+ 
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

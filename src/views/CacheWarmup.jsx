@@ -3,6 +3,8 @@ import HomeLayout from "../layouts/index/index";
 import Toggle from "../utils/toggle";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpgradePopUpShow } from "../services/home";
+import { useEffect } from "react";
+import { fetchData } from "../slice/warmUpCacheSlice";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -164,9 +166,28 @@ const HoverDetail = () => {
 };
 
 const CacheWarmup = ({ setShow }) => {
-  const [enabled, setEnabled] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const dispatch = useDispatch();
+
+  // Define initial cache warmup data
+  const initialCacheWarmupData = {
+    enabled: false,
+    estimatedTimeSaved: "8 hours",
+    estimatedCostsSaved: "$320",
+    numberOfPages: 72,
+  };
+
+  // State variables for cache warmup data
+  const [enabled, setEnabled] = useState(initialCacheWarmupData.enabled);
+  const [estimatedTimeSaved, setEstimatedTimeSaved] = useState(initialCacheWarmupData.estimatedTimeSaved);
+  const [estimatedCostsSaved, setEstimatedCostsSaved] = useState(initialCacheWarmupData.estimatedCostsSaved);
+  const [numberOfPages, setNumberOfPages] = useState(initialCacheWarmupData.numberOfPages);
+
+  // Dispatching the fetchData action on component mount
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
   return (
     <>
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
@@ -225,7 +246,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      8 hours
+                      {estimatedTimeSaved}
                     </p>
                   </div>
                 </div>
@@ -254,7 +275,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      320$
+                      {estimatedCostsSaved}
                     </p>
                   </div>
                 </div>
@@ -283,7 +304,7 @@ const CacheWarmup = ({ setShow }) => {
                       }}
                       className="text-[30px] font-semibold "
                     >
-                      72
+                      {numberOfPages}
                     </p>
                   </div>
                 </div>
