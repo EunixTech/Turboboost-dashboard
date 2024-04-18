@@ -1,8 +1,11 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-toastify"; 
+import { useNavigate } from "react-router-dom";
 import FormikInput from "../../components/forms/FormikInput";
 import FormikSelectInput from "../../components/SettingsComponent/FormikSelectInput";
+import {PostAxiosConfig}  from "../../utils/axiosConfig";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is required"),
@@ -12,8 +15,15 @@ const validationSchema = Yup.object().shape({
 });
 
 const ConnectFAQ = () => {
-  const handleSubmit = (values) => {
-    console.log("Form values:", values);
+  const navigate = useNavigate();
+  const handleSubmit = async(values) => {
+
+    let endPoint = "api/wordpress/auth/update-account";
+    const data = await PostAxiosConfig(endPoint, values);
+    if (data.status === 200) {  
+      navigate("/connector/website-connect");
+    } else return toast.error(data?.message)
+   
   };
   const businessTypeData = [
     "Solopreneur",
@@ -36,8 +46,8 @@ const ConnectFAQ = () => {
       <div className="w-full max-w-md">
         <img src="/logo-b.png" className="w-[150px] mx-auto" alt="" />
 
-        <h1 className="text-[35px] mt-4 font-bold text-center">
-         Tell us about yourself
+        <h1 className="text-[20px] mt-4 font-bold text-center">
+          Ask a Question
         </h1>
         <Formik
           initialValues={{

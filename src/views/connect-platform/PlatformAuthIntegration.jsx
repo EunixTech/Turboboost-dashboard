@@ -2,8 +2,9 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux"; // Import useDispatch
-import { loginWithEmail } from "../../slice/loginWithEmailSlice"; // Import your auth slice
+import { useDispatch } from "react-redux";
+import { useLocation } from 'react-router-dom';
+import { loginWithEmail } from "../../slice/loginWithEmailSlice";
 import FormikInput from "../../components/forms/FormikInput";
 import GoogleLoginButton from "../../components/button/GoogleLogin";
 import toast from "react-hot-toast";
@@ -16,23 +17,37 @@ const validationSchema = Yup.object().shape({
 
 const PlatformAuthIntegration = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // Get the dispatch function from Redux
+  const dispatch = useDispatch();
+
+  const location = useLocation();
+
 
   const handleFormSubmit = async (enteredEmail) => {
 
     try {
-      await dispatch(loginWithEmail(enteredEmail));
-      // If the action dispatch is successful, navigate to the desired page
-      navigate("/auth/opt-verification");
+      const res = await dispatch(loginWithEmail(enteredEmail));
+      console.log("res", res)
+      localStorage.removeItem("authToken")
+
+      const dataObj = res?.payload?.data;
+      const status = res?.payload?.status;
+      const accountExist = dataObj?.accountExist;
+      const emailAddress = dataObj?.emailAddress;
+      const token = dataObj?.token;
+
+      console.log(dataObj, "dataObj")
+      if (status === 200) {
+        navigate(`/auth/opt-verification?new=${!accountExist}&email=${emailAddress}`);
+        localStorage.setItem("authToken", token)
+      }
+
     } catch (error) {
       console.error("Error calling loginWithEmail API:", error);
-      // Handle the error, show toast message, etc.
       toast.error("Failed to login. Please try again later.");
     }
   };
 
   const handleContinueClick = (enteredEmail) => {
-    // Call the handleFormSubmit function to initiate the API call
     handleFormSubmit(enteredEmail);
   };
 
@@ -44,7 +59,7 @@ const PlatformAuthIntegration = () => {
             email: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={() => {}} // No need to specify onSubmit here
+          onSubmit={() => { }} // No need to specify onSubmit here
         >
           {(formikProps) => (
             <Form>
@@ -58,7 +73,7 @@ const PlatformAuthIntegration = () => {
               <h1 className="text-[35px] mt-4 font-bold text-center md:hidden">
                 Let's start with your email
               </h1>
- 
+
               <div className="mt-6">
                 <FormikInput
                   inputLabel="Enter your Email"
@@ -78,10 +93,10 @@ const PlatformAuthIntegration = () => {
                   </span>
                 </button>
 
-                <p className="text-center mt-4">
+                {/* <p className="text-center mt-4">
                   <strong>OR</strong>
                 </p>
-                <GoogleLoginButton />
+                <GoogleLoginButton /> */}
               </div>
             </Form>
           )}

@@ -176,7 +176,7 @@ const App = () => {
       {showOnboardingModal && <NewOnboard />}
       {!(
 
-        location.pathname === "/login-shopify" || location.pathname === "/auth-integration" || location.pathname === "/connector/website-connect" || location.pathname === "/auth/opt-verification" || location.pathname ==="/nitropack-auth-question" || location.pathname ==="/auth/genral-info"
+        location.pathname === "/login-shopify" || location.pathname === "/auth-integration" || location.pathname === "/connector/website-connect" || location.pathname === "/auth/opt-verification" || location.pathname ==="/nitropack-auth-question" || location.pathname ==="/auth/qustions"
       ) && (
           <HomeLayout>
             <Routes>
@@ -194,7 +194,7 @@ const App = () => {
         <Route path={"/login-shopify"} element={<SignInRoute />} />
         <Route path={"/auth-integration"} element={<PlatformAuthIntegration />} />
         <Route path={"/auth/opt-verification"} element={<VerifyOTP />} />
-        <Route path={"/auth/genral-info"} element={<ConnectFAQ />} />
+        <Route path={"/auth/qustions"} element={<ConnectFAQ />} />
         <Route path={"/connector/website-connect"} element={<ConnectPlatfrom />} />
 
       </Routes>

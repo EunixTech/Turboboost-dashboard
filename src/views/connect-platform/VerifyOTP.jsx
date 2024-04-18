@@ -1,29 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import OtpInput from "react-otp-input";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { verifyOTP } from "../../slice/verifyOtpSlice";
 import { toast } from "react-toastify"; // Import toast library
-
+import {PostAxiosConfig}  from "../../utils/axiosConfig"
 const VerifyOTP = () => {
+    const location = useLocation();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [otp, setOtp] = useState("");
   const [error, setError] = useState(null);
 
+
+  const queryParams = useMemo(() => {
+    const searchParams = new URLSearchParams(location.search);
+    return {
+      email: searchParams.get('email'),
+      isNew: searchParams.get('new')
+    };
+  }, [location.search]);
+
+  const emailAddress = queryParams.email,
+    isNewAccount = queryParams.isNew;
+
   const handleSubmit = async (values) => {
     try {
-      const { email } = values; // Extract email from form values
-      await dispatch(verifyOTP({ email, otp })); // Send email and OTP to verifyOTP action
-      navigate("/connector/website-connect");
+
+      const res = await dispatch(verifyOTP({ emailAddress, otp })); // Send email and OTP to verifyOTP action
+ 
+      const isNewAccountBoolean = isNewAccount === 'true' ? true : false;
+
+      const status = res?.payload?.status;
+      if(status === 200 && isNewAccountBoolean === true){
+        navigate("/auth/qustions");
+      } else if(status === 200 && isNewAccountBoolean === false) {
+        navigate("/connector/website-connect");
+      } else {
+        setError("Entered OTP is invalid");
+        setOtp("");
+      }
+      
     } catch (error) {
       setError(error.response.data.message);
       toast.error("Entered OTP is invalid");
-       // Show toast message for invalid OTP
       setOtp("");
     }
   };
+
+  const handleResendOTP = async() =>{
+    let endPoint = "api/wordpress/auth/resend-otp";
+    const data = await PostAxiosConfig(endPoint,{emailAddress});
+    if (data.status === 200) {
+    } else return toast.error(data?.message)
+  }
   
   return (
     <div className="otp-container">
@@ -37,7 +69,7 @@ const VerifyOTP = () => {
       </h3>
       <p className="mb-[10px]">{error && <div>{error}</div>}</p>
       <Formik
-        initialValues={{ email: "", otp: "" }} // Add email field to initialValues
+        initialValues={{ otp: "" }} // Add email field to initialValues
         onSubmit={(values) => handleSubmit(values)} // Pass form values to handleSubmit
       >
         {({ isSubmitting }) => (
@@ -46,7 +78,7 @@ const VerifyOTP = () => {
               <OtpInput
                 value={otp}
                 onChange={setOtp}
-                numInputs={6}
+                numInputs={4}
                 renderSeparator={<span>-</span>}
                 renderInput={(props) => (
                   <input {...props} style={{ width: "4em", color: '#000' }} />
@@ -54,7 +86,7 @@ const VerifyOTP = () => {
               />
             </div>
             <ErrorMessage name="otp" component="div" />
-            <a href="#" className="flex justify-center text-[#38F8AC]">Re-send code</a>
+            <p onClick={handleResendOTP} className="flex justify-center text-[#38F8AC] cursor-pointer">Re-send code</p>
 
             <button
               type="submit"

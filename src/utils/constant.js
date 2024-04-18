@@ -546,3 +546,37 @@ export const planChangeText = (item, currentPlan) => {
     }
     return buttenText;
 };
+
+export const planDetail = {
+
+    "Basic": {
+        name: "Basic",
+        desc: "Try out TurboBoost on a limited plan",
+        monthlyPrice: 0,
+        annuallyPrice: 0,
+        pageViews: "5,000",
+    },
+    "Starter": {
+        name: "Starter",
+        desc: "For very small businesses",
+        monthlyPrice: 15,
+        annuallyPrice: 150,
+        pageViews: "50,000",
+    },
+    "Growth": {
+        name: "Growth",
+        desc: "Our most popular plan for growing brands",
+        monthlyPrice: 40,
+        annuallyPrice: 400,
+        pageViews: "200,000 ",
+        CDN_bandWidth: "100GB ",
+    },
+    "Pro": {
+        name: "Pro",
+        desc: "Best for big brands",
+        monthlyPrice: 150,
+        annuallyPrice: 1500,
+        pageViews: "1,000,000",
+        CDN_bandWidth: "500GB",
+    }
+}
