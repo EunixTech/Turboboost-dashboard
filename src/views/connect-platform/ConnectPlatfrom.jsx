@@ -98,7 +98,7 @@ const ConnectPlatfrom = () => {
       <div className="w-full max-w-lg h-[80vh] overflow-y-scroll">
         <Formik
           initialValues={{
-            siteURL: localStorage.getItem("siteUrl") ? `${localStorage.getItem("siteUrl")}/` : "http://localhost/turbo-boost/",
+            siteURL: localStorage.getItem("siteUrl") ? `${localStorage.getItem("siteUrl")}/` : "http://localhost/turboboost/",
             siteName: localStorage.getItem("siteName") ?  localStorage.getItem("siteName"): "turbo-boost",
             sitePlatform: "",
             subscription: "",
