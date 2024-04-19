@@ -74,7 +74,8 @@ const ConnectPlatfrom = () => {
     // });
     const appURL = appURLs();
     const token = localStorage.getItem("authToken");
-    const response = await axios.post(`${appURL}/api/wordpress/auth/create-checkout-session`,
+    const redirectUrl = localStorage.getItem("siteUrl");
+    const response = await axios.post(`${appURL}/api/wordpress/auth/create-checkout-session?redirectUrl=${redirectUrl}`,
       dataObj,
       { 
         withCredentials: true,
@@ -97,8 +98,8 @@ const ConnectPlatfrom = () => {
       <div className="w-full max-w-lg h-[80vh] overflow-y-scroll">
         <Formik
           initialValues={{
-            siteURL: "https://dashboard.turbo-boost.io/",
-            siteName: "Turboboost",
+            siteURL: localStorage.getItem("siteUrl") ? `${localStorage.getItem("siteUrl")}/` : "http://localhost/turbo-boost/",
+            siteName: localStorage.getItem("siteName") ?  localStorage.getItem("siteName"): "turbo-boost",
             sitePlatform: "",
             subscription: "",
           }}
