@@ -9,9 +9,11 @@ import DashboardPageRoute from "./views/DashboardPage.jsx";
 import SignInRoute from "./routes/SignInRoute";
 import ConnectStore from "./views/ShopifyAuth.jsx";
 import ConnectWebsite from "./views/ConnectWebsite.jsx";
-import CacheWarmup from "./views/CacheWarmupage.jsx";
+import CacheWarmupPage from "./views/CacheWarmupage.jsx";
+import CacheWarmup from "./views/CacheWarmup.jsx"
 
 import CacheStatus from "./views/CacheStatus.jsx";
+import CacheStatusView from "./views/CacheStatusView.jsx";
 import Logs from "./views/Logs.jsx";
 
 import Integrations from "./views/integrations.jsx";
@@ -51,11 +53,19 @@ const router = [
   },
   {
     path: "/page-optimization",
-    element: <CacheWarmup />,
+    element: <CacheWarmupPage />,
   },
   {
     path: "/assets-status",
     element: <CacheStatus />,
+  },
+  {
+    path: "/cache-warmup",
+    element: <CacheWarmup />,
+  },
+  {
+    path: "/cache-status",
+    element: <CacheStatusView />,
   },
   {
     path: "/logs",

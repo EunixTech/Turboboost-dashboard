@@ -78,7 +78,7 @@ const PlatformAuthIntegration = () => {
               <h1 className="text-[20px] mt-4 font-bold text-center hidden md:block">
                 Let's start with your email
               </h1>
-              <h1 className="text-[24px] mt-4 font-bold text-center md:hidden">
+              <h1 className="text-[35px] mt-4 font-bold text-center md:hidden">
                 Let's start with your email
               </h1>
 
