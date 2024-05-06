@@ -275,101 +275,84 @@ const Prompt = ({ setOpen }) => {
   );
 };
 
-const Navbar = ({ selectedView, setSelectedView }) => {
-  const w = useWidth();
+const Navbar = ({ handleViewChange, setSelectedView }) => {
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const [loader, toggleLoader] = useState(false);
   const [platform, setPlatform] = useState("");
   const [websiteDropdownOpen, setWebsiteDropdownOpen] = useState(false);
+  const w = useWidth();
+  useEffect(() => {
+    const onPointerDown = () => {
+      if (!hover) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown, false);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown, false);
+    };
+  }, [hover]);
   const [sideOpen, setSideOpen] = useState(false);
   const [transition, setTransition] = useState(false);
-  const [connectedWebsiteData, setConnectedWebsiteData] = useState([]);
+  const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
   const dark = useSelector((state) => state.home.dark);
-
-  useEffect(() => {
-    const fetchDataAndSetView = async () => {
-      try {
-        const res = await GetAxiosConfig(
-          `api/dashboard/fetch-connected-website-data`
-        );
-        const resJSON = res?.data;
-
-        console.log("data===========>", resJSON);
-        
-        
-        if (resJSON.status === 200) {
-          const platformValue =
-          resJSON.conectedWebsite
-          .length > 0
-          ? resJSON.conectedWebsite
-          [0].platform
+  const testConnectedWebsiteData = [
+    {
+      id: 1,
+      name: "Website 1",
+      platform: 1,
+    },
+    {
+      id: 2,
+      name: "Website 2",
+      platform: 1,
+    },
+    {
+      id: 3,
+      name: "Website 3",
+      platform: 2,
+    },
+    {
+      id: 4,
+      name: "Website 4",
+      platform: 2,
+    },
+  ];
+  const fetchConnectedWebsiteData = async () => {
+    try {
+      toggleLoader(true);
+      updateConnectedWebsiteData(testConnectedWebsiteData);
+      toggleLoader(false);
+      const platformValue =
+        testConnectedWebsiteData.length > 0
+          ? testConnectedWebsiteData[0].platform
           : "";
-          setPlatform(platformValue);
-          
-          // Set selected view based on platform value
-          setSelectedView(
-            platformValue === 1 ? "Websites Connected" : "Other Websites"
-            );
-            
-            setConnectedWebsiteData(resJSON.conectedWebsite); // Corrected typo here
-            console.log("ye hai asli data", resJSON.conectedWebsite            ); // Corrected typo here
-            console.log("my connected data",connectedWebsiteData)
-          } else {
-            // Handle error or invalid response
-            console.error("Error fetching data:", resJSON);
-          }
-        } catch (error) {
-          console.error("Fetch Error:", error);
-        }
-        console.log("my connected data",connectedWebsiteData)
-    };
-
-    fetchDataAndSetView(); // Fetch data and set selected view
-  }, []); // Run effect only once on component mount
-
-  useEffect(() => {
-    const selectedWebsite = localStorage.getItem("selectedWebsite");
-    const selectedPlatform = localStorage.getItem("selectedPlatform");
-    if (selectedWebsite) {
-      const { name, platform } = JSON.parse(selectedWebsite);
-      setSelectedOption(name);
-      setPlatform(platform);
-      setSelectedView(platform === 1 ? "Websites Connected" : "Other Websites");
-    } else {
-      setSelectedOption("");
-      setPlatform("");
-      setSelectedView("");
+      setPlatform(platformValue);
+      if (platformValue === 1) {
+        setSelectedOption("Websites Connected");
+      } else if (platformValue === 2) {
+        setSelectedOption("Other Websites");
+      }
+      setSelectedView(
+        platformValue === 1 ? "Websites Connected" : "Other Websites"
+      );
+      return platformValue;
+    } catch (error) {
+      console.error("Fetch Error:", error);
+      toggleLoader(false);
+      // Handle errors here
     }
-    // If platform is stored in localStorage, set it
-    if (selectedPlatform) {
-      setPlatform(selectedPlatform);
-    }
-  }, [setSelectedView]);
-
-  // Store selected option to localStorage whenever it changes
+  };
   useEffect(() => {
-    localStorage.setItem(
-      "selectedWebsite",
-      JSON.stringify({ name: selectedOption, platform })
-    );
-  }, [selectedOption, platform]);
-
-  // Function to handle website selection
+    fetchConnectedWebsiteData();
+  }, []);
   const handleWebsiteSelect = (website) => {
     setSelectedOption(website.name);
     setPlatform(website.platform);
-    setSelectedView(
-      website.platform === 1 ? "Websites Connected" : "Other Websites"
-    );
+    setSelectedView(website.platform === 1 ? "Websites Connected" : "Other Websites");
     setOpen(false);
-
-    // Store selected website and platform in localStorage
-    localStorage.setItem(
-      "selectedWebsite",
-      JSON.stringify({ name: website.name, platform: website.platform })
-    );
-    localStorage.setItem("selectedPlatform", website.platform);
   };
   return (
     <>
@@ -410,36 +393,35 @@ const Navbar = ({ selectedView, setSelectedView }) => {
         )}
         <div className="flex gap-[20px] items-center">
           {w > 1000 && (
-            <div className="relative">
-              <div
-                className="text-[#13DE8E] cursor-pointer tracking-wide text-[12px] font-medium px-[12px] bg-[#13de8d17] items-center rounded-[3px] h-[35px] flex"
-                onClick={() => setWebsiteDropdownOpen(!websiteDropdownOpen)}
-              >
-                <span className="mr-[20px]">
-                  {selectedOption ||
-                    (platform === 1
-                      ? "Websites Connected"
-                      : platform === 2
-                      ? "Other Websites"
-                      : "")}
-                </span>
-                {websiteDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-200 shadow-lg rounded-md z-10">
-                    {connectedWebsiteData
-                      .filter((website) => website.platform === 1)
-                      .map((website) => (
-                        <div
-                          key={website.id}
-                          className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                          onClick={() => handleWebsiteSelect(website)}
-                        >
-                          {website.name}
-                        </div>
-                      ))}
-                  </div>
-                )}
-              </div>
-            </div>
+           <div className="relative">
+           <div
+             className="text-[#13DE8E] cursor-pointer tracking-wide text-[12px] font-medium px-[12px] bg-[#13de8d17] items-center rounded-[3px] h-[35px] flex"
+             onClick={() => setWebsiteDropdownOpen(!websiteDropdownOpen)}
+           >
+             <span className="mr-[20px]">
+               {selectedOption ||
+                 (platform === 1
+                   ? "Websites Connected"
+                   : platform === 2
+                   ? "Other Websites"
+                   : "")}
+             </span>
+             {/* Dropdown menu */}
+             {websiteDropdownOpen && (
+               <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-200 shadow-lg rounded-md z-10">
+                 {connectedWebsiteData.map((website) => (
+                   <div
+                     key={website.id}
+                     className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                     onClick={() => handleWebsiteSelect(website)}
+                   >
+                     {website.name}
+                   </div>
+                 ))}
+               </div>
+             )}
+           </div>
+         </div>
           )}
           <img
             src={
@@ -494,5 +476,4 @@ const Navbar = ({ selectedView, setSelectedView }) => {
     </>
   );
 };
-
 export default Navbar;

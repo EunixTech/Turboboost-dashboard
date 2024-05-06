@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HomeLayout from "../layouts/index/index";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDemoData } from "../slice/assetsCacheSlice";
+import axios from "axios";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -598,7 +599,17 @@ const CacheStatus = () => {
   useEffect(() => {
     dispatch(fetchDemoData());
   }, [dispatch]);
-
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('/api/cache-status');
+      // Handle success response
+      console.log('Data:', response.data);
+      // You can dispatch an action to update your Redux store if needed
+    } catch (error) {
+      // Handle error
+      console.error('Error:', error);
+    }
+  };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -626,7 +637,6 @@ const CacheStatus = () => {
       ],
     },
   ];
-  // const demoData = data.length > 0 ? data[0] : initialDemoData[0];
   const demoData = data?.length > 0 ? data[0] : initialDemoData[0];
 
 
@@ -648,6 +658,7 @@ const CacheStatus = () => {
               Cache Status
             </h1>
           </div>
+          <button onClick={fetchData}>Fetch Data</button>
 
           <div className="w-[100%] mt-[40px]  laptop:flex justify-between ">
             <div

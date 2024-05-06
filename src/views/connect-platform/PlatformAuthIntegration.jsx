@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +18,20 @@ const validationSchema = Yup.object().shape({
 const PlatformAuthIntegration = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const location = useLocation();
+
+  const [loading, setLoading] = useState(false);
+  const [otpSent, setOtpSent] = useState(false); // State to track if OTP has been sent
+
+  useEffect(() => {
+    setLoading(false); // Reset loading state when component unmounts or changes
+  }, []);
+
+  useEffect(() => {
+    if (otpSent) {
+      toast.success("OTP has been sent to your email address");
+    }else {}
+  }, [otpSent]); // Show toast message when otpSent changes
 
   const parseQueryStringAndStoreInLocalStorage = () => {
     const urlParams = new URLSearchParams(location.search);
@@ -30,8 +42,11 @@ const PlatformAuthIntegration = () => {
     localStorage.setItem('siteUrl', siteUrl);
     localStorage.setItem('siteName', siteName);
   };
+
   const handleFormSubmit = async (enteredEmail) => {
     try {
+      setLoading(true); // Set loading state to true when request starts
+
       const res = await dispatch(loginWithEmail(enteredEmail));
       console.log("res", res)
       localStorage.removeItem("authToken")
@@ -46,12 +61,14 @@ const PlatformAuthIntegration = () => {
       if (status === 200) {
         await parseQueryStringAndStoreInLocalStorage();
         navigate(`/auth/opt-verification?new=${!accountExist}&email=${emailAddress}`);
-        localStorage.setItem("authToken", token)
+        localStorage.setItem("authToken", token);
+        setOtpSent(true); // Set otpSent to true when OTP is successfully sent
       }
-
     } catch (error) {
       console.error("Error calling loginWithEmail API:", error);
       toast.error("Failed to login. Please try again later.");
+    } finally {
+      setLoading(false); // Set loading state to false when request completes
     }
   };
 
@@ -95,10 +112,15 @@ const PlatformAuthIntegration = () => {
                   type="button"
                   onClick={() => handleContinueClick(formikProps.values.email)}
                   className="h-10 text-[#000] w-full font-medium cursor-pointer font-medium flex items-center justify-center px-4 mt-4 inter text-[12px] bg-[#38F8AC] rounded-sm mb-4"
+                  disabled={loading} // Disable the button when loading
                 >
-                  <span className="translate-y-[1.5px] text-[16px]">
-                    Continue
-                  </span>
+                  {loading ? ( // Show loader when loading is true
+                    <span>Loading...</span>
+                  ) : (
+                    <span className="translate-y-[1.5px] text-[16px]">
+                      Continue
+                    </span>
+                  )}
                 </button>
 
                 {/* <p className="text-center mt-4">

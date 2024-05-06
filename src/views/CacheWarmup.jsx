@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUpgradePopUpShow } from "../services/home";
 import { useEffect } from "react";
 import { fetchData } from "../slice/warmUpCacheSlice";
+import axios from "axios";
 
 // const Button = ({ onClick }) => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -168,6 +169,26 @@ const HoverDetail = () => {
 const CacheWarmup = ({ setShow }) => {
   const dark = useSelector((state) => state.home.dark);
   const dispatch = useDispatch();
+
+  const handleCreateRecord = async () => {
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/v1/api/wordpress/cache/cache-status/create-new-record',
+        {
+          enabled,
+          estimatedTimeSaved,
+          estimatedCostsSaved,
+          numberOfPages
+          // Add other necessary data for creating the record
+        }
+      );
+      // Handle success response
+      console.log('Record created successfully:', response.data);
+    } catch (error) {
+      // Handle error
+      console.error('Error creating record:', error);
+    }
+  };
 
   // Define initial cache warmup data
   const initialCacheWarmupData = {

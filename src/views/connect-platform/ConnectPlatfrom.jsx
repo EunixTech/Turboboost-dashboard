@@ -11,12 +11,18 @@ import axios from "axios"
 
 const validationSchema = Yup.object().shape({
   siteURL: Yup.string()
-    .url("Invalid URL format")
+    .test('is-valid-url', 'Invalid URL format', (value) => {
+      if (!value) return true; // Allow empty values
+      const url = new URL(value);
+      return url.protocol === 'http:' || url.protocol === 'https:';
+    })
     .required("Site URL is required"),
   siteName: Yup.string().required("Site Name is required"),
   sitePlatform: Yup.string().required("Site Platform is required"),
   subscription: Yup.string().required("Subscription option is required"),
 });
+
+
 
 
 const ConnectPlatfrom = () => {
@@ -98,7 +104,7 @@ const ConnectPlatfrom = () => {
       <div className="w-full max-w-lg h-[80vh] overflow-y-scroll">
         <Formik
           initialValues={{
-            siteURL: localStorage.getItem("siteUrl") ? `${localStorage.getItem("siteUrl")}/` : "http://localhost/turbo-boost/",
+            siteURL: localStorage.getItem("siteUrl") ? `${localStorage.getItem("siteUrl")}/` : "https://localhost/turbo-boost/",
             siteName: localStorage.getItem("siteName") ?  localStorage.getItem("siteName"): "turbo-boost",
             sitePlatform: "",
             subscription: "",
