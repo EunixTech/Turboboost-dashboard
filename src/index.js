@@ -13,6 +13,12 @@ import ConnectWebsite from "./views/shared/ConnectWebsite.jsx";
 import PagesOptimization from "./views/platform/shopify/PagesOptimization.jsx";
 import AssetsOptimization from "./views/platform/shopify/AssetsOptimization.jsx";
 
+import ConnectWebsite from "./views/ConnectWebsite.jsx";
+import CacheWarmupPage from "./views/CacheWarmupage.jsx";
+import CacheWarmup from "./views/CacheWarmup.jsx"
+
+import CacheStatus from "./views/CacheStatus.jsx";
+import CacheStatusView from "./views/CacheStatusView.jsx";
 import Logs from "./views/Logs.jsx";
 
 import Integrations from "./views/integrations.jsx";
@@ -58,6 +64,14 @@ const router = [
   {
     path: "/assets-status",
     element: <AssetsOptimization />,
+  },
+  {
+    path: "/cache-warmup",
+    element: <CacheWarmup />,
+  },
+  {
+    path: "/cache-status",
+    element: <CacheStatusView />,
   },
   {
     path: "/logs",

@@ -7,7 +7,6 @@ import { setDark } from "../../../services/home";
 import { useNavigate } from "react-router-dom";
 import { GetAxiosConfig } from "../../../utils/axiosConfig.js";
 import { toast } from "react-toastify";
-
 const Item = ({ src, title, onClick }) => {
   return (
     <div
@@ -276,89 +275,102 @@ const Prompt = ({ setOpen }) => {
   );
 };
 
-const Navbar = ({ handleViewChange }) => {
+const Navbar = ({ selectedView, setSelectedView }) => {
+  const w = useWidth();
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const [loader, toggleLoader] = useState(false);
-  const [platform, setPlatform] = useState(""); 
-  const handleOptionClick = (view, optionText) => {
-    handleViewChange(view);
-    setSelectedOption(optionText);
-    setIsOpen(false);
-  };
-  const w = useWidth();
-
-  useEffect(() => {
-    const onPointerDown = () => {
-      if (!hover) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("pointerdown", onPointerDown, false);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown, false);
-    };
-  });
-
+  const [platform, setPlatform] = useState("");
+  const [websiteDropdownOpen, setWebsiteDropdownOpen] = useState(false);
   const [sideOpen, setSideOpen] = useState(false);
   const [transition, setTransition] = useState(false);
-  const [connectedWebsiteData, updateConnectedWebsiteData] = useState([]);
-
+  const [connectedWebsiteData, setConnectedWebsiteData] = useState([]);
   const dark = useSelector((state) => state.home.dark);
 
-  const fetchConnectedWebsiteData = async () => {
-    try {
-      toggleLoader(true);
-      const res = await GetAxiosConfig(
-        `api/dashboard/fetch-connected-website-data`
-      );
-      const resJSON = res?.data;
-  
-      console.log("Response JSON:", resJSON); 
-  
-      if (resJSON.status === 200) {
-        const { conectedWebsite } = resJSON;
-        console.log("Connected Website:", conectedWebsite); 
-        updateConnectedWebsiteData(conectedWebsite);
-        toggleLoader(false);
-  
-      
-        const platformValue = conectedWebsite.length > 0 ? conectedWebsite[0].platform : ""; 
-        setPlatform(platformValue);
-  
-        if (platformValue === 1) {
-          setSelectedOption("Websites Connected");
-        } else if (platformValue === 2) {
-          setSelectedOption("Other Websites");
+  useEffect(() => {
+    const fetchDataAndSetView = async () => {
+      try {
+        const res = await GetAxiosConfig(
+          `api/dashboard/fetch-connected-website-data`
+        );
+        const resJSON = res?.data;
+
+        console.log("data===========>", resJSON);
+        
+        
+        if (resJSON.status === 200) {
+          const platformValue =
+          resJSON.conectedWebsite
+          .length > 0
+          ? resJSON.conectedWebsite
+          [0].platform
+          : "";
+          setPlatform(platformValue);
+          
+          // Set selected view based on platform value
+          setSelectedView(
+            platformValue === 1 ? "Websites Connected" : "Other Websites"
+            );
+            
+            setConnectedWebsiteData(resJSON.conectedWebsite); // Corrected typo here
+            console.log("ye hai asli data", resJSON.conectedWebsite            ); // Corrected typo here
+            console.log("my connected data",connectedWebsiteData)
+          } else {
+            // Handle error or invalid response
+            console.error("Error fetching data:", resJSON);
+          }
+        } catch (error) {
+          console.error("Fetch Error:", error);
         }
-  
-        return platformValue; 
-      } else if (resJSON.status === 403) {
-        localStorage.removeItem("authToken");
-        window.location.replace("/login-shopify");
-      } else {
-        toggleLoader(false);
-        toast.error("Please try again");
-      }
-    } catch (error) {
-      console.error("Fetch Error:", error); 
-      toggleLoader(false);
-      if (error?.response?.status === 401) {
-        localStorage.removeItem("authToken");
-        window.location.replace("/login-shopify");
-      }
-    }
-  };
-  
-  
-  
+        console.log("my connected data",connectedWebsiteData)
+    };
+
+    fetchDataAndSetView(); // Fetch data and set selected view
+  }, []); // Run effect only once on component mount
 
   useEffect(() => {
-    fetchConnectedWebsiteData();
-  }, []);
+    const selectedWebsite = localStorage.getItem("selectedWebsite");
+    const selectedPlatform = localStorage.getItem("selectedPlatform");
+    if (selectedWebsite) {
+      const { name, platform } = JSON.parse(selectedWebsite);
+      setSelectedOption(name);
+      setPlatform(platform);
+      setSelectedView(platform === 1 ? "Websites Connected" : "Other Websites");
+    } else {
+      setSelectedOption("");
+      setPlatform("");
+      setSelectedView("");
+    }
+    // If platform is stored in localStorage, set it
+    if (selectedPlatform) {
+      setPlatform(selectedPlatform);
+    }
+  }, [setSelectedView]);
 
+  // Store selected option to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(
+      "selectedWebsite",
+      JSON.stringify({ name: selectedOption, platform })
+    );
+  }, [selectedOption, platform]);
+
+  // Function to handle website selection
+  const handleWebsiteSelect = (website) => {
+    setSelectedOption(website.name);
+    setPlatform(website.platform);
+    setSelectedView(
+      website.platform === 1 ? "Websites Connected" : "Other Websites"
+    );
+    setOpen(false);
+
+    // Store selected website and platform in localStorage
+    localStorage.setItem(
+      "selectedWebsite",
+      JSON.stringify({ name: website.name, platform: website.platform })
+    );
+    localStorage.setItem("selectedPlatform", website.platform);
+  };
   return (
     <>
       {sideOpen && (
@@ -375,7 +387,7 @@ const Navbar = ({ handleViewChange }) => {
       <div
         style={{
           backgroundColor: dark ? "#111317" : "#fff",
-          borderColor: dark ? "#1F2329" : "#ebebeb",
+          borderColor: dark ? "#1F2329" : "#EBEBEB",
         }}
         className="w-[100%] shrink-0 absolute z-10 top-0 left-0 border-b-[1px]  h-[50px] flex items-center justify-between bg-[#fff] "
       >
@@ -398,15 +410,38 @@ const Navbar = ({ handleViewChange }) => {
         )}
         <div className="flex gap-[20px] items-center">
           {w > 1000 && (
-           <div className="relative">
-           <div className="text-[#13DE8E] cursor-pointer tracking-wide text-[12px] font-medium px-[12px] bg-[#13de8d17] items-center rounded-[3px] h-[35px] flex">
-             <span className="mr-[20px]">
-               {selectedOption || (platform === 1 ? "Websites Connected" : platform === 2 ? "Other Websites" : "")}
-             </span>
-           </div>
-         </div>
+            <div className="relative">
+              <div
+                className="text-[#13DE8E] cursor-pointer tracking-wide text-[12px] font-medium px-[12px] bg-[#13de8d17] items-center rounded-[3px] h-[35px] flex"
+                onClick={() => setWebsiteDropdownOpen(!websiteDropdownOpen)}
+              >
+                <span className="mr-[20px]">
+                  {selectedOption ||
+                    (platform === 1
+                      ? "Websites Connected"
+                      : platform === 2
+                      ? "Other Websites"
+                      : "")}
+                </span>
+                {websiteDropdownOpen && (
+                  <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-200 shadow-lg rounded-md z-10">
+                    {connectedWebsiteData
+                      .filter((website) => website.platform === 1)
+                      .map((website) => (
+                        <div
+                          key={website.id}
+                          className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                          onClick={() => handleWebsiteSelect(website)}
+                        >
+                          {website.name}
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+            </div>
           )}
-             <img
+          <img
             src={
               dark ? "/graphic/navbar/bell-d.svg" : "/graphic/navbar/bell.svg"
             }

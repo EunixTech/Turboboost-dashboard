@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -21,9 +21,16 @@ const PlatformAuthIntegration = () => {
 
   const location = useLocation();
 
+  const parseQueryStringAndStoreInLocalStorage = () => {
+    const urlParams = new URLSearchParams(location.search);
 
+    const siteUrl = urlParams.get('siteUrl') ?? '';
+    const siteName = urlParams.get('siteName') ?? '';
+
+    localStorage.setItem('siteUrl', siteUrl);
+    localStorage.setItem('siteName', siteName);
+  };
   const handleFormSubmit = async (enteredEmail) => {
-
     try {
       const res = await dispatch(loginWithEmail(enteredEmail));
       console.log("res", res)
@@ -37,6 +44,7 @@ const PlatformAuthIntegration = () => {
 
       console.log(dataObj, "dataObj")
       if (status === 200) {
+        await parseQueryStringAndStoreInLocalStorage();
         navigate(`/auth/opt-verification?new=${!accountExist}&email=${emailAddress}`);
         localStorage.setItem("authToken", token)
       }
@@ -70,7 +78,7 @@ const PlatformAuthIntegration = () => {
               <h1 className="text-[20px] mt-4 font-bold text-center hidden md:block">
                 Let's start with your email
               </h1>
-              <h1 className="text-[24px] mt-4 font-bold text-center md:hidden">
+              <h1 className="text-[35px] mt-4 font-bold text-center md:hidden">
                 Let's start with your email
               </h1>
 

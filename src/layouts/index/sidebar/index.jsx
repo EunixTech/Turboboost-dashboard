@@ -28,11 +28,18 @@ const Sidebar = ({ selectedView }) => {
         }}
         className="desktop:w-[280px] laptop:w-[240px] px-[10px] pt-[50px] h-[100vh] flex flex-col justify-between  shrink-0 relative"
       >
+        {/* Render specific sidebar cards based on selectedView */}
         {selectedView === "Websites Connected" && <SidebarCard />}
         {selectedView === "Other Websites" && <NewViewCard />}
+
+        {/* Default sidebar card */}
+        {selectedView !== "Websites Connected" && selectedView !== "Other Websites" && (
+          <SidebarCard />
+        )}
       </div>
     </>
   );
 };
 
 export default Sidebar;
+
