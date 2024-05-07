@@ -481,7 +481,7 @@ const CacheStatus = () => {
 
     try {
       toggleLoader(true)
-      const res = await GetAxiosConfig(`api/dashboard/fetch-connected-website-data`);
+      const res = await GetAxiosConfig(`api/dashboard/shared/conetced-websites/lists`);
 
       const resData = res?.data;
         
@@ -492,8 +492,8 @@ const CacheStatus = () => {
        
       } else if (resData.status === 403) {
 
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
+        // localStorage.removeItem('authToken');
+        // window.location.replace('/login-shopify');
 
       } else {
         toggleLoader(false);
@@ -501,6 +501,7 @@ const CacheStatus = () => {
       }
 
     } catch (error) {
+      console.log(error)
       toggleLoader(false)
       console.error("Error fetching user profile data:", error);
     }
@@ -509,7 +510,7 @@ const CacheStatus = () => {
   const fetchPageViewData = async () => {
     try {
       toggleLoader(true)
-      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
+      const res = await GetAxiosConfig(`api/dashboard/shared/page-views/lists`);
       const resJSON = res?.data;
       console.log("resJSON", resJSON?.lastPurge)
       if (resJSON.status === 200) {
@@ -520,22 +521,23 @@ const CacheStatus = () => {
         updateLastPurge(resJSON?.lastPurge);
       } else if (resJSON.status === 403) {
 
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
+        // localStorage.removeItem('authToken');
+        // window.location.replace('/login-shopify');
 
       } else if (resJSON.status === 404) {
 
-        localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
+        // localStorage.removeItem('authToken');
+        // window.location.replace('/login-shopify');
 
       } else {
         toggleLoader(false);
         return toast.error("Please try again");
       }
     } catch (error) {
-      localStorage.removeItem('authToken');
-        window.location.replace('/login-shopify');
-      toggleLoader(false);
+      console.log("error",error)
+      // localStorage.removeItem('authToken');
+      //   window.location.replace('/login-shopify');
+      // toggleLoader(false);
       console.error("Error fetching user profile data:", error);
     }
   };

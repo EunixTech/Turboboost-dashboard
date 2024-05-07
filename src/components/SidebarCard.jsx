@@ -114,7 +114,7 @@ export default function SidebarCard({cancel}) {
     const fetchPageViewData = async () => {
       try {
   
-        const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
+        const res = await GetAxiosConfig(`api/dashboard/shared/page-views/fetch-page-views-data`);
         const resJSON = res?.data;
   
         if (resJSON.status === 200) {
@@ -122,13 +122,13 @@ export default function SidebarCard({cancel}) {
           updatePageViewCount(pageViews?.length)
         }else if (resJSON.status === 403) {
 
-          localStorage.removeItem('authToken');
-          window.location.replace('/login-shopify');
+          // localStorage.removeItem('authToken');
+          // window.location.replace('/login-shopify');
   
         }else if (resJSON.status === 404) {
-          console.log("workinghjsfgjhsdgjh32424*******")
-          localStorage.removeItem('authToken');
-          window.location.replace('/login-shopify');
+          // console.log("workinghjsfgjhsdgjh32424*******")
+          // localStorage.removeItem('authToken');
+          // window.location.replace('/login-shopify');
         }
       } catch (error) {
         
@@ -182,7 +182,7 @@ export default function SidebarCard({cancel}) {
   
     useEffect(() => {
       if(!userToken1){
-        fetchPageViewData();
+        // fetchPageViewData();
         fetchingBillingDetails()
       }
     }, [userToken1])

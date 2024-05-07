@@ -10,8 +10,10 @@ const DemoLine = () => {
 
   const fetchPageViewData = async () => {
     try {
-      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-graph-data`);
+      const res = await GetAxiosConfig(`api/dashboard/shared/page-views/fetch-page-views-for-graph`);
       const resJSON = res?.data;
+
+      console.log("resresres",res)
 
       if (resJSON.status === 200) {
         const pageViews = resJSON?.pageViewsArr;
@@ -33,7 +35,10 @@ const DemoLine = () => {
 
 
   const dark = useSelector((state) => state.home.dark);
- 
+  if (data.length === 0) {
+    return <p>You don't have page views to show.</p>;
+  }
+
   const config = {
     data,
     xField: "day",
@@ -42,10 +47,10 @@ const DemoLine = () => {
       tickLine: { length: 1 },
       range: [0, 1],
       label: {
-        formatter: (text) => `${(text)}`, // Remove +1 to the x-axis label
+        formatter: (text) => `${text}`, // Remove +1 to the x-axis label
       },
       tickCount: data.length, // Ensure there's a tick for each data point
-      nice: true, //
+      nice: true,
       width: "80%", // Change width for xAxis to 80%
     },
     seriesField: "name",
@@ -66,9 +71,9 @@ const DemoLine = () => {
     yAxis: {
       tickLine: { length: 0 },
       range: [0, 1],
-       nice: true, //
+      nice: true,
       label: {
-        formatter: (text) => `${parseInt(text) }`,
+        formatter: (text) => `${parseInt(text)}`,
       },
       tickCount: 5, // Ensure at least 5 ticks on the y-axis
       grid: {
@@ -78,14 +83,14 @@ const DemoLine = () => {
               },
           },
       },
-  },
-  areaStyle: (e) => {
-    console.log(e, 141132534242);
-    return {
-      fill: "l(270) 0:#ffffff50 0.5:#38F8AC80 1:#38F8AC",
-      width: "70%", // Add width 90%
-    };
-  },
+    },
+    areaStyle: (e) => {
+      console.log(e, 141132534242);
+      return {
+        fill: "l(270) 0:#ffffff50 0.5:#38F8AC80 1:#38F8AC",
+        width: "70%", // Add width 90%
+      };
+    },
     color: ["#38F8AC"],
   };
   return <Area {...config} />;

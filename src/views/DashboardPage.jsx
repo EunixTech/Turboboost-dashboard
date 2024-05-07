@@ -856,7 +856,7 @@ const Dashboard = () => {
                   handlingToggle={handleMinifyHTML}
                 />
               </div>
-              <HoverGreenButton handlePurgeAll={handlePurgeAll} btnText="Purge All" />
+              <HoverGreenButton handlePurgeAll={handlePurgeAll} btnText="Re Optimize" />
             </div>
           </div>
   

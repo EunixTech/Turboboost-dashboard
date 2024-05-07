@@ -17,7 +17,7 @@ export const billingApi=async(item,selected)=>{
 		});
 
 		const response = await axios.post(
-            `${appURL}/user/createSubscription`,
+            `${appURL}/api/shopify/plan/create-subscription`,
             data,
             {
                 headers: {

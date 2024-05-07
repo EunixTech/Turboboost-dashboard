@@ -114,7 +114,7 @@ export default function NewViewCard({cancel}) {
     const fetchPageViewData = async () => {
       try {
   
-        const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-data`);
+        const res = await GetAxiosConfig(`api/dashboard/shared/page-views/fetch-page-views-data`);
         const resJSON = res?.data;
   
         if (resJSON.status === 200) {
@@ -122,10 +122,10 @@ export default function NewViewCard({cancel}) {
           updatePageViewCount(pageViews?.length)
         }
       } catch (error) {
-        if (error?.response?.status === 401) {
-          localStorage.removeItem('authToken');
-          window.location.replace('/login-shopify');
-        }
+        // if (error?.response?.status === 401) {
+        //   localStorage.removeItem('authToken');
+        //   window.location.replace('/login-shopify');
+        // }
         console.error("Error fetching user profile data:", error);
       }
     };
@@ -173,7 +173,7 @@ export default function NewViewCard({cancel}) {
   
     useEffect(() => {
       if(!userToken1){
-        fetchPageViewData();
+        // fetchPageViewData();
         fetchingBillingDetails()
       }
     }, [userToken1])

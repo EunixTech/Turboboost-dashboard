@@ -8,15 +8,16 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import DashboardPageRoute from "./views/DashboardPage.jsx";
 import SignInRoute from "./routes/SignInRoute";
 import ConnectStore from "./views/ShopifyAuth.jsx";
-import ConnectWebsite from "./views/ConnectWebsite.jsx";
-import CacheWarmup from "./views/CacheWarmupage.jsx";
+import ConnectWebsite from "./views/shared/ConnectWebsite.jsx";
 
-import CacheStatus from "./views/CacheStatus.jsx";
+import PagesOptimization from "./views/platform/shopify/PagesOptimization.jsx";
+import AssetsOptimization from "./views/platform/shopify/AssetsOptimization.jsx";
+
 import Logs from "./views/Logs.jsx";
 
 import Integrations from "./views/integrations.jsx";
 
-import Billing from "./views/Billing.jsx";
+import Billing from "./views/platform/shopify/Billing.jsx";
 import Settings from "./views/SettingPage.jsx";
 import Affiliate from "./views/Affiliate.jsx";
 import ShopifyAdmin from "./views/ShopifyAdmin.jsx";
@@ -36,6 +37,7 @@ import PlatformAuthIntegration from "./views/connect-platform/PlatformAuthIntegr
 import ConnectPlatfrom from "./views/connect-platform/ConnectPlatfrom.jsx";
 import VerifyOTP from "./views/connect-platform/VerifyOTP.jsx";
 import ConnectFAQ from "./views/connect-platform/ConnectFAQ.jsx";
+
 const router = [
   {
     path: "/",
@@ -51,11 +53,11 @@ const router = [
   },
   {
     path: "/page-optimization",
-    element: <CacheWarmup />,
+    element: <PagesOptimization />,
   },
   {
     path: "/assets-status",
-    element: <CacheStatus />,
+    element: <AssetsOptimization />,
   },
   {
     path: "/logs",

@@ -1,17 +1,13 @@
-import React, { Suspense, useState, useEffect } from "react";
-import HomeLayout from "../layouts/index/index";
-import Toggle from "../utils/toggle";
+import React, {useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUpgradePopUpShow } from "../services/home";
-import TitleManager from "../components/TitleManager";
-import axios from "axios";
-import appURLs from "../appURL";
-import Tooltip from "../components/Tooltip"
+import TitleManager from "../../../components/TitleManager.jsx";
+import appURLs from "../../../appURL.js";
+import Tooltip from "../../../components/Tooltip.jsx"
 import toast from "react-hot-toast";
-import AnimatedLoader from "../components/loader/AnimatedLoader";
-import { GetAxiosConfig,PostAxiosConfig } from "../utils/axiosConfig.js";
-import { setToggle } from "../slice/statusToggleSlice";
-import ToggleButton from "../components/ToggleButton.jsx";
+import AnimatedLoader from "../../../components/loader/AnimatedLoader.jsx";
+import { GetAxiosConfig } from "../../../utils/axiosConfig.js";
+import { setToggle } from "../../../slice/statusToggleSlice.jsx";
+import ToggleButton from "../../../components/ToggleButton.jsx";
 
 const Button = ({pageOptimizationValue, handleOptimizePage}) => {
   const dark = useSelector((state) => state.home.dark);
@@ -48,33 +44,6 @@ const Button = ({pageOptimizationValue, handleOptimizePage}) => {
      </p>
       }
      
-    </div>
-  );
-};
-
-
-const Button1 = ({ onClick }) => {
-  const dark = useSelector((state) => state.home.dark);
-  return (
-    <div
-      onClick={() => {
-        onClick();
-      }}
-      className={`w-[100%] ${!dark ? "bg-[#f3f3f3] " : "bg-[#1c1f26]"}
-        
-        h-[40px] mt-[20px]  cursor-pointer rounded-[4px]  flex items-center justify-center`}
-    >
-      <p
-        className={`text-[${true ? "#fff" : "#000"}]   f2 text-[12px]   ${dark ? "bg-[#000]" : "bg-[#000]"
-          } rounded-[4px] active:translate-y-[0px] hover:bg-[#333345] active:border-0 translate-y-[0px] translate-x-[0px] active:translate-x-0 w-[100%] flex items-center justify-center h-[100%] tracking-wide font-medium `}
-      >
-        <img
-          src="/graphic/warmup/plus.svg"
-          className="w-[8px] mr-[5px] translate-y-[0px]"
-          alt=""
-        />{" "}
-        Get HTML Sitemap
-      </p>
     </div>
   );
 };
@@ -172,7 +141,6 @@ const Status = ({ i }) => {
 };
 
 const TableItem1 = ({ last, item }) => {
-  const [check, setCheck] = useState(false);
   const dark = useSelector((state) => state.home.dark);
   const formatDate = (dateString) => {
        const dateObj = new Date(dateString);
@@ -225,7 +193,7 @@ const TableItem1 = ({ last, item }) => {
   );
 };
 
-const CacheWarmup = ({ setShow }) => {
+const PagesOptimization = ({ setShow }) => {
   const [enabled, setEnabled] = useState(false);
   const [pageOptimizationData, updatePageOptimizationData] = useState({});
   const dark = useSelector((state) => state.home.dark);
@@ -238,7 +206,7 @@ const CacheWarmup = ({ setShow }) => {
 
     try {
       toggleLoader(true);
-      const res = await GetAxiosConfig(`api/dashboard/fetch-page-optimization-data`);
+      const res = await GetAxiosConfig(`api/dashboard/platforms/shopify/pages-optimization/details`);
       toggleLoader(false);
 
       const resData = res?.data;
@@ -261,8 +229,8 @@ const CacheWarmup = ({ setShow }) => {
 
   const handleOptimizePage = async() =>{
     let endPoint = "";
-    if (!pageOptimizationValue) endPoint = "api/shopify/removed-page-unused-code";
-    else endPoint = "api/shopify/restore-page-optimization";
+    if (!pageOptimizationValue) endPoint = "api/shopify/optimization/page-optimization/remove-unused-code";
+    else endPoint = "api/shopify/optimization/page-optimization/restore-remove-unused-code";
    
     try {
       toggleLoader(true);
@@ -324,18 +292,7 @@ const CacheWarmup = ({ setShow }) => {
                 >
                   Page Optimization
                 </h1>
-                {/* {enabled && (
-                  <div className="w-[120px] h-[34px] text-[#fff] cursor-pointer mt-[18px] rounded-[3px] flex items-center justify-center bg-[#000]">
-                    <h1 className="text-[11px] items-center flex font-medium">
-                      <img
-                        src="/graphic/warmup/web.svg"
-                        className="w-[12px] mr-[5px] translate-y-[0px]"
-                        alt=""
-                      />{" "}
-                      HTML Sitemap
-                    </h1>
-                  </div>
-                )} */}
+                
               </div>
               <div className="w-[100%] laptop:flex justify-between">
                 <div
@@ -451,12 +408,7 @@ const CacheWarmup = ({ setShow }) => {
                     >
                       When TurboBoost is enabled, it will minify the HTML by removing extra whitespace.
                     </p>
-                    {/* <Toggle
-                      value={!enabled}
-                      setValue={(e) => {
-                        setEnabled(!enabled);
-                      }}
-                    /> */}
+                
 
                     <ToggleButton toggleValue={pageOptimizationValue} handlingToggle={handleOptimizePage}  toggleKey="someKey" />
 
@@ -469,75 +421,7 @@ const CacheWarmup = ({ setShow }) => {
                     className="w-[100%] laptop:flex justify-between border-t-[1px] px-[15px] border-[#ebebeb] mt-[8px] block"
                    
                   >
-                    {/* <div className="laptop:w-[49%] mobile:w-[100%] pt-[13px] flex flex-col justify-between">
-                      <div>
-                        <h1
-                          style={{
-                            color: dark ? "#fff" : "#000",
-                          }}
-                          className="text-[16px] font-bold tracking-wide "
-                        >
-                          Home Page URL
-                        </h1>
-                        <p
-                          style={{
-                            color: dark ? "#ffffff74" : "#0a0a187e",
-                          }}
-                          className="text-[14px] mt-[4px] tracking-wide  text-[#0a0a186f]"
-                        >
-                          Specify a URL
-                        </p>
-                      </div>
-                      <input
-                        style={{
-                          color: dark ? "#fff" : "#000",
-                          borderColor: dark ? "#1F2329" : "#ebebeb",
-                        }}
-                        type="text"
-                        className="w-[100%] h-[34px] mt-[4px] rounded-[4px] bg-transparent border-[1px] border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
-                      />
-                    </div>
-                    <div className="laptop:w-[49%] mobile:w-[100%] h-[100%] pt-[13px] flex flex-col justify-between">
-                      <h1
-                        style={{
-                          color: dark ? "#fff" : "#000",
-                        }}
-                        className="text-[16px] font-bold tracking-wide flex"
-                      >
-                        Sitemap URL
-                        {/* <div
-                          onClick={() => {
-                            dispatch(setUpgradePopUpShow(true));
-                          }}
-                          className="bg-[#754ffe33]  cursor-pointer text-[#754FFE] ml-[10px] font-medium tracking-wide h-[18px] rounded-[3px] flex items-center text-[9px] px-[10px] py-[7px] "
-                        >
-                          <img
-                            src="/ss.svg"
-                            className="w-[10px] mr-[4px] "
-                            alt=""
-                          />
-                          <span>Get Feature</span>
-                        </div> */}
-                    {/* </h1>
-                      <p
-                        style={{
-                          color: dark ? "#ffffff74" : "#0a0a187e",
-                        }}
-                        className="text-[14px] mt-[4px] tracking-wide  text-[#0a0a186f]"
-                      >
-                        Please specify a URL for your sitemap (must be in XML
-                        format)
-                      </p>
-                      <input
-                        type="text"
-                        style={{
-                          color: dark ? "#fff" : "#000",
-                          borderColor: dark ? "#1F2329" : "#ebebeb",
-                        }}
-                        className="w-[100%] mt-[4px] h-[34px] rounded-[4px] border-[1px] bg-transparent
-                         border-[#ebebeb] outline-none mt-[5px] text-[13px] font-medium px-[10px] "
-                      />
-                    </div>  */}
+                   
                      <p
                         style={{
                           color: dark ? "#ffffff74" : "#0a0a187e",
@@ -603,74 +487,9 @@ const CacheWarmup = ({ setShow }) => {
                         )}
                       </div>
                     </div>
-
-                    {/* <div className="w-[100%] h-[38px] hover:bg-[#2FE49C] cursor-pointer mt-[18px] rounded-[3px] flex items-center justify-center bg-[#38F8AC]">
-                    <h1 className="text-[14px] items-center flex font-medium">
-                      <img
-                        src="/graphic/warmup/play.svg"
-                        className="w-[8px] mr-[5px] translate-y-[0px]"
-                        alt=""
-                      />{" "}
-                      Start Optimizations
-                    </h1>
-                  </div> */}
                     <Button pageOptimizationValue={pageOptimizationValue} handleOptimizePage = {handleOptimizePage} />
                   </div>
-                  {/* <div
-                    style={{
-                      color: dark ? "#fff" : "#000",
-                      borderColor: dark ? "#1F2329" : "#ebebeb",
-                      backgroundColor: dark ? "#111317" : "#fff",
-                    }}
-                    className="w-[100%] mt-[10px]  px-[15px] py-[14px]  bg-[#fff] border-[1px] border-[#EBEBEB] rounded-[8px]"
-                  >
-                    {/* <div className="flex items-center">
-                      <h1 className="text-[20px] font-bold tracking-wide ">
-                        Generate Sitemap
-                      </h1>
-                      <div
-                        onClick={() => {
-                          dispatch(setUpgradePopUpShow(true));
-                        }}
-                        className="bg-[#754ffe33] cursor-pointer text-[#754FFE] ml-[10px] font-medium tracking-wide h-[22px] rounded-[3px] flex items-center text-[11px] px-[10px] py-[7px] "
-                      >
-                        <img
-                          src="/ss.svg"
-                          className="w-[11px] mr-[4px] "
-                          alt=""
-                        />
-                        <span>Get Feature</span>
-                      </div> */}
-                  {/* <div className="bg-[#000] ml-[5px] font-medium tracking-wide h-[24px] rounded-[3px] flex items-center text-[13px] px-[10px] py-[4px] text-[#fff]">
-                          <img
-                            src="/graphic/warmup/lock.svg"
-                            className="w-[10px] mr-[4px] "
-                            alt=""
-                          />
-                          <span className="translate-y-[1px]">Pro</span>
-                        </div> */}
-                  {/* </div> */}
-                  {/* <div
-                    onClick={() => {
-                      setShow(true);
-                    }}
-                    className="w-[100%] h-[38px] hover:bg-[#333345] text-[#fff] cursor-pointer mt-[18px] rounded-[3px] flex items-center justify-center bg-[#000]"
-                  >
-                    <h1 className="text-[14px] items-center flex font-medium">
-                      <img
-                        src="/graphic/warmup/plus.svg"
-                        className="w-[8px] mr-[5px] translate-y-[0px]"
-                        alt=""
-                      />{" "}
-                      Get HTML Sitemap
-                    </h1>
-                  </div> */}
-                  {/* <Button1
-                      onClick={() => {
-                        setShow(true);
-                      }}
-                    />
-                  </div>  */}
+                
                 </div>
               </div>
             </div>
@@ -682,4 +501,4 @@ const CacheWarmup = ({ setShow }) => {
   );
 };
 
-export default CacheWarmup;
+export default PagesOptimization;

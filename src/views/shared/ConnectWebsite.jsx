@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-import TitleManager from "../components/TitleManager";
-import AnimatedLoader from "../components/loader/AnimatedLoader";
+import TitleManager from "../../components/TitleManager.jsx";
+import AnimatedLoader from "../../components/loader/AnimatedLoader.jsx";
 
-import { GetAxiosConfig } from "../utils/axiosConfig.js";
+import { GetAxiosConfig } from "../../utils/axiosConfig.js";
 
 // const Button = () => {
 //   const dark = useSelector((state) => state.home.dark);
@@ -607,7 +607,7 @@ const ConnectWebsite = () => {
  
       try {
         toggleLoader(true)
-        const res = await GetAxiosConfig(`api/dashboard/fetch-connected-website-data`);
+        const res = await GetAxiosConfig(`api/dashboard/shared/conetced-websites/lists`);
         
         const resJSON = res?.data;
 

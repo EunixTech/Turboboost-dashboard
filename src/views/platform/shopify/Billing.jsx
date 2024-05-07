@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { planMockData, ComparePlans, planChangeText } from "../utils/constant";
+import { planMockData, ComparePlans, planChangeText } from "../../../utils/constant";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { billingApi } from "../utils/billingApi";
-import { setPlan, setSelected } from "../slice/billingSlice";
-import apiRequestHanlder from "../utils/apiRequestHandler";
+import { billingApi } from "../../../utils/billingApi";
+import { setPlan, setSelected } from "../../../slice/billingSlice";
+import apiRequestHanlder from "../../../utils/apiRequestHandler";
 
-import getFetchConfig from '../utils/getFetchConfig';
-import standardFetchHandlers from '../utils/standardFetchHandlers';
-import handleFetchErrors from '../utils/handleFetchErrors';
-import appURLs from '../appURL';
-import TitleManager from "../components/TitleManager";
-import AnimatedLoader from "../components/loader/AnimatedLoader";
+import getFetchConfig from '../../../utils/getFetchConfig';
+import standardFetchHandlers from '../../../utils/standardFetchHandlers';
+import handleFetchErrors from '../../../utils/handleFetchErrors';
+import appURLs from '../../../appURL';
+import TitleManager from "../../../components/TitleManager";
+import AnimatedLoader from "../../../components/loader/AnimatedLoader";
 
 const Billing = () => {
 	const [currentPlan, updateCurrentPlan] = useState("Starter");

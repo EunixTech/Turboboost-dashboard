@@ -1,13 +1,13 @@
 
 
 import React, { useEffect, useState } from "react";
-import TitleManager from "../components/TitleManager.jsx";
+import TitleManager from "../../../components/TitleManager.jsx";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import AnimatedLoader from "../components/loader/AnimatedLoader.jsx";
-import { GetAxiosConfig } from "../utils/axiosConfig.js";
-import { setToggle } from "../slice/statusToggleSlice";
-import Pagination from "../components/pagination/Pagination.jsx";
+import AnimatedLoader from "../../../components/loader/AnimatedLoader.jsx";
+import { GetAxiosConfig } from "../../../utils/axiosConfig.js";
+import { setToggle } from "../../../slice/statusToggleSlice.jsx";
+import Pagination from "../../../components/pagination/Pagination.jsx";
 
 const Button = ({ updateSearchBy, clearFilterHandler }) => {
   const dark = useSelector((state) => state.home.dark);
@@ -518,7 +518,8 @@ const Table = ({ assetsDataArr, assetsData, originalArr, updateAssetsArr, setSel
   );
 };
 
-const CacheStatus = () => {
+const AssetsOptimization = () => {
+  
   const [selected, setSelected] = useState([]);
   const [loader, toggleLoader] = useState(false);
   const dark = useSelector((state) => state.home.dark);
@@ -540,7 +541,7 @@ const CacheStatus = () => {
 
     try {
       toggleLoader(true);
-      const res = await GetAxiosConfig(`api/dashboard/fetch-assets-optimization-data`);
+      const res = await GetAxiosConfig(`api/dashboard/platforms/shopify/assets-optimization/details`);
       const resData = res?.data;
       if (resData?.status === 200) {
         const assetsDataObj = resData?.assets;
@@ -914,4 +915,4 @@ const CacheStatus = () => {
   );
 };
 
-export default CacheStatus;
+export default AssetsOptimization;

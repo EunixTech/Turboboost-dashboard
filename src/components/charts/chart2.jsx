@@ -10,9 +10,9 @@ const DemoLine = ({ currMonth }) => {
 
   const fetchPageViewData = async () => {
     try {
-      const res = await GetAxiosConfig(`api/dashboard/fetch-page-views-graph-data?selectedMonth=${currMonth + 1}`);
+      const res = await GetAxiosConfig(`api/dashboard/shared/page-views/fetch-page-views-for-graph`);
       const resJSON = res?.data;
-
+      console.log("resJSON", resJSON)
       if (resJSON.status === 200) {
         const pageViews = resJSON?.pageViewsArr;
 
