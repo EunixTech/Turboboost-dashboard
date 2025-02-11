@@ -21,6 +21,7 @@ const SignInPage = () => {
   const screenWidth = useWidth();
   const [authType, toggleAuthType] = useState("login");
   const appURL = appURLs();
+  console.log('login')
 
   const handleFormSubmit = async (values, { setSubmitting }) => {
 
