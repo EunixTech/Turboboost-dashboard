@@ -169,7 +169,7 @@ const Billing = () => {
 											backgroundColor: dark ? "#111317" : "#fff",
 											borderColor: dark ? "#1F2329" : "#ebebeb",
 										}}
-										className=" bg-[#fff] border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px] col-span-1 justify-self-center"
+										className=" bg-[#fff] border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px] custom-grid-col-grid"
 									>
 										<div style={{ paddingLeft: "0px" }} className="flex w-[100%] items-center px-[17px]">
 

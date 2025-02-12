@@ -156,7 +156,7 @@ const OnboardingBillings = () => {
                     width: "280px",
                     height: "auto",
                   }}
-                  className="bg-[#fff]  border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px] col-span-1 justify-self-center"
+                  className="bg-[#fff]  border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px] custom-grid-col-grid"
                 >
                   <h1
                     style={{
