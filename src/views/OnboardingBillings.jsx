@@ -156,7 +156,7 @@ const OnboardingBillings = () => {
                     width: "280px",
                     height: "auto",
                   }}
-                  className="bg-[#fff]  border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px]"
+                  className="bg-[#fff]  border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px] justify-center justify-self-center grid-cols-2"
                 >
                   <h1
                     style={{
@@ -199,14 +199,14 @@ const OnboardingBillings = () => {
                     )}
                   </h1>
 
-                  <p
+                  {/* <p
                     style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",
                     }}
                     className="text-[12px] h-[30px] px-[17px] text-[#0a0a187a] font-medium tracking-wide"
                   >
                     {item?.desc}
-                  </p>
+                  </p> */}
                   <div
                     style={{
                       color: dark ? "#fff" : "#000",
@@ -249,7 +249,7 @@ const OnboardingBillings = () => {
                           dark ? "#fff" : "#000"
                         }] bg-[#fff] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#38F8AC] text-[12px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
                       >
-                        Get Started Free
+                         Start Free Trial
                       </div>
                     </div>
                   ) : (
@@ -413,14 +413,14 @@ const OnboardingBillings = () => {
                     )}
                   </h1>
 
-                  <p
+                  {/* <p
                     style={{
                       color: dark ? "#ffffff74" : "#0a0a187e",
                     }}
                     className="text-[12px] h-[30px] px-[17px] text-[#0a0a187a] font-medium tracking-wide"
                   >
                     {item?.desc}
-                  </p>
+                  </p> */}
                   <div
                     style={{
                       color: dark ? "#fff" : "#000",
@@ -463,7 +463,7 @@ const OnboardingBillings = () => {
                           dark ? "#fff" : "#000"
                         }] bg-[#fff] hover:text-[#000] cursor-pointer rounded-[3px] border-[1px] border-[#38F8AC] text-[12px] font-bold text-[#000] tracking-wide flex items-center justify-center`}
                       >
-                        Get Started Free
+                         Start Free Trial
                       </div>
                     </div>
                   ) : (

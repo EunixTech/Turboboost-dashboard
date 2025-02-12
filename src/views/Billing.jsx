@@ -188,14 +188,14 @@ const Billing = () => {
 
 
 										</div>
-										<p
+										{/* <p
 											style={{
 												color: dark ? "#ffffff74" : "#0a0a187e",
 											}}
 											className="text-[14px] h-[42px] px-[17px] text-[#0a0a187a] font-medium tracking-wide"
 										>
 											{item?.desc}
-										</p>
+										</p> */}
 										<div
 											style={{
 												color: dark ? "#fff" : "#000",
