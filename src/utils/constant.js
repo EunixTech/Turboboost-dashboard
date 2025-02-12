@@ -4,14 +4,14 @@ export const planMockData = [
         desc: "Try out TurboBoost on a limited plan",
         monthlyPrice: 19,
         annuallyPrice: 190,
-        pageViews: "25,000",
+        pageViews: "5,000",
         CDN_bandWidth: "1.00GB",
         additionalPage:{
             price:5,
             pageCount:'10,000'
         },
         includes: [
-            "25,000 page views per month",
+            "5,000 page views per month",
             // "1.00 GB CDN bandwidth per month",
             // "Optimized by TurboBoost Badge",
             "All-in-one performance optimization",
