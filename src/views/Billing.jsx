@@ -169,7 +169,7 @@ const Billing = () => {
 											backgroundColor: dark ? "#111317" : "#fff",
 											borderColor: dark ? "#1F2329" : "#ebebeb",
 										}}
-										className=" bg-[#fff] border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px] custom-grid-col-grid"
+										className=" bg-[#fff] border-[1px] border-[#EBEBEB] py-[12px] mobile:mb-[3px] laptop:mb-[30px] rounded-[8px]"
 									>
 										<div style={{ paddingLeft: "0px" }} className="flex w-[100%] items-center px-[17px]">
 
@@ -226,7 +226,7 @@ const Billing = () => {
 											}}
 											className="text-[14px]  px-[17px] text-[#0a0a187a]  tracking-wide"
 										>
-											${item?.additionalPage?.price} per {item?.additionalPage?.pageCount} additional page
+											${item?.additionalPage?.price} per {item?.additionalPage?.pageCount} additional page views
 										</p>
 										<div className="w-[100%] px-[17px] mt-[15px]">
 											{currentPlan == item?.name ? (

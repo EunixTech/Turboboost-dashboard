@@ -924,7 +924,7 @@ const Plan = ({ cancel }) => {
                     style={{ color: dark ? "#ffffff74" : "#0a0a187e" }}
                     className="text-[14px] text-[#696e7e89] font-medium "
                   >
-                    ${item?.additionalPage?.price} per {item?.additionalPage?.pageCount} additional page
+                    ${item?.additionalPage?.price} per {item?.additionalPage?.pageCount} additional page views
                   </h1>
                 </div>
                 <div
