@@ -2,12 +2,16 @@ export const planMockData = [
     {
         name: "Basic",
         desc: "Try out TurboBoost on a limited plan",
-        monthlyPrice: 0,
-        annuallyPrice: 0,
-        pageViews: "5,000",
+        monthlyPrice: 19,
+        annuallyPrice: 190,
+        pageViews: "25,000",
         CDN_bandWidth: "1.00GB",
+        additionalPage:{
+            price:5,
+            pageCount:'10,000'
+        },
         includes: [
-            "5,000 page views per month",
+            "25,000 page views per month",
             // "1.00 GB CDN bandwidth per month",
             // "Optimized by TurboBoost Badge",
             "All-in-one performance optimization",
@@ -28,6 +32,10 @@ export const planMockData = [
         annuallyPrice: 150,
         pageViews: "50,000",
         CDN_bandWidth: "25GB",
+        additionalPage:{
+            price:5,
+            pageCount:'10,000'
+        },
         includes: [
             "50,000 page views per month",
             // "25 GB CDN bandwidth per month",
@@ -54,6 +62,10 @@ export const planMockData = [
         annuallyPrice: 400,
         pageViews: "200,000 ",
         CDN_bandWidth: "100GB ",
+        additionalPage:{
+            price:5,
+            pageCount:'10,000'
+        },
         includes: [
             "200,000 page views per month",
             // "100 GB CDN bandwidth per month",
@@ -86,6 +98,10 @@ export const planMockData = [
         annuallyPrice: 1500,
         pageViews: "1,000,000",
         CDN_bandWidth: "500GB",
+        additionalPage:{
+            price:5,
+            pageCount:'10,000'
+        },
         includes: [
             "200,000 page views per month",
             // "100 GB CDN bandwidth per month",

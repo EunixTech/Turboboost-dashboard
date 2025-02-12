@@ -226,7 +226,7 @@ const Billing = () => {
 											}}
 											className="text-[14px]  px-[17px] text-[#0a0a187a]  tracking-wide"
 										>
-											$15 per 5,000 additional page
+											${item?.additionalPage?.price} per {item?.additionalPage?.pageCount} additional page
 										</p>
 										<div className="w-[100%] px-[17px] mt-[15px]">
 											{currentPlan == item?.name ? (

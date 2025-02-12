@@ -236,7 +236,7 @@ const OnboardingBillings = () => {
                     }}
                     className="text-[12px]  px-[17px] text-[#0a0a187a]  tracking-wide"
                   >
-                    $15 per 5,000 additional page
+                    ${item?.additionalPage?.price} per {item?.additionalPage?.pageCount} additional page
                   </p>
 
                   {item?.name === "Basic" ? (
@@ -450,7 +450,7 @@ const OnboardingBillings = () => {
                     }}
                     className="text-[10px]  px-[17px] text-[#0a0a187a]  tracking-wide"
                   >
-                    $15 per 5,000 additional page
+                    ${item?.additionalPage?.price} per {item?.additionalPage?.pageCount} additional page
                   </p>
 
                   {item?.name === "Basic" ? (
