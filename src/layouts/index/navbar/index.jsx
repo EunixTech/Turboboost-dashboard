@@ -65,7 +65,7 @@ const Prompt = ({ setOpen }) => {
           }
           title="Account Settings"
         />
-        <Item
+        {/* <Item
           onClick={() => {
             setOpen(false)
             router("/billing");
@@ -76,7 +76,7 @@ const Prompt = ({ setOpen }) => {
             </g>
           </svg>}
           title="Billing"
-        />
+        /> */}
         <Item
           onClick={() => {
             setOpen(false)
