@@ -65,10 +65,10 @@ const router = [
     path: "/integrations",
     element: <Integrations />,
   },
-  {
-    path: "/billing",
-    element: <Billing />,
-  },
+  // {
+  //   path: "/billing",
+  //   element: <Billing />,
+  // },
   {
     path: "/settings",
     element: <Settings />,

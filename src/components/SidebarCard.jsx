@@ -202,10 +202,10 @@ export default function SidebarCard({cancel}) {
                 <Item title={"Assets Status"} route="/assets-status" src="/icon4.svg" cancel={cancel} />
                 <Item title={"Logs"} route="/logs" src="/icon5.svg" cancel={cancel} />
                 <Item title={"Integrations"} route="/integrations" src="/icon6.svg" cancel={cancel} />
-                <Item title={"Billing"} route="/billing" src="/icon7.svg" cancel={cancel} />
+                {/* <Item title={"Billing"} route="/billing" src="/icon7.svg" cancel={cancel} /> */}
                 <Item title={"Settings"} route="/settings" src="/icon8.svg" cancel={cancel} />
             </div>
-            <div
+            {/* <div
                 style={{
                     backgroundColor: dark ? "#191B21" : "#191925",
                 }}
@@ -244,7 +244,7 @@ export default function SidebarCard({cancel}) {
                         dispatch(setUpgradePopUpShow(true));
                     }}
                 />
-            </div>
+            </div> */}
         </>
     )
 }
