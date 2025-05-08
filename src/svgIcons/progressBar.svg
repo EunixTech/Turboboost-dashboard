@@ -1,0 +1,18 @@
+ <svg
+    width="70"
+    style={props.style}
+    className="absolute duration-100 z-10 top-0 left-0"
+    height="70"
+    viewBox="0 0 100 100"
+>
+    <circle
+        cx={50}
+                cy={50}
+                    r={props?.radius}
+                    fill="transparent"
+                    strokeWidth="5" 
+                    stroke="#0ccf68" 
+                    strokeDasharray={props?.circumference}
+                    strokeDashoffset={props?.dashOffset}
+                />
+            </svg>

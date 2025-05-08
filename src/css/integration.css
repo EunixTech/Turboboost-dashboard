@@ -1,0 +1,11 @@
+@media only screen and (max-width: 1330px) {
+    .integration_card_wrapper {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .integration_card_wrapper {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+}

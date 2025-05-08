@@ -112,7 +112,7 @@ const Connector7 = () => {
   );
 };
 
-const Button = ({ onClick }) => {
+const ButtonAdd = ({ onClick }) => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <div
@@ -169,7 +169,7 @@ const Connector = ({ title, sub, connect }) => {
         {/* <div className="w-[80px] h-[32px] hover:bg-[#2FE49C] bg-[#38F8AC] text-[#000] font-bold rounded-[3px] flex items-center justify-center text-[11px] cursor-pointer">
           Connect
         </div> */}
-        <Button />
+        <ButtonAdd />
       </div>
     </div>
   );
@@ -333,7 +333,7 @@ const ConnectWebsite = () => {
       }, 1000);
     } else {
       setTimeout(() => {
-        navigate("/auth/signIn");
+        // navigate("/auth/signIn");
         dispatch(setAuth(false));
       }, 1000);
     }

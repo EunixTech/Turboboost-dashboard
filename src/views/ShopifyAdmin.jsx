@@ -4,6 +4,7 @@ import Toggle from "../utils/toggle";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { setDark } from "../services/home";
+import TitleManager from "../components/TitleManager";
 
 const ShopifyAdmin = () => {
   const w = useWidth();
@@ -11,6 +12,7 @@ const ShopifyAdmin = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <HomeLayout>
+          <TitleManager title="Shopify Admin" conicalURL="shopify-admin" />
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
         <div className="w-[100%] h-[50px] shrink-0"></div>
         <div

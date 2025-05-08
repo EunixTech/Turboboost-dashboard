@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function InputFields({
     inputClass = "w-[100%] border-[1px] rounded-[4px] outline-none rounded-[3px] border-[#ebebeb] px-[10px] text-[12px] font-medium mt-[7px] h-[38px]",
     type,
-    onChangeHandler = () => { },
+    onChangeHandler = () => {},
     value,
     inputName,
     wrapperClass = "h-[100%]",
@@ -13,13 +14,14 @@ export default function InputFields({
     labelText,
     list = [],
     dropDownListClass = "w-[100%]  h-[34px] mb-[0px] flex px-[20px] font-medium items-center text-[12px] cursor-pointer",
-    dropDownClass = "h-[38px]"
+    dropDownClass = "h-[38px]",
+    defaultValue = 1,
 
 }) {
 
     const dark = useSelector((state) => state.home.dark);
     const [checkboxStatus, updateCheckboxStatus] = useState(false);
-    const [valueIndex, updateValueIndex] = useState(0);
+    const [valueIndex, updateValueIndex] = useState(defaultValue);
 
     const [hover, setHover] = useState(false),
         [isDropdownOpen, updateIsDropdownOpen] = useState(false);
@@ -31,6 +33,15 @@ export default function InputFields({
         return () => { document.removeEventListener("pointerdown", onpointerdown, false) };
     });
 
+    // password field
+    const [showPassword, updateShowPassword] = useState(false);
+    const [showConfirmPassword, updateShowConfirmPassword] = useState(false);
+   
+    const toggleShowPassword = (passwordType = "") => {
+        if(passwordType === "password") updateShowPassword(!showPassword);
+        else if(passwordType === "confirm_password") updateShowConfirmPassword(!showConfirmPassword)
+    };
+
 
     return (
 
@@ -40,7 +51,6 @@ export default function InputFields({
                 className={labelClass}
             >
                 {labelText}
-
             </p>
             {
                 (() => {
@@ -73,7 +83,7 @@ export default function InputFields({
                                     style={{ color: dark ? "#fff" : "#000" }}
                                     className="text-[12px] font-bold tracking-wide  text-[#000]"
                                 >
-                                    {list[valueIndex]}
+                                    {list[valueIndex-1]}
                                 </p>
 
                                 <img src="/graphic/status/down.svg" className="w-[10px]" alt="" />
@@ -93,22 +103,27 @@ export default function InputFields({
                                 >
 
                                     {list.map((item, i) => {
+                                        
                                         return (
-                                            <div
+                                            
+                                                i+1 !== valueIndex &&   <div
 
                                                 key={i}
                                                 style={{
                                                     backgroundColor: i === valueIndex ? dark ? "#000" : "#ebebeb" : dark ? "#111317" : "#fff",
                                                 }}
                                                 onClick={() => {
-                                                    updateValueIndex(i)
+                                                    updateValueIndex(i+1)
                                                     updateIsDropdownOpen(false)
+                                                    onChangeHandler(i)
                                                 }}
                                                 className={dropDownListClass}
                                             >
                                                 {item}
                                             </div>
 
+                                            
+                                         
                                         );
 
                                     })}
@@ -169,6 +184,27 @@ export default function InputFields({
                                 }}
                                 className="w-[100%] outline-none rounded-[4px] px-[10px] text-[12px] font-medium   h-[100%]"
                             />
+                        </div>
+                    } else if (type === "password") {
+                        return <div>
+
+                            <div className="password-input w-full flex relative mb-5">
+
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    value={value}
+                                    name={inputName}
+                                    onChange={onChangeHandler}
+                                    className="border rounded p-2 w-full"
+                                />
+                                <button
+                                    className="password-toggle-button absolute right-3 top-3"
+                                    onClick={toggleShowPassword}
+                                >
+                                    {showPassword ? <FaEye /> : <FaEyeSlash />}
+                                </button>
+                            </div>
+                          
                         </div>
                     }
 

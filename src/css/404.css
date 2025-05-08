@@ -1,0 +1,23 @@
+.mobile-404-main-wrapper{
+    position: absolute;
+    top: 50%;
+    left: 59%;
+    transform: translate(-50%, -50%);
+}
+.main-wrapper-404{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.notfound-txt-mobile{
+    color: #0a0a18;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: -0.8px;
+    text-align: center;
+    margin: 10px 0;
+}

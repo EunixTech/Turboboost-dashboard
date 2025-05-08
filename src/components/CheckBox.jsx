@@ -10,6 +10,7 @@ const CheckBox = ({ change, check, setCheck }) => {
         change();
       }}
     >
+      
       {check && (
         <img
           alt=""

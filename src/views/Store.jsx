@@ -4,6 +4,7 @@ import Toggle from "../utils/toggle";
 import useWidth from "../hooks/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { setDark } from "../services/home";
+import TitleManager from "../components/TitleManager";
 
 const Store = () => {
   const w = useWidth();
@@ -11,6 +12,7 @@ const Store = () => {
   const dark = useSelector((state) => state.home.dark);
   return (
     <HomeLayout>
+          <TitleManager title="Store" conicalURL="/store" />
       <div className="w-[100%] h-[100vh] overflow-hidden flex flex-col">
         <div className="w-[100%] h-[50px] shrink-0"></div>
         <div

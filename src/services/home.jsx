@@ -4,7 +4,7 @@ const homeSlice = createSlice({
   name: "home",
   initialState: {
     auth: false,
-    darl: false,
+    dark: localStorage.getItem("dark") ? true : false,
     upgradePopUpShow: false,
   },
   reducers: {
